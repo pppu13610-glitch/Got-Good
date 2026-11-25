@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">บ้านชาอุ่นใจ 3D</string>
+    <string name="title_activity_main">บ้านชาอุ่นใจ 3D</string>
+    <string name="package_name">com.baancha.cozyteahouse</string>
+    <string name="custom_url_scheme">com.baancha.cozyteahouse</string>
+</resources>

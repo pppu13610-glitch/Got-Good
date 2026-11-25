@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#233029"/>
+  <circle cx="256" cy="276" r="144" fill="#2E3F35"/>
+  <!-- Steam -->
+  <path d="M214 156c-12-22 14-36 2-58" fill="none" stroke="#DCE5D8" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <path d="M256 146c-12-24 14-40 2-64" fill="none" stroke="#DCE5D8" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <path d="M298 156c-12-22 14-36 2-58" fill="none" stroke="#DCE5D8" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <!-- Saucer -->
+  <ellipse cx="256" cy="364" rx="136" ry="26" fill="#C9822B"/>
+  <ellipse cx="256" cy="358" rx="126" ry="20" fill="#DFA24E"/>
+  <!-- Cup body -->
+  <path d="M158 214h196c0 88-34 140-98 140s-98-52-98-140z" fill="#F3F1EC"/>
+  <!-- Cup handle -->
+  <path d="M350 234c38 0 52 24 52 46s-16 44-56 44" fill="none" stroke="#F3F1EC" stroke-width="24" stroke-linecap="round"/>
+  <!-- Tea surface -->
+  <ellipse cx="256" cy="214" rx="98" ry="20" fill="#E3DFD5"/>
+  <ellipse cx="256" cy="216" rx="84" ry="14" fill="#5E8C4A"/>
+  <!-- Tea leaf motif -->
+  <path d="M242 292c0-26 24-44 46-44-2 22-18 44-46 44z" fill="#416B31" opacity="0.85"/>
+</svg>
