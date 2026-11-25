@@ -60,9 +60,32 @@
   animation: rotate-phone 2.8s ease-in-out infinite;
 }
 
+@keyframes sunbeam-sway {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate3d(14px, 6px, 0) scale(1.04);
+    opacity: 0.36;
+  }
+}
+
+.animate-sunbeam-1 {
+  animation: sunbeam-sway 9s ease-in-out infinite;
+}
+
+.animate-sunbeam-2 {
+  animation: sunbeam-sway 12s ease-in-out 2.5s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rotate-phone {
     animation: none;
     transform: rotate(-90deg);
+  }
+  .animate-sunbeam-1,
+  .animate-sunbeam-2 {
+    animation: none;
   }
 }
