@@ -3,6 +3,7 @@ import {
   GameSettings,
   JournalRecord,
   OptimizationProfile,
+  PlayerCharacterId,
   ResolutionScale,
   TeaHouseSaveData,
 } from '../types/tea';
@@ -15,6 +16,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   ambienceVolume: 75,
   musicVolume: 70,
   musicTrack: 'morning-bamboo',
+  playerCharacter: 'tea-master',
   isMuted: false,
   ambience: 'none',
   graphicsQuality: 'high',
@@ -75,6 +77,18 @@ export function normalizeOptimizationProfile(raw: unknown): OptimizationProfile 
       return 'low-ram-2gb';
     default:
       return DEFAULT_SETTINGS.optimizationProfile;
+  }
+}
+
+export function normalizePlayerCharacter(raw: unknown): PlayerCharacterId {
+  switch (raw) {
+    case 'tea-master':
+    case 'spirit-blossom-kindred':
+    case 'diego-body':
+    case 'cicada-suit-v2':
+      return raw;
+    default:
+      return DEFAULT_SETTINGS.playerCharacter;
   }
 }
 
@@ -191,9 +205,11 @@ export function migrateSettingsPayload(raw: unknown): GameSettings {
       parsed.musicTrack === 'none' ||
       parsed.musicTrack === 'morning-bamboo' ||
       parsed.musicTrack === 'rainy-teahouse' ||
-      parsed.musicTrack === 'twilight-lantern'
+      parsed.musicTrack === 'twilight-lantern' ||
+      parsed.musicTrack === 'smoke-in-the-glass'
         ? parsed.musicTrack
         : DEFAULT_SETTINGS.musicTrack,
+    playerCharacter: normalizePlayerCharacter(parsed.playerCharacter),
     isMuted:
       typeof parsed.isMuted === 'boolean'
         ? parsed.isMuted

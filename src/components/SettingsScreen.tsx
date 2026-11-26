@@ -13,6 +13,7 @@ import {
   RotateCcw,
   Smartphone,
   Sparkles,
+  User,
   Volume2,
   VolumeX,
   Wind,
@@ -23,6 +24,7 @@ import {
   GameSettings,
   GraphicsQuality,
   OptimizationProfile,
+  PlayerCharacterId,
   ResolutionScale,
   TargetFps,
 } from '../types/tea';
@@ -81,6 +83,38 @@ const AMBIENCE_OPTIONS: {id: AmbienceMode; label: string}[] = [
   {id: 'none', label: 'เงียบสงบ'},
   {id: 'rain', label: 'ฝนตก'},
   {id: 'breeze', label: 'ลมสวนไผ่'},
+];
+
+const CHARACTER_MODELS: {
+  id: PlayerCharacterId;
+  name: string;
+  creator: string;
+  accentColor: string;
+}[] = [
+  {
+    id: 'tea-master',
+    name: 'เจ้าบ้านชา (ต้นตำรับ)',
+    creator: 'โมเดลประจำเรือนชา',
+    accentColor: '#2E6F40',
+  },
+  {
+    id: 'spirit-blossom-kindred',
+    name: 'Spirit Blossom Kindred',
+    creator: 'Retronous (@Retronous) [85187f9]',
+    accentColor: '#8B82CB',
+  },
+  {
+    id: 'diego-body',
+    name: 'Body (Trench/Suit)',
+    creator: 'Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]',
+    accentColor: '#8D212C',
+  },
+  {
+    id: 'cicada-suit-v2',
+    name: 'Ultimate CICADA Suit V2',
+    creator: 'rendysix (@rendysix) [21122d8]',
+    accentColor: '#242B35',
+  },
 ];
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
@@ -382,7 +416,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               <div className="flex items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#1F2823]">
                   <Music className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
-                  <span>เลือกเพลงดนตรีสไตล์ชิวๆ (3 เพลง)</span>
+                  <span>เลือกเพลงดนตรีสไตล์ชิวๆ (4 เพลง)</span>
                 </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -918,6 +952,66 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   {settings.autoFullscreen ? 'เปิด' : 'ปิด'}
                 </span>
               </motion.button>
+            </div>
+          </section>
+
+          {/* SECTION 3: 3D PLAYER CHARACTER MODEL SELECTOR */}
+          <section className="md:col-span-2 flex flex-col gap-3 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3">
+              <div className="flex items-center gap-2">
+                <User className="h-5 w-5 text-[#2E6F40]" aria-hidden="true" />
+                <div>
+                  <h2 className="font-display text-base sm:text-lg font-bold text-[#1F2823]">
+                    ตัวละครผู้เล่น 3 มิติ (เลือกโมเดล 3D)
+                  </h2>
+                  <p className="text-xs text-[#5A655D]">
+                    เปลี่ยนโมเดลตัวละคร 3 มิติที่ใช้เดินสำรวจในร้านน้ำชาได้ทันที
+                  </p>
+                </div>
+              </div>
+              <span className="rounded-lg bg-[#EDF5EE] px-2.5 py-1 text-xs font-semibold text-[#2E6F40]">
+                {CHARACTER_MODELS.find((m) => m.id === settings.playerCharacter)?.name ??
+                  'เจ้าบ้านชา'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+              {CHARACTER_MODELS.map((charModel) => {
+                const active = settings.playerCharacter === charModel.id;
+                return (
+                  <motion.button
+                    key={charModel.id}
+                    type="button"
+                    whileTap={{scale: 0.96}}
+                    transition={TAP_SPRING}
+                    onClick={() => {
+                      soundEngine.playTap();
+                      onUpdateSettings({playerCharacter: charModel.id});
+                    }}
+                    className={`flex min-h-[60px] items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors ${
+                      active
+                        ? 'border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823] shadow-2xs'
+                        : 'border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]'
+                    }`}
+                  >
+                    <span
+                      className="h-8 w-8 shrink-0 rounded-lg border border-black/10 flex items-center justify-center text-xs font-bold text-white"
+                      style={{backgroundColor: charModel.accentColor}}
+                      aria-hidden="true"
+                    >
+                      3D
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs sm:text-sm font-bold text-[#1F2823] truncate">
+                        {charModel.name}
+                      </p>
+                      <p className="text-[10px] text-[#5A655D] truncate">
+                        {charModel.creator}
+                      </p>
+                    </div>
+                  </motion.button>
+                );
+              })}
             </div>
           </section>
         </div>

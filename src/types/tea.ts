@@ -174,7 +174,13 @@ export type MusicTrackId =
   | 'none'
   | 'morning-bamboo'
   | 'rainy-teahouse'
-  | 'twilight-lantern';
+  | 'twilight-lantern'
+  | 'smoke-in-the-glass';
+export type PlayerCharacterId =
+  | 'tea-master'
+  | 'spirit-blossom-kindred'
+  | 'diego-body'
+  | 'cicada-suit-v2';
 export type OptimizationProfile =
   | 'auto'
   | 'realme-note-50'
@@ -188,6 +194,7 @@ export interface GameSettings {
   ambienceVolume: number;
   musicVolume: number;
   musicTrack: MusicTrackId;
+  playerCharacter: PlayerCharacterId;
   isMuted: boolean;
   ambience: AmbienceMode;
   graphicsQuality: GraphicsQuality;

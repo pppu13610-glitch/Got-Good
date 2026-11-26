@@ -19,9 +19,44 @@ export interface AppVersionEntry {
   changes: VersionChangeItem[];
 }
 
-export const CURRENT_APP_VERSION = '2.11.0';
+export const CURRENT_APP_VERSION = '2.12.0';
 
 export const VERSION_HISTORY: AppVersionEntry[] = [
+  {
+    version: '2.12.0',
+    previousVersion: '2.11.0',
+    releaseDate: '26 พ.ย. 2026',
+    releaseTitle:
+      'เพิ่มโมเดล 3D ใหม่ 3 ตัวละคร (Spirit Blossom Kindred, Body, Ultimate CICADA Suit V2) & เพลง Smoke in the Glass',
+    summary:
+      'เพิ่มตัวเลือกโมเดลตัวละครผู้เล่น 3 มิติใหม่ 3 สไตล์ในหน้าตั้งค่า (Spirit Blossom Kindred โดย Retronous, Body โดย Diego_P3D_XD และ Ultimate CICADA Suit V2 โดย rendysix) พร้อมเปลี่ยนเพลง “Smoke in the Glass” เป็นไฟล์เพลงต้นฉบับที่แนบมาให้เลือกเปิดฟังระหว่างชงชาได้ทันที',
+    changes: [
+      {
+        category: 'ภาพและ 3 มิติ',
+        title: 'โมเดล 3D Spirit Blossom Kindred — Retronous (@Retronous) [85187f9]',
+        detail:
+          'ชุดกิโมโนพาสเทลซากุระ-ม่วงอ่อน หน้ากากพอร์ซเลน เขาสีคราม หูจิ้งจอกและวิญญาณหมาป่าลอยเคียงไหล่ พร้อมแอนิเมชั่นเดินและชงชาเต็มรูปแบบ',
+      },
+      {
+        category: 'ภาพและ 3 มิติ',
+        title: 'โมเดล 3D Body — Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]',
+        detail:
+          'ชุดสูทสีดำเข้มตัดเนกไทแดงเข้ม เชิ้ตขาว เข็มขัดหัวโลหะ และรองเท้าหนังขัดเงาพร้อมข้อต่อแขนขาขยับเดินสมจริง',
+      },
+      {
+        category: 'ภาพและ 3 มิติ',
+        title: 'โมเดล 3D Ultimate CICADA Suit V2 — rendysix (@rendysix) [21122d8]',
+        detail:
+          'ชุดบอดี้การ์ดแทคติคอล CICADA เกราะอก สายสะพาย แว่นตาดำ ถุงมือหนัง หูฟังสื่อสารแบบขด และรองเท้าคอมแบท',
+      },
+      {
+        category: 'ฟีเจอร์ใหม่',
+        title: 'เพลง “Smoke in the Glass” (ไฟล์เสียงต้นฉบับ)',
+        detail:
+          'บรรจุไฟล์เพลง “Smoke in the Glass” ต้นฉบับลงในตัวเกมแบบออฟไลน์และเลือกเปิดฟังได้ทันทีในหน้าตั้งค่าเสียงเพลงประกอบ',
+      },
+    ],
+  },
   {
     version: '2.11.0',
     previousVersion: '2.10.0',

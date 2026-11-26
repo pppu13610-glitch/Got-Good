@@ -5,7 +5,11 @@ export interface ChillTrackMeta {
   title: string;
   subtitle: string;
   bpmLabel: string;
+  audioSrc?: string;
 }
+
+export const SMOKE_IN_THE_GLASS_AUDIO_URL =
+  '/assets/aistudio/_____-_Smoke_in_the_Glass_402718f9.m4a';
 
 export const CHILL_MUSIC_TRACKS: ChillTrackMeta[] = [
   {
@@ -27,12 +31,21 @@ export const CHILL_MUSIC_TRACKS: ChillTrackMeta[] = [
     bpmLabel: '70 BPM',
   },
   {
+    id: 'smoke-in-the-glass',
+    title: 'Smoke in the Glass',
+    subtitle: 'ไฟล์เพลงต้นฉบับ · แจ๊สชิลล์ในเรือนชา',
+    bpmLabel: '2:44',
+    audioSrc: SMOKE_IN_THE_GLASS_AUDIO_URL,
+  },
+  {
     id: 'none',
     title: 'ปิดเพลงประกอบ',
     subtitle: 'ฟังเฉพาะเสียงชงชาและเสียงธรรมชาติ',
     bpmLabel: 'เงียบ',
   },
 ];
+
+type SynthTrackId = 'morning-bamboo' | 'rainy-teahouse' | 'twilight-lantern';
 
 interface ChillPattern {
   stepMs: number;
@@ -42,7 +55,7 @@ interface ChillPattern {
   leadWave: OscillatorType;
 }
 
-const CHILL_PATTERNS: Record<Exclude<MusicTrackId, 'none'>, ChillPattern> = {
+const CHILL_PATTERNS: Record<SynthTrackId, ChillPattern> = {
   // Warm sunlit garden: Fmaj7 -> Em7 -> Dm9 -> Cmaj7
   'morning-bamboo': {
     stepMs: 405,
@@ -111,6 +124,14 @@ const CHILL_PATTERNS: Record<Exclude<MusicTrackId, 'none'>, ChillPattern> = {
   },
 };
 
+function isSynthTrack(track: MusicTrackId): track is SynthTrackId {
+  return (
+    track === 'morning-bamboo' ||
+    track === 'rainy-teahouse' ||
+    track === 'twilight-lantern'
+  );
+}
+
 class CozySoundEngine {
   private ctx: AudioContext | null = null;
   private isMuted = false;
@@ -130,6 +151,9 @@ class CozySoundEngine {
   private musicTimer: number | null = null;
   private musicStepIdx = 0;
 
+  private audioEl: HTMLAudioElement | null = null;
+  private audioUnlocked = false;
+
   private ensureContext(createIfMissing = true): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
@@ -147,13 +171,68 @@ class CozySoundEngine {
     return this.ctx;
   }
 
+  private getAudioFileMeta(): ChillTrackMeta | undefined {
+    return CHILL_MUSIC_TRACKS.find((t) => t.id === this.musicTrack && t.audioSrc);
+  }
+
+  private getAudioFileVolume(): number {
+    return Math.max(0, Math.min(1, 0.8 * this.masterVolume * this.musicVolume));
+  }
+
+  private syncAudioElementVolume() {
+    if (!this.audioEl) return;
+    const isAudioTrack = Boolean(this.getAudioFileMeta());
+    this.audioEl.volume =
+      this.isMuted || !isAudioTrack ? 0 : this.getAudioFileVolume();
+  }
+
+  private startAudioFileTrack(src: string) {
+    if (typeof window === 'undefined' || typeof Audio === 'undefined') return;
+    if (!this.audioEl) {
+      const audio = new Audio();
+      audio.loop = true;
+      audio.preload = 'auto';
+      this.audioEl = audio;
+    }
+    if (!this.audioEl.src.endsWith(src)) {
+      this.audioEl.src = src;
+      this.audioEl.currentTime = 0;
+    }
+    this.syncAudioElementVolume();
+    if (!this.isMuted && this.audioUnlocked) {
+      void this.audioEl.play().catch(() => {
+        // Ignore browser autoplay rejection until next user gesture
+      });
+    }
+  }
+
+  private stopAudioFileTrack(resetPosition = true) {
+    if (!this.audioEl) return;
+    this.audioEl.pause();
+    if (resetPosition) {
+      try {
+        this.audioEl.currentTime = 0;
+      } catch {
+        // Ignore if metadata not loaded yet
+      }
+    }
+  }
+
   public unlock() {
+    this.audioUnlocked = true;
     const ctx = this.ensureContext(true);
-    if (!ctx) return;
-    if (this.musicTrack !== 'none' && !this.isMuted && this.musicTimer === null) {
+    const fileTrack = this.getAudioFileMeta();
+    if (fileTrack?.audioSrc && !this.isMuted) {
+      this.startAudioFileTrack(fileTrack.audioSrc);
+    } else if (
+      ctx &&
+      isSynthTrack(this.musicTrack) &&
+      !this.isMuted &&
+      this.musicTimer === null
+    ) {
       this.startMusicLoop();
     }
-    if (this.ambienceMode !== 'none' && !this.ambienceSource) {
+    if (ctx && this.ambienceMode !== 'none' && !this.ambienceSource) {
       this.setAmbience(this.ambienceMode);
     }
   }
@@ -183,26 +262,29 @@ class CozySoundEngine {
 
     if (this.musicBusGain && this.ctx) {
       this.musicBusGain.gain.setTargetAtTime(
-        this.isMuted || this.musicTrack === 'none'
+        this.isMuted || !isSynthTrack(this.musicTrack)
           ? 0
           : this.getMusicBusVolume(),
         this.ctx.currentTime,
         0.12,
       );
     }
+
+    this.syncAudioElementVolume();
   }
 
   public setMusicVolume(musicPct: number) {
     this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
     if (this.musicBusGain && this.ctx) {
       this.musicBusGain.gain.setTargetAtTime(
-        this.isMuted || this.musicTrack === 'none'
+        this.isMuted || !isSynthTrack(this.musicTrack)
           ? 0
           : this.getMusicBusVolume(),
         this.ctx.currentTime,
         0.12,
       );
     }
+    this.syncAudioElementVolume();
   }
 
   public setMusicTrack(track: MusicTrackId) {
@@ -210,8 +292,21 @@ class CozySoundEngine {
     this.musicTrack = track;
     if (track === 'none') {
       this.stopMusicLoop();
+      this.stopAudioFileTrack(true);
       return;
     }
+
+    const fileTrack = this.getAudioFileMeta();
+    if (fileTrack?.audioSrc) {
+      this.stopMusicLoop();
+      if (changed) {
+        this.stopAudioFileTrack(true);
+      }
+      this.startAudioFileTrack(fileTrack.audioSrc);
+      return;
+    }
+
+    this.stopAudioFileTrack(true);
     if (changed) {
       this.musicStepIdx = 0;
       this.stopMusicLoop();
@@ -232,12 +327,25 @@ class CozySoundEngine {
     }
     if (this.musicBusGain && this.ctx) {
       this.musicBusGain.gain.setTargetAtTime(
-        muted || this.musicTrack === 'none' ? 0 : this.getMusicBusVolume(),
+        muted || !isSynthTrack(this.musicTrack) ? 0 : this.getMusicBusVolume(),
         this.ctx.currentTime,
         0.15,
       );
     }
-    if (!muted && this.ctx && this.musicTrack !== 'none' && this.musicTimer === null) {
+
+    const fileTrack = this.getAudioFileMeta();
+    if (fileTrack?.audioSrc) {
+      if (muted) {
+        this.stopAudioFileTrack(false);
+      } else {
+        this.startAudioFileTrack(fileTrack.audioSrc);
+      }
+    } else if (
+      !muted &&
+      this.ctx &&
+      isSynthTrack(this.musicTrack) &&
+      this.musicTimer === null
+    ) {
       this.startMusicLoop();
     }
   }
@@ -268,7 +376,7 @@ class CozySoundEngine {
 
       const bus = ctx.createGain();
       bus.gain.setValueAtTime(
-        this.isMuted || this.musicTrack === 'none'
+        this.isMuted || !isSynthTrack(this.musicTrack)
           ? 0
           : this.getMusicBusVolume(),
         ctx.currentTime,
@@ -285,7 +393,7 @@ class CozySoundEngine {
   private scheduleMusicStep() {
     if (
       this.isMuted ||
-      this.musicTrack === 'none' ||
+      !isSynthTrack(this.musicTrack) ||
       !this.ctx ||
       this.ctx.state !== 'running'
     ) {
@@ -359,7 +467,7 @@ class CozySoundEngine {
   }
 
   private startMusicLoop() {
-    if (this.musicTrack === 'none') return;
+    if (!isSynthTrack(this.musicTrack)) return;
     const ctx = this.ensureContext(true);
     if (!ctx) return;
     this.ensureMusicBus(ctx);

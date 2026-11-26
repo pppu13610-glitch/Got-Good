@@ -22003,6 +22003,21 @@ var Trash2 = createLucideIcon("trash-2", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var User = createLucideIcon("user", [["path", {
+	d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",
+	key: "975kel"
+}], ["circle", {
+	cx: "12",
+	cy: "7",
+	r: "4",
+	key: "17ys0d"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Volume2 = createLucideIcon("volume-2", [
 	["path", {
 		d: "M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z",
@@ -23437,7 +23452,6 @@ function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
 		gentleReply: picked.gentleReply
 	};
 }
-// src/utils/soundEngine.ts
 var CHILL_MUSIC_TRACKS = [
 	{
 		id: "morning-bamboo",
@@ -23456,6 +23470,13 @@ var CHILL_MUSIC_TRACKS = [
 		title: "โคมไฟอุ่นยามพลบค่ำ",
 		subtitle: "เสียงพิณและเบสนุ่มๆ ยามเย็นในร้านชา",
 		bpmLabel: "70 BPM"
+	},
+	{
+		id: "smoke-in-the-glass",
+		title: "Smoke in the Glass",
+		subtitle: "ไฟล์เพลงต้นฉบับ · แจ๊สชิลล์ในเรือนชา",
+		bpmLabel: "2:44",
+		audioSrc: "/assets/aistudio/_____-_Smoke_in_the_Glass_402718f9.m4a"
 	},
 	{
 		id: "none",
@@ -23676,6 +23697,9 @@ var CHILL_PATTERNS = {
 		leadWave: "sine"
 	}
 };
+function isSynthTrack(track) {
+	return track === "morning-bamboo" || track === "rainy-teahouse" || track === "twilight-lantern";
+}
 var CozySoundEngine = class {
 	constructor() {
 		this.ctx = null;
@@ -23693,6 +23717,8 @@ var CozySoundEngine = class {
 		this.musicFilter = null;
 		this.musicTimer = null;
 		this.musicStepIdx = 0;
+		this.audioEl = null;
+		this.audioUnlocked = false;
 	}
 	ensureContext(createIfMissing = true) {
 		if (typeof window === "undefined") return null;
@@ -23705,10 +23731,46 @@ var CozySoundEngine = class {
 		if (this.ctx.state === "suspended") this.ctx.resume();
 		return this.ctx;
 	}
+	getAudioFileMeta() {
+		return CHILL_MUSIC_TRACKS.find((t) => t.id === this.musicTrack && t.audioSrc);
+	}
+	getAudioFileVolume() {
+		return Math.max(0, Math.min(1, .8 * this.masterVolume * this.musicVolume));
+	}
+	syncAudioElementVolume() {
+		if (!this.audioEl) return;
+		const isAudioTrack = Boolean(this.getAudioFileMeta());
+		this.audioEl.volume = this.isMuted || !isAudioTrack ? 0 : this.getAudioFileVolume();
+	}
+	startAudioFileTrack(src) {
+		if (typeof window === "undefined" || typeof Audio === "undefined") return;
+		if (!this.audioEl) {
+			const audio = new Audio();
+			audio.loop = true;
+			audio.preload = "auto";
+			this.audioEl = audio;
+		}
+		if (!this.audioEl.src.endsWith(src)) {
+			this.audioEl.src = src;
+			this.audioEl.currentTime = 0;
+		}
+		this.syncAudioElementVolume();
+		if (!this.isMuted && this.audioUnlocked) this.audioEl.play().catch(() => {});
+	}
+	stopAudioFileTrack(resetPosition = true) {
+		if (!this.audioEl) return;
+		this.audioEl.pause();
+		if (resetPosition) try {
+			this.audioEl.currentTime = 0;
+		} catch {}
+	}
 	unlock() {
-		if (!this.ensureContext(true)) return;
-		if (this.musicTrack !== "none" && !this.isMuted && this.musicTimer === null) this.startMusicLoop();
-		if (this.ambienceMode !== "none" && !this.ambienceSource) this.setAmbience(this.ambienceMode);
+		this.audioUnlocked = true;
+		const ctx = this.ensureContext(true);
+		const fileTrack = this.getAudioFileMeta();
+		if (fileTrack?.audioSrc && !this.isMuted) this.startAudioFileTrack(fileTrack.audioSrc);
+		else if (ctx && isSynthTrack(this.musicTrack) && !this.isMuted && this.musicTimer === null) this.startMusicLoop();
+		if (ctx && this.ambienceMode !== "none" && !this.ambienceSource) this.setAmbience(this.ambienceMode);
 	}
 	setVolumes(masterPct, sfxPct, ambiencePct, musicPct) {
 		this.masterVolume = Math.max(0, Math.min(1, masterPct / 100));
@@ -23716,19 +23778,30 @@ var CozySoundEngine = class {
 		this.ambienceVolume = Math.max(0, Math.min(1, ambiencePct / 100));
 		if (typeof musicPct === "number") this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
 		if (this.ambienceGain && this.ctx) this.ambienceGain.gain.setTargetAtTime(this.isMuted || this.ambienceMode === "none" ? 0 : this.getAmbienceVolume(), this.ctx.currentTime, .1);
-		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || !isSynthTrack(this.musicTrack) ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+		this.syncAudioElementVolume();
 	}
 	setMusicVolume(musicPct) {
 		this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
-		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || !isSynthTrack(this.musicTrack) ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+		this.syncAudioElementVolume();
 	}
 	setMusicTrack(track) {
 		const changed = this.musicTrack !== track;
 		this.musicTrack = track;
 		if (track === "none") {
 			this.stopMusicLoop();
+			this.stopAudioFileTrack(true);
 			return;
 		}
+		const fileTrack = this.getAudioFileMeta();
+		if (fileTrack?.audioSrc) {
+			this.stopMusicLoop();
+			if (changed) this.stopAudioFileTrack(true);
+			this.startAudioFileTrack(fileTrack.audioSrc);
+			return;
+		}
+		this.stopAudioFileTrack(true);
 		if (changed) {
 			this.musicStepIdx = 0;
 			this.stopMusicLoop();
@@ -23738,8 +23811,12 @@ var CozySoundEngine = class {
 	setMuted(muted) {
 		this.isMuted = muted;
 		if (this.ambienceGain && this.ctx) this.ambienceGain.gain.setTargetAtTime(muted || this.ambienceMode === "none" ? 0 : this.getAmbienceVolume(), this.ctx.currentTime, .15);
-		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(muted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .15);
-		if (!muted && this.ctx && this.musicTrack !== "none" && this.musicTimer === null) this.startMusicLoop();
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(muted || !isSynthTrack(this.musicTrack) ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .15);
+		const fileTrack = this.getAudioFileMeta();
+		if (fileTrack?.audioSrc) {
+			if (muted) this.stopAudioFileTrack(false);
+			else this.startAudioFileTrack(fileTrack.audioSrc);
+		} else if (!muted && this.ctx && isSynthTrack(this.musicTrack) && this.musicTimer === null) this.startMusicLoop();
 	}
 	getMuted() {
 		return this.isMuted;
@@ -23760,7 +23837,7 @@ var CozySoundEngine = class {
 			filter.frequency.value = 1750;
 			filter.Q.value = .7;
 			const bus = ctx.createGain();
-			bus.gain.setValueAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), ctx.currentTime);
+			bus.gain.setValueAtTime(this.isMuted || !isSynthTrack(this.musicTrack) ? 0 : this.getMusicBusVolume(), ctx.currentTime);
 			filter.connect(bus);
 			bus.connect(ctx.destination);
 			this.musicFilter = filter;
@@ -23769,7 +23846,7 @@ var CozySoundEngine = class {
 		return this.musicBusGain;
 	}
 	scheduleMusicStep() {
-		if (this.isMuted || this.musicTrack === "none" || !this.ctx || this.ctx.state !== "running") return;
+		if (this.isMuted || !isSynthTrack(this.musicTrack) || !this.ctx || this.ctx.state !== "running") return;
 		if (typeof document !== "undefined" && document.hidden) return;
 		const pattern = CHILL_PATTERNS[this.musicTrack];
 		const ctx = this.ctx;
@@ -23826,7 +23903,7 @@ var CozySoundEngine = class {
 		}
 	}
 	startMusicLoop() {
-		if (this.musicTrack === "none") return;
+		if (!isSynthTrack(this.musicTrack)) return;
 		const ctx = this.ensureContext(true);
 		if (!ctx) return;
 		this.ensureMusicBus(ctx);
@@ -43813,6 +43890,96 @@ var LatheGeometry = class LatheGeometry extends BufferGeometry {
 	}
 };
 /**
+* A geometry class for representing an octahedron.
+*
+* ```js
+* const geometry = new THREE.OctahedronGeometry();
+* const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+* const octahedron = new THREE.Mesh( geometry, material );
+* scene.add( octahedron );
+* ```
+*
+* @augments PolyhedronGeometry
+* @demo scenes/geometry-browser.html#OctahedronGeometry
+*/
+var OctahedronGeometry = class OctahedronGeometry extends PolyhedronGeometry {
+	/**
+	* Constructs a new octahedron geometry.
+	*
+	* @param {number} [radius=1] - Radius of the octahedron.
+	* @param {number} [detail=0] - Setting this to a value greater than `0` adds vertices making it no longer a octahedron.
+	*/
+	constructor(radius = 1, detail = 0) {
+		super([
+			1,
+			0,
+			0,
+			-1,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			-1,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			-1
+		], [
+			0,
+			2,
+			4,
+			0,
+			4,
+			3,
+			0,
+			3,
+			5,
+			0,
+			5,
+			2,
+			1,
+			2,
+			5,
+			1,
+			5,
+			3,
+			1,
+			3,
+			4,
+			1,
+			4,
+			2
+		], radius, detail);
+		this.type = "OctahedronGeometry";
+		/**
+		* Holds the constructor parameters that have been
+		* used to generate the geometry. Any modification
+		* after instantiation does not change the geometry.
+		*
+		* @type {Object}
+		*/
+		this.parameters = {
+			radius,
+			detail
+		};
+	}
+	/**
+	* Factory method for creating an instance of this class from the given
+	* JSON object.
+	*
+	* @param {Object} data - A JSON object representing the serialized geometry.
+	* @return {OctahedronGeometry} A new instance.
+	*/
+	static fromJSON(data) {
+		return new OctahedronGeometry(data.radius, data.detail);
+	}
+};
+/**
 * A geometry class for representing a plane.
 *
 * ```js
@@ -62492,10 +62659,8 @@ function createTeaChair(walnutTex, cushionColorHex, compactMode = false) {
 	return chair;
 }
 function createTeaMasterCharacter(compactMode, ultraCompact) {
-	const seg = ultraCompact ? 10 : compactMode ? 12 : 18;
+	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
 	const group = new Group();
-	group.position.copy(PLAYER_SPAWN_POS);
-	group.rotation.y = PLAYER_SPAWN_ROT_Y;
 	const skinMat = new MeshStandardMaterial({
 		color: 15978677,
 		roughness: .65
@@ -62764,6 +62929,606 @@ function createTeaMasterCharacter(compactMode, ultraCompact) {
 	rightBlush.position.x = .095;
 	rightBlush.rotation.y = .38;
 	head.add(leftEye, rightEye, lShine, rShine, noseTip, lBrow, rBrow, smile, leftBlush, rightBlush);
+	group.add(head);
+	group.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group,
+		rig: {
+			leftLeg: leftLegBuilt.hip,
+			rightLeg: rightLegBuilt.hip,
+			leftShin: leftLegBuilt.shin,
+			rightShin: rightLegBuilt.shin,
+			leftArm,
+			rightArm,
+			head
+		}
+	};
+}
+/**
+* 1. Spirit Blossom Kindred — Inspired by Retronous (@Retronous) [85187f9]
+* Pastel sakura-lilac spirit kimono, serene porcelain Kitsune mask, curved teal spirit horns,
+* fox/lamb ears, flowing lavender-blue hair, and orbiting Wolf Spirit Wisp.
+*/
+function createSpiritBlossomKindredCharacter(compactMode, ultraCompact) {
+	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+	const group = new Group();
+	const skinMat = new MeshStandardMaterial({
+		color: 16050415,
+		roughness: .58
+	});
+	const robeWhiteMat = new MeshStandardMaterial({
+		color: 16380920,
+		roughness: .72
+	});
+	const sakuraMat = new MeshStandardMaterial({
+		color: 15113922,
+		roughness: .68
+	});
+	const lilacMat = new MeshStandardMaterial({
+		color: 9142987,
+		roughness: .7
+	});
+	const plumObiMat = new MeshStandardMaterial({
+		color: 4927849,
+		roughness: .74
+	});
+	const hairBlueMat = new MeshStandardMaterial({
+		color: 7043005,
+		roughness: .56
+	});
+	const maskPorcelainMat = new MeshStandardMaterial({
+		color: 16710653,
+		roughness: .25,
+		metalness: .06
+	});
+	const hornMat = new MeshStandardMaterial({
+		color: 6470089,
+		roughness: .34,
+		metalness: .12
+	});
+	const darkDetailMat = new MeshStandardMaterial({
+		color: 2497850,
+		roughness: .3
+	});
+	const spiritGlowMat = new MeshStandardMaterial({
+		color: 9563895,
+		emissive: 5555944,
+		emissiveIntensity: .85,
+		roughness: .2
+	});
+	const blossomGoldMat = new MeshStandardMaterial({
+		color: 15254650,
+		metalness: .55,
+		roughness: .3
+	});
+	const buildLeg = (side) => {
+		const hip = new Group();
+		hip.position.set(side * .105, .72, 0);
+		const hipJoint = new Mesh(new SphereGeometry(.074, seg, seg), plumObiMat);
+		const thigh = new Mesh(new CylinderGeometry(.074, .062, .34, seg), plumObiMat);
+		thigh.position.y = -.17;
+		thigh.castShadow = !compactMode;
+		hip.add(hipJoint, thigh);
+		const shin = new Group();
+		shin.position.set(0, -.34, 0);
+		const kneeJoint = new Mesh(new SphereGeometry(.06, seg, seg), lilacMat);
+		const calf = new Mesh(new CylinderGeometry(.06, .048, .29, seg), robeWhiteMat);
+		calf.position.y = -.145;
+		calf.castShadow = !compactMode;
+		const footCap = new Mesh(new SphereGeometry(.052, seg, seg), robeWhiteMat);
+		footCap.scale.set(.92, .62, 1.52);
+		footCap.position.set(0, -.322, .035);
+		const sole = new Mesh(new BoxGeometry(.108, .028, .21), lilacMat);
+		sole.position.set(0, -.352, .03);
+		const ribbonBand = new Mesh(new TorusGeometry(.052, .01, 6, 10), sakuraMat);
+		ribbonBand.rotation.x = Math.PI / 2;
+		ribbonBand.position.y = -.26;
+		shin.add(kneeJoint, calf, footCap, sole, ribbonBand);
+		hip.add(shin);
+		return {
+			hip,
+			shin
+		};
+	};
+	const leftLegBuilt = buildLeg(-1);
+	const rightLegBuilt = buildLeg(1);
+	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+	const skirtOuter = new Mesh(new CylinderGeometry(.195, .31, .45, seg, 1, false, -Math.PI * .85, Math.PI * 1.7), robeWhiteMat);
+	skirtOuter.position.set(0, .67, -.01);
+	skirtOuter.castShadow = !compactMode;
+	const skirtTrim = new Mesh(new TorusGeometry(.285, .022, 6, seg), sakuraMat);
+	skirtTrim.rotation.x = Math.PI / 2;
+	skirtTrim.position.set(0, .46, -.01);
+	group.add(skirtOuter, skirtTrim);
+	const torsoLower = new Mesh(new CylinderGeometry(.175, .195, .31, seg), robeWhiteMat);
+	torsoLower.position.y = .88;
+	torsoLower.castShadow = !compactMode;
+	const torsoChest = new Mesh(new SphereGeometry(.196, seg, seg), robeWhiteMat);
+	torsoChest.scale.set(1.04, 1.04, .8);
+	torsoChest.position.set(0, 1.11, 0);
+	torsoChest.castShadow = !compactMode;
+	const leftKimonoLapel = new Mesh(new CapsuleGeometry(.028, .21, 4, 8), sakuraMat);
+	leftKimonoLapel.position.set(-.056, 1.17, .155);
+	leftKimonoLapel.rotation.z = -.44;
+	const rightKimonoLapel = new Mesh(new CapsuleGeometry(.028, .21, 4, 8), lilacMat);
+	rightKimonoLapel.position.set(.056, 1.17, .155);
+	rightKimonoLapel.rotation.z = .44;
+	const obiBelt = new Mesh(new CylinderGeometry(.195, .205, .14, seg), plumObiMat);
+	obiBelt.scale.set(1.04, 1, .88);
+	obiBelt.position.set(0, .87, 0);
+	const obiKnot = new Mesh(new SphereGeometry(.06, 8, 8), sakuraMat);
+	obiKnot.position.set(0, .88, -.2);
+	const sashL = new Mesh(new CapsuleGeometry(.026, .26, 4, 6), lilacMat);
+	sashL.position.set(-.065, .72, -.215);
+	sashL.rotation.z = -.24;
+	const sashR = sashL.clone();
+	sashR.position.x = .065;
+	sashR.rotation.z = .24;
+	const chestBlossom = new Mesh(new OctahedronGeometry(.036, 0), blossomGoldMat);
+	chestBlossom.position.set(0, .94, .19);
+	group.add(torsoLower, torsoChest, leftKimonoLapel, rightKimonoLapel, obiBelt, obiKnot, sashL, sashR, chestBlossom);
+	const buildSpiritArm = (side) => {
+		const shoulder = new Group();
+		shoulder.position.set(side * .23, 1.22, 0);
+		const shoulderSphere = new Mesh(new SphereGeometry(.065, seg, seg), sakuraMat);
+		const upperSleeve = new Mesh(new CylinderGeometry(.062, .105, .28, seg), robeWhiteMat);
+		upperSleeve.position.set(side * .01, -.13, .01);
+		upperSleeve.castShadow = !compactMode;
+		const sleeveTrim = new Mesh(new TorusGeometry(.098, .014, 6, seg), lilacMat);
+		sleeveTrim.rotation.x = Math.PI / 2;
+		sleeveTrim.position.set(side * .01, -.26, .01);
+		const forearm = new Mesh(new CylinderGeometry(.042, .034, .18, seg), skinMat);
+		forearm.position.set(side * .01, -.32, .055);
+		forearm.rotation.x = -.32;
+		const hand = new Mesh(new SphereGeometry(.044, seg, seg), skinMat);
+		hand.position.set(side * .01, -.405, .09);
+		shoulder.add(shoulderSphere, upperSleeve, sleeveTrim, forearm, hand);
+		return shoulder;
+	};
+	const leftArm = buildSpiritArm(-1);
+	const rightArm = buildSpiritArm(1);
+	group.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.4, 0);
+	const neck = new Mesh(new CylinderGeometry(.055, .068, .12, seg), skinMat);
+	neck.position.y = -.07;
+	const cranium = new Mesh(new SphereGeometry(.175, seg, seg), skinMat);
+	cranium.scale.set(.97, 1.03, .96);
+	cranium.position.y = .058;
+	cranium.castShadow = !compactMode;
+	head.add(neck, cranium);
+	const hairCap = new Mesh(new SphereGeometry(.189, seg, seg, 0, Math.PI * 2, 0, Math.PI * .64), hairBlueMat);
+	hairCap.position.y = .072;
+	hairCap.rotation.x = -.22;
+	const backHairFlow = new Mesh(new CapsuleGeometry(.115, .25, 6, seg), hairBlueMat);
+	backHairFlow.scale.set(1.25, 1, .65);
+	backHairFlow.position.set(0, -.06, -.145);
+	const lockL = new Mesh(new CapsuleGeometry(.036, .18, 6, 8), hairBlueMat);
+	lockL.position.set(-.155, 0, .065);
+	lockL.rotation.z = .1;
+	const lockR = lockL.clone();
+	lockR.position.x = .155;
+	lockR.rotation.z = -.1;
+	head.add(hairCap, backHairFlow, lockL, lockR);
+	const earGeo = new ConeGeometry(.068, .21, 8);
+	const innerEarGeo = new ConeGeometry(.036, .13, 6);
+	const earL = new Mesh(earGeo, robeWhiteMat);
+	earL.position.set(-.145, .245, .01);
+	earL.rotation.z = .42;
+	const earInL = new Mesh(innerEarGeo, sakuraMat);
+	earInL.position.set(-.14, .24, .032);
+	earInL.rotation.z = .42;
+	const earR = new Mesh(earGeo, robeWhiteMat);
+	earR.position.set(.145, .245, .01);
+	earR.rotation.z = -.42;
+	const earInR = new Mesh(innerEarGeo, sakuraMat);
+	earInR.position.set(.14, .24, .032);
+	earInR.rotation.z = -.42;
+	const hornGeo = new TorusGeometry(.088, .019, 6, 12, Math.PI * .68);
+	const hornL = new Mesh(hornGeo, hornMat);
+	hornL.position.set(-.1, .22, -.02);
+	hornL.rotation.set(.25, .4, .72);
+	const hornR = new Mesh(hornGeo, hornMat);
+	hornR.position.set(.1, .22, -.02);
+	hornR.rotation.set(.25, -.4, Math.PI - .72);
+	const crownFlower = new Mesh(new SphereGeometry(.038, 8, 8), sakuraMat);
+	crownFlower.scale.set(1.1, .65, 1.1);
+	crownFlower.position.set(-.085, .215, .085);
+	head.add(earL, earInL, earR, earInR, hornL, hornR, crownFlower);
+	const maskShell = new Mesh(new SphereGeometry(.174, seg, seg, -Math.PI * .34, Math.PI * .68, Math.PI * .2, Math.PI * .56), maskPorcelainMat);
+	maskShell.rotation.y = Math.PI / 2;
+	maskShell.position.set(0, .056, .025);
+	const eyeSlitGeo = new CapsuleGeometry(.011, .032, 4, 6);
+	const maskEyeL = new Mesh(eyeSlitGeo, darkDetailMat);
+	maskEyeL.position.set(-.06, .06, .194);
+	maskEyeL.rotation.z = Math.PI / 2 - .2;
+	const maskEyeR = new Mesh(eyeSlitGeo, darkDetailMat);
+	maskEyeR.position.set(.06, .06, .194);
+	maskEyeR.rotation.z = Math.PI / 2 + .2;
+	const maskMarkL = new Mesh(new CapsuleGeometry(.008, .028, 4, 6), sakuraMat);
+	maskMarkL.position.set(-.088, .018, .175);
+	maskMarkL.rotation.z = .28;
+	const maskMarkR = maskMarkL.clone();
+	maskMarkR.position.x = .088;
+	maskMarkR.rotation.z = -.28;
+	const maskNose = new Mesh(new SphereGeometry(.012, 6, 6), darkDetailMat);
+	maskNose.position.set(0, .025, .202);
+	head.add(maskShell, maskEyeL, maskEyeR, maskMarkL, maskMarkR, maskNose);
+	group.add(head);
+	const wolfWispGroup = new Group();
+	wolfWispGroup.position.set(.39, 1.38, -.06);
+	const wispCore = new Mesh(new SphereGeometry(.075, seg, seg), spiritGlowMat);
+	const wispEarsL = new Mesh(new ConeGeometry(.024, .068, 6), hornMat);
+	wispEarsL.position.set(-.038, .075, 0);
+	wispEarsL.rotation.z = .3;
+	const wispEarsR = wispEarsL.clone();
+	wispEarsR.position.x = .038;
+	wispEarsR.rotation.z = -.3;
+	const wispOrbTail = new Mesh(new SphereGeometry(.038, 8, 8), sakuraMat);
+	wispOrbTail.position.set(.09, -.07, -.08);
+	wolfWispGroup.add(wispCore, wispEarsL, wispEarsR, wispOrbTail);
+	group.add(wolfWispGroup);
+	group.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group,
+		rig: {
+			leftLeg: leftLegBuilt.hip,
+			rightLeg: rightLegBuilt.hip,
+			leftShin: leftLegBuilt.shin,
+			rightShin: rightLegBuilt.shin,
+			leftArm,
+			rightArm,
+			head,
+			tail: wolfWispGroup
+		}
+	};
+}
+/**
+* 2. Body — Inspired by Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]
+* Sleek dark-charcoal tailored formal/tactical suit body rig with crimson tie,
+* structured shoulders, silver buckle belt, sculpted swept-back hair & polished shoes.
+*/
+function createDiegoBodyCharacter(compactMode, ultraCompact) {
+	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+	const group = new Group();
+	const skinMat = new MeshStandardMaterial({
+		color: 15384738,
+		roughness: .62
+	});
+	const suitMat = new MeshStandardMaterial({
+		color: 1842982,
+		roughness: .68,
+		metalness: .08
+	});
+	const pantsMat = new MeshStandardMaterial({
+		color: 1447966,
+		roughness: .72,
+		metalness: .06
+	});
+	const shirtMat = new MeshStandardMaterial({
+		color: 16053751,
+		roughness: .76
+	});
+	const tieMat = new MeshStandardMaterial({
+		color: 9249068,
+		roughness: .48
+	});
+	const hairMat = new MeshStandardMaterial({
+		color: 1578261,
+		roughness: .62
+	});
+	const shoeMat = new MeshStandardMaterial({
+		color: 1052948,
+		roughness: .28,
+		metalness: .16
+	});
+	const metalMat = new MeshStandardMaterial({
+		color: 12765393,
+		metalness: .82,
+		roughness: .24
+	});
+	const eyeMat = new MeshStandardMaterial({
+		color: 1578519,
+		roughness: .22
+	});
+	const buildLeg = (side) => {
+		const hip = new Group();
+		hip.position.set(side * .11, .74, 0);
+		const hipJoint = new Mesh(new SphereGeometry(.082, seg, seg), pantsMat);
+		const thigh = new Mesh(new CylinderGeometry(.082, .068, .35, seg), pantsMat);
+		thigh.position.y = -.175;
+		thigh.castShadow = !compactMode;
+		hip.add(hipJoint, thigh);
+		const shin = new Group();
+		shin.position.set(0, -.35, 0);
+		const kneeJoint = new Mesh(new SphereGeometry(.066, seg, seg), pantsMat);
+		const calf = new Mesh(new CylinderGeometry(.066, .052, .31, seg), pantsMat);
+		calf.position.y = -.155;
+		calf.castShadow = !compactMode;
+		const shoe = new Mesh(new SphereGeometry(.056, seg, seg), shoeMat);
+		shoe.scale.set(.92, .64, 1.72);
+		shoe.position.set(0, -.345, .038);
+		shin.add(kneeJoint, calf, shoe);
+		hip.add(shin);
+		return {
+			hip,
+			shin
+		};
+	};
+	const leftLegBuilt = buildLeg(-1);
+	const rightLegBuilt = buildLeg(1);
+	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+	const pelvis = new Mesh(new SphereGeometry(.205, seg, seg), pantsMat);
+	pelvis.scale.set(1.02, .56, .85);
+	pelvis.position.set(0, .74, 0);
+	const jacketLower = new Mesh(new CylinderGeometry(.188, .212, .32, seg), suitMat);
+	jacketLower.position.y = .87;
+	jacketLower.castShadow = !compactMode;
+	const jacketChest = new Mesh(new SphereGeometry(.215, seg, seg), suitMat);
+	jacketChest.scale.set(1.08, 1.05, .8);
+	jacketChest.position.set(0, 1.12, 0);
+	jacketChest.castShadow = !compactMode;
+	const shoulderYoke = new Mesh(new CapsuleGeometry(.07, .37, 6, seg), suitMat);
+	shoulderYoke.rotation.z = Math.PI / 2;
+	shoulderYoke.position.set(0, 1.25, -.008);
+	const dressShirtFront = new Mesh(new CapsuleGeometry(.062, .22, 4, 8), shirtMat);
+	dressShirtFront.scale.set(1.05, 1, .52);
+	dressShirtFront.position.set(0, 1.15, .148);
+	const tieKnot = new Mesh(new SphereGeometry(.022, 8, 8), tieMat);
+	tieKnot.position.set(0, 1.24, .182);
+	const tieBlade = new Mesh(new CylinderGeometry(.015, .028, .24, 6), tieMat);
+	tieBlade.scale.set(1, 1, .45);
+	tieBlade.position.set(0, 1.11, .185);
+	const lapelL = new Mesh(new CapsuleGeometry(.022, .21, 4, 8), suitMat);
+	lapelL.position.set(-.062, 1.17, .172);
+	lapelL.rotation.z = -.34;
+	const lapelR = lapelL.clone();
+	lapelR.position.x = .062;
+	lapelR.rotation.z = .34;
+	const belt = new Mesh(new TorusGeometry(.195, .022, 6, seg), shoeMat);
+	belt.rotation.x = Math.PI / 2;
+	belt.scale.set(1.04, .86, 1);
+	belt.position.set(0, .81, 0);
+	const buckle = new Mesh(new BoxGeometry(.056, .036, .02), metalMat);
+	buckle.position.set(0, .81, .184);
+	group.add(pelvis, jacketLower, jacketChest, shoulderYoke, dressShirtFront, tieKnot, tieBlade, lapelL, lapelR, belt, buckle);
+	const buildSuitArm = (side) => {
+		const shoulder = new Group();
+		shoulder.position.set(side * .25, 1.24, 0);
+		const shoulderSphere = new Mesh(new SphereGeometry(.064, seg, seg), suitMat);
+		const upperSleeve = new Mesh(new CylinderGeometry(.06, .052, .22, seg), suitMat);
+		upperSleeve.position.set(side * .008, -.11, .01);
+		upperSleeve.castShadow = !compactMode;
+		const forearmSleeve = new Mesh(new CylinderGeometry(.05, .044, .18, seg), suitMat);
+		forearmSleeve.position.set(side * .008, -.29, .048);
+		forearmSleeve.rotation.x = -.28;
+		const whiteCuff = new Mesh(new CylinderGeometry(.045, .043, .03, seg), shirtMat);
+		whiteCuff.position.set(side * .008, -.375, .072);
+		whiteCuff.rotation.x = -.28;
+		const hand = new Mesh(new SphereGeometry(.046, seg, seg), skinMat);
+		hand.scale.set(.92, 1.12, .85);
+		hand.position.set(side * .008, -.415, .088);
+		shoulder.add(shoulderSphere, upperSleeve, forearmSleeve, whiteCuff, hand);
+		return shoulder;
+	};
+	const leftArm = buildSuitArm(-1);
+	const rightArm = buildSuitArm(1);
+	group.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.41, 0);
+	const neck = new Mesh(new CylinderGeometry(.062, .074, .12, seg), skinMat);
+	neck.position.y = -.07;
+	const cranium = new Mesh(new SphereGeometry(.172, seg, seg), skinMat);
+	cranium.scale.set(.95, 1.05, .96);
+	cranium.position.y = .058;
+	cranium.castShadow = !compactMode;
+	const hairCap = new Mesh(new SphereGeometry(.184, seg, seg, 0, Math.PI * 2, 0, Math.PI * .58), hairMat);
+	hairCap.position.y = .072;
+	hairCap.rotation.x = -.28;
+	const sweptCrest = new Mesh(new CapsuleGeometry(.058, .14, 6, 8), hairMat);
+	sweptCrest.position.set(0, .2, .055);
+	sweptCrest.rotation.x = -.62;
+	const eyeL = new Mesh(new SphereGeometry(.018, 8, 8), eyeMat);
+	eyeL.position.set(-.056, .058, .158);
+	const eyeR = eyeL.clone();
+	eyeR.position.x = .056;
+	const browGeo = new CapsuleGeometry(.007, .038, 4, 6);
+	const browL = new Mesh(browGeo, hairMat);
+	browL.position.set(-.056, .095, .156);
+	browL.rotation.z = Math.PI / 2 + .14;
+	const browR = new Mesh(browGeo, hairMat);
+	browR.position.set(.056, .095, .156);
+	browR.rotation.z = Math.PI / 2 - .14;
+	const noseTip = new Mesh(new SphereGeometry(.013, 6, 6), skinMat);
+	noseTip.position.set(0, .032, .172);
+	head.add(neck, cranium, hairCap, sweptCrest, eyeL, eyeR, browL, browR, noseTip);
+	group.add(head);
+	group.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group,
+		rig: {
+			leftLeg: leftLegBuilt.hip,
+			rightLeg: rightLegBuilt.hip,
+			leftShin: leftLegBuilt.shin,
+			rightShin: rightLegBuilt.shin,
+			leftArm,
+			rightArm,
+			head
+		}
+	};
+}
+/**
+* 3. Ultimate CICADA Suit V2 — Inspired by rendysix (@rendysix) [21122d8]
+* Tactical Hitman CICADA bodyguard formal suit: matte obsidian blazer, ballistic vest layer,
+* shoulder holster harness, polarized sunglasses, coiled comms earpiece, leather gloves & tactical boots.
+*/
+function createCicadaSuitV2Character(compactMode, ultraCompact) {
+	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+	const group = new Group();
+	const skinMat = new MeshStandardMaterial({
+		color: 15121568,
+		roughness: .64
+	});
+	const blazerMat = new MeshStandardMaterial({
+		color: 2106412,
+		roughness: .65,
+		metalness: .1
+	});
+	const armorVestMat = new MeshStandardMaterial({
+		color: 1382430,
+		roughness: .44,
+		metalness: .22
+	});
+	const shirtMat = new MeshStandardMaterial({
+		color: 15461872,
+		roughness: .78
+	});
+	const tieMat = new MeshStandardMaterial({
+		color: 1118999,
+		roughness: .42
+	});
+	const gloveMat = new MeshStandardMaterial({
+		color: 1447965,
+		roughness: .36,
+		metalness: .18
+	});
+	const bootMat = new MeshStandardMaterial({
+		color: 1053206,
+		roughness: .3,
+		metalness: .2
+	});
+	const visorMat = new MeshStandardMaterial({
+		color: 724499,
+		roughness: .14,
+		metalness: .65
+	});
+	const steelMat = new MeshStandardMaterial({
+		color: 10134189,
+		roughness: .25,
+		metalness: .85
+	});
+	const commsMat = new MeshStandardMaterial({
+		color: 14213096,
+		roughness: .3,
+		metalness: .3
+	});
+	const hairMat = new MeshStandardMaterial({
+		color: 2236449,
+		roughness: .68
+	});
+	const buildLeg = (side) => {
+		const hip = new Group();
+		hip.position.set(side * .115, .74, 0);
+		const hipJoint = new Mesh(new SphereGeometry(.084, seg, seg), blazerMat);
+		const thigh = new Mesh(new CylinderGeometry(.085, .072, .35, seg), blazerMat);
+		thigh.position.y = -.175;
+		thigh.castShadow = !compactMode;
+		hip.add(hipJoint, thigh);
+		const shin = new Group();
+		shin.position.set(0, -.35, 0);
+		const kneePad = new Mesh(new SphereGeometry(.068, seg, seg), armorVestMat);
+		const calf = new Mesh(new CylinderGeometry(.068, .056, .3, seg), blazerMat);
+		calf.position.y = -.15;
+		calf.castShadow = !compactMode;
+		const boot = new Mesh(new SphereGeometry(.06, seg, seg), bootMat);
+		boot.scale.set(.98, .68, 1.72);
+		boot.position.set(0, -.342, .036);
+		shin.add(kneePad, calf, boot);
+		hip.add(shin);
+		return {
+			hip,
+			shin
+		};
+	};
+	const leftLegBuilt = buildLeg(-1);
+	const rightLegBuilt = buildLeg(1);
+	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+	const pelvis = new Mesh(new SphereGeometry(.214, seg, seg), blazerMat);
+	pelvis.scale.set(1.04, .56, .88);
+	pelvis.position.set(0, .74, 0);
+	const jacketLower = new Mesh(new CylinderGeometry(.198, .222, .32, seg), blazerMat);
+	jacketLower.position.y = .88;
+	jacketLower.castShadow = !compactMode;
+	const jacketChest = new Mesh(new SphereGeometry(.226, seg, seg), blazerMat);
+	jacketChest.scale.set(1.1, 1.04, .84);
+	jacketChest.position.set(0, 1.13, 0);
+	jacketChest.castShadow = !compactMode;
+	const tacticalVestPlate = new Mesh(new BoxGeometry(.24, .29, .06), armorVestMat);
+	tacticalVestPlate.position.set(0, 1.08, .165);
+	const collarShirt = new Mesh(new CylinderGeometry(.092, .11, .08, seg), shirtMat);
+	collarShirt.position.set(0, 1.28, .02);
+	const blackTie = new Mesh(new CylinderGeometry(.015, .024, .22, 6), tieMat);
+	blackTie.scale.set(1, 1, .45);
+	blackTie.position.set(0, 1.14, .198);
+	const shoulderYoke = new Mesh(new CapsuleGeometry(.075, .39, 6, seg), blazerMat);
+	shoulderYoke.rotation.z = Math.PI / 2;
+	shoulderYoke.position.set(0, 1.25, -.006);
+	const strapL = new Mesh(new BoxGeometry(.036, .24, .022), armorVestMat);
+	strapL.position.set(-.115, 1.15, .16);
+	strapL.rotation.z = -.14;
+	const strapR = strapL.clone();
+	strapR.position.x = .115;
+	strapR.rotation.z = .14;
+	const radioClip = new Mesh(new BoxGeometry(.032, .048, .024), steelMat);
+	radioClip.position.set(-.115, 1.19, .178);
+	const tacticalBelt = new Mesh(new TorusGeometry(.205, .028, 6, seg), armorVestMat);
+	tacticalBelt.rotation.x = Math.PI / 2;
+	tacticalBelt.scale.set(1.05, .88, 1);
+	tacticalBelt.position.set(0, .81, 0);
+	const tacticalBuckle = new Mesh(new BoxGeometry(.064, .042, .024), steelMat);
+	tacticalBuckle.position.set(0, .81, .195);
+	group.add(pelvis, jacketLower, jacketChest, tacticalVestPlate, collarShirt, blackTie, shoulderYoke, strapL, strapR, radioClip, tacticalBelt, tacticalBuckle);
+	const buildTacticalArm = (side) => {
+		const shoulder = new Group();
+		shoulder.position.set(side * .262, 1.24, 0);
+		const shoulderPad = new Mesh(new SphereGeometry(.068, seg, seg), blazerMat);
+		const upperSleeve = new Mesh(new CylinderGeometry(.064, .056, .22, seg), blazerMat);
+		upperSleeve.position.set(side * .008, -.11, .01);
+		upperSleeve.castShadow = !compactMode;
+		const forearmSleeve = new Mesh(new CylinderGeometry(.054, .046, .18, seg), blazerMat);
+		forearmSleeve.position.set(side * .008, -.29, .048);
+		forearmSleeve.rotation.x = -.28;
+		const glove = new Mesh(new SphereGeometry(.049, seg, seg), gloveMat);
+		glove.scale.set(.95, 1.15, .88);
+		glove.position.set(side * .008, -.41, .086);
+		shoulder.add(shoulderPad, upperSleeve, forearmSleeve, glove);
+		return shoulder;
+	};
+	const leftArm = buildTacticalArm(-1);
+	const rightArm = buildTacticalArm(1);
+	group.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.41, 0);
+	const neck = new Mesh(new CylinderGeometry(.064, .076, .12, seg), skinMat);
+	neck.position.y = -.07;
+	const cranium = new Mesh(new SphereGeometry(.172, seg, seg), skinMat);
+	cranium.scale.set(.97, 1.04, .96);
+	cranium.position.y = .058;
+	cranium.castShadow = !compactMode;
+	const hairCap = new Mesh(new SphereGeometry(.181, seg, seg, 0, Math.PI * 2, 0, Math.PI * .54), hairMat);
+	hairCap.position.y = .075;
+	hairCap.rotation.x = -.26;
+	const lensGeo = new BoxGeometry(.068, .036, .018);
+	const lensL = new Mesh(lensGeo, visorMat);
+	lensL.position.set(-.048, .064, .168);
+	lensL.rotation.y = -.14;
+	const lensR = new Mesh(lensGeo, visorMat);
+	lensR.position.set(.048, .064, .168);
+	lensR.rotation.y = .14;
+	const visorBridge = new Mesh(new BoxGeometry(.038, .01, .014), steelMat);
+	visorBridge.position.set(0, .068, .174);
+	const earpieceBud = new Mesh(new SphereGeometry(.02, 8, 8), armorVestMat);
+	earpieceBud.position.set(-.17, .042, .01);
+	const coiledWire = new Mesh(new TorusGeometry(.024, .005, 6, 12, Math.PI * 1.4), commsMat);
+	coiledWire.position.set(-.14, -.04, -.035);
+	coiledWire.rotation.y = Math.PI / 2;
+	head.add(neck, cranium, hairCap, lensL, lensR, visorBridge, earpieceBud, coiledWire);
 	group.add(head);
 	group.traverse((obj) => {
 		obj.frustumCulled = false;
@@ -63309,8 +64074,25 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 		obj.matrixAutoUpdate = false;
 	});
 	root.add(sideTable);
+	const playerContainer = new Group();
+	playerContainer.position.copy(PLAYER_SPAWN_POS);
+	playerContainer.rotation.y = PLAYER_SPAWN_ROT_Y;
 	const teaMaster = createTeaMasterCharacter(compactMode, ultraCompact);
-	root.add(teaMaster.group);
+	const spiritBlossomKindred = createSpiritBlossomKindredCharacter(compactMode, ultraCompact);
+	const diegoBody = createDiegoBodyCharacter(compactMode, ultraCompact);
+	const cicadaSuitV2 = createCicadaSuitV2Character(compactMode, ultraCompact);
+	const playerModels = {
+		"tea-master": teaMaster,
+		"spirit-blossom-kindred": spiritBlossomKindred,
+		"diego-body": diegoBody,
+		"cicada-suit-v2": cicadaSuitV2
+	};
+	let activePlayerId = "tea-master";
+	spiritBlossomKindred.group.visible = false;
+	diegoBody.group.visible = false;
+	cicadaSuitV2.group.visible = false;
+	playerContainer.add(teaMaster.group, spiritBlossomKindred.group, diegoBody.group, cicadaSuitV2.group);
+	root.add(playerContainer);
 	const guestsContainer = new Group();
 	guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
 	guestsContainer.rotation.y = -Math.PI / 2;
@@ -63358,7 +64140,14 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	};
 	const setFirstPersonHidden = (hidden) => {
 		firstPersonHidden = hidden;
-		teaMaster.group.visible = !hidden;
+		playerContainer.visible = !hidden;
+	};
+	const setPlayerCharacter = (characterId) => {
+		activePlayerId = characterId;
+		teaMaster.group.visible = characterId === "tea-master";
+		spiritBlossomKindred.group.visible = characterId === "spirit-blossom-kindred";
+		diegoBody.group.visible = characterId === "diego-body";
+		cicadaSuitV2.group.visible = characterId === "cicada-suit-v2";
 	};
 	const movePlayer = (inputX, inputY, cameraYaw, delta) => {
 		const mag = Math.hypot(inputX, inputY);
@@ -63375,13 +64164,13 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 		const moveDirX = nx * cosY - ny * sinY;
 		const moveDirZ = -nx * sinY - ny * cosY;
 		const speed = 2.45 * clampedMag;
-		const resolved = clampToShopObstacles(teaMaster.group.position.x + moveDirX * speed * delta, teaMaster.group.position.z + moveDirZ * speed * delta);
-		teaMaster.group.position.x = resolved.x;
-		teaMaster.group.position.z = resolved.z;
-		let angleDiff = Math.atan2(moveDirX, moveDirZ) - teaMaster.group.rotation.y;
+		const resolved = clampToShopObstacles(playerContainer.position.x + moveDirX * speed * delta, playerContainer.position.z + moveDirZ * speed * delta);
+		playerContainer.position.x = resolved.x;
+		playerContainer.position.z = resolved.z;
+		let angleDiff = Math.atan2(moveDirX, moveDirZ) - playerContainer.rotation.y;
 		while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
 		while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-		teaMaster.group.rotation.y += angleDiff * Math.min(1, delta * 12);
+		playerContainer.rotation.y += angleDiff * Math.min(1, delta * 12);
 		isPlayerMoving = true;
 		playerWalkSpeed = clampedMag;
 		playerWalkPhase += delta * 9.5 * clampedMag;
@@ -63396,27 +64185,32 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 			malee.group.visible = guestId === "malee";
 			activeGuestRig = guestId === "elara" ? elara.rig : guestId === "malee" ? malee.rig : somO.rig;
 		}
+		const activePlayerRig = playerModels[activePlayerId]?.rig ?? teaMaster.rig;
 		if (!firstPersonHidden) {
+			if (activePlayerRig.tail && !reducedMotion) {
+				activePlayerRig.tail.position.y = 1.38 + Math.sin(elapsed * 2.4) * .045;
+				activePlayerRig.tail.rotation.y = elapsed * .8;
+			}
 			if (isPlayerMoving && !reducedMotion) {
 				const swing = Math.sin(playerWalkPhase) * .56 * playerWalkSpeed;
-				teaMaster.rig.leftLeg.rotation.x = swing;
-				teaMaster.rig.rightLeg.rotation.x = -swing;
-				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
-					teaMaster.rig.leftShin.rotation.x = Math.max(0, -swing * .75);
-					teaMaster.rig.rightShin.rotation.x = Math.max(0, swing * .75);
+				activePlayerRig.leftLeg.rotation.x = swing;
+				activePlayerRig.rightLeg.rotation.x = -swing;
+				if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
+					activePlayerRig.leftShin.rotation.x = Math.max(0, -swing * .75);
+					activePlayerRig.rightShin.rotation.x = Math.max(0, swing * .75);
 				}
-				teaMaster.rig.leftArm.rotation.x = -swing * .72;
-				teaMaster.rig.rightArm.rotation.x = swing * .72;
-				teaMaster.group.position.y = SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * .032;
-				teaMaster.rig.head.rotation.y = Math.sin(elapsed * .9) * .04;
+				activePlayerRig.leftArm.rotation.x = -swing * .72;
+				activePlayerRig.rightArm.rotation.x = swing * .72;
+				playerContainer.position.y = SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * .032;
+				activePlayerRig.head.rotation.y = Math.sin(elapsed * .9) * .04;
 			} else {
 				const damp = Math.min(1, delta * 9);
 				const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * .02;
-				teaMaster.rig.leftLeg.rotation.x = MathUtils.lerp(teaMaster.rig.leftLeg.rotation.x, 0, damp);
-				teaMaster.rig.rightLeg.rotation.x = MathUtils.lerp(teaMaster.rig.rightLeg.rotation.x, 0, damp);
-				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
-					teaMaster.rig.leftShin.rotation.x = MathUtils.lerp(teaMaster.rig.leftShin.rotation.x, 0, damp);
-					teaMaster.rig.rightShin.rotation.x = MathUtils.lerp(teaMaster.rig.rightShin.rotation.x, 0, damp);
+				activePlayerRig.leftLeg.rotation.x = MathUtils.lerp(activePlayerRig.leftLeg.rotation.x, 0, damp);
+				activePlayerRig.rightLeg.rotation.x = MathUtils.lerp(activePlayerRig.rightLeg.rotation.x, 0, damp);
+				if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
+					activePlayerRig.leftShin.rotation.x = MathUtils.lerp(activePlayerRig.leftShin.rotation.x, 0, damp);
+					activePlayerRig.rightShin.rotation.x = MathUtils.lerp(activePlayerRig.rightShin.rotation.x, 0, damp);
 				}
 				let targetRightArm = -.14 + breathe;
 				let targetLeftArm = -.12 - breathe;
@@ -63427,10 +64221,10 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 					targetRightArm = -.52;
 					targetLeftArm = -.42;
 				}
-				teaMaster.rig.rightArm.rotation.x = MathUtils.lerp(teaMaster.rig.rightArm.rotation.x, targetRightArm, damp);
-				teaMaster.rig.leftArm.rotation.x = MathUtils.lerp(teaMaster.rig.leftArm.rotation.x, targetLeftArm, damp);
-				teaMaster.group.position.y = MathUtils.lerp(teaMaster.group.position.y, SHOP_FLOOR_Y, damp);
-				teaMaster.rig.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
+				activePlayerRig.rightArm.rotation.x = MathUtils.lerp(activePlayerRig.rightArm.rotation.x, targetRightArm, damp);
+				activePlayerRig.leftArm.rotation.x = MathUtils.lerp(activePlayerRig.leftArm.rotation.x, targetLeftArm, damp);
+				playerContainer.position.y = MathUtils.lerp(playerContainer.position.y, SHOP_FLOOR_Y, damp);
+				activePlayerRig.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
 			}
 		}
 		let customerCrossedDoorNow = false;
@@ -63498,23 +64292,24 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 			}
 		}
 		return {
-			playerPos: teaMaster.group.position,
-			playerRotY: teaMaster.group.rotation.y,
-			isNearTeaTable: checkNearTeaTable(teaMaster.group.position),
+			playerPos: playerContainer.position,
+			playerRotY: playerContainer.rotation.y,
+			isNearTeaTable: checkNearTeaTable(playerContainer.position),
 			customerPhase,
 			customerCrossedDoorNow
 		};
 	};
 	return {
 		root,
-		teaMasterGroup: teaMaster.group,
+		teaMasterGroup: playerContainer,
 		guestsContainer,
 		startCustomerWalkIn,
 		setFirstPersonHidden,
+		setPlayerCharacter,
 		movePlayer,
-		getPlayerPosition: () => teaMaster.group.position,
-		getPlayerRotationY: () => teaMaster.group.rotation.y,
-		isNearTeaTable: () => checkNearTeaTable(teaMaster.group.position),
+		getPlayerPosition: () => playerContainer.position,
+		getPlayerRotationY: () => playerContainer.rotation.y,
+		isNearTeaTable: () => checkNearTeaTable(playerContainer.position),
 		animate
 	};
 }
@@ -63970,6 +64765,9 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		mode
 	]);
 	(0, import_react.useEffect)(() => {
+		charactersRef.current?.setPlayerCharacter(settings.playerCharacter);
+	}, [settings.playerCharacter]);
+	(0, import_react.useEffect)(() => {
 		shadowDirtyRef.current = true;
 	}, [
 		tea.id,
@@ -64114,6 +64912,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		});
 		scene.add(envGroup);
 		const shopCharacters = createShopCharactersSystem(walnutTex, ceramicTex, compactAssets, ultraCompactAssets);
+		shopCharacters.setPlayerCharacter(initSettings.playerCharacter);
 		charactersRef.current = shopCharacters;
 		scene.add(shopCharacters.root);
 		if (syncRef.current.mode === "guest") shopCharacters.startCustomerWalkIn(syncRef.current.guestId);
@@ -66413,8 +67212,37 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.11.0";
+var CURRENT_APP_VERSION = "2.12.0";
 var VERSION_HISTORY = [
+	{
+		version: "2.12.0",
+		previousVersion: "2.11.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "เพิ่มโมเดล 3D ใหม่ 3 ตัวละคร (Spirit Blossom Kindred, Body, Ultimate CICADA Suit V2) & เพลง Smoke in the Glass",
+		summary: "เพิ่มตัวเลือกโมเดลตัวละครผู้เล่น 3 มิติใหม่ 3 สไตล์ในหน้าตั้งค่า (Spirit Blossom Kindred โดย Retronous, Body โดย Diego_P3D_XD และ Ultimate CICADA Suit V2 โดย rendysix) พร้อมเปลี่ยนเพลง “Smoke in the Glass” เป็นไฟล์เพลงต้นฉบับที่แนบมาให้เลือกเปิดฟังระหว่างชงชาได้ทันที",
+		changes: [
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "โมเดล 3D Spirit Blossom Kindred — Retronous (@Retronous) [85187f9]",
+				detail: "ชุดกิโมโนพาสเทลซากุระ-ม่วงอ่อน หน้ากากพอร์ซเลน เขาสีคราม หูจิ้งจอกและวิญญาณหมาป่าลอยเคียงไหล่ พร้อมแอนิเมชั่นเดินและชงชาเต็มรูปแบบ"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "โมเดล 3D Body — Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]",
+				detail: "ชุดสูทสีดำเข้มตัดเนกไทแดงเข้ม เชิ้ตขาว เข็มขัดหัวโลหะ และรองเท้าหนังขัดเงาพร้อมข้อต่อแขนขาขยับเดินสมจริง"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "โมเดล 3D Ultimate CICADA Suit V2 — rendysix (@rendysix) [21122d8]",
+				detail: "ชุดบอดี้การ์ดแทคติคอล CICADA เกราะอก สายสะพาย แว่นตาดำ ถุงมือหนัง หูฟังสื่อสารแบบขด และรองเท้าคอมแบท"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เพลง “Smoke in the Glass” (ไฟล์เสียงต้นฉบับ)",
+				detail: "บรรจุไฟล์เพลง “Smoke in the Glass” ต้นฉบับลงในตัวเกมแบบออฟไลน์และเลือกเปิดฟังได้ทันทีในหน้าตั้งค่าเสียงเพลงประกอบ"
+			}
+		]
+	},
 	{
 		version: "2.11.0",
 		previousVersion: "2.10.0",
@@ -67195,7 +68023,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 										children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-[11px] text-[#5A655D] truncate",
-										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.11.0 · ดูสิ่งที่เพิ่มใหม่`
+										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.12.0 · ดูสิ่งที่เพิ่มใหม่`
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -67684,6 +68512,32 @@ var AMBIENCE_OPTIONS = [
 		label: "ลมสวนไผ่"
 	}
 ];
+var CHARACTER_MODELS = [
+	{
+		id: "tea-master",
+		name: "เจ้าบ้านชา (ต้นตำรับ)",
+		creator: "โมเดลประจำเรือนชา",
+		accentColor: "#2E6F40"
+	},
+	{
+		id: "spirit-blossom-kindred",
+		name: "Spirit Blossom Kindred",
+		creator: "Retronous (@Retronous) [85187f9]",
+		accentColor: "#8B82CB"
+	},
+	{
+		id: "diego-body",
+		name: "Body (Trench/Suit)",
+		creator: "Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]",
+		accentColor: "#8D212C"
+	},
+	{
+		id: "cicada-suit-v2",
+		name: "Ultimate CICADA Suit V2",
+		creator: "rendysix (@rendysix) [21122d8]",
+		accentColor: "#242B35"
+	}
+];
 var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshRate, onRecheckRefreshRate, onToggleFullscreen, onUpdateSettings, onResetSettings, onClose }) => {
 	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
 	const visibleOptimizationOptions = [{
@@ -67827,625 +68681,680 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 			className: "flex-1 overflow-y-auto safe-px py-4 sm:py-6 safe-pb",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 sm:gap-5",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-					className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+						className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
+										className: "h-5 w-5 text-[#2E6F40]",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
+										children: "ตั้งค่าเสียงและบรรยากาศ"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-xs text-[#5A655D]",
+										children: "ควบคุมระดับเสียงเอฟเฟกต์และเสียงธรรมชาติในสวนไผ่"
+									})] })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+									type: "button",
+									whileTap: { scale: .93 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.unlock();
+										onUpdateSettings({ isMuted: !settings.isMuted });
+									},
+									className: `inline-flex min-h-[44px] items-center gap-1.5 rounded-xl px-3.5 text-xs font-semibold whitespace-nowrap shrink-0 ${settings.isMuted ? "border border-[#1F2823]/15 bg-[#F3F1EC] text-[#5A655D]" : "bg-[#2E6F40] text-white"}`,
+									children: settings.isMuted ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(VolumeX, {
+										className: "h-4 w-4",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปิดเสียงอยู่" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
+										className: "h-4 w-4",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเสียง" })] })
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between text-xs sm:text-sm",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										htmlFor: "slider-master-vol",
+										className: "font-medium text-[#1F2823]",
+										children: "ระดับเสียงหลัก"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono-num font-semibold text-[#2E6F40]",
+										children: settings.isMuted ? "ปิดเสียง" : `${settings.masterVolume}%`
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									id: "slider-master-vol",
+									type: "range",
+									min: 0,
+									max: 100,
+									value: settings.masterVolume,
+									disabled: settings.isMuted,
+									onChange: (e) => {
+										soundEngine.unlock();
+										onUpdateSettings({ masterVolume: Number(e.target.value) });
+									},
+									className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between text-xs sm:text-sm",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										htmlFor: "slider-sfx-vol",
+										className: "font-medium text-[#1F2823]",
+										children: "เสียงชงชา กาต้มน้ำ และปุ่มกด"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "font-mono-num font-semibold text-[#2E6F40]",
+										children: [settings.sfxVolume, "%"]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									id: "slider-sfx-vol",
+									type: "range",
+									min: 0,
+									max: 100,
+									value: settings.sfxVolume,
+									disabled: settings.isMuted,
+									onChange: (e) => {
+										soundEngine.unlock();
+										onUpdateSettings({ sfxVolume: Number(e.target.value) });
+									},
+									className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between text-xs sm:text-sm",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										htmlFor: "slider-amb-vol",
+										className: "font-medium text-[#1F2823]",
+										children: "ระดับเสียงบรรยากาศ"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "font-mono-num font-semibold text-[#2E6F40]",
+										children: [settings.ambienceVolume, "%"]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									id: "slider-amb-vol",
+									type: "range",
+									min: 0,
+									max: 100,
+									value: settings.ambienceVolume,
+									disabled: settings.isMuted,
+									onChange: (e) => {
+										soundEngine.unlock();
+										onUpdateSettings({ ambienceVolume: Number(e.target.value) });
+									},
+									className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between text-xs sm:text-sm",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+										htmlFor: "slider-music-vol",
+										className: "font-medium text-[#1F2823]",
+										children: "ระดับเสียงเพลงประกอบ (ชิวๆ)"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono-num font-semibold text-[#2E6F40]",
+										children: settings.musicTrack === "none" ? "ปิดเพลง" : `${settings.musicVolume}%`
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									id: "slider-music-vol",
+									type: "range",
+									min: 0,
+									max: 100,
+									value: settings.musicVolume,
+									disabled: settings.isMuted || settings.musicTrack === "none",
+									onChange: (e) => {
+										soundEngine.unlock();
+										onUpdateSettings({ musicVolume: Number(e.target.value) });
+									},
+									className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "flex items-center justify-between gap-2",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#1F2823]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Music, {
+											className: "h-4 w-4 text-[#2E6F40]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เลือกเพลงดนตรีสไตล์ชิวๆ (4 เพลง)" })]
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-1.5",
+									children: CHILL_MUSIC_TRACKS.map((track) => {
+										const active = settings.musicTrack === track.id;
+										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .96 },
+											transition: TAP_SPRING$3,
+											onClick: () => {
+												soundEngine.unlock();
+												soundEngine.playTap();
+												onUpdateSettings({ musicTrack: track.id });
+											},
+											className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "min-w-0",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+													className: "text-xs font-semibold text-[#1F2823] truncate",
+													children: track.title
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+													className: "text-[10px] text-[#5A655D] truncate",
+													children: track.subtitle
+												})]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: `rounded-md px-1.5 py-0.5 font-mono-num text-[10px] font-semibold shrink-0 ${active ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
+												children: track.bpmLabel
+											})]
+										}, track.id);
+									})
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-xs sm:text-sm font-medium text-[#1F2823]",
+										children: "เสียงบรรยากาศพื้นหลัง"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .94 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.unlock();
+											soundEngine.playSweetSpotChime();
+										},
+										className: "inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-[#2E6F40]/30 bg-[#EFF6EE] px-3 text-xs font-semibold text-[#255F30]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+											className: "h-3.5 w-3.5",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ทดสอบเสียง" })]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
+									children: AMBIENCE_OPTIONS.map((opt) => {
+										const active = settings.ambience === opt.id;
+										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .94 },
+											onClick: () => {
+												soundEngine.unlock();
+												soundEngine.playTap();
+												onUpdateSettings({ ambience: opt.id });
+											},
+											className: "relative inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg px-2 text-xs sm:text-sm font-medium",
+											children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+												layoutId: "settings-ambience-pill",
+												transition: {
+													type: "spring",
+													stiffness: 420,
+													damping: 30
+												},
+												className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: `relative z-10 inline-flex items-center gap-1.5 ${active ? "text-white" : "text-[#4A534D]"}`,
+												children: [
+													opt.id === "rain" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudRain, {
+														className: "h-4 w-4 shrink-0",
+														"aria-hidden": "true"
+													}),
+													opt.id === "breeze" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wind, {
+														className: "h-4 w-4 shrink-0",
+														"aria-hidden": "true"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: opt.label })
+												]
+											})]
+										}, opt.id);
+									})
+								})]
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+						className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2 border-b border-[#1F2823]/8 pb-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Monitor, {
 									className: "h-5 w-5 text-[#2E6F40]",
 									"aria-hidden": "true"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 									className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
-									children: "ตั้งค่าเสียงและบรรยากาศ"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									children: "กราฟิกและความลื่นไหล (FPS)"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 									className: "text-xs text-[#5A655D]",
-									children: "ควบคุมระดับเสียงเอฟเฟกต์และเสียงธรรมชาติในสวนไผ่"
+									children: [
+										"หน้าจอของคุณรองรับ ",
+										detectedRefreshRate,
+										" Hz · ปรับได้สูงสุด ",
+										detectedRefreshRate,
+										" FPS"
+									]
 								})] })]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
-								type: "button",
-								whileTap: { scale: .93 },
-								transition: TAP_SPRING$3,
-								onClick: () => {
-									soundEngine.unlock();
-									onUpdateSettings({ isMuted: !settings.isMuted });
-								},
-								className: `inline-flex min-h-[44px] items-center gap-1.5 rounded-xl px-3.5 text-xs font-semibold whitespace-nowrap shrink-0 ${settings.isMuted ? "border border-[#1F2823]/15 bg-[#F3F1EC] text-[#5A655D]" : "bg-[#2E6F40] text-white"}`,
-								children: settings.isMuted ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(VolumeX, {
-									className: "h-4 w-4",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปิดเสียงอยู่" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
-									className: "h-4 w-4",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเสียง" })] })
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between text-xs sm:text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									htmlFor: "slider-master-vol",
-									className: "font-medium text-[#1F2823]",
-									children: "ระดับเสียงหลัก"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono-num font-semibold text-[#2E6F40]",
-									children: settings.isMuted ? "ปิดเสียง" : `${settings.masterVolume}%`
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								id: "slider-master-vol",
-								type: "range",
-								min: 0,
-								max: 100,
-								value: settings.masterVolume,
-								disabled: settings.isMuted,
-								onChange: (e) => {
-									soundEngine.unlock();
-									onUpdateSettings({ masterVolume: Number(e.target.value) });
-								},
-								className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between text-xs sm:text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									htmlFor: "slider-sfx-vol",
-									className: "font-medium text-[#1F2823]",
-									children: "เสียงชงชา กาต้มน้ำ และปุ่มกด"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "font-mono-num font-semibold text-[#2E6F40]",
-									children: [settings.sfxVolume, "%"]
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								id: "slider-sfx-vol",
-								type: "range",
-								min: 0,
-								max: 100,
-								value: settings.sfxVolume,
-								disabled: settings.isMuted,
-								onChange: (e) => {
-									soundEngine.unlock();
-									onUpdateSettings({ sfxVolume: Number(e.target.value) });
-								},
-								className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between text-xs sm:text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									htmlFor: "slider-amb-vol",
-									className: "font-medium text-[#1F2823]",
-									children: "ระดับเสียงบรรยากาศ"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "font-mono-num font-semibold text-[#2E6F40]",
-									children: [settings.ambienceVolume, "%"]
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								id: "slider-amb-vol",
-								type: "range",
-								min: 0,
-								max: 100,
-								value: settings.ambienceVolume,
-								disabled: settings.isMuted,
-								onChange: (e) => {
-									soundEngine.unlock();
-									onUpdateSettings({ ambienceVolume: Number(e.target.value) });
-								},
-								className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between text-xs sm:text-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									htmlFor: "slider-music-vol",
-									className: "font-medium text-[#1F2823]",
-									children: "ระดับเสียงเพลงประกอบ (ชิวๆ)"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono-num font-semibold text-[#2E6F40]",
-									children: settings.musicTrack === "none" ? "ปิดเพลง" : `${settings.musicVolume}%`
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								id: "slider-music-vol",
-								type: "range",
-								min: 0,
-								max: 100,
-								value: settings.musicVolume,
-								disabled: settings.isMuted || settings.musicTrack === "none",
-								onChange: (e) => {
-									soundEngine.unlock();
-									onUpdateSettings({ musicVolume: Number(e.target.value) });
-								},
-								className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "flex items-center justify-between gap-2",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#1F2823]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Music, {
-										className: "h-4 w-4 text-[#2E6F40]",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เลือกเพลงดนตรีสไตล์ชิวๆ (3 เพลง)" })]
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-1 sm:grid-cols-2 gap-1.5",
-								children: CHILL_MUSIC_TRACKS.map((track) => {
-									const active = settings.musicTrack === track.id;
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileTap: { scale: .96 },
-										transition: TAP_SPRING$3,
-										onClick: () => {
-											soundEngine.unlock();
-											soundEngine.playTap();
-											onUpdateSettings({ musicTrack: track.id });
-										},
-										className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "min-w-0",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-												className: "text-xs font-semibold text-[#1F2823] truncate",
-												children: track.title
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-												className: "text-[10px] text-[#5A655D] truncate",
-												children: track.subtitle
-											})]
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: `rounded-md px-1.5 py-0.5 font-mono-num text-[10px] font-semibold shrink-0 ${active ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
-											children: track.bpmLabel
-										})]
-									}, track.id);
-								})
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-xs sm:text-sm font-medium text-[#1F2823]",
-									children: "เสียงบรรยากาศพื้นหลัง"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .94 },
-									transition: TAP_SPRING$3,
-									onClick: () => {
-										soundEngine.unlock();
-										soundEngine.playSweetSpotChime();
-									},
-									className: "inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-[#2E6F40]/30 bg-[#EFF6EE] px-3 text-xs font-semibold text-[#255F30]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
-										className: "h-3.5 w-3.5",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ทดสอบเสียง" })]
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
-								children: AMBIENCE_OPTIONS.map((opt) => {
-									const active = settings.ambience === opt.id;
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileTap: { scale: .94 },
-										onClick: () => {
-											soundEngine.unlock();
-											soundEngine.playTap();
-											onUpdateSettings({ ambience: opt.id });
-										},
-										className: "relative inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg px-2 text-xs sm:text-sm font-medium",
-										children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-											layoutId: "settings-ambience-pill",
-											transition: {
-												type: "spring",
-												stiffness: 420,
-												damping: 30
-											},
-											className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: `relative z-10 inline-flex items-center gap-1.5 ${active ? "text-white" : "text-[#4A534D]"}`,
-											children: [
-												opt.id === "rain" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudRain, {
-													className: "h-4 w-4 shrink-0",
-													"aria-hidden": "true"
-												}),
-												opt.id === "breeze" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wind, {
-													className: "h-4 w-4 shrink-0",
-													"aria-hidden": "true"
-												}),
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: opt.label })
-											]
-										})]
-									}, opt.id);
-								})
-							})]
-						})
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-					className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-2 border-b border-[#1F2823]/8 pb-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Monitor, {
-								className: "h-5 w-5 text-[#2E6F40]",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-								className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
-								children: "กราฟิกและความลื่นไหล (FPS)"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-								className: "text-xs text-[#5A655D]",
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2",
 								children: [
-									"หน้าจอของคุณรองรับ ",
-									detectedRefreshRate,
-									" Hz · ปรับได้สูงสุด ",
-									detectedRefreshRate,
-									" FPS"
-								]
-							})] })]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex flex-wrap items-center justify-between gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, {
-											className: "h-4 w-4 text-[#2E6F40]",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-											"ค่ารีเฟรชเรท (หน้าจอ ",
-											detectedRefreshRate,
-											" Hz)"
-										] })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex items-center gap-2",
-										children: [onRecheckRefreshRate && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-											type: "button",
-											onClick: () => {
-												soundEngine.playTap();
-												onRecheckRefreshRate();
-											},
-											className: "text-[11px] font-medium text-[#5A655D] underline underline-offset-2 hover:text-[#1F2823]",
-											children: ["วัด Hz ใหม่", rawRefreshRate ? ` (${rawRefreshRate}Hz)` : ""]
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "font-mono-num text-xs font-bold text-[#2E6F40]",
-											children: [settings.targetFps, " FPS"]
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex flex-wrap items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, {
+												className: "h-4 w-4 text-[#2E6F40]",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+												"ค่ารีเฟรชเรท (หน้าจอ ",
+												detectedRefreshRate,
+												" Hz)"
+											] })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex items-center gap-2",
+											children: [onRecheckRefreshRate && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+												type: "button",
+												onClick: () => {
+													soundEngine.playTap();
+													onRecheckRefreshRate();
+												},
+												className: "text-[11px] font-medium text-[#5A655D] underline underline-offset-2 hover:text-[#1F2823]",
+												children: ["วัด Hz ใหม่", rawRefreshRate ? ` (${rawRefreshRate}Hz)` : ""]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "font-mono-num text-xs font-bold text-[#2E6F40]",
+												children: [settings.targetFps, " FPS"]
+											})]
 										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: `grid ${fpsGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
+										children: visibleFpsOptions.map((fps) => {
+											const active = settings.targetFps === fps.value;
+											return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+												type: "button",
+												whileTap: { scale: .94 },
+												onClick: () => {
+													soundEngine.playTap();
+													onUpdateSettings({ targetFps: fps.value });
+												},
+												className: "relative flex min-h-[48px] flex-col items-center justify-center rounded-lg px-1.5 py-1",
+												children: [
+													active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+														layoutId: "settings-fps-pill",
+														transition: {
+															type: "spring",
+															stiffness: 420,
+															damping: 30
+														},
+														className: "absolute inset-0 rounded-lg bg-[#233029]"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: `relative z-10 font-mono-num text-xs sm:text-sm font-bold ${active ? "text-white" : "text-[#1F2823]"}`,
+														children: fps.label
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: `relative z-10 text-[10px] ${active ? "text-[#C8DFC2]" : "text-[#5A655D]"}`,
+														children: fps.hint
+													})
+												]
+											}, fps.value);
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[11px] text-[#5A655D]",
+										children: deviceReport.isGalaxyA10 ? "ตรวจพบ Samsung Galaxy A10 (จอ 60 Hz) · ล็อคตัวเลือกเฉพาะ 30 / 60 FPS เพื่อความลื่นไหลสูงสุด" : detectedRefreshRate >= 120 ? "ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS" : detectedRefreshRate >= 90 ? "ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)" : "ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)"
+									})
+								]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
+									children: "ระดับคุณภาพกราฟิก 3 มิติ"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
+									children: QUALITY_OPTIONS.map((q) => {
+										const active = settings.graphicsQuality === q.value;
+										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .94 },
+											onClick: () => applyQualityPreset(q.value),
+											className: "relative min-h-[44px] rounded-lg px-2 text-xs sm:text-sm font-medium",
+											children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+												layoutId: "settings-quality-pill",
+												transition: {
+													type: "spring",
+													stiffness: 420,
+													damping: 30
+												},
+												className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: `relative z-10 ${active ? "text-white" : "text-[#4A534D]"}`,
+												children: q.label
+											})]
+										}, q.value);
+									})
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
+										children: "ความละเอียดหน้าจอ 3 มิติ"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[11px] font-semibold text-[#2E6F40]",
+										children: RESOLUTION_OPTIONS.find((r) => r.value === settings.resolutionScale)?.label ?? "HD+"
 									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: `grid ${fpsGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
-									children: visibleFpsOptions.map((fps) => {
-										const active = settings.targetFps === fps.value;
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
+									children: RESOLUTION_OPTIONS.map((res) => {
+										const active = settings.resolutionScale === res.value;
 										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											whileTap: { scale: .94 },
 											onClick: () => {
 												soundEngine.playTap();
-												onUpdateSettings({ targetFps: fps.value });
+												onUpdateSettings({ resolutionScale: res.value });
 											},
-											className: "relative flex min-h-[48px] flex-col items-center justify-center rounded-lg px-1.5 py-1",
+											className: "relative flex min-h-[46px] flex-col items-center justify-center rounded-lg px-1.5 py-1 text-xs font-medium",
 											children: [
 												active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-													layoutId: "settings-fps-pill",
+													layoutId: "settings-res-pill",
+													transition: {
+														type: "spring",
+														stiffness: 420,
+														damping: 30
+													},
+													className: "absolute inset-0 rounded-lg bg-white shadow-xs"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: `relative z-10 leading-tight ${active ? "text-[#1F2823] font-bold" : "text-[#4A534D]"}`,
+													children: res.label
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: `relative z-10 font-mono-num text-[10px] leading-tight ${active ? "text-[#2E6F40] font-semibold" : "text-[#6A736D]"}`,
+													children: res.hint
+												})
+											]
+										}, res.value);
+									})
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid grid-cols-1 sm:grid-cols-3 gap-2 border-t border-[#1F2823]/8 pt-3",
+								children: [
+									{
+										key: "shadowsEnabled",
+										label: "เงา 3 มิติ",
+										value: settings.shadowsEnabled
+									},
+									{
+										key: "antialiasEnabled",
+										label: "ลดรอยหยักขอบ",
+										value: settings.antialiasEnabled
+									},
+									{
+										key: "particlesEnabled",
+										label: "ไอน้ำและละอองแสง",
+										value: settings.particlesEnabled
+									}
+								].map((toggle) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .94 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.playTap();
+										onUpdateSettings({ [toggle.key]: !toggle.value });
+									},
+									className: `flex min-h-[46px] items-center justify-between gap-2 rounded-xl border px-3 text-xs font-medium ${toggle.value ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#5A655D]"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "truncate",
+										children: toggle.label
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: `rounded-md px-1.5 py-0.5 text-[11px] font-semibold ${toggle.value ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
+										children: toggle.value ? "เปิด" : "ปิด"
+									})]
+								}, toggle.key))
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-2.5 border-t border-[#1F2823]/8 pt-3",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex flex-wrap items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Smartphone, {
+												className: "h-4 w-4 text-[#2E6F40]",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปรับจูนตามฮาร์ดแวร์และซอฟต์แวร์เครื่อง" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-medium text-[#2E6F40]",
+											children: deviceReport.detectedModelLabel
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] px-3 py-2 text-[11px] text-[#39423C] space-y-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex flex-wrap items-center justify-between gap-1.5",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "font-semibold text-[#1F2823]",
+												children: ["ฮาร์ดแวร์: ", deviceReport.hardwareSpecSummary]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: "font-mono-num font-semibold text-[#2E6F40]",
+												children: deviceReport.osVersionLabel
+											})]
+										}), deviceReport.gameBoosterReady && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex items-center gap-1.5 text-[#255F30]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gamepad2, {
+												className: "h-3.5 w-3.5 shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รองรับ Game Booster / Game Space อัตโนมัติบนแอปเกมมือถือทุกรุ่น" })]
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: `grid ${optGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
+										children: visibleOptimizationOptions.map((opt) => {
+											const active = deviceReport.effectiveProfile === opt.value;
+											return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+												type: "button",
+												whileTap: { scale: .94 },
+												onClick: () => {
+													soundEngine.playTap();
+													onUpdateSettings({ optimizationProfile: opt.value });
+												},
+												className: "relative min-h-[42px] rounded-lg px-2 text-xs font-medium",
+												children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+													layoutId: "settings-opt-pill",
 													transition: {
 														type: "spring",
 														stiffness: 420,
 														damping: 30
 													},
 													className: "absolute inset-0 rounded-lg bg-[#233029]"
-												}),
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													className: `relative z-10 font-mono-num text-xs sm:text-sm font-bold ${active ? "text-white" : "text-[#1F2823]"}`,
-													children: fps.label
-												}),
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													className: `relative z-10 text-[10px] ${active ? "text-[#C8DFC2]" : "text-[#5A655D]"}`,
-													children: fps.hint
-												})
-											]
-										}, fps.value);
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[11px] text-[#5A655D]",
-									children: deviceReport.isGalaxyA10 ? "ตรวจพบ Samsung Galaxy A10 (จอ 60 Hz) · ล็อคตัวเลือกเฉพาะ 30 / 60 FPS เพื่อความลื่นไหลสูงสุด" : detectedRefreshRate >= 120 ? "ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS" : detectedRefreshRate >= 90 ? "ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)" : "ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)"
-								})
-							]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
-								children: "ระดับคุณภาพกราฟิก 3 มิติ"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
-								children: QUALITY_OPTIONS.map((q) => {
-									const active = settings.graphicsQuality === q.value;
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: `relative z-10 ${active ? "text-white font-semibold" : "text-[#5A655D]"}`,
+													children: opt.label
+												})]
+											}, opt.value);
+										})
+									}),
+									deviceReport.showRealmeNote50Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
-										whileTap: { scale: .94 },
-										onClick: () => applyQualityPreset(q.value),
-										className: "relative min-h-[44px] rounded-lg px-2 text-xs sm:text-sm font-medium",
-										children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-											layoutId: "settings-quality-pill",
-											transition: {
-												type: "spring",
-												stiffness: 420,
-												damping: 30
-											},
-											className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: `relative z-10 ${active ? "text-white" : "text-[#4A534D]"}`,
-											children: q.label
-										})]
-									}, q.value);
-								})
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
-									children: "ความละเอียดหน้าจอ 3 มิติ"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[11px] font-semibold text-[#2E6F40]",
-									children: RESOLUTION_OPTIONS.find((r) => r.value === settings.resolutionScale)?.label ?? "HD+"
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
-								children: RESOLUTION_OPTIONS.map((res) => {
-									const active = settings.resolutionScale === res.value;
-									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileTap: { scale: .94 },
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$3,
 										onClick: () => {
 											soundEngine.playTap();
-											onUpdateSettings({ resolutionScale: res.value });
+											onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
 										},
-										className: "relative flex min-h-[46px] flex-col items-center justify-center rounded-lg px-1.5 py-1 text-xs font-medium",
-										children: [
-											active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-												layoutId: "settings-res-pill",
-												transition: {
-													type: "spring",
-													stiffness: 420,
-													damping: 30
-												},
-												className: "absolute inset-0 rounded-lg bg-white shadow-xs"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: `relative z-10 leading-tight ${active ? "text-[#1F2823] font-bold" : "text-[#4A534D]"}`,
-												children: res.label
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: `relative z-10 font-mono-num text-[10px] leading-tight ${active ? "text-[#2E6F40] font-semibold" : "text-[#6A736D]"}`,
-												children: res.hint
-											})
-										]
-									}, res.value);
-								})
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "grid grid-cols-1 sm:grid-cols-3 gap-2 border-t border-[#1F2823]/8 pt-3",
-							children: [
-								{
-									key: "shadowsEnabled",
-									label: "เงา 3 มิติ",
-									value: settings.shadowsEnabled
-								},
-								{
-									key: "antialiasEnabled",
-									label: "ลดรอยหยักขอบ",
-									value: settings.antialiasEnabled
-								},
-								{
-									key: "particlesEnabled",
-									label: "ไอน้ำและละอองแสง",
-									value: settings.particlesEnabled
-								}
-							].map((toggle) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .94 },
-								transition: TAP_SPRING$3,
-								onClick: () => {
-									soundEngine.playTap();
-									onUpdateSettings({ [toggle.key]: !toggle.value });
-								},
-								className: `flex min-h-[46px] items-center justify-between gap-2 rounded-xl border px-3 text-xs font-medium ${toggle.value ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#5A655D]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "truncate",
-									children: toggle.label
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `rounded-md px-1.5 py-0.5 text-[11px] font-semibold ${toggle.value ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
-									children: toggle.value ? "เปิด" : "ปิด"
-								})]
-							}, toggle.key))
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2.5 border-t border-[#1F2823]/8 pt-3",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex flex-wrap items-center justify-between gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Smartphone, {
-											className: "h-4 w-4 text-[#2E6F40]",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปรับจูนตามฮาร์ดแวร์และซอฟต์แวร์เครื่อง" })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[11px] font-medium text-[#2E6F40]",
-										children: deviceReport.detectedModelLabel
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] px-3 py-2 text-[11px] text-[#39423C] space-y-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex flex-wrap items-center justify-between gap-1.5",
+										className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "font-semibold text-[#1F2823]",
-											children: ["ฮาร์ดแวร์: ", deviceReport.hardwareSpecSummary]
+											className: "inline-flex items-center gap-2 text-left",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
+												className: "h-4 w-4 text-[#2E6F40] shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความแรง realme Note 50 (Unisoc T612 · Mali-G57 · 90 FPS นิ่งขึ้น)" })]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "font-mono-num font-semibold text-[#2E6F40]",
-											children: deviceReport.osVersionLabel
+											className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
+											children: "บูสต์ทันที"
 										})]
-									}), deviceReport.gameBoosterReady && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex items-center gap-1.5 text-[#255F30]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gamepad2, {
-											className: "h-3.5 w-3.5 shrink-0",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รองรับ Game Booster / Game Space อัตโนมัติบนแอปเกมมือถือทุกรุ่น" })]
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: `grid ${optGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
-									children: visibleOptimizationOptions.map((opt) => {
-										const active = deviceReport.effectiveProfile === opt.value;
-										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-											type: "button",
-											whileTap: { scale: .94 },
-											onClick: () => {
-												soundEngine.playTap();
-												onUpdateSettings({ optimizationProfile: opt.value });
-											},
-											className: "relative min-h-[42px] rounded-lg px-2 text-xs font-medium",
-											children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-												layoutId: "settings-opt-pill",
-												transition: {
-													type: "spring",
-													stiffness: 420,
-													damping: 30
-												},
-												className: "absolute inset-0 rounded-lg bg-[#233029]"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: `relative z-10 ${active ? "text-white font-semibold" : "text-[#5A655D]"}`,
-												children: opt.label
-											})]
-										}, opt.value);
+									}),
+									deviceReport.showGalaxyA10Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.playTap();
+											onUpdateSettings(getGalaxyA10Preset());
+										},
+										className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-2 text-left",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
+												className: "h-4 w-4 text-[#2B4E72] shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความลื่น Samsung Galaxy A10 (Exynos 7884 · ล็อค 60 Hz / 60 FPS)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-bold text-[#2B4E72] shrink-0",
+											children: "บูสต์ทันที"
+										})]
+									}),
+									deviceReport.showLowRam2GbOption && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.playTap();
+											onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
+										},
+										className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-2 text-left",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cpu, {
+												className: "h-4 w-4 text-[#7D5A3C] shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดประหยัดแรมพิเศษสำหรับเครื่อง RAM ≤ 2 GB (ความละเอียด HD)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-bold text-[#7D5A3C] shrink-0",
+											children: "ปรับทันที"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[11px] text-[#5A655D] leading-relaxed",
+										children: "ระบบจะตรวจสเปกเครื่องและเวอร์ชั่นซอฟต์แวร์อัตโนมัติ ตัวเลือกจูนเฉพาะรุ่นจะแสดงเฉพาะเครื่องที่ตรงรุ่นเท่านั้น เพื่อความเสถียรและไม่เกิดบั๊กเทกซ์เจอร์หาย"
 									})
-								}),
-								deviceReport.showRealmeNote50Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-[#1F2823]/8 pt-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 									type: "button",
-									whileTap: { scale: .95 },
+									whileTap: { scale: .94 },
 									transition: TAP_SPRING$3,
 									onClick: () => {
 										soundEngine.playTap();
-										onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
+										onToggleFullscreen();
 									},
-									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
+									className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3.5 text-xs sm:text-sm font-semibold ${isFullscreen ? "border-[#2E6F40] bg-[#2E6F40] text-white" : "border-[#1F2823]/15 bg-[#FAF9F6] text-[#1F2823] hover:bg-[#EFECE4]"}`,
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-2 text-left",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
-											className: "h-4 w-4 text-[#2E6F40] shrink-0",
+										className: "inline-flex items-center gap-2",
+										children: [isFullscreen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minimize2, {
+											className: "h-4 w-4 shrink-0",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความแรง realme Note 50 (Unisoc T612 · Mali-G57 · 90 FPS นิ่งขึ้น)" })]
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Maximize2, {
+											className: "h-4 w-4 shrink-0 text-[#2E6F40]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isFullscreen ? "กำลังแสดงเต็มหน้าจอ" : "ขยายเต็มหน้าจอ (Full Screen)" })]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
-										children: "บูสต์ทันที"
+										className: `rounded-md px-2 py-0.5 text-[11px] font-semibold ${isFullscreen ? "bg-white/20 text-white" : "bg-[#2E6F40] text-white"}`,
+										children: isFullscreen ? "ออก" : "เปิด"
 									})]
-								}),
-								deviceReport.showGalaxyA10Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 									type: "button",
-									whileTap: { scale: .95 },
+									whileTap: { scale: .94 },
 									transition: TAP_SPRING$3,
 									onClick: () => {
 										soundEngine.playTap();
-										onUpdateSettings(getGalaxyA10Preset());
+										onUpdateSettings({ autoFullscreen: !settings.autoFullscreen });
 									},
-									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-2 text-left",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
-											className: "h-4 w-4 text-[#2B4E72] shrink-0",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความลื่น Samsung Galaxy A10 (Exynos 7884 · ล็อค 60 Hz / 60 FPS)" })]
+									className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3.5 text-xs font-medium ${settings.autoFullscreen ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#5A655D]"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "truncate",
+										children: "เข้าเต็มจออัตโนมัติเมื่อเริ่มเกม"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[11px] font-bold text-[#2B4E72] shrink-0",
-										children: "บูสต์ทันที"
+										className: `rounded-md px-1.5 py-0.5 text-[11px] font-semibold shrink-0 ${settings.autoFullscreen ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
+										children: settings.autoFullscreen ? "เปิด" : "ปิด"
 									})]
-								}),
-								deviceReport.showLowRam2GbOption && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$3,
-									onClick: () => {
-										soundEngine.playTap();
-										onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
-									},
-									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-2 text-left",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cpu, {
-											className: "h-4 w-4 text-[#7D5A3C] shrink-0",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดประหยัดแรมพิเศษสำหรับเครื่อง RAM ≤ 2 GB (ความละเอียด HD)" })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[11px] font-bold text-[#7D5A3C] shrink-0",
-										children: "ปรับทันที"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[11px] text-[#5A655D] leading-relaxed",
-									children: "ระบบจะตรวจสเปกเครื่องและเวอร์ชั่นซอฟต์แวร์อัตโนมัติ ตัวเลือกจูนเฉพาะรุ่นจะแสดงเฉพาะเครื่องที่ตรงรุ่นเท่านั้น เพื่อความเสถียรและไม่เกิดบั๊กเทกซ์เจอร์หาย"
-								})
-							]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "grid grid-cols-1 sm:grid-cols-2 gap-2 border-t border-[#1F2823]/8 pt-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .94 },
-								transition: TAP_SPRING$3,
-								onClick: () => {
-									soundEngine.playTap();
-									onToggleFullscreen();
-								},
-								className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3.5 text-xs sm:text-sm font-semibold ${isFullscreen ? "border-[#2E6F40] bg-[#2E6F40] text-white" : "border-[#1F2823]/15 bg-[#FAF9F6] text-[#1F2823] hover:bg-[#EFECE4]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "inline-flex items-center gap-2",
-									children: [isFullscreen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minimize2, {
-										className: "h-4 w-4 shrink-0",
-										"aria-hidden": "true"
-									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Maximize2, {
-										className: "h-4 w-4 shrink-0 text-[#2E6F40]",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isFullscreen ? "กำลังแสดงเต็มหน้าจอ" : "ขยายเต็มหน้าจอ (Full Screen)" })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `rounded-md px-2 py-0.5 text-[11px] font-semibold ${isFullscreen ? "bg-white/20 text-white" : "bg-[#2E6F40] text-white"}`,
-									children: isFullscreen ? "ออก" : "เปิด"
 								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .94 },
-								transition: TAP_SPRING$3,
-								onClick: () => {
-									soundEngine.playTap();
-									onUpdateSettings({ autoFullscreen: !settings.autoFullscreen });
-								},
-								className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3.5 text-xs font-medium ${settings.autoFullscreen ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#5A655D]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "truncate",
-									children: "เข้าเต็มจออัตโนมัติเมื่อเริ่มเกม"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `rounded-md px-1.5 py-0.5 text-[11px] font-semibold shrink-0 ${settings.autoFullscreen ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
-									children: settings.autoFullscreen ? "เปิด" : "ปิด"
-								})]
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+						className: "md:col-span-2 flex flex-col gap-3 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, {
+									className: "h-5 w-5 text-[#2E6F40]",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+									className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
+									children: "ตัวละครผู้เล่น 3 มิติ (เลือกโมเดล 3D)"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#5A655D]",
+									children: "เปลี่ยนโมเดลตัวละคร 3 มิติที่ใช้เดินสำรวจในร้านน้ำชาได้ทันที"
+								})] })]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "rounded-lg bg-[#EDF5EE] px-2.5 py-1 text-xs font-semibold text-[#2E6F40]",
+								children: CHARACTER_MODELS.find((m) => m.id === settings.playerCharacter)?.name ?? "เจ้าบ้านชา"
 							})]
-						})
-					]
-				})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2",
+							children: CHARACTER_MODELS.map((charModel) => {
+								const active = settings.playerCharacter === charModel.id;
+								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .96 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.playTap();
+										onUpdateSettings({ playerCharacter: charModel.id });
+									},
+									className: `flex min-h-[60px] items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823] shadow-2xs" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "h-8 w-8 shrink-0 rounded-lg border border-black/10 flex items-center justify-center text-xs font-bold text-white",
+										style: { backgroundColor: charModel.accentColor },
+										"aria-hidden": "true",
+										children: "3D"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "min-w-0 flex-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-xs sm:text-sm font-bold text-[#1F2823] truncate",
+											children: charModel.name
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[10px] text-[#5A655D] truncate",
+											children: charModel.creator
+										})]
+									})]
+								}, charModel.id);
+							})
+						})]
+					})
+				]
 			})
 		})]
 	});
@@ -69381,7 +70290,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.11.0)` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.12.0)` })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex flex-wrap items-center justify-between gap-2",
@@ -70162,7 +71071,7 @@ async function checkLiveBrowserVersion() {
 	if (githubManifest) {
 		if (!bestManifest || compareSemver(githubManifest.version, bestManifest.version) > 0) bestManifest = githubManifest;
 	}
-	const latestVersion = bestManifest?.version ?? "2.11.0";
+	const latestVersion = bestManifest?.version ?? "2.12.0";
 	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
 	const targetSyncUrl = sanitizeExternalUrl(bestManifest?.browserUrl ?? (liveManifestDirect ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"), LIVE_BROWSER_APP_URL);
 	const sourceLabel = checkedFromGithub && checkedFromBrowserServer ? "Browser Server + GitHub ผู้สร้าง" : checkedFromBrowserServer ? "Browser Server ปัจจุบัน" : checkedFromGithub ? "GitHub ผู้สร้างเกม" : "ตรวจสอบในเครื่อง";
@@ -70203,14 +71112,14 @@ async function applyInAppUpdate(result) {
 	} catch {}
 	if (typeof window === "undefined") return;
 	const isNative = Capacitor.isNativePlatform();
-	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.11.0") > 0;
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.12.0") > 0;
 	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
 		const safeTarget = sanitizeExternalUrl(result.targetSyncUrl, LIVE_BROWSER_APP_URL);
 		window.location.replace(safeTarget);
 		return;
 	}
 	const url = new URL(window.location.href);
-	url.searchParams.set("v", result?.latestVersion ?? "2.11.0");
+	url.searchParams.set("v", result?.latestVersion ?? "2.12.0");
 	window.location.replace(url.toString());
 }
 // src/utils/versionMigration.ts
@@ -70220,6 +71129,7 @@ var DEFAULT_SETTINGS = {
 	ambienceVolume: 75,
 	musicVolume: 70,
 	musicTrack: "morning-bamboo",
+	playerCharacter: "tea-master",
 	isMuted: false,
 	ambience: "none",
 	graphicsQuality: "high",
@@ -70266,6 +71176,15 @@ function normalizeOptimizationProfile(raw) {
 		case "2gb":
 		case "low-ram": return "low-ram-2gb";
 		default: return DEFAULT_SETTINGS.optimizationProfile;
+	}
+}
+function normalizePlayerCharacter(raw) {
+	switch (raw) {
+		case "tea-master":
+		case "spirit-blossom-kindred":
+		case "diego-body":
+		case "cicada-suit-v2": return raw;
+		default: return DEFAULT_SETTINGS.playerCharacter;
 	}
 }
 function sanitizeJournalRecord(raw) {
@@ -70315,7 +71234,8 @@ function migrateSettingsPayload(raw) {
 		sfxVolume: typeof parsed.sfxVolume === "number" && Number.isFinite(parsed.sfxVolume) ? Math.max(0, Math.min(100, parsed.sfxVolume)) : DEFAULT_SETTINGS.sfxVolume,
 		ambienceVolume: typeof parsed.ambienceVolume === "number" && Number.isFinite(parsed.ambienceVolume) ? Math.max(0, Math.min(100, parsed.ambienceVolume)) : DEFAULT_SETTINGS.ambienceVolume,
 		musicVolume: typeof parsed.musicVolume === "number" && Number.isFinite(parsed.musicVolume) ? Math.max(0, Math.min(100, parsed.musicVolume)) : DEFAULT_SETTINGS.musicVolume,
-		musicTrack: parsed.musicTrack === "none" || parsed.musicTrack === "morning-bamboo" || parsed.musicTrack === "rainy-teahouse" || parsed.musicTrack === "twilight-lantern" ? parsed.musicTrack : DEFAULT_SETTINGS.musicTrack,
+		musicTrack: parsed.musicTrack === "none" || parsed.musicTrack === "morning-bamboo" || parsed.musicTrack === "rainy-teahouse" || parsed.musicTrack === "twilight-lantern" || parsed.musicTrack === "smoke-in-the-glass" ? parsed.musicTrack : DEFAULT_SETTINGS.musicTrack,
+		playerCharacter: normalizePlayerCharacter(parsed.playerCharacter),
 		isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
 		ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
 		graphicsQuality: parsed.graphicsQuality === "low" || parsed.graphicsQuality === "medium" || parsed.graphicsQuality === "high" ? parsed.graphicsQuality : DEFAULT_SETTINGS.graphicsQuality,
@@ -70444,7 +71364,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.11.0" ? prev : null;
+		return prev && prev !== "2.12.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -70481,7 +71401,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
-	const latestBrowserVersion = updateResult?.latestVersion ?? "2.11.0";
+	const latestBrowserVersion = updateResult?.latestVersion ?? "2.12.0";
 	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
 	const securityAudit = (0, import_react.useMemo)(() => runAppSecurityAudit(), []);
 	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/pppu13610-glitch", CREATOR_GITHUB_PROFILE_URL);
@@ -70642,7 +71562,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 												className: "mt-0.5 h-4 w-4 shrink-0",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.11.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.11.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.12.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.12.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											disabled: isApplyingUpdate,

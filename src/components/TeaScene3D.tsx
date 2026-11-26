@@ -255,6 +255,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     }
   }, [customerSequenceKey, guestId, mode]);
 
+  // Hot-swap active 3D player character rig without tearing down WebGL context
+  useEffect(() => {
+    charactersRef.current?.setPlayerCharacter(settings.playerCharacter);
+  }, [settings.playerCharacter]);
+
   useEffect(() => {
     shadowDirtyRef.current = true;
   }, [tea.id, step, mode, guestId, toppings, isPouring, settings.shadowsEnabled]);
@@ -512,6 +517,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       compactAssets,
       ultraCompactAssets,
     );
+    shopCharacters.setPlayerCharacter(initSettings.playerCharacter);
     charactersRef.current = shopCharacters;
     scene.add(shopCharacters.root);
 

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {BrewStep, CustomerPhase, GameMode} from '../types/tea';
+import {BrewStep, CustomerPhase, GameMode, PlayerCharacterId} from '../types/tea';
 
 export const SHOP_FLOOR_Y = -0.78;
 export const PLAYER_SPAWN_POS = new THREE.Vector3(0.45, SHOP_FLOOR_Y, 2.72);
@@ -34,6 +34,7 @@ export interface ShopCharactersHandles {
   guestsContainer: THREE.Group;
   startCustomerWalkIn: (guestId: string) => void;
   setFirstPersonHidden: (hidden: boolean) => void;
+  setPlayerCharacter: (characterId: PlayerCharacterId) => void;
   movePlayer: (
     inputX: number,
     inputY: number,
@@ -223,10 +224,8 @@ function createTeaMasterCharacter(
   compactMode: boolean,
   ultraCompact: boolean,
 ): {group: THREE.Group; rig: LimbRig} {
-  const seg = ultraCompact ? 10 : compactMode ? 12 : 18;
+  const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
   const group = new THREE.Group();
-  group.position.copy(PLAYER_SPAWN_POS);
-  group.rotation.y = PLAYER_SPAWN_ROT_Y;
 
   const skinMat = new THREE.MeshStandardMaterial({color: 0xf3d0b5, roughness: 0.65});
   const shirtMat = new THREE.MeshStandardMaterial({color: 0xf8f4eb, roughness: 0.78});
@@ -638,6 +637,802 @@ function createTeaMasterCharacter(
     smile,
     leftBlush,
     rightBlush,
+  );
+  group.add(head);
+
+  group.traverse((obj) => {
+    obj.frustumCulled = false;
+  });
+
+  return {
+    group,
+    rig: {
+      leftLeg: leftLegBuilt.hip,
+      rightLeg: rightLegBuilt.hip,
+      leftShin: leftLegBuilt.shin,
+      rightShin: rightLegBuilt.shin,
+      leftArm,
+      rightArm,
+      head,
+    },
+  };
+}
+
+/**
+ * 1. Spirit Blossom Kindred — Inspired by Retronous (@Retronous) [85187f9]
+ * Pastel sakura-lilac spirit kimono, serene porcelain Kitsune mask, curved teal spirit horns,
+ * fox/lamb ears, flowing lavender-blue hair, and orbiting Wolf Spirit Wisp.
+ */
+function createSpiritBlossomKindredCharacter(
+  compactMode: boolean,
+  ultraCompact: boolean,
+): {group: THREE.Group; rig: LimbRig} {
+  const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+  const group = new THREE.Group();
+
+  const skinMat = new THREE.MeshStandardMaterial({color: 0xf4e8ef, roughness: 0.58});
+  const robeWhiteMat = new THREE.MeshStandardMaterial({color: 0xf9f3f8, roughness: 0.72});
+  const sakuraMat = new THREE.MeshStandardMaterial({color: 0xe69ec2, roughness: 0.68});
+  const lilacMat = new THREE.MeshStandardMaterial({color: 0x8b82cb, roughness: 0.7});
+  const plumObiMat = new THREE.MeshStandardMaterial({color: 0x4b3169, roughness: 0.74});
+  const hairBlueMat = new THREE.MeshStandardMaterial({color: 0x6b77bd, roughness: 0.56});
+  const maskPorcelainMat = new THREE.MeshStandardMaterial({
+    color: 0xfefbfd,
+    roughness: 0.25,
+    metalness: 0.06,
+  });
+  const hornMat = new THREE.MeshStandardMaterial({
+    color: 0x62b9c9,
+    roughness: 0.34,
+    metalness: 0.12,
+  });
+  const darkDetailMat = new THREE.MeshStandardMaterial({color: 0x261d3a, roughness: 0.3});
+  const spiritGlowMat = new THREE.MeshStandardMaterial({
+    color: 0x91eef7,
+    emissive: 0x54c6e8,
+    emissiveIntensity: 0.85,
+    roughness: 0.2,
+  });
+  const blossomGoldMat = new THREE.MeshStandardMaterial({
+    color: 0xe8c47a,
+    metalness: 0.55,
+    roughness: 0.3,
+  });
+
+  // Articulated Legs with Pastel Tabi & Spirit Sandals
+  const buildLeg = (side: -1 | 1) => {
+    const hip = new THREE.Group();
+    hip.position.set(side * 0.105, 0.72, 0);
+
+    const hipJoint = new THREE.Mesh(new THREE.SphereGeometry(0.074, seg, seg), plumObiMat);
+    const thigh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.074, 0.062, 0.34, seg),
+      plumObiMat,
+    );
+    thigh.position.y = -0.17;
+    thigh.castShadow = !compactMode;
+    hip.add(hipJoint, thigh);
+
+    const shin = new THREE.Group();
+    shin.position.set(0, -0.34, 0);
+
+    const kneeJoint = new THREE.Mesh(new THREE.SphereGeometry(0.06, seg, seg), lilacMat);
+    const calf = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.048, 0.29, seg),
+      robeWhiteMat,
+    );
+    calf.position.y = -0.145;
+    calf.castShadow = !compactMode;
+
+    const footCap = new THREE.Mesh(new THREE.SphereGeometry(0.052, seg, seg), robeWhiteMat);
+    footCap.scale.set(0.92, 0.62, 1.52);
+    footCap.position.set(0, -0.322, 0.035);
+
+    const sole = new THREE.Mesh(new THREE.BoxGeometry(0.108, 0.028, 0.21), lilacMat);
+    sole.position.set(0, -0.352, 0.03);
+
+    const ribbonBand = new THREE.Mesh(
+      new THREE.TorusGeometry(0.052, 0.01, 6, 10),
+      sakuraMat,
+    );
+    ribbonBand.rotation.x = Math.PI / 2;
+    ribbonBand.position.y = -0.26;
+
+    shin.add(kneeJoint, calf, footCap, sole, ribbonBand);
+    hip.add(shin);
+    return {hip, shin};
+  };
+
+  const leftLegBuilt = buildLeg(-1);
+  const rightLegBuilt = buildLeg(1);
+  group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+
+  // Flowing Layered Spirit Kimono Skirt + Sakura Trim
+  const skirtOuter = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.195, 0.31, 0.45, seg, 1, false, -Math.PI * 0.85, Math.PI * 1.7),
+    robeWhiteMat,
+  );
+  skirtOuter.position.set(0, 0.67, -0.01);
+  skirtOuter.castShadow = !compactMode;
+  const skirtTrim = new THREE.Mesh(
+    new THREE.TorusGeometry(0.285, 0.022, 6, seg),
+    sakuraMat,
+  );
+  skirtTrim.rotation.x = Math.PI / 2;
+  skirtTrim.position.set(0, 0.46, -0.01);
+  group.add(skirtOuter, skirtTrim);
+
+  // Sculpted Torso, Crossed Spirit Kimono Collar & Plum Obi Sash
+  const torsoLower = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.175, 0.195, 0.31, seg),
+    robeWhiteMat,
+  );
+  torsoLower.position.y = 0.88;
+  torsoLower.castShadow = !compactMode;
+
+  const torsoChest = new THREE.Mesh(new THREE.SphereGeometry(0.196, seg, seg), robeWhiteMat);
+  torsoChest.scale.set(1.04, 1.04, 0.8);
+  torsoChest.position.set(0, 1.11, 0);
+  torsoChest.castShadow = !compactMode;
+
+  const leftKimonoLapel = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.028, 0.21, 4, 8),
+    sakuraMat,
+  );
+  leftKimonoLapel.position.set(-0.056, 1.17, 0.155);
+  leftKimonoLapel.rotation.z = -0.44;
+  const rightKimonoLapel = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.028, 0.21, 4, 8),
+    lilacMat,
+  );
+  rightKimonoLapel.position.set(0.056, 1.17, 0.155);
+  rightKimonoLapel.rotation.z = 0.44;
+
+  const obiBelt = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.195, 0.205, 0.14, seg),
+    plumObiMat,
+  );
+  obiBelt.scale.set(1.04, 1, 0.88);
+  obiBelt.position.set(0, 0.87, 0);
+
+  const obiKnot = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), sakuraMat);
+  obiKnot.position.set(0, 0.88, -0.2);
+  const sashL = new THREE.Mesh(new THREE.CapsuleGeometry(0.026, 0.26, 4, 6), lilacMat);
+  sashL.position.set(-0.065, 0.72, -0.215);
+  sashL.rotation.z = -0.24;
+  const sashR = sashL.clone();
+  sashR.position.x = 0.065;
+  sashR.rotation.z = 0.24;
+
+  const chestBlossom = new THREE.Mesh(new THREE.OctahedronGeometry(0.036, 0), blossomGoldMat);
+  chestBlossom.position.set(0, 0.94, 0.19);
+  group.add(
+    torsoLower,
+    torsoChest,
+    leftKimonoLapel,
+    rightKimonoLapel,
+    obiBelt,
+    obiKnot,
+    sashL,
+    sashR,
+    chestBlossom,
+  );
+
+  // Flowing Wide Spirit Kimono Sleeves & Forearms
+  const buildSpiritArm = (side: -1 | 1) => {
+    const shoulder = new THREE.Group();
+    shoulder.position.set(side * 0.23, 1.22, 0);
+
+    const shoulderSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.065, seg, seg),
+      sakuraMat,
+    );
+    const upperSleeve = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.062, 0.105, 0.28, seg),
+      robeWhiteMat,
+    );
+    upperSleeve.position.set(side * 0.01, -0.13, 0.01);
+    upperSleeve.castShadow = !compactMode;
+
+    const sleeveTrim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.098, 0.014, 6, seg),
+      lilacMat,
+    );
+    sleeveTrim.rotation.x = Math.PI / 2;
+    sleeveTrim.position.set(side * 0.01, -0.26, 0.01);
+
+    const forearm = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.042, 0.034, 0.18, seg),
+      skinMat,
+    );
+    forearm.position.set(side * 0.01, -0.32, 0.055);
+    forearm.rotation.x = -0.32;
+
+    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.044, seg, seg), skinMat);
+    hand.position.set(side * 0.01, -0.405, 0.09);
+
+    shoulder.add(shoulderSphere, upperSleeve, sleeveTrim, forearm, hand);
+    return shoulder;
+  };
+  const leftArm = buildSpiritArm(-1);
+  const rightArm = buildSpiritArm(1);
+  group.add(leftArm, rightArm);
+
+  // Head: Cascading Lavender Hair, Fox/Lamb Ears, Curved Spirit Horns & Porcelain Mask
+  const head = new THREE.Group();
+  head.position.set(0, 1.4, 0);
+
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.068, 0.12, seg), skinMat);
+  neck.position.y = -0.07;
+  const cranium = new THREE.Mesh(new THREE.SphereGeometry(0.175, seg, seg), skinMat);
+  cranium.scale.set(0.97, 1.03, 0.96);
+  cranium.position.y = 0.058;
+  cranium.castShadow = !compactMode;
+  head.add(neck, cranium);
+
+  const hairCap = new THREE.Mesh(
+    new THREE.SphereGeometry(0.189, seg, seg, 0, Math.PI * 2, 0, Math.PI * 0.64),
+    hairBlueMat,
+  );
+  hairCap.position.y = 0.072;
+  hairCap.rotation.x = -0.22;
+
+  const backHairFlow = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.115, 0.25, 6, seg),
+    hairBlueMat,
+  );
+  backHairFlow.scale.set(1.25, 1, 0.65);
+  backHairFlow.position.set(0, -0.06, -0.145);
+
+  const lockL = new THREE.Mesh(new THREE.CapsuleGeometry(0.036, 0.18, 6, 8), hairBlueMat);
+  lockL.position.set(-0.155, 0.0, 0.065);
+  lockL.rotation.z = 0.1;
+  const lockR = lockL.clone();
+  lockR.position.x = 0.155;
+  lockR.rotation.z = -0.1;
+  head.add(hairCap, backHairFlow, lockL, lockR);
+
+  // Spirit Blossom Fox/Lamb Ears
+  const earGeo = new THREE.ConeGeometry(0.068, 0.21, 8);
+  const innerEarGeo = new THREE.ConeGeometry(0.036, 0.13, 6);
+  const earL = new THREE.Mesh(earGeo, robeWhiteMat);
+  earL.position.set(-0.145, 0.245, 0.01);
+  earL.rotation.z = 0.42;
+  const earInL = new THREE.Mesh(innerEarGeo, sakuraMat);
+  earInL.position.set(-0.14, 0.24, 0.032);
+  earInL.rotation.z = 0.42;
+
+  const earR = new THREE.Mesh(earGeo, robeWhiteMat);
+  earR.position.set(0.145, 0.245, 0.01);
+  earR.rotation.z = -0.42;
+  const earInR = new THREE.Mesh(innerEarGeo, sakuraMat);
+  earInR.position.set(0.14, 0.24, 0.032);
+  earInR.rotation.z = -0.42;
+
+  // Curved Teal Spirit Horns
+  const hornGeo = new THREE.TorusGeometry(0.088, 0.019, 6, 12, Math.PI * 0.68);
+  const hornL = new THREE.Mesh(hornGeo, hornMat);
+  hornL.position.set(-0.1, 0.22, -0.02);
+  hornL.rotation.set(0.25, 0.4, 0.72);
+  const hornR = new THREE.Mesh(hornGeo, hornMat);
+  hornR.position.set(0.1, 0.22, -0.02);
+  hornR.rotation.set(0.25, -0.4, Math.PI - 0.72);
+
+  // Sakura Blossom Crown Accent
+  const crownFlower = new THREE.Mesh(new THREE.SphereGeometry(0.038, 8, 8), sakuraMat);
+  crownFlower.scale.set(1.1, 0.65, 1.1);
+  crownFlower.position.set(-0.085, 0.215, 0.085);
+  head.add(earL, earInL, earR, earInR, hornL, hornR, crownFlower);
+
+  // Serene Porcelain Kitsune Mask & Glowing Eyes
+  const maskShell = new THREE.Mesh(
+    new THREE.SphereGeometry(0.174, seg, seg, -Math.PI * 0.34, Math.PI * 0.68, Math.PI * 0.2, Math.PI * 0.56),
+    maskPorcelainMat,
+  );
+  maskShell.rotation.y = Math.PI / 2;
+  maskShell.position.set(0, 0.056, 0.025);
+
+  const eyeSlitGeo = new THREE.CapsuleGeometry(0.011, 0.032, 4, 6);
+  const maskEyeL = new THREE.Mesh(eyeSlitGeo, darkDetailMat);
+  maskEyeL.position.set(-0.06, 0.06, 0.194);
+  maskEyeL.rotation.z = Math.PI / 2 - 0.2;
+  const maskEyeR = new THREE.Mesh(eyeSlitGeo, darkDetailMat);
+  maskEyeR.position.set(0.06, 0.06, 0.194);
+  maskEyeR.rotation.z = Math.PI / 2 + 0.2;
+
+  const maskMarkL = new THREE.Mesh(new THREE.CapsuleGeometry(0.008, 0.028, 4, 6), sakuraMat);
+  maskMarkL.position.set(-0.088, 0.018, 0.175);
+  maskMarkL.rotation.z = 0.28;
+  const maskMarkR = maskMarkL.clone();
+  maskMarkR.position.x = 0.088;
+  maskMarkR.rotation.z = -0.28;
+
+  const maskNose = new THREE.Mesh(new THREE.SphereGeometry(0.012, 6, 6), darkDetailMat);
+  maskNose.position.set(0, 0.025, 0.202);
+  head.add(maskShell, maskEyeL, maskEyeR, maskMarkL, maskMarkR, maskNose);
+  group.add(head);
+
+  // Floating Wolf Spirit Wisp & Twin Sakura Spirit Orbs beside right shoulder
+  const wolfWispGroup = new THREE.Group();
+  wolfWispGroup.position.set(0.39, 1.38, -0.06);
+  const wispCore = new THREE.Mesh(new THREE.SphereGeometry(0.075, seg, seg), spiritGlowMat);
+  const wispEarsL = new THREE.Mesh(new THREE.ConeGeometry(0.024, 0.068, 6), hornMat);
+  wispEarsL.position.set(-0.038, 0.075, 0);
+  wispEarsL.rotation.z = 0.3;
+  const wispEarsR = wispEarsL.clone();
+  wispEarsR.position.x = 0.038;
+  wispEarsR.rotation.z = -0.3;
+  const wispOrbTail = new THREE.Mesh(new THREE.SphereGeometry(0.038, 8, 8), sakuraMat);
+  wispOrbTail.position.set(0.09, -0.07, -0.08);
+  wolfWispGroup.add(wispCore, wispEarsL, wispEarsR, wispOrbTail);
+  group.add(wolfWispGroup);
+
+  group.traverse((obj) => {
+    obj.frustumCulled = false;
+  });
+
+  return {
+    group,
+    rig: {
+      leftLeg: leftLegBuilt.hip,
+      rightLeg: rightLegBuilt.hip,
+      leftShin: leftLegBuilt.shin,
+      rightShin: rightLegBuilt.shin,
+      leftArm,
+      rightArm,
+      head,
+      tail: wolfWispGroup,
+    },
+  };
+}
+
+/**
+ * 2. Body — Inspired by Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]
+ * Sleek dark-charcoal tailored formal/tactical suit body rig with crimson tie,
+ * structured shoulders, silver buckle belt, sculpted swept-back hair & polished shoes.
+ */
+function createDiegoBodyCharacter(
+  compactMode: boolean,
+  ultraCompact: boolean,
+): {group: THREE.Group; rig: LimbRig} {
+  const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+  const group = new THREE.Group();
+
+  const skinMat = new THREE.MeshStandardMaterial({color: 0xeac0a2, roughness: 0.62});
+  const suitMat = new THREE.MeshStandardMaterial({color: 0x1c1f26, roughness: 0.68, metalness: 0.08});
+  const pantsMat = new THREE.MeshStandardMaterial({color: 0x16181e, roughness: 0.72, metalness: 0.06});
+  const shirtMat = new THREE.MeshStandardMaterial({color: 0xf4f5f7, roughness: 0.76});
+  const tieMat = new THREE.MeshStandardMaterial({color: 0x8d212c, roughness: 0.48});
+  const hairMat = new THREE.MeshStandardMaterial({color: 0x181515, roughness: 0.62});
+  const shoeMat = new THREE.MeshStandardMaterial({color: 0x101114, roughness: 0.28, metalness: 0.16});
+  const metalMat = new THREE.MeshStandardMaterial({color: 0xc2c8d1, metalness: 0.82, roughness: 0.24});
+  const eyeMat = new THREE.MeshStandardMaterial({color: 0x181617, roughness: 0.22});
+
+  const buildLeg = (side: -1 | 1) => {
+    const hip = new THREE.Group();
+    hip.position.set(side * 0.11, 0.74, 0);
+
+    const hipJoint = new THREE.Mesh(new THREE.SphereGeometry(0.082, seg, seg), pantsMat);
+    const thigh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.082, 0.068, 0.35, seg),
+      pantsMat,
+    );
+    thigh.position.y = -0.175;
+    thigh.castShadow = !compactMode;
+    hip.add(hipJoint, thigh);
+
+    const shin = new THREE.Group();
+    shin.position.set(0, -0.35, 0);
+
+    const kneeJoint = new THREE.Mesh(new THREE.SphereGeometry(0.066, seg, seg), pantsMat);
+    const calf = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.066, 0.052, 0.31, seg),
+      pantsMat,
+    );
+    calf.position.y = -0.155;
+    calf.castShadow = !compactMode;
+
+    const shoe = new THREE.Mesh(new THREE.SphereGeometry(0.056, seg, seg), shoeMat);
+    shoe.scale.set(0.92, 0.64, 1.72);
+    shoe.position.set(0, -0.345, 0.038);
+
+    shin.add(kneeJoint, calf, shoe);
+    hip.add(shin);
+    return {hip, shin};
+  };
+
+  const leftLegBuilt = buildLeg(-1);
+  const rightLegBuilt = buildLeg(1);
+  group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+
+  // Tailored Suit Torso + Shirt V-Front + Crimson Silk Tie + Silver Buckle
+  const pelvis = new THREE.Mesh(new THREE.SphereGeometry(0.205, seg, seg), pantsMat);
+  pelvis.scale.set(1.02, 0.56, 0.85);
+  pelvis.position.set(0, 0.74, 0);
+
+  const jacketLower = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.188, 0.212, 0.32, seg),
+    suitMat,
+  );
+  jacketLower.position.y = 0.87;
+  jacketLower.castShadow = !compactMode;
+
+  const jacketChest = new THREE.Mesh(new THREE.SphereGeometry(0.215, seg, seg), suitMat);
+  jacketChest.scale.set(1.08, 1.05, 0.8);
+  jacketChest.position.set(0, 1.12, 0);
+  jacketChest.castShadow = !compactMode;
+
+  const shoulderYoke = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.07, 0.37, 6, seg),
+    suitMat,
+  );
+  shoulderYoke.rotation.z = Math.PI / 2;
+  shoulderYoke.position.set(0, 1.25, -0.008);
+
+  const dressShirtFront = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.062, 0.22, 4, 8),
+    shirtMat,
+  );
+  dressShirtFront.scale.set(1.05, 1, 0.52);
+  dressShirtFront.position.set(0, 1.15, 0.148);
+
+  const tieKnot = new THREE.Mesh(new THREE.SphereGeometry(0.022, 8, 8), tieMat);
+  tieKnot.position.set(0, 1.24, 0.182);
+  const tieBlade = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.015, 0.028, 0.24, 6),
+    tieMat,
+  );
+  tieBlade.scale.set(1, 1, 0.45);
+  tieBlade.position.set(0, 1.11, 0.185);
+
+  const lapelL = new THREE.Mesh(new THREE.CapsuleGeometry(0.022, 0.21, 4, 8), suitMat);
+  lapelL.position.set(-0.062, 1.17, 0.172);
+  lapelL.rotation.z = -0.34;
+  const lapelR = lapelL.clone();
+  lapelR.position.x = 0.062;
+  lapelR.rotation.z = 0.34;
+
+  const belt = new THREE.Mesh(new THREE.TorusGeometry(0.195, 0.022, 6, seg), shoeMat);
+  belt.rotation.x = Math.PI / 2;
+  belt.scale.set(1.04, 0.86, 1);
+  belt.position.set(0, 0.81, 0);
+  const buckle = new THREE.Mesh(new THREE.BoxGeometry(0.056, 0.036, 0.02), metalMat);
+  buckle.position.set(0, 0.81, 0.184);
+
+  group.add(
+    pelvis,
+    jacketLower,
+    jacketChest,
+    shoulderYoke,
+    dressShirtFront,
+    tieKnot,
+    tieBlade,
+    lapelL,
+    lapelR,
+    belt,
+    buckle,
+  );
+
+  // Articulated Suit Arms with Crisp White Shirt Cuffs
+  const buildSuitArm = (side: -1 | 1) => {
+    const shoulder = new THREE.Group();
+    shoulder.position.set(side * 0.25, 1.24, 0);
+
+    const shoulderSphere = new THREE.Mesh(new THREE.SphereGeometry(0.064, seg, seg), suitMat);
+    const upperSleeve = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.052, 0.22, seg),
+      suitMat,
+    );
+    upperSleeve.position.set(side * 0.008, -0.11, 0.01);
+    upperSleeve.castShadow = !compactMode;
+
+    const forearmSleeve = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.05, 0.044, 0.18, seg),
+      suitMat,
+    );
+    forearmSleeve.position.set(side * 0.008, -0.29, 0.048);
+    forearmSleeve.rotation.x = -0.28;
+
+    const whiteCuff = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.045, 0.043, 0.03, seg),
+      shirtMat,
+    );
+    whiteCuff.position.set(side * 0.008, -0.375, 0.072);
+    whiteCuff.rotation.x = -0.28;
+
+    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.046, seg, seg), skinMat);
+    hand.scale.set(0.92, 1.12, 0.85);
+    hand.position.set(side * 0.008, -0.415, 0.088);
+
+    shoulder.add(shoulderSphere, upperSleeve, forearmSleeve, whiteCuff, hand);
+    return shoulder;
+  };
+  const leftArm = buildSuitArm(-1);
+  const rightArm = buildSuitArm(1);
+  group.add(leftArm, rightArm);
+
+  // Sculpted Head with Swept-Back Hair & Defined Features
+  const head = new THREE.Group();
+  head.position.set(0, 1.41, 0);
+
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.062, 0.074, 0.12, seg), skinMat);
+  neck.position.y = -0.07;
+  const cranium = new THREE.Mesh(new THREE.SphereGeometry(0.172, seg, seg), skinMat);
+  cranium.scale.set(0.95, 1.05, 0.96);
+  cranium.position.y = 0.058;
+  cranium.castShadow = !compactMode;
+
+  const hairCap = new THREE.Mesh(
+    new THREE.SphereGeometry(0.184, seg, seg, 0, Math.PI * 2, 0, Math.PI * 0.58),
+    hairMat,
+  );
+  hairCap.position.y = 0.072;
+  hairCap.rotation.x = -0.28;
+
+  const sweptCrest = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.058, 0.14, 6, 8),
+    hairMat,
+  );
+  sweptCrest.position.set(0, 0.2, 0.055);
+  sweptCrest.rotation.x = -0.62;
+
+  const eyeGeo = new THREE.SphereGeometry(0.018, 8, 8);
+  const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
+  eyeL.position.set(-0.056, 0.058, 0.158);
+  const eyeR = eyeL.clone();
+  eyeR.position.x = 0.056;
+
+  const browGeo = new THREE.CapsuleGeometry(0.007, 0.038, 4, 6);
+  const browL = new THREE.Mesh(browGeo, hairMat);
+  browL.position.set(-0.056, 0.095, 0.156);
+  browL.rotation.z = Math.PI / 2 + 0.14;
+  const browR = new THREE.Mesh(browGeo, hairMat);
+  browR.position.set(0.056, 0.095, 0.156);
+  browR.rotation.z = Math.PI / 2 - 0.14;
+
+  const noseTip = new THREE.Mesh(new THREE.SphereGeometry(0.013, 6, 6), skinMat);
+  noseTip.position.set(0, 0.032, 0.172);
+
+  head.add(neck, cranium, hairCap, sweptCrest, eyeL, eyeR, browL, browR, noseTip);
+  group.add(head);
+
+  group.traverse((obj) => {
+    obj.frustumCulled = false;
+  });
+
+  return {
+    group,
+    rig: {
+      leftLeg: leftLegBuilt.hip,
+      rightLeg: rightLegBuilt.hip,
+      leftShin: leftLegBuilt.shin,
+      rightShin: rightLegBuilt.shin,
+      leftArm,
+      rightArm,
+      head,
+    },
+  };
+}
+
+/**
+ * 3. Ultimate CICADA Suit V2 — Inspired by rendysix (@rendysix) [21122d8]
+ * Tactical Hitman CICADA bodyguard formal suit: matte obsidian blazer, ballistic vest layer,
+ * shoulder holster harness, polarized sunglasses, coiled comms earpiece, leather gloves & tactical boots.
+ */
+function createCicadaSuitV2Character(
+  compactMode: boolean,
+  ultraCompact: boolean,
+): {group: THREE.Group; rig: LimbRig} {
+  const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
+  const group = new THREE.Group();
+
+  const skinMat = new THREE.MeshStandardMaterial({color: 0xe6bca0, roughness: 0.64});
+  const blazerMat = new THREE.MeshStandardMaterial({color: 0x20242c, roughness: 0.65, metalness: 0.1});
+  const armorVestMat = new THREE.MeshStandardMaterial({color: 0x15181e, roughness: 0.44, metalness: 0.22});
+  const shirtMat = new THREE.MeshStandardMaterial({color: 0xebedf0, roughness: 0.78});
+  const tieMat = new THREE.MeshStandardMaterial({color: 0x111317, roughness: 0.42});
+  const gloveMat = new THREE.MeshStandardMaterial({color: 0x16181d, roughness: 0.36, metalness: 0.18});
+  const bootMat = new THREE.MeshStandardMaterial({color: 0x101216, roughness: 0.3, metalness: 0.2});
+  const visorMat = new THREE.MeshStandardMaterial({color: 0x0b0e13, roughness: 0.14, metalness: 0.65});
+  const steelMat = new THREE.MeshStandardMaterial({color: 0x9aa2ad, roughness: 0.25, metalness: 0.85});
+  const commsMat = new THREE.MeshStandardMaterial({color: 0xd8dfe8, roughness: 0.3, metalness: 0.3});
+  const hairMat = new THREE.MeshStandardMaterial({color: 0x222021, roughness: 0.68});
+
+  const buildLeg = (side: -1 | 1) => {
+    const hip = new THREE.Group();
+    hip.position.set(side * 0.115, 0.74, 0);
+
+    const hipJoint = new THREE.Mesh(new THREE.SphereGeometry(0.084, seg, seg), blazerMat);
+    const thigh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.085, 0.072, 0.35, seg),
+      blazerMat,
+    );
+    thigh.position.y = -0.175;
+    thigh.castShadow = !compactMode;
+    hip.add(hipJoint, thigh);
+
+    const shin = new THREE.Group();
+    shin.position.set(0, -0.35, 0);
+
+    const kneePad = new THREE.Mesh(new THREE.SphereGeometry(0.068, seg, seg), armorVestMat);
+    const calf = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.068, 0.056, 0.3, seg),
+      blazerMat,
+    );
+    calf.position.y = -0.15;
+    calf.castShadow = !compactMode;
+
+    const boot = new THREE.Mesh(new THREE.SphereGeometry(0.06, seg, seg), bootMat);
+    boot.scale.set(0.98, 0.68, 1.72);
+    boot.position.set(0, -0.342, 0.036);
+
+    shin.add(kneePad, calf, boot);
+    hip.add(shin);
+    return {hip, shin};
+  };
+
+  const leftLegBuilt = buildLeg(-1);
+  const rightLegBuilt = buildLeg(1);
+  group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+
+  // Armored Tactical Blazer + Ballistic Inner Vest + Shoulder Holster Straps
+  const pelvis = new THREE.Mesh(new THREE.SphereGeometry(0.214, seg, seg), blazerMat);
+  pelvis.scale.set(1.04, 0.56, 0.88);
+  pelvis.position.set(0, 0.74, 0);
+
+  const jacketLower = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.198, 0.222, 0.32, seg),
+    blazerMat,
+  );
+  jacketLower.position.y = 0.88;
+  jacketLower.castShadow = !compactMode;
+
+  const jacketChest = new THREE.Mesh(new THREE.SphereGeometry(0.226, seg, seg), blazerMat);
+  jacketChest.scale.set(1.1, 1.04, 0.84);
+  jacketChest.position.set(0, 1.13, 0);
+  jacketChest.castShadow = !compactMode;
+
+  const tacticalVestPlate = new THREE.Mesh(
+    new THREE.BoxGeometry(0.24, 0.29, 0.06),
+    armorVestMat,
+  );
+  tacticalVestPlate.position.set(0, 1.08, 0.165);
+
+  const collarShirt = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.092, 0.11, 0.08, seg),
+    shirtMat,
+  );
+  collarShirt.position.set(0, 1.28, 0.02);
+
+  const blackTie = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.015, 0.024, 0.22, 6),
+    tieMat,
+  );
+  blackTie.scale.set(1, 1, 0.45);
+  blackTie.position.set(0, 1.14, 0.198);
+
+  const shoulderYoke = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.075, 0.39, 6, seg),
+    blazerMat,
+  );
+  shoulderYoke.rotation.z = Math.PI / 2;
+  shoulderYoke.position.set(0, 1.25, -0.006);
+
+  // Tactical shoulder straps & chest comms clip
+  const strapL = new THREE.Mesh(new THREE.BoxGeometry(0.036, 0.24, 0.022), armorVestMat);
+  strapL.position.set(-0.115, 1.15, 0.16);
+  strapL.rotation.z = -0.14;
+  const strapR = strapL.clone();
+  strapR.position.x = 0.115;
+  strapR.rotation.z = 0.14;
+
+  const radioClip = new THREE.Mesh(new THREE.BoxGeometry(0.032, 0.048, 0.024), steelMat);
+  radioClip.position.set(-0.115, 1.19, 0.178);
+
+  const tacticalBelt = new THREE.Mesh(
+    new THREE.TorusGeometry(0.205, 0.028, 6, seg),
+    armorVestMat,
+  );
+  tacticalBelt.rotation.x = Math.PI / 2;
+  tacticalBelt.scale.set(1.05, 0.88, 1);
+  tacticalBelt.position.set(0, 0.81, 0);
+  const tacticalBuckle = new THREE.Mesh(new THREE.BoxGeometry(0.064, 0.042, 0.024), steelMat);
+  tacticalBuckle.position.set(0, 0.81, 0.195);
+
+  group.add(
+    pelvis,
+    jacketLower,
+    jacketChest,
+    tacticalVestPlate,
+    collarShirt,
+    blackTie,
+    shoulderYoke,
+    strapL,
+    strapR,
+    radioClip,
+    tacticalBelt,
+    tacticalBuckle,
+  );
+
+  // Articulated Arms with Black Tactical Leather Gloves
+  const buildTacticalArm = (side: -1 | 1) => {
+    const shoulder = new THREE.Group();
+    shoulder.position.set(side * 0.262, 1.24, 0);
+
+    const shoulderPad = new THREE.Mesh(new THREE.SphereGeometry(0.068, seg, seg), blazerMat);
+    const upperSleeve = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.064, 0.056, 0.22, seg),
+      blazerMat,
+    );
+    upperSleeve.position.set(side * 0.008, -0.11, 0.01);
+    upperSleeve.castShadow = !compactMode;
+
+    const forearmSleeve = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.054, 0.046, 0.18, seg),
+      blazerMat,
+    );
+    forearmSleeve.position.set(side * 0.008, -0.29, 0.048);
+    forearmSleeve.rotation.x = -0.28;
+
+    const glove = new THREE.Mesh(new THREE.SphereGeometry(0.049, seg, seg), gloveMat);
+    glove.scale.set(0.95, 1.15, 0.88);
+    glove.position.set(side * 0.008, -0.41, 0.086);
+
+    shoulder.add(shoulderPad, upperSleeve, forearmSleeve, glove);
+    return shoulder;
+  };
+  const leftArm = buildTacticalArm(-1);
+  const rightArm = buildTacticalArm(1);
+  group.add(leftArm, rightArm);
+
+  // Head: Polarized Visor Sunglasses & Coiled CICADA Comms Earpiece
+  const head = new THREE.Group();
+  head.position.set(0, 1.41, 0);
+
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.064, 0.076, 0.12, seg), skinMat);
+  neck.position.y = -0.07;
+  const cranium = new THREE.Mesh(new THREE.SphereGeometry(0.172, seg, seg), skinMat);
+  cranium.scale.set(0.97, 1.04, 0.96);
+  cranium.position.y = 0.058;
+  cranium.castShadow = !compactMode;
+
+  const hairCap = new THREE.Mesh(
+    new THREE.SphereGeometry(0.181, seg, seg, 0, Math.PI * 2, 0, Math.PI * 0.54),
+    hairMat,
+  );
+  hairCap.position.y = 0.075;
+  hairCap.rotation.x = -0.26;
+
+  // Polarized Dark Tactical Sunglasses
+  const lensGeo = new THREE.BoxGeometry(0.068, 0.036, 0.018);
+  const lensL = new THREE.Mesh(lensGeo, visorMat);
+  lensL.position.set(-0.048, 0.064, 0.168);
+  lensL.rotation.y = -0.14;
+  const lensR = new THREE.Mesh(lensGeo, visorMat);
+  lensR.position.set(0.048, 0.064, 0.168);
+  lensR.rotation.y = 0.14;
+  const visorBridge = new THREE.Mesh(new THREE.BoxGeometry(0.038, 0.01, 0.014), steelMat);
+  visorBridge.position.set(0, 0.068, 0.174);
+
+  // Coiled Security Earpiece + Acoustic Tube Wire on Left Ear
+  const earpieceBud = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 8), armorVestMat);
+  earpieceBud.position.set(-0.17, 0.042, 0.01);
+  const coiledWire = new THREE.Mesh(
+    new THREE.TorusGeometry(0.024, 0.005, 6, 12, Math.PI * 1.4),
+    commsMat,
+  );
+  coiledWire.position.set(-0.14, -0.04, -0.035);
+  coiledWire.rotation.y = Math.PI / 2;
+
+  head.add(
+    neck,
+    cranium,
+    hairCap,
+    lensL,
+    lensR,
+    visorBridge,
+    earpieceBud,
+    coiledWire,
   );
   group.add(head);
 
@@ -1322,9 +2117,41 @@ export function createShopCharactersSystem(
   });
   root.add(sideTable);
 
-  // 3. Free-Walking Player Character (Tea Master)
+  // 3. Free-Walking Player Character Container (Hot-Swappable 3D Character Rigs)
+  const playerContainer = new THREE.Group();
+  playerContainer.position.copy(PLAYER_SPAWN_POS);
+  playerContainer.rotation.y = PLAYER_SPAWN_ROT_Y;
+
   const teaMaster = createTeaMasterCharacter(compactMode, ultraCompact);
-  root.add(teaMaster.group);
+  const spiritBlossomKindred = createSpiritBlossomKindredCharacter(
+    compactMode,
+    ultraCompact,
+  );
+  const diegoBody = createDiegoBodyCharacter(compactMode, ultraCompact);
+  const cicadaSuitV2 = createCicadaSuitV2Character(compactMode, ultraCompact);
+
+  const playerModels: Record<
+    PlayerCharacterId,
+    {group: THREE.Group; rig: LimbRig}
+  > = {
+    'tea-master': teaMaster,
+    'spirit-blossom-kindred': spiritBlossomKindred,
+    'diego-body': diegoBody,
+    'cicada-suit-v2': cicadaSuitV2,
+  };
+
+  let activePlayerId: PlayerCharacterId = 'tea-master';
+  spiritBlossomKindred.group.visible = false;
+  diegoBody.group.visible = false;
+  cicadaSuitV2.group.visible = false;
+
+  playerContainer.add(
+    teaMaster.group,
+    spiritBlossomKindred.group,
+    diegoBody.group,
+    cicadaSuitV2.group,
+  );
+  root.add(playerContainer);
 
   // 4. Customer Characters (Spawn outside -> walk inside -> sit on Chair 1)
   const guestsContainer = new THREE.Group();
@@ -1382,7 +2209,16 @@ export function createShopCharactersSystem(
 
   const setFirstPersonHidden = (hidden: boolean) => {
     firstPersonHidden = hidden;
-    teaMaster.group.visible = !hidden;
+    playerContainer.visible = !hidden;
+  };
+
+  const setPlayerCharacter = (characterId: PlayerCharacterId) => {
+    activePlayerId = characterId;
+    teaMaster.group.visible = characterId === 'tea-master';
+    spiritBlossomKindred.group.visible =
+      characterId === 'spirit-blossom-kindred';
+    diegoBody.group.visible = characterId === 'diego-body';
+    cicadaSuitV2.group.visible = characterId === 'cicada-suit-v2';
   };
 
   const movePlayer = (
@@ -1409,19 +2245,19 @@ export function createShopCharactersSystem(
     const moveDirZ = -nx * sinY - ny * cosY;
 
     const speed = 2.45 * clampedMag;
-    const rawX = teaMaster.group.position.x + moveDirX * speed * delta;
-    const rawZ = teaMaster.group.position.z + moveDirZ * speed * delta;
+    const rawX = playerContainer.position.x + moveDirX * speed * delta;
+    const rawZ = playerContainer.position.z + moveDirZ * speed * delta;
     const resolved = clampToShopObstacles(rawX, rawZ);
 
-    teaMaster.group.position.x = resolved.x;
-    teaMaster.group.position.z = resolved.z;
+    playerContainer.position.x = resolved.x;
+    playerContainer.position.z = resolved.z;
 
     const targetAngle = Math.atan2(moveDirX, moveDirZ);
     // Shortest angular interpolation
-    let angleDiff = targetAngle - teaMaster.group.rotation.y;
+    let angleDiff = targetAngle - playerContainer.rotation.y;
     while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
     while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-    teaMaster.group.rotation.y += angleDiff * Math.min(1, delta * 12);
+    playerContainer.rotation.y += angleDiff * Math.min(1, delta * 12);
 
     isPlayerMoving = true;
     playerWalkSpeed = clampedMag;
@@ -1449,42 +2285,49 @@ export function createShopCharactersSystem(
         guestId === 'elara' ? elara.rig : guestId === 'malee' ? malee.rig : somO.rig;
     }
 
-    // 1. Update Player Tea Master Pose (Walking in Shop vs Brewing in First-Person)
+    const activePlayerRig =
+      playerModels[activePlayerId]?.rig ?? teaMaster.rig;
+
+    // 1. Update Active Player Character Pose (Walking in Shop vs Brewing in First-Person)
     if (!firstPersonHidden) {
+      if (activePlayerRig.tail && !reducedMotion) {
+        activePlayerRig.tail.position.y = 1.38 + Math.sin(elapsed * 2.4) * 0.045;
+        activePlayerRig.tail.rotation.y = elapsed * 0.8;
+      }
       if (isPlayerMoving && !reducedMotion) {
         const swing = Math.sin(playerWalkPhase) * 0.56 * playerWalkSpeed;
-        teaMaster.rig.leftLeg.rotation.x = swing;
-        teaMaster.rig.rightLeg.rotation.x = -swing;
-        if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
-          teaMaster.rig.leftShin.rotation.x = Math.max(0, -swing * 0.75);
-          teaMaster.rig.rightShin.rotation.x = Math.max(0, swing * 0.75);
+        activePlayerRig.leftLeg.rotation.x = swing;
+        activePlayerRig.rightLeg.rotation.x = -swing;
+        if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
+          activePlayerRig.leftShin.rotation.x = Math.max(0, -swing * 0.75);
+          activePlayerRig.rightShin.rotation.x = Math.max(0, swing * 0.75);
         }
-        teaMaster.rig.leftArm.rotation.x = -swing * 0.72;
-        teaMaster.rig.rightArm.rotation.x = swing * 0.72;
-        teaMaster.group.position.y =
+        activePlayerRig.leftArm.rotation.x = -swing * 0.72;
+        activePlayerRig.rightArm.rotation.x = swing * 0.72;
+        playerContainer.position.y =
           SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * 0.032;
-        teaMaster.rig.head.rotation.y = Math.sin(elapsed * 0.9) * 0.04;
+        activePlayerRig.head.rotation.y = Math.sin(elapsed * 0.9) * 0.04;
       } else {
         const damp = Math.min(1, delta * 9);
         const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * 0.02;
-        teaMaster.rig.leftLeg.rotation.x = THREE.MathUtils.lerp(
-          teaMaster.rig.leftLeg.rotation.x,
+        activePlayerRig.leftLeg.rotation.x = THREE.MathUtils.lerp(
+          activePlayerRig.leftLeg.rotation.x,
           0,
           damp,
         );
-        teaMaster.rig.rightLeg.rotation.x = THREE.MathUtils.lerp(
-          teaMaster.rig.rightLeg.rotation.x,
+        activePlayerRig.rightLeg.rotation.x = THREE.MathUtils.lerp(
+          activePlayerRig.rightLeg.rotation.x,
           0,
           damp,
         );
-        if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
-          teaMaster.rig.leftShin.rotation.x = THREE.MathUtils.lerp(
-            teaMaster.rig.leftShin.rotation.x,
+        if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
+          activePlayerRig.leftShin.rotation.x = THREE.MathUtils.lerp(
+            activePlayerRig.leftShin.rotation.x,
             0,
             damp,
           );
-          teaMaster.rig.rightShin.rotation.x = THREE.MathUtils.lerp(
-            teaMaster.rig.rightShin.rotation.x,
+          activePlayerRig.rightShin.rotation.x = THREE.MathUtils.lerp(
+            activePlayerRig.rightShin.rotation.x,
             0,
             damp,
           );
@@ -1499,22 +2342,22 @@ export function createShopCharactersSystem(
           targetRightArm = -0.52;
           targetLeftArm = -0.42;
         }
-        teaMaster.rig.rightArm.rotation.x = THREE.MathUtils.lerp(
-          teaMaster.rig.rightArm.rotation.x,
+        activePlayerRig.rightArm.rotation.x = THREE.MathUtils.lerp(
+          activePlayerRig.rightArm.rotation.x,
           targetRightArm,
           damp,
         );
-        teaMaster.rig.leftArm.rotation.x = THREE.MathUtils.lerp(
-          teaMaster.rig.leftArm.rotation.x,
+        activePlayerRig.leftArm.rotation.x = THREE.MathUtils.lerp(
+          activePlayerRig.leftArm.rotation.x,
           targetLeftArm,
           damp,
         );
-        teaMaster.group.position.y = THREE.MathUtils.lerp(
-          teaMaster.group.position.y,
+        playerContainer.position.y = THREE.MathUtils.lerp(
+          playerContainer.position.y,
           SHOP_FLOOR_Y,
           damp,
         );
-        teaMaster.rig.head.rotation.y = reducedMotion
+        activePlayerRig.head.rotation.y = reducedMotion
           ? 0
           : Math.sin(elapsed * 0.7) * 0.06;
       }
@@ -1610,9 +2453,9 @@ export function createShopCharactersSystem(
     }
 
     return {
-      playerPos: teaMaster.group.position,
-      playerRotY: teaMaster.group.rotation.y,
-      isNearTeaTable: checkNearTeaTable(teaMaster.group.position),
+      playerPos: playerContainer.position,
+      playerRotY: playerContainer.rotation.y,
+      isNearTeaTable: checkNearTeaTable(playerContainer.position),
       customerPhase,
       customerCrossedDoorNow,
     };
@@ -1620,14 +2463,15 @@ export function createShopCharactersSystem(
 
   return {
     root,
-    teaMasterGroup: teaMaster.group,
+    teaMasterGroup: playerContainer,
     guestsContainer,
     startCustomerWalkIn,
     setFirstPersonHidden,
+    setPlayerCharacter,
     movePlayer,
-    getPlayerPosition: () => teaMaster.group.position,
-    getPlayerRotationY: () => teaMaster.group.rotation.y,
-    isNearTeaTable: () => checkNearTeaTable(teaMaster.group.position),
+    getPlayerPosition: () => playerContainer.position,
+    getPlayerRotationY: () => playerContainer.rotation.y,
+    isNearTeaTable: () => checkNearTeaTable(playerContainer.position),
     animate,
   };
 }
