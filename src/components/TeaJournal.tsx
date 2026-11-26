@@ -22,7 +22,8 @@ const CATEGORIES: {id: 'all' | TeaCategory; label: string}[] = [
   {id: 'herbal', label: 'สมุนไพร'},
 ];
 
-const TAP_SPRING = {type: 'spring' as const, stiffness: 420, damping: 24};
+const TAP_SPRING = {type: 'spring' as const, stiffness: 420, damping: 26};
+const GRID_EASE = [0.16, 1, 0.3, 1] as const;
 
 export const TeaJournal: React.FC<TeaJournalProps> = ({
   saveData,
@@ -33,8 +34,10 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
   const xpInfo = getXpProgress(saveData.xp);
   const unlockedCount = getUnlockedTeas(saveData.level).length;
 
-  const visibleTeas =
-    filter === 'all' ? TEAS : TEAS.filter((t) => t.category === filter);
+  const visibleTeas = React.useMemo(
+    () => (filter === 'all' ? TEAS : TEAS.filter((t) => t.category === filter)),
+    [filter],
+  );
 
   return (
     <div className="mx-auto max-w-[1200px] safe-px py-4 sm:py-6 lg:py-8">
@@ -62,8 +65,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
           </div>
           <motion.button
             type="button"
-            whileHover={{scale: 1.03}}
-            whileTap={{scale: 0.94}}
+            whileTap={{scale: 0.95}}
             transition={TAP_SPRING}
             onClick={onStartBrewing}
             className="min-h-[44px] rounded-xl bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732] whitespace-nowrap shrink-0"
@@ -85,7 +87,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
               <motion.button
                 key={cat.id}
                 type="button"
-                whileTap={{scale: 0.94}}
+                whileTap={{scale: 0.95}}
                 onClick={() => {
                   soundEngine.playTap();
                   setFilter(cat.id);
@@ -95,7 +97,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                 {active && (
                   <motion.span
                     layoutId="journal-cat-pill"
-                    transition={{type: 'spring', stiffness: 420, damping: 30}}
+                    transition={{type: 'spring', stiffness: 420, damping: 32}}
                     className="absolute inset-0 rounded-md bg-white shadow-xs"
                   />
                 )}
@@ -114,28 +116,26 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
         </div>
       </div>
 
-      {/* Tea Collection Grid */}
+      {/* Tea Collection Grid (single compositor transition + GPU-scaled flavor bars) */}
       <section className="mt-4">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-          {visibleTeas.map((tea, idx) => {
+        <motion.div
+          key={filter}
+          initial={{opacity: 0, y: 8}}
+          animate={{opacity: 1, y: 0}}
+          transition={{duration: 0.2, ease: GRID_EASE}}
+          className="grid grid-cols-2 gap-3 lg:grid-cols-3 will-change-transform"
+        >
+          {visibleTeas.map((tea) => {
             const unlocked = isTeaUnlocked(tea, saveData.level);
             const count = saveData.teaCounts[tea.id] ?? 0;
             return (
-              <motion.div
-                key={`${filter}-${tea.id}`}
-                initial={{opacity: 0, y: 12, scale: 0.97}}
-                animate={{opacity: unlocked ? 1 : 0.8, y: 0, scale: 1}}
-                transition={{
-                  delay: Math.min(idx * 0.03, 0.2),
-                  type: 'spring',
-                  stiffness: 360,
-                  damping: 26,
-                }}
-                whileHover={unlocked ? {y: -2, scale: 1.01} : undefined}
-                className={`flex flex-col justify-between rounded-xl border p-4 ${
+              <div
+                key={tea.id}
+                style={{contain: 'layout style paint'}}
+                className={`flex flex-col justify-between rounded-xl border p-4 transition-transform duration-150 ${
                   unlocked
                     ? 'border-[#1F2823]/10 bg-white shadow-2xs'
-                    : 'border-[#1F2823]/10 bg-[#EAE7DF]'
+                    : 'border-[#1F2823]/10 bg-[#EAE7DF] opacity-80'
                 }`}
               >
                 <div>
@@ -168,16 +168,16 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                     {tea.description}
                   </p>
 
-                  {/* Structured Flavor Profile Bars */}
+                  {/* Structured Flavor Profile Bars (GPU scaleX only) */}
                   <div className="mt-3 grid grid-cols-3 gap-2 text-[11px] text-[#5A655D]">
                     <div>
                       <span>กลิ่นหอม</span>
                       <div className="mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-[#2E6F40]"
-                          initial={{width: 0}}
-                          animate={{width: `${tea.flavorProfile.aroma * 20}%`}}
-                          transition={{duration: 0.45, delay: Math.min(idx * 0.03, 0.2)}}
+                          className="h-full w-full origin-left rounded-full bg-[#2E6F40]"
+                          initial={{scaleX: 0}}
+                          animate={{scaleX: tea.flavorProfile.aroma * 0.2}}
+                          transition={{duration: 0.32, ease: GRID_EASE}}
                         />
                       </div>
                     </div>
@@ -185,10 +185,10 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                       <span>ความหวาน</span>
                       <div className="mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-[#C9822B]"
-                          initial={{width: 0}}
-                          animate={{width: `${tea.flavorProfile.sweetness * 20}%`}}
-                          transition={{duration: 0.45, delay: Math.min(idx * 0.03, 0.2) + 0.05}}
+                          className="h-full w-full origin-left rounded-full bg-[#C9822B]"
+                          initial={{scaleX: 0}}
+                          animate={{scaleX: tea.flavorProfile.sweetness * 0.2}}
+                          transition={{duration: 0.34, ease: GRID_EASE}}
                         />
                       </div>
                     </div>
@@ -196,10 +196,10 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                       <span>ความเข้ม</span>
                       <div className="mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-[#4A534D]"
-                          initial={{width: 0}}
-                          animate={{width: `${tea.flavorProfile.body * 20}%`}}
-                          transition={{duration: 0.45, delay: Math.min(idx * 0.03, 0.2) + 0.1}}
+                          className="h-full w-full origin-left rounded-full bg-[#4A534D]"
+                          initial={{scaleX: 0}}
+                          animate={{scaleX: tea.flavorProfile.body * 0.2}}
+                          transition={{duration: 0.36, ease: GRID_EASE}}
                         />
                       </div>
                     </div>
@@ -238,10 +238,10 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                       .join(', ')}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </div>
+        </motion.div>
       </section>
 
       {/* Recent History */}
@@ -270,8 +270,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
             </p>
             <motion.button
               type="button"
-              whileHover={{scale: 1.03}}
-              whileTap={{scale: 0.94}}
+              whileTap={{scale: 0.95}}
               transition={TAP_SPRING}
               onClick={onStartBrewing}
               className="mt-4 min-h-[44px] rounded-lg bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732]"
@@ -281,7 +280,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
           </div>
         ) : (
           <div className="mt-3 divide-y divide-[#1F2823]/10 rounded-xl border border-[#1F2823]/10 bg-white overflow-hidden">
-            {saveData.history.map((item, idx) => {
+            {saveData.history.map((item) => {
               const tempLabel =
                 WATER_TEMPS.find((w) => w.id === item.waterTemp)?.label ?? '';
               const toppingNames = item.toppings
@@ -290,11 +289,8 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                 .join(' + ');
 
               return (
-                <motion.div
+                <div
                   key={item.id}
-                  initial={{opacity: 0, x: -10}}
-                  animate={{opacity: 1, x: 0}}
-                  transition={{delay: Math.min(idx * 0.03, 0.18), duration: 0.2}}
                   className="flex flex-wrap items-center justify-between gap-3 px-4 py-3.5 text-sm"
                 >
                   <div>
@@ -316,7 +312,7 @@ export const TeaJournal: React.FC<TeaJournalProps> = ({
                   <span className="font-mono-num text-xs text-[#2E6F40]">
                     +{item.xpEarned ?? 25} XP
                   </span>
-                </motion.div>
+                </div>
               );
             })}
           </div>

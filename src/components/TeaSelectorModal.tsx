@@ -33,7 +33,7 @@ export function getTeaRewardPreview(tea: TeaType): {warmth: number; xp: number} 
   };
 }
 
-const TeaVesselIcon: React.FC<{tea: TeaType; locked: boolean}> = ({tea, locked}) => {
+const TeaVesselIcon: React.FC<{tea: TeaType; locked: boolean}> = React.memo(({tea, locked}) => {
   const liquid = locked ? '#C5C3B8' : tea.lightColor;
   const liquidEdge = locked ? '#ABA99E' : tea.richColor;
 
@@ -268,9 +268,91 @@ const TeaVesselIcon: React.FC<{tea: TeaType; locked: boolean}> = ({tea, locked})
       <ellipse cx="24" cy="14" rx="7.6" ry="1.8" fill={liquid} />
     </svg>
   );
-};
+});
 
-export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
+const MODAL_EASE = [0.16, 1, 0.3, 1] as const;
+
+interface TeaRecipeRowProps {
+  tea: TeaType;
+  unlocked: boolean;
+  isSelected: boolean;
+  isGuestMatch: boolean;
+  onSelectAndStart: (tea: TeaType) => void;
+}
+
+const TeaRecipeRow: React.FC<TeaRecipeRowProps> = React.memo(
+  ({tea, unlocked, isSelected, isGuestMatch, onSelectAndStart}) => {
+    const reward = getTeaRewardPreview(tea);
+    return (
+      <motion.button
+        type="button"
+        disabled={!unlocked}
+        onClick={() => onSelectAndStart(tea)}
+        whileTap={unlocked ? {scale: 0.97} : {x: [0, -3, 3, 0]}}
+        transition={{duration: 0.14}}
+        style={{contain: 'layout style paint'}}
+        className={`flex w-full items-center justify-between gap-3 rounded-2xl border-[1.5px] px-3.5 py-2.5 text-left transition-colors ${
+          !unlocked
+            ? 'border-[#DCD9CE] bg-[#F2EFE6] opacity-78 cursor-not-allowed'
+            : isSelected
+              ? 'border-[#4D9256] bg-[#F6FBF3] shadow-xs'
+              : 'border-[#C9DFBE] bg-white hover:border-[#6EA86F] hover:bg-[#F9FCF7]'
+        }`}
+      >
+        <div className="relative shrink-0">
+          <TeaVesselIcon tea={tea} locked={!unlocked} />
+          {!unlocked && (
+            <span className="absolute -bottom-0.5 -right-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#3A403B] text-white">
+              <Lock className="h-3 w-3" aria-hidden="true" />
+            </span>
+          )}
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <p className="font-display text-sm sm:text-base font-bold text-[#255F30] truncate">
+            {tea.name}
+          </p>
+          <p className="mt-0.5 text-xs text-[#6B736A] truncate">
+            {unlocked
+              ? `${tea.idealTempLabel} · แช่ ${tea.idealSteepMin}–${tea.idealSteepMax} วิ · ${getEquipmentInfo(tea.equipmentId).name}`
+              : `ปลดล็อกที่ Lv.${tea.unlockLevel}`}
+          </p>
+          {unlocked && (
+            <p className="mt-0.5 text-[11px] text-[#4C5C4F] truncate">
+              วัตถุดิบ: {tea.baseIngredients.join(' · ')}
+            </p>
+          )}
+          <div className="mt-1 flex items-center gap-1.5">
+            {isGuestMatch ? (
+              <span className="inline-block rounded-full bg-[#2E6F40] px-2.5 py-0.5 text-[11px] font-semibold text-white">
+                แขกกำลังสั่ง
+              </span>
+            ) : tea.unlockLevel >= 4 ? (
+              <span className="inline-block rounded-full bg-[#B95B24] px-2.5 py-0.5 text-[11px] font-semibold text-white">
+                สูตรพิเศษ Lv.{tea.unlockLevel}
+              </span>
+            ) : (
+              <span className="inline-block rounded-full bg-[#2B2E29] px-2.5 py-0.5 text-[11px] font-medium text-[#F3F1EC]">
+                {tea.categoryLabel}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="text-right shrink-0 font-display">
+          <p className="text-sm sm:text-base font-bold text-[#2E6B38] leading-tight">
+            +{reward.warmth} แต้ม
+          </p>
+          <p className="text-xs sm:text-sm font-bold text-[#2E6B38] leading-tight mt-0.5">
+            +{reward.xp} XP
+          </p>
+        </div>
+      </motion.button>
+    );
+  },
+);
+
+export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
   playerLevel,
   selectedTeaId,
   categoryFilter,
@@ -280,28 +362,32 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
   onClose,
 }) => {
   const activeCat = CATEGORIES.find((c) => c.id === categoryFilter) ?? CATEGORIES[0];
-  const visibleTeas =
-    categoryFilter === 'all'
-      ? TEAS
-      : TEAS.filter((tea) => tea.category === categoryFilter);
+  const visibleTeas = React.useMemo(
+    () =>
+      categoryFilter === 'all'
+        ? TEAS
+        : TEAS.filter((tea) => tea.category === categoryFilter),
+    [categoryFilter],
+  );
 
   return (
     <motion.div
       initial={{opacity: 0}}
       animate={{opacity: 1}}
       exit={{opacity: 0}}
-      transition={{duration: 0.18}}
+      transition={{duration: 0.16, ease: 'easeOut'}}
       className="pointer-events-none fixed inset-0 z-30 flex items-center justify-center p-2.5 sm:p-4"
     >
       <motion.div
         role="dialog"
         aria-modal="true"
         aria-labelledby="tea-selector-title"
-        initial={{opacity: 0, scale: 0.9, y: 26}}
+        initial={{opacity: 0, scale: 0.94, y: 18}}
         animate={{opacity: 1, scale: 1, y: 0}}
-        exit={{opacity: 0, scale: 0.92, y: 20}}
-        transition={{type: 'spring', stiffness: 380, damping: 28}}
-        className="pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden"
+        exit={{opacity: 0, scale: 0.95, y: 14}}
+        transition={{duration: 0.24, ease: MODAL_EASE}}
+        className="pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform"
+        style={{contain: 'layout style paint'}}
       >
         {/* Header matching reference card */}
         <div className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-2">
@@ -309,10 +395,10 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
             <motion.h2
               key={activeCat.id}
               id="tea-selector-title"
-              initial={{opacity: 0, x: -8}}
+              initial={{opacity: 0, x: -6}}
               animate={{opacity: 1, x: 0}}
-              exit={{opacity: 0, x: 8}}
-              transition={{duration: 0.14}}
+              exit={{opacity: 0, x: 6}}
+              transition={{duration: 0.14, ease: MODAL_EASE}}
               className="font-display text-lg sm:text-xl font-bold text-[#2D6835]"
             >
               {activeCat.modalTitle}
@@ -322,9 +408,8 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
           <motion.button
             type="button"
             onClick={onClose}
-            whileHover={{scale: 1.07}}
-            whileTap={{scale: 0.9}}
-            transition={{type: 'spring', stiffness: 420, damping: 22}}
+            whileTap={{scale: 0.92}}
+            transition={{type: 'spring', stiffness: 420, damping: 26}}
             aria-label="ซ่อนหน้าต่างเลือกชา"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0"
           >
@@ -340,9 +425,9 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
               <motion.button
                 key={cat.id}
                 type="button"
-                whileTap={{scale: 0.94}}
+                whileTap={{scale: 0.95}}
                 onClick={() => onCategoryChange(cat.id)}
-                className="relative min-h-[34px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0"
+                className="relative min-h-[36px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0"
               >
                 {active && (
                   <motion.span
@@ -363,96 +448,35 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = ({
           })}
         </div>
 
-        {/* Vertical Scrollable Recipe Cards */}
-        <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-2.5">
-          {visibleTeas.map((tea, idx) => {
-            const unlocked = isTeaUnlocked(tea, playerLevel);
-            const isSelected = tea.id === selectedTeaId;
-            const isGuestMatch =
-              unlocked &&
-              Boolean(recommendedTeaIds && recommendedTeaIds.includes(tea.id));
-            const reward = getTeaRewardPreview(tea);
-
-            return (
-              <motion.button
-                key={`${categoryFilter}-${tea.id}`}
-                type="button"
-                disabled={!unlocked}
-                onClick={() => onSelectAndStart(tea)}
-                initial={{opacity: 0, y: 12, scale: 0.97}}
-                animate={{opacity: unlocked ? 1 : 0.78, y: 0, scale: 1}}
-                transition={{
-                  delay: Math.min(idx * 0.03, 0.18),
-                  type: 'spring',
-                  stiffness: 380,
-                  damping: 26,
-                }}
-                whileHover={unlocked ? {scale: 1.015, y: -1} : undefined}
-                whileTap={unlocked ? {scale: 0.96} : {x: [0, -3, 3, 0]}}
-                className={`flex w-full items-center justify-between gap-3 rounded-2xl border-[1.5px] px-3.5 py-2.5 text-left ${
-                  !unlocked
-                    ? 'border-[#DCD9CE] bg-[#F2EFE6] cursor-not-allowed'
-                    : isSelected
-                      ? 'border-[#4D9256] bg-[#F6FBF3] shadow-xs'
-                      : 'border-[#C9DFBE] bg-white hover:border-[#6EA86F] hover:bg-[#F9FCF7]'
-                }`}
-              >
-                {/* Left Icon */}
-                <div className="relative shrink-0">
-                  <TeaVesselIcon tea={tea} locked={!unlocked} />
-                  {!unlocked && (
-                    <span className="absolute -bottom-0.5 -right-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#3A403B] text-white">
-                      <Lock className="h-3 w-3" aria-hidden="true" />
-                    </span>
-                  )}
-                </div>
-
-                {/* Middle Info */}
-                <div className="min-w-0 flex-1">
-                  <p className="font-display text-sm sm:text-base font-bold text-[#255F30] truncate">
-                    {tea.name}
-                  </p>
-                  <p className="mt-0.5 text-xs text-[#6B736A] truncate">
-                    {unlocked
-                      ? `${tea.idealTempLabel} · แช่ ${tea.idealSteepMin}–${tea.idealSteepMax} วิ · ${getEquipmentInfo(tea.equipmentId).name}`
-                      : `ปลดล็อกที่ Lv.${tea.unlockLevel}`}
-                  </p>
-                  {unlocked && (
-                    <p className="mt-0.5 text-[11px] text-[#4C5C4F] truncate">
-                      วัตถุดิบ: {tea.baseIngredients.join(' · ')}
-                    </p>
-                  )}
-                  <div className="mt-1 flex items-center gap-1.5">
-                    {isGuestMatch ? (
-                      <span className="inline-block rounded-full bg-[#2E6F40] px-2.5 py-0.5 text-[11px] font-semibold text-white">
-                        แขกกำลังสั่ง
-                      </span>
-                    ) : tea.unlockLevel >= 4 ? (
-                      <span className="inline-block rounded-full bg-[#B95B24] px-2.5 py-0.5 text-[11px] font-semibold text-white">
-                        สูตรพิเศษ Lv.{tea.unlockLevel}
-                      </span>
-                    ) : (
-                      <span className="inline-block rounded-full bg-[#2B2E29] px-2.5 py-0.5 text-[11px] font-medium text-[#F3F1EC]">
-                        {tea.categoryLabel}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right Stacked Rewards */}
-                <div className="text-right shrink-0 font-display">
-                  <p className="text-sm sm:text-base font-bold text-[#2E6B38] leading-tight">
-                    +{reward.warmth} แต้ม
-                  </p>
-                  <p className="text-xs sm:text-sm font-bold text-[#2E6B38] leading-tight mt-0.5">
-                    +{reward.xp} XP
-                  </p>
-                </div>
-              </motion.button>
-            );
-          })}
+        {/* Vertical Scrollable Recipe Cards (single compositor transition per filter switch) */}
+        <div className="flex-1 overflow-y-auto px-4 pb-4">
+          <motion.div
+            key={categoryFilter}
+            initial={{opacity: 0, y: 6}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: 0.18, ease: MODAL_EASE}}
+            className="space-y-2.5 will-change-transform"
+          >
+            {visibleTeas.map((tea) => {
+              const unlocked = isTeaUnlocked(tea, playerLevel);
+              const isSelected = tea.id === selectedTeaId;
+              const isGuestMatch =
+                unlocked &&
+                Boolean(recommendedTeaIds && recommendedTeaIds.includes(tea.id));
+              return (
+                <TeaRecipeRow
+                  key={tea.id}
+                  tea={tea}
+                  unlocked={unlocked}
+                  isSelected={isSelected}
+                  isGuestMatch={isGuestMatch}
+                  onSelectAndStart={onSelectAndStart}
+                />
+              );
+            })}
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>
   );
-};
+});

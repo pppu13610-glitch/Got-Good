@@ -4,25 +4,29 @@ export function createWoodGrainTexture(
   baseHex: string,
   grainHex: string,
   maxAnisotropy: number,
+  compact = false,
 ): THREE.CanvasTexture {
+  const size = compact ? 256 : 512;
+  const lineCount = compact ? 46 : 90;
+  const stepX = compact ? 32 : 32;
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = size;
+  canvas.height = size;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
     ctx.fillStyle = baseHex;
-    ctx.fillRect(0, 0, 512, 512);
+    ctx.fillRect(0, 0, size, size);
 
     ctx.strokeStyle = grainHex;
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < lineCount; i++) {
       ctx.globalAlpha = 0.08 + (i % 5) * 0.03;
-      ctx.lineWidth = 1 + (i % 3);
+      ctx.lineWidth = compact ? 1 : 1 + (i % 3);
       ctx.beginPath();
-      const yBase = (i / 90) * 512;
+      const yBase = (i / lineCount) * size;
       ctx.moveTo(0, yBase);
-      for (let x = 0; x <= 512; x += 32) {
-        const wave = Math.sin(x * 0.02 + i * 0.7) * 5;
+      for (let x = 0; x <= size; x += stepX) {
+        const wave = Math.sin(x * 0.02 + i * 0.7) * (compact ? 3 : 5);
         ctx.lineTo(x, yBase + wave);
       }
       ctx.stroke();
@@ -33,28 +37,34 @@ export function createWoodGrainTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.anisotropy = Math.min(8, maxAnisotropy);
+  texture.anisotropy = Math.min(compact ? 2 : 8, maxAnisotropy);
   return texture;
 }
 
-export function createWovenMatTexture(maxAnisotropy: number): THREE.CanvasTexture {
+export function createWovenMatTexture(
+  maxAnisotropy: number,
+  compact = false,
+): THREE.CanvasTexture {
+  const size = compact ? 128 : 256;
+  const rowStep = compact ? 6 : 8;
+  const colStep = compact ? 12 : 16;
   const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = size;
+  canvas.height = size;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
     ctx.fillStyle = '#B8A88A';
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, size, size);
 
-    for (let y = 0; y < 256; y += 8) {
-      ctx.fillStyle = y % 16 === 0 ? '#AE9D7E' : '#C2B396';
-      ctx.fillRect(0, y, 256, 6);
+    for (let y = 0; y < size; y += rowStep) {
+      ctx.fillStyle = y % (rowStep * 2) === 0 ? '#AE9D7E' : '#C2B396';
+      ctx.fillRect(0, y, size, rowStep - 2);
     }
 
     ctx.fillStyle = 'rgba(72, 58, 40, 0.08)';
-    for (let x = 0; x < 256; x += 16) {
-      ctx.fillRect(x, 0, 2, 256);
+    for (let x = 0; x < size; x += colStep) {
+      ctx.fillRect(x, 0, 2, size);
     }
   }
 
@@ -63,7 +73,7 @@ export function createWovenMatTexture(maxAnisotropy: number): THREE.CanvasTextur
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(3, 2);
-  texture.anisotropy = Math.min(8, maxAnisotropy);
+  texture.anisotropy = Math.min(compact ? 2 : 8, maxAnisotropy);
   return texture;
 }
 
@@ -71,15 +81,18 @@ export function createCeramicSpeckleTexture(
   baseHex: string,
   speckHex: string,
   maxAnisotropy: number,
+  compact = false,
 ): THREE.CanvasTexture {
+  const size = compact ? 128 : 256;
+  const speckCount = compact ? 180 : 420;
   const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = size;
+  canvas.height = size;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
     ctx.fillStyle = baseHex;
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, size, size);
 
     // Subtle organic stoneware speckles
     let seed = 42;
@@ -89,10 +102,10 @@ export function createCeramicSpeckleTexture(
     };
 
     ctx.fillStyle = speckHex;
-    for (let i = 0; i < 420; i++) {
-      const x = rand() * 256;
-      const y = rand() * 256;
-      const r = 0.5 + rand() * 1.4;
+    for (let i = 0; i < speckCount; i++) {
+      const x = rand() * size;
+      const y = rand() * size;
+      const r = (0.5 + rand() * 1.4) * (compact ? 0.65 : 1);
       ctx.globalAlpha = 0.12 + rand() * 0.22;
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -104,7 +117,7 @@ export function createCeramicSpeckleTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.anisotropy = Math.min(4, maxAnisotropy);
+  texture.anisotropy = Math.min(compact ? 2 : 4, maxAnisotropy);
   return texture;
 }
 

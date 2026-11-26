@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {AnimatePresence, motion} from 'motion/react';
 import {
   ArrowLeft,
@@ -139,8 +139,8 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     const start = performance.now();
     steepIntervalRef.current = window.setInterval(() => {
       const elapsed = (performance.now() - start) / 1000;
-      const capped = Math.min(10, elapsed);
-      setSteepSeconds(capped);
+      const capped = Math.min(10, Math.round(elapsed * 10) / 10);
+      setSteepSeconds((prev) => (prev === capped ? prev : capped));
 
       if (
         !sweetSpotChimedRef.current &&
@@ -150,7 +150,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         sweetSpotChimedRef.current = true;
         soundEngine.playSweetSpotChime();
       }
-    }, 80);
+    }, 100);
 
     return () => {
       if (steepIntervalRef.current) {
@@ -160,20 +160,23 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     };
   }, [step, selectedTea]);
 
-  const handleSelectAndStartTea = (tea: TeaType) => {
-    if (!isTeaUnlocked(tea, playerLevel)) {
-      soundEngine.playTap();
-      return;
-    }
-    soundEngine.unlock();
-    soundEngine.playLeafDrop();
-    setSelectedTea(tea);
-    setWaterTemp(tea.idealTemp);
-    setSelectorOpen(false);
-    setStep('POUR_WATER');
-  };
+  const handleSelectAndStartTea = useCallback(
+    (tea: TeaType) => {
+      if (!isTeaUnlocked(tea, playerLevel)) {
+        soundEngine.playTap();
+        return;
+      }
+      soundEngine.unlock();
+      soundEngine.playLeafDrop();
+      setSelectedTea(tea);
+      setWaterTemp(tea.idealTemp);
+      setSelectorOpen(false);
+      setStep('POUR_WATER');
+    },
+    [playerLevel],
+  );
 
-  const handlePourWater = () => {
+  const handlePourWater = useCallback(() => {
     if (isPouring || step !== 'POUR_WATER') return;
     soundEngine.unlock();
     soundEngine.playPourWater();
@@ -196,14 +199,14 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         setIsPouring(false);
         setStep('STEEP_TEA');
       }
-    }, 30);
-  };
+    }, 34);
+  }, [isPouring, step]);
 
-  const handleFinishSteep = () => {
+  const handleFinishSteep = useCallback(() => {
     if (step !== 'STEEP_TEA') return;
     soundEngine.playTap();
     setStep('ADD_TOPPING');
-  };
+  }, [step]);
 
   const handleToggleTopping = (id: ToppingId) => {
     soundEngine.playTap();
@@ -344,11 +347,11 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
   };
 
   const strengthLabel = getStrengthLabel(selectedTea, steepSeconds);
-  const activeEquipment = getEquipmentInfo(selectedTea.equipmentId);
-  const steepProgressPct = Math.min(
-    100,
-    (steepSeconds / MAX_STEEP_DISPLAY) * 100,
+  const activeEquipment = useMemo(
+    () => getEquipmentInfo(selectedTea.equipmentId),
+    [selectedTea.equipmentId],
   );
+  const steepProgressRatio = Math.min(1, steepSeconds / MAX_STEEP_DISPLAY);
   const sweetMinPct = (selectedTea.idealSteepMin / MAX_STEEP_DISPLAY) * 100;
   const sweetMaxPct = (selectedTea.idealSteepMax / MAX_STEEP_DISPLAY) * 100;
 
@@ -405,9 +408,9 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
               </div>
               <div className="mt-1 h-1.5 w-20 sm:w-28 overflow-hidden rounded-full bg-[#1F2823]/12">
                 <motion.div
-                  className="h-full rounded-full bg-[#2E6F40]"
-                  animate={{width: `${Math.round(xpInfo.progressRatio * 100)}%`}}
-                  transition={{type: 'spring', stiffness: 260, damping: 24}}
+                  className="h-full w-full origin-left rounded-full bg-[#2E6F40]"
+                  animate={{scaleX: Math.max(0.02, xpInfo.progressRatio)}}
+                  transition={{duration: 0.35, ease: [0.16, 1, 0.3, 1]}}
                 />
               </div>
             </div>
@@ -567,18 +570,18 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         {step !== 'SELECT_TEA' && (
           <motion.div
             key="brewing-dock"
-            initial={{opacity: 0, y: 40}}
+            initial={{opacity: 0, y: 28}}
             animate={{opacity: 1, y: 0}}
-            exit={{opacity: 0, y: 40}}
-            transition={{type: 'spring', stiffness: 340, damping: 30}}
-            className="pointer-events-none fixed inset-x-0 bottom-0 z-20 flex flex-col items-center safe-px safe-pb"
+            exit={{opacity: 0, y: 24}}
+            transition={{duration: 0.24, ease: [0.16, 1, 0.3, 1]}}
+            className="pointer-events-none fixed inset-x-0 bottom-0 z-20 flex flex-col items-center safe-px safe-pb will-change-transform"
           >
             <motion.div
-              className="flex w-full flex-col items-center"
+              className="flex w-full flex-col items-center will-change-transform"
               animate={{
                 y: dockCollapsed ? 'calc(100% - 36px)' : 0,
               }}
-              transition={{type: 'spring', stiffness: 360, damping: 32}}
+              transition={{duration: 0.24, ease: [0.16, 1, 0.3, 1]}}
             >
               {/* Collapse Toggle Tab */}
               <motion.button
@@ -753,8 +756,8 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                             }}
                           />
                           <div
-                            className="h-full rounded-full bg-[#C9822B] transition-[width] duration-75"
-                            style={{width: `${steepProgressPct}%`}}
+                            className="h-full w-full origin-left rounded-full bg-[#C9822B] transition-transform duration-100 will-change-transform"
+                            style={{transform: `scaleX(${steepProgressRatio})`}}
                           />
                         </div>
                       </div>

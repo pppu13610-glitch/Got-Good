@@ -82,6 +82,7 @@ export function createTeaTableEnvironment(
   matTex: THREE.CanvasTexture,
   ceramicTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
+  compactMode = false,
 ): THREE.Group {
   const envGroup = new THREE.Group();
 
@@ -153,12 +154,13 @@ export function createTeaTableEnvironment(
 
   trayGroup.add(backRail, frontRail, leftRail, rightRail);
 
-  // Brass corner brackets for craft detail
+  // Brass corner brackets for craft detail (shared geometry)
   const brassMat = new THREE.MeshStandardMaterial({
     color: 0xc89d54,
     metalness: 0.85,
     roughness: 0.25,
   });
+  const bracketGeo = new THREE.BoxGeometry(0.14, 0.115, 0.14);
   const cornerPositions: [number, number][] = [
     [-1.93, -1.18],
     [1.93, -1.18],
@@ -166,17 +168,40 @@ export function createTeaTableEnvironment(
     [1.93, 1.18],
   ];
   for (const [cx, cz] of cornerPositions) {
-    const bracket = new THREE.Mesh(
-      new THREE.BoxGeometry(0.14, 0.115, 0.14),
-      brassMat,
-    );
+    const bracket = new THREE.Mesh(bracketGeo, brassMat);
     bracket.position.set(cx, 0.058, cz);
     trayGroup.add(bracket);
   }
   envGroup.add(trayGroup);
 
-  // 3. Decorative Tea Canisters (Left of tray, composite 3-part groups)
+  // 3. Decorative Tea Canisters (shared geometry buffers across canisters)
   const canisterColors = [0x3c5844, 0x8b5a3c];
+  const canisterSeg = compactMode ? 18 : 28;
+  const bodyPts = [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.22, 0),
+    new THREE.Vector2(0.24, 0.42),
+    new THREE.Vector2(0.21, 0.48),
+    new THREE.Vector2(0, 0.48),
+  ];
+  const canisterBodyGeo = new THREE.LatheGeometry(bodyPts, canisterSeg);
+  const canisterLidGeo = new THREE.CylinderGeometry(
+    0.215,
+    0.225,
+    0.09,
+    compactMode ? 16 : 24,
+  );
+  const canisterKnobGeo = new THREE.SphereGeometry(
+    0.045,
+    compactMode ? 10 : 16,
+    compactMode ? 10 : 16,
+  );
+  const canisterLidMat = new THREE.MeshStandardMaterial({
+    map: walnutTex,
+    roughness: 0.72,
+    metalness: 0.02,
+  });
+
   canisterColors.forEach((col, idx) => {
     const canister = new THREE.Group();
     const xPos = -2.65 - idx * 0.65;
@@ -184,15 +209,8 @@ export function createTeaTableEnvironment(
 
     canister.add(makeContactShadow(0.65, shadowTex, 0.5));
 
-    const bodyPts = [
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0.22, 0),
-      new THREE.Vector2(0.24, 0.42),
-      new THREE.Vector2(0.21, 0.48),
-      new THREE.Vector2(0, 0.48),
-    ];
     const body = new THREE.Mesh(
-      new THREE.LatheGeometry(bodyPts, 28),
+      canisterBodyGeo,
       new THREE.MeshStandardMaterial({
         color: col,
         map: ceramicTex,
@@ -204,22 +222,12 @@ export function createTeaTableEnvironment(
     body.receiveShadow = true;
     canister.add(body);
 
-    const lid = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.215, 0.225, 0.09, 24),
-      new THREE.MeshStandardMaterial({
-        map: walnutTex,
-        roughness: 0.72,
-        metalness: 0.02,
-      }),
-    );
+    const lid = new THREE.Mesh(canisterLidGeo, canisterLidMat);
     lid.position.y = 0.52;
     lid.castShadow = true;
     canister.add(lid);
 
-    const knob = new THREE.Mesh(
-      new THREE.SphereGeometry(0.045, 16, 16),
-      brassMat,
-    );
+    const knob = new THREE.Mesh(canisterKnobGeo, brassMat);
     knob.position.y = 0.58;
     canister.add(knob);
 
@@ -228,8 +236,13 @@ export function createTeaTableEnvironment(
   });
 
   // 4. Courtyard Bamboo Garden Backdrop (InstancedMesh for calm horizon depth)
-  const bambooCount = 26;
-  const stalkGeo = new THREE.CylinderGeometry(0.065, 0.08, 4.6, 10);
+  const bambooCount = compactMode ? 18 : 26;
+  const stalkGeo = new THREE.CylinderGeometry(
+    0.065,
+    0.08,
+    4.6,
+    compactMode ? 7 : 10,
+  );
   const stalkMat = new THREE.MeshStandardMaterial({
     color: 0x628358,
     roughness: 0.55,
@@ -292,9 +305,15 @@ export function createTeaVesselSystem(
   walnutTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
   isSoftwareGl: boolean,
+  compactMode = false,
 ): TeaVesselHandles {
   const root = new THREE.Group();
   root.position.set(-0.22, TRAY_SURFACE_Y, 0.08);
+
+  const radialLg = compactMode ? 28 : 44;
+  const radialXl = compactMode ? 30 : 48;
+  const radialMd = compactMode ? 22 : 36;
+  const radialTube = compactMode ? 16 : 24;
 
   // Contact shadow disc
   root.add(makeContactShadow(1.55, shadowTex, 0.55));
@@ -309,7 +328,7 @@ export function createTeaVesselSystem(
     new THREE.Vector2(0, 0.035),
   ];
   const coaster = new THREE.Mesh(
-    new THREE.LatheGeometry(coasterPts, 40),
+    new THREE.LatheGeometry(coasterPts, compactMode ? 26 : 40),
     new THREE.MeshStandardMaterial({
       map: walnutTex,
       roughness: 0.65,
@@ -343,7 +362,7 @@ export function createTeaVesselSystem(
     metalness: 0.04,
   });
   const mugBody = new THREE.Mesh(
-    new THREE.LatheGeometry(mugPts, 44),
+    new THREE.LatheGeometry(mugPts, radialLg),
     ceramicBodyMat,
   );
   mugBody.castShadow = true;
@@ -352,7 +371,7 @@ export function createTeaVesselSystem(
 
   // Matte clay foot ring for roughness contrast (>= 0.25 delta)
   const mugFoot = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.29, 0.27, 0.045, 32),
+    new THREE.CylinderGeometry(0.29, 0.27, 0.045, compactMode ? 20 : 32),
     new THREE.MeshStandardMaterial({
       color: 0x9b8873,
       roughness: 0.88,
@@ -373,7 +392,7 @@ export function createTeaVesselSystem(
     new THREE.Vector2(0, 0.022),
   ];
   const saucerMesh = new THREE.Mesh(
-    new THREE.LatheGeometry(saucerPts, 44),
+    new THREE.LatheGeometry(saucerPts, radialLg),
     new THREE.MeshStandardMaterial({
       color: 0xf8f6ef,
       roughness: 0.24,
@@ -399,7 +418,7 @@ export function createTeaVesselSystem(
     metalness: 0.04,
   });
   const mugHandle = new THREE.Mesh(
-    new THREE.TubeGeometry(handleCurve, 24, 0.045, 14, false),
+    new THREE.TubeGeometry(handleCurve, radialTube, 0.045, compactMode ? 10 : 14, false),
     ceramicHandleMat,
   );
   mugHandle.castShadow = true;
@@ -429,7 +448,7 @@ export function createTeaVesselSystem(
     metalness: 0.06,
   });
   const chawanBody = new THREE.Mesh(
-    new THREE.LatheGeometry(chawanPts, 48),
+    new THREE.LatheGeometry(chawanPts, radialXl),
     chawanBodyMat,
   );
   chawanBody.castShadow = true;
@@ -442,7 +461,7 @@ export function createTeaVesselSystem(
     metalness: 0.12,
   });
   const chawanRim = new THREE.Mesh(
-    new THREE.TorusGeometry(0.505, 0.025, 14, 48),
+    new THREE.TorusGeometry(0.505, 0.025, compactMode ? 10 : 14, radialXl),
     chawanRimMat,
   );
   chawanRim.rotation.x = Math.PI / 2;
@@ -457,7 +476,7 @@ export function createTeaVesselSystem(
     new THREE.Vector3(0.04, 0.11, 0.32),
   ]);
   const kintsugiSeam = new THREE.Mesh(
-    new THREE.TubeGeometry(kintsugiCurve, 20, 0.013, 8, false),
+    new THREE.TubeGeometry(kintsugiCurve, compactMode ? 14 : 20, 0.013, 6, false),
     new THREE.MeshStandardMaterial({
       color: 0xe6be53,
       metalness: 0.9,
@@ -498,14 +517,14 @@ export function createTeaVesselSystem(
     depthWrite: false,
   });
   const glassMesh = new THREE.Mesh(
-    new THREE.LatheGeometry(glassPts, 44),
+    new THREE.LatheGeometry(glassPts, radialLg),
     glassMat,
   );
   glassMesh.renderOrder = 6;
   glassGroup.add(glassMesh);
 
   const glassHandle = new THREE.Mesh(
-    new THREE.TubeGeometry(handleCurve, 24, 0.036, 12, false),
+    new THREE.TubeGeometry(handleCurve, radialTube, 0.036, compactMode ? 8 : 12, false),
     glassMat,
   );
   glassHandle.renderOrder = 6;
@@ -527,7 +546,7 @@ export function createTeaVesselSystem(
     opacity: 0.92,
   });
 
-  const liquidGeo = new THREE.CylinderGeometry(0.415, 0.285, 0.56, 36);
+  const liquidGeo = new THREE.CylinderGeometry(0.415, 0.285, 0.56, radialMd);
   liquidGeo.translate(0, 0.28, 0);
   const liquidMesh = new THREE.Mesh(liquidGeo, liquidMaterial);
   liquidMesh.renderOrder = 3;
@@ -546,9 +565,10 @@ export function createTeaVesselSystem(
   });
   const leafMeshes: THREE.Mesh[] = [];
   const leafGeo = new THREE.DodecahedronGeometry(0.042, 0);
-  for (let i = 0; i < 14; i++) {
+  const leafCount = compactMode ? 10 : 14;
+  for (let i = 0; i < leafCount; i++) {
     const m = new THREE.Mesh(leafGeo, leafMaterial);
-    const angle = (i / 14) * Math.PI * 2;
+    const angle = (i / leafCount) * Math.PI * 2;
     const rad = (i % 3) * 0.065 + 0.03;
     m.position.set(
       Math.cos(angle) * rad,
@@ -562,7 +582,7 @@ export function createTeaVesselSystem(
   }
   root.add(leavesGroup);
 
-  // === Toppings: Ice Cubes ===
+  // === Toppings: Ice Cubes (shared geometry) ===
   const iceGroup = new THREE.Group();
   iceGroup.position.y = 0.56;
   const iceMat = new THREE.MeshPhysicalMaterial({
@@ -574,6 +594,7 @@ export function createTeaVesselSystem(
     clearcoat: 1,
     ior: 1.31,
   });
+  const iceGeo = new THREE.BoxGeometry(0.16, 0.15, 0.16);
   const iceCubes: THREE.Mesh[] = [];
   const icePositions: [number, number, number, number][] = [
     [-0.14, 0.02, -0.06, 0.3],
@@ -581,10 +602,7 @@ export function createTeaVesselSystem(
     [0.02, 0.01, 0.14, 0.8],
   ];
   for (const [ix, iy, iz, rot] of icePositions) {
-    const cube = new THREE.Mesh(
-      new THREE.BoxGeometry(0.16, 0.15, 0.16),
-      iceMat,
-    );
+    const cube = new THREE.Mesh(iceGeo, iceMat);
     cube.position.set(ix, iy, iz);
     cube.rotation.set(rot * 0.4, rot, rot * 0.3);
     cube.renderOrder = 4;
@@ -795,16 +813,17 @@ export function createTeaVesselSystem(
   milkFoamGroup.visible = false;
   root.add(milkFoamGroup);
 
-  // === Toppings: Fresh Mint Sprig ===
+  // === Toppings: Fresh Mint Sprig (shared leaf geometry) ===
   const mintGroup = new THREE.Group();
   mintGroup.position.set(0.08, 0.68, 0.12);
   const mintMat = new THREE.MeshStandardMaterial({
     color: 0x438a4b,
     roughness: 0.55,
   });
+  const mintLeafGeo = new THREE.SphereGeometry(0.055, compactMode ? 8 : 10, compactMode ? 8 : 10);
   const leafAngles = [-0.6, 0.1, 0.8];
   leafAngles.forEach((a, idx) => {
-    const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.055, 10, 10), mintMat);
+    const leaf = new THREE.Mesh(mintLeafGeo, mintMat);
     leaf.scale.set(1.4, 0.22, 0.78);
     leaf.position.set(
       Math.cos(a) * 0.06,
@@ -860,6 +879,7 @@ export function createTeaVesselSystem(
 export function createKettleGroup(
   walnutTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
+  compactMode = false,
 ): KettleHandles {
   const root = new THREE.Group();
   root.position.set(1.12, TRAY_SURFACE_Y, -0.15);
@@ -867,7 +887,7 @@ export function createKettleGroup(
   root.add(makeContactShadow(1.45, shadowTex, 0.5));
 
   const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.46, 0.50, 0.06, 32),
+    new THREE.CylinderGeometry(0.46, 0.50, 0.06, compactMode ? 20 : 32),
     new THREE.MeshStandardMaterial({
       map: walnutTex,
       roughness: 0.72,
@@ -903,7 +923,7 @@ export function createKettleGroup(
     new THREE.Vector2(0, 0.58),
   ];
   const potBody = new THREE.Mesh(
-    new THREE.LatheGeometry(kettlePts, 36),
+    new THREE.LatheGeometry(kettlePts, compactMode ? 22 : 36),
     castIronMat,
   );
   potBody.castShadow = true;
@@ -911,13 +931,16 @@ export function createKettleGroup(
   bodyGroup.add(potBody);
 
   const lid = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.23, 0.25, 0.04, 28),
+    new THREE.CylinderGeometry(0.23, 0.25, 0.04, compactMode ? 18 : 28),
     brassMat,
   );
   lid.position.y = 0.59;
   bodyGroup.add(lid);
 
-  const knob = new THREE.Mesh(new THREE.SphereGeometry(0.055, 16, 16), brassMat);
+  const knob = new THREE.Mesh(
+    new THREE.SphereGeometry(0.055, compactMode ? 10 : 16, compactMode ? 10 : 16),
+    brassMat,
+  );
   knob.position.y = 0.65;
   bodyGroup.add(knob);
 
@@ -928,7 +951,7 @@ export function createKettleGroup(
     new THREE.Vector3(-0.75, 0.64, 0),
   ]);
   const spout = new THREE.Mesh(
-    new THREE.TubeGeometry(spoutCurve, 24, 0.036, 12, false),
+    new THREE.TubeGeometry(spoutCurve, compactMode ? 16 : 24, 0.036, compactMode ? 8 : 12, false),
     castIronMat,
   );
   spout.castShadow = true;
@@ -942,7 +965,7 @@ export function createKettleGroup(
     new THREE.Vector3(-0.34, 0.44, 0),
   ]);
   const handle = new THREE.Mesh(
-    new THREE.TubeGeometry(handleCurve, 28, 0.026, 10, false),
+    new THREE.TubeGeometry(handleCurve, compactMode ? 18 : 28, 0.026, compactMode ? 7 : 10, false),
     brassMat,
   );
   handle.castShadow = true;
@@ -954,7 +977,7 @@ export function createKettleGroup(
     new THREE.Vector3(-1.02, -0.25, 0),
   ]);
   const streamMesh = new THREE.Mesh(
-    new THREE.TubeGeometry(streamCurve, 20, 0.024, 10, false),
+    new THREE.TubeGeometry(streamCurve, compactMode ? 14 : 20, 0.024, compactMode ? 7 : 10, false),
     new THREE.MeshPhysicalMaterial({
       color: 0xe6f4fa,
       roughness: 0.08,
@@ -969,7 +992,7 @@ export function createKettleGroup(
   root.add(bodyGroup);
 
   const clickProxy = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.55, 0.55, 1.0, 14),
+    new THREE.CylinderGeometry(0.55, 0.55, 1.0, 12),
     new THREE.MeshBasicMaterial({visible: false}),
   );
   clickProxy.position.y = 0.5;
@@ -983,6 +1006,7 @@ export function createChasenGroup(
   ceramicTex: THREE.CanvasTexture,
   walnutTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
+  compactMode = false,
 ): ChasenHandles {
   const root = new THREE.Group();
 
@@ -1000,7 +1024,7 @@ export function createChasenGroup(
     new THREE.Vector2(0, 0.30),
   ];
   const holder = new THREE.Mesh(
-    new THREE.LatheGeometry(holderPts, 24),
+    new THREE.LatheGeometry(holderPts, compactMode ? 16 : 24),
     new THREE.MeshStandardMaterial({
       color: 0xdfe5da,
       map: ceramicTex,
@@ -1020,14 +1044,14 @@ export function createChasenGroup(
   });
 
   const handle = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.055, 0.05, 0.22, 16),
+    new THREE.CylinderGeometry(0.055, 0.05, 0.22, compactMode ? 12 : 16),
     bambooMat,
   );
   handle.position.y = 0.34;
   whiskGroup.add(handle);
 
   const collar = new THREE.Mesh(
-    new THREE.TorusGeometry(0.06, 0.012, 8, 20),
+    new THREE.TorusGeometry(0.06, 0.012, 6, compactMode ? 14 : 20),
     new THREE.MeshStandardMaterial({color: 0x2b2520, roughness: 0.8}),
   );
   collar.rotation.x = Math.PI / 2;
@@ -1035,7 +1059,7 @@ export function createChasenGroup(
   whiskGroup.add(collar);
 
   const tines = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.06, 0.135, 0.26, 20, 1, true),
+    new THREE.CylinderGeometry(0.06, 0.135, 0.26, compactMode ? 14 : 20, 1, true),
     new THREE.MeshStandardMaterial({
       color: 0xdcc596,
       roughness: 0.76,
@@ -1068,14 +1092,14 @@ export function createChasenGroup(
     new THREE.Vector2(0, 0.38),
   ];
   const caddyBody = new THREE.Mesh(
-    new THREE.LatheGeometry(caddyPts, 32),
+    new THREE.LatheGeometry(caddyPts, compactMode ? 20 : 32),
     lacquerMat,
   );
   caddyBody.castShadow = true;
   caddyGroup.add(caddyBody);
 
   const goldBand = new THREE.Mesh(
-    new THREE.TorusGeometry(0.232, 0.008, 8, 32),
+    new THREE.TorusGeometry(0.232, 0.008, 6, compactMode ? 20 : 32),
     new THREE.MeshStandardMaterial({
       color: 0xd4a948,
       metalness: 0.85,
@@ -1106,7 +1130,7 @@ export function createChasenGroup(
     new THREE.Vector3(0.33, 0.04, 0),
   ]);
   const scoopStick = new THREE.Mesh(
-    new THREE.TubeGeometry(scoopCurve, 20, 0.016, 8, false),
+    new THREE.TubeGeometry(scoopCurve, compactMode ? 12 : 20, 0.016, 6, false),
     bambooMat,
   );
   scoopStick.scale.set(1, 0.45, 1.45);
@@ -1114,7 +1138,7 @@ export function createChasenGroup(
   chashakuGroup.add(scoopStick);
 
   const powderPinch = new THREE.Mesh(
-    new THREE.SphereGeometry(0.032, 10, 10),
+    new THREE.SphereGeometry(0.032, 8, 8),
     new THREE.MeshStandardMaterial({color: 0x5c9642, roughness: 0.9}),
   );
   powderPinch.scale.set(1.2, 0.55, 0.9);
@@ -1131,8 +1155,11 @@ export function createEquipmentRig(
   walnutTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
   isSoftwareGl: boolean,
+  compactMode = false,
 ): EquipmentRigHandles {
   const root = new THREE.Group();
+  const segMd = compactMode ? 20 : 32;
+  const segSm = compactMode ? 16 : 24;
 
   const steelMat = new THREE.MeshStandardMaterial({
     color: 0xd3d8dc,
@@ -1181,7 +1208,7 @@ export function createEquipmentRig(
     new THREE.Vector2(0, 0.04),
   ];
   const pitcherBody = new THREE.Mesh(
-    new THREE.LatheGeometry(pitcherPts, 32),
+    new THREE.LatheGeometry(pitcherPts, segMd),
     steelMat,
   );
   pitcherBody.castShadow = true;
@@ -1194,13 +1221,13 @@ export function createEquipmentRig(
     new THREE.Vector3(0.24, 0.12, 0),
   ]);
   const pitcherHandle = new THREE.Mesh(
-    new THREE.TubeGeometry(pitcherHandleCurve, 18, 0.022, 8, false),
+    new THREE.TubeGeometry(pitcherHandleCurve, compactMode ? 12 : 18, 0.022, 8, false),
     steelMat,
   );
   pitcher.add(pitcherHandle);
 
   const milkInside = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.19, 0.19, 0.04, 24),
+    new THREE.CylinderGeometry(0.19, 0.19, 0.04, segSm),
     new THREE.MeshStandardMaterial({color: 0xf7f3ea, roughness: 0.3}),
   );
   milkInside.position.y = 0.44;
@@ -1213,7 +1240,7 @@ export function createEquipmentRig(
   frotherStand.add(makeContactShadow(0.55, shadowTex, 0.42));
 
   const basePad = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.14, 0.16, 0.05, 24),
+    new THREE.CylinderGeometry(0.14, 0.16, 0.05, segSm),
     walnutMat,
   );
   basePad.position.y = 0.025;
@@ -1222,7 +1249,7 @@ export function createEquipmentRig(
   const frotherWand = new THREE.Group();
   frotherWand.position.y = 0.05;
   const wandHandle = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.045, 0.038, 0.32, 16),
+    new THREE.CylinderGeometry(0.045, 0.038, 0.32, compactMode ? 12 : 16),
     walnutMat,
   );
   wandHandle.position.y = 0.44;
@@ -1230,14 +1257,14 @@ export function createEquipmentRig(
   frotherWand.add(wandHandle);
 
   const wandShaft = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.01, 0.01, 0.28, 10),
+    new THREE.CylinderGeometry(0.01, 0.01, 0.28, 8),
     steelMat,
   );
   wandShaft.position.y = 0.16;
   frotherWand.add(wandShaft);
 
   const wandCoil = new THREE.Mesh(
-    new THREE.TorusGeometry(0.05, 0.008, 8, 20),
+    new THREE.TorusGeometry(0.05, 0.008, 6, compactMode ? 14 : 20),
     steelMat,
   );
   wandCoil.rotation.x = Math.PI / 2;
@@ -1272,12 +1299,12 @@ export function createEquipmentRig(
     new THREE.Vector2(0.20, 0.44),
     new THREE.Vector2(0, 0.44),
   ];
-  const clayBody = new THREE.Mesh(new THREE.LatheGeometry(potPts, 32), clayMat);
+  const clayBody = new THREE.Mesh(new THREE.LatheGeometry(potPts, segMd), clayMat);
   clayBody.castShadow = true;
   teapot.add(clayBody);
 
   const clayLid = new THREE.Mesh(
-    new THREE.SphereGeometry(0.18, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.45),
+    new THREE.SphereGeometry(0.18, segSm, compactMode ? 8 : 12, 0, Math.PI * 2, 0, Math.PI * 0.45),
     clayMat,
   );
   clayLid.position.y = 0.40;
@@ -1447,11 +1474,9 @@ export function createEquipmentRig(
   );
   dipperRod.rotation.z = Math.PI / 2;
   dipper.add(dipperRod);
+  const dipperRingGeo = new THREE.TorusGeometry(0.036, 0.01, 6, compactMode ? 12 : 16);
   for (let i = 0; i < 4; i++) {
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(0.036, 0.01, 8, 16),
-      walnutMat,
-    );
+    const ring = new THREE.Mesh(dipperRingGeo, walnutMat);
     ring.rotation.y = Math.PI / 2;
     ring.position.x = 0.17 + i * 0.022;
     dipper.add(ring);

@@ -51,9 +51,13 @@ const CAMERA_OPTIONS: {id: CameraPreset; label: string}[] = [
   {id: 'overhead', label: 'มุมสูง'},
 ];
 
-const TAP_SPRING = {type: 'spring' as const, stiffness: 440, damping: 24};
+const TAP_SPRING = {type: 'spring' as const, stiffness: 440, damping: 28};
+const DRAWER_TRANSITION = {
+  duration: 0.24,
+  ease: [0.16, 1, 0.3, 1] as const,
+};
 
-export const CornerMenu: React.FC<CornerMenuProps> = ({
+export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
   screen,
   xp,
   level,
@@ -104,17 +108,16 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
   return (
     <>
-      {/* Single 3-Bar Hamburger Trigger at Top-Right Corner */}
+      {/* Single 3-Bar Hamburger Trigger at Top-Right Corner (solid surface, zero WebGL blur overhead) */}
       <motion.button
         type="button"
         onClick={handleToggleOpen}
-        whileHover={{scale: 1.05}}
-        whileTap={{scale: 0.9}}
+        whileTap={{scale: 0.92}}
         transition={TAP_SPRING}
         aria-label="เปิดเมนู"
         aria-expanded={open}
         style={{right: 'max(0.75rem, env(safe-area-inset-right))'}}
-        className="fixed top-2.5 sm:top-3.5 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6]/92 text-[#1F2823] shadow-sm backdrop-blur-xs hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40]"
+        className="fixed top-2.5 sm:top-3.5 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6]/96 text-[#1F2823] shadow-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40] will-change-transform"
       >
         <Menu className="h-5 w-5" aria-hidden="true" />
       </motion.button>
@@ -126,8 +129,8 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            transition={{duration: 0.2}}
-            className="fixed inset-0 z-50 flex justify-end bg-black/45 backdrop-blur-[1px]"
+            transition={{duration: 0.18, ease: 'easeOut'}}
+            className="fixed inset-0 z-50 flex justify-end bg-black/42"
             onClick={handleClose}
           >
             <motion.aside
@@ -137,9 +140,10 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
               initial={{x: '100%'}}
               animate={{x: 0}}
               exit={{x: '100%'}}
-              transition={{type: 'spring', stiffness: 360, damping: 32}}
+              transition={DRAWER_TRANSITION}
               onClick={(e) => e.stopPropagation()}
-              className="flex h-dvh w-full max-w-[320px] sm:max-w-[360px] flex-col border-l border-[#1F2823]/12 bg-[#FAF8F3] text-[#1F2823] shadow-2xl"
+              className="flex h-dvh w-full max-w-[320px] sm:max-w-[360px] flex-col border-l border-[#1F2823]/12 bg-[#FAF8F3] text-[#1F2823] shadow-2xl will-change-transform"
+              style={{contain: 'layout style paint'}}
             >
               {/* Drawer Header */}
               <div className="flex items-center justify-between gap-3 border-b border-[#1F2823]/10 px-4 py-3">
@@ -157,8 +161,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                 <motion.button
                   type="button"
                   onClick={handleClose}
-                  whileHover={{scale: 1.06}}
-                  whileTap={{scale: 0.9}}
+                  whileTap={{scale: 0.92}}
                   transition={TAP_SPRING}
                   aria-label="ปิดเมนู"
                   className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] hover:text-[#1F2823]"
@@ -170,19 +173,14 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
               {/* Scrollable Drawer Content */}
               <div className="flex-1 overflow-y-auto p-4 space-y-5">
                 {/* Navigation */}
-                <motion.div
-                  initial={{opacity: 0, x: 14}}
-                  animate={{opacity: 1, x: 0}}
-                  transition={{delay: 0.04, duration: 0.2}}
-                >
+                <div>
                   <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
                     ไปยังหน้าต่างๆ
                   </h3>
                   <nav className="grid grid-cols-2 gap-2" aria-label="เมนูหลัก">
                     <motion.button
                       type="button"
-                      whileHover={{scale: 1.02}}
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => go('TITLE_MENU')}
                       className={`flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${
@@ -197,8 +195,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
                     <motion.button
                       type="button"
-                      whileHover={{scale: 1.02}}
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => go('BREWING')}
                       className={`flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${
@@ -213,8 +210,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
                     <motion.button
                       type="button"
-                      whileHover={{scale: 1.02}}
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => go('JOURNAL')}
                       className={`flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${
@@ -229,8 +225,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
                     <motion.button
                       type="button"
-                      whileHover={{scale: 1.02}}
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => go('HOW_TO_PLAY')}
                       className={`flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${
@@ -243,21 +238,17 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                       <span>วิธีชง</span>
                     </motion.button>
                   </nav>
-                </motion.div>
+                </div>
 
                 {/* Game Mode */}
-                <motion.div
-                  initial={{opacity: 0, x: 14}}
-                  animate={{opacity: 1, x: 0}}
-                  transition={{delay: 0.08, duration: 0.2}}
-                >
+                <div>
                   <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
                     โหมดการชง
                   </h3>
                   <div className="grid grid-cols-2 gap-2">
                     <motion.button
                       type="button"
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => {
                         soundEngine.unlock();
@@ -276,7 +267,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
                     <motion.button
                       type="button"
-                      whileTap={{scale: 0.95}}
+                      whileTap={{scale: 0.96}}
                       transition={TAP_SPRING}
                       onClick={() => {
                         soundEngine.unlock();
@@ -293,15 +284,11 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                       <span>ชงตามใจ</span>
                     </motion.button>
                   </div>
-                </motion.div>
+                </div>
 
                 {/* 3D Camera Angle */}
                 {screen === 'BREWING' && (
-                  <motion.div
-                    initial={{opacity: 0, x: 14}}
-                    animate={{opacity: 1, x: 0}}
-                    transition={{delay: 0.12, duration: 0.2}}
-                  >
+                  <div>
                     <h3 className="flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2">
                       <Camera className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>มุมกล้อง 3 มิติ</span>
@@ -311,7 +298,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                         <motion.button
                           key={cam.id}
                           type="button"
-                          whileTap={{scale: 0.94}}
+                          whileTap={{scale: 0.95}}
                           onClick={() => {
                             soundEngine.playTap();
                             onCameraPresetChange(cam.id);
@@ -321,7 +308,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                           {cameraPreset === cam.id && (
                             <motion.span
                               layoutId="drawer-camera-pill"
-                              transition={{type: 'spring', stiffness: 420, damping: 30}}
+                              transition={{type: 'spring', stiffness: 420, damping: 32}}
                               className="absolute inset-0 rounded-lg bg-[#233029]"
                             />
                           )}
@@ -337,15 +324,11 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                         </motion.button>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Sound & Ambience */}
-                <motion.div
-                  initial={{opacity: 0, x: 14}}
-                  animate={{opacity: 1, x: 0}}
-                  transition={{delay: 0.16, duration: 0.2}}
-                >
+                <div>
                   <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
                     เสียงและบรรยากาศ
                   </h3>
@@ -356,7 +339,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                       </span>
                       <motion.button
                         type="button"
-                        whileTap={{scale: 0.94}}
+                        whileTap={{scale: 0.95}}
                         transition={TAP_SPRING}
                         onClick={() => {
                           soundEngine.unlock();
@@ -393,7 +376,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                         <motion.button
                           key={opt.id}
                           type="button"
-                          whileTap={{scale: 0.94}}
+                          whileTap={{scale: 0.95}}
                           onClick={() => {
                             soundEngine.unlock();
                             soundEngine.playTap();
@@ -404,7 +387,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                           {ambience === opt.id && (
                             <motion.span
                               layoutId="drawer-ambience-pill"
-                              transition={{type: 'spring', stiffness: 420, damping: 30}}
+                              transition={{type: 'spring', stiffness: 420, damping: 32}}
                               className="absolute inset-0 rounded-lg bg-[#2E6F40]"
                             />
                           )}
@@ -425,13 +408,12 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Full Screen Quick Toggle */}
                 <motion.button
                   type="button"
-                  whileHover={{scale: 1.02}}
-                  whileTap={{scale: 0.95}}
+                  whileTap={{scale: 0.96}}
                   transition={TAP_SPRING}
                   onClick={() => {
                     soundEngine.playTap();
@@ -459,16 +441,10 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                 <PWAInstallButton compact />
 
                 {/* Full-Screen Update Check & Settings Entries */}
-                <motion.div
-                  initial={{opacity: 0, x: 14}}
-                  animate={{opacity: 1, x: 0}}
-                  transition={{delay: 0.2, duration: 0.2}}
-                  className="border-t border-[#1F2823]/10 pt-3 space-y-2"
-                >
+                <div className="border-t border-[#1F2823]/10 pt-3 space-y-2">
                   <motion.button
                     type="button"
-                    whileHover={{scale: 1.02}}
-                    whileTap={{scale: 0.95}}
+                    whileTap={{scale: 0.96}}
                     transition={TAP_SPRING}
                     onClick={() => {
                       soundEngine.unlock();
@@ -496,8 +472,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
 
                   <motion.button
                     type="button"
-                    whileHover={{scale: 1.02}}
-                    whileTap={{scale: 0.95}}
+                    whileTap={{scale: 0.96}}
                     transition={TAP_SPRING}
                     onClick={() => {
                       soundEngine.unlock();
@@ -522,7 +497,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
                     </span>
                     <ChevronRight className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
                   </motion.button>
-                </motion.div>
+                </div>
               </div>
             </motion.aside>
           </motion.div>
@@ -530,4 +505,4 @@ export const CornerMenu: React.FC<CornerMenuProps> = ({
       </AnimatePresence>
     </>
   );
-};
+});

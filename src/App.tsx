@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {AnimatePresence, motion, MotionConfig} from 'motion/react';
 import {BrewingStation} from './components/BrewingStation';
 import {CornerMenu} from './components/CornerMenu';
@@ -43,6 +43,8 @@ import {
   saveSettings,
 } from './utils/storage';
 
+const SCREEN_EASE = [0.16, 1, 0.3, 1] as const;
+
 export default function App() {
   const [screen, setScreen] = useState<ScreenView>('TITLE_MENU');
   const [mode, setMode] = useState<GameMode>('guest');
@@ -56,10 +58,51 @@ export default function App() {
   const [saveData, setSaveData] = useState<TeaHouseSaveData>(() =>
     loadSaveData(),
   );
+  const userExitedFullscreenRef = useRef<boolean>(false);
 
   useEffect(() => {
     return subscribeFullscreenChange(setIsFullscreen);
   }, []);
+
+  // Enter full screen automatically as the default game behavior (immediately if allowed, or on very first gesture)
+  useEffect(() => {
+    if (!settings.autoFullscreen) return;
+
+    if (!isFullscreenActive() && !userExitedFullscreenRef.current) {
+      void requestAppFullscreen().then((active) => {
+        if (active) setIsFullscreen(true);
+      });
+    }
+
+    const handleFirstGesture = () => {
+      if (
+        settings.autoFullscreen &&
+        !userExitedFullscreenRef.current &&
+        !isFullscreenActive()
+      ) {
+        void requestAppFullscreen().then((active) => {
+          if (active) setIsFullscreen(true);
+        });
+      }
+    };
+
+    window.addEventListener('pointerdown', handleFirstGesture, {
+      capture: true,
+      passive: true,
+    });
+    window.addEventListener('keydown', handleFirstGesture, {
+      capture: true,
+      passive: true,
+    });
+    return () => {
+      window.removeEventListener('pointerdown', handleFirstGesture, {
+        capture: true,
+      });
+      window.removeEventListener('keydown', handleFirstGesture, {
+        capture: true,
+      });
+    };
+  }, [settings.autoFullscreen]);
 
   useEffect(() => {
     const report = probeDeviceOptimization(settings.optimizationProfile);
@@ -82,68 +125,87 @@ export default function App() {
     settings.ambience,
   ]);
 
-  const updateSettings = (patch: Partial<GameSettings>) => {
+  const updateSettings = useCallback((patch: Partial<GameSettings>) => {
+    if (patch.autoFullscreen === true) {
+      userExitedFullscreenRef.current = false;
+    }
     setSettings((prev) => {
       const next = {...prev, ...patch};
       saveSettings(next);
       return next;
     });
-  };
+  }, []);
 
-  const handleResetSettings = () => {
+  const handleResetSettings = useCallback(() => {
+    userExitedFullscreenRef.current = false;
     const reset = {...DEFAULT_SETTINGS};
     saveSettings(reset);
     setSettings(reset);
-  };
+  }, []);
 
-  const handleToggleFullscreen = () => {
+  const handleToggleFullscreen = useCallback(() => {
+    const currentlyActive = isFullscreenActive();
     void toggleAppFullscreen().then((active) => {
+      userExitedFullscreenRef.current = currentlyActive && !active;
       setIsFullscreen(active);
     });
-  };
+  }, []);
 
-  const handleStartBrewing = (chosenMode?: GameMode) => {
-    soundEngine.unlock();
-    soundEngine.playTap();
-    if (settings.autoFullscreen && !isFullscreenActive()) {
-      void requestAppFullscreen().then((active) => {
-        if (active) setIsFullscreen(true);
-      });
-    }
-    if (chosenMode) {
-      setMode(chosenMode);
-    }
-    setScreen('BREWING');
-  };
+  const handleStartBrewing = useCallback(
+    (chosenMode?: GameMode) => {
+      soundEngine.unlock();
+      soundEngine.playTap();
+      if (
+        settings.autoFullscreen &&
+        !userExitedFullscreenRef.current &&
+        !isFullscreenActive()
+      ) {
+        void requestAppFullscreen().then((active) => {
+          if (active) setIsFullscreen(true);
+        });
+      }
+      if (chosenMode) {
+        setMode(chosenMode);
+      }
+      setScreen('BREWING');
+    },
+    [settings.autoFullscreen],
+  );
 
-  const handleAmbienceChange = (nextMode: AmbienceMode) => {
-    updateSettings({ambience: nextMode});
-  };
+  const handleAmbienceChange = useCallback(
+    (nextMode: AmbienceMode) => {
+      updateSettings({ambience: nextMode});
+    },
+    [updateSettings],
+  );
 
-  const handleToggleMute = () => {
-    updateSettings({isMuted: !settings.isMuted});
-  };
+  const handleToggleMute = useCallback(() => {
+    setSettings((prev) => {
+      const next = {...prev, isMuted: !prev.isMuted};
+      saveSettings(next);
+      return next;
+    });
+  }, []);
 
-  const handleBrewComplete = (
-    record: JournalRecord,
-    warmthEarned: number,
-    xpEarned: number,
-  ) => {
-    setSaveData((prev) =>
-      saveBrewRecord(prev, record, warmthEarned, xpEarned),
-    );
-  };
+  const handleBrewComplete = useCallback(
+    (record: JournalRecord, warmthEarned: number, xpEarned: number) => {
+      setSaveData((prev) =>
+        saveBrewRecord(prev, record, warmthEarned, xpEarned),
+      );
+    },
+    [],
+  );
 
-  const handleResetJournal = () => {
+  const handleResetJournal = useCallback(() => {
     soundEngine.playTap();
     setSaveData(clearSaveData());
-  };
+  }, []);
 
-  const navigateTo = (target: ScreenView) => {
+  const navigateTo = useCallback((target: ScreenView) => {
     soundEngine.unlock();
     soundEngine.playTap();
     setScreen(target);
-  };
+  }, []);
 
   const isViewportLocked = screen === 'TITLE_MENU' || screen === 'BREWING';
 
@@ -179,17 +241,23 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Main Content with Smooth Screen Transitions */}
-        <main className={isViewportLocked ? 'h-full w-full flex-1 overflow-hidden' : 'flex-1'}>
-          <AnimatePresence mode="wait">
+        {/* Main Content with Overlapping Smooth Screen Transitions (no wait stall) */}
+        <main
+          className={
+            isViewportLocked
+              ? 'relative h-full w-full flex-1 overflow-hidden'
+              : 'relative flex-1'
+          }
+        >
+          <AnimatePresence initial={false}>
             {screen === 'TITLE_MENU' && (
               <motion.div
                 key="screen-title"
-                className="h-full w-full"
-                initial={{opacity: 0}}
-                animate={{opacity: 1}}
+                className="absolute inset-0 h-full w-full will-change-transform"
+                initial={{opacity: 0, scale: 1.015}}
+                animate={{opacity: 1, scale: 1}}
                 exit={{opacity: 0, scale: 0.985}}
-                transition={{duration: 0.22}}
+                transition={{duration: 0.24, ease: SCREEN_EASE}}
               >
                 <TitleScreen
                   xp={saveData.xp}
@@ -217,11 +285,11 @@ export default function App() {
             {screen === 'BREWING' && (
               <motion.div
                 key="screen-brewing"
-                className="h-full w-full"
-                initial={{opacity: 0}}
-                animate={{opacity: 1}}
+                className="absolute inset-0 h-full w-full will-change-transform"
+                initial={{opacity: 0, y: 10}}
+                animate={{opacity: 1, y: 0}}
                 exit={{opacity: 0}}
-                transition={{duration: 0.24}}
+                transition={{duration: 0.26, ease: SCREEN_EASE}}
               >
                 <BrewingStation
                   playerXp={saveData.xp}
@@ -238,10 +306,11 @@ export default function App() {
             {screen === 'JOURNAL' && (
               <motion.div
                 key="screen-journal"
+                className="w-full will-change-transform"
                 initial={{opacity: 0, y: 12}}
                 animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: -10}}
-                transition={{duration: 0.2}}
+                exit={{opacity: 0}}
+                transition={{duration: 0.22, ease: SCREEN_EASE}}
               >
                 <TeaJournal
                   saveData={saveData}
@@ -254,10 +323,11 @@ export default function App() {
             {screen === 'HOW_TO_PLAY' && (
               <motion.div
                 key="screen-howto"
+                className="w-full will-change-transform"
                 initial={{opacity: 0, y: 12}}
                 animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: -10}}
-                transition={{duration: 0.2}}
+                exit={{opacity: 0}}
+                transition={{duration: 0.22, ease: SCREEN_EASE}}
               >
                 <HowToPlay onStartBrewing={() => handleStartBrewing()} />
               </motion.div>

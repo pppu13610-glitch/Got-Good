@@ -103,7 +103,7 @@ function resolvePixelRatio(
   return Math.max(0.65, baseRatio * dynamicScale);
 }
 
-export const TeaScene3D: React.FC<TeaScene3DProps> = ({
+export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   tea,
   step,
   waterLevel,
@@ -145,6 +145,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
   const presetAnimatingRef = useRef<boolean>(true);
   const lastPresetRef = useRef<CameraPreset>(cameraPreset);
 
+  // Lightweight state sync: NEVER resize renderer or reallocate shadow buffers on timer ticks
   useEffect(() => {
     syncRef.current = {
       tea,
@@ -156,30 +157,9 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       cameraPreset,
       settings,
     };
-    shadowDirtyRef.current = true;
-    dynamicScaleRef.current = 1;
     if (lastPresetRef.current !== cameraPreset) {
       lastPresetRef.current = cameraPreset;
       presetAnimatingRef.current = true;
-    }
-
-    const renderer = rendererRef.current;
-    const keyLight = keyLightRef.current;
-    const container = mountRef.current;
-    const softwareGl = isSoftwareGlRef.current;
-    if (renderer && container) {
-      renderer.setPixelRatio(
-        resolvePixelRatio(settings, softwareGl, liteGpuMode, 1),
-      );
-      const w = Math.max(container.clientWidth, 280);
-      const h = Math.max(container.clientHeight, 260);
-      renderer.setSize(w, h);
-      const allowShadows = !softwareGl && settings.shadowsEnabled;
-      renderer.shadowMap.enabled = allowShadows;
-      renderer.shadowMap.needsUpdate = true;
-      if (keyLight) {
-        keyLight.castShadow = allowShadows;
-      }
     }
   }, [
     tea,
@@ -190,6 +170,39 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     isPouring,
     cameraPreset,
     settings,
+  ]);
+
+  // Mark shadow map dirty only when objects/props that affect shadows actually change
+  useEffect(() => {
+    shadowDirtyRef.current = true;
+  }, [tea.id, step, toppings, isPouring, settings.shadowsEnabled]);
+
+  // Apply renderer pixel ratio / size / shadow toggle ONLY when display settings change
+  useEffect(() => {
+    const renderer = rendererRef.current;
+    const keyLight = keyLightRef.current;
+    const container = mountRef.current;
+    const softwareGl = isSoftwareGlRef.current;
+    if (!renderer || !container) return;
+
+    dynamicScaleRef.current = 1;
+    renderer.setPixelRatio(
+      resolvePixelRatio(settings, softwareGl, liteGpuMode, 1),
+    );
+    const w = Math.max(container.clientWidth, 280);
+    const h = Math.max(container.clientHeight, 260);
+    renderer.setSize(w, h);
+    const allowShadows = !softwareGl && settings.shadowsEnabled;
+    renderer.shadowMap.enabled = allowShadows;
+    renderer.shadowMap.needsUpdate = true;
+    shadowDirtyRef.current = true;
+    if (keyLight) {
+      keyLight.castShadow = allowShadows;
+    }
+  }, [
+    settings.resolutionScale,
+    settings.shadowsEnabled,
+    settings.optimizationProfile,
     liteGpuMode,
   ]);
 
@@ -266,11 +279,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     scene.fog = new THREE.FogExp2(horizonHex, 0.068);
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    const envTexture = pmremGenerator.fromScene(
-      new RoomEnvironment(),
-      0.04,
-    ).texture;
+    const roomEnv = new RoomEnvironment();
+    const envRenderTarget = pmremGenerator.fromScene(roomEnv, 0.04);
+    const envTexture = envRenderTarget.texture;
     scene.environment = envTexture;
+    roomEnv.dispose();
     pmremGenerator.dispose();
 
     // Camera & OrbitControls (tuned for landscape proportions so subject sits clearly above bottom dock)
@@ -336,13 +349,14 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     rimLight.position.set(-4.0, 3.2, -3.5);
     scene.add(rimLight);
 
-    // Procedural Textures
+    // Procedural Textures (compact 256/128 buffers when liteGpuMode is active -> ~75% less RAM)
     const rawAniso = renderer.capabilities.getMaxAnisotropy();
     const maxAniso = liteGpuMode ? Math.min(2, rawAniso) : rawAniso;
-    const cedarTex = createWoodGrainTexture('#A87B4F', '#6B4728', maxAniso);
-    const walnutTex = createWoodGrainTexture('#69492F', '#3E2817', maxAniso);
-    const matTex = createWovenMatTexture(maxAniso);
-    const ceramicTex = createCeramicSpeckleTexture('#EFECE3', '#9D9688', maxAniso);
+    const compactAssets = liteGpuMode || isSoftwareGl;
+    const cedarTex = createWoodGrainTexture('#A87B4F', '#6B4728', maxAniso, compactAssets);
+    const walnutTex = createWoodGrainTexture('#69492F', '#3E2817', maxAniso, compactAssets);
+    const matTex = createWovenMatTexture(maxAniso, compactAssets);
+    const ceramicTex = createCeramicSpeckleTexture('#EFECE3', '#9D9688', maxAniso, compactAssets);
     const shadowTex = createContactShadowTexture();
     const steamTex = createSteamPuffTexture();
 
@@ -354,6 +368,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       matTex,
       ceramicTex,
       shadowTex,
+      compactAssets,
     );
     scene.add(envGroup);
 
@@ -362,13 +377,14 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       walnutTex,
       shadowTex,
       disableExtraGlassPass,
+      compactAssets,
     );
     scene.add(vessel.root);
 
-    const kettle = createKettleGroup(walnutTex, shadowTex);
+    const kettle = createKettleGroup(walnutTex, shadowTex, compactAssets);
     scene.add(kettle.root);
 
-    const chasen = createChasenGroup(ceramicTex, walnutTex, shadowTex);
+    const chasen = createChasenGroup(ceramicTex, walnutTex, shadowTex, compactAssets);
     scene.add(chasen.root);
 
     const equipmentRig = createEquipmentRig(
@@ -376,6 +392,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       walnutTex,
       shadowTex,
       disableExtraGlassPass,
+      compactAssets,
     );
     scene.add(equipmentRig.root);
 
@@ -876,14 +893,25 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
         handleContextRestored,
       );
 
+      const disposedGeos = new Set<THREE.BufferGeometry>();
+      const disposedMats = new Set<THREE.Material>();
       scene.traverse((obj) => {
         if ((obj as THREE.Mesh).isMesh) {
           const mesh = obj as THREE.Mesh;
-          mesh.geometry?.dispose();
+          if (mesh.geometry && !disposedGeos.has(mesh.geometry)) {
+            disposedGeos.add(mesh.geometry);
+            mesh.geometry.dispose();
+          }
           if (Array.isArray(mesh.material)) {
-            mesh.material.forEach((m) => m.dispose());
-          } else {
-            mesh.material?.dispose();
+            mesh.material.forEach((m) => {
+              if (!disposedMats.has(m)) {
+                disposedMats.add(m);
+                m.dispose();
+              }
+            });
+          } else if (mesh.material && !disposedMats.has(mesh.material)) {
+            disposedMats.add(mesh.material);
+            mesh.material.dispose();
           }
         }
       });
@@ -896,6 +924,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       shadowTex.dispose();
       steamTex.dispose();
       envTexture.dispose();
+      envRenderTarget.dispose();
       renderer.dispose();
       rendererRef.current = null;
       keyLightRef.current = null;
@@ -920,4 +949,4 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       aria-label={`ฉากโต๊ะชงชา 3 มิติ: ${tea.name}`}
     />
   );
-};
+});
