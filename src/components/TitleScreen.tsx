@@ -173,17 +173,28 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             transition={{type: 'spring', stiffness: 320, damping: 28}}
             className="max-w-md"
           >
-            <h1
-              className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#FAF7F0] drop-shadow-[0_2px_10px_rgba(18,22,18,0.65)]"
-              style={{textWrap: 'balance'}}
-            >
-              บ้านชาอุ่นใจ
-            </h1>
+            <div className="flex items-center gap-3.5">
+              <img
+                src="/game-icon.png"
+                alt="ไอคอนเกมบ้านชาอุ่นใจ"
+                width={56}
+                height={56}
+                className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl object-cover shadow-lg shadow-black/35 ring-1 ring-white/30 shrink-0"
+              />
+              <div>
+                <h1
+                  className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#FAF7F0] drop-shadow-[0_2px_10px_rgba(18,22,18,0.65)]"
+                  style={{textWrap: 'balance'}}
+                >
+                  บ้านชาอุ่นใจ
+                </h1>
 
-            <p className="mt-1 text-xs sm:text-sm font-medium text-[#EDE7D9] drop-shadow-[0_1px_6px_rgba(18,22,18,0.75)]">
-              เรือนชาไม้กลางสวนไผ่ · Lv. {xpInfo.level} ({xpInfo.title}) · ชงแล้ว{' '}
-              <span className="font-mono-num">{totalCups}</span> ถ้วย
-            </p>
+                <p className="mt-1 text-xs sm:text-sm font-medium text-[#EDE7D9] drop-shadow-[0_1px_6px_rgba(18,22,18,0.75)]">
+                  เรือนชาไม้กลางสวนไผ่ · Lv. {xpInfo.level} ({xpInfo.title}) · ชงแล้ว{' '}
+                  <span className="font-mono-num">{totalCups}</span> ถ้วย
+                </p>
+              </div>
+            </div>
 
             <div className="mt-3 sm:mt-4 flex items-center gap-3">
               <motion.button
@@ -274,13 +285,21 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             >
               {/* Modal Header */}
               <div className="flex items-start justify-between gap-4 border-b border-[#1F2823]/10 pb-3">
-                <div>
-                  <h2
-                    id="title-submenu-heading"
-                    className="font-display text-lg sm:text-xl font-semibold text-[#1F2823]"
-                  >
-                    เมนูเรือนชาและการตั้งค่า
-                  </h2>
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/game-icon.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 rounded-xl object-cover shadow-xs ring-1 ring-[#1F2823]/10 shrink-0"
+                  />
+                  <div>
+                    <h2
+                      id="title-submenu-heading"
+                      className="font-display text-lg sm:text-xl font-semibold text-[#1F2823]"
+                    >
+                      เมนูเรือนชาและการตั้งค่า
+                    </h2>
                   <p className="mt-0.5 text-xs text-[#5A655D]">
                     Lv. {xpInfo.level} ({xpInfo.title}) · แต้มอุ่นใจ{' '}
                     <span className="font-mono-num">{warmthPoints}</span> · ปลดล็อกชา{' '}
@@ -289,6 +308,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                     </span>{' '}
                     ชนิด
                   </p>
+                  </div>
                 </div>
                 <motion.button
                   type="button"

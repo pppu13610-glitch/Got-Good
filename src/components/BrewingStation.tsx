@@ -2,11 +2,13 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {AnimatePresence, motion} from 'motion/react';
 import {
   ArrowLeft,
+  Bell,
   Check,
   ChevronDown,
   ChevronUp,
   Coffee,
   Droplets,
+  Footprints,
   RefreshCw,
   Sparkles,
 } from 'lucide-react';
@@ -27,11 +29,12 @@ import {
 import {
   BrewResult,
   BrewStep,
-  CameraPreset,
+  CustomerPhase,
   GameMode,
   GameSettings,
   GuestOrder,
   JournalRecord,
+  PlayerMoveInput,
   TeaCategory,
   TeaType,
   ToppingId,
@@ -46,7 +49,6 @@ interface BrewingStationProps {
   playerLevel: number;
   mode: GameMode;
   onModeChange: (mode: GameMode) => void;
-  cameraPreset: CameraPreset;
   settings: GameSettings;
   onBrewComplete: (
     record: JournalRecord,
@@ -62,12 +64,11 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
   playerLevel,
   mode,
   onModeChange,
-  cameraPreset,
   settings,
   onBrewComplete,
 }) => {
-  const [step, setStep] = useState<BrewStep>('SELECT_TEA');
-  const [selectorOpen, setSelectorOpen] = useState<boolean>(true);
+  const [step, setStep] = useState<BrewStep>('EXPLORE_SHOP');
+  const [selectorOpen, setSelectorOpen] = useState<boolean>(false);
   const [categoryFilter, setCategoryFilter] = useState<'all' | TeaCategory>(
     'all',
   );
@@ -81,14 +82,26 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
   const [guestOrder, setGuestOrder] = useState<GuestOrder>(() =>
     createRandomGuestOrder(playerLevel),
   );
+  const [customerSequenceKey, setCustomerSequenceKey] = useState<number>(1);
+  const [customerPhase, setCustomerPhase] = useState<CustomerPhase>('ENTERING');
+  const [arrivalAlertVisible, setArrivalAlertVisible] = useState<boolean>(false);
+  const [isNearTeaTable, setIsNearTeaTable] = useState<boolean>(false);
   const [portraitFailed, setPortraitFailed] = useState<Record<string, boolean>>(
     {},
   );
   const [brewResult, setBrewResult] = useState<BrewResult | null>(null);
 
+  // Free-walking movement state (ref avoids React re-render per frame)
+  const playerMoveRef = useRef<PlayerMoveInput>({x: 0, y: 0});
+  const pressedKeysRef = useRef<Set<string>>(new Set());
+  const joystickBaseRef = useRef<HTMLDivElement | null>(null);
+  const joystickKnobRef = useRef<HTMLDivElement | null>(null);
+  const joystickPointerIdRef = useRef<number | null>(null);
+
   const sweetSpotChimedRef = useRef(false);
   const pourIntervalRef = useRef<number | null>(null);
   const steepIntervalRef = useRef<number | null>(null);
+  const arrivalTimerRef = useRef<number | null>(null);
 
   const xpInfo = useMemo(() => getXpProgress(playerXp), [playerXp]);
 
@@ -108,23 +121,192 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     return undefined;
   }, [mode, guestOrder]);
 
+  // Explicit ordered menu items to show cleanly when customer orders
+  const orderedMenuSummary = useMemo(() => {
+    const orderedTeas =
+      guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0
+        ? TEAS.filter((t) => guestOrder.preferredTeaIds!.includes(t.id))
+        : guestOrder.preferredCategories &&
+            guestOrder.preferredCategories.length > 0
+          ? TEAS.filter((t) =>
+              guestOrder.preferredCategories!.includes(t.category),
+            ).slice(0, 3)
+          : [TEAS[0]];
+
+    const orderedToppings = (guestOrder.preferredToppings ?? [])
+      .map((id) => TOPPINGS.find((t) => t.id === id)?.name)
+      .filter((n): n is string => Boolean(n));
+
+    const tempLabel =
+      guestOrder.preferredTemp === 'iced'
+        ? 'เสิร์ฟเย็น (ใส่น้ำแข็ง)'
+        : guestOrder.preferredTemp === 'hot'
+          ? 'เสิร์ฟร้อน'
+          : 'ร้อนหรือเย็นก็ได้';
+
+    return {
+      teaNames: orderedTeas.map((t) => t.name),
+      toppingNames: orderedToppings,
+      tempLabel,
+    };
+  }, [guestOrder]);
+
+  const handleOpenBrewingFromTable = useCallback(() => {
+    soundEngine.unlock();
+    soundEngine.playTap();
+    playerMoveRef.current = {x: 0, y: 0};
+    setStep('SELECT_TEA');
+    setSelectorOpen(true);
+  }, []);
+
+  const handleReturnToShopExplore = useCallback(() => {
+    soundEngine.playTap();
+    setSelectorOpen(false);
+    setStep('EXPLORE_SHOP');
+  }, []);
+
+  const handleCustomerEnteredDoor = useCallback(() => {
+    soundEngine.playTap();
+    setArrivalAlertVisible(true);
+    if (arrivalTimerRef.current) {
+      window.clearTimeout(arrivalTimerRef.current);
+    }
+    arrivalTimerRef.current = window.setTimeout(() => {
+      setArrivalAlertVisible(false);
+    }, 3600);
+  }, []);
+
+  // Desktop keyboard movement (WASD / Arrow keys) + E/Enter at table
   useEffect(() => {
+    const syncKeyboardVector = () => {
+      if (joystickPointerIdRef.current !== null) return;
+      const keys = pressedKeysRef.current;
+      let kx = 0;
+      let ky = 0;
+      if (keys.has('a') || keys.has('arrowleft')) kx -= 1;
+      if (keys.has('d') || keys.has('arrowright')) kx += 1;
+      if (keys.has('w') || keys.has('arrowup')) ky += 1;
+      if (keys.has('s') || keys.has('arrowdown')) ky -= 1;
+      playerMoveRef.current = {x: kx, y: ky};
+    };
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (
-        e.key.toLowerCase() === 'h' &&
-        document.activeElement?.tagName !== 'INPUT'
-      ) {
+      const k = e.key.toLowerCase();
+      if (k === 'h' && document.activeElement?.tagName !== 'INPUT') {
         setDockCollapsed((prev) => !prev);
+        return;
+      }
+      if (
+        ['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(
+          k,
+        )
+      ) {
+        pressedKeysRef.current.add(k);
+        syncKeyboardVector();
+      }
+      if ((k === 'e' || k === ' ') && step === 'EXPLORE_SHOP' && isNearTeaTable) {
+        e.preventDefault();
+        handleOpenBrewingFromTable();
       }
     };
+
+    const onKeyUp = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      if (pressedKeysRef.current.delete(k)) {
+        syncKeyboardVector();
+      }
+    };
+
+    const clearKeys = () => {
+      pressedKeysRef.current.clear();
+      if (joystickPointerIdRef.current === null) {
+        playerMoveRef.current = {x: 0, y: 0};
+      }
+    };
+
     window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('blur', clearKeys);
     return () => {
       window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
+      window.removeEventListener('blur', clearKeys);
       if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
       if (steepIntervalRef.current)
         window.clearInterval(steepIntervalRef.current);
+      if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
     };
-  }, []);
+  }, [step, isNearTeaTable, handleOpenBrewingFromTable]);
+
+  // Clear movement immediately when leaving explore mode
+  useEffect(() => {
+    if (step !== 'EXPLORE_SHOP') {
+      pressedKeysRef.current.clear();
+      joystickPointerIdRef.current = null;
+      playerMoveRef.current = {x: 0, y: 0};
+      if (joystickKnobRef.current) {
+        joystickKnobRef.current.style.transform = 'translate3d(0px, 0px, 0px)';
+      }
+    }
+  }, [step]);
+
+  // Hide arrival banner when leaving guest mode
+  useEffect(() => {
+    if (mode !== 'guest') {
+      setArrivalAlertVisible(false);
+    }
+  }, [mode]);
+
+  const updateJoystickFromPointer = (clientX: number, clientY: number) => {
+    const base = joystickBaseRef.current;
+    const knob = joystickKnobRef.current;
+    if (!base) return;
+    const rect = base.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const maxR = Math.max(24, rect.width * 0.36);
+
+    const dx = clientX - cx;
+    const dy = clientY - cy;
+    const dist = Math.hypot(dx, dy);
+    const clampedDist = Math.min(dist, maxR);
+    const angle = Math.atan2(dy, dx);
+    const kx = dist > 0.001 ? Math.cos(angle) * clampedDist : 0;
+    const ky = dist > 0.001 ? Math.sin(angle) * clampedDist : 0;
+
+    if (knob) {
+      knob.style.transform = `translate3d(${kx.toFixed(1)}px, ${ky.toFixed(1)}px, 0px)`;
+    }
+    // Screen Y up is negative dy, world forward inputY is positive
+    playerMoveRef.current = {
+      x: kx / maxR,
+      y: -ky / maxR,
+    };
+  };
+
+  const handleJoystickDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    joystickPointerIdRef.current = e.pointerId;
+    soundEngine.unlock();
+    updateJoystickFromPointer(e.clientX, e.clientY);
+  };
+
+  const handleJoystickMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (joystickPointerIdRef.current !== e.pointerId) return;
+    e.stopPropagation();
+    updateJoystickFromPointer(e.clientX, e.clientY);
+  };
+
+  const handleJoystickUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (joystickPointerIdRef.current !== e.pointerId) return;
+    e.stopPropagation();
+    joystickPointerIdRef.current = null;
+    playerMoveRef.current = {x: 0, y: 0};
+    if (joystickKnobRef.current) {
+      joystickKnobRef.current.style.transform = 'translate3d(0px, 0px, 0px)';
+    }
+  };
 
   useEffect(() => {
     if (step !== 'STEEP_TEA') {
@@ -324,7 +506,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     onBrewComplete(journalRecord, warmthEarned, xpEarned);
   };
 
-  const handleResetCup = (advanceGuest = true) => {
+  const handleResetCup = (advanceGuest = true, backToShop = true) => {
     soundEngine.playTap();
     if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
     if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
@@ -333,17 +515,26 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     setSteepSeconds(0);
     setToppings([]);
     setBrewResult(null);
-    setStep('SELECT_TEA');
-    setSelectorOpen(true);
+    if (backToShop) {
+      setSelectorOpen(false);
+      setStep('EXPLORE_SHOP');
+    } else {
+      setStep('SELECT_TEA');
+      setSelectorOpen(true);
+    }
     if (mode === 'guest' && advanceGuest) {
       const nextLvl = getLevelFromXp(playerXp);
+      setCustomerPhase('ENTERING');
       setGuestOrder((prev) => createRandomGuestOrder(nextLvl, prev.guest.id));
+      setCustomerSequenceKey((k) => k + 1);
     }
   };
 
   const handleSwapGuest = () => {
     soundEngine.playTap();
+    setCustomerPhase('ENTERING');
     setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
+    setCustomerSequenceKey((k) => k + 1);
   };
 
   const strengthLabel = getStrengthLabel(selectedTea, steepSeconds);
@@ -371,28 +562,52 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
 
   return (
     <div className="relative h-dvh min-h-[290px] w-full overflow-hidden bg-[#D8DFD5]">
-      {/* Full-Viewport 3D Tea Pavilion */}
+      {/* Full-Viewport 3D Tea Shop */}
       <div className="absolute inset-0">
         <TeaScene3D
           tea={selectedTea}
           step={step}
           mode={mode}
           guestId={guestOrder.guest.id}
+          customerSequenceKey={customerSequenceKey}
           waterLevel={waterLevel}
           steepSeconds={steepSeconds}
           toppings={toppings}
           isPouring={isPouring}
-          cameraPreset={cameraPreset}
           settings={settings}
+          playerMoveRef={playerMoveRef}
+          onProximityChange={setIsNearTeaTable}
+          onBrewAtTableClick={handleOpenBrewingFromTable}
+          onCustomerEnteredDoor={handleCustomerEnteredDoor}
+          onCustomerPhaseChange={setCustomerPhase}
           onKettleClick={handlePourWater}
           onVesselClick={handleFinishSteep}
         />
       </div>
 
-      {/* Top Landscape HUD Bar (Top-left status + guest wish; top-right reserved for 3-bar CornerMenu) */}
+      {/* Simple Customer Arrival Notification Banner */}
+      <AnimatePresence>
+        {mode === 'guest' && arrivalAlertVisible && (
+          <motion.div
+            key="guest-arrival-toast"
+            initial={{opacity: 0, y: -14, scale: 0.94}}
+            animate={{opacity: 1, y: 0, scale: 1}}
+            exit={{opacity: 0, y: -12, scale: 0.95}}
+            transition={{type: 'spring', stiffness: 400, damping: 28}}
+            className="pointer-events-none fixed inset-x-0 top-3 z-30 flex justify-center px-4"
+          >
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-[#2E6F40]/35 bg-[#FAF9F6] px-4 py-2 text-xs sm:text-sm font-bold text-[#1F2823] shadow-lg">
+              <Bell className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
+              <span>มีลูกค้าเข้ามาในร้าน</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Top Landscape HUD Bar */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px">
-        {/* Top-Left: Level + Mode + Compact Guest Wish */}
-        <div className="pointer-events-auto flex flex-col gap-1.5 max-w-[54vw] sm:max-w-md">
+        {/* Top-Left: Level + Mode + Customer Ordered Menu Card */}
+        <div className="pointer-events-auto flex flex-col gap-1.5 max-w-[60vw] sm:max-w-md">
           <div className="flex items-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2.5 py-1 shadow-xs">
             <div className="min-w-0">
               <div className="flex items-baseline gap-1.5">
@@ -432,6 +647,10 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                     soundEngine.unlock();
                     soundEngine.playTap();
                     onModeChange(m.id);
+                    if (m.id === 'guest') {
+                      setCustomerPhase('ENTERING');
+                      setCustomerSequenceKey((k) => k + 1);
+                    }
                   }}
                   className="relative min-h-[38px] sm:min-h-[40px] rounded-md px-2.5 text-xs font-medium whitespace-nowrap shrink-0"
                 >
@@ -454,59 +673,78 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
             </div>
           </div>
 
+          {/* Customer Ordered Menu Card (shown as customer sits and starts ordering) */}
           <AnimatePresence mode="wait">
-            {mode === 'guest' && (
+            {mode === 'guest' && customerPhase !== 'ENTERING' && (
               <motion.div
                 key={`${guestOrder.guest.id}-${guestOrder.requestText}-${brewResult?.guestReply ?? 'idle'}`}
                 initial={{opacity: 0, x: -16, scale: 0.96}}
                 animate={{opacity: 1, x: 0, scale: 1}}
                 exit={{opacity: 0, x: 12, scale: 0.96}}
                 transition={{type: 'spring', stiffness: 360, damping: 28}}
-                className="flex items-center gap-2.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 p-2 shadow-xs"
+                className="flex flex-col gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 p-2.5 shadow-sm"
               >
-                <div
-                  className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]"
-                  style={{backgroundColor: guestOrder.guest.accentBg}}
-                >
-                  {!portraitFailed[guestOrder.guest.id] ? (
-                    <img
-                      src={guestOrder.guest.portraitUrl}
-                      alt={guestOrder.guest.name}
-                      referrerPolicy="no-referrer"
-                      onError={() =>
-                        setPortraitFailed((prev) => ({
-                          ...prev,
-                          [guestOrder.guest.id]: true,
-                        }))
-                      }
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span>{guestOrder.guest.fallbackInitial}</span>
-                  )}
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-display text-xs font-semibold text-[#1F2823] truncate">
-                      {guestOrder.guest.name}
-                    </span>
-                    {step !== 'SERVED' && (
-                      <motion.button
-                        type="button"
-                        whileHover={{scale: 1.05}}
-                        whileTap={{scale: 0.9}}
-                        onClick={handleSwapGuest}
-                        aria-label="เปลี่ยนแขก"
-                        className="inline-flex min-h-[32px] min-w-[32px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0"
-                      >
-                        <RefreshCw className="h-3 w-3" aria-hidden="true" />
-                        <span className="hidden sm:inline">เปลี่ยน</span>
-                      </motion.button>
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]"
+                    style={{backgroundColor: guestOrder.guest.accentBg}}
+                  >
+                    {!portraitFailed[guestOrder.guest.id] ? (
+                      <img
+                        src={guestOrder.guest.portraitUrl}
+                        alt={guestOrder.guest.name}
+                        referrerPolicy="no-referrer"
+                        onError={() =>
+                          setPortraitFailed((prev) => ({
+                            ...prev,
+                            [guestOrder.guest.id]: true,
+                          }))
+                        }
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <span>{guestOrder.guest.fallbackInitial}</span>
                     )}
                   </div>
-                  <p className="text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2">
-                    “{brewResult?.guestReply ?? guestOrder.requestText}”
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-display text-xs font-semibold text-[#1F2823] truncate">
+                        {guestOrder.guest.name}
+                      </span>
+                      {step !== 'SERVED' && (
+                        <motion.button
+                          type="button"
+                          whileHover={{scale: 1.05}}
+                          whileTap={{scale: 0.9}}
+                          onClick={handleSwapGuest}
+                          aria-label="เปลี่ยนแขก"
+                          className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0"
+                        >
+                          <RefreshCw className="h-3 w-3" aria-hidden="true" />
+                          <span className="hidden sm:inline">เปลี่ยน</span>
+                        </motion.button>
+                      )}
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2">
+                      “{brewResult?.guestReply ?? guestOrder.requestText}”
+                    </p>
+                  </div>
+                </div>
+
+                {/* Ordered Menu List */}
+                <div className="border-t border-[#1F2823]/8 pt-1.5 text-[11px] text-[#224B2B]">
+                  <p className="font-semibold text-[#1F2823]">
+                    รายการเมนูที่ลูกค้าสั่ง:
+                  </p>
+                  <p className="mt-0.5 leading-snug text-[#2E6F40] font-medium">
+                    • เมนูชา: {orderedMenuSummary.teaNames.join(' / ')}
+                  </p>
+                  <p className="leading-snug text-[#4A534D]">
+                    • อุณหภูมิ: {orderedMenuSummary.tempLabel}
+                    {orderedMenuSummary.toppingNames.length > 0
+                      ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(', ')}`
+                      : ''}
                   </p>
                 </div>
               </motion.div>
@@ -515,7 +753,62 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         </div>
       </div>
 
-      {/* STEP 1: Floating Cream & Sage Recipe Selector Card (matches reference style) */}
+      {/* THIRD-PERSON EXPLORATION CONTROLS (Analog Joystick + Table Prompt Helper) */}
+      <AnimatePresence>
+        {step === 'EXPLORE_SHOP' && (
+          <>
+            {/* Bottom-Left Touch Analog Joystick for Walking Around the Shop */}
+            <motion.div
+              key="explore-joystick"
+              initial={{opacity: 0, scale: 0.9}}
+              animate={{opacity: 1, scale: 1}}
+              exit={{opacity: 0, scale: 0.9}}
+              transition={{duration: 0.18}}
+              className="fixed bottom-4 left-4 z-20 flex flex-col items-center gap-1.5 safe-pb select-none"
+            >
+              <div
+                ref={joystickBaseRef}
+                onPointerDown={handleJoystickDown}
+                onPointerMove={handleJoystickMove}
+                onPointerUp={handleJoystickUp}
+                onPointerCancel={handleJoystickUp}
+                aria-label="ก้านบังคับเดินรอบร้าน"
+                className="relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/85 shadow-lg"
+              >
+                <div className="h-10 w-10 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" />
+                <div
+                  ref={joystickKnobRef}
+                  className="pointer-events-none absolute h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
+                />
+              </div>
+              <span className="rounded-lg bg-[#FAF9F6]/88 px-2 py-0.5 text-[10px] font-medium text-[#39423C] shadow-2xs">
+                เดินในร้าน (WASD)
+              </span>
+            </motion.div>
+
+            {/* Bottom-Center Subtle Hint */}
+            {!isNearTeaTable && (
+              <motion.div
+                key="walk-hint"
+                initial={{opacity: 0, y: 8}}
+                animate={{opacity: 1, y: 0}}
+                exit={{opacity: 0, y: 8}}
+                className="pointer-events-none fixed inset-x-0 bottom-4 z-10 flex justify-center px-4 safe-pb"
+              >
+                <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/92 px-3.5 py-2 text-xs font-medium text-[#27312B] shadow-sm">
+                  <Footprints
+                    className="h-3.5 w-3.5 text-[#2E6F40]"
+                    aria-hidden="true"
+                  />
+                  <span>เดินไปที่โต๊ะชงชาเพื่อกดปุ่มทำชา</span>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* STEP 1 (FIRST-PERSON AT TABLE): Floating Recipe Selector Card */}
       <AnimatePresence>
         {step === 'SELECT_TEA' && selectorOpen && (
           <TeaSelectorModal
@@ -537,7 +830,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Reopen Recipe Card button when minimized to peek at 3D scene */}
+      {/* First-Person Recipe Reopen & Return-to-Walk Buttons */}
       <AnimatePresence>
         {step === 'SELECT_TEA' && !selectorOpen && (
           <motion.div
@@ -546,8 +839,18 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
             animate={{opacity: 1, y: 0, scale: 1}}
             exit={{opacity: 0, y: 16, scale: 0.94}}
             transition={{type: 'spring', stiffness: 380, damping: 28}}
-            className="pointer-events-none fixed inset-x-0 bottom-3 z-20 flex justify-center safe-px safe-pb"
+            className="pointer-events-none fixed inset-x-0 bottom-3 z-20 flex flex-wrap justify-center gap-2 safe-px safe-pb"
           >
+            <motion.button
+              type="button"
+              whileTap={{scale: 0.94}}
+              onClick={handleReturnToShopExplore}
+              className="pointer-events-auto inline-flex min-h-[48px] items-center gap-2 rounded-2xl border border-[#1F2823]/18 bg-[#FAF9F6]/96 px-4 text-sm font-semibold text-[#1F2823] shadow-lg hover:bg-white"
+            >
+              <Footprints className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
+              <span>เดินรอบร้าน</span>
+            </motion.button>
+
             <motion.button
               type="button"
               whileHover={{scale: 1.03, y: -1}}
@@ -567,9 +870,9 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Collapsible Bottom Thumb Dock for Steps 2–5 (Slim & Unobtrusive) */}
+      {/* Collapsible Bottom Thumb Dock for First-Person Steps 2–5 */}
       <AnimatePresence>
-        {step !== 'SELECT_TEA' && (
+        {step !== 'EXPLORE_SHOP' && step !== 'SELECT_TEA' && (
           <motion.div
             key="brewing-dock"
             initial={{opacity: 0, y: 28}}
@@ -585,7 +888,6 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
               }}
               transition={{duration: 0.24, ease: [0.16, 1, 0.3, 1]}}
             >
-              {/* Collapse Toggle Tab */}
               <motion.button
                 type="button"
                 whileTap={{scale: 0.94}}
@@ -608,9 +910,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                 )}
               </motion.button>
 
-              {/* Thumb-Ergonomic Dock Panel */}
               <div className="pointer-events-auto w-full max-w-[740px] rounded-2xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 px-3 py-2 sm:px-4 sm:py-3 shadow-md overflow-hidden">
-                {/* Compact Info & Stepper Line */}
                 <div className="flex items-center justify-between gap-2 border-b border-[#1F2823]/10 pb-1.5">
                   <div className="flex items-center gap-2 min-w-0">
                     <span
@@ -662,7 +962,6 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                 </div>
 
                 <AnimatePresence mode="wait">
-                  {/* STEP 2: POUR WATER */}
                   {step === 'POUR_WATER' && (
                     <motion.div
                       key="step-pour-water"
@@ -729,7 +1028,6 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                     </motion.div>
                   )}
 
-                  {/* STEP 3: STEEP TEA */}
                   {step === 'STEEP_TEA' && (
                     <motion.div
                       key="step-steep-tea"
@@ -778,7 +1076,6 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                     </motion.div>
                   )}
 
-                  {/* STEP 4: ADD TOPPINGS */}
                   {step === 'ADD_TOPPING' && (
                     <motion.div
                       key="step-add-topping"
@@ -860,7 +1157,6 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                     </motion.div>
                   )}
 
-                  {/* STEP 5: SERVED */}
                   {step === 'SERVED' && brewResult && (
                     <motion.div
                       key="step-served"
@@ -868,7 +1164,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                       animate={{opacity: 1, scale: 1, y: 0}}
                       exit={{opacity: 0, scale: 0.96, y: -10}}
                       transition={{type: 'spring', stiffness: 380, damping: 26}}
-                      className="mt-2.5 flex items-center justify-between gap-3"
+                      className="mt-2.5 flex items-center justify-between gap-2 sm:gap-3"
                     >
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
@@ -892,17 +1188,31 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                         </p>
                       </div>
 
-                      <motion.button
-                        type="button"
-                        whileHover={{scale: 1.03}}
-                        whileTap={{scale: 0.94}}
-                        transition={{type: 'spring', stiffness: 420, damping: 24}}
-                        onClick={() => handleResetCup(true)}
-                        className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-5 text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap shrink-0"
-                      >
-                        <Coffee className="h-4 w-4" aria-hidden="true" />
-                        <span>ชงถ้วยถัดไป</span>
-                      </motion.button>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <motion.button
+                          type="button"
+                          whileTap={{scale: 0.94}}
+                          onClick={() => handleResetCup(true, true)}
+                          className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl border border-[#1F2823]/15 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EFECE4] whitespace-nowrap"
+                        >
+                          <Footprints
+                            className="h-4 w-4 text-[#2E6F40]"
+                            aria-hidden="true"
+                          />
+                          <span>เดินในร้าน</span>
+                        </motion.button>
+                        <motion.button
+                          type="button"
+                          whileHover={{scale: 1.03}}
+                          whileTap={{scale: 0.94}}
+                          transition={{type: 'spring', stiffness: 420, damping: 24}}
+                          onClick={() => handleResetCup(true, false)}
+                          className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-4 sm:px-5 text-xs sm:text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap"
+                        >
+                          <Coffee className="h-4 w-4" aria-hidden="true" />
+                          <span>ชงถ้วยถัดไป</span>
+                        </motion.button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

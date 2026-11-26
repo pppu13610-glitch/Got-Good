@@ -17,9 +17,9 @@ export const LIVE_BROWSER_APP_URL =
 export const DEV_BROWSER_APP_URL =
   'https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app';
 export const GITHUB_RAW_VERSION_URL =
-  'https://raw.githubusercontent.com/ggt86203/baan-cha-3d/main/public/version.json';
+  'https://raw.githubusercontent.com/pppu13610-glitch/baan-cha-3d/main/public/version.json';
 export const GITHUB_LATEST_RELEASE_API =
-  'https://api.github.com/repos/ggt86203/baan-cha-3d/releases/latest';
+  'https://api.github.com/repos/pppu13610-glitch/baan-cha-3d/releases/latest';
 
 export interface RemoteVersionManifest {
   version: string;

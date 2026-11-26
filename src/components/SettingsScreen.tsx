@@ -9,6 +9,7 @@ import {
   Maximize2,
   Minimize2,
   Monitor,
+  Music,
   RotateCcw,
   Smartphone,
   Sparkles,
@@ -35,7 +36,7 @@ import {
   DisplayRefreshRate,
   getAllowedFpsOptions,
 } from '../utils/refreshRate';
-import {soundEngine} from '../utils/soundEngine';
+import {CHILL_MUSIC_TRACKS, soundEngine} from '../utils/soundEngine';
 
 interface SettingsScreenProps {
   settings: GameSettings;
@@ -351,6 +352,82 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               />
             </div>
 
+            {/* Music Volume */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs sm:text-sm">
+                <label htmlFor="slider-music-vol" className="font-medium text-[#1F2823]">
+                  ระดับเสียงเพลงประกอบ (ชิวๆ)
+                </label>
+                <span className="font-mono-num font-semibold text-[#2E6F40]">
+                  {settings.musicTrack === 'none' ? 'ปิดเพลง' : `${settings.musicVolume}%`}
+                </span>
+              </div>
+              <input
+                id="slider-music-vol"
+                type="range"
+                min={0}
+                max={100}
+                value={settings.musicVolume}
+                disabled={settings.isMuted || settings.musicTrack === 'none'}
+                onChange={(e) => {
+                  soundEngine.unlock();
+                  onUpdateSettings({musicVolume: Number(e.target.value)});
+                }}
+                className="h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+              />
+            </div>
+
+            {/* Chill Music Track Selector (3 Cozy Tracks + Off) */}
+            <div className="space-y-2 border-t border-[#1F2823]/8 pt-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#1F2823]">
+                  <Music className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
+                  <span>เลือกเพลงดนตรีสไตล์ชิวๆ (3 เพลง)</span>
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                {CHILL_MUSIC_TRACKS.map((track) => {
+                  const active = settings.musicTrack === track.id;
+                  return (
+                    <motion.button
+                      key={track.id}
+                      type="button"
+                      whileTap={{scale: 0.96}}
+                      transition={TAP_SPRING}
+                      onClick={() => {
+                        soundEngine.unlock();
+                        soundEngine.playTap();
+                        onUpdateSettings({musicTrack: track.id});
+                      }}
+                      className={`flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${
+                        active
+                          ? 'border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]'
+                          : 'border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-[#1F2823] truncate">
+                          {track.title}
+                        </p>
+                        <p className="text-[10px] text-[#5A655D] truncate">
+                          {track.subtitle}
+                        </p>
+                      </div>
+                      <span
+                        className={`rounded-md px-1.5 py-0.5 font-mono-num text-[10px] font-semibold shrink-0 ${
+                          active
+                            ? 'bg-[#2E6F40] text-white'
+                            : 'bg-[#E2DFD7] text-[#5A655D]'
+                        }`}
+                      >
+                        {track.bpmLabel}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Ambience Mode */}
             <div className="space-y-2 border-t border-[#1F2823]/8 pt-3">
               <div className="flex items-center justify-between gap-2">
@@ -494,11 +571,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 })}
               </div>
               <p className="text-[11px] text-[#5A655D]">
-                {detectedRefreshRate >= 120
-                  ? 'ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS'
-                  : detectedRefreshRate >= 90
-                    ? 'ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)'
-                    : 'ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)'}
+                {deviceReport.isGalaxyA10
+                  ? 'ตรวจพบ Samsung Galaxy A10 (จอ 60 Hz) · ล็อคตัวเลือกเฉพาะ 30 / 60 FPS เพื่อความลื่นไหลสูงสุด'
+                  : detectedRefreshRate >= 120
+                    ? 'ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS'
+                    : detectedRefreshRate >= 90
+                      ? 'ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)'
+                      : 'ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)'}
               </p>
             </div>
 
@@ -721,11 +800,11 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   <span className="inline-flex items-center gap-2 text-left">
                     <Zap className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
                     <span>
-                      จูนเฉพาะ realme Note 50 (Unisoc T612 · Mali-G57 · เปิด 90 FPS)
+                      บูสต์ความแรง realme Note 50 (Unisoc T612 · Mali-G57 · 90 FPS นิ่งขึ้น)
                     </span>
                   </span>
                   <span className="text-[11px] font-bold text-[#2E6F40] shrink-0">
-                    ปรับทันที
+                    บูสต์ทันที
                   </span>
                 </motion.button>
               )}
@@ -737,18 +816,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   transition={TAP_SPRING}
                   onClick={() => {
                     soundEngine.playTap();
-                    onUpdateSettings(getGalaxyA10Preset(detectedRefreshRate));
+                    onUpdateSettings(getGalaxyA10Preset());
                   }}
                   className="flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]"
                 >
                   <span className="inline-flex items-center gap-2 text-left">
                     <Zap className="h-4 w-4 text-[#2B4E72] shrink-0" aria-hidden="true" />
                     <span>
-                      จูนเฉพาะ Samsung Galaxy A10 (Exynos 7884 · Mali-G71 MP2)
+                      บูสต์ความลื่น Samsung Galaxy A10 (Exynos 7884 · ล็อค 60 Hz / 60 FPS)
                     </span>
                   </span>
                   <span className="text-[11px] font-bold text-[#2B4E72] shrink-0">
-                    ปรับทันที
+                    บูสต์ทันที
                   </span>
                 </motion.button>
               )}

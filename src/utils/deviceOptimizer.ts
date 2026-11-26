@@ -31,6 +31,8 @@ export interface DeviceOptimizationReport {
   isDetected2GbRam: boolean;
   isUltraLowRam: boolean;
   liteGpuActive: boolean;
+  galaxyA10BoostActive: boolean;
+  realmeNote50BoostActive: boolean;
   showRealmeNote50Option: boolean;
   showGalaxyA10Option: boolean;
   showLowRam2GbOption: boolean;
@@ -313,6 +315,14 @@ export function probeDeviceOptimization(
         isMaliG71OrExynos7884 ||
         isBudgetMobileGpu));
 
+  const galaxyA10BoostActive =
+    effectiveProfile === 'galaxy-a10' ||
+    (effectiveProfile === 'auto' && isGalaxyA10);
+
+  const realmeNote50BoostActive =
+    effectiveProfile === 'realme-note-50' ||
+    (effectiveProfile === 'auto' && isRealmeNote50);
+
   const osVersionLabel = detectOsVersionLabel(bridge, ua);
 
   let detectedModelLabel = 'อุปกรณ์ทั่วไป';
@@ -370,6 +380,8 @@ export function probeDeviceOptimization(
     isDetected2GbRam,
     isUltraLowRam,
     liteGpuActive,
+    galaxyA10BoostActive,
+    realmeNote50BoostActive,
     showRealmeNote50Option,
     showGalaxyA10Option,
     showLowRam2GbOption,
@@ -377,7 +389,7 @@ export function probeDeviceOptimization(
     gpuRendererName,
     hardwareThreads,
     deviceMemoryGb,
-    nativeDisplayHz: bridge?.displayHz ?? null,
+    nativeDisplayHz: isGalaxyA10 ? 60 : (bridge?.displayHz ?? null),
     gameBoosterReady: Boolean(bridge?.gameModeSupported) || isMobileUa,
   };
 }
@@ -390,17 +402,15 @@ export function getRealmeNote50Preset(
     optimizationProfile: 'realme-note-50',
     graphicsQuality: 'medium',
     resolutionScale: 'hd-plus',
-    shadowsEnabled: true,
+    shadowsEnabled: false,
     antialiasEnabled: false,
     particlesEnabled: true,
     targetFps: idealFps,
   };
 }
 
-export function getGalaxyA10Preset(
-  maxDisplayHz: DisplayRefreshRate = 60,
-): Partial<GameSettings> {
-  const idealFps: TargetFps = clampTargetFpsToDisplay(60, maxDisplayHz);
+export function getGalaxyA10Preset(): Partial<GameSettings> {
+  // Galaxy A10 60 Hz panel -> strictly lock target FPS to 60 FPS with ultra-smooth low-overhead settings
   return {
     optimizationProfile: 'galaxy-a10',
     graphicsQuality: 'low',
@@ -408,7 +418,7 @@ export function getGalaxyA10Preset(
     shadowsEnabled: false,
     antialiasEnabled: false,
     particlesEnabled: false,
-    targetFps: idealFps,
+    targetFps: 60,
   };
 }
 

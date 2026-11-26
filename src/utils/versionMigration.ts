@@ -13,6 +13,8 @@ export const DEFAULT_SETTINGS: GameSettings = {
   masterVolume: 85,
   sfxVolume: 90,
   ambienceVolume: 75,
+  musicVolume: 70,
+  musicTrack: 'morning-bamboo',
   isMuted: false,
   ambience: 'none',
   graphicsQuality: 'high',
@@ -181,6 +183,17 @@ export function migrateSettingsPayload(raw: unknown): GameSettings {
       typeof parsed.ambienceVolume === 'number' && Number.isFinite(parsed.ambienceVolume)
         ? Math.max(0, Math.min(100, parsed.ambienceVolume))
         : DEFAULT_SETTINGS.ambienceVolume,
+    musicVolume:
+      typeof parsed.musicVolume === 'number' && Number.isFinite(parsed.musicVolume)
+        ? Math.max(0, Math.min(100, parsed.musicVolume))
+        : DEFAULT_SETTINGS.musicVolume,
+    musicTrack:
+      parsed.musicTrack === 'none' ||
+      parsed.musicTrack === 'morning-bamboo' ||
+      parsed.musicTrack === 'rainy-teahouse' ||
+      parsed.musicTrack === 'twilight-lantern'
+        ? parsed.musicTrack
+        : DEFAULT_SETTINGS.musicTrack,
     isMuted:
       typeof parsed.isMuted === 'boolean'
         ? parsed.isMuted

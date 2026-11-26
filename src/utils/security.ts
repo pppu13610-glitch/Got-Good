@@ -1,8 +1,8 @@
 import {Capacitor} from '@capacitor/core';
 
-export const CREATOR_GITHUB_USERNAME = 'ggt86203';
-export const CREATOR_GITHUB_PROFILE_URL = 'https://github.com/ggt86203';
-export const CREATOR_GITHUB_REPO_URL = 'https://github.com/ggt86203/baan-cha-3d';
+export const CREATOR_GITHUB_USERNAME = 'pppu13610-glitch';
+export const CREATOR_GITHUB_PROFILE_URL = 'https://github.com/pppu13610-glitch';
+export const CREATOR_GITHUB_REPO_URL = 'https://github.com/pppu13610-glitch/baan-cha-3d';
 
 const TRUSTED_HTTPS_HOSTS = new Set<string>([
   'ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app',

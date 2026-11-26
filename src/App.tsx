@@ -16,7 +16,6 @@ import {TitleScreen} from './components/TitleScreen';
 import {UpdateCheckScreen} from './components/UpdateCheckScreen';
 import {
   AmbienceMode,
-  CameraPreset,
   GameMode,
   GameSettings,
   JournalRecord,
@@ -60,7 +59,6 @@ const SCREEN_EASE = [0.16, 1, 0.3, 1] as const;
 export default function App() {
   const [screen, setScreen] = useState<ScreenView>('TITLE_MENU');
   const [mode, setMode] = useState<GameMode>('guest');
-  const [cameraPreset, setCameraPreset] = useState<CameraPreset>('table');
   const [settings, setSettings] = useState<GameSettings>(() => loadSettings());
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [updatesOpen, setUpdatesOpen] = useState<boolean>(false);
@@ -97,7 +95,11 @@ export default function App() {
       const effectiveHz = resolveEffectiveRefreshRate(hz, currentReport);
       setDetectedRefreshRate(effectiveHz);
       setRawRefreshRate(
-        currentReport.isRealmeNote50 && rawHz < 85 ? 90 : rawHz,
+        currentReport.isGalaxyA10
+          ? 60
+          : currentReport.isRealmeNote50 && rawHz < 85
+            ? 90
+            : rawHz,
       );
       setSettings((prev) => {
         const sanitizedProfile = sanitizeProfileForDevice(
@@ -116,6 +118,12 @@ export default function App() {
           prev.targetFps === 60
         ) {
           nextTargetFps = clampTargetFpsToDisplay(90, effectiveHz);
+        } else if (
+          currentReport.isGalaxyA10 &&
+          !userOverrodeFpsRef.current &&
+          (sanitizedProfile === 'auto' || sanitizedProfile === 'galaxy-a10')
+        ) {
+          nextTargetFps = 60;
         }
         if (
           nextTargetFps === prev.targetFps &&
@@ -214,13 +222,17 @@ export default function App() {
       settings.masterVolume,
       settings.sfxVolume,
       settings.ambienceVolume,
+      settings.musicVolume,
     );
+    soundEngine.setMusicTrack(settings.musicTrack);
     soundEngine.setMuted(settings.isMuted);
     soundEngine.setAmbience(settings.ambience);
   }, [
     settings.masterVolume,
     settings.sfxVolume,
     settings.ambienceVolume,
+    settings.musicVolume,
+    settings.musicTrack,
     settings.isMuted,
     settings.ambience,
   ]);
@@ -240,9 +252,13 @@ export default function App() {
           merged.optimizationProfile,
           report,
         );
+        const maxAllowedHz = report.isGalaxyA10 ? 60 : detectedRefreshRate;
+        if (patch.optimizationProfile === 'galaxy-a10' && patch.targetFps === undefined) {
+          merged.targetFps = 60;
+        }
         merged.targetFps = clampTargetFpsToDisplay(
           merged.targetFps,
-          detectedRefreshRate,
+          maxAllowedHz,
         );
         saveSettings(merged);
         return merged;
@@ -257,7 +273,9 @@ export default function App() {
     const report = probeDeviceOptimization('auto');
     const resetTargetFps: GameSettings['targetFps'] = report.isRealmeNote50
       ? 90
-      : DEFAULT_SETTINGS.targetFps;
+      : report.isGalaxyA10
+        ? 60
+        : DEFAULT_SETTINGS.targetFps;
     const reset: GameSettings = {
       ...DEFAULT_SETTINGS,
       graphicsQuality: report.isGalaxyA10 || report.isDetected2GbRam ? 'low' : DEFAULT_SETTINGS.graphicsQuality,
@@ -267,7 +285,7 @@ export default function App() {
       particlesEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.particlesEnabled,
       targetFps: clampTargetFpsToDisplay(
         resetTargetFps,
-        detectedRefreshRate,
+        report.isGalaxyA10 ? 60 : detectedRefreshRate,
       ),
     };
     saveSettings(reset);
@@ -357,8 +375,6 @@ export default function App() {
               level={saveData.level}
               mode={mode}
               onModeChange={setMode}
-              cameraPreset={cameraPreset}
-              onCameraPresetChange={setCameraPreset}
               ambience={settings.ambience}
               onAmbienceChange={handleAmbienceChange}
               isMuted={settings.isMuted}
@@ -433,7 +449,6 @@ export default function App() {
                   playerLevel={saveData.level}
                   mode={mode}
                   onModeChange={setMode}
-                  cameraPreset={cameraPreset}
                   settings={settings}
                   onBrewComplete={handleBrewComplete}
                 />

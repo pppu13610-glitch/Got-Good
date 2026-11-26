@@ -231,11 +231,20 @@ export const UpdateCheckScreen: React.FC<UpdateCheckScreenProps> = ({
             {/* Live Version Check Status Card */}
             <section className="rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs text-[#5A655D]">เวอร์ชั่นในตัวเกม</p>
-                  <p className="mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]">
-                    v{CURRENT_APP_VERSION}
-                  </p>
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/game-icon.png"
+                    alt="ไอคอนเกมบ้านชาอุ่นใจ"
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 rounded-xl object-cover shadow-xs ring-1 ring-[#1F2823]/10 shrink-0"
+                  />
+                  <div>
+                    <p className="text-xs text-[#5A655D]">เวอร์ชั่นในตัวเกม</p>
+                    <p className="mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]">
+                      v{CURRENT_APP_VERSION}
+                    </p>
+                  </div>
                 </div>
                 <div className="text-right">
                   <p className="text-[11px] text-[#5A655D]">เวอร์ชั่น Browser ล่าสุด</p>
@@ -373,10 +382,10 @@ export const UpdateCheckScreen: React.FC<UpdateCheckScreenProps> = ({
               <div className="flex items-center justify-between gap-2">
                 <div>
                   <p className="text-[11px] font-medium text-[#5A655D]">
-                    บัญชี GitHub ผู้สร้างเกม
+                    บัญชี GitHub ผู้สร้าง / ผู้พัฒนาเกม
                   </p>
                   <p className="font-mono-num text-xs font-bold text-[#1F2823]">
-                    @{CREATOR_GITHUB_USERNAME}
+                    {CREATOR_GITHUB_USERNAME}
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5">

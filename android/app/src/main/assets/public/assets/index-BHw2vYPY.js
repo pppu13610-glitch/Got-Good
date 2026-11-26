@@ -21235,12 +21235,12 @@ var ArrowLeft = createLucideIcon("arrow-left", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var BookOpen = createLucideIcon("book-open", [["path", {
-	d: "M12 7v14",
-	key: "1akyts"
+var Bell = createLucideIcon("bell", [["path", {
+	d: "M10.268 21a2 2 0 0 0 3.464 0",
+	key: "vwvbt9"
 }], ["path", {
-	d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
-	key: "ruj8y"
+	d: "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326",
+	key: "11g9vi"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21248,14 +21248,12 @@ var BookOpen = createLucideIcon("book-open", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Camera$1 = createLucideIcon("camera", [["path", {
-	d: "M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z",
-	key: "18u6gg"
-}], ["circle", {
-	cx: "12",
-	cy: "13",
-	r: "3",
-	key: "1vg3eu"
+var BookOpen = createLucideIcon("book-open", [["path", {
+	d: "M12 7v14",
+	key: "1akyts"
+}], ["path", {
+	d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+	key: "ruj8y"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21498,6 +21496,30 @@ var ExternalLink = createLucideIcon("external-link", [
 	["path", {
 		d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6",
 		key: "a6xqqp"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Footprints = createLucideIcon("footprints", [
+	["path", {
+		d: "M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z",
+		key: "1dudjm"
+	}],
+	["path", {
+		d: "M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z",
+		key: "l2t8xc"
+	}],
+	["path", {
+		d: "M16 17h4",
+		key: "1dejxt"
+	}],
+	["path", {
+		d: "M4 13h4",
+		key: "1bwh8b"
 	}]
 ]);
 /**
@@ -21758,6 +21780,30 @@ var Monitor = createLucideIcon("monitor", [
 		y1: "17",
 		y2: "21",
 		key: "vw1qmm"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Music = createLucideIcon("music", [
+	["path", {
+		d: "M9 18V5l12-2v13",
+		key: "1jmyc2"
+	}],
+	["circle", {
+		cx: "6",
+		cy: "18",
+		r: "3",
+		key: "fqmcym"
+	}],
+	["circle", {
+		cx: "18",
+		cy: "16",
+		r: "3",
+		key: "1hluhg"
 	}]
 ]);
 /**
@@ -23392,6 +23438,244 @@ function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
 	};
 }
 // src/utils/soundEngine.ts
+var CHILL_MUSIC_TRACKS = [
+	{
+		id: "morning-bamboo",
+		title: "สายลมอุ่นในสวนไผ่",
+		subtitle: "คอร์ดเปียโนไฟฟ้าอุ่นๆ ผสมระฆังไม้ไผ่สบายใจ",
+		bpmLabel: "74 BPM"
+	},
+	{
+		id: "rainy-teahouse",
+		title: "บ่ายฝนพรำในเรือนชา",
+		subtitle: "ทำนองช้าๆ โทนอุ่นนุ่มลึกชวนผ่อนคลาย",
+		bpmLabel: "68 BPM"
+	},
+	{
+		id: "twilight-lantern",
+		title: "โคมไฟอุ่นยามพลบค่ำ",
+		subtitle: "เสียงพิณและเบสนุ่มๆ ยามเย็นในร้านชา",
+		bpmLabel: "70 BPM"
+	},
+	{
+		id: "none",
+		title: "ปิดเพลงประกอบ",
+		subtitle: "ฟังเฉพาะเสียงชงชาและเสียงธรรมชาติ",
+		bpmLabel: "เงียบ"
+	}
+];
+var CHILL_PATTERNS = {
+	"morning-bamboo": {
+		stepMs: 405,
+		chords: [
+			[
+				174.61,
+				220,
+				261.63,
+				329.63
+			],
+			[
+				164.81,
+				196,
+				246.94,
+				293.66
+			],
+			[
+				146.83,
+				174.61,
+				220,
+				329.63
+			],
+			[
+				130.81,
+				164.81,
+				196,
+				246.94
+			]
+		],
+		melody: [
+			523.25,
+			null,
+			659.25,
+			587.33,
+			440,
+			null,
+			392,
+			null,
+			493.88,
+			null,
+			587.33,
+			523.25,
+			392,
+			null,
+			440,
+			null,
+			587.33,
+			null,
+			659.25,
+			783.99,
+			659.25,
+			null,
+			523.25,
+			null,
+			440,
+			493.88,
+			523.25,
+			null,
+			392,
+			null,
+			329.63,
+			null
+		],
+		bass: [
+			87.31,
+			82.41,
+			73.42,
+			65.41
+		],
+		leadWave: "sine"
+	},
+	"rainy-teahouse": {
+		stepMs: 440,
+		chords: [
+			[
+				220,
+				261.63,
+				329.63,
+				493.88
+			],
+			[
+				174.61,
+				220,
+				261.63,
+				329.63
+			],
+			[
+				146.83,
+				174.61,
+				220,
+				261.63
+			],
+			[
+				164.81,
+				220,
+				246.94,
+				293.66
+			]
+		],
+		melody: [
+			659.25,
+			null,
+			587.33,
+			null,
+			523.25,
+			493.88,
+			440,
+			null,
+			523.25,
+			null,
+			440,
+			null,
+			392,
+			null,
+			329.63,
+			null,
+			587.33,
+			null,
+			523.25,
+			440,
+			349.23,
+			null,
+			440,
+			null,
+			493.88,
+			null,
+			523.25,
+			493.88,
+			440,
+			null,
+			null,
+			null
+		],
+		bass: [
+			110,
+			87.31,
+			73.42,
+			82.41
+		],
+		leadWave: "triangle"
+	},
+	"twilight-lantern": {
+		stepMs: 428,
+		chords: [
+			[
+				196,
+				246.94,
+				293.66,
+				369.99
+			],
+			[
+				164.81,
+				196,
+				246.94,
+				369.99
+			],
+			[
+				130.81,
+				164.81,
+				196,
+				246.94
+			],
+			[
+				146.83,
+				185,
+				220,
+				246.94
+			]
+		],
+		melody: [
+			587.33,
+			null,
+			493.88,
+			null,
+			392,
+			440,
+			493.88,
+			null,
+			659.25,
+			null,
+			587.33,
+			493.88,
+			392,
+			null,
+			null,
+			null,
+			523.25,
+			null,
+			493.88,
+			392,
+			329.63,
+			null,
+			392,
+			null,
+			440,
+			null,
+			493.88,
+			587.33,
+			493.88,
+			null,
+			392,
+			null
+		],
+		bass: [
+			98,
+			82.41,
+			65.41,
+			73.42
+		],
+		leadWave: "sine"
+	}
+};
 var CozySoundEngine = class {
 	constructor() {
 		this.ctx = null;
@@ -23399,14 +23683,21 @@ var CozySoundEngine = class {
 		this.masterVolume = .85;
 		this.sfxVolume = .9;
 		this.ambienceVolume = .75;
+		this.musicVolume = .7;
 		this.ambienceMode = "none";
+		this.musicTrack = "morning-bamboo";
 		this.ambienceGain = null;
 		this.ambienceSource = null;
 		this.breezeLfo = null;
+		this.musicBusGain = null;
+		this.musicFilter = null;
+		this.musicTimer = null;
+		this.musicStepIdx = 0;
 	}
-	ensureContext() {
+	ensureContext(createIfMissing = true) {
 		if (typeof window === "undefined") return null;
 		if (!this.ctx) {
+			if (!createIfMissing) return null;
 			const AudioCtx = window.AudioContext || window.webkitAudioContext;
 			if (!AudioCtx) return null;
 			this.ctx = new AudioCtx();
@@ -23415,17 +23706,40 @@ var CozySoundEngine = class {
 		return this.ctx;
 	}
 	unlock() {
-		this.ensureContext();
+		if (!this.ensureContext(true)) return;
+		if (this.musicTrack !== "none" && !this.isMuted && this.musicTimer === null) this.startMusicLoop();
+		if (this.ambienceMode !== "none" && !this.ambienceSource) this.setAmbience(this.ambienceMode);
 	}
-	setVolumes(masterPct, sfxPct, ambiencePct) {
+	setVolumes(masterPct, sfxPct, ambiencePct, musicPct) {
 		this.masterVolume = Math.max(0, Math.min(1, masterPct / 100));
 		this.sfxVolume = Math.max(0, Math.min(1, sfxPct / 100));
 		this.ambienceVolume = Math.max(0, Math.min(1, ambiencePct / 100));
+		if (typeof musicPct === "number") this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
 		if (this.ambienceGain && this.ctx) this.ambienceGain.gain.setTargetAtTime(this.isMuted || this.ambienceMode === "none" ? 0 : this.getAmbienceVolume(), this.ctx.currentTime, .1);
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+	}
+	setMusicVolume(musicPct) {
+		this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .12);
+	}
+	setMusicTrack(track) {
+		const changed = this.musicTrack !== track;
+		this.musicTrack = track;
+		if (track === "none") {
+			this.stopMusicLoop();
+			return;
+		}
+		if (changed) {
+			this.musicStepIdx = 0;
+			this.stopMusicLoop();
+		}
+		if (this.ctx && !this.isMuted && this.musicTimer === null) this.startMusicLoop();
 	}
 	setMuted(muted) {
 		this.isMuted = muted;
 		if (this.ambienceGain && this.ctx) this.ambienceGain.gain.setTargetAtTime(muted || this.ambienceMode === "none" ? 0 : this.getAmbienceVolume(), this.ctx.currentTime, .15);
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(muted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), this.ctx.currentTime, .15);
+		if (!muted && this.ctx && this.musicTrack !== "none" && this.musicTimer === null) this.startMusicLoop();
 	}
 	getMuted() {
 		return this.isMuted;
@@ -23435,6 +23749,100 @@ var CozySoundEngine = class {
 	}
 	getAmbienceVolume() {
 		return (this.ambienceMode === "rain" ? .055 : .042) * this.masterVolume * this.ambienceVolume;
+	}
+	getMusicBusVolume() {
+		return .22 * this.masterVolume * this.musicVolume;
+	}
+	ensureMusicBus(ctx) {
+		if (!this.musicBusGain || !this.musicFilter) {
+			const filter = ctx.createBiquadFilter();
+			filter.type = "lowpass";
+			filter.frequency.value = 1750;
+			filter.Q.value = .7;
+			const bus = ctx.createGain();
+			bus.gain.setValueAtTime(this.isMuted || this.musicTrack === "none" ? 0 : this.getMusicBusVolume(), ctx.currentTime);
+			filter.connect(bus);
+			bus.connect(ctx.destination);
+			this.musicFilter = filter;
+			this.musicBusGain = bus;
+		}
+		return this.musicBusGain;
+	}
+	scheduleMusicStep() {
+		if (this.isMuted || this.musicTrack === "none" || !this.ctx || this.ctx.state !== "running") return;
+		if (typeof document !== "undefined" && document.hidden) return;
+		const pattern = CHILL_PATTERNS[this.musicTrack];
+		const ctx = this.ctx;
+		this.ensureMusicBus(ctx);
+		const dest = this.musicFilter;
+		if (!dest) return;
+		const step = this.musicStepIdx % pattern.melody.length;
+		this.musicStepIdx = (this.musicStepIdx + 1) % pattern.melody.length;
+		const now = ctx.currentTime + .04;
+		const stepSec = pattern.stepMs / 1e3;
+		if (step % 8 === 0) {
+			const barIdx = Math.floor(step / 8) % pattern.chords.length;
+			const chord = pattern.chords[barIdx];
+			const chordDur = stepSec * 7.6;
+			chord.forEach((freq, idx) => {
+				const osc = ctx.createOscillator();
+				const g = ctx.createGain();
+				osc.type = idx % 2 === 0 ? "sine" : "triangle";
+				osc.frequency.setValueAtTime(freq, now + idx * .015);
+				g.gain.setValueAtTime(1e-4, now + idx * .015);
+				g.gain.linearRampToValueAtTime(.065, now + idx * .015 + .14);
+				g.gain.exponentialRampToValueAtTime(8e-4, now + chordDur);
+				osc.connect(g);
+				g.connect(dest);
+				osc.start(now + idx * .015);
+				osc.stop(now + chordDur + .05);
+			});
+			const bassOsc = ctx.createOscillator();
+			const bassGain = ctx.createGain();
+			bassOsc.type = "sine";
+			bassOsc.frequency.setValueAtTime(pattern.bass[barIdx], now);
+			bassGain.gain.setValueAtTime(1e-4, now);
+			bassGain.gain.linearRampToValueAtTime(.14, now + .08);
+			bassGain.gain.exponentialRampToValueAtTime(.001, now + chordDur * .9);
+			bassOsc.connect(bassGain);
+			bassGain.connect(dest);
+			bassOsc.start(now);
+			bassOsc.stop(now + chordDur);
+		}
+		const melFreq = pattern.melody[step];
+		if (melFreq) {
+			const mOsc = ctx.createOscillator();
+			const mGain = ctx.createGain();
+			mOsc.type = pattern.leadWave;
+			mOsc.frequency.setValueAtTime(melFreq, now);
+			const noteDur = stepSec * 2.1;
+			mGain.gain.setValueAtTime(1e-4, now);
+			mGain.gain.linearRampToValueAtTime(.11, now + .025);
+			mGain.gain.exponentialRampToValueAtTime(8e-4, now + noteDur);
+			mOsc.connect(mGain);
+			mGain.connect(dest);
+			mOsc.start(now);
+			mOsc.stop(now + noteDur + .04);
+		}
+	}
+	startMusicLoop() {
+		if (this.musicTrack === "none") return;
+		const ctx = this.ensureContext(true);
+		if (!ctx) return;
+		this.ensureMusicBus(ctx);
+		const pattern = CHILL_PATTERNS[this.musicTrack];
+		this.scheduleMusicStep();
+		if (this.musicTimer !== null) window.clearInterval(this.musicTimer);
+		this.musicTimer = window.setInterval(() => {
+			this.scheduleMusicStep();
+		}, pattern.stepMs);
+	}
+	stopMusicLoop() {
+		if (this.musicTimer !== null) {
+			window.clearInterval(this.musicTimer);
+			this.musicTimer = null;
+		}
+		if (this.musicBusGain && this.ctx) this.musicBusGain.gain.setTargetAtTime(0, this.ctx.currentTime, .08);
 	}
 	playTap() {
 		const scale = this.getSfxScale();
@@ -23631,32 +24039,6 @@ var soundEngine = new CozySoundEngine();
 * Copyright 2010-2026 Three.js Authors
 * SPDX-License-Identifier: MIT
 */
-/**
-* Represents mouse buttons and interaction types in context of controls.
-*
-* @type {ConstantsMouse}
-* @constant
-*/
-var MOUSE = {
-	LEFT: 0,
-	MIDDLE: 1,
-	RIGHT: 2,
-	ROTATE: 0,
-	DOLLY: 1,
-	PAN: 2
-};
-/**
-* Represents touch interaction types in context of controls.
-*
-* @type {ConstantsTouch}
-* @constant
-*/
-var TOUCH = {
-	ROTATE: 0,
-	PAN: 1,
-	DOLLY_PAN: 2,
-	DOLLY_ROTATE: 3
-};
 /**
 * The texture will simply repeat to infinity.
 *
@@ -41033,6 +41415,139 @@ var BoxGeometry = class BoxGeometry extends BufferGeometry {
 	}
 };
 /**
+* A geometry class for representing a capsule.
+*
+* ```js
+* const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8, 1 );
+* const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+* const capsule = new THREE.Mesh( geometry, material );
+* scene.add( capsule );
+* ```
+*
+* @augments BufferGeometry
+* @demo scenes/geometry-browser.html#CapsuleGeometry
+*/
+var CapsuleGeometry = class CapsuleGeometry extends BufferGeometry {
+	/**
+	* Constructs a new capsule geometry.
+	*
+	* @param {number} [radius=1] - Radius of the capsule.
+	* @param {number} [height=1] - Height of the middle section.
+	* @param {number} [capSegments=4] - Number of curve segments used to build each cap.
+	* @param {number} [radialSegments=8] - Number of segmented faces around the circumference of the capsule. Must be an integer >= 3.
+	* @param {number} [heightSegments=1] - Number of rows of faces along the height of the middle section. Must be an integer >= 1.
+	*/
+	constructor(radius = 1, height = 1, capSegments = 4, radialSegments = 8, heightSegments = 1) {
+		super();
+		this.type = "CapsuleGeometry";
+		/**
+		* Holds the constructor parameters that have been
+		* used to generate the geometry. Any modification
+		* after instantiation does not change the geometry.
+		*
+		* @type {Object}
+		*/
+		this.parameters = {
+			radius,
+			height,
+			capSegments,
+			radialSegments,
+			heightSegments
+		};
+		height = Math.max(0, height);
+		capSegments = Math.max(1, Math.floor(capSegments));
+		radialSegments = Math.max(3, Math.floor(radialSegments));
+		heightSegments = Math.max(1, Math.floor(heightSegments));
+		const indices = [];
+		const vertices = [];
+		const normals = [];
+		const uvs = [];
+		const halfHeight = height / 2;
+		const capArcLength = Math.PI / 2 * radius;
+		const cylinderPartLength = height;
+		const totalArcLength = 2 * capArcLength + cylinderPartLength;
+		const numVerticalSegments = capSegments * 2 + heightSegments;
+		const verticesPerRow = radialSegments + 1;
+		const normal = new Vector3();
+		const vertex = new Vector3();
+		for (let iy = 0; iy <= numVerticalSegments; iy++) {
+			let currentArcLength = 0;
+			let profileY = 0;
+			let profileRadius = 0;
+			let normalYComponent = 0;
+			if (iy <= capSegments) {
+				const segmentProgress = iy / capSegments;
+				const angle = segmentProgress * Math.PI / 2;
+				profileY = -halfHeight - radius * Math.cos(angle);
+				profileRadius = radius * Math.sin(angle);
+				normalYComponent = -radius * Math.cos(angle);
+				currentArcLength = segmentProgress * capArcLength;
+			} else if (iy <= capSegments + heightSegments) {
+				const segmentProgress = (iy - capSegments) / heightSegments;
+				profileY = -halfHeight + segmentProgress * height;
+				profileRadius = radius;
+				normalYComponent = 0;
+				currentArcLength = capArcLength + segmentProgress * cylinderPartLength;
+			} else {
+				const segmentProgress = (iy - capSegments - heightSegments) / capSegments;
+				const angle = segmentProgress * Math.PI / 2;
+				profileY = halfHeight + radius * Math.sin(angle);
+				profileRadius = radius * Math.cos(angle);
+				normalYComponent = radius * Math.sin(angle);
+				currentArcLength = capArcLength + cylinderPartLength + segmentProgress * capArcLength;
+			}
+			const v = Math.max(0, Math.min(1, currentArcLength / totalArcLength));
+			let uOffset = 0;
+			if (iy === 0) uOffset = .5 / radialSegments;
+			else if (iy === numVerticalSegments) uOffset = -.5 / radialSegments;
+			for (let ix = 0; ix <= radialSegments; ix++) {
+				const u = ix / radialSegments;
+				const theta = u * Math.PI * 2;
+				const sinTheta = Math.sin(theta);
+				const cosTheta = Math.cos(theta);
+				vertex.x = -profileRadius * cosTheta;
+				vertex.y = profileY;
+				vertex.z = profileRadius * sinTheta;
+				vertices.push(vertex.x, vertex.y, vertex.z);
+				normal.set(-profileRadius * cosTheta, normalYComponent, profileRadius * sinTheta);
+				normal.normalize();
+				normals.push(normal.x, normal.y, normal.z);
+				uvs.push(u + uOffset, v);
+			}
+			if (iy > 0) {
+				const prevIndexRow = (iy - 1) * verticesPerRow;
+				for (let ix = 0; ix < radialSegments; ix++) {
+					const i1 = prevIndexRow + ix;
+					const i2 = prevIndexRow + ix + 1;
+					const i3 = iy * verticesPerRow + ix;
+					const i4 = iy * verticesPerRow + ix + 1;
+					indices.push(i1, i2, i3);
+					indices.push(i2, i4, i3);
+				}
+			}
+		}
+		this.setIndex(indices);
+		this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+		this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+		this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	}
+	copy(source) {
+		super.copy(source);
+		this.parameters = Object.assign({}, source.parameters);
+		return this;
+	}
+	/**
+	* Factory method for creating an instance of this class from the given
+	* JSON object.
+	*
+	* @param {Object} data - A JSON object representing the serialized geometry.
+	* @return {CapsuleGeometry} A new instance.
+	*/
+	static fromJSON(data) {
+		return new CapsuleGeometry(data.radius, data.height, data.capSegments, data.radialSegments, data.heightSegments);
+	}
+};
+/**
 * A simple shape of Euclidean geometry. It is constructed from a
 * number of triangular segments that are oriented around a central point and
 * extend as far out as a given radius. It is built counter-clockwise from a
@@ -49262,116 +49777,6 @@ var Clock = class {
 	}
 };
 /**
-* This class can be used to represent points in 3D space as
-* [Spherical coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system).
-*/
-var Spherical = class {
-	/**
-	* Constructs a new spherical.
-	*
-	* @param {number} [radius=1] - The radius, or the Euclidean distance (straight-line distance) from the point to the origin.
-	* @param {number} [phi=0] - The polar angle in radians from the y (up) axis.
-	* @param {number} [theta=0] - The equator/azimuthal angle in radians around the y (up) axis.
-	*/
-	constructor(radius = 1, phi = 0, theta = 0) {
-		/**
-		* The radius, or the Euclidean distance (straight-line distance) from the point to the origin.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.radius = radius;
-		/**
-		* The polar angle in radians from the y (up) axis.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.phi = phi;
-		/**
-		* The equator/azimuthal angle in radians around the y (up) axis.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.theta = theta;
-	}
-	/**
-	* Sets the spherical components by copying the given values.
-	*
-	* @param {number} radius - The radius.
-	* @param {number} phi - The polar angle.
-	* @param {number} theta - The azimuthal angle.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	set(radius, phi, theta) {
-		this.radius = radius;
-		this.phi = phi;
-		this.theta = theta;
-		return this;
-	}
-	/**
-	* Copies the values of the given spherical to this instance.
-	*
-	* @param {Spherical} other - The spherical to copy.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	copy(other) {
-		this.radius = other.radius;
-		this.phi = other.phi;
-		this.theta = other.theta;
-		return this;
-	}
-	/**
-	* Restricts the polar angle [page:.phi phi] to be between `0.000001` and pi -
-	* `0.000001`.
-	*
-	* @return {Spherical} A reference to this spherical.
-	*/
-	makeSafe() {
-		const EPS = 1e-6;
-		this.phi = clamp(this.phi, EPS, Math.PI - EPS);
-		return this;
-	}
-	/**
-	* Sets the spherical components from the given vector which is assumed to hold
-	* Cartesian coordinates.
-	*
-	* @param {Vector3} v - The vector to set.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	setFromVector3(v) {
-		return this.setFromCartesianCoords(v.x, v.y, v.z);
-	}
-	/**
-	* Sets the spherical components from the given Cartesian coordinates.
-	*
-	* @param {number} x - The x value.
-	* @param {number} y - The y value.
-	* @param {number} z - The z value.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	setFromCartesianCoords(x, y, z) {
-		this.radius = Math.sqrt(x * x + y * y + z * z);
-		if (this.radius === 0) {
-			this.theta = 0;
-			this.phi = 0;
-		} else {
-			this.theta = Math.atan2(x, z);
-			this.phi = Math.acos(clamp(y / this.radius, -1, 1));
-		}
-		return this;
-	}
-	/**
-	* Returns a new spherical with copied values from this instance.
-	*
-	* @return {Spherical} A clone of this instance.
-	*/
-	clone() {
-		return new this.constructor().copy(this);
-	}
-};
-/**
 * Represents a 2x2 matrix.
 *
 * A Note on Row-Major and Column-Major Ordering:
@@ -49470,103 +49875,6 @@ var Matrix2 = class {
 		te[3] = n22;
 		return this;
 	}
-};
-/**
-* Abstract base class for controls.
-*
-* @abstract
-* @augments EventDispatcher
-*/
-var Controls = class extends EventDispatcher {
-	/**
-	* Constructs a new controls instance.
-	*
-	* @param {Object3D} object - The object that is managed by the controls.
-	* @param {?HTMLElement} domElement - The HTML element used for event listeners.
-	*/
-	constructor(object, domElement = null) {
-		super();
-		/**
-		* The object that is managed by the controls.
-		*
-		* @type {Object3D}
-		*/
-		this.object = object;
-		/**
-		* The HTML element used for event listeners.
-		*
-		* @type {?HTMLElement}
-		* @default null
-		*/
-		this.domElement = domElement;
-		/**
-		* Whether the controls responds to user input or not.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enabled = true;
-		/**
-		* The internal state of the controls.
-		*
-		* @type {number}
-		* @default -1
-		*/
-		this.state = -1;
-		/**
-		* This object defines the keyboard input of the controls.
-		*
-		* @type {Object}
-		*/
-		this.keys = {};
-		/**
-		* This object defines what type of actions are assigned to the available mouse buttons.
-		* It depends on the control implementation what kind of mouse buttons and actions are supported.
-		*
-		* @type {{LEFT: ?number, MIDDLE: ?number, RIGHT: ?number}}
-		*/
-		this.mouseButtons = {
-			LEFT: null,
-			MIDDLE: null,
-			RIGHT: null
-		};
-		/**
-		* This object defines what type of actions are assigned to what kind of touch interaction.
-		* It depends on the control implementation what kind of touch interaction and actions are supported.
-		*
-		* @type {{ONE: ?number, TWO: ?number}}
-		*/
-		this.touches = {
-			ONE: null,
-			TWO: null
-		};
-	}
-	/**
-	* Connects the controls to the DOM. This method has so called "side effects" since
-	* it adds the module's event listeners to the DOM.
-	*
-	* @param {HTMLElement} element - The DOM element to connect to.
-	*/
-	connect(element) {
-		if (this.domElement !== null) this.disconnect();
-		this.domElement = element;
-	}
-	/**
-	* Disconnects the controls from the DOM.
-	*/
-	disconnect() {}
-	/**
-	* Call this method if you no longer want use to the controls. It frees all internal
-	* resources and removes all event listeners.
-	*/
-	dispose() {}
-	/**
-	* Controls should implement this method if they have to update their internal state
-	* per simulation step.
-	*
-	* @param {number} [delta] - The time delta in seconds.
-	*/
-	update() {}
 };
 /**
 * Determines how many bytes must be used to represent the texture.
@@ -60447,1133 +60755,6 @@ var WebGLRenderer = class {
 		gl.unpackColorSpace = ColorManagement._getUnpackColorSpace();
 	}
 };
-// node_modules/three/examples/jsm/controls/OrbitControls.js
-/**
-* Fires when the camera has been transformed by the controls.
-*
-* @event OrbitControls#change
-* @type {Object}
-*/
-var _changeEvent = { type: "change" };
-/**
-* Fires when an interaction was initiated.
-*
-* @event OrbitControls#start
-* @type {Object}
-*/
-var _startEvent = { type: "start" };
-/**
-* Fires when an interaction has finished.
-*
-* @event OrbitControls#end
-* @type {Object}
-*/
-var _endEvent = { type: "end" };
-var _ray = new Ray();
-var _plane = new Plane();
-var _TILT_LIMIT = Math.cos(70 * MathUtils.DEG2RAD);
-var _v = new Vector3();
-var _twoPI = 2 * Math.PI;
-var _STATE = {
-	NONE: -1,
-	ROTATE: 0,
-	DOLLY: 1,
-	PAN: 2,
-	TOUCH_ROTATE: 3,
-	TOUCH_PAN: 4,
-	TOUCH_DOLLY_PAN: 5,
-	TOUCH_DOLLY_ROTATE: 6
-};
-var _EPS = 1e-6;
-/**
-* Orbit controls allow the camera to orbit around a target.
-*
-* OrbitControls performs orbiting, dollying (zooming), and panning. Unlike {@link TrackballControls},
-* it maintains the "up" direction `object.up` (+Y by default).
-*
-* - Orbit: Left mouse / touch: one-finger move.
-* - Zoom: Middle mouse, or mousewheel / touch: two-finger spread or squish.
-* - Pan: Right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move.
-*
-* ```js
-* const controls = new OrbitControls( camera, renderer.domElement );
-*
-* // controls.update() must be called after any manual changes to the camera's transform
-* camera.position.set( 0, 20, 100 );
-* controls.update();
-*
-* function animate() {
-*
-* 	// required if controls.enableDamping or controls.autoRotate are set to true
-* 	controls.update();
-*
-* 	renderer.render( scene, camera );
-*
-* }
-* ```
-*
-* @augments Controls
-* @three_import import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-*/
-var OrbitControls = class extends Controls {
-	/**
-	* Constructs a new controls instance.
-	*
-	* @param {Object3D} object - The object that is managed by the controls.
-	* @param {?HTMLElement} domElement - The HTML element used for event listeners.
-	*/
-	constructor(object, domElement = null) {
-		super(object, domElement);
-		this.state = _STATE.NONE;
-		/**
-		* The focus point of the controls, the `object` orbits around this.
-		* It can be updated manually at any point to change the focus of the controls.
-		*
-		* @type {Vector3}
-		*/
-		this.target = new Vector3();
-		/**
-		* The focus point of the `minTargetRadius` and `maxTargetRadius` limits.
-		* It can be updated manually at any point to change the center of interest
-		* for the `target`.
-		*
-		* @type {Vector3}
-		*/
-		this.cursor = new Vector3();
-		/**
-		* How far you can dolly in (perspective camera only).
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minDistance = 0;
-		/**
-		* How far you can dolly out (perspective camera only).
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxDistance = Infinity;
-		/**
-		* How far you can zoom in (orthographic camera only).
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minZoom = 0;
-		/**
-		* How far you can zoom out (orthographic camera only).
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxZoom = Infinity;
-		/**
-		* How close you can get the target to the 3D `cursor`.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minTargetRadius = 0;
-		/**
-		* How far you can move the target from the 3D `cursor`.
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxTargetRadius = Infinity;
-		/**
-		* How far you can orbit vertically, lower limit. Range is `[0, Math.PI]` radians.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minPolarAngle = 0;
-		/**
-		* How far you can orbit vertically, upper limit. Range is `[0, Math.PI]` radians.
-		*
-		* @type {number}
-		* @default Math.PI
-		*/
-		this.maxPolarAngle = Math.PI;
-		/**
-		* How far you can orbit horizontally, lower limit. If set, the interval `[ min, max ]`
-		* must be a sub-interval of `[ - 2 PI, 2 PI ]`, with `( max - min < 2 PI )`.
-		*
-		* @type {number}
-		* @default -Infinity
-		*/
-		this.minAzimuthAngle = -Infinity;
-		/**
-		* How far you can orbit horizontally, upper limit. If set, the interval `[ min, max ]`
-		* must be a sub-interval of `[ - 2 PI, 2 PI ]`, with `( max - min < 2 PI )`.
-		*
-		* @type {number}
-		* @default -Infinity
-		*/
-		this.maxAzimuthAngle = Infinity;
-		/**
-		* Set to `true` to enable damping (inertia), which can be used to give a sense of weight
-		* to the controls. Note that if this is enabled, you must call `update()` in your animation
-		* loop.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.enableDamping = false;
-		/**
-		* The damping inertia used if `enableDamping` is set to `true`.
-		*
-		* Note that for this to work, you must call `update()` in your animation loop.
-		*
-		* @type {number}
-		* @default 0.05
-		*/
-		this.dampingFactor = .05;
-		/**
-		* Enable or disable zooming (dollying) of the camera.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enableZoom = true;
-		/**
-		* Speed of zooming / dollying.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.zoomSpeed = 1;
-		/**
-		* Enable or disable horizontal and vertical rotation of the camera.
-		*
-		* Note that it is possible to disable a single axis by setting the min and max of the
-		* `minPolarAngle` or `minAzimuthAngle` to the same value, which will cause the vertical
-		* or horizontal rotation to be fixed at that value.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enableRotate = true;
-		/**
-		* Speed of rotation.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.rotateSpeed = 1;
-		/**
-		* How fast to rotate the camera when the keyboard is used.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.keyRotateSpeed = 1;
-		/**
-		* Enable or disable camera panning.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enablePan = true;
-		/**
-		* Speed of panning.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.panSpeed = 1;
-		/**
-		* Defines how the camera's position is translated when panning. If `true`, the camera pans
-		* in screen space. Otherwise, the camera pans in the plane orthogonal to the camera's up
-		* direction.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.screenSpacePanning = true;
-		/**
-		* How fast to pan the camera when the keyboard is used in
-		* pixels per keypress.
-		*
-		* @type {number}
-		* @default 7
-		*/
-		this.keyPanSpeed = 7;
-		/**
-		* Setting this property to `true` allows to zoom to the cursor's position.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.zoomToCursor = false;
-		/**
-		* Set to true to automatically rotate around the target
-		*
-		* Note that if this is enabled, you must call `update()` in your animation loop.
-		* If you want the auto-rotate speed to be independent of the frame rate (the refresh
-		* rate of the display), you must pass the time `deltaTime`, in seconds, to `update()`.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.autoRotate = false;
-		/**
-		* How fast to rotate around the target if `autoRotate` is `true`. The default  equates to 30 seconds
-		* per orbit at 60fps.
-		*
-		* Note that if `autoRotate` is enabled, you must call `update()` in your animation loop.
-		*
-		* @type {number}
-		* @default 2
-		*/
-		this.autoRotateSpeed = 2;
-		/**
-		* This object contains references to the keycodes for controlling camera panning.
-		*
-		* ```js
-		* controls.keys = {
-		* 	LEFT: 'ArrowLeft', //left arrow
-		* 	UP: 'ArrowUp', // up arrow
-		* 	RIGHT: 'ArrowRight', // right arrow
-		* 	BOTTOM: 'ArrowDown' // down arrow
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.keys = {
-			LEFT: "ArrowLeft",
-			UP: "ArrowUp",
-			RIGHT: "ArrowRight",
-			BOTTOM: "ArrowDown"
-		};
-		/**
-		* This object contains references to the mouse actions used by the controls.
-		*
-		* ```js
-		* controls.mouseButtons = {
-		* 	LEFT: THREE.MOUSE.ROTATE,
-		* 	MIDDLE: THREE.MOUSE.DOLLY,
-		* 	RIGHT: THREE.MOUSE.PAN
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.mouseButtons = {
-			LEFT: MOUSE.ROTATE,
-			MIDDLE: MOUSE.DOLLY,
-			RIGHT: MOUSE.PAN
-		};
-		/**
-		* This object contains references to the touch actions used by the controls.
-		*
-		* ```js
-		* controls.mouseButtons = {
-		* 	ONE: THREE.TOUCH.ROTATE,
-		* 	TWO: THREE.TOUCH.DOLLY_PAN
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.touches = {
-			ONE: TOUCH.ROTATE,
-			TWO: TOUCH.DOLLY_PAN
-		};
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {Vector3}
-		*/
-		this.target0 = this.target.clone();
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {Vector3}
-		*/
-		this.position0 = this.object.position.clone();
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {number}
-		*/
-		this.zoom0 = this.object.zoom;
-		this._cursorStyle = "auto";
-		this._domElementKeyEvents = null;
-		this._lastPosition = new Vector3();
-		this._lastQuaternion = new Quaternion();
-		this._lastTargetPosition = new Vector3();
-		this._quat = new Quaternion().setFromUnitVectors(object.up, new Vector3(0, 1, 0));
-		this._quatInverse = this._quat.clone().invert();
-		this._spherical = new Spherical();
-		this._sphericalDelta = new Spherical();
-		this._scale = 1;
-		this._panOffset = new Vector3();
-		this._rotateStart = new Vector2();
-		this._rotateEnd = new Vector2();
-		this._rotateDelta = new Vector2();
-		this._panStart = new Vector2();
-		this._panEnd = new Vector2();
-		this._panDelta = new Vector2();
-		this._dollyStart = new Vector2();
-		this._dollyEnd = new Vector2();
-		this._dollyDelta = new Vector2();
-		this._dollyDirection = new Vector3();
-		this._mouse = new Vector2();
-		this._performCursorZoom = false;
-		this._pointers = [];
-		this._pointerPositions = {};
-		this._controlActive = false;
-		this._onPointerMove = onPointerMove.bind(this);
-		this._onPointerDown = onPointerDown.bind(this);
-		this._onPointerUp = onPointerUp.bind(this);
-		this._onContextMenu = onContextMenu.bind(this);
-		this._onMouseWheel = onMouseWheel.bind(this);
-		this._onKeyDown = onKeyDown.bind(this);
-		this._onTouchStart = onTouchStart.bind(this);
-		this._onTouchMove = onTouchMove.bind(this);
-		this._onMouseDown = onMouseDown.bind(this);
-		this._onMouseMove = onMouseMove.bind(this);
-		this._interceptControlDown = interceptControlDown.bind(this);
-		this._interceptControlUp = interceptControlUp.bind(this);
-		if (this.domElement !== null) this.connect(this.domElement);
-		this.update();
-	}
-	/**
-	* Defines the visual representation of the cursor.
-	*
-	* @type {('auto'|'grab')}
-	* @default 'auto'
-	*/
-	set cursorStyle(type) {
-		this._cursorStyle = type;
-		if (type === "grab") this.domElement.style.cursor = "grab";
-		else this.domElement.style.cursor = "auto";
-	}
-	get cursorStyle() {
-		return this._cursorStyle;
-	}
-	connect(element) {
-		super.connect(element);
-		this.domElement.addEventListener("pointerdown", this._onPointerDown);
-		this.domElement.addEventListener("pointercancel", this._onPointerUp);
-		this.domElement.addEventListener("contextmenu", this._onContextMenu);
-		this.domElement.addEventListener("wheel", this._onMouseWheel, { passive: false });
-		this.domElement.ownerDocument.addEventListener("keydown", this._interceptControlDown, {
-			passive: true,
-			capture: true
-		});
-		this.domElement.style.touchAction = "none";
-	}
-	disconnect() {
-		this.state = _STATE.NONE;
-		this.domElement.removeEventListener("pointerdown", this._onPointerDown);
-		this.domElement.ownerDocument.removeEventListener("pointermove", this._onPointerMove);
-		this.domElement.ownerDocument.removeEventListener("pointerup", this._onPointerUp);
-		this.domElement.removeEventListener("pointercancel", this._onPointerUp);
-		this.domElement.removeEventListener("wheel", this._onMouseWheel);
-		this.domElement.removeEventListener("contextmenu", this._onContextMenu);
-		this.stopListenToKeyEvents();
-		this.domElement.ownerDocument.removeEventListener("keydown", this._interceptControlDown, { capture: true });
-		this.domElement.ownerDocument.removeEventListener("keyup", this._interceptControlUp, { capture: true });
-		this._controlActive = false;
-		this._pointers.length = 0;
-		this._pointerPositions = {};
-		this.domElement.style.touchAction = "";
-		this.domElement.style.cursor = "auto";
-	}
-	dispose() {
-		this.disconnect();
-	}
-	/**
-	* Get the current vertical rotation, in radians.
-	*
-	* @return {number} The current vertical rotation, in radians.
-	*/
-	getPolarAngle() {
-		return this._spherical.phi;
-	}
-	/**
-	* Get the current horizontal rotation, in radians.
-	*
-	* @return {number} The current horizontal rotation, in radians.
-	*/
-	getAzimuthalAngle() {
-		return this._spherical.theta;
-	}
-	/**
-	* Returns the distance from the camera to the target.
-	*
-	* @return {number} The distance from the camera to the target.
-	*/
-	getDistance() {
-		return this.object.position.distanceTo(this.target);
-	}
-	/**
-	* Adds key event listeners to the given DOM element.
-	* `window` is a recommended argument for using this method.
-	*
-	* @param {HTMLElement} domElement - The DOM element
-	*/
-	listenToKeyEvents(domElement) {
-		domElement.addEventListener("keydown", this._onKeyDown);
-		this._domElementKeyEvents = domElement;
-	}
-	/**
-	* Removes the key event listener previously defined with `listenToKeyEvents()`.
-	*/
-	stopListenToKeyEvents() {
-		if (this._domElementKeyEvents !== null) {
-			this._domElementKeyEvents.removeEventListener("keydown", this._onKeyDown);
-			this._domElementKeyEvents = null;
-		}
-	}
-	/**
-	* Save the current state of the controls. This can later be recovered with `reset()`.
-	*/
-	saveState() {
-		this.target0.copy(this.target);
-		this.position0.copy(this.object.position);
-		this.zoom0 = this.object.zoom;
-	}
-	/**
-	* Reset the controls to their state from either the last time the `saveState()`
-	* was called, or the initial state.
-	*/
-	reset() {
-		this.target.copy(this.target0);
-		this.object.position.copy(this.position0);
-		this.object.zoom = this.zoom0;
-		this.object.updateProjectionMatrix();
-		this.dispatchEvent(_changeEvent);
-		this.update();
-		this.state = _STATE.NONE;
-	}
-	/**
-	* Programmatically pan the camera.
-	*
-	* @param {number} deltaX - The horizontal pan amount in pixels.
-	* @param {number} deltaY - The vertical pan amount in pixels.
-	*/
-	pan(deltaX, deltaY) {
-		this._pan(deltaX, deltaY);
-		this.update();
-	}
-	/**
-	* Programmatically dolly in (zoom in for perspective camera).
-	*
-	* @param {number} dollyScale - The dolly scale factor.
-	*/
-	dollyIn(dollyScale) {
-		this._dollyIn(dollyScale);
-		this.update();
-	}
-	/**
-	* Programmatically dolly out (zoom out for perspective camera).
-	*
-	* @param {number} dollyScale - The dolly scale factor.
-	*/
-	dollyOut(dollyScale) {
-		this._dollyOut(dollyScale);
-		this.update();
-	}
-	/**
-	* Programmatically rotate the camera left (around the vertical axis).
-	*
-	* @param {number} angle - The rotation angle in radians.
-	*/
-	rotateLeft(angle) {
-		this._rotateLeft(angle);
-		this.update();
-	}
-	/**
-	* Programmatically rotate the camera up (around the horizontal axis).
-	*
-	* @param {number} angle - The rotation angle in radians.
-	*/
-	rotateUp(angle) {
-		this._rotateUp(angle);
-		this.update();
-	}
-	update(deltaTime = null) {
-		const position = this.object.position;
-		_v.copy(position).sub(this.target);
-		_v.applyQuaternion(this._quat);
-		this._spherical.setFromVector3(_v);
-		if (this.autoRotate && this.state === _STATE.NONE) this._rotateLeft(this._getAutoRotationAngle(deltaTime));
-		if (this.enableDamping) {
-			this._spherical.theta += this._sphericalDelta.theta * this.dampingFactor;
-			this._spherical.phi += this._sphericalDelta.phi * this.dampingFactor;
-		} else {
-			this._spherical.theta += this._sphericalDelta.theta;
-			this._spherical.phi += this._sphericalDelta.phi;
-		}
-		let min = this.minAzimuthAngle;
-		let max = this.maxAzimuthAngle;
-		if (isFinite(min) && isFinite(max)) {
-			if (min < -Math.PI) min += _twoPI;
-			else if (min > Math.PI) min -= _twoPI;
-			if (max < -Math.PI) max += _twoPI;
-			else if (max > Math.PI) max -= _twoPI;
-			if (min <= max) this._spherical.theta = Math.max(min, Math.min(max, this._spherical.theta));
-			else this._spherical.theta = this._spherical.theta > (min + max) / 2 ? Math.max(min, this._spherical.theta) : Math.min(max, this._spherical.theta);
-		}
-		this._spherical.phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, this._spherical.phi));
-		this._spherical.makeSafe();
-		if (this.enableDamping === true) this.target.addScaledVector(this._panOffset, this.dampingFactor);
-		else this.target.add(this._panOffset);
-		this.target.sub(this.cursor);
-		this.target.clampLength(this.minTargetRadius, this.maxTargetRadius);
-		this.target.add(this.cursor);
-		let zoomChanged = false;
-		if (this.zoomToCursor && this._performCursorZoom || this.object.isOrthographicCamera) this._spherical.radius = this._clampDistance(this._spherical.radius);
-		else {
-			const prevRadius = this._spherical.radius;
-			this._spherical.radius = this._clampDistance(this._spherical.radius * this._scale);
-			zoomChanged = prevRadius != this._spherical.radius;
-		}
-		_v.setFromSpherical(this._spherical);
-		_v.applyQuaternion(this._quatInverse);
-		position.copy(this.target).add(_v);
-		this.object.lookAt(this.target);
-		if (this.enableDamping === true) {
-			this._sphericalDelta.theta *= 1 - this.dampingFactor;
-			this._sphericalDelta.phi *= 1 - this.dampingFactor;
-			this._panOffset.multiplyScalar(1 - this.dampingFactor);
-		} else {
-			this._sphericalDelta.set(0, 0, 0);
-			this._panOffset.set(0, 0, 0);
-		}
-		if (this.zoomToCursor && this._performCursorZoom) {
-			let newRadius = null;
-			if (this.object.isPerspectiveCamera) {
-				const prevRadius = _v.length();
-				newRadius = this._clampDistance(prevRadius * this._scale);
-				const radiusDelta = prevRadius - newRadius;
-				this.object.position.addScaledVector(this._dollyDirection, radiusDelta);
-				this.object.updateMatrixWorld();
-				zoomChanged = !!radiusDelta;
-			} else if (this.object.isOrthographicCamera) {
-				const mouseBefore = new Vector3(this._mouse.x, this._mouse.y, 0);
-				mouseBefore.unproject(this.object);
-				const prevZoom = this.object.zoom;
-				this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale));
-				this.object.updateProjectionMatrix();
-				zoomChanged = prevZoom !== this.object.zoom;
-				const mouseAfter = new Vector3(this._mouse.x, this._mouse.y, 0);
-				mouseAfter.unproject(this.object);
-				this.object.position.sub(mouseAfter).add(mouseBefore);
-				this.object.updateMatrixWorld();
-				newRadius = _v.length();
-			} else {
-				console.warn("WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.");
-				this.zoomToCursor = false;
-			}
-			if (newRadius !== null) {
-				if (this.screenSpacePanning) this.target.set(0, 0, -1).transformDirection(this.object.matrix).multiplyScalar(newRadius).add(this.object.position);
-				else {
-					_ray.origin.copy(this.object.position);
-					_ray.direction.set(0, 0, -1).transformDirection(this.object.matrix);
-					if (Math.abs(this.object.up.dot(_ray.direction)) < _TILT_LIMIT) this.object.lookAt(this.target);
-					else {
-						_plane.setFromNormalAndCoplanarPoint(this.object.up, this.target);
-						_ray.intersectPlane(_plane, this.target);
-					}
-				}
-			}
-		} else if (this.object.isOrthographicCamera) {
-			const prevZoom = this.object.zoom;
-			this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale));
-			if (prevZoom !== this.object.zoom) {
-				this.object.updateProjectionMatrix();
-				zoomChanged = true;
-			}
-		}
-		this._scale = 1;
-		this._performCursorZoom = false;
-		if (zoomChanged || this._lastPosition.distanceToSquared(this.object.position) > _EPS || 8 * (1 - this._lastQuaternion.dot(this.object.quaternion)) > _EPS || this._lastTargetPosition.distanceToSquared(this.target) > _EPS) {
-			this.dispatchEvent(_changeEvent);
-			this._lastPosition.copy(this.object.position);
-			this._lastQuaternion.copy(this.object.quaternion);
-			this._lastTargetPosition.copy(this.target);
-			return true;
-		}
-		return false;
-	}
-	_getAutoRotationAngle(deltaTime) {
-		if (deltaTime !== null) return _twoPI / 60 * this.autoRotateSpeed * deltaTime;
-		else return _twoPI / 60 / 60 * this.autoRotateSpeed;
-	}
-	_getZoomScale(delta) {
-		const normalizedDelta = Math.abs(delta * .01);
-		return Math.pow(.95, this.zoomSpeed * normalizedDelta);
-	}
-	_rotateLeft(angle) {
-		this._sphericalDelta.theta -= angle;
-	}
-	_rotateUp(angle) {
-		this._sphericalDelta.phi -= angle;
-	}
-	_panLeft(distance, objectMatrix) {
-		_v.setFromMatrixColumn(objectMatrix, 0);
-		_v.multiplyScalar(-distance);
-		this._panOffset.add(_v);
-	}
-	_panUp(distance, objectMatrix) {
-		if (this.screenSpacePanning === true) _v.setFromMatrixColumn(objectMatrix, 1);
-		else {
-			_v.setFromMatrixColumn(objectMatrix, 0);
-			_v.crossVectors(this.object.up, _v);
-		}
-		_v.multiplyScalar(distance);
-		this._panOffset.add(_v);
-	}
-	_pan(deltaX, deltaY) {
-		const element = this.domElement;
-		if (this.object.isPerspectiveCamera) {
-			const position = this.object.position;
-			_v.copy(position).sub(this.target);
-			let targetDistance = _v.length();
-			targetDistance *= Math.tan(this.object.fov / 2 * Math.PI / 180);
-			this._panLeft(2 * deltaX * targetDistance / element.clientHeight, this.object.matrix);
-			this._panUp(2 * deltaY * targetDistance / element.clientHeight, this.object.matrix);
-		} else if (this.object.isOrthographicCamera) {
-			this._panLeft(deltaX * (this.object.right - this.object.left) / this.object.zoom / element.clientWidth, this.object.matrix);
-			this._panUp(deltaY * (this.object.top - this.object.bottom) / this.object.zoom / element.clientHeight, this.object.matrix);
-		} else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
-			this.enablePan = false;
-		}
-	}
-	_dollyOut(dollyScale) {
-		if (this.object.isPerspectiveCamera || this.object.isOrthographicCamera) this._scale /= dollyScale;
-		else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-			this.enableZoom = false;
-		}
-	}
-	_dollyIn(dollyScale) {
-		if (this.object.isPerspectiveCamera || this.object.isOrthographicCamera) this._scale *= dollyScale;
-		else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-			this.enableZoom = false;
-		}
-	}
-	_updateZoomParameters(x, y) {
-		if (!this.zoomToCursor) return;
-		this._performCursorZoom = true;
-		const rect = this.domElement.getBoundingClientRect();
-		const dx = x - rect.left;
-		const dy = y - rect.top;
-		const w = rect.width;
-		const h = rect.height;
-		this._mouse.x = dx / w * 2 - 1;
-		this._mouse.y = -(dy / h) * 2 + 1;
-		this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
-	}
-	_clampDistance(dist) {
-		return Math.max(this.minDistance, Math.min(this.maxDistance, dist));
-	}
-	_handleMouseDownRotate(event) {
-		this._rotateStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseDownDolly(event) {
-		this._updateZoomParameters(event.clientX, event.clientY);
-		this._dollyStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseDownPan(event) {
-		this._panStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseMoveRotate(event) {
-		this._rotateEnd.set(event.clientX, event.clientY);
-		this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-		const element = this.domElement;
-		this._rotateLeft(_twoPI * this._rotateDelta.x / element.clientHeight);
-		this._rotateUp(_twoPI * this._rotateDelta.y / element.clientHeight);
-		this._rotateStart.copy(this._rotateEnd);
-		this.update();
-	}
-	_handleMouseMoveDolly(event) {
-		this._dollyEnd.set(event.clientX, event.clientY);
-		this._dollyDelta.subVectors(this._dollyEnd, this._dollyStart);
-		if (this._dollyDelta.y > 0) this._dollyOut(this._getZoomScale(this._dollyDelta.y));
-		else if (this._dollyDelta.y < 0) this._dollyIn(this._getZoomScale(this._dollyDelta.y));
-		this._dollyStart.copy(this._dollyEnd);
-		if (this.zoomToCursor) {
-			this._performCursorZoom = true;
-			this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
-		}
-		this.update();
-	}
-	_handleMouseMovePan(event) {
-		this._panEnd.set(event.clientX, event.clientY);
-		this._panDelta.subVectors(this._panEnd, this._panStart).multiplyScalar(this.panSpeed);
-		this._pan(this._panDelta.x, this._panDelta.y);
-		this._panStart.copy(this._panEnd);
-		this.update();
-	}
-	_handleMouseWheel(event) {
-		this._updateZoomParameters(event.clientX, event.clientY);
-		if (event.deltaY < 0) this._dollyIn(this._getZoomScale(event.deltaY));
-		else if (event.deltaY > 0) this._dollyOut(this._getZoomScale(event.deltaY));
-		this.update();
-	}
-	_handleKeyDown(event) {
-		let needsUpdate = false;
-		switch (event.code) {
-			case this.keys.UP:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateUp(_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(0, this.keyPanSpeed);
-				needsUpdate = true;
-				break;
-			case this.keys.BOTTOM:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateUp(-_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(0, -this.keyPanSpeed);
-				needsUpdate = true;
-				break;
-			case this.keys.LEFT:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateLeft(_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(this.keyPanSpeed, 0);
-				needsUpdate = true;
-				break;
-			case this.keys.RIGHT:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateLeft(-_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(-this.keyPanSpeed, 0);
-				needsUpdate = true;
-		}
-		if (needsUpdate) {
-			event.preventDefault();
-			this.update();
-		}
-	}
-	_handleTouchStartRotate(event) {
-		if (this._pointers.length === 1) this._rotateStart.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._rotateStart.set(x, y);
-		}
-	}
-	_handleTouchStartPan(event) {
-		if (this._pointers.length === 1) this._panStart.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._panStart.set(x, y);
-		}
-	}
-	_handleTouchStartDolly(event) {
-		const position = this._getSecondPointerPosition(event);
-		const dx = event.pageX - position.x;
-		const dy = event.pageY - position.y;
-		const distance = Math.sqrt(dx * dx + dy * dy);
-		this._dollyStart.set(0, distance);
-	}
-	_handleTouchStartDollyPan(event) {
-		if (this.enableZoom) this._handleTouchStartDolly(event);
-		if (this.enablePan) this._handleTouchStartPan(event);
-	}
-	_handleTouchStartDollyRotate(event) {
-		if (this.enableZoom) this._handleTouchStartDolly(event);
-		if (this.enableRotate) this._handleTouchStartRotate(event);
-	}
-	_handleTouchMoveRotate(event) {
-		if (this._pointers.length == 1) this._rotateEnd.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._rotateEnd.set(x, y);
-		}
-		this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-		const element = this.domElement;
-		this._rotateLeft(_twoPI * this._rotateDelta.x / element.clientHeight);
-		this._rotateUp(_twoPI * this._rotateDelta.y / element.clientHeight);
-		this._rotateStart.copy(this._rotateEnd);
-	}
-	_handleTouchMovePan(event) {
-		if (this._pointers.length === 1) this._panEnd.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._panEnd.set(x, y);
-		}
-		this._panDelta.subVectors(this._panEnd, this._panStart).multiplyScalar(this.panSpeed);
-		this._pan(this._panDelta.x, this._panDelta.y);
-		this._panStart.copy(this._panEnd);
-	}
-	_handleTouchMoveDolly(event) {
-		const position = this._getSecondPointerPosition(event);
-		const dx = event.pageX - position.x;
-		const dy = event.pageY - position.y;
-		const distance = Math.sqrt(dx * dx + dy * dy);
-		this._dollyEnd.set(0, distance);
-		this._dollyDelta.set(0, Math.pow(this._dollyEnd.y / this._dollyStart.y, this.zoomSpeed));
-		this._dollyOut(this._dollyDelta.y);
-		this._dollyStart.copy(this._dollyEnd);
-		const centerX = (event.pageX + position.x) * .5;
-		const centerY = (event.pageY + position.y) * .5;
-		this._updateZoomParameters(centerX, centerY);
-	}
-	_handleTouchMoveDollyPan(event) {
-		if (this.enableZoom) this._handleTouchMoveDolly(event);
-		if (this.enablePan) this._handleTouchMovePan(event);
-	}
-	_handleTouchMoveDollyRotate(event) {
-		if (this.enableZoom) this._handleTouchMoveDolly(event);
-		if (this.enableRotate) this._handleTouchMoveRotate(event);
-	}
-	_addPointer(event) {
-		this._pointers.push(event.pointerId);
-	}
-	_removePointer(event) {
-		delete this._pointerPositions[event.pointerId];
-		for (let i = 0; i < this._pointers.length; i++) if (this._pointers[i] == event.pointerId) {
-			this._pointers.splice(i, 1);
-			return;
-		}
-	}
-	_isTrackingPointer(event) {
-		for (let i = 0; i < this._pointers.length; i++) if (this._pointers[i] == event.pointerId) return true;
-		return false;
-	}
-	_trackPointer(event) {
-		let position = this._pointerPositions[event.pointerId];
-		if (position === void 0) {
-			position = new Vector2();
-			this._pointerPositions[event.pointerId] = position;
-		}
-		position.set(event.pageX, event.pageY);
-	}
-	_getSecondPointerPosition(event) {
-		const pointerId = event.pointerId === this._pointers[0] ? this._pointers[1] : this._pointers[0];
-		return this._pointerPositions[pointerId];
-	}
-	_customWheelEvent(event) {
-		const mode = event.deltaMode;
-		const newEvent = {
-			clientX: event.clientX,
-			clientY: event.clientY,
-			deltaY: event.deltaY
-		};
-		switch (mode) {
-			case 1:
-				newEvent.deltaY *= 16;
-				break;
-			case 2: newEvent.deltaY *= 100;
-		}
-		if (event.ctrlKey && !this._controlActive) newEvent.deltaY *= 10;
-		return newEvent;
-	}
-};
-function onPointerDown(event) {
-	if (this.enabled === false) return;
-	if (this._pointers.length === 0) {
-		this.domElement.setPointerCapture(event.pointerId);
-		this.domElement.ownerDocument.addEventListener("pointermove", this._onPointerMove);
-		this.domElement.ownerDocument.addEventListener("pointerup", this._onPointerUp);
-	}
-	if (this._isTrackingPointer(event)) return;
-	this._addPointer(event);
-	if (event.pointerType === "touch") this._onTouchStart(event);
-	else this._onMouseDown(event);
-	if (this._cursorStyle === "grab") this.domElement.style.cursor = "grabbing";
-}
-function onPointerMove(event) {
-	if (this.enabled === false) return;
-	if (event.pointerType === "touch") this._onTouchMove(event);
-	else this._onMouseMove(event);
-}
-function onPointerUp(event) {
-	this._removePointer(event);
-	switch (this._pointers.length) {
-		case 0:
-			this.domElement.releasePointerCapture(event.pointerId);
-			this.domElement.ownerDocument.removeEventListener("pointermove", this._onPointerMove);
-			this.domElement.ownerDocument.removeEventListener("pointerup", this._onPointerUp);
-			this.dispatchEvent(_endEvent);
-			this.state = _STATE.NONE;
-			if (this._cursorStyle === "grab") this.domElement.style.cursor = "grab";
-			break;
-		case 1:
-			const pointerId = this._pointers[0];
-			const position = this._pointerPositions[pointerId];
-			this._onTouchStart({
-				pointerId,
-				pageX: position.x,
-				pageY: position.y
-			});
-	}
-}
-function onMouseDown(event) {
-	let mouseAction;
-	switch (event.button) {
-		case 0:
-			mouseAction = this.mouseButtons.LEFT;
-			break;
-		case 1:
-			mouseAction = this.mouseButtons.MIDDLE;
-			break;
-		case 2:
-			mouseAction = this.mouseButtons.RIGHT;
-			break;
-		default: mouseAction = -1;
-	}
-	switch (mouseAction) {
-		case MOUSE.DOLLY:
-			if (this.enableZoom === false) return;
-			this._handleMouseDownDolly(event);
-			this.state = _STATE.DOLLY;
-			break;
-		case MOUSE.ROTATE:
-			if (event.ctrlKey || event.metaKey || event.shiftKey) {
-				if (this.enablePan === false) return;
-				this._handleMouseDownPan(event);
-				this.state = _STATE.PAN;
-			} else {
-				if (this.enableRotate === false) return;
-				this._handleMouseDownRotate(event);
-				this.state = _STATE.ROTATE;
-			}
-			break;
-		case MOUSE.PAN:
-			if (event.ctrlKey || event.metaKey || event.shiftKey) {
-				if (this.enableRotate === false) return;
-				this._handleMouseDownRotate(event);
-				this.state = _STATE.ROTATE;
-			} else {
-				if (this.enablePan === false) return;
-				this._handleMouseDownPan(event);
-				this.state = _STATE.PAN;
-			}
-			break;
-		default: this.state = _STATE.NONE;
-	}
-	if (this.state !== _STATE.NONE) this.dispatchEvent(_startEvent);
-}
-function onMouseMove(event) {
-	switch (this.state) {
-		case _STATE.ROTATE:
-			if (this.enableRotate === false) return;
-			this._handleMouseMoveRotate(event);
-			break;
-		case _STATE.DOLLY:
-			if (this.enableZoom === false) return;
-			this._handleMouseMoveDolly(event);
-			break;
-		case _STATE.PAN:
-			if (this.enablePan === false) return;
-			this._handleMouseMovePan(event);
-	}
-}
-function onMouseWheel(event) {
-	if (this.enabled === false || this.enableZoom === false || this.state !== _STATE.NONE) return;
-	event.preventDefault();
-	this.dispatchEvent(_startEvent);
-	this._handleMouseWheel(this._customWheelEvent(event));
-	this.dispatchEvent(_endEvent);
-}
-function onKeyDown(event) {
-	if (this.enabled === false) return;
-	this._handleKeyDown(event);
-}
-function onTouchStart(event) {
-	this._trackPointer(event);
-	switch (this._pointers.length) {
-		case 1:
-			switch (this.touches.ONE) {
-				case TOUCH.ROTATE:
-					if (this.enableRotate === false) {
-						this.state = _STATE.NONE;
-						break;
-					}
-					this._handleTouchStartRotate(event);
-					this.state = _STATE.TOUCH_ROTATE;
-					break;
-				case TOUCH.PAN:
-					if (this.enablePan === false) {
-						this.state = _STATE.NONE;
-						break;
-					}
-					this._handleTouchStartPan(event);
-					this.state = _STATE.TOUCH_PAN;
-					break;
-				default: this.state = _STATE.NONE;
-			}
-			break;
-		case 2:
-			switch (this.touches.TWO) {
-				case TOUCH.DOLLY_PAN:
-					if (this.enableZoom === false && this.enablePan === false) return;
-					this._handleTouchStartDollyPan(event);
-					this.state = _STATE.TOUCH_DOLLY_PAN;
-					break;
-				case TOUCH.DOLLY_ROTATE:
-					if (this.enableZoom === false && this.enableRotate === false) return;
-					this._handleTouchStartDollyRotate(event);
-					this.state = _STATE.TOUCH_DOLLY_ROTATE;
-					break;
-				default: this.state = _STATE.NONE;
-			}
-			break;
-		default: this.state = _STATE.NONE;
-	}
-	if (this.state !== _STATE.NONE) this.dispatchEvent(_startEvent);
-}
-function onTouchMove(event) {
-	this._trackPointer(event);
-	switch (this.state) {
-		case _STATE.TOUCH_ROTATE:
-			if (this.enableRotate === false) return;
-			this._handleTouchMoveRotate(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_PAN:
-			if (this.enablePan === false) return;
-			this._handleTouchMovePan(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_DOLLY_PAN:
-			if (this.enableZoom === false && this.enablePan === false) return;
-			this._handleTouchMoveDollyPan(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_DOLLY_ROTATE:
-			if (this.enableZoom === false && this.enableRotate === false) return;
-			this._handleTouchMoveDollyRotate(event);
-			this.update();
-			break;
-		default: this.state = _STATE.NONE;
-	}
-}
-function onContextMenu(event) {
-	if (this.enabled === false) return;
-	event.preventDefault();
-}
-function interceptControlDown(event) {
-	if (event.key === "Control") {
-		this._controlActive = true;
-		this.domElement.ownerDocument.addEventListener("keyup", this._interceptControlUp, {
-			passive: true,
-			capture: true
-		});
-	}
-}
-function interceptControlUp(event) {
-	if (event.key === "Control") {
-		this._controlActive = false;
-		this.domElement.ownerDocument.removeEventListener("keyup", this._interceptControlUp, {
-			passive: true,
-			capture: true
-		});
-	}
-}
 // node_modules/three/examples/jsm/environments/RoomEnvironment.js
 /**
 * This class represents a scene with a basic room setup that can be used as
@@ -61885,12 +61066,12 @@ function makeContactShadow(size, shadowTex, opacity = .45) {
 }
 function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shadowTex, compactMode = false, ultraCompact = false) {
 	const envGroup = new Group();
-	const table = new Mesh(new BoxGeometry(7.8, .22, 2.76), new MeshStandardMaterial({
+	const table = new Mesh(new BoxGeometry(6.4, .22, 2.45), new MeshStandardMaterial({
 		map: woodTex,
 		roughness: .62,
 		metalness: .02
 	}));
-	table.position.set(0, -.11, .14);
+	table.position.set(0, -.11, .05);
 	table.receiveShadow = true;
 	envGroup.add(table);
 	const trimMat = new MeshStandardMaterial({
@@ -61898,25 +61079,27 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		roughness: .45,
 		metalness: .05
 	});
-	const frontTrim = new Mesh(new BoxGeometry(7.84, .06, .08), trimMat);
-	frontTrim.position.set(0, -.02, 1.52);
+	const frontTrim = new Mesh(new BoxGeometry(6.44, .06, .08), trimMat);
+	frontTrim.position.set(0, -.02, 1.28);
 	envGroup.add(frontTrim);
 	const walnutMat = new MeshStandardMaterial({
 		map: walnutTex,
 		roughness: .68,
 		metalness: .02
 	});
-	const counterBase = new Mesh(new BoxGeometry(7.25, .56, 2.25), walnutMat);
-	counterBase.position.set(0, -.5, .14);
+	const counterBase = new Mesh(new BoxGeometry(5.95, .56, 2.05), walnutMat);
+	counterBase.position.set(0, -.5, .05);
 	counterBase.receiveShadow = true;
 	envGroup.add(counterBase);
 	const slatGeo = new BoxGeometry(.12, .5, .04);
-	const slatCount = ultraCompact ? 6 : 10;
+	const slatCount = ultraCompact ? 6 : 9;
 	for (let i = 0; i < slatCount; i++) {
 		const t = i / (slatCount - 1) - .5;
-		const slat = new Mesh(slatGeo, trimMat);
-		slat.position.set(t * 6.4, -.5, -.99);
-		envGroup.add(slat);
+		const slatBack = new Mesh(slatGeo, trimMat);
+		slatBack.position.set(t * 5.2, -.5, -.98);
+		const slatFront = new Mesh(slatGeo, trimMat);
+		slatFront.position.set(t * 5.2, -.5, 1.08);
+		envGroup.add(slatBack, slatFront);
 	}
 	const trayGroup = new Group();
 	const trayFloor = new Mesh(new BoxGeometry(3.8, .06, 2.35), new MeshStandardMaterial({
@@ -61982,7 +61165,7 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	});
 	canisterColors.forEach((col, idx) => {
 		const canister = new Group();
-		const xPos = -2.65 - idx * .65;
+		const xPos = -2.38 - idx * .48;
 		const zPos = -.35 + idx * .55;
 		canister.add(makeContactShadow(.65, shadowTex, .5));
 		const body = new Mesh(canisterBodyGeo, new MeshStandardMaterial({
@@ -62021,24 +61204,30 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		roughness: .72,
 		metalness: .02
 	});
-	const shopFloor = new Mesh(new BoxGeometry(9.6, .08, 7.6), floorMat);
-	shopFloor.position.set(0, -.8200000000000001, .55);
+	const shopFloor = new Mesh(new BoxGeometry(10.9, .08, 8.2), floorMat);
+	shopFloor.position.set(0, -.8200000000000001, .85);
 	shopFloor.receiveShadow = true;
 	shopGroup.add(shopFloor);
-	const backWainscot = new Mesh(new BoxGeometry(9.6, 1.24, .16), timberMat);
+	const entryStone = new Mesh(new BoxGeometry(2.8, .07, 2.2), new MeshStandardMaterial({
+		color: 12173750,
+		roughness: .88
+	}));
+	entryStone.position.set(6.75, -.8250000000000001, -1.82);
+	shopGroup.add(entryStone);
+	const backWainscot = new Mesh(new BoxGeometry(10.9, 1.24, .16), timberMat);
 	backWainscot.position.set(0, -.16000000000000003, -3.15);
 	shopGroup.add(backWainscot);
-	const backWallLeft = new Mesh(new BoxGeometry(2.95, 2.85, .16), plasterMat);
-	backWallLeft.position.set(-3.32, 1.88, -3.15);
+	const backWallLeft = new Mesh(new BoxGeometry(3.6, 2.85, .16), plasterMat);
+	backWallLeft.position.set(-3.65, 1.88, -3.15);
 	const backWallRight = backWallLeft.clone();
-	backWallRight.position.x = 3.32;
+	backWallRight.position.x = 3.65;
 	shopGroup.add(backWallLeft, backWallRight);
 	const backHeader = new Mesh(new BoxGeometry(3.75, .85, .16), plasterMat);
 	backHeader.position.set(0, 2.9, -3.15);
 	shopGroup.add(backHeader);
 	const windowSill = new Mesh(new BoxGeometry(3.85, .08, .28), timberMat);
 	windowSill.position.set(0, .46, -3.12);
-	const windowTopBeam = new Mesh(new BoxGeometry(9.6, .14, .22), timberMat);
+	const windowTopBeam = new Mesh(new BoxGeometry(10.9, .14, .22), timberMat);
 	windowTopBeam.position.set(0, 2.52, -3.14);
 	shopGroup.add(windowSill, windowTopBeam);
 	const vMullionGeo = new BoxGeometry(.055, 2.02, .055);
@@ -62056,25 +61245,37 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	const hBar = new Mesh(new BoxGeometry(3.72, .045, .045), timberMat);
 	hBar.position.set(0, 1.98, -3.14);
 	shopGroup.add(hBar);
-	const sideWallGeo = new BoxGeometry(.16, 4.15, 7.6);
-	const leftWall = new Mesh(sideWallGeo, plasterMat);
-	leftWall.position.set(-4.75, 1.28, .55);
-	const rightWall = new Mesh(sideWallGeo, plasterMat);
-	rightWall.position.set(4.75, 1.28, .55);
-	shopGroup.add(leftWall, rightWall);
+	const leftWall = new Mesh(new BoxGeometry(.16, 4.15, 8.2), plasterMat);
+	leftWall.position.set(-5.35, 1.28, .85);
+	shopGroup.add(leftWall);
+	const rightWallBack = new Mesh(new BoxGeometry(.16, 4.15, .78), plasterMat);
+	rightWallBack.position.set(5.35, 1.28, -2.86);
+	const rightWallFront = new Mesh(new BoxGeometry(.16, 4.15, 6.1), plasterMat);
+	rightWallFront.position.set(5.35, 1.28, 1.92);
+	const rightDoorHeader = new Mesh(new BoxGeometry(.16, 1.25, 1.45), plasterMat);
+	rightDoorHeader.position.set(5.35, 2.72, -1.8);
+	shopGroup.add(rightWallBack, rightWallFront, rightDoorHeader);
+	const doorPostGeo = new BoxGeometry(.22, 2.86, .12);
+	const doorPostBack = new Mesh(doorPostGeo, timberMat);
+	doorPostBack.position.set(5.35, .65, -2.46);
+	const doorPostFront = new Mesh(doorPostGeo, timberMat);
+	doorPostFront.position.set(5.35, .65, -1.14);
+	const doorLintel = new Mesh(new BoxGeometry(.26, .14, 1.52), timberMat);
+	doorLintel.position.set(5.35, 2.12, -1.8);
+	shopGroup.add(doorPostBack, doorPostFront, doorLintel);
 	const pillarGeo = new BoxGeometry(.22, 4.15, .22);
 	for (const [px, pz] of [
-		[-4.65, -3.05],
-		[4.65, -3.05],
-		[-4.65, .85],
-		[4.65, .85]
+		[-5.25, -3.05],
+		[5.25, -3.05],
+		[-5.25, .85],
+		[5.25, .85]
 	]) {
 		const pillar = new Mesh(pillarGeo, timberMat);
 		pillar.position.set(px, 1.28, pz);
 		shopGroup.add(pillar);
 	}
 	const shelfBoard = new Mesh(new BoxGeometry(1.75, .06, .34), timberMat);
-	shelfBoard.position.set(-3.25, 1.38, -2.92);
+	shelfBoard.position.set(-3.45, 1.38, -2.92);
 	shopGroup.add(shelfBoard);
 	const jarMat = new MeshStandardMaterial({
 		color: 5401428,
@@ -62084,7 +61285,7 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	const jarGeo = new CylinderGeometry(.1, .11, .26, compactMode ? 10 : 16);
 	for (let j = 0; j < 3; j++) {
 		const jar = new Mesh(jarGeo, jarMat);
-		jar.position.set(-3.75 + j * .45, 1.54, -2.92);
+		jar.position.set(-3.95 + j * .45, 1.54, -2.92);
 		shopGroup.add(jar);
 	}
 	const lanternGroup = new Group();
@@ -62109,14 +61310,14 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		color: 3889474,
 		roughness: .86
 	});
-	const norenBar = new Mesh(new CylinderGeometry(.025, .025, 1.55, 8), timberMat);
+	const norenBar = new Mesh(new CylinderGeometry(.025, .025, 1.36, 8), timberMat);
 	norenBar.rotation.x = Math.PI / 2;
-	norenBar.position.set(4.56, 2.15, -1.65);
+	norenBar.position.set(5.26, 2.02, -1.8);
 	shopGroup.add(norenBar);
-	const norenPanelGeo = new BoxGeometry(.03, .68, .42);
+	const norenPanelGeo = new BoxGeometry(.03, .56, .4);
 	for (let p = 0; p < 3; p++) {
 		const panel = new Mesh(norenPanelGeo, norenMat);
-		panel.position.set(4.56, 1.78, -2.12 + p * .47);
+		panel.position.set(5.26, 1.72, -2.22 + p * .42);
 		shopGroup.add(panel);
 	}
 	shopGroup.traverse((obj) => {
@@ -63157,6 +62358,79 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl, comp
 	};
 }
 // src/three/shopCharacters.ts
+var SHOP_FLOOR_Y = -.78;
+var PLAYER_SPAWN_POS = new Vector3(.45, SHOP_FLOOR_Y, 2.72);
+var PLAYER_SPAWN_ROT_Y = Math.PI;
+var DOOR_OUTSIDE_POS = new Vector2(6.65, -1.8);
+var DOOR_THRESHOLD_X = 5.32;
+var SEAT_LEFT_POS = new Vector3(-1.55, SHOP_FLOOR_Y, -1.92);
+var SEAT_LEFT_ROT_Y = .28;
+var CUSTOMER_WAYPOINTS = [
+	new Vector2(6.65, -1.8),
+	new Vector2(5.1, -1.8),
+	new Vector2(3.65, -2.12),
+	new Vector2(.85, -2.35),
+	new Vector2(-1.55, -2.38),
+	new Vector2(-1.55, -1.92)
+];
+function clampToShopObstacles(x, z) {
+	let nx = MathUtils.clamp(x, -4.82, 4.82);
+	let nz = MathUtils.clamp(z, -2.68, 4.35);
+	const cMinX = -3.54;
+	const cMaxX = 3.54;
+	const cMinZ = -1.52;
+	const cMaxZ = 1.64;
+	if (nx > cMinX && nx < cMaxX && nz > cMinZ && nz < cMaxZ) {
+		const dLeft = Math.abs(nx - cMinX);
+		const dRight = Math.abs(cMaxX - nx);
+		const dBack = Math.abs(nz - cMinZ);
+		const dFront = Math.abs(cMaxZ - nz);
+		const minD = Math.min(dLeft, dRight, dBack, dFront);
+		if (minD === dFront) nz = cMaxZ;
+		else if (minD === dBack) nz = cMinZ;
+		else if (minD === dLeft) nx = cMinX;
+		else nx = cMaxX;
+	}
+	for (const [cx, cz, rad] of [
+		[
+			-1.55,
+			-1.92,
+			.62
+		],
+		[
+			1.55,
+			-1.96,
+			.56
+		],
+		[
+			2.42,
+			-1.78,
+			.52
+		]
+	]) {
+		const dx = nx - cx;
+		const dz = nz - cz;
+		const dist = Math.hypot(dx, dz);
+		if (dist < rad) {
+			const inv = dist > .001 ? 1 / dist : 1;
+			nx = cx + (dist > .001 ? dx * inv : 0) * rad;
+			nz = cz + (dist > .001 ? dz * inv : 1) * rad;
+		}
+	}
+	nx = MathUtils.clamp(nx, -4.82, 4.82);
+	nz = MathUtils.clamp(nz, -2.68, 4.35);
+	return {
+		x: nx,
+		z: nz
+	};
+}
+function checkNearTeaTable(pos) {
+	const px = pos.x;
+	const pz = pos.z;
+	const inFrontBrewZone = Math.abs(px) <= 2.35 && pz >= 1.2 && pz <= 2.75;
+	const nearCounterCenter = Math.hypot(px, pz - 1.35) <= 2.05;
+	return inFrontBrewZone || nearCounterCenter || Math.abs(px) <= 4.15 && pz >= -1.25 && pz <= 2.15;
+}
 function createTeaChair(walnutTex, cushionColorHex, compactMode = false) {
 	const chair = new Group();
 	const woodMat = new MeshStandardMaterial({
@@ -63220,137 +62494,310 @@ function createTeaChair(walnutTex, cushionColorHex, compactMode = false) {
 function createTeaMasterCharacter(compactMode, ultraCompact) {
 	const seg = ultraCompact ? 10 : compactMode ? 12 : 18;
 	const group = new Group();
-	group.position.set(2.38, -.78, .48);
-	group.rotation.y = -1.16;
+	group.position.copy(PLAYER_SPAWN_POS);
+	group.rotation.y = PLAYER_SPAWN_ROT_Y;
 	const skinMat = new MeshStandardMaterial({
-		color: 15912884,
-		roughness: .7,
-		metalness: 0
+		color: 15978677,
+		roughness: .65
 	});
 	const shirtMat = new MeshStandardMaterial({
-		color: 16183782,
-		roughness: .82,
-		metalness: 0
+		color: 16315627,
+		roughness: .78
+	});
+	const collarMat = new MeshStandardMaterial({
+		color: 15130057,
+		roughness: .8
 	});
 	const apronMat = new MeshStandardMaterial({
 		color: 3043136,
-		roughness: .78,
-		metalness: 0
+		roughness: .72
+	});
+	const apronDarkMat = new MeshStandardMaterial({
+		color: 2116908,
+		roughness: .78
+	});
+	const obiMat = new MeshStandardMaterial({
+		color: 8147765,
+		roughness: .76
 	});
 	const pantsMat = new MeshStandardMaterial({
-		color: 3880239,
-		roughness: .85
+		color: 3354153,
+		roughness: .84
 	});
 	const hairMat = new MeshStandardMaterial({
-		color: 2498846,
-		roughness: .75
+		color: 2433053,
+		roughness: .66
 	});
 	const eyeMat = new MeshStandardMaterial({
-		color: 1775895,
-		roughness: .35
+		color: 1709845,
+		roughness: .25
 	});
 	const woodPinMat = new MeshStandardMaterial({
-		color: 12026956,
-		roughness: .5
+		color: 12158284,
+		roughness: .45
 	});
-	const legGeo = new CylinderGeometry(.085, .075, .74, seg);
-	const leftLeg = new Mesh(legGeo, pantsMat);
-	leftLeg.position.set(-.11, .37, 0);
-	const rightLeg = new Mesh(legGeo, pantsMat);
-	rightLeg.position.set(.11, .37, 0);
-	group.add(leftLeg, rightLeg);
-	const torso = new Mesh(new CylinderGeometry(.2, .22, .56, seg), shirtMat);
-	torso.position.y = 1.01;
-	torso.castShadow = !compactMode;
-	group.add(torso);
-	const apronFront = new Mesh(new BoxGeometry(.34, .62, .06), apronMat);
-	apronFront.position.set(0, .94, .19);
-	apronFront.castShadow = !compactMode;
-	group.add(apronFront);
-	const apronPocket = new Mesh(new BoxGeometry(.18, .14, .025), new MeshStandardMaterial({
-		color: 2382130,
-		roughness: .82
-	}));
-	apronPocket.position.set(0, .84, .22);
-	group.add(apronPocket);
-	const armGeo = new CylinderGeometry(.055, .048, .46, seg);
-	const handGeo = new SphereGeometry(.058, seg, seg);
-	const rightArm = new Group();
-	rightArm.position.set(.25, 1.24, 0);
-	const rightSleeve = new Mesh(armGeo, shirtMat);
-	rightSleeve.position.set(.02, -.2, .06);
-	rightSleeve.rotation.x = -.35;
-	const rightHand = new Mesh(handGeo, skinMat);
-	rightHand.position.set(.02, -.4, .15);
-	rightArm.add(rightSleeve, rightHand);
-	group.add(rightArm);
-	const leftArm = new Group();
-	leftArm.position.set(-.25, 1.24, 0);
-	const leftSleeve = new Mesh(armGeo, shirtMat);
-	leftSleeve.position.set(-.02, -.2, .05);
-	leftSleeve.rotation.x = -.28;
-	const leftHand = new Mesh(handGeo, skinMat);
-	leftHand.position.set(-.02, -.4, .12);
-	leftArm.add(leftSleeve, leftHand);
-	group.add(leftArm);
+	const jadeMat = new MeshStandardMaterial({
+		color: 6466170,
+		roughness: .32
+	});
+	const sockMat = new MeshStandardMaterial({
+		color: 16316144,
+		roughness: .85
+	});
+	const sandalMat = new MeshStandardMaterial({
+		color: 7819312,
+		roughness: .62
+	});
+	const buildLeg = (side) => {
+		const hip = new Group();
+		hip.position.set(side * .112, .72, 0);
+		const hipJoint = new Mesh(new SphereGeometry(.084, seg, seg), pantsMat);
+		hip.add(hipJoint);
+		const thigh = new Mesh(new CylinderGeometry(.084, .072, .34, seg), pantsMat);
+		thigh.position.y = -.17;
+		thigh.castShadow = !compactMode;
+		hip.add(thigh);
+		const shin = new Group();
+		shin.position.set(0, -.34, 0);
+		const kneeJoint = new Mesh(new SphereGeometry(.069, seg, seg), pantsMat);
+		const calf = new Mesh(new CylinderGeometry(.07, .056, .29, seg), pantsMat);
+		calf.position.y = -.145;
+		calf.castShadow = !compactMode;
+		const sock = new Mesh(new CylinderGeometry(.053, .05, .085, seg), sockMat);
+		sock.position.y = -.295;
+		const footCap = new Mesh(new SphereGeometry(.054, seg, seg), sockMat);
+		footCap.scale.set(.95, .62, 1.55);
+		footCap.position.set(0, -.325, .035);
+		const sole = new Mesh(new BoxGeometry(.112, .028, .215), sandalMat);
+		sole.position.set(0, -.352, .03);
+		const toothFront = new Mesh(new BoxGeometry(.105, .02, .024), sandalMat);
+		toothFront.position.set(0, -.372, .08);
+		const toothBack = new Mesh(new BoxGeometry(.105, .02, .024), sandalMat);
+		toothBack.position.set(0, -.372, -.04);
+		const strapL = new Mesh(new CylinderGeometry(.008, .008, .09, 6), apronMat);
+		strapL.position.set(-.028, -.322, .055);
+		strapL.rotation.set(.65, 0, -.38);
+		const strapR = strapL.clone();
+		strapR.position.x = .028;
+		strapR.rotation.z = .38;
+		shin.add(kneeJoint, calf, sock, footCap, sole, toothFront, toothBack, strapL, strapR);
+		hip.add(shin);
+		return {
+			hip,
+			shin
+		};
+	};
+	const leftLegBuilt = buildLeg(-1);
+	const rightLegBuilt = buildLeg(1);
+	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+	const pelvis = new Mesh(new SphereGeometry(.218, seg, seg), pantsMat);
+	pelvis.scale.set(1.02, .56, .88);
+	pelvis.position.set(0, .72, 0);
+	group.add(pelvis);
+	const torsoLower = new Mesh(new CylinderGeometry(.195, .215, .3, seg), shirtMat);
+	torsoLower.position.y = .87;
+	torsoLower.castShadow = !compactMode;
+	group.add(torsoLower);
+	const torsoChest = new Mesh(new SphereGeometry(.215, seg, seg), shirtMat);
+	torsoChest.scale.set(1.06, 1.05, .82);
+	torsoChest.position.set(0, 1.11, 0);
+	torsoChest.castShadow = !compactMode;
+	group.add(torsoChest);
+	const shoulderYoke = new Mesh(new CapsuleGeometry(.068, .34, 6, seg), shirtMat);
+	shoulderYoke.rotation.z = Math.PI / 2;
+	shoulderYoke.position.set(0, 1.24, -.01);
+	group.add(shoulderYoke);
+	const leftLapel = new Mesh(new CapsuleGeometry(.025, .19, 4, 8), collarMat);
+	leftLapel.position.set(-.058, 1.19, .168);
+	leftLapel.rotation.z = -.4;
+	const rightLapel = new Mesh(new CapsuleGeometry(.025, .19, 4, 8), collarMat);
+	rightLapel.position.set(.058, 1.19, .168);
+	rightLapel.rotation.z = .4;
+	group.add(leftLapel, rightLapel);
+	const apronSkirt = new Mesh(new CylinderGeometry(.222, .245, .4, seg, 1, false, -Math.PI * .62, Math.PI * 1.24), apronMat);
+	apronSkirt.position.set(0, .72, .015);
+	apronSkirt.castShadow = !compactMode;
+	group.add(apronSkirt);
+	const apronBib = new Mesh(new CylinderGeometry(.205, .218, .32, seg, 1, false, -Math.PI * .36, Math.PI * .72), apronMat);
+	apronBib.position.set(0, 1.04, .02);
+	group.add(apronBib);
+	const apronNeckStrap = new Mesh(new TorusGeometry(.115, .014, 6, 14), apronDarkMat);
+	apronNeckStrap.rotation.x = Math.PI / 2 + .35;
+	apronNeckStrap.position.set(0, 1.24, .03);
+	group.add(apronNeckStrap);
+	const apronWaist = new Mesh(new TorusGeometry(.21, .032, 8, seg), obiMat);
+	apronWaist.rotation.x = Math.PI / 2;
+	apronWaist.scale.set(1.04, .88, 1);
+	apronWaist.position.set(0, .84, 0);
+	group.add(apronWaist);
+	const apronBackKnot = new Mesh(new SphereGeometry(.048, 8, 8), obiMat);
+	apronBackKnot.position.set(0, .84, -.215);
+	const bowLoopGeo = new TorusGeometry(.044, .015, 6, 10);
+	const bowL = new Mesh(bowLoopGeo, obiMat);
+	bowL.position.set(-.048, .85, -.22);
+	bowL.rotation.y = .28;
+	const bowR = new Mesh(bowLoopGeo, obiMat);
+	bowR.position.set(.048, .85, -.22);
+	bowR.rotation.y = -.28;
+	const ribbonL = new Mesh(new CapsuleGeometry(.016, .16, 4, 6), obiMat);
+	ribbonL.position.set(-.036, .71, -.22);
+	ribbonL.rotation.z = -.2;
+	const ribbonR = ribbonL.clone();
+	ribbonR.position.x = .036;
+	ribbonR.rotation.z = .2;
+	group.add(apronBackKnot, bowL, bowR, ribbonL, ribbonR);
+	const apronPocket = new Mesh(new BoxGeometry(.175, .13, .025), apronDarkMat);
+	apronPocket.position.set(0, .72, .228);
+	const scoopStick = new Mesh(new CylinderGeometry(.008, .007, .145, 6), woodPinMat);
+	scoopStick.position.set(.045, .79, .232);
+	scoopStick.rotation.z = -.22;
+	group.add(apronPocket, scoopStick);
+	const buildArm = (side) => {
+		const shoulder = new Group();
+		shoulder.position.set(side * .245, 1.23, 0);
+		const shoulderSphere = new Mesh(new SphereGeometry(.064, seg, seg), shirtMat);
+		const upperSleeve = new Mesh(new CylinderGeometry(.06, .054, .21, seg), shirtMat);
+		upperSleeve.position.set(side * .008, -.1, .015);
+		upperSleeve.castShadow = !compactMode;
+		const cuffRing = new Mesh(new TorusGeometry(.056, .016, 6, seg), collarMat);
+		cuffRing.rotation.x = Math.PI / 2;
+		cuffRing.position.set(side * .008, -.21, .025);
+		const elbow = new Mesh(new SphereGeometry(.046, 8, 8), skinMat);
+		elbow.position.set(side * .008, -.22, .028);
+		const forearm = new Mesh(new CylinderGeometry(.045, .036, .19, seg), skinMat);
+		forearm.position.set(side * .008, -.31, .062);
+		forearm.rotation.x = -.3;
+		const hand = new Mesh(new SphereGeometry(.048, seg, seg), skinMat);
+		hand.scale.set(.95, 1.12, .85);
+		hand.position.set(side * .008, -.405, .095);
+		shoulder.add(shoulderSphere, upperSleeve, cuffRing, elbow, forearm, hand);
+		return shoulder;
+	};
+	const leftArm = buildArm(-1);
+	const rightArm = buildArm(1);
+	group.add(leftArm, rightArm);
 	const head = new Group();
-	head.position.set(0, 1.41, 0);
-	const neck = new Mesh(new CylinderGeometry(.065, .075, .12, seg), skinMat);
-	neck.position.y = -.08;
+	head.position.set(0, 1.4, 0);
+	const neck = new Mesh(new CylinderGeometry(.06, .072, .12, seg), skinMat);
+	neck.position.y = -.07;
 	head.add(neck);
-	const cranium = new Mesh(new SphereGeometry(.185, seg, seg), skinMat);
-	cranium.position.y = .05;
+	const cranium = new Mesh(new SphereGeometry(.18, seg, seg), skinMat);
+	cranium.scale.set(.98, 1.03, .96);
+	cranium.position.y = .058;
 	cranium.castShadow = !compactMode;
 	head.add(cranium);
-	const hairCap = new Mesh(new SphereGeometry(.194, seg, seg, 0, Math.PI * 2, 0, Math.PI * .58), hairMat);
-	hairCap.position.y = .075;
-	hairCap.rotation.x = -.22;
+	const leftEar = new Mesh(new SphereGeometry(.036, 8, 8), skinMat);
+	leftEar.scale.set(.65, 1.1, .85);
+	leftEar.position.set(-.174, .045, 0);
+	const rightEar = leftEar.clone();
+	rightEar.position.x = .174;
+	head.add(leftEar, rightEar);
+	const hairCap = new Mesh(new SphereGeometry(.191, seg, seg, 0, Math.PI * 2, 0, Math.PI * .62), hairMat);
+	hairCap.position.y = .072;
+	hairCap.rotation.x = -.24;
 	head.add(hairCap);
-	const hairBun = new Mesh(new SphereGeometry(.085, seg, seg), hairMat);
-	hairBun.position.set(0, .12, -.18);
-	head.add(hairBun);
-	const hairPin = new Mesh(new CylinderGeometry(.008, .008, .24, 6), woodPinMat);
-	hairPin.position.set(0, .13, -.19);
+	const bangL = new Mesh(new SphereGeometry(.075, seg, seg), hairMat);
+	bangL.scale.set(1.25, .72, .72);
+	bangL.position.set(-.078, .165, .122);
+	bangL.rotation.z = .32;
+	const bangR = new Mesh(new SphereGeometry(.075, seg, seg), hairMat);
+	bangR.scale.set(1.25, .72, .72);
+	bangR.position.set(.078, .165, .122);
+	bangR.rotation.z = -.32;
+	const sideLockGeo = new CapsuleGeometry(.034, .12, 6, 8);
+	const sideLockL = new Mesh(sideLockGeo, hairMat);
+	sideLockL.position.set(-.155, .025, .075);
+	sideLockL.rotation.z = .12;
+	const sideLockR = new Mesh(sideLockGeo, hairMat);
+	sideLockR.position.set(.155, .025, .075);
+	sideLockR.rotation.z = -.12;
+	head.add(bangL, bangR, sideLockL, sideLockR);
+	const hairBun = new Mesh(new SphereGeometry(.088, seg, seg), hairMat);
+	hairBun.scale.set(1, .92, .88);
+	hairBun.position.set(0, .125, -.175);
+	const bunScrunchie = new Mesh(new TorusGeometry(.068, .015, 6, 12), apronMat);
+	bunScrunchie.position.set(0, .125, -.16);
+	const hairPin = new Mesh(new CylinderGeometry(.008, .006, .25, 6), woodPinMat);
+	hairPin.position.set(0, .135, -.185);
 	hairPin.rotation.z = 1.18;
-	head.add(hairPin);
-	const eyeGeo = new SphereGeometry(.019, 8, 8);
-	const leftEye = new Mesh(eyeGeo, eyeMat);
-	leftEye.position.set(-.065, .055, .168);
-	const rightEye = new Mesh(eyeGeo, eyeMat);
-	rightEye.position.set(.065, .055, .168);
-	head.add(leftEye, rightEye);
+	const pinBead = new Mesh(new SphereGeometry(.022, 8, 8), jadeMat);
+	pinBead.position.set(.115, .185, -.185);
+	head.add(hairBun, bunScrunchie, hairPin, pinBead);
+	const leftEye = new Mesh(new SphereGeometry(.021, 8, 8), eyeMat);
+	leftEye.scale.set(1, 1.12, .8);
+	leftEye.position.set(-.062, .056, .162);
+	const rightEye = leftEye.clone();
+	rightEye.position.x = .062;
+	const shineGeo = new SphereGeometry(.007, 6, 6);
+	const shineMat = new MeshBasicMaterial({ color: 16777215 });
+	const lShine = new Mesh(shineGeo, shineMat);
+	lShine.position.set(-.056, .065, .177);
+	const rShine = new Mesh(shineGeo, shineMat);
+	rShine.position.set(.068, .065, .177);
+	const noseTip = new Mesh(new SphereGeometry(.013, 6, 6), new MeshStandardMaterial({
+		color: 15120023,
+		roughness: .7
+	}));
+	noseTip.position.set(0, .032, .174);
+	const browGeo = new CapsuleGeometry(.006, .034, 4, 6);
+	const lBrow = new Mesh(browGeo, hairMat);
+	lBrow.rotation.z = Math.PI / 2 + .09;
+	lBrow.position.set(-.062, .095, .16);
+	const rBrow = new Mesh(browGeo, hairMat);
+	rBrow.rotation.z = Math.PI / 2 - .09;
+	rBrow.position.set(.062, .095, .16);
+	const smile = new Mesh(new TorusGeometry(.026, .006, 6, 10, Math.PI), new MeshStandardMaterial({
+		color: 10179660,
+		roughness: .6
+	}));
+	smile.position.set(0, .002, .164);
+	smile.rotation.z = Math.PI;
 	const blushMat = new MeshStandardMaterial({
-		color: 15112330,
+		color: 15177866,
 		roughness: .9
 	});
-	const blushGeo = new CircleGeometry(.028, 10);
-	const leftBlush = new Mesh(blushGeo, blushMat);
-	leftBlush.position.set(-.095, .015, .162);
-	leftBlush.rotation.y = -.35;
-	const rightBlush = new Mesh(blushGeo, blushMat);
-	rightBlush.position.set(.095, .015, .162);
-	rightBlush.rotation.y = .35;
-	head.add(leftBlush, rightBlush);
+	const leftBlush = new Mesh(new SphereGeometry(.026, 8, 8), blushMat);
+	leftBlush.scale.set(1.15, .68, .25);
+	leftBlush.position.set(-.095, .02, .146);
+	leftBlush.rotation.y = -.38;
+	const rightBlush = leftBlush.clone();
+	rightBlush.position.x = .095;
+	rightBlush.rotation.y = .38;
+	head.add(leftEye, rightEye, lShine, rShine, noseTip, lBrow, rBrow, smile, leftBlush, rightBlush);
 	group.add(head);
 	group.traverse((obj) => {
 		obj.frustumCulled = false;
 	});
 	return {
 		group,
-		rightArm,
-		leftArm,
-		head
+		rig: {
+			leftLeg: leftLegBuilt.hip,
+			rightLeg: rightLegBuilt.hip,
+			leftShin: leftLegBuilt.shin,
+			rightShin: rightLegBuilt.shin,
+			leftArm,
+			rightArm,
+			head
+		}
 	};
 }
 function createSomOGuest(seg, compactMode) {
 	const cat = new Group();
 	const furOrange = new MeshStandardMaterial({
-		color: 14849355,
-		roughness: .85
+		color: 14915148,
+		roughness: .82
+	});
+	const furStripe = new MeshStandardMaterial({
+		color: 12741673,
+		roughness: .84
 	});
 	const furCream = new MeshStandardMaterial({
-		color: 16379874,
-		roughness: .85
+		color: 16445667,
+		roughness: .84
+	});
+	const innerEarMat = new MeshStandardMaterial({
+		color: 16037555,
+		roughness: .78
 	});
 	const collarMat = new MeshStandardMaterial({
 		color: 3897943,
@@ -63361,178 +62808,484 @@ function createSomOGuest(seg, compactMode) {
 		metalness: .8,
 		roughness: .25
 	});
-	const darkMat = new MeshStandardMaterial({
-		color: 1972501,
-		roughness: .3
+	const irisMat = new MeshStandardMaterial({
+		color: 4947283,
+		roughness: .28
 	});
-	const body = new Mesh(new SphereGeometry(.22, seg, seg), furOrange);
-	body.scale.set(.95, 1.25, .95);
+	const darkMat = new MeshStandardMaterial({
+		color: 1775380,
+		roughness: .25
+	});
+	const whiskerMat = new MeshStandardMaterial({
+		color: 16117734,
+		roughness: .5
+	});
+	const standingLegsGroup = new Group();
+	const buildPawLeg = (side) => {
+		const leg = new Group();
+		leg.position.set(side * .092, .58, .02);
+		const hipJoint = new Mesh(new SphereGeometry(.056, seg, seg), furOrange);
+		const upper = new Mesh(new CylinderGeometry(.056, .048, .43, seg), furOrange);
+		upper.position.y = -.215;
+		const paw = new Mesh(new SphereGeometry(.062, seg, seg), furCream);
+		paw.scale.set(1.02, .72, 1.28);
+		paw.position.set(0, -.515, .032);
+		leg.add(hipJoint, upper, paw);
+		return leg;
+	};
+	const leftLeg = buildPawLeg(-1);
+	const rightLeg = buildPawLeg(1);
+	standingLegsGroup.add(leftLeg, rightLeg);
+	cat.add(standingLegsGroup);
+	const seatedOnlyGroup = new Group();
+	const seatedPawL = new Mesh(new SphereGeometry(.058, seg, seg), furCream);
+	seatedPawL.scale.set(1, .76, 1.25);
+	seatedPawL.position.set(-.095, .62, .21);
+	const seatedPawR = seatedPawL.clone();
+	seatedPawR.position.x = .095;
+	seatedOnlyGroup.add(seatedPawL, seatedPawR);
+	cat.add(seatedOnlyGroup);
+	const body = new Mesh(new SphereGeometry(.225, seg, seg), furOrange);
+	body.scale.set(.96, 1.24, .96);
 	body.position.set(0, .81, .01);
 	body.castShadow = !compactMode;
 	cat.add(body);
-	const belly = new Mesh(new SphereGeometry(.16, seg, seg), furCream);
-	belly.scale.set(.88, 1.08, .55);
-	belly.position.set(0, .79, .13);
+	const belly = new Mesh(new SphereGeometry(.165, seg, seg), furCream);
+	belly.scale.set(.88, 1.08, .54);
+	belly.position.set(0, .79, .132);
 	cat.add(belly);
-	const pawGeo = new SphereGeometry(.055, seg, seg);
-	const leftPaw = new Mesh(pawGeo, furCream);
-	leftPaw.position.set(-.09, .62, .21);
-	const rightPaw = new Mesh(pawGeo, furCream);
-	rightPaw.position.set(.09, .62, .21);
-	cat.add(leftPaw, rightPaw);
-	const collar = new Mesh(new TorusGeometry(.14, .022, 8, seg), collarMat);
+	for (let s = 0; s < 3; s++) {
+		const stripe = new Mesh(new TorusGeometry(.175 - s * .012, .016, 6, 12, Math.PI * .75), furStripe);
+		stripe.rotation.x = Math.PI / 2;
+		stripe.rotation.z = Math.PI * .12;
+		stripe.position.set(0, .72 + s * .1, -.02);
+		cat.add(stripe);
+	}
+	const buildCatArm = (side) => {
+		const arm = new Group();
+		arm.position.set(side * .18, .96, .055);
+		const shoulder = new Mesh(new SphereGeometry(.048, seg, seg), furOrange);
+		const armMesh = new Mesh(new CylinderGeometry(.045, .04, .25, seg), furOrange);
+		armMesh.position.y = -.12;
+		const pawTip = new Mesh(new SphereGeometry(.049, seg, seg), furCream);
+		pawTip.position.y = -.25;
+		arm.add(shoulder, armMesh, pawTip);
+		return arm;
+	};
+	const leftArm = buildCatArm(-1);
+	const rightArm = buildCatArm(1);
+	cat.add(leftArm, rightArm);
+	const collar = new Mesh(new TorusGeometry(.145, .026, 8, seg), collarMat);
 	collar.rotation.x = Math.PI / 2;
 	collar.position.set(0, 1.03, .02);
+	const scarfTab = new Mesh(new CapsuleGeometry(.028, .07, 4, 8), collarMat);
+	scarfTab.position.set(.05, .97, .15);
+	scarfTab.rotation.z = -.28;
 	const bell = new Mesh(new SphereGeometry(.032, 10, 10), brassMat);
-	bell.position.set(0, 1, .16);
-	cat.add(collar, bell);
+	bell.position.set(0, 1, .165);
+	cat.add(collar, scarfTab, bell);
 	const head = new Group();
-	head.position.set(0, 1.2, .03);
-	const headSphere = new Mesh(new SphereGeometry(.19, seg, seg), furOrange);
-	headSphere.scale.set(1.06, .94, .96);
+	head.position.set(0, 1.21, .03);
+	const headSphere = new Mesh(new SphereGeometry(.195, seg, seg), furOrange);
+	headSphere.scale.set(1.07, .94, .95);
 	headSphere.castShadow = !compactMode;
 	head.add(headSphere);
-	const muzzle = new Mesh(new SphereGeometry(.09, seg, seg), furCream);
-	muzzle.scale.set(1.15, .78, .7);
-	muzzle.position.set(0, -.04, .15);
-	head.add(muzzle);
-	const earGeo = new ConeGeometry(.068, .14, 6);
+	const cheekL = new Mesh(new SphereGeometry(.072, seg, seg), furOrange);
+	cheekL.scale.set(1.15, .85, .9);
+	cheekL.position.set(-.115, -.045, .11);
+	const cheekR = cheekL.clone();
+	cheekR.position.x = .115;
+	head.add(cheekL, cheekR);
+	for (const sx of [
+		-.04,
+		0,
+		.04
+	]) {
+		const fStripe = new Mesh(new CapsuleGeometry(.008, .046, 4, 6), furStripe);
+		fStripe.position.set(sx, .118, .155);
+		fStripe.rotation.x = -.45;
+		head.add(fStripe);
+	}
+	const muzzleL = new Mesh(new SphereGeometry(.056, seg, seg), furCream);
+	muzzleL.scale.set(1.1, .82, .8);
+	muzzleL.position.set(-.036, -.045, .165);
+	const muzzleR = muzzleL.clone();
+	muzzleR.position.x = .036;
+	head.add(muzzleL, muzzleR);
+	const earGeo = new ConeGeometry(.072, .15, 8);
+	const innerEarGeo = new ConeGeometry(.042, .095, 6);
 	const leftEar = new Mesh(earGeo, furOrange);
-	leftEar.position.set(-.12, .18, 0);
+	leftEar.position.set(-.122, .175, 0);
 	leftEar.rotation.z = .28;
+	const leftInner = new Mesh(innerEarGeo, innerEarMat);
+	leftInner.position.set(-.12, .17, .025);
+	leftInner.rotation.z = .28;
 	const rightEar = new Mesh(earGeo, furOrange);
-	rightEar.position.set(.12, .18, 0);
+	rightEar.position.set(.122, .175, 0);
 	rightEar.rotation.z = -.28;
-	head.add(leftEar, rightEar);
-	const eyeGeo = new SphereGeometry(.024, 8, 8);
-	const leftEye = new Mesh(eyeGeo, darkMat);
-	leftEye.position.set(-.072, .03, .165);
-	const rightEye = new Mesh(eyeGeo, darkMat);
-	rightEye.position.set(.072, .03, .165);
-	const nose = new Mesh(new SphereGeometry(.018, 6, 6), new MeshStandardMaterial({
+	const rightInner = new Mesh(innerEarGeo, innerEarMat);
+	rightInner.position.set(.12, .17, .025);
+	rightInner.rotation.z = -.28;
+	head.add(leftEar, leftInner, rightEar, rightInner);
+	const lIris = new Mesh(new SphereGeometry(.031, 8, 8), irisMat);
+	lIris.scale.set(1, 1.08, .72);
+	lIris.position.set(-.076, .032, .162);
+	const rIris = lIris.clone();
+	rIris.position.x = .076;
+	const leftEye = new Mesh(new SphereGeometry(.021, 8, 8), darkMat);
+	leftEye.scale.set(.75, 1.15, .8);
+	leftEye.position.set(-.076, .032, .172);
+	const rightEye = leftEye.clone();
+	rightEye.position.x = .076;
+	const shineGeo = new SphereGeometry(.008, 6, 6);
+	const shineMat = new MeshBasicMaterial({ color: 16777215 });
+	const lShine = new Mesh(shineGeo, shineMat);
+	lShine.position.set(-.068, .042, .187);
+	const rShine = new Mesh(shineGeo, shineMat);
+	rShine.position.set(.084, .042, .187);
+	const nose = new Mesh(new SphereGeometry(.02, 8, 8), new MeshStandardMaterial({
 		color: 14250874,
-		roughness: .5
+		roughness: .45
 	}));
-	nose.position.set(0, -.01, .21);
-	head.add(leftEye, rightEye, nose);
+	nose.scale.set(1.2, .85, .8);
+	nose.position.set(0, -.012, .212);
+	const whiskerGeo = new CylinderGeometry(.003, .002, .12, 4);
+	for (const side of [-1, 1]) for (let w = -1; w <= 1; w++) {
+		const whisker = new Mesh(whiskerGeo, whiskerMat);
+		whisker.rotation.z = Math.PI / 2 + w * .18 * side;
+		whisker.position.set(side * .145, -.035 + w * .02, .16);
+		head.add(whisker);
+	}
+	head.add(lIris, rIris, leftEye, rightEye, lShine, rShine, nose);
 	cat.add(head);
-	const tail = new Mesh(new TubeGeometry(new CatmullRomCurve3([
-		new Vector3(0, .63, -.17),
-		new Vector3(.16, .68, -.22),
-		new Vector3(.24, .84, -.14)
-	]), 12, .034, 8, false), furOrange);
-	cat.add(tail);
+	const tailGroup = new Group();
+	tailGroup.position.set(0, .66, -.17);
+	const tailMesh = new Mesh(new TubeGeometry(new CatmullRomCurve3([
+		new Vector3(0, 0, 0),
+		new Vector3(.14, .07, -.06),
+		new Vector3(.22, .24, .02)
+	]), 12, .035, 8, false), furOrange);
+	const tailTip = new Mesh(new SphereGeometry(.038, 8, 8), furCream);
+	tailTip.position.set(.22, .24, .02);
+	tailGroup.add(tailMesh, tailTip);
+	cat.add(tailGroup);
 	cat.traverse((obj) => {
 		obj.frustumCulled = false;
 	});
-	return cat;
+	return {
+		group: cat,
+		rig: {
+			leftLeg,
+			rightLeg,
+			leftArm,
+			rightArm,
+			head,
+			tail: tailGroup,
+			seatedOnlyGroup,
+			standingLegsGroup
+		}
+	};
 }
-function createSeatedHumanGuest(seg, compactMode, config) {
+function createHumanGuest(seg, compactMode, config) {
 	const person = new Group();
 	const skinMat = new MeshStandardMaterial({
 		color: 15846576,
-		roughness: .72
+		roughness: .68
 	});
 	const coatMat = new MeshStandardMaterial({
 		color: config.coatColor,
-		roughness: .82
+		roughness: .78
 	});
 	const innerMat = new MeshStandardMaterial({
 		color: config.innerColor,
-		roughness: .85
+		roughness: .84
 	});
 	const skirtMat = new MeshStandardMaterial({
 		color: config.skirtColor,
-		roughness: .86
+		roughness: .82
 	});
 	const hairMat = new MeshStandardMaterial({
 		color: config.hairColor,
-		roughness: .78
+		roughness: .7
+	});
+	const shoeMat = new MeshStandardMaterial({
+		color: config.shoeColor,
+		roughness: .6
+	});
+	const bagMat = new MeshStandardMaterial({
+		color: config.bagColor,
+		roughness: .72
 	});
 	const darkMat = new MeshStandardMaterial({
 		color: 1907224,
-		roughness: .35
+		roughness: .28
 	});
-	const lap = new Mesh(new BoxGeometry(.32, .14, .36), skirtMat);
-	lap.position.set(0, .61, .1);
-	person.add(lap);
-	const calfGeo = new CylinderGeometry(.062, .052, .48, seg);
+	const standingLegsGroup = new Group();
+	const buildWalkLeg = (side) => {
+		const leg = new Group();
+		leg.position.set(side * .095, .68, 0);
+		const thigh = new Mesh(new CylinderGeometry(.068, .056, .35, seg), skirtMat);
+		thigh.position.y = -.175;
+		const calf = new Mesh(new CylinderGeometry(.052, .043, .28, seg), skinMat);
+		calf.position.y = -.455;
+		const shoeBase = new Mesh(new SphereGeometry(.055, seg, seg), shoeMat);
+		shoeBase.scale.set(.92, .65, 1.68);
+		shoeBase.position.set(0, -.635, .032);
+		leg.add(thigh, calf, shoeBase);
+		return leg;
+	};
+	const leftLeg = buildWalkLeg(-1);
+	const rightLeg = buildWalkLeg(1);
+	standingLegsGroup.add(leftLeg, rightLeg);
+	person.add(standingLegsGroup);
+	const seatedOnlyGroup = new Group();
+	const lap = new Mesh(new SphereGeometry(.21, seg, seg), skirtMat);
+	lap.scale.set(1.02, .42, 1.05);
+	lap.position.set(0, .6, .11);
+	const calfGeo = new CylinderGeometry(.058, .048, .43, seg);
 	const leftCalf = new Mesh(calfGeo, skirtMat);
-	leftCalf.position.set(-.09, .31, .25);
+	leftCalf.position.set(-.092, .32, .24);
 	const rightCalf = new Mesh(calfGeo, skirtMat);
-	rightCalf.position.set(.09, .31, .25);
-	person.add(leftCalf, rightCalf);
-	const torso = new Mesh(new CylinderGeometry(.175, .195, .5, seg), coatMat);
-	torso.position.set(0, .9, -.02);
-	torso.castShadow = !compactMode;
-	person.add(torso);
-	const innerFront = new Mesh(new BoxGeometry(.14, .44, .05), innerMat);
-	innerFront.position.set(0, .9, .15);
+	rightCalf.position.set(.092, .32, .24);
+	const shoeL = new Mesh(new SphereGeometry(.052, seg, seg), shoeMat);
+	shoeL.scale.set(.92, .65, 1.65);
+	shoeL.position.set(-.092, .045, .275);
+	const shoeR = shoeL.clone();
+	shoeR.position.x = .092;
+	seatedOnlyGroup.add(lap, leftCalf, rightCalf, shoeL, shoeR);
+	person.add(seatedOnlyGroup);
+	const skirtHem = new Mesh(new CylinderGeometry(.172, .255, .28, seg), skirtMat);
+	skirtHem.position.set(0, .62, 0);
+	person.add(skirtHem);
+	const torsoLower = new Mesh(new CylinderGeometry(.165, .185, .28, seg), coatMat);
+	torsoLower.position.set(0, .83, -.01);
+	torsoLower.castShadow = !compactMode;
+	const torsoChest = new Mesh(new SphereGeometry(.182, seg, seg), coatMat);
+	torsoChest.scale.set(1.06, 1.04, .84);
+	torsoChest.position.set(0, 1.01, -.01);
+	torsoChest.castShadow = !compactMode;
+	person.add(torsoLower, torsoChest);
+	const innerFront = new Mesh(new CapsuleGeometry(.068, .3, 4, 8), innerMat);
+	innerFront.scale.set(1.05, 1, .55);
+	innerFront.position.set(0, .92, .135);
 	person.add(innerFront);
-	const armGeo = new CylinderGeometry(.046, .04, .38, seg);
-	const leftArm = new Mesh(armGeo, coatMat);
-	leftArm.position.set(-.21, .86, .08);
-	leftArm.rotation.x = -.58;
-	const rightArm = new Mesh(armGeo, coatMat);
-	rightArm.position.set(.21, .86, .08);
-	rightArm.rotation.x = -.58;
-	person.add(leftArm, rightArm);
-	const headGroup = new Group();
-	headGroup.position.set(0, 1.29, 0);
-	const head = new Mesh(new SphereGeometry(.168, seg, seg), skinMat);
-	head.castShadow = !compactMode;
-	headGroup.add(head);
-	const hairCap = new Mesh(new SphereGeometry(.178, seg, seg, 0, Math.PI * 2, 0, Math.PI * .6), hairMat);
-	hairCap.position.y = .025;
-	hairCap.rotation.x = -.25;
-	headGroup.add(hairCap);
-	if (config.hasBun) {
-		const bun = new Mesh(new SphereGeometry(.075, seg, seg), hairMat);
-		bun.position.set(0, .08, -.17);
-		headGroup.add(bun);
+	if (config.hasShawl) {
+		const shawlMat = new MeshStandardMaterial({
+			color: 12751464,
+			roughness: .86
+		});
+		const shawl = new Mesh(new TorusGeometry(.188, .056, 8, seg, Math.PI * 1.48), shawlMat);
+		shawl.rotation.x = Math.PI / 2 + .22;
+		shawl.rotation.z = -Math.PI * .24;
+		shawl.position.set(0, 1.07, 0);
+		const shawlDrape = new Mesh(new CapsuleGeometry(.036, .16, 4, 8), shawlMat);
+		shawlDrape.position.set(.08, .94, .148);
+		shawlDrape.rotation.z = -.18;
+		person.add(shawl, shawlDrape);
 	} else {
-		const backHair = new Mesh(new BoxGeometry(.32, .24, .14), hairMat);
-		backHair.position.set(0, -.07, -.1);
-		headGroup.add(backHair);
+		const btnGeo = new SphereGeometry(.013, 6, 6);
+		const btnMat = new MeshStandardMaterial({
+			color: 14205851,
+			roughness: .4
+		});
+		for (let b = 0; b < 3; b++) {
+			const btn = new Mesh(btnGeo, btnMat);
+			btn.position.set(.048, .81 + b * .085, .172);
+			person.add(btn);
+		}
+		const lCollar = new Mesh(new CapsuleGeometry(.02, .16, 4, 6), coatMat);
+		lCollar.position.set(-.055, 1.05, .145);
+		lCollar.rotation.z = -.32;
+		const rCollar = lCollar.clone();
+		rCollar.position.x = .055;
+		rCollar.rotation.z = .32;
+		person.add(lCollar, rCollar);
 	}
-	const eyeGeo = new SphereGeometry(.017, 8, 8);
-	const leftEye = new Mesh(eyeGeo, darkMat);
-	leftEye.position.set(-.058, .015, .155);
-	const rightEye = new Mesh(eyeGeo, darkMat);
-	rightEye.position.set(.058, .015, .155);
-	headGroup.add(leftEye, rightEye);
+	const buildArm = (side) => {
+		const armGroup = new Group();
+		armGroup.position.set(side * .21, 1.1, 0);
+		const shoulder = new Mesh(new SphereGeometry(.052, seg, seg), coatMat);
+		const sleeve = new Mesh(new CylinderGeometry(.048, .04, .34, seg), coatMat);
+		sleeve.position.y = -.17;
+		const cuff = new Mesh(new TorusGeometry(.042, .012, 6, seg), innerMat);
+		cuff.rotation.x = Math.PI / 2;
+		cuff.position.y = -.34;
+		const hand = new Mesh(new SphereGeometry(.042, 8, 8), skinMat);
+		hand.position.y = -.375;
+		armGroup.add(shoulder, sleeve, cuff, hand);
+		if (side === 1) {
+			if (config.hasGlasses) {
+				const book = new Mesh(new BoxGeometry(.125, .026, .165), bagMat);
+				book.position.set(-.02, -.385, .06);
+				const pageEdge = new Mesh(new BoxGeometry(.115, .018, .155), new MeshStandardMaterial({
+					color: 16249573,
+					roughness: .85
+				}));
+				pageEdge.position.set(-.018, -.385, .062);
+				armGroup.add(book, pageEdge);
+			} else {
+				const bagBody = new Mesh(new SphereGeometry(.088, seg, seg), bagMat);
+				bagBody.scale.set(.65, 1.05, 1.05);
+				bagBody.position.set(.032, -.455, .02);
+				const bagHandle = new Mesh(new TorusGeometry(.045, .008, 6, 10, Math.PI), bagMat);
+				bagHandle.position.set(.032, -.365, .02);
+				bagHandle.rotation.y = Math.PI / 2;
+				armGroup.add(bagBody, bagHandle);
+			}
+		}
+		return armGroup;
+	};
+	const leftArm = buildArm(-1);
+	const rightArm = buildArm(1);
+	person.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.29, 0);
+	const neck = new Mesh(new CylinderGeometry(.052, .062, .11, seg), skinMat);
+	neck.position.y = -.075;
+	head.add(neck);
+	const cranium = new Mesh(new SphereGeometry(.166, seg, seg), skinMat);
+	cranium.scale.set(.97, 1.03, .96);
+	cranium.castShadow = !compactMode;
+	head.add(cranium);
+	const earL = new Mesh(new SphereGeometry(.03, 6, 6), skinMat);
+	earL.scale.set(.65, 1.1, .85);
+	earL.position.set(-.162, 0, 0);
+	const earR = earL.clone();
+	earR.position.x = .162;
+	head.add(earL, earR);
+	const hairCap = new Mesh(new SphereGeometry(.178, seg, seg, 0, Math.PI * 2, 0, Math.PI * .62), hairMat);
+	hairCap.position.y = .026;
+	hairCap.rotation.x = -.24;
+	head.add(hairCap);
+	if (config.hasBun) {
+		const bun = new Mesh(new SphereGeometry(.082, seg, seg), hairMat);
+		bun.scale.set(1, .92, .88);
+		bun.position.set(0, .078, -.175);
+		const pearlPin = new Mesh(new SphereGeometry(.022, 8, 8), new MeshStandardMaterial({
+			color: 16249576,
+			roughness: .25
+		}));
+		pearlPin.position.set(.06, .105, -.18);
+		const combMat = new MeshStandardMaterial({
+			color: 6465657,
+			roughness: .35
+		});
+		const comb = new Mesh(new BoxGeometry(.07, .022, .012), combMat);
+		comb.position.set(-.04, .115, -.165);
+		comb.rotation.z = .25;
+		head.add(bun, pearlPin, comb);
+	} else {
+		const backHairDome = new Mesh(new SphereGeometry(.176, seg, seg), hairMat);
+		backHairDome.scale.set(1.04, 1.38, .82);
+		backHairDome.position.set(0, -.08, -.068);
+		const waveGeo = new CapsuleGeometry(.046, .18, 6, 8);
+		const sideLockL = new Mesh(waveGeo, hairMat);
+		sideLockL.position.set(-.145, -.06, .045);
+		sideLockL.rotation.z = .08;
+		const sideLockR = new Mesh(waveGeo, hairMat);
+		sideLockR.position.set(.145, -.06, .045);
+		sideLockR.rotation.z = -.08;
+		const bangL = new Mesh(new SphereGeometry(.066, seg, seg), hairMat);
+		bangL.scale.set(1.22, .68, .65);
+		bangL.position.set(-.068, .11, .116);
+		bangL.rotation.z = .34;
+		const bangR = bangL.clone();
+		bangR.position.x = .068;
+		bangR.rotation.z = -.34;
+		head.add(backHairDome, sideLockL, sideLockR, bangL, bangR);
+	}
+	const leftEye = new Mesh(new SphereGeometry(.018, 8, 8), darkMat);
+	leftEye.scale.set(1, 1.12, .8);
+	leftEye.position.set(-.056, .015, .152);
+	const rightEye = leftEye.clone();
+	rightEye.position.x = .056;
+	const shineGeo = new SphereGeometry(.006, 6, 6);
+	const shineMat = new MeshBasicMaterial({ color: 16777215 });
+	const lShine = new Mesh(shineGeo, shineMat);
+	lShine.position.set(-.051, .022, .166);
+	const rShine = new Mesh(shineGeo, shineMat);
+	rShine.position.set(.061, .022, .166);
+	const noseTip = new Mesh(new SphereGeometry(.012, 6, 6), new MeshStandardMaterial({
+		color: 14922130,
+		roughness: .72
+	}));
+	noseTip.position.set(0, -.01, .164);
+	const smile = new Mesh(new TorusGeometry(.024, .005, 6, 10, Math.PI), new MeshStandardMaterial({
+		color: 10179660,
+		roughness: .6
+	}));
+	smile.position.set(0, -.04, .156);
+	smile.rotation.z = Math.PI;
+	const blushMat = new MeshStandardMaterial({
+		color: 15047052,
+		roughness: .9
+	});
+	const leftBlush = new Mesh(new SphereGeometry(.023, 8, 8), blushMat);
+	leftBlush.scale.set(1.15, .65, .25);
+	leftBlush.position.set(-.088, -.02, .136);
+	leftBlush.rotation.y = -.35;
+	const rightBlush = leftBlush.clone();
+	rightBlush.position.x = .088;
+	rightBlush.rotation.y = .35;
+	head.add(leftEye, rightEye, lShine, rShine, noseTip, smile, leftBlush, rightBlush);
 	if (config.hasGlasses) {
 		const rimMat = new MeshStandardMaterial({
-			color: 10189126,
-			metalness: .75,
-			roughness: .25
+			color: 10912068,
+			metalness: .78,
+			roughness: .24
 		});
 		const lensRingGeo = new TorusGeometry(.036, .005, 6, 14);
 		const lGlass = new Mesh(lensRingGeo, rimMat);
-		lGlass.position.set(-.058, .015, .168);
+		lGlass.position.set(-.056, .015, .168);
 		const rGlass = new Mesh(lensRingGeo, rimMat);
-		rGlass.position.set(.058, .015, .168);
-		headGroup.add(lGlass, rGlass);
+		rGlass.position.set(.056, .015, .168);
+		const bridge = new Mesh(new BoxGeometry(.044, .006, .006), rimMat);
+		bridge.position.set(0, .02, .17);
+		const lTemple = new Mesh(new CylinderGeometry(.003, .003, .14, 4), rimMat);
+		lTemple.rotation.x = Math.PI / 2;
+		lTemple.position.set(-.092, .018, .095);
+		const rTemple = lTemple.clone();
+		rTemple.position.x = .092;
+		head.add(lGlass, rGlass, bridge, lTemple, rTemple);
 	}
-	person.add(headGroup);
+	person.add(head);
 	person.traverse((obj) => {
 		obj.frustumCulled = false;
 	});
-	return person;
+	return {
+		group: person,
+		rig: {
+			leftLeg,
+			rightLeg,
+			leftArm,
+			rightArm,
+			head,
+			seatedOnlyGroup,
+			standingLegsGroup
+		}
+	};
 }
 function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, ultraCompact = false) {
 	const root = new Group();
 	const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
 	const guestChairLeft = createTeaChair(walnutTex, 7375721, compactMode);
-	guestChairLeft.position.set(-1.55, -.78, -1.92);
-	guestChairLeft.rotation.y = .28;
+	guestChairLeft.position.copy(SEAT_LEFT_POS);
+	guestChairLeft.rotation.y = SEAT_LEFT_ROT_Y;
+	guestChairLeft.traverse((obj) => {
+		obj.updateMatrix();
+		obj.matrixAutoUpdate = false;
+	});
 	root.add(guestChairLeft);
 	const guestChairRight = createTeaChair(walnutTex, 11041878, compactMode);
-	guestChairRight.position.set(1.55, -.78, -1.96);
+	guestChairRight.position.set(1.55, SHOP_FLOOR_Y, -1.96);
 	guestChairRight.rotation.y = -.34;
+	guestChairRight.traverse((obj) => {
+		obj.updateMatrix();
+		obj.matrixAutoUpdate = false;
+	});
 	root.add(guestChairRight);
 	const sideTable = new Group();
-	sideTable.position.set(2.42, -.78, -1.78);
+	sideTable.position.set(2.42, SHOP_FLOOR_Y, -1.78);
 	const tableWoodMat = new MeshStandardMaterial({
 		map: walnutTex,
 		roughness: .64
@@ -63551,80 +63304,217 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	}));
 	spareCup.position.y = .6;
 	sideTable.add(stTop, stStem, stFoot, spareCup);
+	sideTable.traverse((obj) => {
+		obj.updateMatrix();
+		obj.matrixAutoUpdate = false;
+	});
 	root.add(sideTable);
 	const teaMaster = createTeaMasterCharacter(compactMode, ultraCompact);
 	root.add(teaMaster.group);
 	const guestsContainer = new Group();
-	guestsContainer.position.copy(guestChairLeft.position);
-	guestsContainer.rotation.copy(guestChairLeft.rotation);
-	const somOCatGroup = createSomOGuest(seg, compactMode);
-	const elaraGroup = createSeatedHumanGuest(seg, compactMode, {
+	guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
+	guestsContainer.rotation.y = -Math.PI / 2;
+	const somO = createSomOGuest(seg, compactMode);
+	const elara = createHumanGuest(seg, compactMode, {
 		coatColor: 6058849,
 		innerColor: 16052196,
 		skirtColor: 3884094,
 		hairColor: 3942430,
+		shoeColor: 4928550,
+		bagColor: 9263675,
 		hasGlasses: true,
 		hasBun: false
 	});
-	const maleeGroup = createSeatedHumanGuest(seg, compactMode, {
-		coatColor: 10252888,
-		innerColor: 15919320,
+	const malee = createHumanGuest(seg, compactMode, {
+		coatColor: 15327184,
+		innerColor: 16315371,
 		skirtColor: 5194553,
 		hairColor: 14079183,
+		shoeColor: 7295291,
+		bagColor: 12028766,
 		hasGlasses: false,
-		hasBun: true
+		hasBun: true,
+		hasShawl: true
 	});
-	elaraGroup.visible = false;
-	maleeGroup.visible = false;
-	guestsContainer.add(somOCatGroup, elaraGroup, maleeGroup);
+	elara.group.visible = false;
+	malee.group.visible = false;
+	guestsContainer.add(somO.group, elara.group, malee.group);
 	root.add(guestsContainer);
+	let playerWalkSpeed = 0;
+	let playerWalkPhase = 0;
+	let isPlayerMoving = false;
+	let firstPersonHidden = false;
+	let customerPhase = "ENTERING";
+	let waypointIdx = 1;
+	let customerWalkPhase = 0;
+	let customerDoorCrossedEmitted = false;
+	const startCustomerWalkIn = (_guestId) => {
+		customerPhase = "ENTERING";
+		waypointIdx = 1;
+		customerWalkPhase = 0;
+		customerDoorCrossedEmitted = false;
+		guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
+		guestsContainer.rotation.y = -Math.PI / 2;
+	};
+	const setFirstPersonHidden = (hidden) => {
+		firstPersonHidden = hidden;
+		teaMaster.group.visible = !hidden;
+	};
+	const movePlayer = (inputX, inputY, cameraYaw, delta) => {
+		const mag = Math.hypot(inputX, inputY);
+		if (mag < .06) {
+			isPlayerMoving = false;
+			playerWalkSpeed = MathUtils.damp(playerWalkSpeed, 0, 10, delta);
+			return;
+		}
+		const clampedMag = Math.min(1, mag);
+		const nx = inputX / mag;
+		const ny = inputY / mag;
+		const sinY = Math.sin(cameraYaw);
+		const cosY = Math.cos(cameraYaw);
+		const moveDirX = nx * cosY - ny * sinY;
+		const moveDirZ = -nx * sinY - ny * cosY;
+		const speed = 2.45 * clampedMag;
+		const resolved = clampToShopObstacles(teaMaster.group.position.x + moveDirX * speed * delta, teaMaster.group.position.z + moveDirZ * speed * delta);
+		teaMaster.group.position.x = resolved.x;
+		teaMaster.group.position.z = resolved.z;
+		let angleDiff = Math.atan2(moveDirX, moveDirZ) - teaMaster.group.rotation.y;
+		while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+		while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+		teaMaster.group.rotation.y += angleDiff * Math.min(1, delta * 12);
+		isPlayerMoving = true;
+		playerWalkSpeed = clampedMag;
+		playerWalkPhase += delta * 9.5 * clampedMag;
+	};
 	const animate = (elapsed, delta, step, isPouring, mode, guestId, reducedMotion) => {
 		const showGuest = mode === "guest";
 		guestsContainer.visible = showGuest;
+		let activeGuestRig = somO.rig;
 		if (showGuest) {
-			somOCatGroup.visible = guestId === "som-o";
-			elaraGroup.visible = guestId === "elara";
-			maleeGroup.visible = guestId === "malee";
+			somO.group.visible = guestId === "som-o";
+			elara.group.visible = guestId === "elara";
+			malee.group.visible = guestId === "malee";
+			activeGuestRig = guestId === "elara" ? elara.rig : guestId === "malee" ? malee.rig : somO.rig;
 		}
-		if (reducedMotion) return;
-		const breathe = Math.sin(elapsed * 1.9) * .015;
-		teaMaster.head.rotation.y = Math.sin(elapsed * .7) * .06;
-		let targetRightArmX = -.15 + breathe;
-		let targetLeftArmX = -.12 - breathe;
-		let targetBodyY = -.78;
-		if (isPouring || step === "POUR_WATER") {
-			targetRightArmX = -.68 + Math.sin(elapsed * 3.2) * .08;
-			targetLeftArmX = -.25;
-			teaMaster.head.rotation.x = .14;
-		} else if (step === "STEEP_TEA") {
-			targetRightArmX = -.52 + Math.sin(elapsed * 4.5) * .12;
-			targetLeftArmX = -.42 + Math.cos(elapsed * 4.5) * .08;
-			teaMaster.head.rotation.x = .1;
-		} else if (step === "SERVED") {
-			targetRightArmX = -.78;
-			targetLeftArmX = -.62;
-			targetBodyY = -.765 + Math.abs(Math.sin(elapsed * 2.4)) * .012;
-			teaMaster.head.rotation.x = -.05;
-		} else teaMaster.head.rotation.x = .04;
-		const dampFactor = Math.min(1, delta * 6);
-		teaMaster.rightArm.rotation.x = MathUtils.lerp(teaMaster.rightArm.rotation.x, targetRightArmX, dampFactor);
-		teaMaster.leftArm.rotation.x = MathUtils.lerp(teaMaster.leftArm.rotation.x, targetLeftArmX, dampFactor);
-		teaMaster.group.position.y = MathUtils.lerp(teaMaster.group.position.y, targetBodyY, dampFactor);
+		if (!firstPersonHidden) {
+			if (isPlayerMoving && !reducedMotion) {
+				const swing = Math.sin(playerWalkPhase) * .56 * playerWalkSpeed;
+				teaMaster.rig.leftLeg.rotation.x = swing;
+				teaMaster.rig.rightLeg.rotation.x = -swing;
+				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
+					teaMaster.rig.leftShin.rotation.x = Math.max(0, -swing * .75);
+					teaMaster.rig.rightShin.rotation.x = Math.max(0, swing * .75);
+				}
+				teaMaster.rig.leftArm.rotation.x = -swing * .72;
+				teaMaster.rig.rightArm.rotation.x = swing * .72;
+				teaMaster.group.position.y = SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * .032;
+				teaMaster.rig.head.rotation.y = Math.sin(elapsed * .9) * .04;
+			} else {
+				const damp = Math.min(1, delta * 9);
+				const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * .02;
+				teaMaster.rig.leftLeg.rotation.x = MathUtils.lerp(teaMaster.rig.leftLeg.rotation.x, 0, damp);
+				teaMaster.rig.rightLeg.rotation.x = MathUtils.lerp(teaMaster.rig.rightLeg.rotation.x, 0, damp);
+				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
+					teaMaster.rig.leftShin.rotation.x = MathUtils.lerp(teaMaster.rig.leftShin.rotation.x, 0, damp);
+					teaMaster.rig.rightShin.rotation.x = MathUtils.lerp(teaMaster.rig.rightShin.rotation.x, 0, damp);
+				}
+				let targetRightArm = -.14 + breathe;
+				let targetLeftArm = -.12 - breathe;
+				if (isPouring || step === "POUR_WATER") {
+					targetRightArm = -.68;
+					targetLeftArm = -.25;
+				} else if (step === "STEEP_TEA") {
+					targetRightArm = -.52;
+					targetLeftArm = -.42;
+				}
+				teaMaster.rig.rightArm.rotation.x = MathUtils.lerp(teaMaster.rig.rightArm.rotation.x, targetRightArm, damp);
+				teaMaster.rig.leftArm.rotation.x = MathUtils.lerp(teaMaster.rig.leftArm.rotation.x, targetLeftArm, damp);
+				teaMaster.group.position.y = MathUtils.lerp(teaMaster.group.position.y, SHOP_FLOOR_Y, damp);
+				teaMaster.rig.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
+			}
+		}
+		let customerCrossedDoorNow = false;
 		if (showGuest) {
-			const bob = step === "SERVED" ? Math.sin(elapsed * 3.6) * .018 : Math.sin(elapsed * 1.5) * .008;
-			guestsContainer.position.y = -.78 + bob;
+			if (step === "SERVED") customerPhase = "SERVED_ENJOYING";
+			if (customerPhase === "ENTERING") {
+				const wp = CUSTOMER_WAYPOINTS[waypointIdx];
+				if (wp) {
+					const dx = wp.x - guestsContainer.position.x;
+					const dz = wp.y - guestsContainer.position.z;
+					const dist = Math.hypot(dx, dz);
+					const walkSpeed = 1.65;
+					if (dist <= walkSpeed * delta + .04) {
+						guestsContainer.position.x = wp.x;
+						guestsContainer.position.z = wp.y;
+						waypointIdx += 1;
+						if (waypointIdx >= CUSTOMER_WAYPOINTS.length) {
+							customerPhase = "SEATED_ORDERING";
+							guestsContainer.position.copy(SEAT_LEFT_POS);
+							guestsContainer.rotation.y = SEAT_LEFT_ROT_Y;
+						}
+					} else {
+						guestsContainer.position.x += dx / dist * walkSpeed * delta;
+						guestsContainer.position.z += dz / dist * walkSpeed * delta;
+						let diff = Math.atan2(dx, dz) - guestsContainer.rotation.y;
+						while (diff > Math.PI) diff -= Math.PI * 2;
+						while (diff < -Math.PI) diff += Math.PI * 2;
+						guestsContainer.rotation.y += diff * Math.min(1, delta * 10);
+					}
+				}
+				if (!customerDoorCrossedEmitted && guestsContainer.position.x <= DOOR_THRESHOLD_X) {
+					customerDoorCrossedEmitted = true;
+					customerCrossedDoorNow = true;
+				}
+				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
+					activeGuestRig.standingLegsGroup.visible = true;
+					activeGuestRig.seatedOnlyGroup.visible = false;
+				}
+				customerWalkPhase += delta * 8.2;
+				const gSwing = reducedMotion ? 0 : Math.sin(customerWalkPhase) * .52;
+				activeGuestRig.leftLeg.rotation.x = gSwing;
+				activeGuestRig.rightLeg.rotation.x = -gSwing;
+				activeGuestRig.leftArm.rotation.x = -gSwing * .65;
+				activeGuestRig.rightArm.rotation.x = gSwing * .65;
+				guestsContainer.position.y = SHOP_FLOOR_Y + (reducedMotion ? 0 : Math.abs(Math.sin(customerWalkPhase)) * .025);
+				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 4.5) * .25;
+			} else {
+				guestsContainer.position.x = SEAT_LEFT_POS.x;
+				guestsContainer.position.z = SEAT_LEFT_POS.z;
+				let rotDiff = SEAT_LEFT_ROT_Y - guestsContainer.rotation.y;
+				while (rotDiff > Math.PI) rotDiff -= Math.PI * 2;
+				while (rotDiff < -Math.PI) rotDiff += Math.PI * 2;
+				guestsContainer.rotation.y += rotDiff * Math.min(1, delta * 8);
+				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
+					activeGuestRig.standingLegsGroup.visible = false;
+					activeGuestRig.seatedOnlyGroup.visible = true;
+				}
+				activeGuestRig.leftLeg.rotation.x = 0;
+				activeGuestRig.rightLeg.rotation.x = 0;
+				activeGuestRig.leftArm.rotation.x = -.58;
+				activeGuestRig.rightArm.rotation.x = -.58;
+				const bob = reducedMotion ? 0 : customerPhase === "SERVED_ENJOYING" ? Math.sin(elapsed * 3.6) * .016 : Math.sin(elapsed * 1.5) * .008;
+				guestsContainer.position.y = SHOP_FLOOR_Y + bob;
+				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 2.2) * .14;
+			}
 		}
+		return {
+			playerPos: teaMaster.group.position,
+			playerRotY: teaMaster.group.rotation.y,
+			isNearTeaTable: checkNearTeaTable(teaMaster.group.position),
+			customerPhase,
+			customerCrossedDoorNow
+		};
 	};
 	return {
 		root,
 		teaMasterGroup: teaMaster.group,
-		teaMasterRightArm: teaMaster.rightArm,
-		teaMasterLeftArm: teaMaster.leftArm,
-		teaMasterHead: teaMaster.head,
 		guestsContainer,
-		somOCatGroup,
-		elaraGroup,
-		maleeGroup,
+		startCustomerWalkIn,
+		setFirstPersonHidden,
+		movePlayer,
+		getPlayerPosition: () => teaMaster.group.position,
+		getPlayerRotationY: () => teaMaster.group.rotation.y,
+		isNearTeaTable: () => checkNearTeaTable(teaMaster.group.position),
 		animate
 	};
 }
@@ -63668,6 +63558,7 @@ function clampTargetFpsToDisplay(targetFps, maxRefreshRate) {
 * browser battery-saver caps rAF momentarily.
 */
 function resolveEffectiveRefreshRate(measuredHz, hardwareHint) {
+	if (hardwareHint.isGalaxyA10) return 60;
 	const nativeTier = hardwareHint.nativeDisplayHz && hardwareHint.nativeDisplayHz > 0 ? bucketRefreshRate(hardwareHint.nativeDisplayHz) : 60;
 	let resolved = nativeTier > measuredHz ? nativeTier : measuredHz;
 	if (hardwareHint.isRealmeNote50 && resolved < 90) resolved = 90;
@@ -63871,6 +63762,8 @@ function probeDeviceOptimization(requestedProfile) {
 	const isBudgetMobileGpu = isRealmeNote50 || isGalaxyA10 || isUnisocT612OrMaliG57 || isMaliG71OrExynos7884 || isBudgetGpuString || isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
 	const isUltraLowRam = effectiveProfile === "low-ram-2gb" && showLowRam2GbOption || effectiveProfile === "galaxy-a10" || effectiveProfile === "auto" && (isDetected2GbRam || isGalaxyA10);
 	const liteGpuActive = effectiveProfile === "realme-note-50" || effectiveProfile === "galaxy-a10" || effectiveProfile === "low-ram-2gb" || effectiveProfile === "auto" && (isRealmeNote50 || isGalaxyA10 || isUnisocT612OrMaliG57 || isMaliG71OrExynos7884 || isBudgetMobileGpu);
+	const galaxyA10BoostActive = effectiveProfile === "galaxy-a10" || effectiveProfile === "auto" && isGalaxyA10;
+	const realmeNote50BoostActive = effectiveProfile === "realme-note-50" || effectiveProfile === "auto" && isRealmeNote50;
 	const osVersionLabel = detectOsVersionLabel(bridge, ua);
 	let detectedModelLabel = "อุปกรณ์ทั่วไป";
 	if (isRealmeNote50) detectedModelLabel = "realme Note 50 (Unisoc T612 · Mali-G57)";
@@ -63892,6 +63785,8 @@ function probeDeviceOptimization(requestedProfile) {
 		isDetected2GbRam,
 		isUltraLowRam,
 		liteGpuActive,
+		galaxyA10BoostActive,
+		realmeNote50BoostActive,
 		showRealmeNote50Option,
 		showGalaxyA10Option,
 		showLowRam2GbOption,
@@ -63899,7 +63794,7 @@ function probeDeviceOptimization(requestedProfile) {
 		gpuRendererName,
 		hardwareThreads,
 		deviceMemoryGb,
-		nativeDisplayHz: bridge?.displayHz ?? null,
+		nativeDisplayHz: isGalaxyA10 ? 60 : bridge?.displayHz ?? null,
 		gameBoosterReady: Boolean(bridge?.gameModeSupported) || isMobileUa
 	};
 }
@@ -63908,13 +63803,13 @@ function getRealmeNote50Preset(maxDisplayHz = 90) {
 		optimizationProfile: "realme-note-50",
 		graphicsQuality: "medium",
 		resolutionScale: "hd-plus",
-		shadowsEnabled: true,
+		shadowsEnabled: false,
 		antialiasEnabled: false,
 		particlesEnabled: true,
 		targetFps: clampTargetFpsToDisplay(90, maxDisplayHz)
 	};
 }
-function getGalaxyA10Preset(maxDisplayHz = 60) {
+function getGalaxyA10Preset() {
 	return {
 		optimizationProfile: "galaxy-a10",
 		graphicsQuality: "low",
@@ -63922,7 +63817,7 @@ function getGalaxyA10Preset(maxDisplayHz = 60) {
 		shadowsEnabled: false,
 		antialiasEnabled: false,
 		particlesEnabled: false,
-		targetFps: clampTargetFpsToDisplay(60, maxDisplayHz)
+		targetFps: 60
 	};
 }
 function getLowRam2GbPreset(maxDisplayHz = 60) {
@@ -63942,49 +63837,14 @@ function applyDomPerformanceClass(liteGpuActive, ultraLowRam = false) {
 	document.documentElement.classList.toggle("ram-2gb", ultraLowRam);
 }
 // src/components/TeaScene3D.tsx
-var CAMERA_PRESETS = {
-	table: {
-		pos: [
-			.35,
-			2.35,
-			3.65
-		],
-		target: [
-			.18,
-			.42,
-			.05
-		]
-	},
-	cup: {
-		pos: [
-			-.22,
-			1.45,
-			2.05
-		],
-		target: [
-			-.22,
-			.48,
-			.08
-		]
-	},
-	overhead: {
-		pos: [
-			.08,
-			3.9,
-			1.35
-		],
-		target: [
-			.12,
-			.25,
-			.05
-		]
-	}
-};
 var _targetLiquidColor = new Color();
 var _targetLeafColor = new Color();
 var _camGoalPos = new Vector3();
 var _camGoalTarget = new Vector3();
+var _camCurrentTarget = new Vector3(.45, .25, 2.72);
 var _pointerNdc = new Vector2();
+var _TABLE_ANCHOR = new Vector3(-.1, .72, .18);
+var _tableProj = new Vector3();
 function detectSoftwareWebGL() {
 	try {
 		const canvas = document.createElement("canvas");
@@ -63999,7 +63859,7 @@ function detectSoftwareWebGL() {
 		return true;
 	}
 }
-function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, containerWidth, containerHeight, dynamicScale = 1) {
+function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, galaxyA10Boost, realmeNote50Boost, containerWidth, containerHeight, dynamicScale = 1) {
 	if (isSoftwareGl) return 1;
 	const deviceDpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 	const shortCss = Math.max(240, Math.min(containerWidth, containerHeight));
@@ -64009,31 +63869,33 @@ function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, c
 	switch (settings.resolutionScale) {
 		case "hd":
 			targetShortPx = 540;
-			minFloor = .65;
-			maxCap = isUltraLowRam ? .95 : 1.2;
+			minFloor = galaxyA10Boost ? .6 : .65;
+			maxCap = galaxyA10Boost ? .86 : isUltraLowRam ? .92 : 1.2;
 			break;
 		case "hd-plus":
 			targetShortPx = 720;
-			minFloor = .75;
-			maxCap = isUltraLowRam ? 1.05 : liteGpuMode ? 1.35 : 1.5;
+			minFloor = galaxyA10Boost ? .65 : .75;
+			maxCap = galaxyA10Boost ? .94 : realmeNote50Boost ? 1.12 : isUltraLowRam ? 1.05 : liteGpuMode ? 1.32 : 1.5;
 			break;
 		case "fhd":
 			targetShortPx = 1080;
 			minFloor = .9;
-			maxCap = isUltraLowRam ? 1.25 : 2;
+			maxCap = galaxyA10Boost ? 1.05 : isUltraLowRam ? 1.25 : 2;
 			break;
 		default:
 			targetShortPx = 1280;
 			minFloor = 1;
-			maxCap = isUltraLowRam ? 1.4 : Math.min(Math.max(deviceDpr, 1.5), 2.5);
+			maxCap = galaxyA10Boost ? 1.15 : isUltraLowRam ? 1.35 : Math.min(Math.max(deviceDpr, 1.5), 2.5);
 	}
 	const desiredRatio = Math.min(maxCap, Math.max(minFloor, targetShortPx / shortCss));
-	return Math.max(.6, desiredRatio * dynamicScale);
+	return Math.max(galaxyA10Boost ? .58 : .6, desiredRatio * dynamicScale);
 }
-var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, steepSeconds, toppings, isPouring, cameraPreset, settings, onKettleClick, onVesselClick }) => {
+var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequenceKey, waterLevel, steepSeconds, toppings, isPouring, settings, playerMoveRef, onProximityChange, onBrewAtTableClick, onCustomerEnteredDoor, onCustomerPhaseChange, onKettleClick, onVesselClick }) => {
 	const mountRef = (0, import_react.useRef)(null);
+	const tableBtnRef = (0, import_react.useRef)(null);
 	const rendererRef = (0, import_react.useRef)(null);
 	const keyLightRef = (0, import_react.useRef)(null);
+	const charactersRef = (0, import_react.useRef)(null);
 	const isSoftwareGlRef = (0, import_react.useRef)(false);
 	const shadowDirtyRef = (0, import_react.useRef)(true);
 	const dynamicScaleRef = (0, import_react.useRef)(1);
@@ -64042,6 +63904,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 	const liteGpuMode = deviceReport.liteGpuActive;
 	const isUltraLowRam = deviceReport.isUltraLowRam;
 	const isMaliG71Hardware = deviceReport.isMaliG71OrExynos7884;
+	const galaxyA10Boost = deviceReport.galaxyA10BoostActive;
+	const realmeNote50Boost = deviceReport.realmeNote50BoostActive;
 	const syncRef = (0, import_react.useRef)({
 		tea,
 		step,
@@ -64051,15 +63915,15 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		steepSeconds,
 		toppings,
 		isPouring,
-		cameraPreset,
 		settings
 	});
 	const callbacksRef = (0, import_react.useRef)({
 		onKettleClick,
-		onVesselClick
+		onVesselClick,
+		onProximityChange,
+		onCustomerEnteredDoor,
+		onCustomerPhaseChange
 	});
-	const presetAnimatingRef = (0, import_react.useRef)(true);
-	const lastPresetRef = (0, import_react.useRef)(cameraPreset);
 	(0, import_react.useEffect)(() => {
 		syncRef.current = {
 			tea,
@@ -64070,13 +63934,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			steepSeconds,
 			toppings,
 			isPouring,
-			cameraPreset,
 			settings
 		};
-		if (lastPresetRef.current !== cameraPreset) {
-			lastPresetRef.current = cameraPreset;
-			presetAnimatingRef.current = true;
-		}
 	}, [
 		tea,
 		step,
@@ -64086,8 +63945,29 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		steepSeconds,
 		toppings,
 		isPouring,
-		cameraPreset,
 		settings
+	]);
+	(0, import_react.useEffect)(() => {
+		callbacksRef.current = {
+			onKettleClick,
+			onVesselClick,
+			onProximityChange,
+			onCustomerEnteredDoor,
+			onCustomerPhaseChange
+		};
+	}, [
+		onKettleClick,
+		onVesselClick,
+		onProximityChange,
+		onCustomerEnteredDoor,
+		onCustomerPhaseChange
+	]);
+	(0, import_react.useEffect)(() => {
+		if (mode === "guest" && charactersRef.current) charactersRef.current.startCustomerWalkIn(guestId);
+	}, [
+		customerSequenceKey,
+		guestId,
+		mode
 	]);
 	(0, import_react.useEffect)(() => {
 		shadowDirtyRef.current = true;
@@ -64109,9 +63989,9 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		dynamicScaleRef.current = 1;
 		const w = Math.max(container.clientWidth, 280);
 		const h = Math.max(container.clientHeight, 260);
-		renderer.setPixelRatio(resolvePixelRatio(settings, softwareGl, liteGpuMode, isUltraLowRam, w, h, 1));
+		renderer.setPixelRatio(resolvePixelRatio(settings, softwareGl, liteGpuMode, isUltraLowRam, galaxyA10Boost, realmeNote50Boost, w, h, 1));
 		renderer.setSize(w, h);
-		const allowShadows = !softwareGl && !isUltraLowRam && !isMaliG71Hardware && settings.shadowsEnabled;
+		const allowShadows = !softwareGl && !isUltraLowRam && !isMaliG71Hardware && !galaxyA10Boost && !realmeNote50Boost && settings.shadowsEnabled;
 		renderer.shadowMap.enabled = allowShadows;
 		renderer.shadowMap.needsUpdate = true;
 		shadowDirtyRef.current = true;
@@ -64122,14 +64002,10 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		settings.optimizationProfile,
 		liteGpuMode,
 		isUltraLowRam,
-		isMaliG71Hardware
+		isMaliG71Hardware,
+		galaxyA10Boost,
+		realmeNote50Boost
 	]);
-	(0, import_react.useEffect)(() => {
-		callbacksRef.current = {
-			onKettleClick,
-			onVesselClick
-		};
-	}, [onKettleClick, onVesselClick]);
 	(0, import_react.useEffect)(() => {
 		const container = mountRef.current;
 		if (!container) return;
@@ -64141,8 +64017,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		let renderer;
 		try {
 			renderer = new WebGLRenderer({
-				antialias: !isSoftwareGl && !liteGpuMode && !isUltraLowRam && initSettings.antialiasEnabled,
-				powerPreference: isUltraLowRam ? "default" : "high-performance",
+				antialias: !isSoftwareGl && !liteGpuMode && !isUltraLowRam && !galaxyA10Boost && !realmeNote50Boost && initSettings.antialiasEnabled,
+				powerPreference: isUltraLowRam || galaxyA10Boost ? "default" : "high-performance",
 				precision: "highp"
 			});
 		} catch {
@@ -64155,8 +64031,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		renderer.outputColorSpace = SRGBColorSpace;
 		renderer.toneMapping = 4;
 		renderer.toneMappingExposure = 1.08;
-		renderer.setPixelRatio(resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, isUltraLowRam, initW, initH, 1));
-		const allowInitShadows = !isSoftwareGl && !isUltraLowRam && !isMaliG71Hardware && initSettings.shadowsEnabled;
+		renderer.setPixelRatio(resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, isUltraLowRam, galaxyA10Boost, realmeNote50Boost, initW, initH, 1));
+		const allowInitShadows = !isSoftwareGl && !isUltraLowRam && !isMaliG71Hardware && !galaxyA10Boost && !realmeNote50Boost && initSettings.shadowsEnabled;
 		renderer.shadowMap.enabled = allowInitShadows;
 		renderer.shadowMap.type = liteGpuMode ? 1 : 2;
 		renderer.shadowMap.autoUpdate = !liteGpuMode;
@@ -64180,35 +64056,20 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		const scene = new Scene();
 		const horizonHex = 14213077;
 		scene.background = new Color(horizonHex);
-		scene.fog = new FogExp2(horizonHex, .052);
+		scene.fog = new FogExp2(horizonHex, .048);
 		const pmremGenerator = new PMREMGenerator(renderer);
 		const roomEnv = new RoomEnvironment();
 		const envRenderTarget = pmremGenerator.fromScene(roomEnv, .04);
 		const envTexture = envRenderTarget.texture;
 		scene.environment = envTexture;
+		scene.environmentIntensity = galaxyA10Boost ? .72 : realmeNote50Boost ? .88 : 1;
 		roomEnv.dispose();
 		pmremGenerator.dispose();
-		const isShortLandscape = initH < 520;
-		const camera = new PerspectiveCamera(isShortLandscape ? 46 : 42, initW / initH, .08, 60);
-		const initialPreset = CAMERA_PRESETS[syncRef.current.cameraPreset];
-		camera.position.set(initialPreset.pos[0], initialPreset.pos[1] + (isShortLandscape ? .15 : 0), initialPreset.pos[2] + (isShortLandscape ? .45 : 0));
-		const controls = new OrbitControls(camera, renderer.domElement);
-		controls.target.set(initialPreset.target[0], initialPreset.target[1] - (isShortLandscape ? .16 : 0), initialPreset.target[2]);
-		controls.enableDamping = !isSoftwareGl;
-		controls.dampingFactor = .06;
-		controls.minDistance = 1.65;
-		controls.maxDistance = 5.35;
-		controls.minPolarAngle = .28;
-		controls.maxPolarAngle = Math.PI / 2 - .08;
-		controls.minAzimuthAngle = -Math.PI / 2.55;
-		controls.maxAzimuthAngle = Math.PI / 2.55;
-		controls.enablePan = false;
-		controls.update();
-		const handleControlStart = () => {
-			presetAnimatingRef.current = false;
-		};
-		controls.addEventListener("start", handleControlStart);
-		const hemiLight = new HemisphereLight(14674156, 9139032, .9);
+		const camera = new PerspectiveCamera(initH < 520 ? 50 : 46, initW / initH, .08, 60);
+		camera.position.set(.45, 1.38, 4.48);
+		_camCurrentTarget.set(.45, .25, 2.72);
+		camera.lookAt(_camCurrentTarget);
+		const hemiLight = new HemisphereLight(14674156, 9139032, .92);
 		scene.add(hemiLight);
 		const keyLight = new DirectionalLight(16773596, 1.6);
 		keyLight.position.set(4.5, 6.2, 3.8);
@@ -64219,11 +64080,11 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		keyLight.shadow.mapSize.height = shadowSize;
 		keyLight.shadow.camera.near = .5;
 		keyLight.shadow.camera.far = 18;
-		const d = 4.2;
-		keyLight.shadow.camera.left = -4.2;
+		const d = 4.6;
+		keyLight.shadow.camera.left = -4.6;
 		keyLight.shadow.camera.right = d;
 		keyLight.shadow.camera.top = d;
-		keyLight.shadow.camera.bottom = -4.2;
+		keyLight.shadow.camera.bottom = -4.6;
 		keyLight.shadow.bias = -5e-4;
 		keyLight.shadow.normalBias = liteGpuMode ? .032 : .02;
 		scene.add(keyLight);
@@ -64247,9 +64108,15 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		const steamTex = createSteamPuffTexture(ultraCompactAssets);
 		const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
 		const envGroup = createTeaTableEnvironment(cedarTex, walnutTex, matTex, ceramicTex, shadowTex, compactAssets, ultraCompactAssets);
+		envGroup.traverse((obj) => {
+			obj.updateMatrix();
+			obj.matrixAutoUpdate = false;
+		});
 		scene.add(envGroup);
 		const shopCharacters = createShopCharactersSystem(walnutTex, ceramicTex, compactAssets, ultraCompactAssets);
+		charactersRef.current = shopCharacters;
 		scene.add(shopCharacters.root);
+		if (syncRef.current.mode === "guest") shopCharacters.startCustomerWalkIn(syncRef.current.guestId);
 		const vessel = createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass, compactAssets, ultraCompactAssets);
 		scene.add(vessel.root);
 		const kettle = createKettleGroup(walnutTex, shadowTex, compactAssets);
@@ -64279,20 +64146,37 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			});
 		}
 		if (!isSoftwareGl) renderer.compile(scene, camera);
-		const raycaster = new Raycaster();
-		const clickables = [kettle.clickProxy, vessel.clickProxy];
+		let thirdPersonYaw = 0;
+		let thirdPersonHeightOffset = 2.05;
+		let firstPersonLookYaw = 0;
+		let firstPersonLookPitch = 0;
+		let activePointerId = null;
+		let dragLastPos = {
+			x: 0,
+			y: 0
+		};
 		let pointerDownPos = {
 			x: 0,
 			y: 0
 		};
+		const raycaster = new Raycaster();
+		const clickables = [kettle.clickProxy, vessel.clickProxy];
 		const onPointerDown = (e) => {
+			if (activePointerId !== null) return;
+			activePointerId = e.pointerId;
 			pointerDownPos = {
+				x: e.clientX,
+				y: e.clientY
+			};
+			dragLastPos = {
 				x: e.clientX,
 				y: e.clientY
 			};
 		};
 		const onPointerUp = (e) => {
+			if (activePointerId === e.pointerId) activePointerId = null;
 			if (Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y) > 8) return;
+			if (syncRef.current.step === "EXPLORE_SHOP") return;
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -64306,15 +64190,35 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		};
 		let lastHoverCheck = 0;
 		const onPointerMove = (e) => {
+			if (activePointerId === e.pointerId) {
+				const dx = e.clientX - dragLastPos.x;
+				const dy = e.clientY - dragLastPos.y;
+				dragLastPos = {
+					x: e.clientX,
+					y: e.clientY
+				};
+				if (syncRef.current.step === "EXPLORE_SHOP") {
+					thirdPersonYaw -= dx * .0065;
+					thirdPersonHeightOffset = MathUtils.clamp(thirdPersonHeightOffset + dy * .0045, 1.35, 2.9);
+				} else {
+					firstPersonLookYaw = MathUtils.clamp(firstPersonLookYaw - dx * .0032, -.52, .52);
+					firstPersonLookPitch = MathUtils.clamp(firstPersonLookPitch - dy * .0025, -.25, .25);
+				}
+				return;
+			}
 			const now = performance.now();
-			if (now - lastHoverCheck < 60) return;
+			if (now - lastHoverCheck < 75) return;
 			lastHoverCheck = now;
+			const curStep = syncRef.current.step;
+			if (curStep === "EXPLORE_SHOP") {
+				renderer.domElement.style.cursor = "grab";
+				return;
+			}
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 			raycaster.setFromCamera(_pointerNdc, camera);
 			const hits = raycaster.intersectObjects(clickables, false);
-			const curStep = syncRef.current.step;
 			let canInteract = false;
 			if (hits.length > 0) {
 				const id = hits[0].object.userData.interactId;
@@ -64324,15 +64228,15 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			renderer.domElement.style.cursor = canInteract ? "pointer" : "grab";
 		};
 		renderer.domElement.addEventListener("pointerdown", onPointerDown);
-		renderer.domElement.addEventListener("pointerup", onPointerUp);
-		renderer.domElement.addEventListener("pointermove", onPointerMove);
+		window.addEventListener("pointerup", onPointerUp);
+		window.addEventListener("pointermove", onPointerMove);
 		const handleResize = () => {
 			if (!container) return;
 			const w = Math.max(container.clientWidth, 280);
 			const h = Math.max(container.clientHeight, 260);
 			camera.aspect = w / h;
 			camera.updateProjectionMatrix();
-			renderer.setPixelRatio(resolvePixelRatio(syncRef.current.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, w, h, dynamicScaleRef.current));
+			renderer.setPixelRatio(resolvePixelRatio(syncRef.current.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, galaxyA10Boost, realmeNote50Boost, w, h, dynamicScaleRef.current));
 			renderer.setSize(w, h);
 		};
 		const resizeObserver = new ResizeObserver(handleResize);
@@ -64347,6 +64251,9 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 		let shadowTickCounter = 0;
 		let lastAppliedTeaId = "";
 		let lastLiquidCacheKey = "";
+		let lastNearState = false;
+		let lastCustomerPhase = "ENTERING";
+		let lastStep = syncRef.current.step;
 		function afterDraw(cb) {
 			const gl = renderer.getContext();
 			if (!gl || typeof gl.fenceSync !== "function") {
@@ -64383,32 +64290,86 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			lastDrawMs = nowMs;
 			const delta = Math.min(clock.getDelta(), .1);
 			const elapsed = clock.getElapsedTime();
-			if ((liteGpuMode || isUltraLowRam) && !isSoftwareGl && prevDrawMs > 0 && state.settings.targetFps >= 60) {
-				if (nowMs - prevDrawMs > 28) {
+			if ((liteGpuMode || isUltraLowRam || galaxyA10Boost || realmeNote50Boost) && !isSoftwareGl && prevDrawMs > 0 && state.settings.targetFps >= 60) {
+				const frameSpanMs = nowMs - prevDrawMs;
+				const slowThresholdMs = galaxyA10Boost ? 19 : realmeNote50Boost && state.settings.targetFps >= 90 ? 14.5 : 28;
+				const streakLimit = galaxyA10Boost ? 10 : realmeNote50Boost ? 12 : 18;
+				const scaleFloor = galaxyA10Boost ? .62 : .74;
+				if (frameSpanMs > slowThresholdMs) {
 					slowFrameStreak += 1;
-					if (slowFrameStreak >= 18 && dynamicScaleRef.current > .76) {
-						dynamicScaleRef.current = Math.max(.74, dynamicScaleRef.current - .12);
+					if (slowFrameStreak >= streakLimit && dynamicScaleRef.current > scaleFloor + .02) {
+						dynamicScaleRef.current = Math.max(scaleFloor, dynamicScaleRef.current - .1);
 						slowFrameStreak = 0;
 						const cw = Math.max(mountRef.current?.clientWidth ?? 280, 280);
 						const ch = Math.max(mountRef.current?.clientHeight ?? 260, 260);
-						renderer.setPixelRatio(resolvePixelRatio(state.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, cw, ch, dynamicScaleRef.current));
+						renderer.setPixelRatio(resolvePixelRatio(state.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, galaxyA10Boost, realmeNote50Boost, cw, ch, dynamicScaleRef.current));
 					}
 				} else if (slowFrameStreak > 0) slowFrameStreak -= 1;
 			}
-			if (presetAnimatingRef.current) {
-				const preset = CAMERA_PRESETS[state.cameraPreset];
-				_camGoalPos.set(...preset.pos);
-				_camGoalTarget.set(...preset.target);
-				const lambda = isSoftwareGl ? 12 : 4.5;
-				camera.position.x = MathUtils.damp(camera.position.x, _camGoalPos.x, lambda, delta);
-				camera.position.y = MathUtils.damp(camera.position.y, _camGoalPos.y, lambda, delta);
-				camera.position.z = MathUtils.damp(camera.position.z, _camGoalPos.z, lambda, delta);
-				controls.target.x = MathUtils.damp(controls.target.x, _camGoalTarget.x, lambda, delta);
-				controls.target.y = MathUtils.damp(controls.target.y, _camGoalTarget.y, lambda, delta);
-				controls.target.z = MathUtils.damp(controls.target.z, _camGoalTarget.z, lambda, delta);
-				if (camera.position.distanceTo(_camGoalPos) < .015 && controls.target.distanceTo(_camGoalTarget) < .015) presetAnimatingRef.current = false;
+			if (lastStep !== state.step) {
+				if (lastStep === "EXPLORE_SHOP" || state.step === "EXPLORE_SHOP") {
+					firstPersonLookYaw = 0;
+					firstPersonLookPitch = 0;
+				}
+				lastStep = state.step;
 			}
-			controls.update();
+			const isThirdPerson = state.step === "EXPLORE_SHOP";
+			shopCharacters.setFirstPersonHidden(!isThirdPerson);
+			if (isThirdPerson) {
+				const moveInput = playerMoveRef.current;
+				shopCharacters.movePlayer(moveInput.x, moveInput.y, thirdPersonYaw, delta);
+			} else shopCharacters.movePlayer(0, 0, thirdPersonYaw, delta);
+			const charTick = shopCharacters.animate(elapsed, delta, state.step, state.isPouring, state.mode, state.guestId, reducedMotion);
+			if (charTick.customerCrossedDoorNow) callbacksRef.current.onCustomerEnteredDoor();
+			if (charTick.customerPhase !== lastCustomerPhase) {
+				lastCustomerPhase = charTick.customerPhase;
+				callbacksRef.current.onCustomerPhaseChange(charTick.customerPhase);
+			}
+			if (charTick.isNearTeaTable !== lastNearState) {
+				lastNearState = charTick.isNearTeaTable;
+				callbacksRef.current.onProximityChange(charTick.isNearTeaTable);
+			}
+			const camLambda = isSoftwareGl ? 14 : 9.5;
+			if (isThirdPerson) {
+				const p = charTick.playerPos;
+				const followDist = 2.55;
+				const desiredCamX = MathUtils.clamp(p.x + Math.sin(thirdPersonYaw) * followDist, -4.95, 4.95);
+				const desiredCamY = MathUtils.clamp(p.y + thirdPersonHeightOffset, .65, 2.65);
+				const desiredCamZ = MathUtils.clamp(p.z + Math.cos(thirdPersonYaw) * followDist, -2.75, 4.55);
+				_camGoalPos.set(desiredCamX, desiredCamY, desiredCamZ);
+				_camGoalTarget.set(p.x, p.y + 1.02, p.z);
+			} else {
+				_camGoalPos.set(.06 + firstPersonLookYaw * .18, 1.26 + firstPersonLookPitch * .14, 1.62);
+				_camGoalTarget.set(-.14 + firstPersonLookYaw * .85, .26 + firstPersonLookPitch * .48, -.24);
+			}
+			camera.position.x = MathUtils.damp(camera.position.x, _camGoalPos.x, camLambda, delta);
+			camera.position.y = MathUtils.damp(camera.position.y, _camGoalPos.y, camLambda, delta);
+			camera.position.z = MathUtils.damp(camera.position.z, _camGoalPos.z, camLambda, delta);
+			_camCurrentTarget.x = MathUtils.damp(_camCurrentTarget.x, _camGoalTarget.x, camLambda, delta);
+			_camCurrentTarget.y = MathUtils.damp(_camCurrentTarget.y, _camGoalTarget.y, camLambda, delta);
+			_camCurrentTarget.z = MathUtils.damp(_camCurrentTarget.z, _camGoalTarget.z, camLambda, delta);
+			camera.lookAt(_camCurrentTarget);
+			const btnEl = tableBtnRef.current;
+			if (btnEl) {
+				if (isThirdPerson && charTick.isNearTeaTable) {
+					_tableProj.copy(_TABLE_ANCHOR).project(camera);
+					if (_tableProj.z < 1) {
+						const cw = mountRef.current?.clientWidth || initW;
+						const ch = mountRef.current?.clientHeight || initH;
+						const sx = MathUtils.clamp((_tableProj.x * .5 + .5) * cw, 96, cw - 96);
+						const sy = MathUtils.clamp((-_tableProj.y * .5 + .5) * ch, 78, ch - 76);
+						btnEl.style.opacity = "1";
+						btnEl.style.pointerEvents = "auto";
+						btnEl.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%)`;
+					} else {
+						btnEl.style.opacity = "0";
+						btnEl.style.pointerEvents = "none";
+					}
+				} else {
+					btnEl.style.opacity = "0";
+					btnEl.style.pointerEvents = "none";
+				}
+			}
 			if (lastAppliedTeaId !== state.tea.id) {
 				lastAppliedTeaId = state.tea.id;
 				vessel.chawanGroup.visible = state.tea.vesselStyle === "chawan";
@@ -64523,7 +64484,6 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			}
 			vessel.mintGroup.visible = showToppings && state.toppings.includes("mint");
 			if (vessel.mintGroup.visible) vessel.mintGroup.position.y = liquidSurfaceY + .01;
-			shopCharacters.animate(elapsed, delta, state.step, state.isPouring, state.mode, state.guestId, reducedMotion);
 			const emitSteam = state.settings.particlesEnabled && !reducedMotion && smoothedLevel > .45 && !state.toppings.includes("ice") && (state.step === "STEEP_TEA" || state.step === "ADD_TOPPING" || state.step === "SERVED");
 			for (const s of steamSprites) {
 				if (!emitSteam) {
@@ -64540,7 +64500,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			}
 			if (liteGpuMode && renderer.shadowMap.enabled) {
 				shadowTickCounter = (shadowTickCounter + 1) % 3;
-				const movingShadowCasters = state.isPouring || kettleSlide > .015 || state.step === "STEEP_TEA";
+				const movingShadowCasters = state.isPouring || kettleSlide > .015 || state.step === "STEEP_TEA" || isThirdPerson || charTick.customerPhase === "ENTERING";
 				if (shadowDirtyRef.current || movingShadowCasters && shadowTickCounter === 0) {
 					renderer.shadowMap.needsUpdate = true;
 					shadowDirtyRef.current = false;
@@ -64556,11 +64516,9 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			cancelAnimationFrame(frameId);
 			clearTimeout(frameId);
 			resizeObserver.disconnect();
-			controls.removeEventListener("start", handleControlStart);
-			controls.dispose();
 			renderer.domElement.removeEventListener("pointerdown", onPointerDown);
-			renderer.domElement.removeEventListener("pointerup", onPointerUp);
-			renderer.domElement.removeEventListener("pointermove", onPointerMove);
+			window.removeEventListener("pointerup", onPointerUp);
+			window.removeEventListener("pointermove", onPointerMove);
 			renderer.domElement.removeEventListener("webglcontextlost", handleContextLost);
 			renderer.domElement.removeEventListener("webglcontextrestored", handleContextRestored);
 			const disposedGeos = /* @__PURE__ */ new Set();
@@ -64597,12 +64555,16 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			renderer.dispose();
 			rendererRef.current = null;
 			keyLightRef.current = null;
+			charactersRef.current = null;
 		};
 	}, [
 		settings.antialiasEnabled,
 		liteGpuMode,
 		isUltraLowRam,
-		isMaliG71Hardware
+		isMaliG71Hardware,
+		galaxyA10Boost,
+		realmeNote50Boost,
+		playerMoveRef
 	]);
 	if (webglError) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full w-full flex-col items-center justify-center bg-[#233029] p-6 text-center text-[#F3F1EC]",
@@ -64614,10 +64576,28 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, waterLevel, stee
 			children: "อุปกรณ์นี้ไม่รองรับการแสดงผล WebGL 3D ในขณะนี้ แต่ยังสามารถเลือกชาและชงต่อได้ตามปกติ"
 		})]
 	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		ref: mountRef,
-		className: "h-full w-full select-none",
-		"aria-label": `ฉากโต๊ะชงชา 3 มิติ: ${tea.name}`
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "relative h-full w-full select-none overflow-hidden",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			ref: mountRef,
+			className: "h-full w-full select-none",
+			"aria-label": `ฉากร้านน้ำชา 3 มิติ: ${tea.name}`
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+			ref: tableBtnRef,
+			type: "button",
+			onClick: onBrewAtTableClick,
+			style: {
+				opacity: 0,
+				pointerEvents: "none",
+				top: 0,
+				left: 0
+			},
+			className: "fixed z-20 inline-flex min-h-[48px] items-center gap-2 rounded-2xl border-2 border-[#C5DCBA] bg-[#2E6F40] px-5 py-2.5 text-sm font-bold text-white shadow-xl transition-opacity duration-150 hover:bg-[#245732] active:scale-95 whitespace-nowrap",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+				className: "h-4 w-4 shrink-0",
+				"aria-hidden": "true"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงชาที่โต๊ะ" })]
+		})]
 	});
 });
 // src/components/TeaSelectorModal.tsx
@@ -65269,9 +65249,9 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 });
 // src/components/BrewingStation.tsx
 var MAX_STEEP_DISPLAY = 8;
-var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset, settings, onBrewComplete }) => {
-	const [step, setStep] = (0, import_react.useState)("SELECT_TEA");
-	const [selectorOpen, setSelectorOpen] = (0, import_react.useState)(true);
+var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onBrewComplete }) => {
+	const [step, setStep] = (0, import_react.useState)("EXPLORE_SHOP");
+	const [selectorOpen, setSelectorOpen] = (0, import_react.useState)(false);
 	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("all");
 	const [selectedTea, setSelectedTea] = (0, import_react.useState)(TEAS[0]);
 	const [waterTemp, setWaterTemp] = (0, import_react.useState)(TEAS[0].idealTemp);
@@ -65281,28 +65261,186 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 	const [toppings, setToppings] = (0, import_react.useState)([]);
 	const [dockCollapsed, setDockCollapsed] = (0, import_react.useState)(false);
 	const [guestOrder, setGuestOrder] = (0, import_react.useState)(() => createRandomGuestOrder(playerLevel));
+	const [customerSequenceKey, setCustomerSequenceKey] = (0, import_react.useState)(1);
+	const [customerPhase, setCustomerPhase] = (0, import_react.useState)("ENTERING");
+	const [arrivalAlertVisible, setArrivalAlertVisible] = (0, import_react.useState)(false);
+	const [isNearTeaTable, setIsNearTeaTable] = (0, import_react.useState)(false);
 	const [portraitFailed, setPortraitFailed] = (0, import_react.useState)({});
 	const [brewResult, setBrewResult] = (0, import_react.useState)(null);
+	const playerMoveRef = (0, import_react.useRef)({
+		x: 0,
+		y: 0
+	});
+	const pressedKeysRef = (0, import_react.useRef)(/* @__PURE__ */ new Set());
+	const joystickBaseRef = (0, import_react.useRef)(null);
+	const joystickKnobRef = (0, import_react.useRef)(null);
+	const joystickPointerIdRef = (0, import_react.useRef)(null);
 	const sweetSpotChimedRef = (0, import_react.useRef)(false);
 	const pourIntervalRef = (0, import_react.useRef)(null);
 	const steepIntervalRef = (0, import_react.useRef)(null);
+	const arrivalTimerRef = (0, import_react.useRef)(null);
 	const xpInfo = (0, import_react.useMemo)(() => getXpProgress(playerXp), [playerXp]);
 	const recommendedTeaIds = (0, import_react.useMemo)(() => {
 		if (mode !== "guest") return void 0;
 		if (guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0) return guestOrder.preferredTeaIds;
 		if (guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0) return TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).map((t) => t.id);
 	}, [mode, guestOrder]);
+	const orderedMenuSummary = (0, import_react.useMemo)(() => {
+		const orderedTeas = guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0 ? TEAS.filter((t) => guestOrder.preferredTeaIds.includes(t.id)) : guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0 ? TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).slice(0, 3) : [TEAS[0]];
+		const orderedToppings = (guestOrder.preferredToppings ?? []).map((id) => TOPPINGS.find((t) => t.id === id)?.name).filter((n) => Boolean(n));
+		const tempLabel = guestOrder.preferredTemp === "iced" ? "เสิร์ฟเย็น (ใส่น้ำแข็ง)" : guestOrder.preferredTemp === "hot" ? "เสิร์ฟร้อน" : "ร้อนหรือเย็นก็ได้";
+		return {
+			teaNames: orderedTeas.map((t) => t.name),
+			toppingNames: orderedToppings,
+			tempLabel
+		};
+	}, [guestOrder]);
+	const handleOpenBrewingFromTable = (0, import_react.useCallback)(() => {
+		soundEngine.unlock();
+		soundEngine.playTap();
+		playerMoveRef.current = {
+			x: 0,
+			y: 0
+		};
+		setStep("SELECT_TEA");
+		setSelectorOpen(true);
+	}, []);
+	const handleReturnToShopExplore = (0, import_react.useCallback)(() => {
+		soundEngine.playTap();
+		setSelectorOpen(false);
+		setStep("EXPLORE_SHOP");
+	}, []);
+	const handleCustomerEnteredDoor = (0, import_react.useCallback)(() => {
+		soundEngine.playTap();
+		setArrivalAlertVisible(true);
+		if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
+		arrivalTimerRef.current = window.setTimeout(() => {
+			setArrivalAlertVisible(false);
+		}, 3600);
+	}, []);
 	(0, import_react.useEffect)(() => {
+		const syncKeyboardVector = () => {
+			if (joystickPointerIdRef.current !== null) return;
+			const keys = pressedKeysRef.current;
+			let kx = 0;
+			let ky = 0;
+			if (keys.has("a") || keys.has("arrowleft")) kx -= 1;
+			if (keys.has("d") || keys.has("arrowright")) kx += 1;
+			if (keys.has("w") || keys.has("arrowup")) ky += 1;
+			if (keys.has("s") || keys.has("arrowdown")) ky -= 1;
+			playerMoveRef.current = {
+				x: kx,
+				y: ky
+			};
+		};
 		const onKeyDown = (e) => {
-			if (e.key.toLowerCase() === "h" && document.activeElement?.tagName !== "INPUT") setDockCollapsed((prev) => !prev);
+			const k = e.key.toLowerCase();
+			if (k === "h" && document.activeElement?.tagName !== "INPUT") {
+				setDockCollapsed((prev) => !prev);
+				return;
+			}
+			if ([
+				"w",
+				"a",
+				"s",
+				"d",
+				"arrowup",
+				"arrowdown",
+				"arrowleft",
+				"arrowright"
+			].includes(k)) {
+				pressedKeysRef.current.add(k);
+				syncKeyboardVector();
+			}
+			if ((k === "e" || k === " ") && step === "EXPLORE_SHOP" && isNearTeaTable) {
+				e.preventDefault();
+				handleOpenBrewingFromTable();
+			}
+		};
+		const onKeyUp = (e) => {
+			const k = e.key.toLowerCase();
+			if (pressedKeysRef.current.delete(k)) syncKeyboardVector();
+		};
+		const clearKeys = () => {
+			pressedKeysRef.current.clear();
+			if (joystickPointerIdRef.current === null) playerMoveRef.current = {
+				x: 0,
+				y: 0
+			};
 		};
 		window.addEventListener("keydown", onKeyDown);
+		window.addEventListener("keyup", onKeyUp);
+		window.addEventListener("blur", clearKeys);
 		return () => {
 			window.removeEventListener("keydown", onKeyDown);
+			window.removeEventListener("keyup", onKeyUp);
+			window.removeEventListener("blur", clearKeys);
 			if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
 			if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
+			if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
 		};
-	}, []);
+	}, [
+		step,
+		isNearTeaTable,
+		handleOpenBrewingFromTable
+	]);
+	(0, import_react.useEffect)(() => {
+		if (step !== "EXPLORE_SHOP") {
+			pressedKeysRef.current.clear();
+			joystickPointerIdRef.current = null;
+			playerMoveRef.current = {
+				x: 0,
+				y: 0
+			};
+			if (joystickKnobRef.current) joystickKnobRef.current.style.transform = "translate3d(0px, 0px, 0px)";
+		}
+	}, [step]);
+	(0, import_react.useEffect)(() => {
+		if (mode !== "guest") setArrivalAlertVisible(false);
+	}, [mode]);
+	const updateJoystickFromPointer = (clientX, clientY) => {
+		const base = joystickBaseRef.current;
+		const knob = joystickKnobRef.current;
+		if (!base) return;
+		const rect = base.getBoundingClientRect();
+		const cx = rect.left + rect.width / 2;
+		const cy = rect.top + rect.height / 2;
+		const maxR = Math.max(24, rect.width * .36);
+		const dx = clientX - cx;
+		const dy = clientY - cy;
+		const dist = Math.hypot(dx, dy);
+		const clampedDist = Math.min(dist, maxR);
+		const angle = Math.atan2(dy, dx);
+		const kx = dist > .001 ? Math.cos(angle) * clampedDist : 0;
+		const ky = dist > .001 ? Math.sin(angle) * clampedDist : 0;
+		if (knob) knob.style.transform = `translate3d(${kx.toFixed(1)}px, ${ky.toFixed(1)}px, 0px)`;
+		playerMoveRef.current = {
+			x: kx / maxR,
+			y: -ky / maxR
+		};
+	};
+	const handleJoystickDown = (e) => {
+		e.stopPropagation();
+		e.currentTarget.setPointerCapture(e.pointerId);
+		joystickPointerIdRef.current = e.pointerId;
+		soundEngine.unlock();
+		updateJoystickFromPointer(e.clientX, e.clientY);
+	};
+	const handleJoystickMove = (e) => {
+		if (joystickPointerIdRef.current !== e.pointerId) return;
+		e.stopPropagation();
+		updateJoystickFromPointer(e.clientX, e.clientY);
+	};
+	const handleJoystickUp = (e) => {
+		if (joystickPointerIdRef.current !== e.pointerId) return;
+		e.stopPropagation();
+		joystickPointerIdRef.current = null;
+		playerMoveRef.current = {
+			x: 0,
+			y: 0
+		};
+		if (joystickKnobRef.current) joystickKnobRef.current.style.transform = "translate3d(0px, 0px, 0px)";
+	};
 	(0, import_react.useEffect)(() => {
 		if (step !== "STEEP_TEA") {
 			if (steepIntervalRef.current) {
@@ -65455,7 +65593,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setStep("SERVED");
 		onBrewComplete(journalRecord, warmthEarned, xpEarned);
 	};
-	const handleResetCup = (advanceGuest = true) => {
+	const handleResetCup = (advanceGuest = true, backToShop = true) => {
 		soundEngine.playTap();
 		if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
 		if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
@@ -65464,16 +65602,25 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setSteepSeconds(0);
 		setToppings([]);
 		setBrewResult(null);
-		setStep("SELECT_TEA");
-		setSelectorOpen(true);
+		if (backToShop) {
+			setSelectorOpen(false);
+			setStep("EXPLORE_SHOP");
+		} else {
+			setStep("SELECT_TEA");
+			setSelectorOpen(true);
+		}
 		if (mode === "guest" && advanceGuest) {
 			const nextLvl = getLevelFromXp(playerXp);
+			setCustomerPhase("ENTERING");
 			setGuestOrder((prev) => createRandomGuestOrder(nextLvl, prev.guest.id));
+			setCustomerSequenceKey((k) => k + 1);
 		}
 	};
 	const handleSwapGuest = () => {
 		soundEngine.playTap();
+		setCustomerPhase("ENTERING");
 		setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
+		setCustomerSequenceKey((k) => k + 1);
 	};
 	const strengthLabel = getStrengthLabel(selectedTea, steepSeconds);
 	const activeEquipment = (0, import_react.useMemo)(() => getEquipmentInfo(selectedTea.equipmentId), [selectedTea.equipmentId]);
@@ -65492,20 +65639,55 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 					step,
 					mode,
 					guestId: guestOrder.guest.id,
+					customerSequenceKey,
 					waterLevel,
 					steepSeconds,
 					toppings,
 					isPouring,
-					cameraPreset,
 					settings,
+					playerMoveRef,
+					onProximityChange: setIsNearTeaTable,
+					onBrewAtTableClick: handleOpenBrewingFromTable,
+					onCustomerEnteredDoor: handleCustomerEnteredDoor,
+					onCustomerPhaseChange: setCustomerPhase,
 					onKettleClick: handlePourWater,
 					onVesselClick: handleFinishSteep
 				})
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: mode === "guest" && arrivalAlertVisible && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				initial: {
+					opacity: 0,
+					y: -14,
+					scale: .94
+				},
+				animate: {
+					opacity: 1,
+					y: 0,
+					scale: 1
+				},
+				exit: {
+					opacity: 0,
+					y: -12,
+					scale: .95
+				},
+				transition: {
+					type: "spring",
+					stiffness: 400,
+					damping: 28
+				},
+				className: "pointer-events-none fixed inset-x-0 top-3 z-30 flex justify-center px-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "inline-flex items-center gap-2 rounded-2xl border border-[#2E6F40]/35 bg-[#FAF9F6] px-4 py-2 text-xs sm:text-sm font-bold text-[#1F2823] shadow-lg",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, {
+						className: "h-4 w-4 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มีลูกค้าเข้ามาในร้าน" })]
+				})
+			}, "guest-arrival-toast") }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "pointer-events-auto flex flex-col gap-1.5 max-w-[54vw] sm:max-w-md",
+					className: "pointer-events-auto flex flex-col gap-1.5 max-w-[60vw] sm:max-w-md",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2.5 py-1 shadow-xs",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -65557,6 +65739,10 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 									soundEngine.unlock();
 									soundEngine.playTap();
 									onModeChange(m.id);
+									if (m.id === "guest") {
+										setCustomerPhase("ENTERING");
+										setCustomerSequenceKey((k) => k + 1);
+									}
 								},
 								className: "relative min-h-[38px] sm:min-h-[40px] rounded-md px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
 								children: [mode === m.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
@@ -65575,7 +65761,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
 						mode: "wait",
-						children: mode === "guest" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+						children: mode === "guest" && customerPhase !== "ENTERING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 							initial: {
 								opacity: 0,
 								x: -16,
@@ -65596,55 +65782,131 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 								stiffness: 360,
 								damping: 28
 							},
-							className: "flex items-center gap-2.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 p-2 shadow-xs",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]",
-								style: { backgroundColor: guestOrder.guest.accentBg },
-								children: !portraitFailed[guestOrder.guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: guestOrder.guest.portraitUrl,
-									alt: guestOrder.guest.name,
-									referrerPolicy: "no-referrer",
-									onError: () => setPortraitFailed((prev) => ({
-										...prev,
-										[guestOrder.guest.id]: true
-									})),
-									className: "h-full w-full object-cover"
-								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: guestOrder.guest.fallbackInitial })
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "min-w-0 flex-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center justify-between gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-display text-xs font-semibold text-[#1F2823] truncate",
-										children: guestOrder.guest.name
-									}), step !== "SERVED" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileHover: { scale: 1.05 },
-										whileTap: { scale: .9 },
-										onClick: handleSwapGuest,
-										"aria-label": "เปลี่ยนแขก",
-										className: "inline-flex min-h-[32px] min-w-[32px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
-											className: "h-3 w-3",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "hidden sm:inline",
-											children: "เปลี่ยน"
+							className: "flex flex-col gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 p-2.5 shadow-sm",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]",
+									style: { backgroundColor: guestOrder.guest.accentBg },
+									children: !portraitFailed[guestOrder.guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: guestOrder.guest.portraitUrl,
+										alt: guestOrder.guest.name,
+										referrerPolicy: "no-referrer",
+										onError: () => setPortraitFailed((prev) => ({
+											...prev,
+											[guestOrder.guest.id]: true
+										})),
+										className: "h-full w-full object-cover"
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: guestOrder.guest.fallbackInitial })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0 flex-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-display text-xs font-semibold text-[#1F2823] truncate",
+											children: guestOrder.guest.name
+										}), step !== "SERVED" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileHover: { scale: 1.05 },
+											whileTap: { scale: .9 },
+											onClick: handleSwapGuest,
+											"aria-label": "เปลี่ยนแขก",
+											className: "inline-flex min-h-[30px] min-w-[30px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
+												className: "h-3 w-3",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: "hidden sm:inline",
+												children: "เปลี่ยน"
+											})]
 										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2",
+										children: [
+											"“",
+											brewResult?.guestReply ?? guestOrder.requestText,
+											"”"
+										]
 									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2",
-									children: [
-										"“",
-										brewResult?.guestReply ?? guestOrder.requestText,
-										"”"
-									]
 								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "border-t border-[#1F2823]/8 pt-1.5 text-[11px] text-[#224B2B]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-semibold text-[#1F2823]",
+										children: "รายการเมนูที่ลูกค้าสั่ง:"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "mt-0.5 leading-snug text-[#2E6F40] font-medium",
+										children: ["• เมนูชา: ", orderedMenuSummary.teaNames.join(" / ")]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "leading-snug text-[#4A534D]",
+										children: [
+											"• อุณหภูมิ: ",
+											orderedMenuSummary.tempLabel,
+											orderedMenuSummary.toppingNames.length > 0 ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(", ")}` : ""
+										]
+									})
+								]
 							})]
 						}, `${guestOrder.guest.id}-${guestOrder.requestText}-${brewResult?.guestReply ?? "idle"}`)
 					})]
 				})
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "EXPLORE_SHOP" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+				initial: {
+					opacity: 0,
+					scale: .9
+				},
+				animate: {
+					opacity: 1,
+					scale: 1
+				},
+				exit: {
+					opacity: 0,
+					scale: .9
+				},
+				transition: { duration: .18 },
+				className: "fixed bottom-4 left-4 z-20 flex flex-col items-center gap-1.5 safe-pb select-none",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					ref: joystickBaseRef,
+					onPointerDown: handleJoystickDown,
+					onPointerMove: handleJoystickMove,
+					onPointerUp: handleJoystickUp,
+					onPointerCancel: handleJoystickUp,
+					"aria-label": "ก้านบังคับเดินรอบร้าน",
+					className: "relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/85 shadow-lg",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-10 w-10 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						ref: joystickKnobRef,
+						className: "pointer-events-none absolute h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "rounded-lg bg-[#FAF9F6]/88 px-2 py-0.5 text-[10px] font-medium text-[#39423C] shadow-2xs",
+					children: "เดินในร้าน (WASD)"
+				})]
+			}, "explore-joystick"), !isNearTeaTable && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				initial: {
+					opacity: 0,
+					y: 8
+				},
+				animate: {
+					opacity: 1,
+					y: 0
+				},
+				exit: {
+					opacity: 0,
+					y: 8
+				},
+				className: "pointer-events-none fixed inset-x-0 bottom-4 z-10 flex justify-center px-4 safe-pb",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "inline-flex items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/92 px-3.5 py-2 text-xs font-medium text-[#27312B] shadow-sm",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+						className: "h-3.5 w-3.5 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินไปที่โต๊ะชงชาเพื่อกดปุ่มทำชา" })]
+				})
+			}, "walk-hint")] }) }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaSelectorModal, {
 				playerLevel,
 				selectedTeaId: selectedTea.id,
@@ -65660,7 +65922,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 					setSelectorOpen(false);
 				}
 			}, "tea-selector-modal") }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && !selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && !selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 				initial: {
 					opacity: 0,
 					y: 20,
@@ -65681,8 +65943,17 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 					stiffness: 380,
 					damping: 28
 				},
-				className: "pointer-events-none fixed inset-x-0 bottom-3 z-20 flex justify-center safe-px safe-pb",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+				className: "pointer-events-none fixed inset-x-0 bottom-3 z-20 flex flex-wrap justify-center gap-2 safe-px safe-pb",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+					type: "button",
+					whileTap: { scale: .94 },
+					onClick: handleReturnToShopExplore,
+					className: "pointer-events-auto inline-flex min-h-[48px] items-center gap-2 rounded-2xl border border-[#1F2823]/18 bg-[#FAF9F6]/96 px-4 text-sm font-semibold text-[#1F2823] shadow-lg hover:bg-white",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+						className: "h-4 w-4 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินรอบร้าน" })]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 					type: "button",
 					whileHover: {
 						scale: 1.03,
@@ -65704,9 +65975,9 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 						className: "h-4 w-4",
 						"aria-hidden": "true"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เลือกใบชาที่จะชง" })]
-				})
+				})]
 			}, "reopen-tea-selector") }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step !== "SELECT_TEA" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step !== "EXPLORE_SHOP" && step !== "SELECT_TEA" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 				initial: {
 					opacity: 0,
 					y: 28
@@ -66082,7 +66353,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 										stiffness: 380,
 										damping: 26
 									},
-									className: "mt-2.5 flex items-center justify-between gap-3",
+									className: "mt-2.5 flex items-center justify-between gap-2 sm:gap-3",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "min-w-0 flex-1",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -66104,21 +66375,33 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 											className: "text-xs text-[#4A534D] truncate",
 											children: brewResult.leveledUpTo ? `เลื่อนระดับเป็น Lv.${brewResult.leveledUpTo}! ${brewResult.newlyUnlockedTeas.length > 0 ? `ปลดล็อก ${brewResult.newlyUnlockedTeas.map((t) => t.name).join(", ")}` : ""}` : brewResult.harmonyMessage
 										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileHover: { scale: 1.03 },
-										whileTap: { scale: .94 },
-										transition: {
-											type: "spring",
-											stiffness: 420,
-											damping: 24
-										},
-										onClick: () => handleResetCup(true),
-										className: "inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-5 text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap shrink-0",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
-											className: "h-4 w-4",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงถ้วยถัดไป" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-1.5 shrink-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .94 },
+											onClick: () => handleResetCup(true, true),
+											className: "inline-flex min-h-[48px] items-center gap-1.5 rounded-xl border border-[#1F2823]/15 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EFECE4] whitespace-nowrap",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+												className: "h-4 w-4 text-[#2E6F40]",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินในร้าน" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileHover: { scale: 1.03 },
+											whileTap: { scale: .94 },
+											transition: {
+												type: "spring",
+												stiffness: 420,
+												damping: 24
+											},
+											onClick: () => handleResetCup(true, false),
+											className: "inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-4 sm:px-5 text-xs sm:text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+												className: "h-4 w-4",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงถ้วยถัดไป" })]
+										})]
 									})]
 								}, "step-served")
 							]
@@ -66130,8 +66413,66 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.9.0";
+var CURRENT_APP_VERSION = "2.11.0";
 var VERSION_HISTORY = [
+	{
+		version: "2.11.0",
+		previousVersion: "2.10.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "ไอคอนเกมบ้านชาอุ่นใจ, เพลงชิวๆ 3 เพลง, อัปเกรดโมเดล 3D ตัวละคร, ล็อค Galaxy A10 ที่ 60 Hz / 60 FPS & บูสต์ realme Note 50 แรงขึ้น",
+		summary: "สร้างไอคอนเกมใหม่สำหรับทั้งแอป Android, PWA และหน้าหลัก เพิ่มเสียงเพลงดนตรีสไตล์ชิวๆ 3 เพลงพร้อมตัวเลือกและระดับเสียงเพลงในหน้าตั้งค่า ปรับปรุงสัดส่วนและเส้นสายโมเดลตัวละคร 3D ให้เนียนสมส่วนขึ้น พร้อมล็อคหน้าจอ 60 Hz (ตัวเลือก 30/60 FPS เท่านั้น) และบูสต์ความลื่นสำหรับ Samsung Galaxy A10 รวมถึงเพิ่มพลังโหมด Optimize ของ realme Note 50",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "ไอคอนเกมบ้านชาอุ่นใจเฉพาะตัว (Android · PWA · เว็บ)",
+				detail: "ออกแบบไอคอนเกมชามมัทฉะอุ่นๆ ท่ามกลางโทนสีเขียวสวนไผ่ พร้อมติดตั้งลงไอคอนแอป Android, Adaptive Icon, PWA และหน้าหลักของเกม"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เสียงเพลงดนตรีสไตล์ชิวๆ 3 เพลงพร้อมตัวเลือกในหน้าตั้งค่า",
+				detail: "เพิ่มเพลงบรรเลงอุ่นๆ 3 สไตล์ (“สายลมอุ่นในสวนไผ่”, “บ่ายฝนพรำในเรือนชา”, “โคมไฟอุ่นยามพลบค่ำ”) พร้อมปุ่มปิดเพลงและแถบปรับระดับเสียงเพลงแยกอิสระ"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "อัปเกรดโมเดล 3D ตัวละครผู้เล่นและลูกค้าให้สมส่วนสวยงามขึ้น",
+				detail: "ปรับทรงผมเป็นเลเยอร์โค้งมนไร้เหลี่ยม เพิ่มข้อต่อหัวไหล่/เข่า/สะโพกที่เนียนตา สายเอี๊ยมและโบว์โอบิ รองเท้าเกี๊ยะมีซี่ไม้ ดวงตาพร้อมประกาย แก้มนุ่ม และพร็อพสมุดโน้ต/กระเป๋าสานละเอียดขึ้น"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "ล็อค Galaxy A10 ที่ 60 Hz (30/60 FPS) & บูสต์ realme Note 50 แรงขึ้น",
+				detail: "Samsung Galaxy A10 ล็อคค่ารีเฟรชเรทไว้ที่ 60 Hz ทำให้เห็นเฉพาะ 30 FPS และ 60 FPS ทั้งในโหมด Optimize อัตโนมัติ และมาตรฐาน พร้อมเพิ่มประสิทธิภาพเฟรมเรตทั้งโหมดบูสต์ของ Galaxy A10 และ realme Note 50 ให้ลื่นนิ่งกว่าเดิม"
+			}
+		]
+	},
+	{
+		version: "2.10.0",
+		previousVersion: "2.9.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "เดินรอบร้านมุมมองบุคคลที่ 3, กดปุ่มชงชาที่โต๊ะสู่มุมมองบุคคลที่ 1, ลูกค้าเดินเข้าร้านสั่งเมนู & GitHub ผู้พัฒนา pppu13610-glitch",
+		summary: "เพิ่มอิสระให้ตัวละครผู้เล่น 3 มิติเดินสำรวจรอบร้านได้เต็มที่ในมุมมองบุคคลที่ 3 เดินเข้าใกล้โต๊ะเพื่อกดปุ่มชงชาที่โต๊ะและสลับเป็นมุมมองบุคคลที่ 1 ระหว่างชงชา เพิ่มประตูร้านให้ลูกค้าเดินเข้ามาจากด้านนอกพร้อมข้อความแจ้งเตือนมีลูกค้าเข้ามาในร้านและรายการเมนูที่สั่ง อัปเกรดรายละเอียดโมเดล 3 มิติทุกตัวละคร และระบุบัญชี GitHub ผู้พัฒนา pppu13610-glitch",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เดินสำรวจร้าน 3 มิติ + ปุ่มชงชาบนโต๊ะ & มุมมองบุคคลที่ 3 / บุคคลที่ 1",
+				detail: "ระหว่างเดินรอบร้านใช้มุมมองบุคคลที่ 3 เพียงมุมมองเดียวพร้อมจอยสติ๊กและปุ่ม WASD เดินเข้าใกล้เคาน์เตอร์จะมีปุ่มชงชาที่โต๊ะแสดงขึ้นบนโต๊ะโดยตรง และเมื่อกดทำชาจะเปลี่ยนเป็นมุมมองบุคคลที่ 1 เต็มตา"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "ลูกค้าเดินเข้าร้านจากข้างนอก + แจ้งเตือน & รายการเมนูที่สั่ง",
+				detail: "ตัวละครลูกค้าจะเดินผ่านประตูหน้าร้านเข้ามาด้านใน พร้อมข้อความแจ้งเตือน “มีลูกค้าเข้ามาในร้าน” และแสดงรายการเมนูชา อุณหภูมิ และท็อปปิ้งที่ลูกค้าสั่งทันทีที่นั่งสั่งชา"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เพิ่มรายละเอียดโมเดล 3 มิติของตัวละครผู้เล่นและลูกค้าทุกตัว",
+				detail: "เพิ่มข้อต่อแขน-ขาขยับเดินจริง รองเท้าเกี๊ยะ สายโอบิ ผ้ากันเปื้อน ช้อนตักชา ปิ่นหยก ลายแมวส้มกับหนวดแมว แว่นตากรอบทอง สมุดโน้ต ผ้าคลุมไหล่ และกระเป๋าสานของลูกค้า"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "อัปเดตรายละเอียดผู้พัฒนา GitHub: pppu13610-glitch",
+				detail: "เชื่อมบัญชีผู้สร้างและผู้พัฒนาเกม pppu13610-glitch ในหน้าตรวจสอบเวอร์ชั่นและการวิเคราะห์อัปเดต Browser โดยตรง"
+			}
+		]
+	},
 	{
 		version: "2.9.0",
 		previousVersion: "2.8.0",
@@ -66151,7 +66492,7 @@ var VERSION_HISTORY = [
 			},
 			{
 				category: "ฟีเจอร์ใหม่",
-				title: "วิเคราะห์การอัปเดต Browser + ลิงก์บัญชี GitHub ผู้สร้างเกม (@ggt86203)",
+				title: "วิเคราะห์การอัปเดต Browser + ลิงก์บัญชี GitHub ผู้สร้างเกม",
 				detail: "เพิ่มตัววิเคราะห์เปรียบเทียบความต่างระหว่างเวอร์ชั่นในเครื่องกับเซิร์ฟเวอร์ Browser และ GitHub Release พร้อมลิงก์ตรงไปยังบัญชี GitHub ของผู้สร้างเกมอย่างปลอดภัย"
 			},
 			{
@@ -66521,20 +66862,6 @@ var PWAInstallButton = ({ compact }) => {
 	return null;
 };
 // src/components/CornerMenu.tsx
-var CAMERA_OPTIONS = [
-	{
-		id: "table",
-		label: "โต๊ะชา"
-	},
-	{
-		id: "cup",
-		label: "ถ้วยชา"
-	},
-	{
-		id: "overhead",
-		label: "มุมสูง"
-	}
-];
 var TAP_SPRING$5 = {
 	type: "spring",
 	stiffness: 440,
@@ -66549,7 +66876,7 @@ var DRAWER_TRANSITION = {
 		1
 	]
 };
-var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cameraPreset, onCameraPresetChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
+var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [open, setOpen] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
@@ -66737,36 +67064,6 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cam
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงตามใจ" })]
 						})]
 					})] }),
-					screen === "BREWING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-						className: "flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera$1, {
-							className: "h-3.5 w-3.5",
-							"aria-hidden": "true"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมกล้อง 3 มิติ" })]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "grid grid-cols-3 gap-1.5 rounded-xl border border-[#1F2823]/10 bg-white p-1",
-						children: CAMERA_OPTIONS.map((cam) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .95 },
-							onClick: () => {
-								soundEngine.playTap();
-								onCameraPresetChange(cam.id);
-							},
-							className: "relative min-h-[42px] rounded-lg text-xs font-medium",
-							children: [cameraPreset === cam.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-								layoutId: "drawer-camera-pill",
-								transition: {
-									type: "spring",
-									stiffness: 420,
-									damping: 32
-								},
-								className: "absolute inset-0 rounded-lg bg-[#233029]"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: `relative z-10 ${cameraPreset === cam.id ? "text-[#F3F1EC]" : "text-[#4A534D]"}`,
-								children: cam.label
-							})]
-						}, cam.id))
-					})] }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 						className: "text-xs font-semibold text-[#5A655D] mb-2",
 						children: "เสียงและบรรยากาศ"
@@ -66898,7 +67195,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cam
 										children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-[11px] text-[#5A655D] truncate",
-										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.9.0 · ดูสิ่งที่เพิ่มใหม่`
+										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.11.0 · ดูสิ่งที่เพิ่มใหม่`
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -67644,6 +67941,74 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-1.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between text-xs sm:text-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+									htmlFor: "slider-music-vol",
+									className: "font-medium text-[#1F2823]",
+									children: "ระดับเสียงเพลงประกอบ (ชิวๆ)"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-mono-num font-semibold text-[#2E6F40]",
+									children: settings.musicTrack === "none" ? "ปิดเพลง" : `${settings.musicVolume}%`
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								id: "slider-music-vol",
+								type: "range",
+								min: 0,
+								max: 100,
+								value: settings.musicVolume,
+								disabled: settings.isMuted || settings.musicTrack === "none",
+								onChange: (e) => {
+									soundEngine.unlock();
+									onUpdateSettings({ musicVolume: Number(e.target.value) });
+								},
+								className: "h-3 w-full cursor-pointer accent-[#2E6F40] disabled:opacity-40"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "flex items-center justify-between gap-2",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#1F2823]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Music, {
+										className: "h-4 w-4 text-[#2E6F40]",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เลือกเพลงดนตรีสไตล์ชิวๆ (3 เพลง)" })]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid grid-cols-1 sm:grid-cols-2 gap-1.5",
+								children: CHILL_MUSIC_TRACKS.map((track) => {
+									const active = settings.musicTrack === track.id;
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .96 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.unlock();
+											soundEngine.playTap();
+											onUpdateSettings({ musicTrack: track.id });
+										},
+										className: `flex min-h-[48px] items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823]" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "min-w-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-xs font-semibold text-[#1F2823] truncate",
+												children: track.title
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[10px] text-[#5A655D] truncate",
+												children: track.subtitle
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: `rounded-md px-1.5 py-0.5 font-mono-num text-[10px] font-semibold shrink-0 ${active ? "bg-[#2E6F40] text-white" : "bg-[#E2DFD7] text-[#5A655D]"}`,
+											children: track.bpmLabel
+										})]
+									}, track.id);
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "space-y-2 border-t border-[#1F2823]/8 pt-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex items-center justify-between gap-2",
@@ -67793,7 +68158,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[11px] text-[#5A655D]",
-									children: detectedRefreshRate >= 120 ? "ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS" : detectedRefreshRate >= 90 ? "ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)" : "ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)"
+									children: deviceReport.isGalaxyA10 ? "ตรวจพบ Samsung Galaxy A10 (จอ 60 Hz) · ล็อคตัวเลือกเฉพาะ 30 / 60 FPS เพื่อความลื่นไหลสูงสุด" : detectedRefreshRate >= 120 ? "ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS" : detectedRefreshRate >= 90 ? "ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)" : "ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)"
 								})
 							]
 						}),
@@ -67985,10 +68350,10 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
 											className: "h-4 w-4 text-[#2E6F40] shrink-0",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "จูนเฉพาะ realme Note 50 (Unisoc T612 · Mali-G57 · เปิด 90 FPS)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความแรง realme Note 50 (Unisoc T612 · Mali-G57 · 90 FPS นิ่งขึ้น)" })]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
-										children: "ปรับทันที"
+										children: "บูสต์ทันที"
 									})]
 								}),
 								deviceReport.showGalaxyA10Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
@@ -67997,7 +68362,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									transition: TAP_SPRING$3,
 									onClick: () => {
 										soundEngine.playTap();
-										onUpdateSettings(getGalaxyA10Preset(detectedRefreshRate));
+										onUpdateSettings(getGalaxyA10Preset());
 									},
 									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
@@ -68005,10 +68370,10 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
 											className: "h-4 w-4 text-[#2B4E72] shrink-0",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "จูนเฉพาะ Samsung Galaxy A10 (Exynos 7884 · Mali-G71 MP2)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บูสต์ความลื่น Samsung Galaxy A10 (Exynos 7884 · ล็อค 60 Hz / 60 FPS)" })]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "text-[11px] font-bold text-[#2B4E72] shrink-0",
-										children: "ปรับทันที"
+										children: "บูสต์ทันที"
 									})]
 								}),
 								deviceReport.showLowRam2GbOption && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
@@ -68604,13 +68969,19 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 							damping: 28
 						},
 						className: "max-w-md",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-3.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "/game-icon.png",
+								alt: "ไอคอนเกมบ้านชาอุ่นใจ",
+								width: 56,
+								height: 56,
+								className: "h-12 w-12 sm:h-14 sm:w-14 rounded-2xl object-cover shadow-lg shadow-black/35 ring-1 ring-white/30 shrink-0"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 								className: "font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#FAF7F0] drop-shadow-[0_2px_10px_rgba(18,22,18,0.65)]",
 								style: { textWrap: "balance" },
 								children: "บ้านชาอุ่นใจ"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "mt-1 text-xs sm:text-sm font-medium text-[#EDE7D9] drop-shadow-[0_1px_6px_rgba(18,22,18,0.75)]",
 								children: [
 									"เรือนชาไม้กลางสวนไผ่ · Lv. ",
@@ -68625,26 +68996,25 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 									}),
 									" ถ้วย"
 								]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "mt-3 sm:mt-4 flex items-center gap-3",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: {
-										scale: 1.03,
-										y: -1
-									},
-									whileTap: { scale: .94 },
-									transition: TAP_SPRING$1,
-									onClick: () => onStart(mode),
-									className: "inline-flex min-h-[48px] items-center gap-2.5 rounded-xl bg-[#2E6F40] px-6 py-2.5 text-sm sm:text-base font-medium text-[#FAF8F3] shadow-lg shadow-black/25 ring-1 ring-white/15 hover:bg-[#255C34] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, {
-										className: "h-4 w-4 fill-current",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เริ่มชงชา" })]
-								})
+							})] })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-3 sm:mt-4 flex items-center gap-3",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileHover: {
+									scale: 1.03,
+									y: -1
+								},
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$1,
+								onClick: () => onStart(mode),
+								className: "inline-flex min-h-[48px] items-center gap-2.5 rounded-xl bg-[#2E6F40] px-6 py-2.5 text-sm sm:text-base font-medium text-[#FAF8F3] shadow-lg shadow-black/25 ring-1 ring-white/15 hover:bg-[#255C34] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, {
+									className: "h-4 w-4 fill-current",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เริ่มชงชา" })]
 							})
-						]
+						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 						initial: {
 							opacity: 0,
@@ -68737,37 +69107,46 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 					className: "w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl p-4 sm:p-6 will-change-transform",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-start justify-between gap-4 border-b border-[#1F2823]/10 pb-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-							id: "title-submenu-heading",
-							className: "font-display text-lg sm:text-xl font-semibold text-[#1F2823]",
-							children: "เมนูเรือนชาและการตั้งค่า"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-							className: "mt-0.5 text-xs text-[#5A655D]",
-							children: [
-								"Lv. ",
-								xpInfo.level,
-								" (",
-								xpInfo.title,
-								") · แต้มอุ่นใจ",
-								" ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono-num",
-									children: warmthPoints
-								}),
-								" · ปลดล็อกชา",
-								" ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "font-mono-num",
-									children: [
-										unlockedCount,
-										"/",
-										TEAS.length
-									]
-								}),
-								" ",
-								"ชนิด"
-							]
-						})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "/game-icon.png",
+								alt: "",
+								width: 40,
+								height: 40,
+								className: "h-10 w-10 rounded-xl object-cover shadow-xs ring-1 ring-[#1F2823]/10 shrink-0"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								id: "title-submenu-heading",
+								className: "font-display text-lg sm:text-xl font-semibold text-[#1F2823]",
+								children: "เมนูเรือนชาและการตั้งค่า"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "mt-0.5 text-xs text-[#5A655D]",
+								children: [
+									"Lv. ",
+									xpInfo.level,
+									" (",
+									xpInfo.title,
+									") · แต้มอุ่นใจ",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono-num",
+										children: warmthPoints
+									}),
+									" · ปลดล็อกชา",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "font-mono-num",
+										children: [
+											unlockedCount,
+											"/",
+											TEAS.length
+										]
+									}),
+									" ",
+									"ชนิด"
+								]
+							})] })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 							type: "button",
 							onClick: closeModal,
 							whileHover: { scale: 1.07 },
@@ -69002,7 +69381,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.9.0)` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.11.0)` })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex flex-wrap items-center justify-between gap-2",
@@ -69530,9 +69909,9 @@ var SystemBarsPluginWeb = class extends WebPlugin {
 };
 registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
 // src/utils/security.ts
-var CREATOR_GITHUB_USERNAME = "ggt86203";
-var CREATOR_GITHUB_PROFILE_URL = "https://github.com/ggt86203";
-var CREATOR_GITHUB_REPO_URL = "https://github.com/ggt86203/baan-cha-3d";
+var CREATOR_GITHUB_USERNAME = "pppu13610-glitch";
+var CREATOR_GITHUB_PROFILE_URL = "https://github.com/pppu13610-glitch";
+var CREATOR_GITHUB_REPO_URL = "https://github.com/pppu13610-glitch/baan-cha-3d";
 var TRUSTED_HTTPS_HOSTS = /* @__PURE__ */ new Set([
 	"ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
 	"ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
@@ -69589,7 +69968,7 @@ function runAppSecurityAudit() {
 		{
 			id: "verified-sources",
 			label: "ลิงก์ผู้สร้าง GitHub และเซิร์ฟเวอร์อัปเดตถูกยืนยันแล้ว",
-			passed: isTrustedExternalUrl("https://github.com/ggt86203") && isTrustedExternalUrl("https://github.com/ggt86203/baan-cha-3d"),
+			passed: isTrustedExternalUrl("https://github.com/pppu13610-glitch") && isTrustedExternalUrl("https://github.com/pppu13610-glitch/baan-cha-3d"),
 			detail: `ตรวจสอบปลายทาง ${CREATOR_GITHUB_PROFILE_URL} และเซิร์ฟเวอร์เกมหลักแล้ว`
 		},
 		{
@@ -69609,8 +69988,8 @@ function runAppSecurityAudit() {
 // src/utils/appUpdater.ts
 var LIVE_BROWSER_APP_URL = "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
 var DEV_BROWSER_APP_URL = "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
-var GITHUB_RAW_VERSION_URL = "https://raw.githubusercontent.com/ggt86203/baan-cha-3d/main/public/version.json";
-var GITHUB_LATEST_RELEASE_API = "https://api.github.com/repos/ggt86203/baan-cha-3d/releases/latest";
+var GITHUB_RAW_VERSION_URL = "https://raw.githubusercontent.com/pppu13610-glitch/baan-cha-3d/main/public/version.json";
+var GITHUB_LATEST_RELEASE_API = "https://api.github.com/repos/pppu13610-glitch/baan-cha-3d/releases/latest";
 function compareSemver(a, b) {
 	const pa = a.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
 	const pb = b.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
@@ -69783,7 +70162,7 @@ async function checkLiveBrowserVersion() {
 	if (githubManifest) {
 		if (!bestManifest || compareSemver(githubManifest.version, bestManifest.version) > 0) bestManifest = githubManifest;
 	}
-	const latestVersion = bestManifest?.version ?? "2.9.0";
+	const latestVersion = bestManifest?.version ?? "2.11.0";
 	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
 	const targetSyncUrl = sanitizeExternalUrl(bestManifest?.browserUrl ?? (liveManifestDirect ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"), LIVE_BROWSER_APP_URL);
 	const sourceLabel = checkedFromGithub && checkedFromBrowserServer ? "Browser Server + GitHub ผู้สร้าง" : checkedFromBrowserServer ? "Browser Server ปัจจุบัน" : checkedFromGithub ? "GitHub ผู้สร้างเกม" : "ตรวจสอบในเครื่อง";
@@ -69824,14 +70203,14 @@ async function applyInAppUpdate(result) {
 	} catch {}
 	if (typeof window === "undefined") return;
 	const isNative = Capacitor.isNativePlatform();
-	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.9.0") > 0;
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.11.0") > 0;
 	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
 		const safeTarget = sanitizeExternalUrl(result.targetSyncUrl, LIVE_BROWSER_APP_URL);
 		window.location.replace(safeTarget);
 		return;
 	}
 	const url = new URL(window.location.href);
-	url.searchParams.set("v", result?.latestVersion ?? "2.9.0");
+	url.searchParams.set("v", result?.latestVersion ?? "2.11.0");
 	window.location.replace(url.toString());
 }
 // src/utils/versionMigration.ts
@@ -69839,6 +70218,8 @@ var DEFAULT_SETTINGS = {
 	masterVolume: 85,
 	sfxVolume: 90,
 	ambienceVolume: 75,
+	musicVolume: 70,
+	musicTrack: "morning-bamboo",
 	isMuted: false,
 	ambience: "none",
 	graphicsQuality: "high",
@@ -69933,6 +70314,8 @@ function migrateSettingsPayload(raw) {
 		masterVolume: typeof parsed.masterVolume === "number" && Number.isFinite(parsed.masterVolume) ? Math.max(0, Math.min(100, parsed.masterVolume)) : DEFAULT_SETTINGS.masterVolume,
 		sfxVolume: typeof parsed.sfxVolume === "number" && Number.isFinite(parsed.sfxVolume) ? Math.max(0, Math.min(100, parsed.sfxVolume)) : DEFAULT_SETTINGS.sfxVolume,
 		ambienceVolume: typeof parsed.ambienceVolume === "number" && Number.isFinite(parsed.ambienceVolume) ? Math.max(0, Math.min(100, parsed.ambienceVolume)) : DEFAULT_SETTINGS.ambienceVolume,
+		musicVolume: typeof parsed.musicVolume === "number" && Number.isFinite(parsed.musicVolume) ? Math.max(0, Math.min(100, parsed.musicVolume)) : DEFAULT_SETTINGS.musicVolume,
+		musicTrack: parsed.musicTrack === "none" || parsed.musicTrack === "morning-bamboo" || parsed.musicTrack === "rainy-teahouse" || parsed.musicTrack === "twilight-lantern" ? parsed.musicTrack : DEFAULT_SETTINGS.musicTrack,
 		isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
 		ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
 		graphicsQuality: parsed.graphicsQuality === "low" || parsed.graphicsQuality === "medium" || parsed.graphicsQuality === "high" ? parsed.graphicsQuality : DEFAULT_SETTINGS.graphicsQuality,
@@ -70061,7 +70444,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.9.0" ? prev : null;
+		return prev && prev !== "2.11.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -70098,11 +70481,11 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
-	const latestBrowserVersion = updateResult?.latestVersion ?? "2.9.0";
+	const latestBrowserVersion = updateResult?.latestVersion ?? "2.11.0";
 	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
 	const securityAudit = (0, import_react.useMemo)(() => runAppSecurityAudit(), []);
-	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/ggt86203", CREATOR_GITHUB_PROFILE_URL);
-	const safeGithubRepoUrl = sanitizeExternalUrl(updateResult?.analysis.githubRepoUrl ?? "https://github.com/ggt86203/baan-cha-3d", CREATOR_GITHUB_REPO_URL);
+	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/pppu13610-glitch", CREATOR_GITHUB_PROFILE_URL);
+	const safeGithubRepoUrl = sanitizeExternalUrl(updateResult?.analysis.githubRepoUrl ?? "https://github.com/pppu13610-glitch/baan-cha-3d", CREATOR_GITHUB_REPO_URL);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 		role: "dialog",
 		"aria-modal": "true",
@@ -70186,13 +70569,22 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 							className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex items-start justify-between gap-3",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-xs text-[#5A655D]",
-									children: "เวอร์ชั่นในตัวเกม"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
-									children: ["v", CURRENT_APP_VERSION]
-								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: "/game-icon.png",
+										alt: "ไอคอนเกมบ้านชาอุ่นใจ",
+										width: 44,
+										height: 44,
+										className: "h-11 w-11 rounded-xl object-cover shadow-xs ring-1 ring-[#1F2823]/10 shrink-0"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-xs text-[#5A655D]",
+										children: "เวอร์ชั่นในตัวเกม"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
+										children: ["v", CURRENT_APP_VERSION]
+									})] })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "text-right",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
@@ -70250,7 +70642,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 												className: "mt-0.5 h-4 w-4 shrink-0",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.9.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.9.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.11.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.11.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											disabled: isApplyingUpdate,
@@ -70309,10 +70701,10 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 								className: "flex items-center justify-between gap-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[11px] font-medium text-[#5A655D]",
-									children: "บัญชี GitHub ผู้สร้างเกม"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									children: "บัญชี GitHub ผู้สร้าง / ผู้พัฒนาเกม"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "font-mono-num text-xs font-bold text-[#1F2823]",
-									children: ["@", CREATOR_GITHUB_USERNAME]
+									children: CREATOR_GITHUB_USERNAME
 								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex items-center gap-1.5",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
@@ -70598,7 +70990,6 @@ var SCREEN_EASE = [
 function App() {
 	const [screen, setScreen] = (0, import_react.useState)("TITLE_MENU");
 	const [mode, setMode] = (0, import_react.useState)("guest");
-	const [cameraPreset, setCameraPreset] = (0, import_react.useState)("table");
 	const [settings, setSettings] = (0, import_react.useState)(() => loadSettings());
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	const [updatesOpen, setUpdatesOpen] = (0, import_react.useState)(false);
@@ -70622,11 +71013,12 @@ function App() {
 			const currentReport = probeDeviceOptimization(loadSettings().optimizationProfile);
 			const effectiveHz = resolveEffectiveRefreshRate(hz, currentReport);
 			setDetectedRefreshRate(effectiveHz);
-			setRawRefreshRate(currentReport.isRealmeNote50 && rawHz < 85 ? 90 : rawHz);
+			setRawRefreshRate(currentReport.isGalaxyA10 ? 60 : currentReport.isRealmeNote50 && rawHz < 85 ? 90 : rawHz);
 			setSettings((prev) => {
 				const sanitizedProfile = sanitizeProfileForDevice(prev.optimizationProfile, currentReport);
 				let nextTargetFps = clampTargetFpsToDisplay(prev.targetFps, effectiveHz);
 				if (currentReport.isRealmeNote50 && !userOverrodeFpsRef.current && (sanitizedProfile === "auto" || sanitizedProfile === "realme-note-50") && prev.targetFps === 60) nextTargetFps = clampTargetFpsToDisplay(90, effectiveHz);
+				else if (currentReport.isGalaxyA10 && !userOverrodeFpsRef.current && (sanitizedProfile === "auto" || sanitizedProfile === "galaxy-a10")) nextTargetFps = 60;
 				if (nextTargetFps === prev.targetFps && sanitizedProfile === prev.optimizationProfile) return prev;
 				const next = {
 					...prev,
@@ -70684,13 +71076,16 @@ function App() {
 		applyDomPerformanceClass(deviceReport.liteGpuActive, deviceReport.isUltraLowRam);
 	}, [deviceReport.liteGpuActive, deviceReport.isUltraLowRam]);
 	(0, import_react.useEffect)(() => {
-		soundEngine.setVolumes(settings.masterVolume, settings.sfxVolume, settings.ambienceVolume);
+		soundEngine.setVolumes(settings.masterVolume, settings.sfxVolume, settings.ambienceVolume, settings.musicVolume);
+		soundEngine.setMusicTrack(settings.musicTrack);
 		soundEngine.setMuted(settings.isMuted);
 		soundEngine.setAmbience(settings.ambience);
 	}, [
 		settings.masterVolume,
 		settings.sfxVolume,
 		settings.ambienceVolume,
+		settings.musicVolume,
+		settings.musicTrack,
 		settings.isMuted,
 		settings.ambience
 	]);
@@ -70704,7 +71099,9 @@ function App() {
 				...patch
 			};
 			merged.optimizationProfile = sanitizeProfileForDevice(merged.optimizationProfile, report);
-			merged.targetFps = clampTargetFpsToDisplay(merged.targetFps, detectedRefreshRate);
+			const maxAllowedHz = report.isGalaxyA10 ? 60 : detectedRefreshRate;
+			if (patch.optimizationProfile === "galaxy-a10" && patch.targetFps === void 0) merged.targetFps = 60;
+			merged.targetFps = clampTargetFpsToDisplay(merged.targetFps, maxAllowedHz);
 			saveSettings(merged);
 			return merged;
 		});
@@ -70713,7 +71110,7 @@ function App() {
 		userExitedFullscreenRef.current = false;
 		userOverrodeFpsRef.current = false;
 		const report = probeDeviceOptimization("auto");
-		const resetTargetFps = report.isRealmeNote50 ? 90 : DEFAULT_SETTINGS.targetFps;
+		const resetTargetFps = report.isRealmeNote50 ? 90 : report.isGalaxyA10 ? 60 : DEFAULT_SETTINGS.targetFps;
 		const reset = {
 			...DEFAULT_SETTINGS,
 			graphicsQuality: report.isGalaxyA10 || report.isDetected2GbRam ? "low" : DEFAULT_SETTINGS.graphicsQuality,
@@ -70721,7 +71118,7 @@ function App() {
 			shadowsEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.shadowsEnabled,
 			antialiasEnabled: report.liteGpuActive ? false : DEFAULT_SETTINGS.antialiasEnabled,
 			particlesEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.particlesEnabled,
-			targetFps: clampTargetFpsToDisplay(resetTargetFps, detectedRefreshRate)
+			targetFps: clampTargetFpsToDisplay(resetTargetFps, report.isGalaxyA10 ? 60 : detectedRefreshRate)
 		};
 		saveSettings(reset);
 		setSettings(reset);
@@ -70779,8 +71176,6 @@ function App() {
 					level: saveData.level,
 					mode,
 					onModeChange: setMode,
-					cameraPreset,
-					onCameraPresetChange: setCameraPreset,
 					ambience: settings.ambience,
 					onAmbienceChange: handleAmbienceChange,
 					isMuted: settings.isMuted,
@@ -70861,7 +71256,6 @@ function App() {
 									playerLevel: saveData.level,
 									mode,
 									onModeChange: setMode,
-									cameraPreset,
 									settings,
 									onBrewComplete: handleBrewComplete
 								})

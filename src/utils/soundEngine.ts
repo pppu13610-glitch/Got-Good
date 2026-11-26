@@ -1,4 +1,115 @@
-import {AmbienceMode} from '../types/tea';
+import {AmbienceMode, MusicTrackId} from '../types/tea';
+
+export interface ChillTrackMeta {
+  id: MusicTrackId;
+  title: string;
+  subtitle: string;
+  bpmLabel: string;
+}
+
+export const CHILL_MUSIC_TRACKS: ChillTrackMeta[] = [
+  {
+    id: 'morning-bamboo',
+    title: 'สายลมอุ่นในสวนไผ่',
+    subtitle: 'คอร์ดเปียโนไฟฟ้าอุ่นๆ ผสมระฆังไม้ไผ่สบายใจ',
+    bpmLabel: '74 BPM',
+  },
+  {
+    id: 'rainy-teahouse',
+    title: 'บ่ายฝนพรำในเรือนชา',
+    subtitle: 'ทำนองช้าๆ โทนอุ่นนุ่มลึกชวนผ่อนคลาย',
+    bpmLabel: '68 BPM',
+  },
+  {
+    id: 'twilight-lantern',
+    title: 'โคมไฟอุ่นยามพลบค่ำ',
+    subtitle: 'เสียงพิณและเบสนุ่มๆ ยามเย็นในร้านชา',
+    bpmLabel: '70 BPM',
+  },
+  {
+    id: 'none',
+    title: 'ปิดเพลงประกอบ',
+    subtitle: 'ฟังเฉพาะเสียงชงชาและเสียงธรรมชาติ',
+    bpmLabel: 'เงียบ',
+  },
+];
+
+interface ChillPattern {
+  stepMs: number;
+  chords: number[][];
+  melody: (number | null)[];
+  bass: number[];
+  leadWave: OscillatorType;
+}
+
+const CHILL_PATTERNS: Record<Exclude<MusicTrackId, 'none'>, ChillPattern> = {
+  // Warm sunlit garden: Fmaj7 -> Em7 -> Dm9 -> Cmaj7
+  'morning-bamboo': {
+    stepMs: 405,
+    chords: [
+      [174.61, 220.0, 261.63, 329.63], // Fmaj7
+      [164.81, 196.0, 246.94, 293.66], // Em7
+      [146.83, 174.61, 220.0, 329.63], // Dm9
+      [130.81, 164.81, 196.0, 246.94], // Cmaj7
+    ],
+    melody: [
+      523.25, null, 659.25, 587.33,
+      440.0, null, 392.0, null,
+      493.88, null, 587.33, 523.25,
+      392.0, null, 440.0, null,
+      587.33, null, 659.25, 783.99,
+      659.25, null, 523.25, null,
+      440.0, 493.88, 523.25, null,
+      392.0, null, 329.63, null,
+    ],
+    bass: [87.31, 82.41, 73.42, 65.41],
+    leadWave: 'sine',
+  },
+  // Mellow rainy cafe lo-fi: Am9 -> Fmaj7 -> Dm7 -> E7sus4
+  'rainy-teahouse': {
+    stepMs: 440,
+    chords: [
+      [220.0, 261.63, 329.63, 493.88], // Am9
+      [174.61, 220.0, 261.63, 329.63], // Fmaj7
+      [146.83, 174.61, 220.0, 261.63], // Dm7
+      [164.81, 220.0, 246.94, 293.66], // E7sus4
+    ],
+    melody: [
+      659.25, null, 587.33, null,
+      523.25, 493.88, 440.0, null,
+      523.25, null, 440.0, null,
+      392.0, null, 329.63, null,
+      587.33, null, 523.25, 440.0,
+      349.23, null, 440.0, null,
+      493.88, null, 523.25, 493.88,
+      440.0, null, null, null,
+    ],
+    bass: [110.0, 87.31, 73.42, 82.41],
+    leadWave: 'triangle',
+  },
+  // Cozy warm lantern evening: Gmaj7 -> Em9 -> Cmaj7 -> D6
+  'twilight-lantern': {
+    stepMs: 428,
+    chords: [
+      [196.0, 246.94, 293.66, 369.99], // Gmaj7
+      [164.81, 196.0, 246.94, 369.99], // Em9
+      [130.81, 164.81, 196.0, 246.94], // Cmaj7
+      [146.83, 185.0, 220.0, 246.94], // D6
+    ],
+    melody: [
+      587.33, null, 493.88, null,
+      392.0, 440.0, 493.88, null,
+      659.25, null, 587.33, 493.88,
+      392.0, null, null, null,
+      523.25, null, 493.88, 392.0,
+      329.63, null, 392.0, null,
+      440.0, null, 493.88, 587.33,
+      493.88, null, 392.0, null,
+    ],
+    bass: [98.0, 82.41, 65.41, 73.42],
+    leadWave: 'sine',
+  },
+};
 
 class CozySoundEngine {
   private ctx: AudioContext | null = null;
@@ -6,14 +117,23 @@ class CozySoundEngine {
   private masterVolume = 0.85;
   private sfxVolume = 0.9;
   private ambienceVolume = 0.75;
+  private musicVolume = 0.7;
   private ambienceMode: AmbienceMode = 'none';
+  private musicTrack: MusicTrackId = 'morning-bamboo';
+
   private ambienceGain: GainNode | null = null;
   private ambienceSource: AudioBufferSourceNode | null = null;
   private breezeLfo: OscillatorNode | null = null;
 
-  private ensureContext(): AudioContext | null {
+  private musicBusGain: GainNode | null = null;
+  private musicFilter: BiquadFilterNode | null = null;
+  private musicTimer: number | null = null;
+  private musicStepIdx = 0;
+
+  private ensureContext(createIfMissing = true): AudioContext | null {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
+      if (!createIfMissing) return null;
       const AudioCtx =
         window.AudioContext ||
         (window as unknown as {webkitAudioContext?: typeof AudioContext})
@@ -28,13 +148,29 @@ class CozySoundEngine {
   }
 
   public unlock() {
-    this.ensureContext();
+    const ctx = this.ensureContext(true);
+    if (!ctx) return;
+    if (this.musicTrack !== 'none' && !this.isMuted && this.musicTimer === null) {
+      this.startMusicLoop();
+    }
+    if (this.ambienceMode !== 'none' && !this.ambienceSource) {
+      this.setAmbience(this.ambienceMode);
+    }
   }
 
-  public setVolumes(masterPct: number, sfxPct: number, ambiencePct: number) {
+  public setVolumes(
+    masterPct: number,
+    sfxPct: number,
+    ambiencePct: number,
+    musicPct?: number,
+  ) {
     this.masterVolume = Math.max(0, Math.min(1, masterPct / 100));
     this.sfxVolume = Math.max(0, Math.min(1, sfxPct / 100));
     this.ambienceVolume = Math.max(0, Math.min(1, ambiencePct / 100));
+    if (typeof musicPct === 'number') {
+      this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
+    }
+
     if (this.ambienceGain && this.ctx) {
       this.ambienceGain.gain.setTargetAtTime(
         this.isMuted || this.ambienceMode === 'none'
@@ -43,6 +179,45 @@ class CozySoundEngine {
         this.ctx.currentTime,
         0.1,
       );
+    }
+
+    if (this.musicBusGain && this.ctx) {
+      this.musicBusGain.gain.setTargetAtTime(
+        this.isMuted || this.musicTrack === 'none'
+          ? 0
+          : this.getMusicBusVolume(),
+        this.ctx.currentTime,
+        0.12,
+      );
+    }
+  }
+
+  public setMusicVolume(musicPct: number) {
+    this.musicVolume = Math.max(0, Math.min(1, musicPct / 100));
+    if (this.musicBusGain && this.ctx) {
+      this.musicBusGain.gain.setTargetAtTime(
+        this.isMuted || this.musicTrack === 'none'
+          ? 0
+          : this.getMusicBusVolume(),
+        this.ctx.currentTime,
+        0.12,
+      );
+    }
+  }
+
+  public setMusicTrack(track: MusicTrackId) {
+    const changed = this.musicTrack !== track;
+    this.musicTrack = track;
+    if (track === 'none') {
+      this.stopMusicLoop();
+      return;
+    }
+    if (changed) {
+      this.musicStepIdx = 0;
+      this.stopMusicLoop();
+    }
+    if (this.ctx && !this.isMuted && this.musicTimer === null) {
+      this.startMusicLoop();
     }
   }
 
@@ -54,6 +229,16 @@ class CozySoundEngine {
         this.ctx.currentTime,
         0.15,
       );
+    }
+    if (this.musicBusGain && this.ctx) {
+      this.musicBusGain.gain.setTargetAtTime(
+        muted || this.musicTrack === 'none' ? 0 : this.getMusicBusVolume(),
+        this.ctx.currentTime,
+        0.15,
+      );
+    }
+    if (!muted && this.ctx && this.musicTrack !== 'none' && this.musicTimer === null) {
+      this.startMusicLoop();
     }
   }
 
@@ -68,6 +253,135 @@ class CozySoundEngine {
   private getAmbienceVolume(): number {
     const base = this.ambienceMode === 'rain' ? 0.055 : 0.042;
     return base * this.masterVolume * this.ambienceVolume;
+  }
+
+  private getMusicBusVolume(): number {
+    return 0.22 * this.masterVolume * this.musicVolume;
+  }
+
+  private ensureMusicBus(ctx: AudioContext): GainNode {
+    if (!this.musicBusGain || !this.musicFilter) {
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 1750;
+      filter.Q.value = 0.7;
+
+      const bus = ctx.createGain();
+      bus.gain.setValueAtTime(
+        this.isMuted || this.musicTrack === 'none'
+          ? 0
+          : this.getMusicBusVolume(),
+        ctx.currentTime,
+      );
+
+      filter.connect(bus);
+      bus.connect(ctx.destination);
+      this.musicFilter = filter;
+      this.musicBusGain = bus;
+    }
+    return this.musicBusGain;
+  }
+
+  private scheduleMusicStep() {
+    if (
+      this.isMuted ||
+      this.musicTrack === 'none' ||
+      !this.ctx ||
+      this.ctx.state !== 'running'
+    ) {
+      return;
+    }
+    if (typeof document !== 'undefined' && document.hidden) return;
+
+    const pattern = CHILL_PATTERNS[this.musicTrack];
+    const ctx = this.ctx;
+    this.ensureMusicBus(ctx);
+    const dest = this.musicFilter;
+    if (!dest) return;
+
+    const step = this.musicStepIdx % pattern.melody.length;
+    this.musicStepIdx = (this.musicStepIdx + 1) % pattern.melody.length;
+
+    const now = ctx.currentTime + 0.04;
+    const stepSec = pattern.stepMs / 1000;
+
+    // Trigger warm chord + soft bass at the start of every 8-step bar
+    if (step % 8 === 0) {
+      const barIdx = Math.floor(step / 8) % pattern.chords.length;
+      const chord = pattern.chords[barIdx];
+      const chordDur = stepSec * 7.6;
+
+      chord.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.015);
+        g.gain.setValueAtTime(0.0001, now + idx * 0.015);
+        g.gain.linearRampToValueAtTime(0.065, now + idx * 0.015 + 0.14);
+        g.gain.exponentialRampToValueAtTime(0.0008, now + chordDur);
+        osc.connect(g);
+        g.connect(dest);
+        osc.start(now + idx * 0.015);
+        osc.stop(now + chordDur + 0.05);
+      });
+
+      const bassOsc = ctx.createOscillator();
+      const bassGain = ctx.createGain();
+      bassOsc.type = 'sine';
+      bassOsc.frequency.setValueAtTime(pattern.bass[barIdx], now);
+      bassGain.gain.setValueAtTime(0.0001, now);
+      bassGain.gain.linearRampToValueAtTime(0.14, now + 0.08);
+      bassGain.gain.exponentialRampToValueAtTime(0.001, now + chordDur * 0.9);
+      bassOsc.connect(bassGain);
+      bassGain.connect(dest);
+      bassOsc.start(now);
+      bassOsc.stop(now + chordDur);
+    }
+
+    // Gentle melody pluck
+    const melFreq = pattern.melody[step];
+    if (melFreq) {
+      const mOsc = ctx.createOscillator();
+      const mGain = ctx.createGain();
+      mOsc.type = pattern.leadWave;
+      mOsc.frequency.setValueAtTime(melFreq, now);
+
+      const noteDur = stepSec * 2.1;
+      mGain.gain.setValueAtTime(0.0001, now);
+      mGain.gain.linearRampToValueAtTime(0.11, now + 0.025);
+      mGain.gain.exponentialRampToValueAtTime(0.0008, now + noteDur);
+
+      mOsc.connect(mGain);
+      mGain.connect(dest);
+      mOsc.start(now);
+      mOsc.stop(now + noteDur + 0.04);
+    }
+  }
+
+  private startMusicLoop() {
+    if (this.musicTrack === 'none') return;
+    const ctx = this.ensureContext(true);
+    if (!ctx) return;
+    this.ensureMusicBus(ctx);
+
+    const pattern = CHILL_PATTERNS[this.musicTrack];
+    this.scheduleMusicStep();
+    if (this.musicTimer !== null) {
+      window.clearInterval(this.musicTimer);
+    }
+    this.musicTimer = window.setInterval(() => {
+      this.scheduleMusicStep();
+    }, pattern.stepMs);
+  }
+
+  private stopMusicLoop() {
+    if (this.musicTimer !== null) {
+      window.clearInterval(this.musicTimer);
+      this.musicTimer = null;
+    }
+    if (this.musicBusGain && this.ctx) {
+      this.musicBusGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.08);
+    }
   }
 
   public playTap() {

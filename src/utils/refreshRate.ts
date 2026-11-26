@@ -54,9 +54,15 @@ export function resolveEffectiveRefreshRate(
   measuredHz: DisplayRefreshRate,
   hardwareHint: {
     isRealmeNote50: boolean;
+    isGalaxyA10?: boolean;
     nativeDisplayHz?: number | null;
   },
 ): DisplayRefreshRate {
+  // Samsung Galaxy A10 uses a 60 Hz PLS TFT screen -> strictly lock to 60 Hz (30 & 60 FPS only)
+  if (hardwareHint.isGalaxyA10) {
+    return 60;
+  }
+
   const nativeTier =
     hardwareHint.nativeDisplayHz && hardwareHint.nativeDisplayHz > 0
       ? bucketRefreshRate(hardwareHint.nativeDisplayHz)
