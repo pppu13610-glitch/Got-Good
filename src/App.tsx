@@ -152,10 +152,14 @@ export default function App() {
     };
   }, [settings.autoFullscreen]);
 
+  const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+
   useEffect(() => {
-    const report = probeDeviceOptimization(settings.optimizationProfile);
-    applyDomPerformanceClass(report.liteGpuActive);
-  }, [settings.optimizationProfile]);
+    applyDomPerformanceClass(
+      deviceReport.liteGpuActive,
+      deviceReport.isUltraLowRam,
+    );
+  }, [deviceReport.liteGpuActive, deviceReport.isUltraLowRam]);
 
   useEffect(() => {
     soundEngine.setVolumes(
@@ -342,6 +346,7 @@ export default function App() {
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenUpdates={() => setUpdatesOpen(true)}
                   isOverlayOpen={settingsOpen || updatesOpen}
+                  isUltraLowRam={deviceReport.isUltraLowRam}
                   updateAvailable={updateCheckResult?.status === 'update-ready'}
                   latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
                 />

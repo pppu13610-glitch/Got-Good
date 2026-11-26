@@ -16,7 +16,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   isMuted: false,
   ambience: 'none',
   graphicsQuality: 'high',
-  resolutionScale: 'native',
+  resolutionScale: 'hd-plus',
   shadowsEnabled: true,
   antialiasEnabled: true,
   particlesEnabled: true,
@@ -101,11 +101,53 @@ export function clearSaveData(): TeaHouseSaveData {
   return DEFAULT_SAVE;
 }
 
+function normalizeResolutionScale(raw: unknown): GameSettings['resolutionScale'] {
+  switch (raw) {
+    case 'hd':
+    case '0.75':
+      return 'hd';
+    case 'hd-plus':
+    case '1.0':
+      return 'hd-plus';
+    case 'fhd':
+    case '1.5':
+      return 'fhd';
+    case 'fhd-plus':
+    case 'native':
+      return 'fhd-plus';
+    default:
+      return DEFAULT_SETTINGS.resolutionScale;
+  }
+}
+
 export function loadSettings(): GameSettings {
   try {
     const raw = localStorage.getItem(SETTINGS_KEY);
-    if (!raw) return DEFAULT_SETTINGS;
-    const parsed = JSON.parse(raw) as Partial<GameSettings>;
+    if (!raw) {
+      const memGb =
+        typeof navigator !== 'undefined' &&
+        'deviceMemory' in navigator &&
+        typeof (navigator as Navigator & {deviceMemory?: number})
+          .deviceMemory === 'number'
+          ? (navigator as Navigator & {deviceMemory?: number}).deviceMemory ??
+            null
+          : null;
+      if (memGb !== null && memGb <= 2) {
+        return {
+          ...DEFAULT_SETTINGS,
+          graphicsQuality: 'low',
+          resolutionScale: 'hd',
+          shadowsEnabled: false,
+          antialiasEnabled: false,
+          particlesEnabled: false,
+          optimizationProfile: 'low-ram-2gb',
+        };
+      }
+      return DEFAULT_SETTINGS;
+    }
+    const parsed = JSON.parse(raw) as Partial<GameSettings> & {
+      resolutionScale?: unknown;
+    };
     return {
       masterVolume:
         typeof parsed.masterVolume === 'number'
@@ -135,13 +177,7 @@ export function loadSettings(): GameSettings {
         parsed.graphicsQuality === 'high'
           ? parsed.graphicsQuality
           : DEFAULT_SETTINGS.graphicsQuality,
-      resolutionScale:
-        parsed.resolutionScale === '0.75' ||
-        parsed.resolutionScale === '1.0' ||
-        parsed.resolutionScale === '1.5' ||
-        parsed.resolutionScale === 'native'
-          ? parsed.resolutionScale
-          : DEFAULT_SETTINGS.resolutionScale,
+      resolutionScale: normalizeResolutionScale(parsed.resolutionScale),
       shadowsEnabled:
         typeof parsed.shadowsEnabled === 'boolean'
           ? parsed.shadowsEnabled
@@ -168,6 +204,7 @@ export function loadSettings(): GameSettings {
       optimizationProfile:
         parsed.optimizationProfile === 'auto' ||
         parsed.optimizationProfile === 'realme-note-50' ||
+        parsed.optimizationProfile === 'low-ram-2gb' ||
         parsed.optimizationProfile === 'standard'
           ? parsed.optimizationProfile
           : DEFAULT_SETTINGS.optimizationProfile,

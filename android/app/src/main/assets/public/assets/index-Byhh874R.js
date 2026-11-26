@@ -21381,6 +21381,78 @@ var Compass = createLucideIcon("compass", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Cpu = createLucideIcon("cpu", [
+	["path", {
+		d: "M12 20v2",
+		key: "1lh1kg"
+	}],
+	["path", {
+		d: "M12 2v2",
+		key: "tus03m"
+	}],
+	["path", {
+		d: "M17 20v2",
+		key: "1rnc9c"
+	}],
+	["path", {
+		d: "M17 2v2",
+		key: "11trls"
+	}],
+	["path", {
+		d: "M2 12h2",
+		key: "1t8f8n"
+	}],
+	["path", {
+		d: "M2 17h2",
+		key: "7oei6x"
+	}],
+	["path", {
+		d: "M2 7h2",
+		key: "asdhe0"
+	}],
+	["path", {
+		d: "M20 12h2",
+		key: "1q8mjw"
+	}],
+	["path", {
+		d: "M20 17h2",
+		key: "1fpfkl"
+	}],
+	["path", {
+		d: "M20 7h2",
+		key: "1o8tra"
+	}],
+	["path", {
+		d: "M7 20v2",
+		key: "4gnj0m"
+	}],
+	["path", {
+		d: "M7 2v2",
+		key: "1i4yhu"
+	}],
+	["rect", {
+		x: "4",
+		y: "4",
+		width: "16",
+		height: "16",
+		rx: "2",
+		key: "1vbyd7"
+	}],
+	["rect", {
+		x: "8",
+		y: "8",
+		width: "8",
+		height: "8",
+		rx: "1",
+		key: "z9xiuo"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Download = createLucideIcon("download", [
 	["path", {
 		d: "M12 15V3",
@@ -21455,6 +21527,28 @@ var GitCompareArrows = createLucideIcon("git-compare-arrows", [
 	["path", {
 		d: "m9 15 3 3-3 3",
 		key: "1m3kbl"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Globe = createLucideIcon("globe", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}],
+	["path", {
+		d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20",
+		key: "13o1zl"
+	}],
+	["path", {
+		d: "M2 12h20",
+		key: "9i4pu4"
 	}]
 ]);
 /**
@@ -61525,23 +61619,26 @@ function createAreaLightMaterial(intensity) {
 	});
 }
 // src/three/proceduralTextures.ts
-function createWoodGrainTexture(baseHex, grainHex, maxAnisotropy) {
+function createWoodGrainTexture(baseHex, grainHex, maxAnisotropy, compact = false, ultraCompact = false) {
+	const size = ultraCompact ? 128 : compact ? 256 : 512;
+	const lineCount = ultraCompact ? 28 : compact ? 46 : 90;
+	const stepX = 32;
 	const canvas = document.createElement("canvas");
-	canvas.width = 512;
-	canvas.height = 512;
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
 	if (ctx) {
 		ctx.fillStyle = baseHex;
-		ctx.fillRect(0, 0, 512, 512);
+		ctx.fillRect(0, 0, size, size);
 		ctx.strokeStyle = grainHex;
-		for (let i = 0; i < 90; i++) {
+		for (let i = 0; i < lineCount; i++) {
 			ctx.globalAlpha = .08 + i % 5 * .03;
-			ctx.lineWidth = 1 + i % 3;
+			ctx.lineWidth = compact || ultraCompact ? 1 : 1 + i % 3;
 			ctx.beginPath();
-			const yBase = i / 90 * 512;
+			const yBase = i / lineCount * size;
 			ctx.moveTo(0, yBase);
-			for (let x = 0; x <= 512; x += 32) {
-				const wave = Math.sin(x * .02 + i * .7) * 5;
+			for (let x = 0; x <= size; x += stepX) {
+				const wave = Math.sin(x * .02 + i * .7) * (compact || ultraCompact ? 2.5 : 5);
 				ctx.lineTo(x, yBase + wave);
 			}
 			ctx.stroke();
@@ -61551,50 +61648,75 @@ function createWoodGrainTexture(baseHex, grainHex, maxAnisotropy) {
 	texture.colorSpace = SRGBColorSpace;
 	texture.wrapS = RepeatWrapping;
 	texture.wrapT = RepeatWrapping;
-	texture.anisotropy = Math.min(8, maxAnisotropy);
+	if (compact || ultraCompact) {
+		texture.generateMipmaps = false;
+		texture.minFilter = LinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = 1;
+	} else {
+		texture.minFilter = LinearMipmapLinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = Math.min(8, maxAnisotropy);
+	}
+	texture.needsUpdate = true;
 	return texture;
 }
-function createWovenMatTexture(maxAnisotropy) {
+function createWovenMatTexture(maxAnisotropy, compact = false, ultraCompact = false) {
+	const size = ultraCompact ? 64 : compact ? 128 : 256;
+	const rowStep = ultraCompact ? 4 : compact ? 6 : 8;
+	const colStep = ultraCompact ? 8 : compact ? 12 : 16;
 	const canvas = document.createElement("canvas");
-	canvas.width = 256;
-	canvas.height = 256;
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
 	if (ctx) {
 		ctx.fillStyle = "#B8A88A";
-		ctx.fillRect(0, 0, 256, 256);
-		for (let y = 0; y < 256; y += 8) {
-			ctx.fillStyle = y % 16 === 0 ? "#AE9D7E" : "#C2B396";
-			ctx.fillRect(0, y, 256, 6);
+		ctx.fillRect(0, 0, size, size);
+		for (let y = 0; y < size; y += rowStep) {
+			ctx.fillStyle = y % (rowStep * 2) === 0 ? "#AE9D7E" : "#C2B396";
+			ctx.fillRect(0, y, size, Math.max(1, rowStep - 2));
 		}
 		ctx.fillStyle = "rgba(72, 58, 40, 0.08)";
-		for (let x = 0; x < 256; x += 16) ctx.fillRect(x, 0, 2, 256);
+		for (let x = 0; x < size; x += colStep) ctx.fillRect(x, 0, 2, size);
 	}
 	const texture = new CanvasTexture(canvas);
 	texture.colorSpace = SRGBColorSpace;
 	texture.wrapS = RepeatWrapping;
 	texture.wrapT = RepeatWrapping;
 	texture.repeat.set(3, 2);
-	texture.anisotropy = Math.min(8, maxAnisotropy);
+	if (compact || ultraCompact) {
+		texture.generateMipmaps = false;
+		texture.minFilter = LinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = 1;
+	} else {
+		texture.minFilter = LinearMipmapLinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = Math.min(8, maxAnisotropy);
+	}
+	texture.needsUpdate = true;
 	return texture;
 }
-function createCeramicSpeckleTexture(baseHex, speckHex, maxAnisotropy) {
+function createCeramicSpeckleTexture(baseHex, speckHex, maxAnisotropy, compact = false, ultraCompact = false) {
+	const size = ultraCompact ? 64 : compact ? 128 : 256;
+	const speckCount = ultraCompact ? 90 : compact ? 180 : 420;
 	const canvas = document.createElement("canvas");
-	canvas.width = 256;
-	canvas.height = 256;
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
 	if (ctx) {
 		ctx.fillStyle = baseHex;
-		ctx.fillRect(0, 0, 256, 256);
+		ctx.fillRect(0, 0, size, size);
 		let seed = 42;
 		const rand = () => {
 			seed = (seed * 1664525 + 1013904223) % 4294967296;
 			return seed / 4294967296;
 		};
 		ctx.fillStyle = speckHex;
-		for (let i = 0; i < 420; i++) {
-			const x = rand() * 256;
-			const y = rand() * 256;
-			const r = .5 + rand() * 1.4;
+		for (let i = 0; i < speckCount; i++) {
+			const x = rand() * size;
+			const y = rand() * size;
+			const r = (.5 + rand() * 1.4) * (compact || ultraCompact ? .65 : 1);
 			ctx.globalAlpha = .12 + rand() * .22;
 			ctx.beginPath();
 			ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -61605,41 +61727,71 @@ function createCeramicSpeckleTexture(baseHex, speckHex, maxAnisotropy) {
 	texture.colorSpace = SRGBColorSpace;
 	texture.wrapS = RepeatWrapping;
 	texture.wrapT = RepeatWrapping;
-	texture.anisotropy = Math.min(4, maxAnisotropy);
+	if (compact || ultraCompact) {
+		texture.generateMipmaps = false;
+		texture.minFilter = LinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = 1;
+	} else {
+		texture.minFilter = LinearMipmapLinearFilter;
+		texture.magFilter = LinearFilter;
+		texture.anisotropy = Math.min(4, maxAnisotropy);
+	}
+	texture.needsUpdate = true;
 	return texture;
 }
-function createContactShadowTexture() {
+function createContactShadowTexture(ultraCompact = false) {
+	const size = ultraCompact ? 64 : 128;
+	const half = size / 2;
 	const canvas = document.createElement("canvas");
-	canvas.width = 128;
-	canvas.height = 128;
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
 	if (ctx) {
-		const grad = ctx.createRadialGradient(64, 64, 8, 64, 64, 62);
+		ctx.clearRect(0, 0, size, size);
+		const grad = ctx.createRadialGradient(half, half, ultraCompact ? 4 : 8, half, half, half - 4);
 		grad.addColorStop(0, "rgba(18, 22, 18, 0.55)");
 		grad.addColorStop(.55, "rgba(18, 22, 18, 0.22)");
 		grad.addColorStop(1, "rgba(18, 22, 18, 0)");
 		ctx.fillStyle = grad;
-		ctx.fillRect(0, 0, 128, 128);
+		ctx.fillRect(0, 0, size, size);
 	}
 	const texture = new CanvasTexture(canvas);
 	texture.colorSpace = SRGBColorSpace;
+	texture.wrapS = ClampToEdgeWrapping;
+	texture.wrapT = ClampToEdgeWrapping;
+	texture.generateMipmaps = false;
+	texture.minFilter = LinearFilter;
+	texture.magFilter = LinearFilter;
+	texture.anisotropy = 1;
+	texture.needsUpdate = true;
 	return texture;
 }
-function createSteamPuffTexture() {
+function createSteamPuffTexture(ultraCompact = false) {
+	const size = ultraCompact ? 64 : 128;
+	const half = size / 2;
 	const canvas = document.createElement("canvas");
-	canvas.width = 128;
-	canvas.height = 128;
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
 	if (ctx) {
-		const grad = ctx.createRadialGradient(64, 64, 4, 64, 64, 58);
+		ctx.clearRect(0, 0, size, size);
+		const grad = ctx.createRadialGradient(half, half, ultraCompact ? 2 : 4, half, half, half - 6);
 		grad.addColorStop(0, "rgba(248, 248, 244, 0.45)");
 		grad.addColorStop(.5, "rgba(248, 248, 244, 0.16)");
 		grad.addColorStop(1, "rgba(248, 248, 244, 0)");
 		ctx.fillStyle = grad;
-		ctx.fillRect(0, 0, 128, 128);
+		ctx.fillRect(0, 0, size, size);
 	}
 	const texture = new CanvasTexture(canvas);
 	texture.colorSpace = SRGBColorSpace;
+	texture.wrapS = ClampToEdgeWrapping;
+	texture.wrapT = ClampToEdgeWrapping;
+	texture.generateMipmaps = false;
+	texture.minFilter = LinearFilter;
+	texture.magFilter = LinearFilter;
+	texture.anisotropy = 1;
+	texture.needsUpdate = true;
 	return texture;
 }
 // src/three/teaModels.ts
@@ -61649,13 +61801,16 @@ function makeContactShadow(size, shadowTex, opacity = .45) {
 		map: shadowTex,
 		transparent: true,
 		depthWrite: false,
+		polygonOffset: true,
+		polygonOffsetFactor: -1,
+		polygonOffsetUnits: -1,
 		opacity
 	}));
 	m.rotation.x = -Math.PI / 2;
 	m.position.y = .004;
 	return m;
 }
-function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shadowTex) {
+function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shadowTex, compactMode = false, ultraCompact = false) {
 	const envGroup = new Group();
 	const table = new Mesh(new BoxGeometry(10.5, .22, 6.2), new MeshStandardMaterial({
 		map: woodTex,
@@ -61706,29 +61861,40 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		metalness: .85,
 		roughness: .25
 	});
+	const bracketGeo = new BoxGeometry(.14, .115, .14);
 	for (const [cx, cz] of [
 		[-1.93, -1.18],
 		[1.93, -1.18],
 		[-1.93, 1.18],
 		[1.93, 1.18]
 	]) {
-		const bracket = new Mesh(new BoxGeometry(.14, .115, .14), brassMat);
+		const bracket = new Mesh(bracketGeo, brassMat);
 		bracket.position.set(cx, .058, cz);
 		trayGroup.add(bracket);
 	}
 	envGroup.add(trayGroup);
-	[3954756, 9132604].forEach((col, idx) => {
+	const canisterColors = [3954756, 9132604];
+	const canisterSeg = ultraCompact ? 14 : compactMode ? 18 : 28;
+	const canisterBodyGeo = new LatheGeometry([
+		new Vector2(0, 0),
+		new Vector2(.22, 0),
+		new Vector2(.24, .42),
+		new Vector2(.21, .48),
+		new Vector2(0, .48)
+	], canisterSeg);
+	const canisterLidGeo = new CylinderGeometry(.215, .225, .09, ultraCompact ? 12 : compactMode ? 16 : 24);
+	const canisterKnobGeo = new SphereGeometry(.045, ultraCompact ? 8 : compactMode ? 10 : 16, ultraCompact ? 8 : compactMode ? 10 : 16);
+	const canisterLidMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .72,
+		metalness: .02
+	});
+	canisterColors.forEach((col, idx) => {
 		const canister = new Group();
 		const xPos = -2.65 - idx * .65;
 		const zPos = -.35 + idx * .55;
 		canister.add(makeContactShadow(.65, shadowTex, .5));
-		const body = new Mesh(new LatheGeometry([
-			new Vector2(0, 0),
-			new Vector2(.22, 0),
-			new Vector2(.24, .42),
-			new Vector2(.21, .48),
-			new Vector2(0, .48)
-		], 28), new MeshStandardMaterial({
+		const body = new Mesh(canisterBodyGeo, new MeshStandardMaterial({
 			color: col,
 			map: ceramicTex,
 			roughness: .35,
@@ -61737,22 +61903,18 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		body.castShadow = true;
 		body.receiveShadow = true;
 		canister.add(body);
-		const lid = new Mesh(new CylinderGeometry(.215, .225, .09, 24), new MeshStandardMaterial({
-			map: walnutTex,
-			roughness: .72,
-			metalness: .02
-		}));
+		const lid = new Mesh(canisterLidGeo, canisterLidMat);
 		lid.position.y = .52;
 		lid.castShadow = true;
 		canister.add(lid);
-		const knob = new Mesh(new SphereGeometry(.045, 16, 16), brassMat);
+		const knob = new Mesh(canisterKnobGeo, brassMat);
 		knob.position.y = .58;
 		canister.add(knob);
 		canister.position.set(xPos, 0, zPos);
 		envGroup.add(canister);
 	});
-	const bambooCount = 26;
-	const bambooInstanced = new InstancedMesh(new CylinderGeometry(.065, .08, 4.6, 10), new MeshStandardMaterial({
+	const bambooCount = ultraCompact ? 12 : compactMode ? 18 : 26;
+	const bambooInstanced = new InstancedMesh(new CylinderGeometry(.065, .08, 4.6, ultraCompact ? 6 : compactMode ? 7 : 10), new MeshStandardMaterial({
 		color: 6456152,
 		roughness: .55,
 		metalness: .02
@@ -61760,7 +61922,7 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	const dummy = new Object3D();
 	const tint = new Color();
 	for (let i = 0; i < bambooCount; i++) {
-		const angle = -Math.PI * .88 + i / 25 * Math.PI * .76;
+		const angle = -Math.PI * .88 + i / (bambooCount - 1) * Math.PI * .76;
 		const dist = 4.2 + i % 3 * 1.1;
 		dummy.position.set(Math.cos(angle) * dist * 1.15, 1.6, -2.2 - Math.abs(Math.sin(angle)) * dist * .65);
 		dummy.rotation.set((i % 5 - 2) * .025, i * .4, (i % 7 - 3) * .02);
@@ -61774,6 +61936,7 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	bambooInstanced.instanceMatrix.needsUpdate = true;
 	if (bambooInstanced.instanceColor) bambooInstanced.instanceColor.needsUpdate = true;
 	bambooInstanced.computeBoundingSphere();
+	bambooInstanced.frustumCulled = false;
 	envGroup.add(bambooInstanced);
 	const deck = new Mesh(new PlaneGeometry(36, 28), new MeshStandardMaterial({
 		color: 12766144,
@@ -61785,9 +61948,13 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	envGroup.add(deck);
 	return envGroup;
 }
-function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
+function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl, compactMode = false, ultraCompact = false) {
 	const root = new Group();
 	root.position.set(-.22, TRAY_SURFACE_Y, .08);
+	const radialLg = ultraCompact ? 20 : compactMode ? 28 : 44;
+	const radialXl = ultraCompact ? 22 : compactMode ? 30 : 48;
+	const radialMd = ultraCompact ? 18 : compactMode ? 22 : 36;
+	const radialTube = ultraCompact ? 12 : compactMode ? 16 : 24;
 	root.add(makeContactShadow(1.55, shadowTex, .55));
 	const coaster = new Mesh(new LatheGeometry([
 		new Vector2(0, 0),
@@ -61796,7 +61963,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector2(.58, .055),
 		new Vector2(.46, .035),
 		new Vector2(0, .035)
-	], 40), new MeshStandardMaterial({
+	], compactMode ? 26 : 40), new MeshStandardMaterial({
 		map: walnutTex,
 		roughness: .65,
 		metalness: .03
@@ -61824,11 +61991,11 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		roughness: .28,
 		metalness: .04
 	});
-	const mugBody = new Mesh(new LatheGeometry(mugPts, 44), ceramicBodyMat);
+	const mugBody = new Mesh(new LatheGeometry(mugPts, radialLg), ceramicBodyMat);
 	mugBody.castShadow = true;
 	mugBody.receiveShadow = true;
 	ceramicGroup.add(mugBody);
-	const mugFoot = new Mesh(new CylinderGeometry(.29, .27, .045, 32), new MeshStandardMaterial({
+	const mugFoot = new Mesh(new CylinderGeometry(.29, .27, .045, compactMode ? 20 : 32), new MeshStandardMaterial({
 		color: 10193011,
 		roughness: .88,
 		metalness: 0
@@ -61843,7 +62010,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector2(.63, .075),
 		new Vector2(.32, .022),
 		new Vector2(0, .022)
-	], 44), new MeshStandardMaterial({
+	], radialLg), new MeshStandardMaterial({
 		color: 16316143,
 		roughness: .24,
 		metalness: .04
@@ -61864,7 +62031,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		roughness: .28,
 		metalness: .04
 	});
-	const mugHandle = new Mesh(new TubeGeometry(handleCurve, 24, .045, 14, false), ceramicHandleMat);
+	const mugHandle = new Mesh(new TubeGeometry(handleCurve, radialTube, .045, compactMode ? 10 : 14, false), ceramicHandleMat);
 	mugHandle.castShadow = true;
 	ceramicGroup.add(mugHandle);
 	root.add(ceramicGroup);
@@ -61888,7 +62055,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		roughness: .34,
 		metalness: .06
 	});
-	const chawanBody = new Mesh(new LatheGeometry(chawanPts, 48), chawanBodyMat);
+	const chawanBody = new Mesh(new LatheGeometry(chawanPts, radialXl), chawanBodyMat);
 	chawanBody.castShadow = true;
 	chawanBody.receiveShadow = true;
 	chawanGroup.add(chawanBody);
@@ -61897,7 +62064,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		roughness: .55,
 		metalness: .12
 	});
-	const chawanRim = new Mesh(new TorusGeometry(.505, .025, 14, 48), chawanRimMat);
+	const chawanRim = new Mesh(new TorusGeometry(.505, .025, compactMode ? 10 : 14, radialXl), chawanRimMat);
 	chawanRim.rotation.x = Math.PI / 2;
 	chawanRim.position.y = .595;
 	chawanGroup.add(chawanRim);
@@ -61906,7 +62073,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector3(.03, .42, .5),
 		new Vector3(-.04, .27, .45),
 		new Vector3(.04, .11, .32)
-	]), 20, .013, 8, false), new MeshStandardMaterial({
+	]), compactMode ? 14 : 20, .013, 6, false), new MeshStandardMaterial({
 		color: 15122003,
 		metalness: .9,
 		roughness: .2
@@ -61928,47 +62095,60 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector2(.28, .06),
 		new Vector2(0, .06)
 	];
-	const glassMat = new MeshPhysicalMaterial({
+	const liteShader = isSoftwareGl || compactMode;
+	const glassMat = liteShader ? new MeshStandardMaterial({
+		color: 15397615,
+		metalness: .05,
+		roughness: .14,
+		transparent: true,
+		opacity: .36,
+		depthWrite: false
+	}) : new MeshPhysicalMaterial({
 		color: 16777215,
 		metalness: 0,
 		roughness: .08,
-		transmission: isSoftwareGl ? 0 : .78,
+		transmission: .78,
 		transparent: true,
-		opacity: isSoftwareGl ? .34 : .92,
+		opacity: .92,
 		ior: 1.5,
 		thickness: .25,
 		clearcoat: 1,
 		depthWrite: false
 	});
-	const glassMesh = new Mesh(new LatheGeometry(glassPts, 44), glassMat);
-	glassMesh.renderOrder = 6;
+	const glassMesh = new Mesh(new LatheGeometry(glassPts, radialLg), glassMat);
+	glassMesh.renderOrder = 10;
+	glassMesh.frustumCulled = false;
 	glassGroup.add(glassMesh);
-	const glassHandle = new Mesh(new TubeGeometry(handleCurve, 24, .036, 12, false), glassMat);
-	glassHandle.renderOrder = 6;
+	const glassHandle = new Mesh(new TubeGeometry(handleCurve, radialTube, .036, compactMode ? 8 : 12, false), glassMat);
+	glassHandle.renderOrder = 10;
+	glassHandle.frustumCulled = false;
 	glassGroup.add(glassHandle);
 	glassGroup.visible = false;
 	root.add(glassGroup);
 	const liquidGroup = new Group();
-	liquidGroup.position.y = .11;
-	const liquidMaterial = new MeshPhysicalMaterial({
+	liquidGroup.position.y = .12;
+	const liquidMaterial = liteShader ? new MeshStandardMaterial({
+		color: 15263455,
+		roughness: .16,
+		metalness: .04
+	}) : new MeshPhysicalMaterial({
 		color: 15263455,
 		roughness: .12,
 		metalness: .02,
 		clearcoat: .9,
-		clearcoatRoughness: .08,
-		transparent: true,
-		opacity: .92
+		clearcoatRoughness: .08
 	});
-	const liquidGeo = new CylinderGeometry(.415, .285, .56, 36);
-	liquidGeo.translate(0, .28, 0);
+	const liquidGeo = new CylinderGeometry(.375, .232, .53, radialMd);
+	liquidGeo.translate(0, .265, 0);
 	const liquidMesh = new Mesh(liquidGeo, liquidMaterial);
-	liquidMesh.renderOrder = 3;
+	liquidMesh.renderOrder = 1;
+	liquidMesh.frustumCulled = false;
 	liquidGroup.add(liquidMesh);
 	liquidGroup.scale.y = .001;
 	liquidGroup.visible = false;
 	root.add(liquidGroup);
 	const leavesGroup = new Group();
-	leavesGroup.position.y = .13;
+	leavesGroup.position.y = .135;
 	const leafMaterial = new MeshStandardMaterial({
 		color: 5143098,
 		roughness: .85,
@@ -61976,20 +62156,28 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	});
 	const leafMeshes = [];
 	const leafGeo = new DodecahedronGeometry(.042, 0);
-	for (let i = 0; i < 14; i++) {
+	const leafCount = ultraCompact ? 6 : compactMode ? 10 : 14;
+	for (let i = 0; i < leafCount; i++) {
 		const m = new Mesh(leafGeo, leafMaterial);
-		const angle = i / 14 * Math.PI * 2;
-		const rad = i % 3 * .065 + .03;
+		const angle = i / leafCount * Math.PI * 2;
+		const rad = i % 3 * .055 + .03;
 		m.position.set(Math.cos(angle) * rad, i % 2 * .015, Math.sin(angle) * rad);
 		m.scale.set(1.2, .45, .85);
 		m.rotation.set(i * .4, angle, i * .2);
+		m.frustumCulled = false;
 		leavesGroup.add(m);
 		leafMeshes.push(m);
 	}
 	root.add(leavesGroup);
 	const iceGroup = new Group();
 	iceGroup.position.y = .56;
-	const iceMat = new MeshPhysicalMaterial({
+	const iceMat = liteShader ? new MeshStandardMaterial({
+		color: 15135994,
+		roughness: .16,
+		metalness: .05,
+		transparent: true,
+		opacity: .65
+	}) : new MeshPhysicalMaterial({
 		color: 15135994,
 		roughness: .12,
 		metalness: 0,
@@ -61998,6 +62186,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		clearcoat: 1,
 		ior: 1.31
 	});
+	const iceGeo = new BoxGeometry(.16, .15, .16);
 	const iceCubes = [];
 	for (const [ix, iy, iz, rot] of [
 		[
@@ -62019,7 +62208,7 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 			.8
 		]
 	]) {
-		const cube = new Mesh(new BoxGeometry(.16, .15, .16), iceMat);
+		const cube = new Mesh(iceGeo, iceMat);
 		cube.position.set(ix, iy, iz);
 		cube.rotation.set(rot * .4, rot, rot * .3);
 		cube.renderOrder = 4;
@@ -62053,7 +62242,12 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector3(-.08, .14, -.14)
 	]);
 	const honeyGroup = new Group();
-	const honeyTube = new Mesh(new TubeGeometry(honeyCurve, 28, .018, 8, false), new MeshPhysicalMaterial({
+	const honeyTube = new Mesh(new TubeGeometry(honeyCurve, compactMode ? 18 : 28, .018, 8, false), liteShader ? new MeshStandardMaterial({
+		color: 14851363,
+		roughness: .2,
+		transparent: true,
+		opacity: .85
+	}) : new MeshPhysicalMaterial({
 		color: 14851363,
 		roughness: .18,
 		clearcoat: 1,
@@ -62067,7 +62261,8 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	osmanthusGroup.position.y = .67;
 	const petalMat = new MeshStandardMaterial({
 		color: 16041810,
-		roughness: .55
+		roughness: .55,
+		side: 2
 	});
 	const petalGeo = new CircleGeometry(.025, 6);
 	for (let i = 0; i < 9; i++) {
@@ -62076,29 +62271,39 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		const r = .08 + i % 3 * .08;
 		p.position.set(Math.cos(a) * r, .004, Math.sin(a) * r);
 		p.rotation.x = -Math.PI / 2;
+		p.frustumCulled = false;
 		osmanthusGroup.add(p);
 	}
 	osmanthusGroup.visible = false;
 	root.add(osmanthusGroup);
 	const strawberryGroup = new Group();
-	const berryLayerMat = new MeshPhysicalMaterial({
+	const berryLayerMat = liteShader ? new MeshStandardMaterial({
+		color: 14243440,
+		roughness: .24,
+		polygonOffset: true,
+		polygonOffsetFactor: -1,
+		polygonOffsetUnits: -1
+	}) : new MeshPhysicalMaterial({
 		color: 14243440,
 		roughness: .22,
 		clearcoat: .65,
-		transparent: true,
-		opacity: .92
+		polygonOffset: true,
+		polygonOffsetFactor: -1,
+		polygonOffsetUnits: -1
 	});
-	const berryBase = new Mesh(new CylinderGeometry(.31, .275, .14, 32), berryLayerMat);
-	berryBase.position.y = .185;
+	const berryBase = new Mesh(new CylinderGeometry(.282, .248, .115, compactMode ? 22 : 32), berryLayerMat);
+	berryBase.position.y = .175;
 	berryBase.renderOrder = 2;
+	berryBase.frustumCulled = false;
 	strawberryGroup.add(berryBase);
-	const berryBody = new Mesh(new ConeGeometry(.075, .14, 16), new MeshStandardMaterial({
+	const berryBody = new Mesh(new ConeGeometry(.075, .14, compactMode ? 12 : 16), new MeshStandardMaterial({
 		color: 13710927,
 		roughness: .45
 	}));
 	berryBody.rotation.x = Math.PI;
 	berryBody.position.set(.34, .76, .15);
 	berryBody.rotation.z = -.35;
+	berryBody.frustumCulled = false;
 	strawberryGroup.add(berryBody);
 	const berryLeaf = new Mesh(new CylinderGeometry(.055, .02, .02, 6), new MeshStandardMaterial({
 		color: 4554808,
@@ -62106,21 +62311,33 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	}));
 	berryLeaf.position.set(.36, .82, .15);
 	berryLeaf.rotation.z = -.35;
+	berryLeaf.frustumCulled = false;
 	strawberryGroup.add(berryLeaf);
 	strawberryGroup.visible = false;
 	root.add(strawberryGroup);
 	const brownSugarGroup = new Group();
-	const caramelLayer = new Mesh(new CylinderGeometry(.31, .275, .13, 32), new MeshPhysicalMaterial({
+	const caramelLayer = new Mesh(new CylinderGeometry(.282, .248, .115, compactMode ? 22 : 32), liteShader ? new MeshStandardMaterial({
+		color: 8012312,
+		roughness: .2,
+		polygonOffset: true,
+		polygonOffsetFactor: -1,
+		polygonOffsetUnits: -1
+	}) : new MeshPhysicalMaterial({
 		color: 8012312,
 		roughness: .18,
 		clearcoat: .85,
-		transparent: true,
-		opacity: .92
+		polygonOffset: true,
+		polygonOffsetFactor: -1,
+		polygonOffsetUnits: -1
 	}));
-	caramelLayer.position.y = .18;
+	caramelLayer.position.y = .175;
 	caramelLayer.renderOrder = 2;
+	caramelLayer.frustumCulled = false;
 	brownSugarGroup.add(caramelLayer);
-	const pearlMat = new MeshPhysicalMaterial({
+	const pearlMat = liteShader ? new MeshStandardMaterial({
+		color: 3874829,
+		roughness: .18
+	}) : new MeshPhysicalMaterial({
 		color: 3874829,
 		roughness: .15,
 		clearcoat: .9
@@ -62177,11 +62394,13 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	milkFoamGroup.add(foamCrown);
 	const artDisc = new Mesh(new CircleGeometry(.12, 16), new MeshStandardMaterial({
 		color: 6462277,
-		roughness: .78
+		roughness: .78,
+		side: 2
 	}));
 	artDisc.rotation.x = -Math.PI / 2;
 	artDisc.position.y = .068;
 	artDisc.renderOrder = 5;
+	artDisc.frustumCulled = false;
 	milkFoamGroup.add(artDisc);
 	milkFoamGroup.visible = false;
 	root.add(milkFoamGroup);
@@ -62191,12 +62410,13 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		color: 4426315,
 		roughness: .55
 	});
+	const mintLeafGeo = new SphereGeometry(.055, compactMode ? 8 : 10, compactMode ? 8 : 10);
 	[
 		-.6,
 		.1,
 		.8
 	].forEach((a, idx) => {
-		const leaf = new Mesh(new SphereGeometry(.055, 10, 10), mintMat);
+		const leaf = new Mesh(mintLeafGeo, mintMat);
 		leaf.scale.set(1.4, .22, .78);
 		leaf.position.set(Math.cos(a) * .06, .015 + idx * .008, Math.sin(a) * .06);
 		leaf.rotation.set(.2, -a, .15);
@@ -62238,11 +62458,11 @@ function createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		clickProxy
 	};
 }
-function createKettleGroup(walnutTex, shadowTex) {
+function createKettleGroup(walnutTex, shadowTex, compactMode = false) {
 	const root = new Group();
 	root.position.set(1.12, TRAY_SURFACE_Y, -.15);
 	root.add(makeContactShadow(1.45, shadowTex, .5));
-	const stand = new Mesh(new CylinderGeometry(.46, .5, .06, 32), new MeshStandardMaterial({
+	const stand = new Mesh(new CylinderGeometry(.46, .5, .06, compactMode ? 20 : 32), new MeshStandardMaterial({
 		map: walnutTex,
 		roughness: .72,
 		metalness: .02
@@ -62270,14 +62490,14 @@ function createKettleGroup(walnutTex, shadowTex) {
 		new Vector2(.36, .52),
 		new Vector2(.24, .58),
 		new Vector2(0, .58)
-	], 36), castIronMat);
+	], compactMode ? 22 : 36), castIronMat);
 	potBody.castShadow = true;
 	potBody.receiveShadow = true;
 	bodyGroup.add(potBody);
-	const lid = new Mesh(new CylinderGeometry(.23, .25, .04, 28), brassMat);
+	const lid = new Mesh(new CylinderGeometry(.23, .25, .04, compactMode ? 18 : 28), brassMat);
 	lid.position.y = .59;
 	bodyGroup.add(lid);
-	const knob = new Mesh(new SphereGeometry(.055, 16, 16), brassMat);
+	const knob = new Mesh(new SphereGeometry(.055, compactMode ? 10 : 16, compactMode ? 10 : 16), brassMat);
 	knob.position.y = .65;
 	bodyGroup.add(knob);
 	const spout = new Mesh(new TubeGeometry(new CatmullRomCurve3([
@@ -62285,7 +62505,7 @@ function createKettleGroup(walnutTex, shadowTex) {
 		new Vector3(-.56, .34, 0),
 		new Vector3(-.66, .58, 0),
 		new Vector3(-.75, .64, 0)
-	]), 24, .036, 12, false), castIronMat);
+	]), compactMode ? 16 : 24, .036, compactMode ? 8 : 12, false), castIronMat);
 	spout.castShadow = true;
 	bodyGroup.add(spout);
 	const handle = new Mesh(new TubeGeometry(new CatmullRomCurve3([
@@ -62294,14 +62514,19 @@ function createKettleGroup(walnutTex, shadowTex) {
 		new Vector3(0, .94, 0),
 		new Vector3(-.3, .8, 0),
 		new Vector3(-.34, .44, 0)
-	]), 28, .026, 10, false), brassMat);
+	]), compactMode ? 18 : 28, .026, compactMode ? 7 : 10, false), brassMat);
 	handle.castShadow = true;
 	bodyGroup.add(handle);
 	const streamMesh = new Mesh(new TubeGeometry(new CatmullRomCurve3([
 		new Vector3(-.76, .62, 0),
 		new Vector3(-.92, .4, 0),
 		new Vector3(-1.02, -.25, 0)
-	]), 20, .024, 10, false), new MeshPhysicalMaterial({
+	]), compactMode ? 14 : 20, .024, compactMode ? 7 : 10, false), compactMode ? new MeshStandardMaterial({
+		color: 15135994,
+		roughness: .12,
+		transparent: true,
+		opacity: .78
+	}) : new MeshPhysicalMaterial({
 		color: 15135994,
 		roughness: .08,
 		transparent: true,
@@ -62309,9 +62534,15 @@ function createKettleGroup(walnutTex, shadowTex) {
 		clearcoat: 1
 	}));
 	streamMesh.visible = false;
+	streamMesh.frustumCulled = false;
+	potBody.frustumCulled = false;
+	lid.frustumCulled = false;
+	knob.frustumCulled = false;
+	spout.frustumCulled = false;
+	handle.frustumCulled = false;
 	bodyGroup.add(streamMesh);
 	root.add(bodyGroup);
-	const clickProxy = new Mesh(new CylinderGeometry(.55, .55, 1, 14), new MeshBasicMaterial({ visible: false }));
+	const clickProxy = new Mesh(new CylinderGeometry(.55, .55, 1, 12), new MeshBasicMaterial({ visible: false }));
 	clickProxy.position.y = .5;
 	clickProxy.userData = { interactId: "kettle" };
 	root.add(clickProxy);
@@ -62322,7 +62553,7 @@ function createKettleGroup(walnutTex, shadowTex) {
 		clickProxy
 	};
 }
-function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
+function createChasenGroup(ceramicTex, walnutTex, shadowTex, compactMode = false) {
 	const root = new Group();
 	const whiskStandRoot = new Group();
 	whiskStandRoot.position.set(1.18, TRAY_SURFACE_Y, .72);
@@ -62334,7 +62565,7 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 		new Vector2(.09, .24),
 		new Vector2(.12, .3),
 		new Vector2(0, .3)
-	], 24), new MeshStandardMaterial({
+	], compactMode ? 16 : 24), new MeshStandardMaterial({
 		color: 14673370,
 		map: ceramicTex,
 		roughness: .32,
@@ -62349,17 +62580,17 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 		roughness: .72,
 		metalness: 0
 	});
-	const handle = new Mesh(new CylinderGeometry(.055, .05, .22, 16), bambooMat);
+	const handle = new Mesh(new CylinderGeometry(.055, .05, .22, compactMode ? 12 : 16), bambooMat);
 	handle.position.y = .34;
 	whiskGroup.add(handle);
-	const collar = new Mesh(new TorusGeometry(.06, .012, 8, 20), new MeshStandardMaterial({
+	const collar = new Mesh(new TorusGeometry(.06, .012, 6, compactMode ? 14 : 20), new MeshStandardMaterial({
 		color: 2827552,
 		roughness: .8
 	}));
 	collar.rotation.x = Math.PI / 2;
 	collar.position.y = .24;
 	whiskGroup.add(collar);
-	const tines = new Mesh(new CylinderGeometry(.06, .135, .26, 20, 1, true), new MeshStandardMaterial({
+	const tines = new Mesh(new CylinderGeometry(.06, .135, .26, compactMode ? 14 : 20, 1, true), new MeshStandardMaterial({
 		color: 14468502,
 		roughness: .76,
 		side: 2
@@ -62371,7 +62602,11 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 	const caddyGroup = new Group();
 	caddyGroup.position.set(-1.26, TRAY_SURFACE_Y, -.45);
 	caddyGroup.add(makeContactShadow(.75, shadowTex, .45));
-	const lacquerMat = new MeshPhysicalMaterial({
+	const lacquerMat = compactMode ? new MeshStandardMaterial({
+		color: 2301209,
+		roughness: .22,
+		metalness: .08
+	}) : new MeshPhysicalMaterial({
 		color: 2301209,
 		roughness: .2,
 		metalness: .08,
@@ -62384,10 +62619,10 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 		new Vector2(.23, .36),
 		new Vector2(.19, .38),
 		new Vector2(0, .38)
-	], 32), lacquerMat);
+	], compactMode ? 20 : 32), lacquerMat);
 	caddyBody.castShadow = true;
 	caddyGroup.add(caddyBody);
-	const goldBand = new Mesh(new TorusGeometry(.232, .008, 8, 32), new MeshStandardMaterial({
+	const goldBand = new Mesh(new TorusGeometry(.232, .008, 6, compactMode ? 20 : 32), new MeshStandardMaterial({
 		color: 13936968,
 		metalness: .85,
 		roughness: .22
@@ -62409,11 +62644,11 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 		new Vector3(.05, .065, 0),
 		new Vector3(.26, .075, 0),
 		new Vector3(.33, .04, 0)
-	]), 20, .016, 8, false), bambooMat);
+	]), compactMode ? 12 : 20, .016, 6, false), bambooMat);
 	scoopStick.scale.set(1, .45, 1.45);
 	scoopStick.rotation.y = .35;
 	chashakuGroup.add(scoopStick);
-	const powderPinch = new Mesh(new SphereGeometry(.032, 10, 10), new MeshStandardMaterial({
+	const powderPinch = new Mesh(new SphereGeometry(.032, 8, 8), new MeshStandardMaterial({
 		color: 6067778,
 		roughness: .9
 	}));
@@ -62428,8 +62663,10 @@ function createChasenGroup(ceramicTex, walnutTex, shadowTex) {
 		chashakuGroup
 	};
 }
-function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
+function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl, compactMode = false) {
 	const root = new Group();
+	const segMd = compactMode ? 20 : 32;
+	const segSm = compactMode ? 16 : 24;
 	const steelMat = new MeshStandardMaterial({
 		color: 13883612,
 		metalness: .88,
@@ -62445,13 +62682,21 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		roughness: .68,
 		metalness: .02
 	});
-	const glassMat = new MeshPhysicalMaterial({
+	const liteShader = isSoftwareGl || compactMode;
+	const glassMat = liteShader ? new MeshStandardMaterial({
+		color: 15397615,
+		metalness: .05,
+		roughness: .14,
+		transparent: true,
+		opacity: .36,
+		depthWrite: false
+	}) : new MeshPhysicalMaterial({
 		color: 16777215,
 		metalness: 0,
 		roughness: .08,
-		transmission: isSoftwareGl ? 0 : .76,
+		transmission: .76,
 		transparent: true,
-		opacity: isSoftwareGl ? .36 : .92,
+		opacity: .92,
 		ior: 1.5,
 		clearcoat: 1,
 		depthWrite: false
@@ -62468,7 +62713,7 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector2(.24, .58),
 		new Vector2(.2, .58),
 		new Vector2(0, .04)
-	], 32), steelMat);
+	], segMd), steelMat);
 	pitcherBody.castShadow = true;
 	pitcher.add(pitcherBody);
 	const pitcherHandle = new Mesh(new TubeGeometry(new CatmullRomCurve3([
@@ -62476,9 +62721,9 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector3(.36, .44, 0),
 		new Vector3(.35, .18, 0),
 		new Vector3(.24, .12, 0)
-	]), 18, .022, 8, false), steelMat);
+	]), compactMode ? 12 : 18, .022, 8, false), steelMat);
 	pitcher.add(pitcherHandle);
-	const milkInside = new Mesh(new CylinderGeometry(.19, .19, .04, 24), new MeshStandardMaterial({
+	const milkInside = new Mesh(new CylinderGeometry(.19, .19, .04, segSm), new MeshStandardMaterial({
 		color: 16249834,
 		roughness: .3
 	}));
@@ -62488,19 +62733,19 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	const frotherStand = new Group();
 	frotherStand.position.set(1.22, TRAY_SURFACE_Y, .72);
 	frotherStand.add(makeContactShadow(.55, shadowTex, .42));
-	const basePad = new Mesh(new CylinderGeometry(.14, .16, .05, 24), walnutMat);
+	const basePad = new Mesh(new CylinderGeometry(.14, .16, .05, segSm), walnutMat);
 	basePad.position.y = .025;
 	frotherStand.add(basePad);
 	const frotherWand = new Group();
 	frotherWand.position.y = .05;
-	const wandHandle = new Mesh(new CylinderGeometry(.045, .038, .32, 16), walnutMat);
+	const wandHandle = new Mesh(new CylinderGeometry(.045, .038, .32, compactMode ? 12 : 16), walnutMat);
 	wandHandle.position.y = .44;
 	wandHandle.castShadow = true;
 	frotherWand.add(wandHandle);
-	const wandShaft = new Mesh(new CylinderGeometry(.01, .01, .28, 10), steelMat);
+	const wandShaft = new Mesh(new CylinderGeometry(.01, .01, .28, 8), steelMat);
 	wandShaft.position.y = .16;
 	frotherWand.add(wandShaft);
-	const wandCoil = new Mesh(new TorusGeometry(.05, .008, 8, 20), steelMat);
+	const wandCoil = new Mesh(new TorusGeometry(.05, .008, 6, compactMode ? 14 : 20), steelMat);
 	wandCoil.rotation.x = Math.PI / 2;
 	wandCoil.position.y = .025;
 	frotherWand.add(wandCoil);
@@ -62525,10 +62770,10 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		new Vector2(.34, .34),
 		new Vector2(.2, .44),
 		new Vector2(0, .44)
-	], 32), clayMat);
+	], segMd), clayMat);
 	clayBody.castShadow = true;
 	teapot.add(clayBody);
-	const clayLid = new Mesh(new SphereGeometry(.18, 24, 12, 0, Math.PI * 2, 0, Math.PI * .45), clayMat);
+	const clayLid = new Mesh(new SphereGeometry(.18, segSm, compactMode ? 8 : 12, 0, Math.PI * 2, 0, Math.PI * .45), clayMat);
 	clayLid.position.y = .4;
 	teapot.add(clayLid);
 	const clayFinial = new Mesh(new SphereGeometry(.042, 12, 12), clayMat);
@@ -62602,12 +62847,17 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	const herbalPot = new Group();
 	herbalPot.position.set(-1.22, TRAY_SURFACE_Y, -.38);
 	herbalPot.add(makeContactShadow(.9, shadowTex, .45));
-	const glassBowl = new Mesh(new SphereGeometry(.32, 28, 20), glassMat);
+	const glassBowl = new Mesh(new SphereGeometry(.32, compactMode ? 20 : 28, compactMode ? 14 : 20), glassMat);
 	glassBowl.scale.set(1, .85, 1);
 	glassBowl.position.y = .28;
-	glassBowl.renderOrder = 6;
+	glassBowl.renderOrder = 10;
 	herbalPot.add(glassBowl);
-	const herbalInfuseTea = new Mesh(new SphereGeometry(.26, 24, 16, 0, Math.PI * 2, Math.PI * .25, Math.PI * .75), new MeshPhysicalMaterial({
+	const herbalInfuseTea = new Mesh(new SphereGeometry(.26, compactMode ? 18 : 24, compactMode ? 12 : 16, 0, Math.PI * 2, Math.PI * .25, Math.PI * .75), liteShader ? new MeshStandardMaterial({
+		color: 15124590,
+		roughness: .16,
+		transparent: true,
+		opacity: .84
+	}) : new MeshPhysicalMaterial({
 		color: 15124590,
 		roughness: .12,
 		transparent: true,
@@ -62626,8 +62876,9 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	const dipperRod = new Mesh(new CylinderGeometry(.015, .015, .44, 10), walnutMat);
 	dipperRod.rotation.z = Math.PI / 2;
 	dipper.add(dipperRod);
+	const dipperRingGeo = new TorusGeometry(.036, .01, 6, compactMode ? 12 : 16);
 	for (let i = 0; i < 4; i++) {
-		const ring = new Mesh(new TorusGeometry(.036, .01, 8, 16), walnutMat);
+		const ring = new Mesh(dipperRingGeo, walnutMat);
 		ring.rotation.y = Math.PI / 2;
 		ring.position.x = .17 + i * .022;
 		dipper.add(ring);
@@ -62647,15 +62898,20 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	const postRight = postLeft.clone();
 	postRight.position.x = .22;
 	tower.add(postLeft, postRight);
-	const topChamber = new Mesh(new CylinderGeometry(.16, .05, .32, 24), glassMat);
+	const topChamber = new Mesh(new CylinderGeometry(.16, .05, .32, compactMode ? 16 : 24), glassMat);
 	topChamber.position.y = .8;
-	topChamber.renderOrder = 6;
+	topChamber.renderOrder = 10;
 	tower.add(topChamber);
-	const bottomCarafe = new Mesh(new CylinderGeometry(.12, .21, .36, 24), glassMat);
+	const bottomCarafe = new Mesh(new CylinderGeometry(.12, .21, .36, compactMode ? 16 : 24), glassMat);
 	bottomCarafe.position.y = .24;
-	bottomCarafe.renderOrder = 6;
+	bottomCarafe.renderOrder = 10;
 	tower.add(bottomCarafe);
-	const dripMatcha = new Mesh(new CylinderGeometry(.14, .18, .18, 20), new MeshPhysicalMaterial({
+	const dripMatcha = new Mesh(new CylinderGeometry(.14, .18, .18, compactMode ? 14 : 20), liteShader ? new MeshStandardMaterial({
+		color: 6135111,
+		roughness: .18,
+		transparent: true,
+		opacity: .88
+	}) : new MeshPhysicalMaterial({
 		color: 6135111,
 		roughness: .14,
 		transparent: true,
@@ -62664,7 +62920,12 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 	dripMatcha.position.y = .15;
 	dripMatcha.renderOrder = 3;
 	tower.add(dripMatcha);
-	const coldDripDrop = new Mesh(new SphereGeometry(.022, 10, 10), new MeshPhysicalMaterial({
+	const coldDripDrop = new Mesh(new SphereGeometry(.022, 8, 8), liteShader ? new MeshStandardMaterial({
+		color: 8570728,
+		roughness: .12,
+		transparent: true,
+		opacity: .88
+	}) : new MeshPhysicalMaterial({
 		color: 8570728,
 		roughness: .08,
 		transparent: true,
@@ -62686,8 +62947,100 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl) {
 		coldDripDrop
 	};
 }
+// src/utils/refreshRate.ts
+var REFRESH_PROBE_SAMPLES = 22;
+var WARMUP_FRAMES = 4;
+/**
+* Classifies a measured display refresh rate (Hz) into standard mobile tiers:
+* - <= 74 Hz -> 60 Hz (supports 30, 60 FPS)
+* - 75..105 Hz -> 90 Hz (supports 30, 60, 90 FPS)
+* - >= 106 Hz -> 120 Hz (supports 30, 60, 90, 120 FPS)
+*/
+function bucketRefreshRate(measuredHz) {
+	if (!Number.isFinite(measuredHz) || measuredHz < 74) return 60;
+	if (measuredHz < 106) return 90;
+	return 120;
+}
+function getAllowedFpsOptions(maxRefreshRate) {
+	if (maxRefreshRate >= 120) return [
+		30,
+		60,
+		90,
+		120
+	];
+	if (maxRefreshRate >= 90) return [
+		30,
+		60,
+		90
+	];
+	return [30, 60];
+}
+function clampTargetFpsToDisplay(targetFps, maxRefreshRate) {
+	const allowed = getAllowedFpsOptions(maxRefreshRate);
+	if (allowed.includes(targetFps)) return targetFps;
+	return allowed[allowed.length - 1];
+}
+/**
+* Measures the actual hardware vsync refresh rate using median requestAnimationFrame intervals.
+* Resolves with { hz, rawHz } and falls back cleanly to 60 Hz if interrupted or hidden.
+*/
+function probeDisplayRefreshRate() {
+	if (typeof window === "undefined" || typeof requestAnimationFrame !== "function") return Promise.resolve({
+		hz: 60,
+		rawHz: 60
+	});
+	return new Promise((resolve) => {
+		const intervals = [];
+		let frameCount = 0;
+		let lastTs = 0;
+		let rafId = 0;
+		let settled = false;
+		const finish = () => {
+			if (settled) return;
+			settled = true;
+			cancelAnimationFrame(rafId);
+			clearTimeout(timeoutId);
+			if (intervals.length < 5) {
+				resolve({
+					hz: 60,
+					rawHz: 60
+				});
+				return;
+			}
+			const sorted = [...intervals].sort((a, b) => a - b);
+			const representativeMs = sorted[Math.max(0, Math.floor(sorted.length * .35))];
+			const rawHz = representativeMs > 2 ? Math.round(1e3 / representativeMs) : 60;
+			resolve({
+				hz: bucketRefreshRate(rawHz),
+				rawHz
+			});
+		};
+		const timeoutId = window.setTimeout(finish, 900);
+		const step = (ts) => {
+			if (settled) return;
+			if (typeof document !== "undefined" && document.hidden) {
+				finish();
+				return;
+			}
+			if (lastTs > 0) {
+				const dt = ts - lastTs;
+				if (frameCount >= WARMUP_FRAMES && dt >= 4 && dt <= 50) intervals.push(dt);
+			}
+			lastTs = ts;
+			frameCount += 1;
+			if (intervals.length >= REFRESH_PROBE_SAMPLES) {
+				finish();
+				return;
+			}
+			rafId = requestAnimationFrame(step);
+		};
+		rafId = requestAnimationFrame(step);
+	});
+}
 // src/utils/deviceOptimizer.ts
 var REALME_NOTE_50_UA_RE = /RMX3834|realme\s*note\s*50/i;
+var UNISOC_T612_RE = /Unisoc|Tiger\s*T612|\bT612\b|ums9230/i;
+var MALI_G57_RE = /Mali-G57/i;
 var BUDGET_MOBILE_GPU_RE = /Mali-G57|Mali-G52|Mali-G51|Mali-G31|Mali-T|PowerVR\s*GE8|Adreno\s*\(TM\)\s*(50[0-9]|610|612)/i;
 var cachedGpuName = null;
 function readGpuRendererName() {
@@ -62720,38 +63073,59 @@ function probeDeviceOptimization(profile) {
 	const deviceMemoryGb = typeof navigator !== "undefined" && "deviceMemory" in navigator && typeof navigator.deviceMemory === "number" ? navigator.deviceMemory ?? null : null;
 	const gpuRendererName = readGpuRendererName();
 	const isRealmeNote50 = REALME_NOTE_50_UA_RE.test(ua);
+	const isUnisocT612OrMaliG57 = isRealmeNote50 || UNISOC_T612_RE.test(ua) || MALI_G57_RE.test(gpuRendererName);
 	const isMobileUa = /Android|Mobile/i.test(ua);
 	const isBudgetGpuString = BUDGET_MOBILE_GPU_RE.test(gpuRendererName);
-	const isBudgetMobileGpu = isRealmeNote50 || isBudgetGpuString || isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
-	const liteGpuActive = profile === "realme-note-50" || profile === "auto" && (isRealmeNote50 || isBudgetMobileGpu);
+	const isLowMemoryMobile = isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
+	const isDetected2GbRam = deviceMemoryGb !== null && deviceMemoryGb <= 2;
+	const isBudgetMobileGpu = isRealmeNote50 || isUnisocT612OrMaliG57 || isBudgetGpuString || isLowMemoryMobile;
+	const isUltraLowRam = profile === "low-ram-2gb" || profile === "auto" && isDetected2GbRam;
+	const liteGpuActive = profile === "realme-note-50" || profile === "low-ram-2gb" || profile === "auto" && (isRealmeNote50 || isBudgetMobileGpu);
 	let detectedModelLabel = "อุปกรณ์ทั่วไป";
-	if (profile === "realme-note-50") detectedModelLabel = "โหมด realme Note 50 (Mali-G57 · 90Hz)";
-	else if (isRealmeNote50) detectedModelLabel = "ตรวจพบ realme Note 50 (RMX3834)";
+	if (profile === "low-ram-2gb") detectedModelLabel = "โหมดประหยัดแรมพิเศษ (RAM 2 GB)";
+	else if (profile === "realme-note-50") detectedModelLabel = "จูนพิเศษ Unisoc T612 · Mali-G57";
+	else if (isDetected2GbRam && profile === "auto") detectedModelLabel = "ตรวจพบ RAM ≤ 2 GB (เปิดโหมดประหยัดแรมอัตโนมัติ)";
+	else if (isRealmeNote50) detectedModelLabel = "realme Note 50 (Unisoc T612 · Mali-G57)";
+	else if (MALI_G57_RE.test(gpuRendererName)) detectedModelLabel = "ตรวจพบจีพียู ARM Mali-G57 (เปิดจูนอัตโนมัติ)";
 	else if (isBudgetMobileGpu) detectedModelLabel = "ตรวจพบมือถือประหยัดพลังงาน (เปิดจูนอัตโนมัติ)";
 	return {
 		detectedModelLabel,
 		isRealmeNote50,
+		isUnisocT612OrMaliG57,
 		isBudgetMobileGpu,
+		isUltraLowRam,
 		liteGpuActive,
 		gpuRendererName,
 		hardwareThreads,
 		deviceMemoryGb
 	};
 }
-function getRealmeNote50Preset() {
+function getRealmeNote50Preset(maxDisplayHz = 90) {
 	return {
 		optimizationProfile: "realme-note-50",
 		graphicsQuality: "medium",
-		resolutionScale: "1.0",
+		resolutionScale: "hd-plus",
 		shadowsEnabled: true,
 		antialiasEnabled: false,
 		particlesEnabled: true,
-		targetFps: 90
+		targetFps: clampTargetFpsToDisplay(90, maxDisplayHz)
 	};
 }
-function applyDomPerformanceClass(liteGpuActive) {
+function getLowRam2GbPreset(maxDisplayHz = 60) {
+	return {
+		optimizationProfile: "low-ram-2gb",
+		graphicsQuality: "low",
+		resolutionScale: "hd",
+		shadowsEnabled: false,
+		antialiasEnabled: false,
+		particlesEnabled: false,
+		targetFps: clampTargetFpsToDisplay(60, maxDisplayHz)
+	};
+}
+function applyDomPerformanceClass(liteGpuActive, ultraLowRam = false) {
 	if (typeof document === "undefined") return;
 	document.documentElement.classList.toggle("perf-lite", liteGpuActive);
+	document.documentElement.classList.toggle("ram-2gb", ultraLowRam);
 }
 // src/components/TeaScene3D.tsx
 var CAMERA_PRESETS = {
@@ -62811,25 +63185,38 @@ function detectSoftwareWebGL() {
 		return true;
 	}
 }
-function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, dynamicScale = 1) {
+function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, containerWidth, containerHeight, dynamicScale = 1) {
 	if (isSoftwareGl) return 1;
 	const deviceDpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
-	let baseRatio = 1;
+	const shortCss = Math.max(240, Math.min(containerWidth, containerHeight));
+	let targetShortPx = 720;
+	let minFloor = .75;
+	let maxCap = 1.5;
 	switch (settings.resolutionScale) {
-		case "0.75":
-			baseRatio = .75;
+		case "hd":
+			targetShortPx = 540;
+			minFloor = .65;
+			maxCap = isUltraLowRam ? .95 : 1.2;
 			break;
-		case "1.0":
-			baseRatio = 1;
+		case "hd-plus":
+			targetShortPx = 720;
+			minFloor = .75;
+			maxCap = isUltraLowRam ? 1.05 : liteGpuMode ? 1.35 : 1.5;
 			break;
-		case "1.5":
-			baseRatio = liteGpuMode ? 1.15 : 1.5;
+		case "fhd":
+			targetShortPx = 1080;
+			minFloor = .9;
+			maxCap = isUltraLowRam ? 1.25 : 2;
 			break;
-		default: baseRatio = liteGpuMode ? Math.min(deviceDpr, 1.05) : Math.min(deviceDpr, 2.5);
+		default:
+			targetShortPx = 1280;
+			minFloor = 1;
+			maxCap = isUltraLowRam ? 1.4 : Math.min(Math.max(deviceDpr, 1.5), 2.5);
 	}
-	return Math.max(.65, baseRatio * dynamicScale);
+	const desiredRatio = Math.min(maxCap, Math.max(minFloor, targetShortPx / shortCss));
+	return Math.max(.6, desiredRatio * dynamicScale);
 }
-var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, cameraPreset, settings, onKettleClick, onVesselClick }) => {
+var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppings, isPouring, cameraPreset, settings, onKettleClick, onVesselClick }) => {
 	const mountRef = (0, import_react.useRef)(null);
 	const rendererRef = (0, import_react.useRef)(null);
 	const keyLightRef = (0, import_react.useRef)(null);
@@ -62837,7 +63224,9 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 	const shadowDirtyRef = (0, import_react.useRef)(true);
 	const dynamicScaleRef = (0, import_react.useRef)(1);
 	const [webglError, setWebglError] = (0, import_react.useState)(false);
-	const liteGpuMode = probeDeviceOptimization(settings.optimizationProfile).liteGpuActive;
+	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+	const liteGpuMode = deviceReport.liteGpuActive;
+	const isUltraLowRam = deviceReport.isUltraLowRam;
 	const syncRef = (0, import_react.useRef)({
 		tea,
 		step,
@@ -62865,25 +63254,9 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			cameraPreset,
 			settings
 		};
-		shadowDirtyRef.current = true;
-		dynamicScaleRef.current = 1;
 		if (lastPresetRef.current !== cameraPreset) {
 			lastPresetRef.current = cameraPreset;
 			presetAnimatingRef.current = true;
-		}
-		const renderer = rendererRef.current;
-		const keyLight = keyLightRef.current;
-		const container = mountRef.current;
-		const softwareGl = isSoftwareGlRef.current;
-		if (renderer && container) {
-			renderer.setPixelRatio(resolvePixelRatio(settings, softwareGl, liteGpuMode, 1));
-			const w = Math.max(container.clientWidth, 280);
-			const h = Math.max(container.clientHeight, 260);
-			renderer.setSize(w, h);
-			const allowShadows = !softwareGl && settings.shadowsEnabled;
-			renderer.shadowMap.enabled = allowShadows;
-			renderer.shadowMap.needsUpdate = true;
-			if (keyLight) keyLight.castShadow = allowShadows;
 		}
 	}, [
 		tea,
@@ -62893,8 +63266,39 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		toppings,
 		isPouring,
 		cameraPreset,
-		settings,
-		liteGpuMode
+		settings
+	]);
+	(0, import_react.useEffect)(() => {
+		shadowDirtyRef.current = true;
+	}, [
+		tea.id,
+		step,
+		toppings,
+		isPouring,
+		settings.shadowsEnabled
+	]);
+	(0, import_react.useEffect)(() => {
+		const renderer = rendererRef.current;
+		const keyLight = keyLightRef.current;
+		const container = mountRef.current;
+		const softwareGl = isSoftwareGlRef.current;
+		if (!renderer || !container) return;
+		dynamicScaleRef.current = 1;
+		const w = Math.max(container.clientWidth, 280);
+		const h = Math.max(container.clientHeight, 260);
+		renderer.setPixelRatio(resolvePixelRatio(settings, softwareGl, liteGpuMode, isUltraLowRam, w, h, 1));
+		renderer.setSize(w, h);
+		const allowShadows = !softwareGl && !isUltraLowRam && settings.shadowsEnabled;
+		renderer.shadowMap.enabled = allowShadows;
+		renderer.shadowMap.needsUpdate = true;
+		shadowDirtyRef.current = true;
+		if (keyLight) keyLight.castShadow = allowShadows;
+	}, [
+		settings.resolutionScale,
+		settings.shadowsEnabled,
+		settings.optimizationProfile,
+		liteGpuMode,
+		isUltraLowRam
 	]);
 	(0, import_react.useEffect)(() => {
 		callbacksRef.current = {
@@ -62913,25 +63317,26 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		let renderer;
 		try {
 			renderer = new WebGLRenderer({
-				antialias: !isSoftwareGl && !liteGpuMode && initSettings.antialiasEnabled,
-				powerPreference: "high-performance",
-				precision: liteGpuMode ? "mediump" : "highp"
+				antialias: !isSoftwareGl && !liteGpuMode && !isUltraLowRam && initSettings.antialiasEnabled,
+				powerPreference: isUltraLowRam ? "default" : "high-performance",
+				precision: "highp"
 			});
 		} catch {
 			setWebglError(true);
 			return;
 		}
 		rendererRef.current = renderer;
+		const initW = Math.max(container.clientWidth, 320);
+		const initH = Math.max(container.clientHeight, 260);
 		renderer.outputColorSpace = SRGBColorSpace;
 		renderer.toneMapping = 4;
 		renderer.toneMappingExposure = 1.08;
-		renderer.setPixelRatio(resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, 1));
-		renderer.shadowMap.enabled = !isSoftwareGl && initSettings.shadowsEnabled;
+		renderer.setPixelRatio(resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, isUltraLowRam, initW, initH, 1));
+		const allowInitShadows = !isSoftwareGl && !isUltraLowRam && initSettings.shadowsEnabled;
+		renderer.shadowMap.enabled = allowInitShadows;
 		renderer.shadowMap.type = liteGpuMode ? 1 : 2;
 		renderer.shadowMap.autoUpdate = !liteGpuMode;
 		renderer.shadowMap.needsUpdate = true;
-		const initW = Math.max(container.clientWidth, 320);
-		const initH = Math.max(container.clientHeight, 260);
 		renderer.setSize(initW, initH);
 		renderer.domElement.style.display = "block";
 		renderer.domElement.style.width = "100%";
@@ -62953,18 +63358,21 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		scene.background = new Color(horizonHex);
 		scene.fog = new FogExp2(horizonHex, .068);
 		const pmremGenerator = new PMREMGenerator(renderer);
-		const envTexture = pmremGenerator.fromScene(new RoomEnvironment(), .04).texture;
+		const roomEnv = new RoomEnvironment();
+		const envRenderTarget = pmremGenerator.fromScene(roomEnv, .04);
+		const envTexture = envRenderTarget.texture;
 		scene.environment = envTexture;
+		roomEnv.dispose();
 		pmremGenerator.dispose();
 		const isShortLandscape = initH < 520;
-		const camera = new PerspectiveCamera(isShortLandscape ? 46 : 42, initW / initH, .1, 45);
+		const camera = new PerspectiveCamera(isShortLandscape ? 46 : 42, initW / initH, .08, 60);
 		const initialPreset = CAMERA_PRESETS[syncRef.current.cameraPreset];
 		camera.position.set(initialPreset.pos[0], initialPreset.pos[1] + (isShortLandscape ? .15 : 0), initialPreset.pos[2] + (isShortLandscape ? .45 : 0));
 		const controls = new OrbitControls(camera, renderer.domElement);
 		controls.target.set(initialPreset.target[0], initialPreset.target[1] - (isShortLandscape ? .16 : 0), initialPreset.target[2]);
 		controls.enableDamping = !isSoftwareGl;
 		controls.dampingFactor = .06;
-		controls.minDistance = 1.5;
+		controls.minDistance = 1.65;
 		controls.maxDistance = 6.2;
 		controls.minPolarAngle = .28;
 		controls.maxPolarAngle = Math.PI / 2 - .08;
@@ -62993,31 +63401,33 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		keyLight.shadow.camera.top = d;
 		keyLight.shadow.camera.bottom = -4.2;
 		keyLight.shadow.bias = -5e-4;
-		keyLight.shadow.normalBias = .02;
+		keyLight.shadow.normalBias = liteGpuMode ? .032 : .02;
 		scene.add(keyLight);
 		const rimLight = new DirectionalLight(14281686, .65);
 		rimLight.position.set(-4, 3.2, -3.5);
 		scene.add(rimLight);
 		const rawAniso = renderer.capabilities.getMaxAnisotropy();
-		const maxAniso = liteGpuMode ? Math.min(2, rawAniso) : rawAniso;
-		const cedarTex = createWoodGrainTexture("#A87B4F", "#6B4728", maxAniso);
-		const walnutTex = createWoodGrainTexture("#69492F", "#3E2817", maxAniso);
-		const matTex = createWovenMatTexture(maxAniso);
-		const ceramicTex = createCeramicSpeckleTexture("#EFECE3", "#9D9688", maxAniso);
-		const shadowTex = createContactShadowTexture();
-		const steamTex = createSteamPuffTexture();
-		const disableExtraGlassPass = isSoftwareGl || liteGpuMode;
-		const envGroup = createTeaTableEnvironment(cedarTex, walnutTex, matTex, ceramicTex, shadowTex);
+		const maxAniso = liteGpuMode ? 1 : rawAniso;
+		const compactAssets = liteGpuMode || isSoftwareGl;
+		const ultraCompactAssets = isUltraLowRam;
+		const cedarTex = createWoodGrainTexture("#A87B4F", "#6B4728", maxAniso, compactAssets, ultraCompactAssets);
+		const walnutTex = createWoodGrainTexture("#69492F", "#3E2817", maxAniso, compactAssets, ultraCompactAssets);
+		const matTex = createWovenMatTexture(maxAniso, compactAssets, ultraCompactAssets);
+		const ceramicTex = createCeramicSpeckleTexture("#EFECE3", "#9D9688", maxAniso, compactAssets, ultraCompactAssets);
+		const shadowTex = createContactShadowTexture(ultraCompactAssets);
+		const steamTex = createSteamPuffTexture(ultraCompactAssets);
+		const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
+		const envGroup = createTeaTableEnvironment(cedarTex, walnutTex, matTex, ceramicTex, shadowTex, compactAssets, ultraCompactAssets);
 		scene.add(envGroup);
-		const vessel = createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass);
+		const vessel = createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass, compactAssets, ultraCompactAssets);
 		scene.add(vessel.root);
-		const kettle = createKettleGroup(walnutTex, shadowTex);
+		const kettle = createKettleGroup(walnutTex, shadowTex, compactAssets);
 		scene.add(kettle.root);
-		const chasen = createChasenGroup(ceramicTex, walnutTex, shadowTex);
+		const chasen = createChasenGroup(ceramicTex, walnutTex, shadowTex, compactAssets);
 		scene.add(chasen.root);
-		const equipmentRig = createEquipmentRig(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass);
+		const equipmentRig = createEquipmentRig(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass, compactAssets);
 		scene.add(equipmentRig.root);
-		const steamCount = liteGpuMode ? 3 : 6;
+		const steamCount = isUltraLowRam ? 0 : liteGpuMode ? 3 : 6;
 		const steamSprites = [];
 		for (let i = 0; i < steamCount; i++) {
 			const sprite = new Sprite(new SpriteMaterial({
@@ -63028,6 +63438,7 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			}));
 			sprite.position.set(-.22, .9, .08);
 			sprite.scale.set(.32, .32, 1);
+			sprite.frustumCulled = false;
 			scene.add(sprite);
 			steamSprites.push({
 				sprite,
@@ -63090,6 +63501,7 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			const h = Math.max(container.clientHeight, 260);
 			camera.aspect = w / h;
 			camera.updateProjectionMatrix();
+			renderer.setPixelRatio(resolvePixelRatio(syncRef.current.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, w, h, dynamicScaleRef.current));
 			renderer.setSize(w, h);
 		};
 		const resizeObserver = new ResizeObserver(handleResize);
@@ -63102,6 +63514,8 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		let lastDrawMs = 0;
 		let slowFrameStreak = 0;
 		let shadowTickCounter = 0;
+		let lastAppliedTeaId = "";
+		let lastLiquidCacheKey = "";
 		function afterDraw(cb) {
 			const gl = renderer.getContext();
 			if (!gl || typeof gl.fenceSync !== "function") {
@@ -63138,13 +63552,15 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			lastDrawMs = nowMs;
 			const delta = Math.min(clock.getDelta(), .1);
 			const elapsed = clock.getElapsedTime();
-			if (liteGpuMode && !isSoftwareGl && prevDrawMs > 0 && state.settings.targetFps >= 60) {
+			if ((liteGpuMode || isUltraLowRam) && !isSoftwareGl && prevDrawMs > 0 && state.settings.targetFps >= 60) {
 				if (nowMs - prevDrawMs > 28) {
 					slowFrameStreak += 1;
-					if (slowFrameStreak >= 18 && dynamicScaleRef.current > .78) {
-						dynamicScaleRef.current = Math.max(.75, dynamicScaleRef.current - .12);
+					if (slowFrameStreak >= 18 && dynamicScaleRef.current > .76) {
+						dynamicScaleRef.current = Math.max(.74, dynamicScaleRef.current - .12);
 						slowFrameStreak = 0;
-						renderer.setPixelRatio(resolvePixelRatio(state.settings, isSoftwareGl, liteGpuMode, dynamicScaleRef.current));
+						const cw = Math.max(mountRef.current?.clientWidth ?? 280, 280);
+						const ch = Math.max(mountRef.current?.clientHeight ?? 260, 260);
+						renderer.setPixelRatio(resolvePixelRatio(state.settings, isSoftwareGl, liteGpuMode, isUltraLowRam, cw, ch, dynamicScaleRef.current));
 					}
 				} else if (slowFrameStreak > 0) slowFrameStreak -= 1;
 			}
@@ -63162,56 +63578,61 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 				if (camera.position.distanceTo(_camGoalPos) < .015 && controls.target.distanceTo(_camGoalTarget) < .015) presetAnimatingRef.current = false;
 			}
 			controls.update();
-			vessel.chawanGroup.visible = state.tea.vesselStyle === "chawan";
-			vessel.ceramicGroup.visible = state.tea.vesselStyle === "ceramic";
-			vessel.glassGroup.visible = state.tea.vesselStyle === "glass";
-			vessel.saucerMesh.visible = state.tea.id === "matcha-rosetta-latte";
-			if (state.tea.id === "matcha-rosetta-latte") {
-				vessel.ceramicBodyMat.color.setHex(16381938);
-				vessel.ceramicHandleMat.color.setHex(16381938);
-			} else {
-				vessel.ceramicBodyMat.color.setHex(15921126);
-				vessel.ceramicHandleMat.color.setHex(15921126);
+			if (lastAppliedTeaId !== state.tea.id) {
+				lastAppliedTeaId = state.tea.id;
+				vessel.chawanGroup.visible = state.tea.vesselStyle === "chawan";
+				vessel.ceramicGroup.visible = state.tea.vesselStyle === "ceramic";
+				vessel.glassGroup.visible = state.tea.vesselStyle === "glass";
+				vessel.saucerMesh.visible = state.tea.id === "matcha-rosetta-latte";
+				if (state.tea.id === "matcha-rosetta-latte") {
+					vessel.ceramicBodyMat.color.setHex(16381938);
+					vessel.ceramicHandleMat.color.setHex(16381938);
+				} else {
+					vessel.ceramicBodyMat.color.setHex(15921126);
+					vessel.ceramicHandleMat.color.setHex(15921126);
+				}
+				vessel.kintsugiSeam.visible = state.tea.id === "kintsugi-matcha";
+				if (state.tea.id === "kintsugi-matcha") {
+					vessel.chawanBodyMat.color.setHex(2303529);
+					vessel.chawanRimMat.color.setHex(14200906);
+				} else if (state.tea.id === "classic-heritage-matcha") {
+					vessel.chawanBodyMat.color.setHex(7155497);
+					vessel.chawanRimMat.color.setHex(13212742);
+				} else if (state.tea.id === "uji-roasted-matcha") {
+					vessel.chawanBodyMat.color.setHex(7885631);
+					vessel.chawanRimMat.color.setHex(12884588);
+				} else if (state.tea.id === "sakura-matcha") {
+					vessel.chawanBodyMat.color.setHex(15786458);
+					vessel.chawanRimMat.color.setHex(14192281);
+				} else if (state.tea.id === "uji-matcha" || state.tea.id === "stone-milled-koicha") {
+					vessel.chawanBodyMat.color.setHex(2896184);
+					vessel.chawanRimMat.color.setHex(5922920);
+				} else if (state.tea.id === "ceremonial-matcha" || state.tea.id === "pumpkin-spice-matcha") {
+					vessel.chawanBodyMat.color.setHex(15789280);
+					vessel.chawanRimMat.color.setHex(5145148);
+				} else {
+					vessel.chawanBodyMat.color.setHex(3885117);
+					vessel.chawanRimMat.color.setHex(11965802);
+				}
+				chasen.root.visible = state.tea.category === "matcha" || state.tea.category === "latte";
+				equipmentRig.frotherSet.visible = state.tea.equipmentId === "milk-frother";
+				equipmentRig.clayTeapotSet.visible = state.tea.equipmentId === "clay-teapot";
+				equipmentRig.strainerSet.visible = state.tea.equipmentId === "strainer-kettle";
+				equipmentRig.herbalInfuserSet.visible = state.tea.equipmentId === "herbal-infuser";
+				equipmentRig.coldDripSet.visible = state.tea.equipmentId === "cold-drip";
+				_targetLeafColor.set(state.tea.deepColor);
+				vessel.leafMaterial.color.copy(_targetLeafColor);
 			}
-			vessel.kintsugiSeam.visible = state.tea.id === "kintsugi-matcha";
-			if (state.tea.id === "kintsugi-matcha") {
-				vessel.chawanBodyMat.color.setHex(2303529);
-				vessel.chawanRimMat.color.setHex(14200906);
-			} else if (state.tea.id === "classic-heritage-matcha") {
-				vessel.chawanBodyMat.color.setHex(7155497);
-				vessel.chawanRimMat.color.setHex(13212742);
-			} else if (state.tea.id === "uji-roasted-matcha") {
-				vessel.chawanBodyMat.color.setHex(7885631);
-				vessel.chawanRimMat.color.setHex(12884588);
-			} else if (state.tea.id === "sakura-matcha") {
-				vessel.chawanBodyMat.color.setHex(15786458);
-				vessel.chawanRimMat.color.setHex(14192281);
-			} else if (state.tea.id === "uji-matcha" || state.tea.id === "stone-milled-koicha") {
-				vessel.chawanBodyMat.color.setHex(2896184);
-				vessel.chawanRimMat.color.setHex(5922920);
-			} else if (state.tea.id === "ceremonial-matcha" || state.tea.id === "pumpkin-spice-matcha") {
-				vessel.chawanBodyMat.color.setHex(15789280);
-				vessel.chawanRimMat.color.setHex(5145148);
-			} else {
-				vessel.chawanBodyMat.color.setHex(3885117);
-				vessel.chawanRimMat.color.setHex(11965802);
-			}
-			chasen.root.visible = state.tea.category === "matcha" || state.tea.category === "latte";
-			equipmentRig.frotherSet.visible = state.tea.equipmentId === "milk-frother";
-			equipmentRig.clayTeapotSet.visible = state.tea.equipmentId === "clay-teapot";
-			equipmentRig.strainerSet.visible = state.tea.equipmentId === "strainer-kettle";
-			equipmentRig.herbalInfuserSet.visible = state.tea.equipmentId === "herbal-infuser";
-			equipmentRig.coldDripSet.visible = state.tea.equipmentId === "cold-drip";
 			if (!reducedMotion) {
 				if (chasen.root.visible && state.step === "STEEP_TEA") {
 					chasen.whiskGroup.rotation.y = elapsed * 4.2;
 					chasen.whiskGroup.position.y = .22 + Math.sin(elapsed * 6) * .03;
-				} else {
+				} else if (chasen.whiskGroup.rotation.y !== 0) {
 					chasen.whiskGroup.rotation.y = 0;
 					chasen.whiskGroup.position.y = .16;
 				}
 				if (equipmentRig.frotherSet.visible && state.step === "STEEP_TEA") equipmentRig.frotherWand.rotation.y = elapsed * 8;
-				else equipmentRig.frotherWand.rotation.y = 0;
+				else if (equipmentRig.frotherWand.rotation.y !== 0) equipmentRig.frotherWand.rotation.y = 0;
 				if (equipmentRig.coldDripSet.visible) {
 					const dropPhase = elapsed * .85 % 1;
 					equipmentRig.coldDripDrop.position.y = .62 - dropPhase * .36;
@@ -63223,15 +63644,16 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 				vessel.liquidGroup.visible = true;
 				const maxScale = state.tea.vesselStyle === "chawan" ? .82 : 1;
 				vessel.liquidGroup.scale.y = Math.max(.01, smoothedLevel * maxScale);
-				vessel.liquidGroup.scale.x = state.tea.vesselStyle === "chawan" ? 1.12 : 1;
-				vessel.liquidGroup.scale.z = state.tea.vesselStyle === "chawan" ? 1.12 : 1;
-				const targetHex = getLiquidColor(state.tea, state.steepSeconds, state.toppings);
-				_targetLiquidColor.set(targetHex);
+				vessel.liquidGroup.scale.x = state.tea.vesselStyle === "chawan" ? 1.02 : 1;
+				vessel.liquidGroup.scale.z = state.tea.vesselStyle === "chawan" ? 1.02 : 1;
+				const liquidKey = `${state.tea.id}:${state.steepSeconds}:${state.toppings.join(",")}`;
+				if (liquidKey !== lastLiquidCacheKey) {
+					lastLiquidCacheKey = liquidKey;
+					const targetHex = getLiquidColor(state.tea, state.steepSeconds, state.toppings);
+					_targetLiquidColor.set(targetHex);
+				}
 				vessel.liquidMaterial.color.lerp(_targetLiquidColor, Math.min(1, delta * 5));
-				vessel.liquidMaterial.opacity = state.toppings.includes("milk") || state.toppings.includes("milk-foam") ? .98 : .9;
 			} else vessel.liquidGroup.visible = false;
-			_targetLeafColor.set(state.tea.deepColor);
-			vessel.leafMaterial.color.copy(_targetLeafColor);
 			vessel.leavesGroup.visible = state.step !== "SERVED";
 			if (state.isPouring || state.step === "STEEP_TEA") vessel.leavesGroup.rotation.y += delta * .65;
 			const targetSlide = state.isPouring ? 1 : 0;
@@ -63309,12 +63731,25 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			renderer.domElement.removeEventListener("pointermove", onPointerMove);
 			renderer.domElement.removeEventListener("webglcontextlost", handleContextLost);
 			renderer.domElement.removeEventListener("webglcontextrestored", handleContextRestored);
+			const disposedGeos = /* @__PURE__ */ new Set();
+			const disposedMats = /* @__PURE__ */ new Set();
 			scene.traverse((obj) => {
 				if (obj.isMesh) {
 					const mesh = obj;
-					mesh.geometry?.dispose();
-					if (Array.isArray(mesh.material)) mesh.material.forEach((m) => m.dispose());
-					else mesh.material?.dispose();
+					if (mesh.geometry && !disposedGeos.has(mesh.geometry)) {
+						disposedGeos.add(mesh.geometry);
+						mesh.geometry.dispose();
+					}
+					if (Array.isArray(mesh.material)) mesh.material.forEach((m) => {
+						if (!disposedMats.has(m)) {
+							disposedMats.add(m);
+							m.dispose();
+						}
+					});
+					else if (mesh.material && !disposedMats.has(mesh.material)) {
+						disposedMats.add(mesh.material);
+						mesh.material.dispose();
+					}
 				}
 			});
 			steamSprites.forEach((s) => s.sprite.material.dispose());
@@ -63325,11 +63760,17 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 			shadowTex.dispose();
 			steamTex.dispose();
 			envTexture.dispose();
+			envRenderTarget.dispose();
+			renderer.renderLists.dispose();
 			renderer.dispose();
 			rendererRef.current = null;
 			keyLightRef.current = null;
 		};
-	}, [settings.antialiasEnabled, liteGpuMode]);
+	}, [
+		settings.antialiasEnabled,
+		liteGpuMode,
+		isUltraLowRam
+	]);
 	if (webglError) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full w-full flex-col items-center justify-center bg-[#233029] p-6 text-center text-[#F3F1EC]",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
@@ -63345,7 +63786,7 @@ var TeaScene3D = ({ tea, step, waterLevel, steepSeconds, toppings, isPouring, ca
 		className: "h-full w-full select-none",
 		"aria-label": `ฉากโต๊ะชงชา 3 มิติ: ${tea.name}`
 	});
-};
+});
 // src/components/TeaSelectorModal.tsx
 var CATEGORIES$1 = [
 	{
@@ -63391,7 +63832,7 @@ function getTeaRewardPreview(tea) {
 		xp: 25 + tierBonus
 	};
 }
-var TeaVesselIcon = ({ tea, locked }) => {
+var TeaVesselIcon = import_react.memo(({ tea, locked }) => {
 	const liquid = locked ? "#C5C3B8" : tea.lightColor;
 	const liquidEdge = locked ? "#ABA99E" : tea.richColor;
 	if (tea.id === "matcha-rosetta-latte") {
@@ -63764,15 +64205,108 @@ var TeaVesselIcon = ({ tea, locked }) => {
 			})
 		]
 	});
-};
-var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategoryChange, recommendedTeaIds, onSelectAndStart, onClose }) => {
+});
+var MODAL_EASE$1 = [
+	.16,
+	1,
+	.3,
+	1
+];
+var TeaRecipeRow = import_react.memo(({ tea, unlocked, isSelected, isGuestMatch, onSelectAndStart }) => {
+	const reward = getTeaRewardPreview(tea);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+		type: "button",
+		disabled: !unlocked,
+		onClick: () => onSelectAndStart(tea),
+		whileTap: unlocked ? { scale: .97 } : { x: [
+			0,
+			-3,
+			3,
+			0
+		] },
+		transition: { duration: .14 },
+		style: {
+			contain: "layout style paint",
+			contentVisibility: "auto",
+			containIntrinsicSize: "auto 88px"
+		},
+		className: `flex w-full items-center justify-between gap-3 rounded-2xl border-[1.5px] px-3.5 py-2.5 text-left transition-colors ${!unlocked ? "border-[#DCD9CE] bg-[#F2EFE6] opacity-78 cursor-not-allowed" : isSelected ? "border-[#4D9256] bg-[#F6FBF3] shadow-xs" : "border-[#C9DFBE] bg-white hover:border-[#6EA86F] hover:bg-[#F9FCF7]"}`,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaVesselIcon, {
+					tea,
+					locked: !unlocked
+				}), !unlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "absolute -bottom-0.5 -right-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#3A403B] text-white",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, {
+						className: "h-3 w-3",
+						"aria-hidden": "true"
+					})
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "min-w-0 flex-1",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "font-display text-sm sm:text-base font-bold text-[#255F30] truncate",
+						children: tea.name
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-0.5 text-xs text-[#6B736A] truncate",
+						children: unlocked ? `${tea.idealTempLabel} · แช่ ${tea.idealSteepMin}–${tea.idealSteepMax} วิ · ${getEquipmentInfo(tea.equipmentId).name}` : `ปลดล็อกที่ Lv.${tea.unlockLevel}`
+					}),
+					unlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "mt-0.5 text-[11px] text-[#4C5C4F] truncate",
+						children: ["วัตถุดิบ: ", tea.baseIngredients.join(" · ")]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "mt-1 flex items-center gap-1.5",
+						children: isGuestMatch ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "inline-block rounded-full bg-[#2E6F40] px-2.5 py-0.5 text-[11px] font-semibold text-white",
+							children: "แขกกำลังสั่ง"
+						}) : tea.unlockLevel >= 4 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "inline-block rounded-full bg-[#B95B24] px-2.5 py-0.5 text-[11px] font-semibold text-white",
+							children: ["สูตรพิเศษ Lv.", tea.unlockLevel]
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "inline-block rounded-full bg-[#2B2E29] px-2.5 py-0.5 text-[11px] font-medium text-[#F3F1EC]",
+							children: tea.categoryLabel
+						})
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "text-right shrink-0 font-display",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: "text-sm sm:text-base font-bold text-[#2E6B38] leading-tight",
+					children: [
+						"+",
+						reward.warmth,
+						" แต้ม"
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: "text-xs sm:text-sm font-bold text-[#2E6B38] leading-tight mt-0.5",
+					children: [
+						"+",
+						reward.xp,
+						" XP"
+					]
+				})]
+			})
+		]
+	});
+});
+var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, categoryFilter, onCategoryChange, recommendedTeaIds, onSelectAndStart, onClose }) => {
 	const activeCat = CATEGORIES$1.find((c) => c.id === categoryFilter) ?? CATEGORIES$1[0];
-	const visibleTeas = categoryFilter === "all" ? TEAS : TEAS.filter((tea) => tea.category === categoryFilter);
+	const visibleTeas = import_react.useMemo(() => categoryFilter === "all" ? TEAS : TEAS.filter((tea) => tea.category === categoryFilter), [categoryFilter]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 		initial: { opacity: 0 },
 		animate: { opacity: 1 },
 		exit: { opacity: 0 },
-		transition: { duration: .18 },
+		transition: {
+			duration: .16,
+			ease: "easeOut"
+		},
 		className: "pointer-events-none fixed inset-0 z-30 flex items-center justify-center p-2.5 sm:p-4",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 			role: "dialog",
@@ -63780,8 +64314,8 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 			"aria-labelledby": "tea-selector-title",
 			initial: {
 				opacity: 0,
-				scale: .9,
-				y: 26
+				scale: .94,
+				y: 18
 			},
 			animate: {
 				opacity: 1,
@@ -63790,15 +64324,15 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 			},
 			exit: {
 				opacity: 0,
-				scale: .92,
-				y: 20
+				scale: .95,
+				y: 14
 			},
 			transition: {
-				type: "spring",
-				stiffness: 380,
-				damping: 28
+				duration: .24,
+				ease: MODAL_EASE$1
 			},
-			className: "pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden",
+			className: "pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform",
+			style: { contain: "layout style paint" },
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center justify-between gap-3 px-4 pt-3.5 pb-2",
@@ -63808,7 +64342,7 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 							id: "tea-selector-title",
 							initial: {
 								opacity: 0,
-								x: -8
+								x: -6
 							},
 							animate: {
 								opacity: 1,
@@ -63816,21 +64350,23 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 							},
 							exit: {
 								opacity: 0,
-								x: 8
+								x: 6
 							},
-							transition: { duration: .14 },
+							transition: {
+								duration: .14,
+								ease: MODAL_EASE$1
+							},
 							className: "font-display text-lg sm:text-xl font-bold text-[#2D6835]",
 							children: activeCat.modalTitle
 						}, activeCat.id)
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
 						onClick: onClose,
-						whileHover: { scale: 1.07 },
-						whileTap: { scale: .9 },
+						whileTap: { scale: .92 },
 						transition: {
 							type: "spring",
 							stiffness: 420,
-							damping: 22
+							damping: 26
 						},
 						"aria-label": "ซ่อนหน้าต่างเลือกชา",
 						className: "inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0",
@@ -63846,9 +64382,9 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 						const active = categoryFilter === cat.id;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
-							whileTap: { scale: .94 },
+							whileTap: { scale: .95 },
 							onClick: () => onCategoryChange(cat.id),
-							className: "relative min-h-[34px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
+							className: "relative min-h-[36px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
 							children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
 								layoutId: "tea-selector-category-pill",
 								transition: {
@@ -63865,113 +64401,39 @@ var TeaSelectorModal = ({ playerLevel, selectedTeaId, categoryFilter, onCategory
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex-1 overflow-y-auto px-4 pb-4 space-y-2.5",
-					children: visibleTeas.map((tea, idx) => {
-						const unlocked = isTeaUnlocked(tea, playerLevel);
-						const isSelected = tea.id === selectedTeaId;
-						const isGuestMatch = unlocked && Boolean(recommendedTeaIds && recommendedTeaIds.includes(tea.id));
-						const reward = getTeaRewardPreview(tea);
-						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							disabled: !unlocked,
-							onClick: () => onSelectAndStart(tea),
-							initial: {
-								opacity: 0,
-								y: 12,
-								scale: .97
-							},
-							animate: {
-								opacity: unlocked ? 1 : .78,
-								y: 0,
-								scale: 1
-							},
-							transition: {
-								delay: Math.min(idx * .03, .18),
-								type: "spring",
-								stiffness: 380,
-								damping: 26
-							},
-							whileHover: unlocked ? {
-								scale: 1.015,
-								y: -1
-							} : void 0,
-							whileTap: unlocked ? { scale: .96 } : { x: [
-								0,
-								-3,
-								3,
-								0
-							] },
-							className: `flex w-full items-center justify-between gap-3 rounded-2xl border-[1.5px] px-3.5 py-2.5 text-left ${!unlocked ? "border-[#DCD9CE] bg-[#F2EFE6] cursor-not-allowed" : isSelected ? "border-[#4D9256] bg-[#F6FBF3] shadow-xs" : "border-[#C9DFBE] bg-white hover:border-[#6EA86F] hover:bg-[#F9FCF7]"}`,
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "relative shrink-0",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaVesselIcon, {
-										tea,
-										locked: !unlocked
-									}), !unlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "absolute -bottom-0.5 -right-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#3A403B] text-white",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, {
-											className: "h-3 w-3",
-											"aria-hidden": "true"
-										})
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "min-w-0 flex-1",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "font-display text-sm sm:text-base font-bold text-[#255F30] truncate",
-											children: tea.name
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "mt-0.5 text-xs text-[#6B736A] truncate",
-											children: unlocked ? `${tea.idealTempLabel} · แช่ ${tea.idealSteepMin}–${tea.idealSteepMax} วิ · ${getEquipmentInfo(tea.equipmentId).name}` : `ปลดล็อกที่ Lv.${tea.unlockLevel}`
-										}),
-										unlocked && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-											className: "mt-0.5 text-[11px] text-[#4C5C4F] truncate",
-											children: ["วัตถุดิบ: ", tea.baseIngredients.join(" · ")]
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: "mt-1 flex items-center gap-1.5",
-											children: isGuestMatch ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "inline-block rounded-full bg-[#2E6F40] px-2.5 py-0.5 text-[11px] font-semibold text-white",
-												children: "แขกกำลังสั่ง"
-											}) : tea.unlockLevel >= 4 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-												className: "inline-block rounded-full bg-[#B95B24] px-2.5 py-0.5 text-[11px] font-semibold text-white",
-												children: ["สูตรพิเศษ Lv.", tea.unlockLevel]
-											}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "inline-block rounded-full bg-[#2B2E29] px-2.5 py-0.5 text-[11px] font-medium text-[#F3F1EC]",
-												children: tea.categoryLabel
-											})
-										})
-									]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "text-right shrink-0 font-display",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "text-sm sm:text-base font-bold text-[#2E6B38] leading-tight",
-										children: [
-											"+",
-											reward.warmth,
-											" แต้ม"
-										]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "text-xs sm:text-sm font-bold text-[#2E6B38] leading-tight mt-0.5",
-										children: [
-											"+",
-											reward.xp,
-											" XP"
-										]
-									})]
-								})
-							]
-						}, `${categoryFilter}-${tea.id}`);
-					})
+					className: "flex-1 overflow-y-auto px-4 pb-4",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+						initial: {
+							opacity: 0,
+							y: 6
+						},
+						animate: {
+							opacity: 1,
+							y: 0
+						},
+						transition: {
+							duration: .18,
+							ease: MODAL_EASE$1
+						},
+						className: "space-y-2.5 will-change-transform",
+						children: visibleTeas.map((tea) => {
+							const unlocked = isTeaUnlocked(tea, playerLevel);
+							const isSelected = tea.id === selectedTeaId;
+							const isGuestMatch = unlocked && Boolean(recommendedTeaIds && recommendedTeaIds.includes(tea.id));
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaRecipeRow, {
+								tea,
+								unlocked,
+								isSelected,
+								isGuestMatch,
+								onSelectAndStart
+							}, tea.id);
+						})
+					}, categoryFilter)
 				})
 			]
 		})
 	});
-};
+});
 // src/components/BrewingStation.tsx
 var MAX_STEEP_DISPLAY = 8;
 var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset, settings, onBrewComplete }) => {
@@ -64020,13 +64482,13 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		const start = performance.now();
 		steepIntervalRef.current = window.setInterval(() => {
 			const elapsed = (performance.now() - start) / 1e3;
-			const capped = Math.min(10, elapsed);
-			setSteepSeconds(capped);
+			const capped = Math.min(10, Math.round(elapsed * 10) / 10);
+			setSteepSeconds((prev) => prev === capped ? prev : capped);
 			if (!sweetSpotChimedRef.current && capped >= selectedTea.idealSteepMin && capped <= selectedTea.idealSteepMax) {
 				sweetSpotChimedRef.current = true;
 				soundEngine.playSweetSpotChime();
 			}
-		}, 80);
+		}, 100);
 		return () => {
 			if (steepIntervalRef.current) {
 				window.clearInterval(steepIntervalRef.current);
@@ -64034,7 +64496,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 			}
 		};
 	}, [step, selectedTea]);
-	const handleSelectAndStartTea = (tea) => {
+	const handleSelectAndStartTea = (0, import_react.useCallback)((tea) => {
 		if (!isTeaUnlocked(tea, playerLevel)) {
 			soundEngine.playTap();
 			return;
@@ -64045,8 +64507,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setWaterTemp(tea.idealTemp);
 		setSelectorOpen(false);
 		setStep("POUR_WATER");
-	};
-	const handlePourWater = () => {
+	}, [playerLevel]);
+	const handlePourWater = (0, import_react.useCallback)(() => {
 		if (isPouring || step !== "POUR_WATER") return;
 		soundEngine.unlock();
 		soundEngine.playPourWater();
@@ -64067,13 +64529,13 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 				setIsPouring(false);
 				setStep("STEEP_TEA");
 			}
-		}, 30);
-	};
-	const handleFinishSteep = () => {
+		}, 34);
+	}, [isPouring, step]);
+	const handleFinishSteep = (0, import_react.useCallback)(() => {
 		if (step !== "STEEP_TEA") return;
 		soundEngine.playTap();
 		setStep("ADD_TOPPING");
-	};
+	}, [step]);
 	const handleToggleTopping = (id) => {
 		soundEngine.playTap();
 		setToppings((prev) => {
@@ -64181,8 +64643,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
 	};
 	const strengthLabel = getStrengthLabel(selectedTea, steepSeconds);
-	const activeEquipment = getEquipmentInfo(selectedTea.equipmentId);
-	const steepProgressPct = Math.min(100, steepSeconds / MAX_STEEP_DISPLAY * 100);
+	const activeEquipment = (0, import_react.useMemo)(() => getEquipmentInfo(selectedTea.equipmentId), [selectedTea.equipmentId]);
+	const steepProgressRatio = Math.min(1, steepSeconds / MAX_STEEP_DISPLAY);
 	const sweetMinPct = selectedTea.idealSteepMin / MAX_STEEP_DISPLAY * 100;
 	const sweetMaxPct = selectedTea.idealSteepMax / MAX_STEEP_DISPLAY * 100;
 	const isColorMagic = selectedTea.id === "butterfly-pea" && toppings.includes("lemon");
@@ -64232,12 +64694,16 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "mt-1 h-1.5 w-20 sm:w-28 overflow-hidden rounded-full bg-[#1F2823]/12",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-									className: "h-full rounded-full bg-[#2E6F40]",
-									animate: { width: `${Math.round(xpInfo.progressRatio * 100)}%` },
+									className: "h-full w-full origin-left rounded-full bg-[#2E6F40]",
+									animate: { scaleX: Math.max(.02, xpInfo.progressRatio) },
 									transition: {
-										type: "spring",
-										stiffness: 260,
-										damping: 24
+										duration: .35,
+										ease: [
+											.16,
+											1,
+											.3,
+											1
+										]
 									}
 								})
 							})]
@@ -64408,7 +64874,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step !== "SELECT_TEA" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 				initial: {
 					opacity: 0,
-					y: 40
+					y: 28
 				},
 				animate: {
 					opacity: 1,
@@ -64416,21 +64882,29 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 				},
 				exit: {
 					opacity: 0,
-					y: 40
+					y: 24
 				},
 				transition: {
-					type: "spring",
-					stiffness: 340,
-					damping: 30
+					duration: .24,
+					ease: [
+						.16,
+						1,
+						.3,
+						1
+					]
 				},
-				className: "pointer-events-none fixed inset-x-0 bottom-0 z-20 flex flex-col items-center safe-px safe-pb",
+				className: "pointer-events-none fixed inset-x-0 bottom-0 z-20 flex flex-col items-center safe-px safe-pb will-change-transform",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-					className: "flex w-full flex-col items-center",
+					className: "flex w-full flex-col items-center will-change-transform",
 					animate: { y: dockCollapsed ? "calc(100% - 36px)" : 0 },
 					transition: {
-						type: "spring",
-						stiffness: 360,
-						damping: 32
+						duration: .24,
+						ease: [
+							.16,
+							1,
+							.3,
+							1
+						]
 					},
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
@@ -64634,8 +65108,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 													width: `${sweetMaxPct - sweetMinPct}%`
 												}
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-												className: "h-full rounded-full bg-[#C9822B] transition-[width] duration-75",
-												style: { width: `${steepProgressPct}%` }
+												className: "h-full w-full origin-left rounded-full bg-[#C9822B] transition-transform duration-100 will-change-transform",
+												style: { transform: `scaleX(${steepProgressRatio})` }
 											})]
 										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
@@ -64821,8 +65295,85 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.5.0";
+var CURRENT_APP_VERSION = "2.8.0";
 var VERSION_HISTORY = [
+	{
+		version: "2.8.0",
+		previousVersion: "2.7.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "ความละเอียด HD / Full HD+, แก้บั๊กเทกซ์เจอร์ขาดเวลาหมุนซ้าย-ขวา & รองรับมือถือ RAM 2 GB",
+		summary: "แก้บั๊กพื้นผิวและโมเดล 3 มิติขาดหายหรือซ้อนทับเวลาหมุนกล้องซ้าย-ขวาหรือรินชา เพิ่มตัวเลือกความละเอียดหน้าจอ HD, HD+, Full HD, Full HD+ ในหน้าตั้งค่า และเพิ่มโหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB",
+		changes: [
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "แก้บั๊ก Texture ขาดหายและแหว่งเวลาหมุนกล้องซ้าย-ขวา",
+				detail: "ปรับขนาดน้ำชาให้พอดีกับชามมัทฉะ แยก Render Order ของแก้วใสกับชั้นน้ำชา/ไซรัปไม่ให้พลิกซ้อนทับเวลาหันมุมกล้อง ปิด Frustum Culling บนวัตถุที่ขยับและต้นไผ่ และปิด Mipmap บนชิป Mali-G57 เพื่อป้องกันเทกซ์เจอร์หายเป็นจุด"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เลือกความละเอียดหน้าจอ 3D ได้ 4 ระดับ (HD / HD+ / Full HD / Full HD+)",
+				detail: "ปรับความคมชัดได้ตรงตามหน้าจอมือถือในหน้าตั้งค่า พร้อมปุ่มปรับจูนสำเร็จรูปทั้งสำหรับ realme Note 50 และมือถือ RAM 2 GB"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "เพิ่มโหมดรองรับมือถือที่มี RAM 2 GB โดยเฉพาะ",
+				detail: "ตรวจจับเครื่อง RAM ≤ 2 GB อัตโนมัติ ลดขนาดเทกซ์เจอร์และจำนวนเหลี่ยมโมเดล 3 มิติ ปิดเอฟเฟกต์พาร์ติเคิล/เงาที่ไม่จำเป็น และใช้ content-visibility ในรายการชาเพื่อให้เล่นได้ลื่นไม่เด้ง"
+			}
+		]
+	},
+	{
+		version: "2.7.0",
+		previousVersion: "2.6.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "อัปเดตเวอร์ชั่นตรงกับเบราว์เซอร์, จูน Unisoc T612 / Mali-G57 ไร้บั๊กเทกซ์เจอร์ & FPS ตามจอ",
+		summary: "เพิ่มระบบตรวจจับและอัปเดตเวอร์ชั่นภายในแอปให้ตรงกับเวอร์ชั่นบน Browser ปัจจุบัน ปรับตัวเลือก FPS ตามอัตรารีเฟรชหน้าจอจริง (60/90/120 Hz) เพิ่มพลังและแก้บั๊ก Texture บนชิป Unisoc Tiger T612 และจีพียู ARM Mali-G57 พร้อมทำให้เข้าหน้าเมนูและตั้งค่าจากหน้าเริ่มต้นลื่นขึ้นไม่กระตุก",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "อัปเดตเวอร์ชั่นในตัวแอปให้ตรงกับ Browser ปัจจุบันได้ทันที",
+				detail: "ตรวจสอบเวอร์ชั่นจริงจากเซิร์ฟเวอร์ Browser อัตโนมัติ พร้อมปุ่มกดอัปเดตและล้างแคชในตัวแอปหรือแอป Android เพื่อให้ได้เวอร์ชั่นล่าสุดตรงกันเสมอ"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "ปรับตัวเลือก FPS สูงสุดตาม Refresh Rate จริงของหน้าจอมือถือ",
+				detail: "ตรวจจับ Hz จริงของหน้าจอแต่ละเครื่องอัตโนมัติ จอ 60 Hz ปรับได้ 30/60 FPS, จอ 90 Hz ปรับได้ 30/60/90 FPS และจอ 120 Hz ปรับได้ครบ 30/60/90/120 FPS"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "จูน Unisoc Tiger T612 & ARM Mali-G57 แก้บั๊ก Texture & เพิ่มความแรง",
+				detail: "เปลี่ยนความแม่นยำเชดเดอร์เป็น highp แก้บั๊ก UV/PMREM ใช้ MeshStandardMaterial น้ำหนักเบาแทน Physical Shader ซ้อน ปิด Mipmap Bleed ของเงาสัมผัส/ไอน้ำ และลดการอัปเดตสี/วัตถุซ้ำบน CPU เพื่อดันเฟรมเรตให้นิ่งบน realme Note 50"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เข้าเมนูและหน้าตั้งค่าจากหน้าเริ่มต้นเกมลื่นขึ้นไม่กระตุก",
+				detail: "ตัด CSS blur ที่กินสเปกบนหน้าแรกออก เปลี่ยนแสงแดดเป็นเกรเดียนต์บริสุทธิ์ แคชสไปรต์ละอองแสง และพักพาร์ติเคิลพื้นหลังทันทีที่เปิดหน้าต่างเมนูหรือตั้งค่า"
+			}
+		]
+	},
+	{
+		version: "2.6.0",
+		previousVersion: "2.5.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "เข้าเต็มหน้าจออัตโนมัติ, อนิเมชั่นลื่นไหล และลดการกินแรมในหน้าชงชา",
+		summary: "ตั้งค่าเริ่มต้นเป็นโหมดเต็มหน้าจอทันที ปรับความนุ่มนวลของอนิเมชั่นตอนเข้าเกม หน้าเลือกชา เมนูขีด 3 ขีด สมุดชา และรีดการใช้แรมของสถานีชงชา 3 มิติลงอย่างมาก",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "โหมดเต็มหน้าจอ (Full Screen) เป็นค่าเริ่มต้นอัตโนมัติ",
+				detail: "เกมจะขยายเต็มหน้าจออัตโนมัติเมื่อเปิดเกมหรือแตะครั้งแรก และจำค่าการปิดไว้หากผู้เล่นกดออกเอง"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "อนิเมชั่นเข้าเกม เลือกชา ขีด 3 ขีด และสมุดชาลื่นละมุนขึ้น",
+				detail: "เปลี่ยนการเลื่อนลิ้นชักและหน้าต่างทั้งหมดให้วิ่งบน GPU Compositor เต็มรูปแบบ ลดการเบลอทับฉาก 3 มิติ และลดการเรียงตัวทีละใบที่ทำให้กระตุก"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "Optimize สถานีชงชา 3 มิติให้กินแรมน้อยลง",
+				detail: "แก้บั๊กรีเซ็ตขนาดเฟรมบัฟเฟอร์ระหว่างรินน้ำและแช่ชา แชร์บัฟเฟอร์โมเดล 3 มิติซ้ำ ลดขนาดเทกซ์เจอร์บนมือถือลง ~75% และคืนแรมสภาพแวดล้อม 3 มิติทันทีหลังโหลด"
+			}
+		]
+	},
 	{
 		version: "2.5.0",
 		previousVersion: "2.4.0",
@@ -65123,9 +65674,18 @@ var CAMERA_OPTIONS = [
 var TAP_SPRING$5 = {
 	type: "spring",
 	stiffness: 440,
-	damping: 24
+	damping: 28
 };
-var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCameraPresetChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates }) => {
+var DRAWER_TRANSITION = {
+	duration: .24,
+	ease: [
+		.16,
+		1,
+		.3,
+		1
+	]
+};
+var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cameraPreset, onCameraPresetChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [open, setOpen] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
@@ -65150,26 +65710,31 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 		setOpen(false);
 		onNavigate(target);
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 		type: "button",
 		onClick: handleToggleOpen,
-		whileHover: { scale: 1.05 },
-		whileTap: { scale: .9 },
+		whileTap: { scale: .92 },
 		transition: TAP_SPRING$5,
 		"aria-label": "เปิดเมนู",
 		"aria-expanded": open,
 		style: { right: "max(0.75rem, env(safe-area-inset-right))" },
-		className: "fixed top-2.5 sm:top-3.5 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6]/92 text-[#1F2823] shadow-sm backdrop-blur-xs hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40]",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
+		className: "fixed top-2.5 sm:top-3.5 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6]/96 text-[#1F2823] shadow-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40] will-change-transform",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
 			className: "h-5 w-5",
 			"aria-hidden": "true"
-		})
+		}), updateAvailable && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			"aria-label": "มีอัปเดตใหม่",
+			className: "absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[#2E6F40]"
+		})]
 	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 		initial: { opacity: 0 },
 		animate: { opacity: 1 },
 		exit: { opacity: 0 },
-		transition: { duration: .2 },
-		className: "fixed inset-0 z-50 flex justify-end bg-black/45 backdrop-blur-[1px]",
+		transition: {
+			duration: .18,
+			ease: "easeOut"
+		},
+		className: "fixed inset-0 z-50 flex justify-end bg-black/42",
 		onClick: handleClose,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.aside, {
 			role: "dialog",
@@ -65178,13 +65743,10 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 			initial: { x: "100%" },
 			animate: { x: 0 },
 			exit: { x: "100%" },
-			transition: {
-				type: "spring",
-				stiffness: 360,
-				damping: 32
-			},
+			transition: DRAWER_TRANSITION,
 			onClick: (e) => e.stopPropagation(),
-			className: "flex h-dvh w-full max-w-[320px] sm:max-w-[360px] flex-col border-l border-[#1F2823]/12 bg-[#FAF8F3] text-[#1F2823] shadow-2xl",
+			className: "flex h-dvh w-full max-w-[320px] sm:max-w-[360px] flex-col border-l border-[#1F2823]/12 bg-[#FAF8F3] text-[#1F2823] shadow-2xl will-change-transform",
+			style: { contain: "layout style paint" },
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center justify-between gap-3 border-b border-[#1F2823]/10 px-4 py-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
@@ -65211,8 +65773,7 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 					type: "button",
 					onClick: handleClose,
-					whileHover: { scale: 1.06 },
-					whileTap: { scale: .9 },
+					whileTap: { scale: .92 },
 					transition: TAP_SPRING$5,
 					"aria-label": "ปิดเมนู",
 					className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] hover:text-[#1F2823]",
@@ -65224,267 +65785,206 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex-1 overflow-y-auto p-4 space-y-5",
 				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						initial: {
-							opacity: 0,
-							x: 14
-						},
-						animate: {
-							opacity: 1,
-							x: 0
-						},
-						transition: {
-							delay: .04,
-							duration: .2
-						},
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-xs font-semibold text-[#5A655D] mb-2",
-							children: "ไปยังหน้าต่างๆ"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
-							className: "grid grid-cols-2 gap-2",
-							"aria-label": "เมนูหลัก",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$5,
-									onClick: () => go("TITLE_MENU"),
-									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "TITLE_MENU" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(House, {
-										className: "h-4 w-4 text-[#2E6F40] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หน้าแรก" })]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$5,
-									onClick: () => go("BREWING"),
-									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "BREWING" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
-										className: "h-4 w-4 text-[#2E6F40] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมชงชา 3D" })]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$5,
-									onClick: () => go("JOURNAL"),
-									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "JOURNAL" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
-										className: "h-4 w-4 text-[#2E6F40] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชา" })]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$5,
-									onClick: () => go("HOW_TO_PLAY"),
-									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "HOW_TO_PLAY" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
-										className: "h-4 w-4 text-[#7D5A3C] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
-								})
-							]
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						initial: {
-							opacity: 0,
-							x: 14
-						},
-						animate: {
-							opacity: 1,
-							x: 0
-						},
-						transition: {
-							delay: .08,
-							duration: .2
-						},
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-xs font-semibold text-[#5A655D] mb-2",
-							children: "โหมดการชง"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "grid grid-cols-2 gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-xs font-semibold text-[#5A655D] mb-2",
+						children: "ไปยังหน้าต่างๆ"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
+						className: "grid grid-cols-2 gap-2",
+						"aria-label": "เมนูหลัก",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
-								whileTap: { scale: .95 },
+								whileTap: { scale: .96 },
 								transition: TAP_SPRING$5,
-								onClick: () => {
-									soundEngine.unlock();
-									soundEngine.playTap();
-									onModeChange("guest");
-								},
-								className: `flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border px-3 text-xs font-medium ${mode === "guest" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#4A534D]"}`,
+								onClick: () => go("TITLE_MENU"),
+								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "TITLE_MENU" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(House, {
+									className: "h-4 w-4 text-[#2E6F40] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หน้าแรก" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$5,
+								onClick: () => go("BREWING"),
+								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "BREWING" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
-									className: "h-3.5 w-3.5 text-[#2E6F40]",
+									className: "h-4 w-4 text-[#2E6F40] shrink-0",
 									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รับรองแขก" })]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมชงชา 3D" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$5,
+								onClick: () => go("JOURNAL"),
+								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "JOURNAL" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
+									className: "h-4 w-4 text-[#2E6F40] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชา" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$5,
+								onClick: () => go("HOW_TO_PLAY"),
+								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "HOW_TO_PLAY" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
+									className: "h-4 w-4 text-[#7D5A3C] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
+							})
+						]
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-xs font-semibold text-[#5A655D] mb-2",
+						children: "โหมดการชง"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid grid-cols-2 gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .96 },
+							transition: TAP_SPRING$5,
+							onClick: () => {
+								soundEngine.unlock();
+								soundEngine.playTap();
+								onModeChange("guest");
+							},
+							className: `flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border px-3 text-xs font-medium ${mode === "guest" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#4A534D]"}`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+								className: "h-3.5 w-3.5 text-[#2E6F40]",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รับรองแขก" })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .96 },
+							transition: TAP_SPRING$5,
+							onClick: () => {
+								soundEngine.unlock();
+								soundEngine.playTap();
+								onModeChange("free");
+							},
+							className: `flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border px-3 text-xs font-medium ${mode === "free" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#4A534D]"}`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+								className: "h-3.5 w-3.5 text-[#B87324]",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงตามใจ" })]
+						})]
+					})] }),
+					screen === "BREWING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
+						className: "flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera$1, {
+							className: "h-3.5 w-3.5",
+							"aria-hidden": "true"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมกล้อง 3 มิติ" })]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "grid grid-cols-3 gap-1.5 rounded-xl border border-[#1F2823]/10 bg-white p-1",
+						children: CAMERA_OPTIONS.map((cam) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .95 },
+							onClick: () => {
+								soundEngine.playTap();
+								onCameraPresetChange(cam.id);
+							},
+							className: "relative min-h-[42px] rounded-lg text-xs font-medium",
+							children: [cameraPreset === cam.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+								layoutId: "drawer-camera-pill",
+								transition: {
+									type: "spring",
+									stiffness: 420,
+									damping: 32
+								},
+								className: "absolute inset-0 rounded-lg bg-[#233029]"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: `relative z-10 ${cameraPreset === cam.id ? "text-[#F3F1EC]" : "text-[#4A534D]"}`,
+								children: cam.label
+							})]
+						}, cam.id))
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-xs font-semibold text-[#5A655D] mb-2",
+						children: "เสียงและบรรยากาศ"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "space-y-2.5 rounded-xl border border-[#1F2823]/10 bg-white p-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center justify-between gap-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-xs sm:text-sm font-medium text-[#1F2823]",
+								children: "เสียงเอฟเฟกต์"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 								type: "button",
 								whileTap: { scale: .95 },
 								transition: TAP_SPRING$5,
 								onClick: () => {
 									soundEngine.unlock();
-									soundEngine.playTap();
-									onModeChange("free");
+									onToggleMute();
 								},
-								className: `flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border px-3 text-xs font-medium ${mode === "free" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#4A534D]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
-									className: "h-3.5 w-3.5 text-[#B87324]",
+								className: `inline-flex min-h-[42px] items-center gap-1.5 rounded-xl px-3 text-xs font-medium ${isMuted ? "border border-[#1F2823]/15 bg-[#F3F1EC] text-[#5A655D]" : "bg-[#233029] text-white"}`,
+								children: isMuted ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(VolumeX, {
+									className: "h-4 w-4",
 									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงตามใจ" })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปิดเสียงอยู่" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
+									className: "h-4 w-4",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเสียง" })] })
 							})]
-						})]
-					}),
-					screen === "BREWING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						initial: {
-							opacity: 0,
-							x: 14
-						},
-						animate: {
-							opacity: 1,
-							x: 0
-						},
-						transition: {
-							delay: .12,
-							duration: .2
-						},
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-							className: "flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera$1, {
-								className: "h-3.5 w-3.5",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมกล้อง 3 มิติ" })]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "grid grid-cols-3 gap-1.5 rounded-xl border border-[#1F2823]/10 bg-white p-1",
-							children: CAMERA_OPTIONS.map((cam) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .94 },
-								onClick: () => {
-									soundEngine.playTap();
-									onCameraPresetChange(cam.id);
+							className: "grid grid-cols-3 gap-1.5 border-t border-[#1F2823]/8 pt-2.5",
+							children: [
+								{
+									id: "none",
+									label: "เงียบสงบ",
+									icon: null
 								},
-								className: "relative min-h-[42px] rounded-lg text-xs font-medium",
-								children: [cameraPreset === cam.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-									layoutId: "drawer-camera-pill",
+								{
+									id: "rain",
+									label: "ฝนตก",
+									icon: "rain"
+								},
+								{
+									id: "breeze",
+									label: "ลมไผ่",
+									icon: "breeze"
+								}
+							].map((opt) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .95 },
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									onAmbienceChange(opt.id);
+								},
+								className: "relative inline-flex min-h-[42px] items-center justify-center gap-1 rounded-lg px-2 text-xs font-medium",
+								children: [ambience === opt.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+									layoutId: "drawer-ambience-pill",
 									transition: {
 										type: "spring",
 										stiffness: 420,
-										damping: 30
+										damping: 32
 									},
-									className: "absolute inset-0 rounded-lg bg-[#233029]"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `relative z-10 ${cameraPreset === cam.id ? "text-[#F3F1EC]" : "text-[#4A534D]"}`,
-									children: cam.label
+									className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: `relative z-10 inline-flex items-center gap-1 ${ambience === opt.id ? "text-white" : "text-[#4A534D]"}`,
+									children: [
+										opt.icon === "rain" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudRain, {
+											className: "h-3.5 w-3.5 shrink-0",
+											"aria-hidden": "true"
+										}),
+										opt.icon === "breeze" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wind, {
+											className: "h-3.5 w-3.5 shrink-0",
+											"aria-hidden": "true"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: opt.label })
+									]
 								})]
-							}, cam.id))
+							}, opt.id))
 						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						initial: {
-							opacity: 0,
-							x: 14
-						},
-						animate: {
-							opacity: 1,
-							x: 0
-						},
-						transition: {
-							delay: .16,
-							duration: .2
-						},
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-xs font-semibold text-[#5A655D] mb-2",
-							children: "เสียงและบรรยากาศ"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2.5 rounded-xl border border-[#1F2823]/10 bg-white p-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center justify-between gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-xs sm:text-sm font-medium text-[#1F2823]",
-									children: "เสียงเอฟเฟกต์"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
-									type: "button",
-									whileTap: { scale: .94 },
-									transition: TAP_SPRING$5,
-									onClick: () => {
-										soundEngine.unlock();
-										onToggleMute();
-									},
-									className: `inline-flex min-h-[42px] items-center gap-1.5 rounded-xl px-3 text-xs font-medium ${isMuted ? "border border-[#1F2823]/15 bg-[#F3F1EC] text-[#5A655D]" : "bg-[#233029] text-white"}`,
-									children: isMuted ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(VolumeX, {
-										className: "h-4 w-4",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปิดเสียงอยู่" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, {
-										className: "h-4 w-4",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเสียง" })] })
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-3 gap-1.5 border-t border-[#1F2823]/8 pt-2.5",
-								children: [
-									{
-										id: "none",
-										label: "เงียบสงบ",
-										icon: null
-									},
-									{
-										id: "rain",
-										label: "ฝนตก",
-										icon: "rain"
-									},
-									{
-										id: "breeze",
-										label: "ลมไผ่",
-										icon: "breeze"
-									}
-								].map((opt) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .94 },
-									onClick: () => {
-										soundEngine.unlock();
-										soundEngine.playTap();
-										onAmbienceChange(opt.id);
-									},
-									className: "relative inline-flex min-h-[42px] items-center justify-center gap-1 rounded-lg px-2 text-xs font-medium",
-									children: [ambience === opt.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-										layoutId: "drawer-ambience-pill",
-										transition: {
-											type: "spring",
-											stiffness: 420,
-											damping: 30
-										},
-										className: "absolute inset-0 rounded-lg bg-[#2E6F40]"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: `relative z-10 inline-flex items-center gap-1 ${ambience === opt.id ? "text-white" : "text-[#4A534D]"}`,
-										children: [
-											opt.icon === "rain" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudRain, {
-												className: "h-3.5 w-3.5 shrink-0",
-												"aria-hidden": "true"
-											}),
-											opt.icon === "breeze" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wind, {
-												className: "h-3.5 w-3.5 shrink-0",
-												"aria-hidden": "true"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: opt.label })
-										]
-									})]
-								}, opt.id))
-							})]
-						})]
-					}),
+					})] }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 						type: "button",
-						whileHover: { scale: 1.02 },
-						whileTap: { scale: .95 },
+						whileTap: { scale: .96 },
 						transition: TAP_SPRING$5,
 						onClick: () => {
 							soundEngine.playTap();
@@ -65506,24 +66006,11 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PWAInstallButton, { compact: true }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						initial: {
-							opacity: 0,
-							x: 14
-						},
-						animate: {
-							opacity: 1,
-							x: 0
-						},
-						transition: {
-							delay: .2,
-							duration: .2
-						},
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "border-t border-[#1F2823]/10 pt-3 space-y-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
-							whileHover: { scale: 1.02 },
-							whileTap: { scale: .95 },
+							whileTap: { scale: .96 },
 							transition: TAP_SPRING$5,
 							onClick: () => {
 								soundEngine.unlock();
@@ -65531,7 +66018,7 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 								setOpen(false);
 								onOpenUpdates();
 							},
-							className: "flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 py-2 text-left hover:bg-[#F3F0E8]",
+							className: `flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border px-3.5 py-2 text-left ${updateAvailable ? "border-[#2E6F40]/40 bg-[#EDF5EE] hover:bg-[#E2EFE4]" : "border-[#1F2823]/12 bg-white hover:bg-[#F3F0E8]"}`,
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 								className: "flex items-center gap-2.5 min-w-0",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -65544,14 +66031,10 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 									className: "min-w-0",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-sm font-bold text-[#1F2823] truncate",
-										children: "เช็คอัปเดตเวอร์ชั่น"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-[11px] text-[#5A655D] truncate",
-										children: [
-											"เวอร์ชั่น v",
-											"2.5.0",
-											" · ดูสิ่งที่เพิ่มใหม่"
-										]
+										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.8.0 · ดูสิ่งที่เพิ่มใหม่`
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -65560,8 +66043,7 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
-							whileHover: { scale: 1.02 },
-							whileTap: { scale: .95 },
+							whileTap: { scale: .96 },
 							transition: TAP_SPRING$5,
 							onClick: () => {
 								soundEngine.unlock();
@@ -65585,7 +66067,7 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 										children: "การตั้งค่า"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-[11px] text-[#4A5E4E] truncate",
-										children: "เสียง กราฟิก 3 มิติ & สูงสุด 120 FPS"
+										children: "เสียง กราฟิก 3 มิติ & ค่ารีเฟรชเรทตามจอ"
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -65598,7 +66080,7 @@ var CornerMenu = ({ screen, xp, level, mode, onModeChange, cameraPreset, onCamer
 			})]
 		})
 	}) })] });
-};
+});
 // src/components/HowToPlay.tsx
 var TAP_SPRING$4 = {
 	type: "spring",
@@ -65963,6 +66445,12 @@ var TAP_SPRING$3 = {
 	stiffness: 430,
 	damping: 26
 };
+var PANEL_EASE$1 = [
+	.16,
+	1,
+	.3,
+	1
+];
 var FPS_OPTIONS = [
 	{
 		value: 30,
@@ -66001,20 +66489,24 @@ var QUALITY_OPTIONS = [
 ];
 var RESOLUTION_OPTIONS = [
 	{
-		value: "0.75",
-		label: "0.75x"
+		value: "hd",
+		label: "HD",
+		hint: "720p"
 	},
 	{
-		value: "1.0",
-		label: "1.0x"
+		value: "hd-plus",
+		label: "HD+",
+		hint: "900p"
 	},
 	{
-		value: "1.5",
-		label: "1.5x"
+		value: "fhd",
+		label: "Full HD",
+		hint: "1080p"
 	},
 	{
-		value: "native",
-		label: "เต็มจอ"
+		value: "fhd-plus",
+		label: "Full HD+",
+		hint: "1080p+"
 	}
 ];
 var AMBIENCE_OPTIONS = [
@@ -66041,12 +66533,19 @@ var OPTIMIZATION_OPTIONS = [
 		label: "realme Note 50"
 	},
 	{
+		value: "low-ram-2gb",
+		label: "RAM 2 GB"
+	},
+	{
 		value: "standard",
 		label: "มาตรฐาน"
 	}
 ];
-var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSettings, onResetSettings, onClose }) => {
+var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshRate, onRecheckRefreshRate, onToggleFullscreen, onUpdateSettings, onResetSettings, onClose }) => {
 	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+	const allowedFpsValues = getAllowedFpsOptions(detectedRefreshRate);
+	const visibleFpsOptions = FPS_OPTIONS.filter((opt) => allowedFpsValues.includes(opt.value));
+	const fpsGridColsClass = visibleFpsOptions.length <= 2 ? "grid-cols-2" : visibleFpsOptions.length === 3 ? "grid-cols-3" : "grid-cols-4";
 	(0, import_react.useEffect)(() => {
 		const onKeyDown = (e) => {
 			if (e.key === "Escape") {
@@ -66061,21 +66560,21 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 		soundEngine.playTap();
 		if (quality === "low") onUpdateSettings({
 			graphicsQuality: "low",
-			resolutionScale: "0.75",
+			resolutionScale: "hd",
 			shadowsEnabled: false,
 			antialiasEnabled: false,
 			particlesEnabled: false
 		});
 		else if (quality === "medium") onUpdateSettings({
 			graphicsQuality: "medium",
-			resolutionScale: "1.0",
+			resolutionScale: "hd-plus",
 			shadowsEnabled: true,
-			antialiasEnabled: true,
+			antialiasEnabled: false,
 			particlesEnabled: true
 		});
 		else onUpdateSettings({
 			graphicsQuality: "high",
-			resolutionScale: "native",
+			resolutionScale: "fhd-plus",
 			shadowsEnabled: true,
 			antialiasEnabled: true,
 			particlesEnabled: true
@@ -66087,7 +66586,7 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 		"aria-labelledby": "settings-screen-title",
 		initial: {
 			opacity: 0,
-			y: 24
+			y: 14
 		},
 		animate: {
 			opacity: 1,
@@ -66095,21 +66594,20 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 		},
 		exit: {
 			opacity: 0,
-			y: 20
+			y: 10
 		},
 		transition: {
-			type: "spring",
-			stiffness: 360,
-			damping: 30
+			duration: .2,
+			ease: PANEL_EASE$1
 		},
-		className: "fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823]",
+		style: { contain: "layout style paint" },
+		className: "fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823] will-change-transform",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-			className: "sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3]/96 safe-px py-2.5 sm:py-3.5",
+			className: "sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3] safe-px py-2.5 sm:py-3.5",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-3 min-w-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 					type: "button",
-					whileHover: { scale: 1.03 },
 					whileTap: { scale: .92 },
 					transition: TAP_SPRING$3,
 					onClick: () => {
@@ -66128,14 +66626,17 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 						id: "settings-screen-title",
 						className: "font-display text-base sm:text-xl font-bold text-[#1F2823] truncate",
 						children: "การตั้งค่าเกม"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "hidden sm:block text-xs text-[#5A655D] truncate",
-						children: "ปรับแต่งเสียง ระบบภาพ 3 มิติ และความลื่นไหลสูงสุด 120 FPS"
+						children: [
+							"ปรับแต่งเสียง ระบบภาพ 3 มิติ และค่า FPS สูงสุดตามหน้าจอเครื่อง (",
+							detectedRefreshRate,
+							" Hz)"
+						]
 					})]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 				type: "button",
-				whileHover: { scale: 1.03 },
 				whileTap: { scale: .93 },
 				transition: TAP_SPRING$3,
 				onClick: () => {
@@ -66162,19 +66663,7 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 			className: "flex-1 overflow-y-auto safe-px py-4 sm:py-6 safe-pb",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 sm:gap-5",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.section, {
-					initial: {
-						opacity: 0,
-						y: 12
-					},
-					animate: {
-						opacity: 1,
-						y: 0
-					},
-					transition: {
-						delay: .04,
-						duration: .22
-					},
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 					className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -66348,19 +66837,7 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 							})]
 						})
 					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.section, {
-					initial: {
-						opacity: 0,
-						y: 12
-					},
-					animate: {
-						opacity: 1,
-						y: 0
-					},
-					transition: {
-						delay: .08,
-						duration: .22
-					},
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 					className: "flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -66371,30 +66848,51 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 								className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
 								children: "กราฟิกและความลื่นไหล (FPS)"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "text-xs text-[#5A655D]",
-								children: "ปรับคุณภาพฉาก 3 มิติ และอัตรารีเฟรชสูงสุด 120 เฟรมต่อวินาที"
+								children: [
+									"หน้าจอของคุณรองรับ ",
+									detectedRefreshRate,
+									" Hz · ปรับได้สูงสุด ",
+									detectedRefreshRate,
+									" FPS"
+								]
 							})] })]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "space-y-2",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center justify-between gap-2",
+									className: "flex flex-wrap items-center justify-between gap-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 										className: "inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ค่ารีเฟรชเรท (Max FPS)" })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "font-mono-num text-xs font-bold text-[#2E6F40]",
-										children: [settings.targetFps, " FPS"]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+											"ค่ารีเฟรชเรท (หน้าจอ ",
+											detectedRefreshRate,
+											" Hz)"
+										] })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-2",
+										children: [onRecheckRefreshRate && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+											type: "button",
+											onClick: () => {
+												soundEngine.playTap();
+												onRecheckRefreshRate();
+											},
+											className: "text-[11px] font-medium text-[#5A655D] underline underline-offset-2 hover:text-[#1F2823]",
+											children: ["วัด Hz ใหม่", rawRefreshRate ? ` (${rawRefreshRate}Hz)` : ""]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "font-mono-num text-xs font-bold text-[#2E6F40]",
+											children: [settings.targetFps, " FPS"]
+										})]
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "grid grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
-									children: FPS_OPTIONS.map((fps) => {
+									className: `grid ${fpsGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
+									children: visibleFpsOptions.map((fps) => {
 										const active = settings.targetFps === fps.value;
 										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
@@ -66428,7 +66926,7 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[11px] text-[#5A655D]",
-									children: "รองรับการแสดงผลสูงสุด 120 เฟรมต่อวินาที ตามอัตราการรีเฟรชหน้าจอของอุปกรณ์"
+									children: detectedRefreshRate >= 120 ? "ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS" : detectedRefreshRate >= 90 ? "ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)" : "ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)"
 								})
 							]
 						}),
@@ -66464,11 +66962,17 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "space-y-1.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
-								children: "ความคมชัดในการเรนเดอร์"
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block text-xs sm:text-sm font-medium text-[#1F2823]",
+									children: "ความละเอียดหน้าจอ 3 มิติ"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-[11px] font-semibold text-[#2E6F40]",
+									children: RESOLUTION_OPTIONS.find((r) => r.value === settings.resolutionScale)?.label ?? "HD+"
+								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "grid grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
+								className: "grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
 								children: RESOLUTION_OPTIONS.map((res) => {
 									const active = settings.resolutionScale === res.value;
 									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
@@ -66478,19 +66982,26 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 											soundEngine.playTap();
 											onUpdateSettings({ resolutionScale: res.value });
 										},
-										className: "relative min-h-[42px] rounded-lg px-2 text-xs font-medium",
-										children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-											layoutId: "settings-res-pill",
-											transition: {
-												type: "spring",
-												stiffness: 420,
-												damping: 30
-											},
-											className: "absolute inset-0 rounded-lg bg-white shadow-xs"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: `relative z-10 font-mono-num ${active ? "text-[#1F2823] font-semibold" : "text-[#5A655D]"}`,
-											children: res.label
-										})]
+										className: "relative flex min-h-[46px] flex-col items-center justify-center rounded-lg px-1.5 py-1 text-xs font-medium",
+										children: [
+											active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+												layoutId: "settings-res-pill",
+												transition: {
+													type: "spring",
+													stiffness: 420,
+													damping: 30
+												},
+												className: "absolute inset-0 rounded-lg bg-white shadow-xs"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: `relative z-10 leading-tight ${active ? "text-[#1F2823] font-bold" : "text-[#4A534D]"}`,
+												children: res.label
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: `relative z-10 font-mono-num text-[10px] leading-tight ${active ? "text-[#2E6F40] font-semibold" : "text-[#6A736D]"}`,
+												children: res.hint
+											})
+										]
 									}, res.value);
 								})
 							})]
@@ -66548,7 +67059,7 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
+									className: "grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
 									children: OPTIMIZATION_OPTIONS.map((opt) => {
 										const active = settings.optimizationProfile === opt.value;
 										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
@@ -66574,29 +67085,51 @@ var SettingsScreen = ({ settings, isFullscreen, onToggleFullscreen, onUpdateSett
 										}, opt.value);
 									})
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$3,
-									onClick: () => {
-										soundEngine.playTap();
-										onUpdateSettings(getRealmeNote50Preset());
-									},
-									className: "flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "inline-flex items-center gap-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
-											className: "h-4 w-4 text-[#2E6F40] shrink-0",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ใช้ค่าแนะนำสำหรับ realme Note 50 (90Hz · Mali-G57)" })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
-										children: "ปรับทันที"
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.playTap();
+											onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
+										},
+										className: "flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-2 text-left",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
+												className: "h-4 w-4 text-[#2E6F40] shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
+											children: "ปรับทันที"
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.playTap();
+											onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
+										},
+										className: "flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "inline-flex items-center gap-2 text-left",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cpu, {
+												className: "h-4 w-4 text-[#7D5A3C] shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB (ความละเอียด HD)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-bold text-[#7D5A3C] shrink-0",
+											children: "ปรับทันที"
+										})]
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[11px] text-[#5A655D] leading-relaxed",
-									children: "ลดภาระการเรนเดอร์แก้ว 2 ชั้น แคชเงา 512px ลดรอยหยักที่กินสเปก และปรับความคมชัดอัตโนมัติเพื่อให้รัน 60–90 FPS ได้นิ่งบน Unisoc T612"
+									children: "ใช้เชดเดอร์ highp + โครงสร้างแก้ว/น้ำชาไร้การแหว่งขณะหมุนกล้อง, ปิด Mipmap Bleed, แคชเงา 512px และโหมด RAM 2 GB ที่รีดขนาดเทกซ์เจอร์และโมเดลลงเพื่อป้องกันเกมเด้ง"
 								})
 							]
 						}),
@@ -66682,13 +67215,19 @@ var CATEGORIES = [
 var TAP_SPRING$2 = {
 	type: "spring",
 	stiffness: 420,
-	damping: 24
+	damping: 26
 };
+var GRID_EASE = [
+	.16,
+	1,
+	.3,
+	1
+];
 var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 	const [filter, setFilter] = (0, import_react.useState)("all");
 	const xpInfo = getXpProgress(saveData.xp);
 	const unlockedCount = getUnlockedTeas(saveData.level).length;
-	const visibleTeas = filter === "all" ? TEAS : TEAS.filter((t) => t.category === filter);
+	const visibleTeas = import_react.useMemo(() => filter === "all" ? TEAS : TEAS.filter((t) => t.category === filter), [filter]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "mx-auto max-w-[1200px] safe-px py-4 sm:py-6 lg:py-8",
 		children: [
@@ -66728,8 +67267,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
-						whileHover: { scale: 1.03 },
-						whileTap: { scale: .94 },
+						whileTap: { scale: .95 },
 						transition: TAP_SPRING$2,
 						onClick: onStartBrewing,
 						className: "min-h-[44px] rounded-xl bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732] whitespace-nowrap shrink-0",
@@ -66752,7 +67290,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 						const active = filter === cat.id;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
-							whileTap: { scale: .94 },
+							whileTap: { scale: .95 },
 							onClick: () => {
 								soundEngine.playTap();
 								setFilter(cat.id);
@@ -66763,7 +67301,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 								transition: {
 									type: "spring",
 									stiffness: 420,
-									damping: 30
+									damping: 32
 								},
 								className: "absolute inset-0 rounded-md bg-white shadow-xs"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -66776,33 +67314,26 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 				className: "mt-4",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "grid grid-cols-2 gap-3 lg:grid-cols-3",
-					children: visibleTeas.map((tea, idx) => {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					initial: {
+						opacity: 0,
+						y: 8
+					},
+					animate: {
+						opacity: 1,
+						y: 0
+					},
+					transition: {
+						duration: .2,
+						ease: GRID_EASE
+					},
+					className: "grid grid-cols-2 gap-3 lg:grid-cols-3 will-change-transform",
+					children: visibleTeas.map((tea) => {
 						const unlocked = isTeaUnlocked(tea, saveData.level);
 						const count = saveData.teaCounts[tea.id] ?? 0;
-						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-							initial: {
-								opacity: 0,
-								y: 12,
-								scale: .97
-							},
-							animate: {
-								opacity: unlocked ? 1 : .8,
-								y: 0,
-								scale: 1
-							},
-							transition: {
-								delay: Math.min(idx * .03, .2),
-								type: "spring",
-								stiffness: 360,
-								damping: 26
-							},
-							whileHover: unlocked ? {
-								y: -2,
-								scale: 1.01
-							} : void 0,
-							className: `flex flex-col justify-between rounded-xl border p-4 ${unlocked ? "border-[#1F2823]/10 bg-white shadow-2xs" : "border-[#1F2823]/10 bg-[#EAE7DF]"}`,
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							style: { contain: "layout style paint" },
+							className: `flex flex-col justify-between rounded-xl border p-4 transition-transform duration-150 ${unlocked ? "border-[#1F2823]/10 bg-white shadow-2xs" : "border-[#1F2823]/10 bg-[#EAE7DF] opacity-80"}`,
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex items-center justify-between gap-2",
@@ -66853,36 +67384,36 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "กลิ่นหอม" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 											className: "mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-												className: "h-full rounded-full bg-[#2E6F40]",
-												initial: { width: 0 },
-												animate: { width: `${tea.flavorProfile.aroma * 20}%` },
+												className: "h-full w-full origin-left rounded-full bg-[#2E6F40]",
+												initial: { scaleX: 0 },
+												animate: { scaleX: tea.flavorProfile.aroma * .2 },
 												transition: {
-													duration: .45,
-													delay: Math.min(idx * .03, .2)
+													duration: .32,
+													ease: GRID_EASE
 												}
 											})
 										})] }),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ความหวาน" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 											className: "mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-												className: "h-full rounded-full bg-[#C9822B]",
-												initial: { width: 0 },
-												animate: { width: `${tea.flavorProfile.sweetness * 20}%` },
+												className: "h-full w-full origin-left rounded-full bg-[#C9822B]",
+												initial: { scaleX: 0 },
+												animate: { scaleX: tea.flavorProfile.sweetness * .2 },
 												transition: {
-													duration: .45,
-													delay: Math.min(idx * .03, .2) + .05
+													duration: .34,
+													ease: GRID_EASE
 												}
 											})
 										})] }),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ความเข้ม" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 											className: "mt-1 h-1.5 w-full rounded-full bg-[#1F2823]/10 overflow-hidden",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-												className: "h-full rounded-full bg-[#4A534D]",
-												initial: { width: 0 },
-												animate: { width: `${tea.flavorProfile.body * 20}%` },
+												className: "h-full w-full origin-left rounded-full bg-[#4A534D]",
+												initial: { scaleX: 0 },
+												animate: { scaleX: tea.flavorProfile.body * .2 },
 												transition: {
-													duration: .45,
-													delay: Math.min(idx * .03, .2) + .1
+													duration: .36,
+													ease: GRID_EASE
 												}
 											})
 										})] })
@@ -66915,9 +67446,9 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 									})
 								]
 							})]
-						}, `${filter}-${tea.id}`);
+						}, tea.id);
 					})
-				})
+				}, filter)
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 				className: "mt-8",
@@ -66943,8 +67474,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 						children: "ยังไม่มีบันทึกการชงชา ลองชงชาถ้วยแรกเพื่อเก็บ XP และปลดล็อกชาใหม่ๆ ดูสิ"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
-						whileHover: { scale: 1.03 },
-						whileTap: { scale: .94 },
+						whileTap: { scale: .95 },
 						transition: TAP_SPRING$2,
 						onClick: onStartBrewing,
 						className: "mt-4 min-h-[44px] rounded-lg bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732]",
@@ -66952,22 +67482,10 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 					})]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "mt-3 divide-y divide-[#1F2823]/10 rounded-xl border border-[#1F2823]/10 bg-white overflow-hidden",
-					children: saveData.history.map((item, idx) => {
+					children: saveData.history.map((item) => {
 						const tempLabel = WATER_TEMPS.find((w) => w.id === item.waterTemp)?.label ?? "";
 						const toppingNames = item.toppings.map((id) => TOPPINGS.find((t) => t.id === id)?.name).filter(Boolean).join(" + ");
-						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-							initial: {
-								opacity: 0,
-								x: -10
-							},
-							animate: {
-								opacity: 1,
-								x: 0
-							},
-							transition: {
-								delay: Math.min(idx * .03, .18),
-								duration: .2
-							},
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex flex-wrap items-center justify-between gap-3 px-4 py-3.5 text-sm",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex flex-wrap items-center gap-2",
@@ -67005,22 +67523,45 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 	});
 };
 // src/components/SunlitParticles.tsx
-var SunlitParticles = () => {
+function createMoteSprite(warm) {
+	const sprite = document.createElement("canvas");
+	sprite.width = 32;
+	sprite.height = 32;
+	const sctx = sprite.getContext("2d");
+	if (sctx) {
+		const grad = sctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+		if (warm) {
+			grad.addColorStop(0, "rgba(255, 241, 198, 1)");
+			grad.addColorStop(.5, "rgba(255, 241, 198, 0.35)");
+			grad.addColorStop(1, "rgba(255, 241, 198, 0)");
+		} else {
+			grad.addColorStop(0, "rgba(220, 236, 212, 1)");
+			grad.addColorStop(.5, "rgba(220, 236, 212, 0.35)");
+			grad.addColorStop(1, "rgba(220, 236, 212, 0)");
+		}
+		sctx.fillStyle = grad;
+		sctx.fillRect(0, 0, 32, 32);
+	}
+	return sprite;
+}
+var SunlitParticles = ({ paused = false }) => {
 	const canvasRef = (0, import_react.useRef)(null);
 	(0, import_react.useEffect)(() => {
 		const canvas = canvasRef.current;
-		if (!canvas) return;
+		if (!canvas || paused) return;
 		if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		const ctx = canvas.getContext("2d");
 		if (!ctx) return;
 		let width = 0;
 		let height = 0;
 		let frameId = 0;
+		const warmSprite = createMoteSprite(true);
+		const coolSprite = createMoteSprite(false);
 		const resize = () => {
 			const parent = canvas.parentElement;
 			width = parent ? parent.clientWidth : window.innerWidth;
 			height = parent ? parent.clientHeight : window.innerHeight;
-			const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+			const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
 			canvas.width = Math.floor(width * dpr);
 			canvas.height = Math.floor(height * dpr);
 			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -67028,13 +67569,13 @@ var SunlitParticles = () => {
 		resize();
 		const ro = new ResizeObserver(resize);
 		if (canvas.parentElement) ro.observe(canvas.parentElement);
-		const motes = Array.from({ length: 26 }, (_, i) => ({
+		const motes = Array.from({ length: 18 }, (_, i) => ({
 			x: Math.random() * Math.max(width, 400),
 			y: Math.random() * Math.max(height, 300),
-			r: 1.3 + i % 4 * .85,
+			r: 1.4 + i % 4 * .85,
 			vx: 4 + Math.random() * 8,
 			vy: -(5 + Math.random() * 9),
-			alpha: .18 + i % 5 * .08,
+			alpha: .2 + i % 5 * .08,
 			phase: Math.random() * Math.PI * 2,
 			warm: i % 3 !== 0
 		}));
@@ -67051,20 +67592,11 @@ var SunlitParticles = () => {
 				if (m.x > width + 12) m.x = -12;
 				if (m.x < -12) m.x = width + 12;
 				const twinkle = .65 + .35 * Math.sin(m.phase * 1.6);
-				const a = m.alpha * twinkle;
-				const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 3.2);
-				if (m.warm) {
-					grad.addColorStop(0, `rgba(255, 241, 198, ${a})`);
-					grad.addColorStop(1, "rgba(255, 241, 198, 0)");
-				} else {
-					grad.addColorStop(0, `rgba(220, 236, 212, ${a})`);
-					grad.addColorStop(1, "rgba(220, 236, 212, 0)");
-				}
-				ctx.fillStyle = grad;
-				ctx.beginPath();
-				ctx.arc(m.x, m.y, m.r * 3.2, 0, Math.PI * 2);
-				ctx.fill();
+				const size = m.r * 6.4;
+				ctx.globalAlpha = m.alpha * twinkle;
+				ctx.drawImage(m.warm ? warmSprite : coolSprite, m.x - size * .5, m.y - size * .5, size, size);
 			}
+			ctx.globalAlpha = 1;
 			frameId = requestAnimationFrame(tick);
 		};
 		frameId = requestAnimationFrame(tick);
@@ -67072,7 +67604,7 @@ var SunlitParticles = () => {
 			cancelAnimationFrame(frameId);
 			ro.disconnect();
 		};
-	}, []);
+	}, [paused]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("canvas", {
 		ref: canvasRef,
 		"aria-hidden": "true",
@@ -67083,13 +67615,20 @@ var SunlitParticles = () => {
 var TAP_SPRING$1 = {
 	type: "spring",
 	stiffness: 420,
-	damping: 24
+	damping: 26
 };
-var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates }) => {
+var MODAL_EASE = [
+	.16,
+	1,
+	.3,
+	1
+];
+var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates, isOverlayOpen = false, isUltraLowRam = false, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [bgFailed, setBgFailed] = (0, import_react.useState)(false);
 	const [showMenuModal, setShowMenuModal] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
+	const pauseBackgroundFx = showMenuModal || isOverlayOpen || isUltraLowRam;
 	(0, import_react.useEffect)(() => {
 		if (!showMenuModal) return;
 		const handleKeyDown = (e) => {
@@ -67110,23 +67649,12 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "relative h-dvh min-h-[300px] w-full overflow-hidden bg-[#222B24] select-none",
 		children: [
-			!bgFailed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.img, {
+			!bgFailed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 				src: "/src/assets/images/tea_house_backdrop_1795626509107.jpg",
 				alt: "บรรยากาศเรือนชาไม้ท่ามกลางสวนไผ่ในแสงแดดรำไร",
 				referrerPolicy: "no-referrer",
+				decoding: "async",
 				onError: () => setBgFailed(true),
-				initial: {
-					scale: 1.04,
-					opacity: .85
-				},
-				animate: {
-					scale: 1,
-					opacity: 1
-				},
-				transition: {
-					duration: .9,
-					ease: "easeOut"
-				},
 				className: "absolute inset-0 h-full w-full object-cover object-center"
 			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-br from-[#2C3E31] via-[#475B48] to-[#1D261F]" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -67138,22 +67666,16 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 						style: { background: "radial-gradient(ellipse at top left, rgba(255, 240, 198, 0.42) 0%, rgba(255, 232, 178, 0.12) 45%, transparent 72%)" }
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "animate-sunbeam-1 absolute -top-[20%] left-[10%] h-[135%] w-[24%] origin-top",
-						style: {
-							background: "linear-gradient(180deg, rgba(255, 244, 210, 0.24) 0%, rgba(255, 238, 194, 0.08) 55%, transparent 90%)",
-							filter: "blur(18px)"
-						}
+						className: `${pauseBackgroundFx ? "" : "animate-sunbeam-1"} absolute -top-[20%] left-[8%] h-[135%] w-[30%] origin-top`,
+						style: { background: "linear-gradient(90deg, transparent 0%, rgba(255, 244, 210, 0.14) 50%, transparent 100%)" }
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "animate-sunbeam-2 absolute -top-[20%] left-[34%] h-[130%] w-[18%] origin-top",
-						style: {
-							background: "linear-gradient(180deg, rgba(255, 246, 216, 0.18) 0%, rgba(244, 230, 185, 0.06) 50%, transparent 88%)",
-							filter: "blur(22px)"
-						}
+						className: `${pauseBackgroundFx ? "" : "animate-sunbeam-2"} absolute -top-[20%] left-[32%] h-[130%] w-[24%] origin-top`,
+						style: { background: "linear-gradient(90deg, transparent 0%, rgba(255, 246, 216, 0.11) 50%, transparent 100%)" }
 					})
 				]
 			}),
-			particlesEnabled && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SunlitParticles, {}),
+			particlesEnabled && !isUltraLowRam && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SunlitParticles, { paused: pauseBackgroundFx }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				"aria-hidden": "true",
 				className: "pointer-events-none absolute inset-0",
@@ -67222,25 +67744,19 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 						initial: {
 							opacity: 0,
-							y: 18
+							y: 14
 						},
 						animate: {
 							opacity: 1,
 							y: 0
 						},
 						transition: {
-							delay: .08,
-							type: "spring",
-							stiffness: 320,
-							damping: 28
+							duration: .24,
+							ease: MODAL_EASE
 						},
-						className: "flex items-center gap-2.5",
+						className: "flex items-center gap-2.5 will-change-transform",
 						children: [onToggleFullscreen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 							type: "button",
-							whileHover: {
-								scale: 1.04,
-								y: -1
-							},
 							whileTap: { scale: .92 },
 							transition: TAP_SPRING$1,
 							onClick: () => {
@@ -67250,7 +67766,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 							},
 							"aria-label": isFullscreen ? "ออกจากเต็มหน้าจอ" : "ขยายเต็มหน้าจอ",
 							title: isFullscreen ? "ออกจากเต็มหน้าจอ" : "ขยายเต็มหน้าจอ",
-							className: "inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/70 backdrop-blur-md text-[#FAF7F0] shadow-lg shadow-black/20 hover:bg-[#1E251F]/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] shrink-0",
+							className: "inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/88 text-[#FAF7F0] shadow-lg shadow-black/25 hover:bg-[#252E26] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] shrink-0",
 							children: isFullscreen ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minimize2, {
 								className: "h-4 w-4 text-[#DFC48C]",
 								"aria-hidden": "true"
@@ -67260,18 +67776,21 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
-							whileHover: {
-								scale: 1.03,
-								y: -1
-							},
 							whileTap: { scale: .94 },
 							transition: TAP_SPRING$1,
 							onClick: openModal,
-							className: "inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/70 backdrop-blur-md px-4 sm:px-5 py-2.5 text-sm font-medium text-[#FAF7F0] shadow-lg shadow-black/20 hover:bg-[#1E251F]/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, {
-								className: "h-4 w-4 text-[#DFC48C]",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เมนูและตั้งค่า" })]
+							className: "relative inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/88 px-4 sm:px-5 py-2.5 text-sm font-medium text-[#FAF7F0] shadow-lg shadow-black/25 hover:bg-[#252E26] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, {
+									className: "h-4 w-4 text-[#DFC48C]",
+									"aria-hidden": "true"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เมนูและตั้งค่า" }),
+								updateAvailable && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"aria-label": "มีอัปเดตใหม่",
+									className: "h-2 w-2 rounded-full bg-[#6EE787]"
+								})
+							]
 						})]
 					})]
 				})
@@ -67280,8 +67799,11 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 				initial: { opacity: 0 },
 				animate: { opacity: 1 },
 				exit: { opacity: 0 },
-				transition: { duration: .18 },
-				className: "fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-[2px] p-3 sm:p-5",
+				transition: {
+					duration: .16,
+					ease: "easeOut"
+				},
+				className: "fixed inset-0 z-50 flex items-center justify-center bg-black/58 p-3 sm:p-5",
 				onClick: closeModal,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 					role: "dialog",
@@ -67289,8 +67811,8 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 					"aria-labelledby": "title-submenu-heading",
 					initial: {
 						opacity: 0,
-						scale: .92,
-						y: 18
+						scale: .96,
+						y: 12
 					},
 					animate: {
 						opacity: 1,
@@ -67299,16 +67821,16 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 					},
 					exit: {
 						opacity: 0,
-						scale: .94,
-						y: 14
+						scale: .96,
+						y: 8
 					},
 					transition: {
-						type: "spring",
-						stiffness: 380,
-						damping: 28
+						duration: .2,
+						ease: MODAL_EASE
 					},
 					onClick: (e) => e.stopPropagation(),
-					className: "w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl p-4 sm:p-6",
+					style: { contain: "layout style paint" },
+					className: "w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl p-4 sm:p-6 will-change-transform",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-start justify-between gap-4 border-b border-[#1F2823]/10 pb-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
@@ -67561,7 +68083,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersHorizontal, {
 											className: "h-4 w-4",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ตั้งค่ากราฟิก 3D · เสียง · 120 FPS" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ตั้งค่ากราฟิก 3D · เสียง · FPS ตามจอ" })]
 									}),
 									onOpenUpdates && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
@@ -67572,15 +68094,11 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 											setShowMenuModal(false);
 											onOpenUpdates();
 										},
-										className: "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EAE6DC]",
+										className: `flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${updateAvailable ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1D542C] font-semibold" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#EAE6DC]"}`,
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-											"เช็คอัปเดตเวอร์ชั่น (v",
-											"2.5.0",
-											")"
-										] })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.8.0)` })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex flex-wrap items-center justify-between gap-2",
@@ -67598,6 +68116,637 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 		]
 	});
 };
+// node_modules/@capacitor/core/dist/index.js
+/*! Capacitor: https://capacitorjs.com/ - MIT License */
+var ExceptionCode;
+(function(ExceptionCode) {
+	/**
+	* API is not implemented.
+	*
+	* This usually means the API can't be used because it is not implemented for
+	* the current platform.
+	*/
+	ExceptionCode["Unimplemented"] = "UNIMPLEMENTED";
+	/**
+	* API is not available.
+	*
+	* This means the API can't be used right now because:
+	*   - it is currently missing a prerequisite, such as network connectivity
+	*   - it requires a particular platform or browser version
+	*/
+	ExceptionCode["Unavailable"] = "UNAVAILABLE";
+})(ExceptionCode || (ExceptionCode = {}));
+var CapacitorException = class extends Error {
+	constructor(message, code, data) {
+		super(message);
+		this.message = message;
+		this.code = code;
+		this.data = data;
+	}
+};
+var getPlatformId = (win) => {
+	var _a, _b;
+	if (win === null || win === void 0 ? void 0 : win.androidBridge) return "android";
+	else if ((_b = (_a = win === null || win === void 0 ? void 0 : win.webkit) === null || _a === void 0 ? void 0 : _a.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) return "ios";
+	else return "web";
+};
+var createCapacitor = (win) => {
+	const capCustomPlatform = win.CapacitorCustomPlatform || null;
+	const cap = win.Capacitor || {};
+	const Plugins = cap.Plugins = cap.Plugins || {};
+	const getPlatform = () => {
+		return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
+	};
+	const isNativePlatform = () => getPlatform() !== "web";
+	const isPluginAvailable = (pluginName) => {
+		const plugin = registeredPlugins.get(pluginName);
+		if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) return true;
+		if (getPluginHeader(pluginName)) return true;
+		return false;
+	};
+	const getPluginHeader = (pluginName) => {
+		var _a;
+		return (_a = cap.PluginHeaders) === null || _a === void 0 ? void 0 : _a.find((h) => h.name === pluginName);
+	};
+	const handleError = (err) => win.console.error(err);
+	const registeredPlugins = /* @__PURE__ */ new Map();
+	const registerPlugin = (pluginName, jsImplementations = {}) => {
+		const registeredPlugin = registeredPlugins.get(pluginName);
+		if (registeredPlugin) {
+			console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
+			return registeredPlugin.proxy;
+		}
+		const platform = getPlatform();
+		const pluginHeader = getPluginHeader(pluginName);
+		let jsImplementation;
+		const loadPluginImplementation = async () => {
+			if (!jsImplementation && platform in jsImplementations) jsImplementation = typeof jsImplementations[platform] === "function" ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
+			else if (capCustomPlatform !== null && !jsImplementation && "web" in jsImplementations) jsImplementation = typeof jsImplementations["web"] === "function" ? jsImplementation = await jsImplementations["web"]() : jsImplementation = jsImplementations["web"];
+			return jsImplementation;
+		};
+		const createPluginMethod = (impl, prop) => {
+			var _a, _b;
+			if (pluginHeader) {
+				const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m) => prop === m.name);
+				if (methodHeader) {
+					if (methodHeader.rtype === "promise") return (options) => cap.nativePromise(pluginName, prop.toString(), options);
+					else return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
+				} else if (impl) return (_a = impl[prop]) === null || _a === void 0 ? void 0 : _a.bind(impl);
+			} else if (impl) return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
+			else throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+		};
+		const createPluginMethodWrapper = (prop) => {
+			let remove;
+			const wrapper = (...args) => {
+				const p = loadPluginImplementation().then((impl) => {
+					const fn = createPluginMethod(impl, prop);
+					if (fn) {
+						const p = fn(...args);
+						remove = p === null || p === void 0 ? void 0 : p.remove;
+						return p;
+					} else throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+				});
+				if (prop === "addListener") p.remove = async () => remove();
+				return p;
+			};
+			wrapper.toString = () => `${prop.toString()}() { [capacitor code] }`;
+			Object.defineProperty(wrapper, "name", {
+				value: prop,
+				writable: false,
+				configurable: false
+			});
+			return wrapper;
+		};
+		const addListener = createPluginMethodWrapper("addListener");
+		const removeListener = createPluginMethodWrapper("removeListener");
+		const addListenerNative = (eventName, callback) => {
+			const call = addListener({ eventName }, callback).then((callbackId) => callbackId);
+			const remove = async () => {
+				const callbackId = await call;
+				await removeListener({
+					eventName,
+					callbackId
+				});
+			};
+			const p = new Promise((resolve) => call.then(() => resolve({ remove })));
+			p.remove = async () => {
+				console.warn(`Using addListener() without 'await' is deprecated.`);
+				await remove();
+			};
+			return p;
+		};
+		const proxy = new Proxy({}, { get(_, prop) {
+			switch (prop) {
+				case "$$typeof": return;
+				case "toJSON": return () => ({});
+				case "addListener": return pluginHeader ? addListenerNative : addListener;
+				case "removeListener": return removeListener;
+				default: return createPluginMethodWrapper(prop);
+			}
+		} });
+		Plugins[pluginName] = proxy;
+		registeredPlugins.set(pluginName, {
+			name: pluginName,
+			proxy,
+			platforms: /* @__PURE__ */ new Set([...Object.keys(jsImplementations), ...pluginHeader ? [platform] : []])
+		});
+		return proxy;
+	};
+	if (!cap.convertFileSrc) cap.convertFileSrc = (filePath) => filePath;
+	cap.getPlatform = getPlatform;
+	cap.handleError = handleError;
+	cap.isNativePlatform = isNativePlatform;
+	cap.isPluginAvailable = isPluginAvailable;
+	cap.registerPlugin = registerPlugin;
+	cap.Exception = CapacitorException;
+	cap.DEBUG = !!cap.DEBUG;
+	cap.isLoggingEnabled = !!cap.isLoggingEnabled;
+	return cap;
+};
+var initCapacitorGlobal = (win) => win.Capacitor = createCapacitor(win);
+var Capacitor = /*#__PURE__*/ initCapacitorGlobal(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
+var registerPlugin = Capacitor.registerPlugin;
+/**
+* Base class web plugins should extend.
+*/
+var WebPlugin = class {
+	constructor() {
+		this.listeners = {};
+		this.retainedEventArguments = {};
+		this.windowListeners = {};
+	}
+	addListener(eventName, listenerFunc) {
+		let firstListener = false;
+		if (!this.listeners[eventName]) {
+			this.listeners[eventName] = [];
+			firstListener = true;
+		}
+		this.listeners[eventName].push(listenerFunc);
+		const windowListener = this.windowListeners[eventName];
+		if (windowListener && !windowListener.registered) this.addWindowListener(windowListener);
+		if (firstListener) this.sendRetainedArgumentsForEvent(eventName);
+		const remove = async () => this.removeListener(eventName, listenerFunc);
+		return Promise.resolve({ remove });
+	}
+	async removeAllListeners() {
+		this.listeners = {};
+		for (const listener in this.windowListeners) this.removeWindowListener(this.windowListeners[listener]);
+		this.windowListeners = {};
+	}
+	notifyListeners(eventName, data, retainUntilConsumed) {
+		const listeners = this.listeners[eventName];
+		if (!listeners) {
+			if (retainUntilConsumed) {
+				let args = this.retainedEventArguments[eventName];
+				if (!args) args = [];
+				args.push(data);
+				this.retainedEventArguments[eventName] = args;
+			}
+			return;
+		}
+		listeners.forEach((listener) => listener(data));
+	}
+	hasListeners(eventName) {
+		var _a;
+		return !!((_a = this.listeners[eventName]) === null || _a === void 0 ? void 0 : _a.length);
+	}
+	registerWindowListener(windowEventName, pluginEventName) {
+		this.windowListeners[pluginEventName] = {
+			registered: false,
+			windowEventName,
+			pluginEventName,
+			handler: (event) => {
+				this.notifyListeners(pluginEventName, event);
+			}
+		};
+	}
+	unimplemented(msg = "not implemented") {
+		return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
+	}
+	unavailable(msg = "not available") {
+		return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
+	}
+	async removeListener(eventName, listenerFunc) {
+		const listeners = this.listeners[eventName];
+		if (!listeners) return;
+		const index = listeners.indexOf(listenerFunc);
+		if (index !== -1) this.listeners[eventName].splice(index, 1);
+		if (!this.listeners[eventName].length) this.removeWindowListener(this.windowListeners[eventName]);
+	}
+	addWindowListener(handle) {
+		window.addEventListener(handle.windowEventName, handle.handler);
+		handle.registered = true;
+	}
+	removeWindowListener(handle) {
+		if (!handle) return;
+		window.removeEventListener(handle.windowEventName, handle.handler);
+		handle.registered = false;
+	}
+	sendRetainedArgumentsForEvent(eventName) {
+		const args = this.retainedEventArguments[eventName];
+		if (!args) return;
+		delete this.retainedEventArguments[eventName];
+		args.forEach((arg) => {
+			this.notifyListeners(eventName, arg);
+		});
+	}
+};
+/******** END WEB VIEW PLUGIN ********/
+/******** COOKIES PLUGIN ********/
+/**
+* Safely web encode a string value (inspired by js-cookie)
+* @param str The string value to encode
+*/
+var encode = (str) => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
+/**
+* Safely web decode a string value (inspired by js-cookie)
+* @param str The string value to decode
+*/
+var decode = (str) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
+var CapacitorCookiesPluginWeb = class extends WebPlugin {
+	async getCookies() {
+		const cookies = document.cookie;
+		const cookieMap = {};
+		cookies.split(";").forEach((cookie) => {
+			if (cookie.length <= 0) return;
+			let [key, value] = cookie.replace(/=/, "CAP_COOKIE").split("CAP_COOKIE");
+			key = decode(key).trim();
+			value = decode(value).trim();
+			cookieMap[key] = value;
+		});
+		return cookieMap;
+	}
+	async setCookie(options) {
+		try {
+			const encodedKey = encode(options.key);
+			const encodedValue = encode(options.value);
+			const expires = options.expires ? `; expires=${options.expires.replace("expires=", "")}` : "";
+			const path = (options.path || "/").replace("path=", "");
+			const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : "";
+			document.cookie = `${encodedKey}=${encodedValue || ""}${expires}; path=${path}; ${domain};`;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async deleteCookie(options) {
+		try {
+			document.cookie = `${options.key}=; Max-Age=0`;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async clearCookies() {
+		try {
+			const cookies = document.cookie.split(";") || [];
+			for (const cookie of cookies) document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${(/* @__PURE__ */ new Date()).toUTCString()};path=/`);
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async clearAllCookies() {
+		try {
+			await this.clearCookies();
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+};
+registerPlugin("CapacitorCookies", { web: () => new CapacitorCookiesPluginWeb() });
+/**
+* Read in a Blob value and return it as a base64 string
+* @param blob The blob value to convert to a base64 string
+*/
+var readBlobAsBase64 = async (blob) => new Promise((resolve, reject) => {
+	const reader = new FileReader();
+	reader.onload = () => {
+		const base64String = reader.result;
+		resolve(base64String.indexOf(",") >= 0 ? base64String.split(",")[1] : base64String);
+	};
+	reader.onerror = (error) => reject(error);
+	reader.readAsDataURL(blob);
+});
+/**
+* Normalize an HttpHeaders map by lowercasing all of the values
+* @param headers The HttpHeaders object to normalize
+*/
+var normalizeHttpHeaders = (headers = {}) => {
+	const originalKeys = Object.keys(headers);
+	return Object.keys(headers).map((k) => k.toLocaleLowerCase()).reduce((acc, key, index) => {
+		acc[key] = headers[originalKeys[index]];
+		return acc;
+	}, {});
+};
+/**
+* Builds a string of url parameters that
+* @param params A map of url parameters
+* @param shouldEncode true if you should encodeURIComponent() the values (true by default)
+*/
+var buildUrlParams = (params, shouldEncode = true) => {
+	if (!params) return null;
+	return Object.entries(params).reduce((accumulator, entry) => {
+		const [key, value] = entry;
+		let encodedValue;
+		let item;
+		if (Array.isArray(value)) {
+			item = "";
+			value.forEach((str) => {
+				encodedValue = shouldEncode ? encodeURIComponent(str) : str;
+				item += `${key}=${encodedValue}&`;
+			});
+			item.slice(0, -1);
+		} else {
+			encodedValue = shouldEncode ? encodeURIComponent(value) : value;
+			item = `${key}=${encodedValue}`;
+		}
+		return `${accumulator}&${item}`;
+	}, "").substr(1);
+};
+/**
+* Build the RequestInit object based on the options passed into the initial request
+* @param options The Http plugin options
+* @param extra Any extra RequestInit values
+*/
+var buildRequestInit = (options, extra = {}) => {
+	const output = Object.assign({
+		method: options.method || "GET",
+		headers: options.headers
+	}, extra);
+	const type = normalizeHttpHeaders(options.headers)["content-type"] || "";
+	if (typeof options.data === "string") output.body = options.data;
+	else if (type.includes("application/x-www-form-urlencoded")) {
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(options.data || {})) params.set(key, value);
+		output.body = params.toString();
+	} else if (type.includes("multipart/form-data") || options.data instanceof FormData) {
+		const form = new FormData();
+		if (options.data instanceof FormData) options.data.forEach((value, key) => {
+			form.append(key, value);
+		});
+		else for (const key of Object.keys(options.data)) form.append(key, options.data[key]);
+		output.body = form;
+		const headers = new Headers(output.headers);
+		headers.delete("content-type");
+		output.headers = headers;
+	} else if (type.includes("application/json") || typeof options.data === "object") output.body = JSON.stringify(options.data);
+	return output;
+};
+var CapacitorHttpPluginWeb = class extends WebPlugin {
+	/**
+	* Perform an Http request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async request(options) {
+		const requestInit = buildRequestInit(options, options.webFetchExtra);
+		const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
+		const url = urlParams ? `${options.url}?${urlParams}` : options.url;
+		const response = await fetch(url, requestInit);
+		const contentType = response.headers.get("content-type") || "";
+		let { responseType = "text" } = response.ok ? options : {};
+		if (contentType.includes("application/json")) responseType = "json";
+		let data;
+		let blob;
+		switch (responseType) {
+			case "arraybuffer":
+			case "blob":
+				blob = await response.blob();
+				data = await readBlobAsBase64(blob);
+				break;
+			case "json":
+				data = await response.json();
+				break;
+			default: data = await response.text();
+		}
+		const headers = {};
+		response.headers.forEach((value, key) => {
+			headers[key] = value;
+		});
+		return {
+			data,
+			headers,
+			status: response.status,
+			url: response.url
+		};
+	}
+	/**
+	* Perform an Http GET request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async get(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "GET" }));
+	}
+	/**
+	* Perform an Http POST request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async post(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "POST" }));
+	}
+	/**
+	* Perform an Http PUT request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async put(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "PUT" }));
+	}
+	/**
+	* Perform an Http PATCH request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async patch(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "PATCH" }));
+	}
+	/**
+	* Perform an Http DELETE request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async delete(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
+	}
+};
+registerPlugin("CapacitorHttp", { web: () => new CapacitorHttpPluginWeb() });
+/******** END HTTP PLUGIN ********/
+/******** SYSTEM BARS PLUGIN ********/
+/**
+* Available status bar styles.
+*/
+var SystemBarsStyle;
+(function(SystemBarsStyle) {
+	/**
+	* Light system bar content on a dark background.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Dark"] = "DARK";
+	/**
+	* For dark system bar content on a light background.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Light"] = "LIGHT";
+	/**
+	* The style is based on the device appearance or the underlying content.
+	* If the device is using Dark mode, the system bars content will be light.
+	* If the device is using Light mode, the system bars content will be dark.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Default"] = "DEFAULT";
+})(SystemBarsStyle || (SystemBarsStyle = {}));
+/**
+* Available system bar types.
+*/
+var SystemBarType;
+(function(SystemBarType) {
+	/**
+	* The top status bar on both Android and iOS.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarType["StatusBar"] = "StatusBar";
+	/**
+	* The navigation bar (or gesture bar on iOS) on both Android and iOS.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarType["NavigationBar"] = "NavigationBar";
+})(SystemBarType || (SystemBarType = {}));
+var SystemBarsPluginWeb = class extends WebPlugin {
+	async setStyle() {
+		this.unavailable("not available for web");
+	}
+	async setAnimation() {
+		this.unavailable("not available for web");
+	}
+	async show() {
+		this.unavailable("not available for web");
+	}
+	async hide() {
+		this.unavailable("not available for web");
+	}
+};
+registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
+function compareSemver(a, b) {
+	const pa = a.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
+	const pb = b.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
+	const len = Math.max(pa.length, pb.length);
+	for (let i = 0; i < len; i++) {
+		const va = pa[i] ?? 0;
+		const vb = pb[i] ?? 0;
+		if (va > vb) return 1;
+		if (va < vb) return -1;
+	}
+	return 0;
+}
+async function fetchManifestWithTimeout(url, timeoutMs = 4500) {
+	const controller = new AbortController();
+	const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+	try {
+		const sep = url.includes("?") ? "&" : "?";
+		const res = await fetch(`${url}${sep}t=${Date.now()}`, {
+			cache: "no-store",
+			signal: controller.signal,
+			headers: { "Cache-Control": "no-cache" }
+		});
+		if (!res.ok) return null;
+		const data = await res.json();
+		if (!data || typeof data.version !== "string") return null;
+		return {
+			version: data.version,
+			previousVersion: data.previousVersion,
+			releaseDate: data.releaseDate,
+			releaseTitle: data.releaseTitle,
+			browserUrl: data.browserUrl,
+			devBrowserUrl: data.devBrowserUrl,
+			highlights: Array.isArray(data.highlights) ? data.highlights : void 0
+		};
+	} catch {
+		return null;
+	} finally {
+		window.clearTimeout(timer);
+	}
+}
+async function checkLiveBrowserVersion() {
+	const checkedAtLabel = (/* @__PURE__ */ new Date()).toLocaleTimeString("th-TH", {
+		hour: "2-digit",
+		minute: "2-digit"
+	});
+	const isNativeApp = Capacitor.isNativePlatform();
+	if (typeof navigator !== "undefined" && !navigator.onLine) return {
+		status: "offline",
+		currentVersion: CURRENT_APP_VERSION,
+		latestVersion: CURRENT_APP_VERSION,
+		remoteManifest: null,
+		waitingWorker: null,
+		targetSyncUrl: null,
+		isNativeApp,
+		checkedFromBrowserServer: false,
+		checkedAtLabel
+	};
+	let waitingWorker = null;
+	if (typeof navigator !== "undefined" && "serviceWorker" in navigator) try {
+		const reg = await navigator.serviceWorker.getRegistration();
+		if (reg) {
+			await reg.update().catch(() => {});
+			if (reg.waiting) waitingWorker = reg.waiting;
+		}
+	} catch {}
+	const sameOriginManifest = await fetchManifestWithTimeout("/version.json");
+	let liveBrowserManifest = null;
+	const currentOrigin = typeof window !== "undefined" ? window.location.origin : "";
+	if (isNativeApp || currentOrigin !== "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && currentOrigin !== "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && !currentOrigin.includes("localhost") || !sameOriginManifest) liveBrowserManifest = await fetchManifestWithTimeout(`https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app/version.json`) ?? await fetchManifestWithTimeout(`https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app/version.json`);
+	let bestManifest = sameOriginManifest;
+	let checkedFromBrowserServer = false;
+	if (liveBrowserManifest) {
+		if (!bestManifest || compareSemver(liveBrowserManifest.version, bestManifest.version) >= 0) {
+			bestManifest = liveBrowserManifest;
+			checkedFromBrowserServer = true;
+		}
+	}
+	const latestVersion = bestManifest?.version ?? "2.8.0";
+	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
+	const targetSyncUrl = bestManifest?.browserUrl ?? (liveBrowserManifest ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : null);
+	return {
+		status: hasNewerVersion || waitingWorker ? "update-ready" : "up-to-date",
+		currentVersion: CURRENT_APP_VERSION,
+		latestVersion,
+		remoteManifest: bestManifest,
+		waitingWorker,
+		targetSyncUrl,
+		isNativeApp,
+		checkedFromBrowserServer: checkedFromBrowserServer || Boolean(sameOriginManifest),
+		checkedAtLabel
+	};
+}
+/**
+* Applies the update directly inside the app:
+* - Clears stale Service Worker & CacheStorage entries
+* - Activates any waiting Service Worker
+* - If inside Capacitor native APK and a newer hosted browser URL exists, switches seamlessly inside WebView
+* - Otherwise forces a clean reload so the browser/PWA boots the latest version
+*/
+async function applyInAppUpdate(result) {
+	if (result?.waitingWorker) try {
+		result.waitingWorker.postMessage({ type: "SKIP_WAITING" });
+	} catch {}
+	if (typeof caches !== "undefined") try {
+		const keys = await caches.keys();
+		await Promise.all(keys.map((k) => caches.delete(k)));
+	} catch {}
+	if (typeof navigator !== "undefined" && "serviceWorker" in navigator) try {
+		const regs = await navigator.serviceWorker.getRegistrations();
+		await Promise.all(regs.map((r) => r.update().catch(() => {})));
+	} catch {}
+	if (typeof window === "undefined") return;
+	const isNative = Capacitor.isNativePlatform();
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.8.0") > 0;
+	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
+		window.location.replace(result.targetSyncUrl);
+		return;
+	}
+	const url = new URL(window.location.href);
+	url.searchParams.set("v", result?.latestVersion ?? "2.8.0");
+	window.location.replace(url.toString());
+}
 // src/utils/storage.ts
 var STORAGE_KEY = "baan_cha_save_v2";
 var LEGACY_KEY = "baan_cha_save_v1";
@@ -67609,7 +68758,7 @@ var DEFAULT_SETTINGS = {
 	isMuted: false,
 	ambience: "none",
 	graphicsQuality: "high",
-	resolutionScale: "native",
+	resolutionScale: "hd-plus",
 	shadowsEnabled: true,
 	antialiasEnabled: true,
 	particlesEnabled: true,
@@ -67669,10 +68818,35 @@ function clearSaveData() {
 	} catch {}
 	return DEFAULT_SAVE;
 }
+function normalizeResolutionScale(raw) {
+	switch (raw) {
+		case "hd":
+		case "0.75": return "hd";
+		case "hd-plus":
+		case "1.0": return "hd-plus";
+		case "fhd":
+		case "1.5": return "fhd";
+		case "fhd-plus":
+		case "native": return "fhd-plus";
+		default: return DEFAULT_SETTINGS.resolutionScale;
+	}
+}
 function loadSettings() {
 	try {
 		const raw = localStorage.getItem(SETTINGS_KEY);
-		if (!raw) return DEFAULT_SETTINGS;
+		if (!raw) {
+			const memGb = typeof navigator !== "undefined" && "deviceMemory" in navigator && typeof navigator.deviceMemory === "number" ? navigator.deviceMemory ?? null : null;
+			if (memGb !== null && memGb <= 2) return {
+				...DEFAULT_SETTINGS,
+				graphicsQuality: "low",
+				resolutionScale: "hd",
+				shadowsEnabled: false,
+				antialiasEnabled: false,
+				particlesEnabled: false,
+				optimizationProfile: "low-ram-2gb"
+			};
+			return DEFAULT_SETTINGS;
+		}
 		const parsed = JSON.parse(raw);
 		return {
 			masterVolume: typeof parsed.masterVolume === "number" ? Math.max(0, Math.min(100, parsed.masterVolume)) : DEFAULT_SETTINGS.masterVolume,
@@ -67681,13 +68855,13 @@ function loadSettings() {
 			isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
 			ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
 			graphicsQuality: parsed.graphicsQuality === "low" || parsed.graphicsQuality === "medium" || parsed.graphicsQuality === "high" ? parsed.graphicsQuality : DEFAULT_SETTINGS.graphicsQuality,
-			resolutionScale: parsed.resolutionScale === "0.75" || parsed.resolutionScale === "1.0" || parsed.resolutionScale === "1.5" || parsed.resolutionScale === "native" ? parsed.resolutionScale : DEFAULT_SETTINGS.resolutionScale,
+			resolutionScale: normalizeResolutionScale(parsed.resolutionScale),
 			shadowsEnabled: typeof parsed.shadowsEnabled === "boolean" ? parsed.shadowsEnabled : DEFAULT_SETTINGS.shadowsEnabled,
 			antialiasEnabled: typeof parsed.antialiasEnabled === "boolean" ? parsed.antialiasEnabled : DEFAULT_SETTINGS.antialiasEnabled,
 			particlesEnabled: typeof parsed.particlesEnabled === "boolean" ? parsed.particlesEnabled : DEFAULT_SETTINGS.particlesEnabled,
 			targetFps: parsed.targetFps === 30 || parsed.targetFps === 60 || parsed.targetFps === 90 || parsed.targetFps === 120 ? parsed.targetFps : DEFAULT_SETTINGS.targetFps,
 			autoFullscreen: typeof parsed.autoFullscreen === "boolean" ? parsed.autoFullscreen : DEFAULT_SETTINGS.autoFullscreen,
-			optimizationProfile: parsed.optimizationProfile === "auto" || parsed.optimizationProfile === "realme-note-50" || parsed.optimizationProfile === "standard" ? parsed.optimizationProfile : DEFAULT_SETTINGS.optimizationProfile
+			optimizationProfile: parsed.optimizationProfile === "auto" || parsed.optimizationProfile === "realme-note-50" || parsed.optimizationProfile === "low-ram-2gb" || parsed.optimizationProfile === "standard" ? parsed.optimizationProfile : DEFAULT_SETTINGS.optimizationProfile
 		};
 	} catch {
 		return DEFAULT_SETTINGS;
@@ -67717,6 +68891,12 @@ var TAP_SPRING = {
 	stiffness: 430,
 	damping: 26
 };
+var PANEL_EASE = [
+	.16,
+	1,
+	.3,
+	1
+];
 var CATEGORY_FILTERS = [
 	"ทั้งหมด",
 	"ฟีเจอร์ใหม่",
@@ -67724,18 +68904,19 @@ var CATEGORY_FILTERS = [
 	"ภาพและ 3 มิติ",
 	"ประสิทธิภาพ"
 ];
-var UpdateCheckScreen = ({ onClose }) => {
+var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }) => {
 	const [selectedVersion, setSelectedVersion] = (0, import_react.useState)(CURRENT_APP_VERSION);
 	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("ทั้งหมด");
-	const [status, setStatus] = (0, import_react.useState)("up-to-date");
-	const [waitingWorker, setWaitingWorker] = (0, import_react.useState)(null);
-	const [lastCheckedAt, setLastCheckedAt] = (0, import_react.useState)(() => (/* @__PURE__ */ new Date()).toLocaleTimeString("th-TH", {
+	const [status, setStatus] = (0, import_react.useState)(initialUpdateResult?.status ?? "checking");
+	const [updateResult, setUpdateResult] = (0, import_react.useState)(initialUpdateResult);
+	const [isApplyingUpdate, setIsApplyingUpdate] = (0, import_react.useState)(false);
+	const [lastCheckedAt, setLastCheckedAt] = (0, import_react.useState)(() => initialUpdateResult?.checkedAtLabel ?? (/* @__PURE__ */ new Date()).toLocaleTimeString("th-TH", {
 		hour: "2-digit",
 		minute: "2-digit"
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.5.0" ? prev : null;
+		return prev && prev !== "2.8.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -67750,55 +68931,37 @@ var UpdateCheckScreen = ({ onClose }) => {
 		window.addEventListener("keydown", onKeyDown);
 		return () => window.removeEventListener("keydown", onKeyDown);
 	}, [onClose]);
-	const handleCheckForUpdates = async () => {
-		soundEngine.playTap();
+	const runLiveCheck = (0, import_react.useCallback)(async (withSound = false) => {
+		if (withSound) soundEngine.playTap();
 		setStatus("checking");
-		const nowLabel = (/* @__PURE__ */ new Date()).toLocaleTimeString("th-TH", {
-			hour: "2-digit",
-			minute: "2-digit"
-		});
-		if (typeof navigator !== "undefined" && !navigator.onLine) {
-			setLastCheckedAt(nowLabel);
-			setStatus("offline");
-			return;
-		}
-		try {
-			if (typeof navigator !== "undefined" && "serviceWorker" in navigator) {
-				const reg = await navigator.serviceWorker.getRegistration();
-				if (reg) {
-					await reg.update().catch(() => {});
-					if (reg.waiting) {
-						setWaitingWorker(reg.waiting);
-						setLastCheckedAt(nowLabel);
-						setStatus("update-ready");
-						return;
-					}
-				}
-			}
-			setLastCheckedAt(nowLabel);
-			setStatus("up-to-date");
-		} catch {
-			setLastCheckedAt(nowLabel);
-			setStatus("up-to-date");
-		}
-	};
-	const handleApplyUpdate = () => {
+		const result = await checkLiveBrowserVersion();
+		setUpdateResult(result);
+		setStatus(result.status);
+		setLastCheckedAt(result.checkedAtLabel);
+		onUpdateResult?.(result);
+	}, [onUpdateResult]);
+	(0, import_react.useEffect)(() => {
+		runLiveCheck(false);
+	}, [runLiveCheck]);
+	const handleApplyUpdate = async () => {
 		soundEngine.playTap();
-		if (waitingWorker) waitingWorker.postMessage({ type: "SKIP_WAITING" });
-		window.location.reload();
+		setIsApplyingUpdate(true);
+		await applyInAppUpdate(updateResult);
 	};
 	const activeEntry = (0, import_react.useMemo)(() => VERSION_HISTORY.find((v) => v.version === selectedVersion) ?? VERSION_HISTORY[0], [selectedVersion]);
 	const filteredChanges = (0, import_react.useMemo)(() => {
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
+	const latestBrowserVersion = updateResult?.latestVersion ?? "2.8.0";
+	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-labelledby": "update-screen-title",
 		initial: {
 			opacity: 0,
-			y: 24
+			y: 14
 		},
 		animate: {
 			opacity: 1,
@@ -67806,21 +68969,20 @@ var UpdateCheckScreen = ({ onClose }) => {
 		},
 		exit: {
 			opacity: 0,
-			y: 20
+			y: 10
 		},
 		transition: {
-			type: "spring",
-			stiffness: 360,
-			damping: 30
+			duration: .2,
+			ease: PANEL_EASE
 		},
-		className: "fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823]",
+		style: { contain: "layout style paint" },
+		className: "fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823] will-change-transform",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-			className: "sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3]/96 safe-px py-2.5 sm:py-3.5",
+			className: "sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3] safe-px py-2.5 sm:py-3.5",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-3 min-w-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 					type: "button",
-					whileHover: { scale: 1.03 },
 					whileTap: { scale: .92 },
 					transition: TAP_SPRING,
 					onClick: () => {
@@ -67838,28 +69000,27 @@ var UpdateCheckScreen = ({ onClose }) => {
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 						id: "update-screen-title",
 						className: "font-display text-base sm:text-xl font-bold text-[#1F2823] truncate",
-						children: "เช็คอัปเดตเวอร์ชั่นและสิ่งใหม่"
+						children: "เช็คอัปเดตเวอร์ชั่นและซิงก์กับ Browser"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "hidden sm:block text-xs text-[#5A655D] truncate",
 						children: [
-							"เวอร์ชั่นปัจจุบัน",
+							"เวอร์ชั่นในตัวเกม",
 							" ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 								className: "font-mono-num font-semibold text-[#2E6F40]",
 								children: ["v", CURRENT_APP_VERSION]
 							}),
 							" ",
-							"· เปรียบเทียบฟีเจอร์ที่เพิ่มจากเวอร์ชั่นเดิม"
+							"· ตรวจสอบและอัปเดตให้ตรงกับ Browser ปัจจุบันได้ทันที"
 						]
 					})]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 				type: "button",
-				disabled: status === "checking",
-				whileHover: { scale: 1.03 },
+				disabled: status === "checking" || isApplyingUpdate,
 				whileTap: { scale: .93 },
 				transition: TAP_SPRING,
-				onClick: () => void handleCheckForUpdates(),
+				onClick: () => void runLiveCheck(true),
 				className: "inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#2E6F40] px-3.5 sm:px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732] disabled:opacity-60 whitespace-nowrap shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
 					className: `h-4 w-4 shrink-0 ${status === "checking" ? "animate-spin" : ""}`,
@@ -67878,56 +69039,91 @@ var UpdateCheckScreen = ({ onClose }) => {
 							className: "flex items-start justify-between gap-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-xs text-[#5A655D]",
-								children: "เวอร์ชั่นที่ติดตั้ง"
+								children: "เวอร์ชั่นในตัวเกม"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
 								children: ["v", CURRENT_APP_VERSION]
 							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "text-right",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[11px] text-[#5A655D]",
-									children: "ตรวจล่าสุด"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "font-mono-num text-xs font-medium text-[#1F2823]",
-									children: [lastCheckedAt, " น."]
-								})]
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[11px] text-[#5A655D]",
+										children: "เวอร์ชั่น Browser ล่าสุด"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "font-mono-num text-base font-bold text-[#2E6F40]",
+										children: ["v", latestBrowserVersion]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "font-mono-num text-[11px] text-[#5A655D]",
+										children: [
+											"ตรวจเมื่อ ",
+											lastCheckedAt,
+											" น."
+										]
+									})
+								]
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "mt-3 border-t border-[#1F2823]/8 pt-3",
 							children: [
 								status === "update-ready" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "space-y-2.5",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex items-start gap-2 text-xs text-[#255F30]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
-											className: "mt-0.5 h-4 w-4 shrink-0",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "พบแพ็กเกจเวอร์ชั่นใหม่พร้อมใช้งานแล้ว แตะปุ่มด้านล่างเพื่อรีเฟรชและอัปเดตทันที" })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
-										type: "button",
-										whileTap: { scale: .95 },
-										onClick: handleApplyUpdate,
-										className: "w-full min-h-[44px] rounded-xl bg-[#2E6F40] px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732]",
-										children: "รีเฟรชเพื่อใช้เวอร์ชั่นใหม่"
-									})]
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex items-start gap-2 text-xs text-[#255F30]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+												className: "mt-0.5 h-4 w-4 shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: hasNewerBrowserVersion ? `พบเวอร์ชั่นใหม่ v${latestBrowserVersion} บน Browser! กดปุ่มด้านล่างเพื่ออัปเดตภายในแอปให้ตรงกันทันที` : "พบแพ็กเกจอัปเดตใหม่บน Browser พร้อมใช้งานแล้ว แตะปุ่มด้านล่างเพื่ออัปเดตทันที" })]
+										}),
+										updateResult?.remoteManifest?.highlights && updateResult.remoteManifest.highlights.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+											className: "space-y-1 rounded-xl bg-[#EDF5EE] p-2.5 text-[11px] text-[#224B2B]",
+											children: updateResult.remoteManifest.highlights.map((line) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: ["• ", line] }, line))
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											disabled: isApplyingUpdate,
+											whileTap: { scale: .95 },
+											onClick: () => void handleApplyUpdate(),
+											className: "flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-[#2E6F40] px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732] disabled:opacity-60",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, {
+												className: "h-4 w-4 shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังอัปเดต..." : `อัปเดตเป็น v${latestBrowserVersion} ทันที` })]
+										})
+									]
 								}),
 								status === "up-to-date" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-start gap-2 text-xs text-[#255F30]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-										className: "mt-0.5 h-4 w-4 shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.5.0 เรียบร้อยแล้ว` : `คุณกำลังใช้งานเวอร์ชั่นล่าสุด (v2.5.0) แล้ว` })]
+									className: "space-y-2.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-start gap-2 text-xs text-[#255F30]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											className: "mt-0.5 h-4 w-4 shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.8.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.8.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										disabled: isApplyingUpdate,
+										whileTap: { scale: .95 },
+										onClick: () => void handleApplyUpdate(),
+										className: "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6] px-3 text-xs font-medium text-[#1F2823] hover:bg-[#EFECE4]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, {
+											className: "h-3.5 w-3.5 text-[#2E6F40]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังรีโหลดเวอร์ชั่นล่าสุด..." : "ล้างแคช & โหลดเวอร์ชั่น Browser ซ้ำ" })]
+									})]
 								}),
 								status === "offline" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "flex items-start gap-2 text-xs text-[#7D5A3C]",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WifiOff, {
 										className: "mt-0.5 h-4 w-4 shrink-0",
 										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ขณะนี้ออฟไลน์อยู่ จึงไม่สามารถเช็กเซิร์ฟเวอร์ได้ แต่ยังดูสิ่งที่เพิ่มเข้ามาในแต่ละเวอร์ชั่นได้ครบถ้วน" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ขณะนี้ออฟไลน์อยู่ จึงไม่สามารถเทียบเวอร์ชั่นกับเซิร์ฟเวอร์ Browser ได้ แต่ยังดูสิ่งที่เพิ่มเข้ามาในแต่ละเวอร์ชั่นได้ครบถ้วน" })]
 								}),
 								status === "checking" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-xs text-[#5A655D]",
-									children: "กำลังตรวจสอบไฟล์แคชและเวอร์ชั่นล่าสุด..."
+									children: "กำลังเชื่อมต่อเช็คเวอร์ชั่นล่าสุดจาก Browser ปัจจุบัน..."
 								})
 							]
 						})]
@@ -67991,7 +69187,7 @@ var UpdateCheckScreen = ({ onClose }) => {
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 							initial: {
 								opacity: 0,
-								y: 10
+								y: 8
 							},
 							animate: {
 								opacity: 1,
@@ -67999,9 +69195,12 @@ var UpdateCheckScreen = ({ onClose }) => {
 							},
 							exit: {
 								opacity: 0,
-								y: -8
+								y: -6
 							},
-							transition: { duration: .18 },
+							transition: {
+								duration: .16,
+								ease: PANEL_EASE
+							},
 							className: "flex flex-col flex-1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "border-b border-[#1F2823]/10 pb-4",
@@ -68075,19 +69274,7 @@ var UpdateCheckScreen = ({ onClose }) => {
 								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "mt-2 divide-y divide-[#1F2823]/8",
-								children: filteredChanges.length > 0 ? filteredChanges.map((change, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-									initial: {
-										opacity: 0,
-										x: 8
-									},
-									animate: {
-										opacity: 1,
-										x: 0
-									},
-									transition: {
-										delay: idx * .03,
-										duration: .18
-									},
+								children: filteredChanges.length > 0 ? filteredChanges.map((change, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "py-3.5 sm:py-4",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -68176,6 +69363,12 @@ function subscribeFullscreenChange(callback) {
 * @license
 * SPDX-License-Identifier: Apache-2.0
 */
+var SCREEN_EASE = [
+	.16,
+	1,
+	.3,
+	1
+];
 function App() {
 	const [screen, setScreen] = (0, import_react.useState)("TITLE_MENU");
 	const [mode, setMode] = (0, import_react.useState)("guest");
@@ -68185,12 +69378,70 @@ function App() {
 	const [updatesOpen, setUpdatesOpen] = (0, import_react.useState)(false);
 	const [isFullscreen, setIsFullscreen] = (0, import_react.useState)(() => isFullscreenActive());
 	const [saveData, setSaveData] = (0, import_react.useState)(() => loadSaveData());
+	const [detectedRefreshRate, setDetectedRefreshRate] = (0, import_react.useState)(60);
+	const [rawRefreshRate, setRawRefreshRate] = (0, import_react.useState)(60);
+	const [updateCheckResult, setUpdateCheckResult] = (0, import_react.useState)(null);
+	const userExitedFullscreenRef = (0, import_react.useRef)(false);
 	(0, import_react.useEffect)(() => {
 		return subscribeFullscreenChange(setIsFullscreen);
 	}, []);
+	const recheckRefreshRate = (0, import_react.useCallback)(() => {
+		probeDisplayRefreshRate().then(({ hz, rawHz }) => {
+			setDetectedRefreshRate(hz);
+			setRawRefreshRate(rawHz);
+			setSettings((prev) => {
+				const clampedFps = clampTargetFpsToDisplay(prev.targetFps, hz);
+				if (clampedFps === prev.targetFps) return prev;
+				const next = {
+					...prev,
+					targetFps: clampedFps
+				};
+				saveSettings(next);
+				return next;
+			});
+		});
+	}, []);
 	(0, import_react.useEffect)(() => {
-		applyDomPerformanceClass(probeDeviceOptimization(settings.optimizationProfile).liteGpuActive);
-	}, [settings.optimizationProfile]);
+		recheckRefreshRate();
+		const onVisibility = () => {
+			if (!document.hidden) recheckRefreshRate();
+		};
+		document.addEventListener("visibilitychange", onVisibility);
+		return () => document.removeEventListener("visibilitychange", onVisibility);
+	}, [recheckRefreshRate]);
+	(0, import_react.useEffect)(() => {
+		const timer = window.setTimeout(() => {
+			checkLiveBrowserVersion().then(setUpdateCheckResult);
+		}, 900);
+		return () => window.clearTimeout(timer);
+	}, []);
+	(0, import_react.useEffect)(() => {
+		if (!settings.autoFullscreen) return;
+		if (!isFullscreenActive() && !userExitedFullscreenRef.current) requestAppFullscreen().then((active) => {
+			if (active) setIsFullscreen(true);
+		});
+		const handleFirstGesture = () => {
+			if (settings.autoFullscreen && !userExitedFullscreenRef.current && !isFullscreenActive()) requestAppFullscreen().then((active) => {
+				if (active) setIsFullscreen(true);
+			});
+		};
+		window.addEventListener("pointerdown", handleFirstGesture, {
+			capture: true,
+			passive: true
+		});
+		window.addEventListener("keydown", handleFirstGesture, {
+			capture: true,
+			passive: true
+		});
+		return () => {
+			window.removeEventListener("pointerdown", handleFirstGesture, { capture: true });
+			window.removeEventListener("keydown", handleFirstGesture, { capture: true });
+		};
+	}, [settings.autoFullscreen]);
+	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+	(0, import_react.useEffect)(() => {
+		applyDomPerformanceClass(deviceReport.liteGpuActive, deviceReport.isUltraLowRam);
+	}, [deviceReport.liteGpuActive, deviceReport.isUltraLowRam]);
 	(0, import_react.useEffect)(() => {
 		soundEngine.setVolumes(settings.masterVolume, settings.sfxVolume, settings.ambienceVolume);
 		soundEngine.setMuted(settings.isMuted);
@@ -68202,53 +69453,68 @@ function App() {
 		settings.isMuted,
 		settings.ambience
 	]);
-	const updateSettings = (patch) => {
+	const updateSettings = (0, import_react.useCallback)((patch) => {
+		if (patch.autoFullscreen === true) userExitedFullscreenRef.current = false;
 		setSettings((prev) => {
-			const next = {
+			const merged = {
 				...prev,
 				...patch
 			};
-			saveSettings(next);
-			return next;
+			merged.targetFps = clampTargetFpsToDisplay(merged.targetFps, detectedRefreshRate);
+			saveSettings(merged);
+			return merged;
 		});
-	};
-	const handleResetSettings = () => {
-		const reset = { ...DEFAULT_SETTINGS };
+	}, [detectedRefreshRate]);
+	const handleResetSettings = (0, import_react.useCallback)(() => {
+		userExitedFullscreenRef.current = false;
+		const reset = {
+			...DEFAULT_SETTINGS,
+			targetFps: clampTargetFpsToDisplay(DEFAULT_SETTINGS.targetFps, detectedRefreshRate)
+		};
 		saveSettings(reset);
 		setSettings(reset);
-	};
-	const handleToggleFullscreen = () => {
+	}, [detectedRefreshRate]);
+	const handleToggleFullscreen = (0, import_react.useCallback)(() => {
+		const currentlyActive = isFullscreenActive();
 		toggleAppFullscreen().then((active) => {
+			userExitedFullscreenRef.current = currentlyActive && !active;
 			setIsFullscreen(active);
 		});
-	};
-	const handleStartBrewing = (chosenMode) => {
+	}, []);
+	const handleStartBrewing = (0, import_react.useCallback)((chosenMode) => {
 		soundEngine.unlock();
 		soundEngine.playTap();
-		if (settings.autoFullscreen && !isFullscreenActive()) requestAppFullscreen().then((active) => {
+		if (settings.autoFullscreen && !userExitedFullscreenRef.current && !isFullscreenActive()) requestAppFullscreen().then((active) => {
 			if (active) setIsFullscreen(true);
 		});
 		if (chosenMode) setMode(chosenMode);
 		setScreen("BREWING");
-	};
-	const handleAmbienceChange = (nextMode) => {
+	}, [settings.autoFullscreen]);
+	const handleAmbienceChange = (0, import_react.useCallback)((nextMode) => {
 		updateSettings({ ambience: nextMode });
-	};
-	const handleToggleMute = () => {
-		updateSettings({ isMuted: !settings.isMuted });
-	};
-	const handleBrewComplete = (record, warmthEarned, xpEarned) => {
+	}, [updateSettings]);
+	const handleToggleMute = (0, import_react.useCallback)(() => {
+		setSettings((prev) => {
+			const next = {
+				...prev,
+				isMuted: !prev.isMuted
+			};
+			saveSettings(next);
+			return next;
+		});
+	}, []);
+	const handleBrewComplete = (0, import_react.useCallback)((record, warmthEarned, xpEarned) => {
 		setSaveData((prev) => saveBrewRecord(prev, record, warmthEarned, xpEarned));
-	};
-	const handleResetJournal = () => {
+	}, []);
+	const handleResetJournal = (0, import_react.useCallback)(() => {
 		soundEngine.playTap();
 		setSaveData(clearSaveData());
-	};
-	const navigateTo = (target) => {
+	}, []);
+	const navigateTo = (0, import_react.useCallback)((target) => {
 		soundEngine.unlock();
 		soundEngine.playTap();
 		setScreen(target);
-	};
+	}, []);
 	const isViewportLocked = screen === "TITLE_MENU" || screen === "BREWING";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MotionConfig, {
 		reducedMotion: "user",
@@ -68271,22 +69537,33 @@ function App() {
 					onToggleFullscreen: handleToggleFullscreen,
 					onNavigate: navigateTo,
 					onOpenSettings: () => setSettingsOpen(true),
-					onOpenUpdates: () => setUpdatesOpen(true)
+					onOpenUpdates: () => setUpdatesOpen(true),
+					updateAvailable: updateCheckResult?.status === "update-ready",
+					latestBrowserVersion: updateCheckResult?.latestVersion ?? null
 				}, "corner-menu") }),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
-					className: isViewportLocked ? "h-full w-full flex-1 overflow-hidden" : "flex-1",
+					className: isViewportLocked ? "relative h-full w-full flex-1 overflow-hidden" : "relative flex-1",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AnimatePresence, {
-						mode: "wait",
+						initial: false,
 						children: [
 							screen === "TITLE_MENU" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-								className: "h-full w-full",
-								initial: { opacity: 0 },
-								animate: { opacity: 1 },
+								className: "absolute inset-0 h-full w-full will-change-transform",
+								initial: {
+									opacity: 0,
+									scale: 1.015
+								},
+								animate: {
+									opacity: 1,
+									scale: 1
+								},
 								exit: {
 									opacity: 0,
 									scale: .985
 								},
-								transition: { duration: .22 },
+								transition: {
+									duration: .24,
+									ease: SCREEN_EASE
+								},
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TitleScreen, {
 									xp: saveData.xp,
 									level: saveData.level,
@@ -68305,15 +69582,28 @@ function App() {
 									onOpenJournal: () => navigateTo("JOURNAL"),
 									onOpenHowToPlay: () => navigateTo("HOW_TO_PLAY"),
 									onOpenSettings: () => setSettingsOpen(true),
-									onOpenUpdates: () => setUpdatesOpen(true)
+									onOpenUpdates: () => setUpdatesOpen(true),
+									isOverlayOpen: settingsOpen || updatesOpen,
+									isUltraLowRam: deviceReport.isUltraLowRam,
+									updateAvailable: updateCheckResult?.status === "update-ready",
+									latestBrowserVersion: updateCheckResult?.latestVersion ?? null
 								})
 							}, "screen-title"),
 							screen === "BREWING" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-								className: "h-full w-full",
-								initial: { opacity: 0 },
-								animate: { opacity: 1 },
+								className: "absolute inset-0 h-full w-full will-change-transform",
+								initial: {
+									opacity: 0,
+									y: 10
+								},
+								animate: {
+									opacity: 1,
+									y: 0
+								},
 								exit: { opacity: 0 },
-								transition: { duration: .24 },
+								transition: {
+									duration: .26,
+									ease: SCREEN_EASE
+								},
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrewingStation, {
 									playerXp: saveData.xp,
 									playerLevel: saveData.level,
@@ -68325,6 +69615,7 @@ function App() {
 								})
 							}, "screen-brewing"),
 							screen === "JOURNAL" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+								className: "w-full will-change-transform",
 								initial: {
 									opacity: 0,
 									y: 12
@@ -68333,11 +69624,11 @@ function App() {
 									opacity: 1,
 									y: 0
 								},
-								exit: {
-									opacity: 0,
-									y: -10
+								exit: { opacity: 0 },
+								transition: {
+									duration: .22,
+									ease: SCREEN_EASE
 								},
-								transition: { duration: .2 },
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaJournal, {
 									saveData,
 									onStartBrewing: () => handleStartBrewing(),
@@ -68345,6 +69636,7 @@ function App() {
 								})
 							}, "screen-journal"),
 							screen === "HOW_TO_PLAY" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+								className: "w-full will-change-transform",
 								initial: {
 									opacity: 0,
 									y: 12
@@ -68353,11 +69645,11 @@ function App() {
 									opacity: 1,
 									y: 0
 								},
-								exit: {
-									opacity: 0,
-									y: -10
+								exit: { opacity: 0 },
+								transition: {
+									duration: .22,
+									ease: SCREEN_EASE
 								},
-								transition: { duration: .2 },
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HowToPlay, { onStartBrewing: () => handleStartBrewing() })
 							}, "screen-howto")
 						]
@@ -68366,12 +69658,19 @@ function App() {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: settingsOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SettingsScreen, {
 					settings,
 					isFullscreen,
+					detectedRefreshRate,
+					rawRefreshRate,
+					onRecheckRefreshRate: recheckRefreshRate,
 					onToggleFullscreen: handleToggleFullscreen,
 					onUpdateSettings: updateSettings,
 					onResetSettings: handleResetSettings,
 					onClose: () => setSettingsOpen(false)
 				}, "settings-screen") }),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: updatesOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(UpdateCheckScreen, { onClose: () => setUpdatesOpen(false) }, "updates-screen") }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: updatesOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(UpdateCheckScreen, {
+					initialUpdateResult: updateCheckResult,
+					onUpdateResult: setUpdateCheckResult,
+					onClose: () => setUpdatesOpen(false)
+				}, "updates-screen") }),
 				screen !== "BREWING" && screen !== "TITLE_MENU" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
 					className: "border-t border-[#1F2823]/10 bg-[#FAF9F6] py-4",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

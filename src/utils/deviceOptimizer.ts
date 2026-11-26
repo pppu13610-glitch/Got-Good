@@ -9,6 +9,7 @@ export interface DeviceOptimizationReport {
   isRealmeNote50: boolean;
   isUnisocT612OrMaliG57: boolean;
   isBudgetMobileGpu: boolean;
+  isUltraLowRam: boolean;
   liteGpuActive: boolean;
   gpuRendererName: string;
   hardwareThreads: number;
@@ -73,6 +74,8 @@ export function probeDeviceOptimization(
   const isBudgetGpuString = BUDGET_MOBILE_GPU_RE.test(gpuRendererName);
   const isLowMemoryMobile =
     isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
+  const isDetected2GbRam =
+    deviceMemoryGb !== null && deviceMemoryGb <= 2;
 
   const isBudgetMobileGpu =
     isRealmeNote50 ||
@@ -80,13 +83,22 @@ export function probeDeviceOptimization(
     isBudgetGpuString ||
     isLowMemoryMobile;
 
+  const isUltraLowRam =
+    profile === 'low-ram-2gb' ||
+    (profile === 'auto' && isDetected2GbRam);
+
   const liteGpuActive =
     profile === 'realme-note-50' ||
+    profile === 'low-ram-2gb' ||
     (profile === 'auto' && (isRealmeNote50 || isBudgetMobileGpu));
 
   let detectedModelLabel = 'อุปกรณ์ทั่วไป';
-  if (profile === 'realme-note-50') {
+  if (profile === 'low-ram-2gb') {
+    detectedModelLabel = 'โหมดประหยัดแรมพิเศษ (RAM 2 GB)';
+  } else if (profile === 'realme-note-50') {
     detectedModelLabel = 'จูนพิเศษ Unisoc T612 · Mali-G57';
+  } else if (isDetected2GbRam && profile === 'auto') {
+    detectedModelLabel = 'ตรวจพบ RAM ≤ 2 GB (เปิดโหมดประหยัดแรมอัตโนมัติ)';
   } else if (isRealmeNote50) {
     detectedModelLabel = 'realme Note 50 (Unisoc T612 · Mali-G57)';
   } else if (MALI_G57_RE.test(gpuRendererName)) {
@@ -100,6 +112,7 @@ export function probeDeviceOptimization(
     isRealmeNote50,
     isUnisocT612OrMaliG57,
     isBudgetMobileGpu,
+    isUltraLowRam,
     liteGpuActive,
     gpuRendererName,
     hardwareThreads,
@@ -114,7 +127,7 @@ export function getRealmeNote50Preset(
   return {
     optimizationProfile: 'realme-note-50',
     graphicsQuality: 'medium',
-    resolutionScale: '1.0',
+    resolutionScale: 'hd-plus',
     shadowsEnabled: true,
     antialiasEnabled: false,
     particlesEnabled: true,
@@ -122,7 +135,26 @@ export function getRealmeNote50Preset(
   };
 }
 
-export function applyDomPerformanceClass(liteGpuActive: boolean): void {
+export function getLowRam2GbPreset(
+  maxDisplayHz: DisplayRefreshRate = 60,
+): Partial<GameSettings> {
+  const idealFps: TargetFps = clampTargetFpsToDisplay(60, maxDisplayHz);
+  return {
+    optimizationProfile: 'low-ram-2gb',
+    graphicsQuality: 'low',
+    resolutionScale: 'hd',
+    shadowsEnabled: false,
+    antialiasEnabled: false,
+    particlesEnabled: false,
+    targetFps: idealFps,
+  };
+}
+
+export function applyDomPerformanceClass(
+  liteGpuActive: boolean,
+  ultraLowRam = false,
+): void {
   if (typeof document === 'undefined') return;
   document.documentElement.classList.toggle('perf-lite', liteGpuActive);
+  document.documentElement.classList.toggle('ram-2gb', ultraLowRam);
 }

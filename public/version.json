@@ -1,14 +1,14 @@
 {
-  "version": "2.7.0",
-  "previousVersion": "2.6.0",
+  "version": "2.8.0",
+  "previousVersion": "2.7.0",
   "releaseDate": "26 พ.ย. 2026",
-  "releaseTitle": "อัปเดตเวอร์ชั่นตรงกับเบราว์เซอร์, จูน Unisoc T612 / Mali-G57 ไร้บั๊กเทกซ์เจอร์ & FPS ตามจอ",
+  "releaseTitle": "ตั้งค่าความละเอียด HD / Full HD+, แก้บั๊กเทกซ์เจอร์ขาดเวลาหมุนกล้อง & รองรับมือถือ RAM 2 GB",
   "browserUrl": "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
   "devBrowserUrl": "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
   "highlights": [
-    "เช็คและกดอัปเดตเวอร์ชั่นภายในแอปให้ตรงกับเวอร์ชั่นบน Browser ปัจจุบันได้ทันที",
-    "ตรวจจับ Refresh Rate หน้าจอจริง (60Hz / 90Hz / 120Hz) และจำกัดตัวเลือก FPS ให้ตรงกับหน้าจอเครื่อง",
-    "เพิ่มความแรงและแก้บั๊ก Texture/Z-fighting บน CPU Unisoc Tiger T612 และ GPU ARM Mali-G57 (realme Note 50)",
-    "เข้าเมนูและหน้าตั้งค่าจากหน้าเริ่มต้นลื่นขึ้น ตัดการเบลอและพักพาร์ติเคิลพื้นหลังขณะเปิดเมนู"
+    "เพิ่มตัวเลือกความละเอียดหน้าจอ 3 มิติในหน้าตั้งค่าครบ 4 ระดับ: HD, HD+, Full HD และ Full HD+",
+    "แก้บั๊ก Texture ขาดหายหรือทะลุขอบเวลาหมุนกล้องซ้าย-ขวาและรินน้ำบนมือถือ realme Note 50 (Mali-G57)",
+    "เพิ่มระบบประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB ลดขนาดเทกซ์เจอร์และโมเดลอัตโนมัติไม่ให้เกมเด้ง",
+    "ซิงค์อัปเดตเวอร์ชั่นจาก Browser และปรับ FPS ตาม Hz หน้าจอจริง (60 / 90 / 120 Hz) ต่อเนื่อง"
   ]
 }

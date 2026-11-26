@@ -44,6 +44,7 @@ interface TitleScreenProps {
   onOpenSettings?: () => void;
   onOpenUpdates?: () => void;
   isOverlayOpen?: boolean;
+  isUltraLowRam?: boolean;
   updateAvailable?: boolean;
   latestBrowserVersion?: string | null;
 }
@@ -71,6 +72,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   onOpenSettings,
   onOpenUpdates,
   isOverlayOpen = false,
+  isUltraLowRam = false,
   updateAvailable = false,
   latestBrowserVersion = null,
 }) => {
@@ -78,7 +80,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   const [showMenuModal, setShowMenuModal] = useState(false);
   const xpInfo = getXpProgress(xp);
   const unlockedCount = getUnlockedTeas(level).length;
-  const pauseBackgroundFx = showMenuModal || isOverlayOpen;
+  const pauseBackgroundFx = showMenuModal || isOverlayOpen || isUltraLowRam;
 
   useEffect(() => {
     if (!showMenuModal) return;
@@ -146,8 +148,10 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
         />
       </div>
 
-      {/* Drifting Sunlit Tea Mist & Golden Dust Motes (paused while menus/settings open) */}
-      {particlesEnabled && <SunlitParticles paused={pauseBackgroundFx} />}
+      {/* Drifting Sunlit Tea Mist & Golden Dust Motes (paused while menus/settings open or disabled on 2GB RAM) */}
+      {particlesEnabled && !isUltraLowRam && (
+        <SunlitParticles paused={pauseBackgroundFx} />
+      )}
 
       {/* Edge-only Contrast Scrims */}
       <div

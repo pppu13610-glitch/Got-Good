@@ -79,28 +79,49 @@ function resolvePixelRatio(
   settings: GameSettings,
   isSoftwareGl: boolean,
   liteGpuMode: boolean,
+  isUltraLowRam: boolean,
+  containerWidth: number,
+  containerHeight: number,
   dynamicScale = 1,
 ): number {
   if (isSoftwareGl) return 1;
   const deviceDpr =
     typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-  let baseRatio = 1;
+  const shortCss = Math.max(240, Math.min(containerWidth, containerHeight));
+
+  let targetShortPx = 720;
+  let minFloor = 0.75;
+  let maxCap = 1.5;
+
   switch (settings.resolutionScale) {
-    case '0.75':
-      baseRatio = 0.75;
+    case 'hd':
+      targetShortPx = 540;
+      minFloor = 0.65;
+      maxCap = isUltraLowRam ? 0.95 : 1.2;
       break;
-    case '1.0':
-      baseRatio = 1;
+    case 'hd-plus':
+      targetShortPx = 720;
+      minFloor = 0.75;
+      maxCap = isUltraLowRam ? 1.05 : liteGpuMode ? 1.35 : 1.5;
       break;
-    case '1.5':
-      baseRatio = liteGpuMode ? 1.15 : 1.5;
+    case 'fhd':
+      targetShortPx = 1080;
+      minFloor = 0.9;
+      maxCap = isUltraLowRam ? 1.25 : 2.0;
       break;
-    case 'native':
+    case 'fhd-plus':
     default:
-      baseRatio = liteGpuMode ? Math.min(deviceDpr, 1.0) : Math.min(deviceDpr, 2.5);
+      targetShortPx = 1280;
+      minFloor = 1.0;
+      maxCap = isUltraLowRam ? 1.4 : Math.min(Math.max(deviceDpr, 1.5), 2.5);
       break;
   }
-  return Math.max(0.65, baseRatio * dynamicScale);
+
+  const desiredRatio = Math.min(
+    maxCap,
+    Math.max(minFloor, targetShortPx / shortCss),
+  );
+  return Math.max(0.6, desiredRatio * dynamicScale);
 }
 
 export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
@@ -125,6 +146,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
 
   const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
   const liteGpuMode = deviceReport.liteGpuActive;
+  const isUltraLowRam = deviceReport.isUltraLowRam;
 
   const syncRef = useRef<SceneSyncState>({
     tea,
@@ -186,13 +208,22 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     if (!renderer || !container) return;
 
     dynamicScaleRef.current = 1;
-    renderer.setPixelRatio(
-      resolvePixelRatio(settings, softwareGl, liteGpuMode, 1),
-    );
     const w = Math.max(container.clientWidth, 280);
     const h = Math.max(container.clientHeight, 260);
+    renderer.setPixelRatio(
+      resolvePixelRatio(
+        settings,
+        softwareGl,
+        liteGpuMode,
+        isUltraLowRam,
+        w,
+        h,
+        1,
+      ),
+    );
     renderer.setSize(w, h);
-    const allowShadows = !softwareGl && settings.shadowsEnabled;
+    const allowShadows =
+      !softwareGl && !isUltraLowRam && settings.shadowsEnabled;
     renderer.shadowMap.enabled = allowShadows;
     renderer.shadowMap.needsUpdate = true;
     shadowDirtyRef.current = true;
@@ -204,6 +235,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     settings.shadowsEnabled,
     settings.optimizationProfile,
     liteGpuMode,
+    isUltraLowRam,
   ]);
 
   useEffect(() => {
@@ -225,8 +257,12 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
-        antialias: !isSoftwareGl && !liteGpuMode && initSettings.antialiasEnabled,
-        powerPreference: 'high-performance',
+        antialias:
+          !isSoftwareGl &&
+          !liteGpuMode &&
+          !isUltraLowRam &&
+          initSettings.antialiasEnabled,
+        powerPreference: isUltraLowRam ? 'default' : 'high-performance',
         precision: 'highp',
       });
     } catch {
@@ -235,21 +271,32 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     }
     rendererRef.current = renderer;
 
+    const initW = Math.max(container.clientWidth, 320);
+    const initH = Math.max(container.clientHeight, 260);
+
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
     renderer.setPixelRatio(
-      resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, 1),
+      resolvePixelRatio(
+        initSettings,
+        isSoftwareGl,
+        liteGpuMode,
+        isUltraLowRam,
+        initW,
+        initH,
+        1,
+      ),
     );
-    renderer.shadowMap.enabled = !isSoftwareGl && initSettings.shadowsEnabled;
+    const allowInitShadows =
+      !isSoftwareGl && !isUltraLowRam && initSettings.shadowsEnabled;
+    renderer.shadowMap.enabled = allowInitShadows;
     renderer.shadowMap.type = liteGpuMode
       ? THREE.PCFShadowMap
       : THREE.PCFSoftShadowMap;
     renderer.shadowMap.autoUpdate = !liteGpuMode;
     renderer.shadowMap.needsUpdate = true;
 
-    const initW = Math.max(container.clientWidth, 320);
-    const initH = Math.max(container.clientHeight, 260);
     renderer.setSize(initW, initH);
     renderer.domElement.style.display = 'block';
     renderer.domElement.style.width = '100%';
@@ -291,8 +338,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     const camera = new THREE.PerspectiveCamera(
       isShortLandscape ? 46 : 42,
       initW / initH,
-      0.1,
-      45,
+      0.08,
+      60,
     );
     const initialPreset = CAMERA_PRESETS[syncRef.current.cameraPreset];
     camera.position.set(
@@ -309,7 +356,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     );
     controls.enableDamping = !isSoftwareGl;
     controls.dampingFactor = 0.06;
-    controls.minDistance = 1.5;
+    controls.minDistance = 1.65;
     controls.maxDistance = 6.2;
     controls.minPolarAngle = 0.28;
     controls.maxPolarAngle = Math.PI / 2 - 0.08;
@@ -349,19 +396,42 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     rimLight.position.set(-4.0, 3.2, -3.5);
     scene.add(rimLight);
 
-    // Procedural Textures (compact 256/128 buffers & anisotropy=1 when liteGpuMode is active)
+    // Procedural Textures (compact 256/128 or ultra-compact 128/64 buffers & mipmap-free on Mali-G57/2GB RAM)
     const rawAniso = renderer.capabilities.getMaxAnisotropy();
     const maxAniso = liteGpuMode ? 1 : rawAniso;
     const compactAssets = liteGpuMode || isSoftwareGl;
-    const cedarTex = createWoodGrainTexture('#A87B4F', '#6B4728', maxAniso, compactAssets);
-    const walnutTex = createWoodGrainTexture('#69492F', '#3E2817', maxAniso, compactAssets);
-    const matTex = createWovenMatTexture(maxAniso, compactAssets);
-    const ceramicTex = createCeramicSpeckleTexture('#EFECE3', '#9D9688', maxAniso, compactAssets);
-    const shadowTex = createContactShadowTexture();
-    const steamTex = createSteamPuffTexture();
+    const ultraCompactAssets = isUltraLowRam;
+    const cedarTex = createWoodGrainTexture(
+      '#A87B4F',
+      '#6B4728',
+      maxAniso,
+      compactAssets,
+      ultraCompactAssets,
+    );
+    const walnutTex = createWoodGrainTexture(
+      '#69492F',
+      '#3E2817',
+      maxAniso,
+      compactAssets,
+      ultraCompactAssets,
+    );
+    const matTex = createWovenMatTexture(
+      maxAniso,
+      compactAssets,
+      ultraCompactAssets,
+    );
+    const ceramicTex = createCeramicSpeckleTexture(
+      '#EFECE3',
+      '#9D9688',
+      maxAniso,
+      compactAssets,
+      ultraCompactAssets,
+    );
+    const shadowTex = createContactShadowTexture(ultraCompactAssets);
+    const steamTex = createSteamPuffTexture(ultraCompactAssets);
 
-    // Assemble Multi-Part 3D Models (bypass extra transmission pass on Software GL & realme Note 50 Mali-G57)
-    const disableExtraGlassPass = isSoftwareGl || liteGpuMode;
+    // Assemble Multi-Part 3D Models (bypass extra transmission pass on Software GL, Mali-G57, & 2GB RAM)
+    const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
     const envGroup = createTeaTableEnvironment(
       cedarTex,
       walnutTex,
@@ -369,6 +439,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       ceramicTex,
       shadowTex,
       compactAssets,
+      ultraCompactAssets,
     );
     scene.add(envGroup);
 
@@ -378,6 +449,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       shadowTex,
       disableExtraGlassPass,
       compactAssets,
+      ultraCompactAssets,
     );
     scene.add(vessel.root);
 
@@ -396,8 +468,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     );
     scene.add(equipmentRig.root);
 
-    // Rising Steam Wisps (fewer sprites on budget mobile TBDR GPUs to avoid overdraw)
-    const steamCount = liteGpuMode ? 3 : 6;
+    // Rising Steam Wisps (0 on 2GB RAM, 3 on lite GPU, 6 on standard)
+    const steamCount = isUltraLowRam ? 0 : liteGpuMode ? 3 : 6;
     const steamSprites: {
       sprite: THREE.Sprite;
       phase: number;
@@ -414,6 +486,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       const sprite = new THREE.Sprite(mat);
       sprite.position.set(-0.22, 0.9, 0.08);
       sprite.scale.set(0.32, 0.32, 1);
+      sprite.frustumCulled = false;
       scene.add(sprite);
       steamSprites.push({
         sprite,
@@ -486,13 +559,24 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     renderer.domElement.addEventListener('pointerup', onPointerUp);
     renderer.domElement.addEventListener('pointermove', onPointerMove);
 
-    // ResizeObserver for crisp container fitting
+    // ResizeObserver for crisp container fitting & accurate HD/HD+/FHD/FHD+ pixel ratios
     const handleResize = () => {
       if (!container) return;
       const w = Math.max(container.clientWidth, 280);
       const h = Math.max(container.clientHeight, 260);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      renderer.setPixelRatio(
+        resolvePixelRatio(
+          syncRef.current.settings,
+          isSoftwareGl,
+          liteGpuMode,
+          isUltraLowRam,
+          w,
+          h,
+          dynamicScaleRef.current,
+        ),
+      );
       renderer.setSize(w, h);
     };
     const resizeObserver = new ResizeObserver(handleResize);
@@ -552,9 +636,9 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       const delta = Math.min(clock.getDelta(), 0.1);
       const elapsed = clock.getElapsedTime();
 
-      // Adaptive Resolution Guard for realme Note 50 / Mali-G57 MP1
+      // Adaptive Resolution Guard for realme Note 50 / Mali-G57 MP1 / 2GB RAM
       if (
-        liteGpuMode &&
+        (liteGpuMode || isUltraLowRam) &&
         !isSoftwareGl &&
         prevDrawMs > 0 &&
         state.settings.targetFps >= 60
@@ -562,17 +646,22 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         const frameSpanMs = nowMs - prevDrawMs;
         if (frameSpanMs > 28) {
           slowFrameStreak += 1;
-          if (slowFrameStreak >= 18 && dynamicScaleRef.current > 0.78) {
+          if (slowFrameStreak >= 18 && dynamicScaleRef.current > 0.76) {
             dynamicScaleRef.current = Math.max(
-              0.75,
+              0.74,
               dynamicScaleRef.current - 0.12,
             );
             slowFrameStreak = 0;
+            const cw = Math.max(mountRef.current?.clientWidth ?? 280, 280);
+            const ch = Math.max(mountRef.current?.clientHeight ?? 260, 260);
             renderer.setPixelRatio(
               resolvePixelRatio(
                 state.settings,
                 isSoftwareGl,
                 liteGpuMode,
+                isUltraLowRam,
+                cw,
+                ch,
                 dynamicScaleRef.current,
               ),
             );
@@ -732,9 +821,9 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         const maxScale = state.tea.vesselStyle === 'chawan' ? 0.82 : 1.0;
         vessel.liquidGroup.scale.y = Math.max(0.01, smoothedLevel * maxScale);
         vessel.liquidGroup.scale.x =
-          state.tea.vesselStyle === 'chawan' ? 1.12 : 1.0;
+          state.tea.vesselStyle === 'chawan' ? 1.02 : 1.0;
         vessel.liquidGroup.scale.z =
-          state.tea.vesselStyle === 'chawan' ? 1.12 : 1.0;
+          state.tea.vesselStyle === 'chawan' ? 1.02 : 1.0;
 
         const liquidKey = `${state.tea.id}:${state.steepSeconds}:${state.toppings.join(',')}`;
         if (liquidKey !== lastLiquidCacheKey) {
@@ -745,11 +834,6 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
             state.toppings,
           );
           _targetLiquidColor.set(targetHex);
-          vessel.liquidMaterial.opacity =
-            state.toppings.includes('milk') ||
-            state.toppings.includes('milk-foam')
-              ? 0.98
-              : 0.9;
         }
         vessel.liquidMaterial.color.lerp(
           _targetLiquidColor,
@@ -937,11 +1021,12 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       steamTex.dispose();
       envTexture.dispose();
       envRenderTarget.dispose();
+      renderer.renderLists.dispose();
       renderer.dispose();
       rendererRef.current = null;
       keyLightRef.current = null;
     };
-  }, [settings.antialiasEnabled, liteGpuMode]);
+  }, [settings.antialiasEnabled, liteGpuMode, isUltraLowRam]);
 
   if (webglError) {
     return (

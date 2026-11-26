@@ -158,8 +158,12 @@ export interface TeaHouseSaveData {
 
 export type GraphicsQuality = 'low' | 'medium' | 'high';
 export type TargetFps = 30 | 60 | 90 | 120;
-export type ResolutionScale = '0.75' | '1.0' | '1.5' | 'native';
-export type OptimizationProfile = 'auto' | 'realme-note-50' | 'standard';
+export type ResolutionScale = 'hd' | 'hd-plus' | 'fhd' | 'fhd-plus';
+export type OptimizationProfile =
+  | 'auto'
+  | 'realme-note-50'
+  | 'low-ram-2gb'
+  | 'standard';
 
 export interface GameSettings {
   masterVolume: number;

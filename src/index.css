@@ -38,6 +38,11 @@
     -webkit-backdrop-filter: none !important;
   }
 
+  .ram-2gb .animate-sunbeam-1,
+  .ram-2gb .animate-sunbeam-2 {
+    animation: none !important;
+  }
+
   button,
   a,
   [role="button"] {

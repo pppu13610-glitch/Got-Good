@@ -394,6 +394,10 @@
     -webkit-backdrop-filter: none !important;
   }
 
+  .ram-2gb .animate-sunbeam-1, .ram-2gb .animate-sunbeam-2 {
+    animation: none !important;
+  }
+
   button, a, [role="button"] {
     touch-action: manipulation;
   }
@@ -1212,6 +1216,10 @@
     border-color: #4d9256;
   }
 
+  .border-\[\#7D5A3C\]\/30 {
+    border-color: oklab(49.7153% .0306774 .0557368 / .3);
+  }
+
   .border-\[\#8EB889\] {
     border-color: #8eb889;
   }
@@ -1366,6 +1374,10 @@
 
   .bg-\[\#F6FBF3\] {
     background-color: #f6fbf3;
+  }
+
+  .bg-\[\#FAF4EC\] {
+    background-color: #faf4ec;
   }
 
   .bg-\[\#FAF8F3\] {
@@ -1763,6 +1775,10 @@
     color: #5a655d;
   }
 
+  .text-\[\#6A736D\] {
+    color: #6a736d;
+  }
+
   .text-\[\#6B736A\] {
     color: #6b736a;
   }
@@ -2067,6 +2083,10 @@
       background-color: #efece4;
     }
 
+    .hover\:bg-\[\#F3E9DB\]:hover {
+      background-color: #f3e9db;
+    }
+
     .hover\:bg-\[\#F3F0E8\]:hover {
       background-color: #f3f0e8;
     }
@@ -2176,6 +2196,10 @@
 
     .sm\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sm\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .sm\:gap-5 {

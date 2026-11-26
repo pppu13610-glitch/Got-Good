@@ -290,7 +290,11 @@ const TeaRecipeRow: React.FC<TeaRecipeRowProps> = React.memo(
         onClick={() => onSelectAndStart(tea)}
         whileTap={unlocked ? {scale: 0.97} : {x: [0, -3, 3, 0]}}
         transition={{duration: 0.14}}
-        style={{contain: 'layout style paint'}}
+        style={{
+          contain: 'layout style paint',
+          contentVisibility: 'auto',
+          containIntrinsicSize: 'auto 88px',
+        }}
         className={`flex w-full items-center justify-between gap-3 rounded-2xl border-[1.5px] px-3.5 py-2.5 text-left transition-colors ${
           !unlocked
             ? 'border-[#DCD9CE] bg-[#F2EFE6] opacity-78 cursor-not-allowed'

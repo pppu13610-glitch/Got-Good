@@ -3,6 +3,7 @@ import {motion} from 'motion/react';
 import {
   ArrowLeft,
   CloudRain,
+  Cpu,
   Gauge,
   Maximize2,
   Minimize2,
@@ -24,6 +25,7 @@ import {
   TargetFps,
 } from '../types/tea';
 import {
+  getLowRam2GbPreset,
   getRealmeNote50Preset,
   probeDeviceOptimization,
 } from '../utils/deviceOptimizer';
@@ -61,11 +63,15 @@ const QUALITY_OPTIONS: {value: GraphicsQuality; label: string}[] = [
   {value: 'high', label: 'คมชัดสูง'},
 ];
 
-const RESOLUTION_OPTIONS: {value: ResolutionScale; label: string}[] = [
-  {value: '0.75', label: '0.75x'},
-  {value: '1.0', label: '1.0x'},
-  {value: '1.5', label: '1.5x'},
-  {value: 'native', label: 'เต็มจอ'},
+const RESOLUTION_OPTIONS: {
+  value: ResolutionScale;
+  label: string;
+  hint: string;
+}[] = [
+  {value: 'hd', label: 'HD', hint: '720p'},
+  {value: 'hd-plus', label: 'HD+', hint: '900p'},
+  {value: 'fhd', label: 'Full HD', hint: '1080p'},
+  {value: 'fhd-plus', label: 'Full HD+', hint: '1080p+'},
 ];
 
 const AMBIENCE_OPTIONS: {id: AmbienceMode; label: string}[] = [
@@ -77,6 +83,7 @@ const AMBIENCE_OPTIONS: {id: AmbienceMode; label: string}[] = [
 const OPTIMIZATION_OPTIONS: {value: OptimizationProfile; label: string}[] = [
   {value: 'auto', label: 'อัตโนมัติ'},
   {value: 'realme-note-50', label: 'realme Note 50'},
+  {value: 'low-ram-2gb', label: 'RAM 2 GB'},
   {value: 'standard', label: 'มาตรฐาน'},
 ];
 
@@ -118,7 +125,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     if (quality === 'low') {
       onUpdateSettings({
         graphicsQuality: 'low',
-        resolutionScale: '0.75',
+        resolutionScale: 'hd',
         shadowsEnabled: false,
         antialiasEnabled: false,
         particlesEnabled: false,
@@ -126,15 +133,15 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     } else if (quality === 'medium') {
       onUpdateSettings({
         graphicsQuality: 'medium',
-        resolutionScale: '1.0',
+        resolutionScale: 'hd-plus',
         shadowsEnabled: true,
-        antialiasEnabled: true,
+        antialiasEnabled: false,
         particlesEnabled: true,
       });
     } else {
       onUpdateSettings({
         graphicsQuality: 'high',
-        resolutionScale: 'native',
+        resolutionScale: 'fhd-plus',
         shadowsEnabled: true,
         antialiasEnabled: true,
         particlesEnabled: true,
@@ -509,12 +516,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               </div>
             </div>
 
-            {/* Render Resolution Scale */}
+            {/* Render Resolution Preset (HD / HD+ / Full HD / Full HD+) */}
             <div className="space-y-1.5">
-              <span className="block text-xs sm:text-sm font-medium text-[#1F2823]">
-                ความคมชัดในการเรนเดอร์
-              </span>
-              <div className="grid grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
+              <div className="flex items-center justify-between gap-2">
+                <span className="block text-xs sm:text-sm font-medium text-[#1F2823]">
+                  ความละเอียดหน้าจอ 3 มิติ
+                </span>
+                <span className="text-[11px] font-semibold text-[#2E6F40]">
+                  {RESOLUTION_OPTIONS.find((r) => r.value === settings.resolutionScale)
+                    ?.label ?? 'HD+'}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
                 {RESOLUTION_OPTIONS.map((res) => {
                   const active = settings.resolutionScale === res.value;
                   return (
@@ -526,7 +539,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                         soundEngine.playTap();
                         onUpdateSettings({resolutionScale: res.value});
                       }}
-                      className="relative min-h-[42px] rounded-lg px-2 text-xs font-medium"
+                      className="relative flex min-h-[46px] flex-col items-center justify-center rounded-lg px-1.5 py-1 text-xs font-medium"
                     >
                       {active && (
                         <motion.span
@@ -536,11 +549,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                         />
                       )}
                       <span
-                        className={`relative z-10 font-mono-num ${
-                          active ? 'text-[#1F2823] font-semibold' : 'text-[#5A655D]'
+                        className={`relative z-10 leading-tight ${
+                          active ? 'text-[#1F2823] font-bold' : 'text-[#4A534D]'
                         }`}
                       >
                         {res.label}
+                      </span>
+                      <span
+                        className={`relative z-10 font-mono-num text-[10px] leading-tight ${
+                          active ? 'text-[#2E6F40] font-semibold' : 'text-[#6A736D]'
+                        }`}
+                      >
+                        {res.hint}
                       </span>
                     </motion.button>
                   );
@@ -610,7 +630,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 </span>
               </div>
 
-              <div className="grid grid-cols-3 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
                 {OPTIMIZATION_OPTIONS.map((opt) => {
                   const active = settings.optimizationProfile === opt.value;
                   return (
@@ -643,26 +663,47 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 })}
               </div>
 
-              <motion.button
-                type="button"
-                whileTap={{scale: 0.95}}
-                transition={TAP_SPRING}
-                onClick={() => {
-                  soundEngine.playTap();
-                  onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
-                }}
-                className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                  <span>ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)</span>
-                </span>
-                <span className="text-[11px] font-bold text-[#2E6F40] shrink-0">
-                  ปรับทันที
-                </span>
-              </motion.button>
+              <div className="grid grid-cols-1 gap-2">
+                <motion.button
+                  type="button"
+                  whileTap={{scale: 0.95}}
+                  transition={TAP_SPRING}
+                  onClick={() => {
+                    soundEngine.playTap();
+                    onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
+                  }}
+                  className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]"
+                >
+                  <span className="inline-flex items-center gap-2 text-left">
+                    <Zap className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
+                    <span>ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)</span>
+                  </span>
+                  <span className="text-[11px] font-bold text-[#2E6F40] shrink-0">
+                    ปรับทันที
+                  </span>
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  whileTap={{scale: 0.95}}
+                  transition={TAP_SPRING}
+                  onClick={() => {
+                    soundEngine.playTap();
+                    onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
+                  }}
+                  className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]"
+                >
+                  <span className="inline-flex items-center gap-2 text-left">
+                    <Cpu className="h-4 w-4 text-[#7D5A3C] shrink-0" aria-hidden="true" />
+                    <span>โหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB (ความละเอียด HD)</span>
+                  </span>
+                  <span className="text-[11px] font-bold text-[#7D5A3C] shrink-0">
+                    ปรับทันที
+                  </span>
+                </motion.button>
+              </div>
               <p className="text-[11px] text-[#5A655D] leading-relaxed">
-                ใช้เชดเดอร์ highp + MeshStandardMaterial ไร้บั๊ก Texture, ปิด Mipmap Bleed, แคชเงา 512px และลดการคำนวณสีบน CPU เพื่อให้ Unisoc Tiger T612 & ARM Mali-G57 รันลื่นเต็มหน้าจอ
+                ใช้เชดเดอร์ highp + โครงสร้างแก้ว/น้ำชาไร้การแหว่งขณะหมุนกล้อง, ปิด Mipmap Bleed, แคชเงา 512px และโหมด RAM 2 GB ที่รีดขนาดเทกซ์เจอร์และโมเดลลงเพื่อป้องกันเกมเด้ง
               </p>
             </div>
 

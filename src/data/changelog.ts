@@ -19,9 +19,38 @@ export interface AppVersionEntry {
   changes: VersionChangeItem[];
 }
 
-export const CURRENT_APP_VERSION = '2.7.0';
+export const CURRENT_APP_VERSION = '2.8.0';
 
 export const VERSION_HISTORY: AppVersionEntry[] = [
+  {
+    version: '2.8.0',
+    previousVersion: '2.7.0',
+    releaseDate: '26 พ.ย. 2026',
+    releaseTitle:
+      'ความละเอียด HD / Full HD+, แก้บั๊กเทกซ์เจอร์ขาดเวลาหมุนซ้าย-ขวา & รองรับมือถือ RAM 2 GB',
+    summary:
+      'แก้บั๊กพื้นผิวและโมเดล 3 มิติขาดหายหรือซ้อนทับเวลาหมุนกล้องซ้าย-ขวาหรือรินชา เพิ่มตัวเลือกความละเอียดหน้าจอ HD, HD+, Full HD, Full HD+ ในหน้าตั้งค่า และเพิ่มโหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB',
+    changes: [
+      {
+        category: 'ภาพและ 3 มิติ',
+        title: 'แก้บั๊ก Texture ขาดหายและแหว่งเวลาหมุนกล้องซ้าย-ขวา',
+        detail:
+          'ปรับขนาดน้ำชาให้พอดีกับชามมัทฉะ แยก Render Order ของแก้วใสกับชั้นน้ำชา/ไซรัปไม่ให้พลิกซ้อนทับเวลาหันมุมกล้อง ปิด Frustum Culling บนวัตถุที่ขยับและต้นไผ่ และปิด Mipmap บนชิป Mali-G57 เพื่อป้องกันเทกซ์เจอร์หายเป็นจุด',
+      },
+      {
+        category: 'ฟีเจอร์ใหม่',
+        title: 'เลือกความละเอียดหน้าจอ 3D ได้ 4 ระดับ (HD / HD+ / Full HD / Full HD+)',
+        detail:
+          'ปรับความคมชัดได้ตรงตามหน้าจอมือถือในหน้าตั้งค่า พร้อมปุ่มปรับจูนสำเร็จรูปทั้งสำหรับ realme Note 50 และมือถือ RAM 2 GB',
+      },
+      {
+        category: 'ประสิทธิภาพ',
+        title: 'เพิ่มโหมดรองรับมือถือที่มี RAM 2 GB โดยเฉพาะ',
+        detail:
+          'ตรวจจับเครื่อง RAM ≤ 2 GB อัตโนมัติ ลดขนาดเทกซ์เจอร์และจำนวนเหลี่ยมโมเดล 3 มิติ ปิดเอฟเฟกต์พาร์ติเคิล/เงาที่ไม่จำเป็น และใช้ content-visibility ในรายการชาเพื่อให้เล่นได้ลื่นไม่เด้ง',
+      },
+    ],
+  },
   {
     version: '2.7.0',
     previousVersion: '2.6.0',

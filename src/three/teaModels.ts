@@ -86,6 +86,7 @@ export function createTeaTableEnvironment(
   ceramicTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
   compactMode = false,
+  ultraCompact = false,
 ): THREE.Group {
   const envGroup = new THREE.Group();
 
@@ -179,7 +180,7 @@ export function createTeaTableEnvironment(
 
   // 3. Decorative Tea Canisters (shared geometry buffers across canisters)
   const canisterColors = [0x3c5844, 0x8b5a3c];
-  const canisterSeg = compactMode ? 18 : 28;
+  const canisterSeg = ultraCompact ? 14 : compactMode ? 18 : 28;
   const bodyPts = [
     new THREE.Vector2(0, 0),
     new THREE.Vector2(0.22, 0),
@@ -192,12 +193,12 @@ export function createTeaTableEnvironment(
     0.215,
     0.225,
     0.09,
-    compactMode ? 16 : 24,
+    ultraCompact ? 12 : compactMode ? 16 : 24,
   );
   const canisterKnobGeo = new THREE.SphereGeometry(
     0.045,
-    compactMode ? 10 : 16,
-    compactMode ? 10 : 16,
+    ultraCompact ? 8 : compactMode ? 10 : 16,
+    ultraCompact ? 8 : compactMode ? 10 : 16,
   );
   const canisterLidMat = new THREE.MeshStandardMaterial({
     map: walnutTex,
@@ -238,13 +239,13 @@ export function createTeaTableEnvironment(
     envGroup.add(canister);
   });
 
-  // 4. Courtyard Bamboo Garden Backdrop (InstancedMesh for calm horizon depth)
-  const bambooCount = compactMode ? 18 : 26;
+  // 4. Courtyard Bamboo Garden Backdrop (InstancedMesh with frustumCulled=false so stalks never vanish when rotating)
+  const bambooCount = ultraCompact ? 12 : compactMode ? 18 : 26;
   const stalkGeo = new THREE.CylinderGeometry(
     0.065,
     0.08,
     4.6,
-    compactMode ? 7 : 10,
+    ultraCompact ? 6 : compactMode ? 7 : 10,
   );
   const stalkMat = new THREE.MeshStandardMaterial({
     color: 0x628358,
@@ -285,6 +286,7 @@ export function createTeaTableEnvironment(
     bambooInstanced.instanceColor.needsUpdate = true;
   }
   bambooInstanced.computeBoundingSphere();
+  bambooInstanced.frustumCulled = false;
   envGroup.add(bambooInstanced);
 
   // Soft courtyard stone deck beyond counter
@@ -309,14 +311,15 @@ export function createTeaVesselSystem(
   shadowTex: THREE.CanvasTexture,
   isSoftwareGl: boolean,
   compactMode = false,
+  ultraCompact = false,
 ): TeaVesselHandles {
   const root = new THREE.Group();
   root.position.set(-0.22, TRAY_SURFACE_Y, 0.08);
 
-  const radialLg = compactMode ? 28 : 44;
-  const radialXl = compactMode ? 30 : 48;
-  const radialMd = compactMode ? 22 : 36;
-  const radialTube = compactMode ? 16 : 24;
+  const radialLg = ultraCompact ? 20 : compactMode ? 28 : 44;
+  const radialXl = ultraCompact ? 22 : compactMode ? 30 : 48;
+  const radialMd = ultraCompact ? 18 : compactMode ? 22 : 36;
+  const radialTube = ultraCompact ? 12 : compactMode ? 16 : 24;
 
   // Contact shadow disc
   root.add(makeContactShadow(1.55, shadowTex, 0.55));
@@ -533,29 +536,29 @@ export function createTeaVesselSystem(
     new THREE.LatheGeometry(glassPts, radialLg),
     glassMat,
   );
-  glassMesh.renderOrder = 6;
+  glassMesh.renderOrder = 10;
+  glassMesh.frustumCulled = false;
   glassGroup.add(glassMesh);
 
   const glassHandle = new THREE.Mesh(
     new THREE.TubeGeometry(handleCurve, radialTube, 0.036, compactMode ? 8 : 12, false),
     glassMat,
   );
-  glassHandle.renderOrder = 6;
+  glassHandle.renderOrder = 10;
+  glassHandle.frustumCulled = false;
   glassGroup.add(glassHandle);
   glassGroup.visible = false;
   root.add(glassGroup);
 
-  // === Dynamic Liquid Volume ===
+  // === Dynamic Liquid Volume (sized cleanly inside ceramic, chawan, & glass walls; opaque so glass sorting never flips) ===
   const liquidGroup = new THREE.Group();
-  liquidGroup.position.y = 0.11;
+  liquidGroup.position.y = 0.12;
 
   const liquidMaterial: THREE.MeshStandardMaterial = liteShader
     ? new THREE.MeshStandardMaterial({
         color: 0xe8e6df,
-        roughness: 0.14,
+        roughness: 0.16,
         metalness: 0.04,
-        transparent: true,
-        opacity: 0.92,
       })
     : new THREE.MeshPhysicalMaterial({
         color: 0xe8e6df,
@@ -563,14 +566,13 @@ export function createTeaVesselSystem(
         metalness: 0.02,
         clearcoat: 0.9,
         clearcoatRoughness: 0.08,
-        transparent: true,
-        opacity: 0.92,
       });
 
-  const liquidGeo = new THREE.CylinderGeometry(0.415, 0.285, 0.56, radialMd);
-  liquidGeo.translate(0, 0.28, 0);
+  const liquidGeo = new THREE.CylinderGeometry(0.375, 0.232, 0.53, radialMd);
+  liquidGeo.translate(0, 0.265, 0);
   const liquidMesh = new THREE.Mesh(liquidGeo, liquidMaterial);
-  liquidMesh.renderOrder = 3;
+  liquidMesh.renderOrder = 1;
+  liquidMesh.frustumCulled = false;
   liquidGroup.add(liquidMesh);
   liquidGroup.scale.y = 0.001;
   liquidGroup.visible = false;
@@ -578,7 +580,7 @@ export function createTeaVesselSystem(
 
   // === Tea Leaves / Matcha Powder Bed ===
   const leavesGroup = new THREE.Group();
-  leavesGroup.position.y = 0.13;
+  leavesGroup.position.y = 0.135;
   const leafMaterial = new THREE.MeshStandardMaterial({
     color: 0x4e7a3a,
     roughness: 0.85,
@@ -586,11 +588,11 @@ export function createTeaVesselSystem(
   });
   const leafMeshes: THREE.Mesh[] = [];
   const leafGeo = new THREE.DodecahedronGeometry(0.042, 0);
-  const leafCount = compactMode ? 10 : 14;
+  const leafCount = ultraCompact ? 6 : compactMode ? 10 : 14;
   for (let i = 0; i < leafCount; i++) {
     const m = new THREE.Mesh(leafGeo, leafMaterial);
     const angle = (i / leafCount) * Math.PI * 2;
-    const rad = (i % 3) * 0.065 + 0.03;
+    const rad = (i % 3) * 0.055 + 0.03;
     m.position.set(
       Math.cos(angle) * rad,
       (i % 2) * 0.015,
@@ -598,6 +600,7 @@ export function createTeaVesselSystem(
     );
     m.scale.set(1.2, 0.45, 0.85);
     m.rotation.set(i * 0.4, angle, i * 0.2);
+    m.frustumCulled = false;
     leavesGroup.add(m);
     leafMeshes.push(m);
   }
@@ -696,6 +699,7 @@ export function createTeaVesselSystem(
   const petalMat = new THREE.MeshStandardMaterial({
     color: 0xf4c752,
     roughness: 0.55,
+    side: THREE.DoubleSide,
   });
   const petalGeo = new THREE.CircleGeometry(0.025, 6);
   for (let i = 0; i < 9; i++) {
@@ -704,6 +708,7 @@ export function createTeaVesselSystem(
     const r = 0.08 + (i % 3) * 0.08;
     p.position.set(Math.cos(a) * r, 0.004, Math.sin(a) * r);
     p.rotation.x = -Math.PI / 2;
+    p.frustumCulled = false;
     osmanthusGroup.add(p);
   }
   osmanthusGroup.visible = false;
@@ -715,22 +720,25 @@ export function createTeaVesselSystem(
     ? new THREE.MeshStandardMaterial({
         color: 0xd95670,
         roughness: 0.24,
-        transparent: true,
-        opacity: 0.92,
+        polygonOffset: true,
+        polygonOffsetFactor: -1,
+        polygonOffsetUnits: -1,
       })
     : new THREE.MeshPhysicalMaterial({
         color: 0xd95670,
         roughness: 0.22,
         clearcoat: 0.65,
-        transparent: true,
-        opacity: 0.92,
+        polygonOffset: true,
+        polygonOffsetFactor: -1,
+        polygonOffsetUnits: -1,
       });
   const berryBase = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.31, 0.275, 0.14, compactMode ? 22 : 32),
+    new THREE.CylinderGeometry(0.282, 0.248, 0.115, compactMode ? 22 : 32),
     berryLayerMat,
   );
-  berryBase.position.y = 0.185;
+  berryBase.position.y = 0.175;
   berryBase.renderOrder = 2;
+  berryBase.frustumCulled = false;
   strawberryGroup.add(berryBase);
 
   const berryBody = new THREE.Mesh(
@@ -740,6 +748,7 @@ export function createTeaVesselSystem(
   berryBody.rotation.x = Math.PI;
   berryBody.position.set(0.34, 0.76, 0.15);
   berryBody.rotation.z = -0.35;
+  berryBody.frustumCulled = false;
   strawberryGroup.add(berryBody);
 
   const berryLeaf = new THREE.Mesh(
@@ -748,6 +757,7 @@ export function createTeaVesselSystem(
   );
   berryLeaf.position.set(0.36, 0.82, 0.15);
   berryLeaf.rotation.z = -0.35;
+  berryLeaf.frustumCulled = false;
   strawberryGroup.add(berryLeaf);
   strawberryGroup.visible = false;
   root.add(strawberryGroup);
@@ -755,24 +765,27 @@ export function createTeaVesselSystem(
   // === Toppings: Brown Sugar Caramel Layer & Tapioca/Sugar Pearls ===
   const brownSugarGroup = new THREE.Group();
   const caramelLayer = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.31, 0.275, 0.13, compactMode ? 22 : 32),
+    new THREE.CylinderGeometry(0.282, 0.248, 0.115, compactMode ? 22 : 32),
     liteShader
       ? new THREE.MeshStandardMaterial({
           color: 0x7a4218,
           roughness: 0.2,
-          transparent: true,
-          opacity: 0.92,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1,
         })
       : new THREE.MeshPhysicalMaterial({
           color: 0x7a4218,
           roughness: 0.18,
           clearcoat: 0.85,
-          transparent: true,
-          opacity: 0.92,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1,
         }),
   );
-  caramelLayer.position.y = 0.18;
+  caramelLayer.position.y = 0.175;
   caramelLayer.renderOrder = 2;
+  caramelLayer.frustumCulled = false;
   brownSugarGroup.add(caramelLayer);
 
   const pearlMat = liteShader
@@ -858,11 +871,16 @@ export function createTeaVesselSystem(
   // Delicate green matcha art leaf on foam
   const artDisc = new THREE.Mesh(
     new THREE.CircleGeometry(0.12, 16),
-    new THREE.MeshStandardMaterial({color: 0x629b45, roughness: 0.78}),
+    new THREE.MeshStandardMaterial({
+      color: 0x629b45,
+      roughness: 0.78,
+      side: THREE.DoubleSide,
+    }),
   );
   artDisc.rotation.x = -Math.PI / 2;
   artDisc.position.y = 0.068;
   artDisc.renderOrder = 5;
+  artDisc.frustumCulled = false;
   milkFoamGroup.add(artDisc);
 
   milkFoamGroup.visible = false;
@@ -1049,6 +1067,12 @@ export function createKettleGroup(
         }),
   );
   streamMesh.visible = false;
+  streamMesh.frustumCulled = false;
+  potBody.frustumCulled = false;
+  lid.frustumCulled = false;
+  knob.frustumCulled = false;
+  spout.frustumCulled = false;
+  handle.frustumCulled = false;
   bodyGroup.add(streamMesh);
 
   root.add(bodyGroup);
@@ -1513,12 +1537,12 @@ export function createEquipmentRig(
   herbalPot.add(makeContactShadow(0.9, shadowTex, 0.45));
 
   const glassBowl = new THREE.Mesh(
-    new THREE.SphereGeometry(0.32, 28, 20),
+    new THREE.SphereGeometry(0.32, compactMode ? 20 : 28, compactMode ? 14 : 20),
     glassMat,
   );
   glassBowl.scale.set(1, 0.85, 1);
   glassBowl.position.y = 0.28;
-  glassBowl.renderOrder = 6;
+  glassBowl.renderOrder = 10;
   herbalPot.add(glassBowl);
 
   const herbalInfuseTea = new THREE.Mesh(
@@ -1595,19 +1619,19 @@ export function createEquipmentRig(
   tower.add(postLeft, postRight);
 
   const topChamber = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.16, 0.05, 0.32, 24),
+    new THREE.CylinderGeometry(0.16, 0.05, 0.32, compactMode ? 16 : 24),
     glassMat,
   );
   topChamber.position.y = 0.80;
-  topChamber.renderOrder = 6;
+  topChamber.renderOrder = 10;
   tower.add(topChamber);
 
   const bottomCarafe = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.12, 0.21, 0.36, 24),
+    new THREE.CylinderGeometry(0.12, 0.21, 0.36, compactMode ? 16 : 24),
     glassMat,
   );
   bottomCarafe.position.y = 0.24;
-  bottomCarafe.renderOrder = 6;
+  bottomCarafe.renderOrder = 10;
   tower.add(bottomCarafe);
 
   const dripMatcha = new THREE.Mesh(
