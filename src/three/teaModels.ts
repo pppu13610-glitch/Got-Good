@@ -91,15 +91,15 @@ export function createTeaTableEnvironment(
   const envGroup = new THREE.Group();
   const SHOP_FLOOR_Y = -0.78;
 
-  // 1. Cedar Tea Countertop (y = -0.22 to 0, sized with walkable aisles all around)
-  const tableGeo = new THREE.BoxGeometry(6.4, 0.22, 2.45);
+  // 1. Cedar Tea Countertop (y = -0.22 to 0, sized so guest chairs sit naturally across the counter)
+  const tableGeo = new THREE.BoxGeometry(7.8, 0.22, 2.76);
   const tableMat = new THREE.MeshStandardMaterial({
     map: woodTex,
     roughness: 0.62,
     metalness: 0.02,
   });
   const table = new THREE.Mesh(tableGeo, tableMat);
-  table.position.set(0, -0.11, 0.05);
+  table.position.set(0, -0.11, 0.14);
   table.receiveShadow = true;
   envGroup.add(table);
 
@@ -110,10 +110,10 @@ export function createTeaTableEnvironment(
     metalness: 0.05,
   });
   const frontTrim = new THREE.Mesh(
-    new THREE.BoxGeometry(6.44, 0.06, 0.08),
+    new THREE.BoxGeometry(7.84, 0.06, 0.08),
     trimMat,
   );
-  frontTrim.position.set(0, -0.02, 1.28);
+  frontTrim.position.set(0, -0.02, 1.52);
   envGroup.add(frontTrim);
 
   // Counter Cabinet Apron & Support Pillars down to Shop Floor (y = -0.78..-0.22)
@@ -123,23 +123,21 @@ export function createTeaTableEnvironment(
     metalness: 0.02,
   });
   const counterBase = new THREE.Mesh(
-    new THREE.BoxGeometry(5.95, 0.56, 2.05),
+    new THREE.BoxGeometry(7.25, 0.56, 2.25),
     walnutMat,
   );
-  counterBase.position.set(0, -0.50, 0.05);
+  counterBase.position.set(0, -0.50, 0.14);
   counterBase.receiveShadow = true;
   envGroup.add(counterBase);
 
-  // Vertical slatted paneling across both customer & tea-master sides
+  // Subtle vertical slatted paneling across back/customer side of counter
   const slatGeo = new THREE.BoxGeometry(0.12, 0.50, 0.04);
-  const slatCount = ultraCompact ? 6 : 9;
+  const slatCount = ultraCompact ? 6 : 10;
   for (let i = 0; i < slatCount; i++) {
     const t = i / (slatCount - 1) - 0.5;
-    const slatBack = new THREE.Mesh(slatGeo, trimMat);
-    slatBack.position.set(t * 5.2, -0.50, -0.98);
-    const slatFront = new THREE.Mesh(slatGeo, trimMat);
-    slatFront.position.set(t * 5.2, -0.50, 1.08);
-    envGroup.add(slatBack, slatFront);
+    const slat = new THREE.Mesh(slatGeo, trimMat);
+    slat.position.set(t * 6.4, -0.50, -0.99);
+    envGroup.add(slat);
   }
 
   // 2. Woven Bamboo Tea Tray (multi-part group grounded at y = 0)
@@ -207,7 +205,7 @@ export function createTeaTableEnvironment(
   }
   envGroup.add(trayGroup);
 
-  // 3. Decorative Tea Canisters (positioned neatly on counter beside tray)
+  // 3. Decorative Tea Canisters (shared geometry buffers across canisters)
   const canisterColors = [0x3c5844, 0x8b5a3c];
   const canisterSeg = ultraCompact ? 14 : compactMode ? 18 : 28;
   const bodyPts = [
@@ -237,7 +235,7 @@ export function createTeaTableEnvironment(
 
   canisterColors.forEach((col, idx) => {
     const canister = new THREE.Group();
-    const xPos = -2.38 - idx * 0.48;
+    const xPos = -2.65 - idx * 0.65;
     const zPos = -0.35 + idx * 0.55;
 
     canister.add(makeContactShadow(0.65, shadowTex, 0.5));
@@ -268,7 +266,7 @@ export function createTeaTableEnvironment(
     envGroup.add(canister);
   });
 
-  // 4. Small Wooden Tea Shop Architecture (Walkable floor, Plaster & Timber walls, Lattice Window, Open Entry Door)
+  // 4. Small Wooden Tea Shop Architecture (Plank floor, Plaster & Timber walls, Lattice Window)
   const shopGroup = new THREE.Group();
   const plasterMat = new THREE.MeshStandardMaterial({
     color: 0xe9e1d2,
@@ -287,38 +285,30 @@ export function createTeaTableEnvironment(
     metalness: 0.02,
   });
 
-  // Expanded Walkable Shop Plank Floor (x: -5.45..5.45, z: -3.25..4.95)
+  // Shop Plank Floor (y = -0.78)
   const shopFloor = new THREE.Mesh(
-    new THREE.BoxGeometry(10.9, 0.08, 8.2),
+    new THREE.BoxGeometry(9.6, 0.08, 7.6),
     floorMat,
   );
-  shopFloor.position.set(0, SHOP_FLOOR_Y - 0.04, 0.85);
+  shopFloor.position.set(0, SHOP_FLOOR_Y - 0.04, 0.55);
   shopFloor.receiveShadow = true;
   shopGroup.add(shopFloor);
 
-  // Outdoor stone stepping patio outside the right-side Noren doorway
-  const entryStone = new THREE.Mesh(
-    new THREE.BoxGeometry(2.8, 0.07, 2.2),
-    new THREE.MeshStandardMaterial({color: 0xb9c1b6, roughness: 0.88}),
-  );
-  entryStone.position.set(6.75, SHOP_FLOOR_Y - 0.045, -1.82);
-  shopGroup.add(entryStone);
-
   // Back Wall (z = -3.15) with Wide Central Lattice Window Opening (-1.85..1.85, y = 0.45..2.52)
   const backWainscot = new THREE.Mesh(
-    new THREE.BoxGeometry(10.9, 1.24, 0.16),
+    new THREE.BoxGeometry(9.6, 1.24, 0.16),
     timberMat,
   );
   backWainscot.position.set(0, SHOP_FLOOR_Y + 0.62, -3.15);
   shopGroup.add(backWainscot);
 
   const backWallLeft = new THREE.Mesh(
-    new THREE.BoxGeometry(3.6, 2.85, 0.16),
+    new THREE.BoxGeometry(2.95, 2.85, 0.16),
     plasterMat,
   );
-  backWallLeft.position.set(-3.65, 1.88, -3.15);
+  backWallLeft.position.set(-3.32, 1.88, -3.15);
   const backWallRight = backWallLeft.clone();
-  backWallRight.position.x = 3.65;
+  backWallRight.position.x = 3.32;
   shopGroup.add(backWallLeft, backWallRight);
 
   const backHeader = new THREE.Mesh(
@@ -335,7 +325,7 @@ export function createTeaTableEnvironment(
   );
   windowSill.position.set(0, 0.46, -3.12);
   const windowTopBeam = new THREE.Mesh(
-    new THREE.BoxGeometry(10.9, 0.14, 0.22),
+    new THREE.BoxGeometry(9.6, 0.14, 0.22),
     timberMat,
   );
   windowTopBeam.position.set(0, 2.52, -3.14);
@@ -353,52 +343,21 @@ export function createTeaTableEnvironment(
   hBar.position.set(0, 1.98, -3.14);
   shopGroup.add(hBar);
 
-  // Left Wall (x = -5.35)
-  const leftWall = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 4.15, 8.2),
-    plasterMat,
-  );
-  leftWall.position.set(-5.35, 1.28, 0.85);
-  shopGroup.add(leftWall);
-
-  // Right Wall (x = 5.35) split cleanly for Open Customer Entrance Doorway (z: -2.48..-1.12)
-  const rightWallBack = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 4.15, 0.78),
-    plasterMat,
-  );
-  rightWallBack.position.set(5.35, 1.28, -2.86);
-  const rightWallFront = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 4.15, 6.1),
-    plasterMat,
-  );
-  rightWallFront.position.set(5.35, 1.28, 1.92);
-  const rightDoorHeader = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 1.25, 1.45),
-    plasterMat,
-  );
-  rightDoorHeader.position.set(5.35, 2.72, -1.80);
-  shopGroup.add(rightWallBack, rightWallFront, rightDoorHeader);
-
-  // Wooden Doorway Frame around Entrance
-  const doorPostGeo = new THREE.BoxGeometry(0.22, 2.86, 0.12);
-  const doorPostBack = new THREE.Mesh(doorPostGeo, timberMat);
-  doorPostBack.position.set(5.35, 0.65, -2.46);
-  const doorPostFront = new THREE.Mesh(doorPostGeo, timberMat);
-  doorPostFront.position.set(5.35, 0.65, -1.14);
-  const doorLintel = new THREE.Mesh(
-    new THREE.BoxGeometry(0.26, 0.14, 1.52),
-    timberMat,
-  );
-  doorLintel.position.set(5.35, 2.12, -1.80);
-  shopGroup.add(doorPostBack, doorPostFront, doorLintel);
+  // Left & Right Shop Side Walls (x = +-4.75) so orbiting stays cozy inside the shop
+  const sideWallGeo = new THREE.BoxGeometry(0.16, 4.15, 7.6);
+  const leftWall = new THREE.Mesh(sideWallGeo, plasterMat);
+  leftWall.position.set(-4.75, 1.28, 0.55);
+  const rightWall = new THREE.Mesh(sideWallGeo, plasterMat);
+  rightWall.position.set(4.75, 1.28, 0.55);
+  shopGroup.add(leftWall, rightWall);
 
   // Corner Timber Columns
   const pillarGeo = new THREE.BoxGeometry(0.22, 4.15, 0.22);
   const pillarPositions: [number, number][] = [
-    [-5.25, -3.05],
-    [5.25, -3.05],
-    [-5.25, 0.85],
-    [5.25, 0.85],
+    [-4.65, -3.05],
+    [4.65, -3.05],
+    [-4.65, 0.85],
+    [4.65, 0.85],
   ];
   for (const [px, pz] of pillarPositions) {
     const pillar = new THREE.Mesh(pillarGeo, timberMat);
@@ -411,7 +370,7 @@ export function createTeaTableEnvironment(
     new THREE.BoxGeometry(1.75, 0.06, 0.34),
     timberMat,
   );
-  shelfBoard.position.set(-3.45, 1.38, -2.92);
+  shelfBoard.position.set(-3.25, 1.38, -2.92);
   shopGroup.add(shelfBoard);
 
   const jarMat = new THREE.MeshStandardMaterial({
@@ -427,7 +386,7 @@ export function createTeaTableEnvironment(
   );
   for (let j = 0; j < 3; j++) {
     const jar = new THREE.Mesh(jarGeo, jarMat);
-    jar.position.set(-3.95 + j * 0.45, 1.54, -2.92);
+    jar.position.set(-3.75 + j * 0.45, 1.54, -2.92);
     shopGroup.add(jar);
   }
 
@@ -457,22 +416,22 @@ export function createTeaTableEnvironment(
   lanternGroup.add(lanternCord, lanternShade, topCap, botCap);
   shopGroup.add(lanternGroup);
 
-  // Matcha Noren Curtains hung high at the Right Doorway Entrance so guests walk cleanly underneath
+  // Indigo / Matcha Noren Curtains on Right Wall Entrance
   const norenMat = new THREE.MeshStandardMaterial({
     color: 0x3b5942,
     roughness: 0.86,
   });
   const norenBar = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.025, 0.025, 1.36, 8),
+    new THREE.CylinderGeometry(0.025, 0.025, 1.55, 8),
     timberMat,
   );
   norenBar.rotation.x = Math.PI / 2;
-  norenBar.position.set(5.26, 2.02, -1.80);
+  norenBar.position.set(4.56, 2.15, -1.65);
   shopGroup.add(norenBar);
-  const norenPanelGeo = new THREE.BoxGeometry(0.03, 0.56, 0.40);
+  const norenPanelGeo = new THREE.BoxGeometry(0.03, 0.68, 0.42);
   for (let p = 0; p < 3; p++) {
     const panel = new THREE.Mesh(norenPanelGeo, norenMat);
-    panel.position.set(5.26, 1.72, -2.22 + p * 0.42);
+    panel.position.set(4.56, 1.78, -2.12 + p * 0.47);
     shopGroup.add(panel);
   }
 

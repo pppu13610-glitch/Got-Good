@@ -373,10 +373,10 @@ export const UpdateCheckScreen: React.FC<UpdateCheckScreenProps> = ({
               <div className="flex items-center justify-between gap-2">
                 <div>
                   <p className="text-[11px] font-medium text-[#5A655D]">
-                    บัญชี GitHub ผู้สร้าง / ผู้พัฒนาเกม
+                    บัญชี GitHub ผู้สร้างเกม
                   </p>
                   <p className="font-mono-num text-xs font-bold text-[#1F2823]">
-                    {CREATOR_GITHUB_USERNAME}
+                    @{CREATOR_GITHUB_USERNAME}
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5">

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {Coffee} from 'lucide-react';
 import {getLiquidColor} from '../data/teas';
 import {
   createCeramicSpeckleTexture,
@@ -17,16 +17,12 @@ import {
   createTeaTableEnvironment,
   createTeaVesselSystem,
 } from '../three/teaModels';
-import {
-  createShopCharactersSystem,
-  ShopCharactersHandles,
-} from '../three/shopCharacters';
+import {createShopCharactersSystem} from '../three/shopCharacters';
 import {
   BrewStep,
-  CustomerPhase,
+  CameraPreset,
   GameMode,
   GameSettings,
-  PlayerMoveInput,
   TeaType,
   ToppingId,
 } from '../types/tea';
@@ -37,17 +33,12 @@ interface TeaScene3DProps {
   step: BrewStep;
   mode: GameMode;
   guestId: string;
-  customerSequenceKey: number;
   waterLevel: number;
   steepSeconds: number;
   toppings: ToppingId[];
   isPouring: boolean;
+  cameraPreset: CameraPreset;
   settings: GameSettings;
-  playerMoveRef: React.MutableRefObject<PlayerMoveInput>;
-  onProximityChange: (near: boolean) => void;
-  onBrewAtTableClick: () => void;
-  onCustomerEnteredDoor: () => void;
-  onCustomerPhaseChange: (phase: CustomerPhase) => void;
   onKettleClick?: () => void;
   onVesselClick?: () => void;
 }
@@ -61,18 +52,25 @@ interface SceneSyncState {
   steepSeconds: number;
   toppings: ToppingId[];
   isPouring: boolean;
+  cameraPreset: CameraPreset;
   settings: GameSettings;
 }
+
+const CAMERA_PRESETS: Record<
+  CameraPreset,
+  {pos: [number, number, number]; target: [number, number, number]}
+> = {
+  table: {pos: [0.35, 2.35, 3.65], target: [0.18, 0.42, 0.05]},
+  cup: {pos: [-0.22, 1.45, 2.05], target: [-0.22, 0.48, 0.08]},
+  overhead: {pos: [0.08, 3.9, 1.35], target: [0.12, 0.25, 0.05]},
+};
 
 // Module-scope scratch variables to keep the render loop GC-free
 const _targetLiquidColor = new THREE.Color();
 const _targetLeafColor = new THREE.Color();
 const _camGoalPos = new THREE.Vector3();
 const _camGoalTarget = new THREE.Vector3();
-const _camCurrentTarget = new THREE.Vector3(0.45, 0.25, 2.72);
 const _pointerNdc = new THREE.Vector2();
-const _TABLE_ANCHOR = new THREE.Vector3(-0.1, 0.72, 0.18);
-const _tableProj = new THREE.Vector3();
 
 function detectSoftwareWebGL(): boolean {
   try {
@@ -143,25 +141,18 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   step,
   mode,
   guestId,
-  customerSequenceKey,
   waterLevel,
   steepSeconds,
   toppings,
   isPouring,
+  cameraPreset,
   settings,
-  playerMoveRef,
-  onProximityChange,
-  onBrewAtTableClick,
-  onCustomerEnteredDoor,
-  onCustomerPhaseChange,
   onKettleClick,
   onVesselClick,
 }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
-  const tableBtnRef = useRef<HTMLButtonElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const keyLightRef = useRef<THREE.DirectionalLight | null>(null);
-  const charactersRef = useRef<ShopCharactersHandles | null>(null);
   const isSoftwareGlRef = useRef<boolean>(false);
   const shadowDirtyRef = useRef<boolean>(true);
   const dynamicScaleRef = useRef<number>(1);
@@ -181,17 +172,19 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     steepSeconds,
     toppings,
     isPouring,
+    cameraPreset,
     settings,
   });
 
   const callbacksRef = useRef({
     onKettleClick,
     onVesselClick,
-    onProximityChange,
-    onCustomerEnteredDoor,
-    onCustomerPhaseChange,
   });
 
+  const presetAnimatingRef = useRef<boolean>(true);
+  const lastPresetRef = useRef<CameraPreset>(cameraPreset);
+
+  // Lightweight state sync: NEVER resize renderer or reallocate shadow buffers on timer ticks
   useEffect(() => {
     syncRef.current = {
       tea,
@@ -202,8 +195,13 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       steepSeconds,
       toppings,
       isPouring,
+      cameraPreset,
       settings,
     };
+    if (lastPresetRef.current !== cameraPreset) {
+      lastPresetRef.current = cameraPreset;
+      presetAnimatingRef.current = true;
+    }
   }, [
     tea,
     step,
@@ -213,36 +211,16 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     steepSeconds,
     toppings,
     isPouring,
+    cameraPreset,
     settings,
   ]);
 
-  useEffect(() => {
-    callbacksRef.current = {
-      onKettleClick,
-      onVesselClick,
-      onProximityChange,
-      onCustomerEnteredDoor,
-      onCustomerPhaseChange,
-    };
-  }, [
-    onKettleClick,
-    onVesselClick,
-    onProximityChange,
-    onCustomerEnteredDoor,
-    onCustomerPhaseChange,
-  ]);
-
-  // Spawn walking guest whenever guestId/customerSequenceKey updates in guest mode
-  useEffect(() => {
-    if (mode === 'guest' && charactersRef.current) {
-      charactersRef.current.startCustomerWalkIn(guestId);
-    }
-  }, [customerSequenceKey, guestId, mode]);
-
+  // Mark shadow map dirty only when objects/props that affect shadows actually change
   useEffect(() => {
     shadowDirtyRef.current = true;
   }, [tea.id, step, mode, guestId, toppings, isPouring, settings.shadowsEnabled]);
 
+  // Apply renderer pixel ratio / size / shadow toggle ONLY when display settings change
   useEffect(() => {
     const renderer = rendererRef.current;
     const keyLight = keyLightRef.current;
@@ -284,6 +262,10 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     isUltraLowRam,
     isMaliG71Hardware,
   ]);
+
+  useEffect(() => {
+    callbacksRef.current = {onKettleClick, onVesselClick};
+  }, [onKettleClick, onVesselClick]);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -365,10 +347,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       handleContextRestored,
     );
 
+    // Scene & Atmosphere
     const scene = new THREE.Scene();
     const horizonHex = 0xd8dfd5;
     scene.background = new THREE.Color(horizonHex);
-    scene.fog = new THREE.FogExp2(horizonHex, 0.048);
+    scene.fog = new THREE.FogExp2(horizonHex, 0.052);
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const roomEnv = new RoomEnvironment();
@@ -378,20 +361,45 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     roomEnv.dispose();
     pmremGenerator.dispose();
 
+    // Camera & OrbitControls (clamped cleanly inside small tea shop walls)
     const isShortLandscape = initH < 520;
     const camera = new THREE.PerspectiveCamera(
-      isShortLandscape ? 50 : 46,
+      isShortLandscape ? 46 : 42,
       initW / initH,
       0.08,
       60,
     );
-    // Start in Third-Person View behind player spawn
-    camera.position.set(0.45, 1.38, 4.48);
-    _camCurrentTarget.set(0.45, 0.25, 2.72);
-    camera.lookAt(_camCurrentTarget);
+    const initialPreset = CAMERA_PRESETS[syncRef.current.cameraPreset];
+    camera.position.set(
+      initialPreset.pos[0],
+      initialPreset.pos[1] + (isShortLandscape ? 0.15 : 0),
+      initialPreset.pos[2] + (isShortLandscape ? 0.45 : 0),
+    );
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(
+      initialPreset.target[0],
+      initialPreset.target[1] - (isShortLandscape ? 0.16 : 0),
+      initialPreset.target[2],
+    );
+    controls.enableDamping = !isSoftwareGl;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 1.65;
+    controls.maxDistance = 5.35;
+    controls.minPolarAngle = 0.28;
+    controls.maxPolarAngle = Math.PI / 2 - 0.08;
+    controls.minAzimuthAngle = -Math.PI / 2.55;
+    controls.maxAzimuthAngle = Math.PI / 2.55;
+    controls.enablePan = false;
+    controls.update();
+
+    const handleControlStart = () => {
+      presetAnimatingRef.current = false;
+    };
+    controls.addEventListener('start', handleControlStart);
 
     // 3-Point Studio Lighting Rig + Cozy Paper Lantern Accent
-    const hemiLight = new THREE.HemisphereLight(0xdfe8ec, 0x8b7358, 0.92);
+    const hemiLight = new THREE.HemisphereLight(0xdfe8ec, 0x8b7358, 0.9);
     scene.add(hemiLight);
 
     const keyLight = new THREE.DirectionalLight(0xfff1dc, 1.6);
@@ -403,7 +411,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     keyLight.shadow.mapSize.height = shadowSize;
     keyLight.shadow.camera.near = 0.5;
     keyLight.shadow.camera.far = 18;
-    const d = 4.6;
+    const d = 4.2;
     keyLight.shadow.camera.left = -d;
     keyLight.shadow.camera.right = d;
     keyLight.shadow.camera.top = d;
@@ -422,11 +430,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       scene.add(lanternWarmLight);
     }
 
+    // Procedural Textures (compact 256/128 or ultra-compact 128/64 buffers & mipmap-free on Mali-G57 / Mali-G71 / 2GB RAM)
     const rawAniso = renderer.capabilities.getMaxAnisotropy();
     const maxAniso = liteGpuMode ? 1 : rawAniso;
     const compactAssets = liteGpuMode || isSoftwareGl;
     const ultraCompactAssets = isUltraLowRam || isMaliG71Hardware;
-
     const cedarTex = createWoodGrainTexture(
       '#A87B4F',
       '#6B4728',
@@ -456,6 +464,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     const shadowTex = createContactShadowTexture(ultraCompactAssets);
     const steamTex = createSteamPuffTexture(ultraCompactAssets);
 
+    // Assemble Multi-Part 3D Models (bypass extra transmission pass on Software GL, Mali-G57, Mali-G71 & 2GB RAM)
     const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
     const envGroup = createTeaTableEnvironment(
       cedarTex,
@@ -474,12 +483,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       compactAssets,
       ultraCompactAssets,
     );
-    charactersRef.current = shopCharacters;
     scene.add(shopCharacters.root);
-
-    if (syncRef.current.mode === 'guest') {
-      shopCharacters.startCustomerWalkIn(syncRef.current.guestId);
-    }
 
     const vessel = createTeaVesselSystem(
       ceramicTex,
@@ -506,6 +510,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     );
     scene.add(equipmentRig.root);
 
+    // Rising Steam Wisps (0 on 2GB RAM, 3 on lite GPU, 6 on standard)
     const steamCount = isUltraLowRam ? 0 : liteGpuMode ? 3 : 6;
     const steamSprites: {
       sprite: THREE.Sprite;
@@ -529,7 +534,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         sprite,
         phase: i / steamCount,
         speed: 0.24 + (i % 3) * 0.05,
-        driftX: (i % 2 === 0 ? 1 : -1) * (0.04 + i * 0.015),
+        driftX: ((i % 2 === 0 ? 1 : -1) * (0.04 + i * 0.015)),
       });
     }
 
@@ -537,37 +542,22 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       renderer.compile(scene, camera);
     }
 
-    // Camera Drag + Raycasting for First-Person Vessel/Kettle Clicks
-    let thirdPersonYaw = 0;
-    let thirdPersonHeightOffset = 2.05;
-    let firstPersonLookYaw = 0;
-    let firstPersonLookPitch = 0;
-
-    let activePointerId: number | null = null;
-    let dragLastPos = {x: 0, y: 0};
-    let pointerDownPos = {x: 0, y: 0};
-
+    // Raycasting for 3D Kettle & Vessel clicks
     const raycaster = new THREE.Raycaster();
     const clickables = [kettle.clickProxy, vessel.clickProxy];
+    let pointerDownPos = {x: 0, y: 0};
 
     const onPointerDown = (e: PointerEvent) => {
-      if (activePointerId !== null) return;
-      activePointerId = e.pointerId;
       pointerDownPos = {x: e.clientX, y: e.clientY};
-      dragLastPos = {x: e.clientX, y: e.clientY};
     };
 
     const onPointerUp = (e: PointerEvent) => {
-      if (activePointerId === e.pointerId) {
-        activePointerId = null;
-      }
+      // Ignore camera drag releases
       const moveDist = Math.hypot(
         e.clientX - pointerDownPos.x,
         e.clientY - pointerDownPos.y,
       );
       if (moveDist > 8) return;
-
-      if (syncRef.current.step === 'EXPLORE_SHOP') return;
 
       const rect = renderer.domElement.getBoundingClientRect();
       _pointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -587,42 +577,9 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
 
     let lastHoverCheck = 0;
     const onPointerMove = (e: PointerEvent) => {
-      if (activePointerId === e.pointerId) {
-        const dx = e.clientX - dragLastPos.x;
-        const dy = e.clientY - dragLastPos.y;
-        dragLastPos = {x: e.clientX, y: e.clientY};
-
-        if (syncRef.current.step === 'EXPLORE_SHOP') {
-          thirdPersonYaw -= dx * 0.0065;
-          thirdPersonHeightOffset = THREE.MathUtils.clamp(
-            thirdPersonHeightOffset + dy * 0.0045,
-            1.35,
-            2.9,
-          );
-        } else {
-          firstPersonLookYaw = THREE.MathUtils.clamp(
-            firstPersonLookYaw - dx * 0.0032,
-            -0.52,
-            0.52,
-          );
-          firstPersonLookPitch = THREE.MathUtils.clamp(
-            firstPersonLookPitch - dy * 0.0025,
-            -0.25,
-            0.25,
-          );
-        }
-        return;
-      }
-
       const now = performance.now();
-      if (now - lastHoverCheck < 75) return;
+      if (now - lastHoverCheck < 60) return;
       lastHoverCheck = now;
-
-      const curStep = syncRef.current.step;
-      if (curStep === 'EXPLORE_SHOP') {
-        renderer.domElement.style.cursor = 'grab';
-        return;
-      }
 
       const rect = renderer.domElement.getBoundingClientRect();
       _pointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -630,6 +587,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
 
       raycaster.setFromCamera(_pointerNdc, camera);
       const hits = raycaster.intersectObjects(clickables, false);
+      const curStep = syncRef.current.step;
       let canInteract = false;
       if (hits.length > 0) {
         const id = hits[0].object.userData.interactId;
@@ -640,9 +598,10 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     };
 
     renderer.domElement.addEventListener('pointerdown', onPointerDown);
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('pointermove', onPointerMove);
+    renderer.domElement.addEventListener('pointerup', onPointerUp);
+    renderer.domElement.addEventListener('pointermove', onPointerMove);
 
+    // ResizeObserver for crisp container fitting & accurate HD/HD+/FHD/FHD+ pixel ratios
     const handleResize = () => {
       if (!container) return;
       const w = Math.max(container.clientWidth, 280);
@@ -665,6 +624,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
+    // Animation Loop State
     const clock = new THREE.Clock();
     let frameId = 0;
     let isDisposed = false;
@@ -675,9 +635,6 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     let shadowTickCounter = 0;
     let lastAppliedTeaId = '';
     let lastLiquidCacheKey = '';
-    let lastNearState = false;
-    let lastCustomerPhase: CustomerPhase = 'ENTERING';
-    let lastStep: BrewStep = syncRef.current.step;
 
     function afterDraw(cb: () => void) {
       const gl = renderer.getContext() as WebGL2RenderingContext;
@@ -721,6 +678,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       const delta = Math.min(clock.getDelta(), 0.1);
       const elapsed = clock.getElapsedTime();
 
+      // Adaptive Resolution Guard for realme Note 50 / Mali-G57 MP1 / 2GB RAM
       if (
         (liteGpuMode || isUltraLowRam) &&
         !isSoftwareGl &&
@@ -755,154 +713,58 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         }
       }
 
-      // Reset subtle head look-around when switching between third-person and first-person brewing
-      if (lastStep !== state.step) {
-        if (lastStep === 'EXPLORE_SHOP' || state.step === 'EXPLORE_SHOP') {
-          firstPersonLookYaw = 0;
-          firstPersonLookPitch = 0;
-        }
-        lastStep = state.step;
-      }
-
-      const isThirdPerson = state.step === 'EXPLORE_SHOP';
-      shopCharacters.setFirstPersonHidden(!isThirdPerson);
-
-      if (isThirdPerson) {
-        const moveInput = playerMoveRef.current;
-        shopCharacters.movePlayer(moveInput.x, moveInput.y, thirdPersonYaw, delta);
-      } else {
-        shopCharacters.movePlayer(0, 0, thirdPersonYaw, delta);
-      }
-
-      const charTick = shopCharacters.animate(
-        elapsed,
-        delta,
-        state.step,
-        state.isPouring,
-        state.mode,
-        state.guestId,
-        reducedMotion,
-      );
-
-      if (charTick.customerCrossedDoorNow) {
-        callbacksRef.current.onCustomerEnteredDoor();
-      }
-      if (charTick.customerPhase !== lastCustomerPhase) {
-        lastCustomerPhase = charTick.customerPhase;
-        callbacksRef.current.onCustomerPhaseChange(charTick.customerPhase);
-      }
-      if (charTick.isNearTeaTable !== lastNearState) {
-        lastNearState = charTick.isNearTeaTable;
-        callbacksRef.current.onProximityChange(charTick.isNearTeaTable);
-      }
-
-      // Camera Rig: Strictly Third-Person in Shop OR First-Person while Brewing at Table
-      const camLambda = isSoftwareGl ? 14 : 9.5;
-      if (isThirdPerson) {
-        const p = charTick.playerPos;
-        const followDist = 2.55;
-        const desiredCamX = THREE.MathUtils.clamp(
-          p.x + Math.sin(thirdPersonYaw) * followDist,
-          -4.95,
-          4.95,
+      // 1. Camera Preset Smooth Interpolation
+      if (presetAnimatingRef.current) {
+        const preset = CAMERA_PRESETS[state.cameraPreset];
+        _camGoalPos.set(...preset.pos);
+        _camGoalTarget.set(...preset.target);
+        const lambda = isSoftwareGl ? 12 : 4.5;
+        camera.position.x = THREE.MathUtils.damp(
+          camera.position.x,
+          _camGoalPos.x,
+          lambda,
+          delta,
         );
-        const desiredCamY = THREE.MathUtils.clamp(
-          p.y + thirdPersonHeightOffset,
-          0.65,
-          2.65,
+        camera.position.y = THREE.MathUtils.damp(
+          camera.position.y,
+          _camGoalPos.y,
+          lambda,
+          delta,
         );
-        const desiredCamZ = THREE.MathUtils.clamp(
-          p.z + Math.cos(thirdPersonYaw) * followDist,
-          -2.75,
-          4.55,
+        camera.position.z = THREE.MathUtils.damp(
+          camera.position.z,
+          _camGoalPos.z,
+          lambda,
+          delta,
         );
-        _camGoalPos.set(desiredCamX, desiredCamY, desiredCamZ);
-        _camGoalTarget.set(p.x, p.y + 1.02, p.z);
-      } else {
-        // First-Person View at the Tea Counter (Tea Master's standing eye level looking across tray & guest)
-        _camGoalPos.set(
-          0.06 + firstPersonLookYaw * 0.18,
-          1.26 + firstPersonLookPitch * 0.14,
-          1.62,
+        controls.target.x = THREE.MathUtils.damp(
+          controls.target.x,
+          _camGoalTarget.x,
+          lambda,
+          delta,
         );
-        _camGoalTarget.set(
-          -0.14 + firstPersonLookYaw * 0.85,
-          0.26 + firstPersonLookPitch * 0.48,
-          -0.24,
+        controls.target.y = THREE.MathUtils.damp(
+          controls.target.y,
+          _camGoalTarget.y,
+          lambda,
+          delta,
         );
-      }
-
-      camera.position.x = THREE.MathUtils.damp(
-        camera.position.x,
-        _camGoalPos.x,
-        camLambda,
-        delta,
-      );
-      camera.position.y = THREE.MathUtils.damp(
-        camera.position.y,
-        _camGoalPos.y,
-        camLambda,
-        delta,
-      );
-      camera.position.z = THREE.MathUtils.damp(
-        camera.position.z,
-        _camGoalPos.z,
-        camLambda,
-        delta,
-      );
-
-      _camCurrentTarget.x = THREE.MathUtils.damp(
-        _camCurrentTarget.x,
-        _camGoalTarget.x,
-        camLambda,
-        delta,
-      );
-      _camCurrentTarget.y = THREE.MathUtils.damp(
-        _camCurrentTarget.y,
-        _camGoalTarget.y,
-        camLambda,
-        delta,
-      );
-      _camCurrentTarget.z = THREE.MathUtils.damp(
-        _camCurrentTarget.z,
-        _camGoalTarget.z,
-        camLambda,
-        delta,
-      );
-      camera.lookAt(_camCurrentTarget);
-
-      // Update floating On-Table Brew Button screen position without React re-renders
-      const btnEl = tableBtnRef.current;
-      if (btnEl) {
-        if (isThirdPerson && charTick.isNearTeaTable) {
-          _tableProj.copy(_TABLE_ANCHOR).project(camera);
-          if (_tableProj.z < 1) {
-            const cw = mountRef.current?.clientWidth || initW;
-            const ch = mountRef.current?.clientHeight || initH;
-            const sx = THREE.MathUtils.clamp(
-              (_tableProj.x * 0.5 + 0.5) * cw,
-              96,
-              cw - 96,
-            );
-            const sy = THREE.MathUtils.clamp(
-              (-_tableProj.y * 0.5 + 0.5) * ch,
-              78,
-              ch - 76,
-            );
-            btnEl.style.opacity = '1';
-            btnEl.style.pointerEvents = 'auto';
-            btnEl.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%)`;
-          } else {
-            btnEl.style.opacity = '0';
-            btnEl.style.pointerEvents = 'none';
-          }
-        } else {
-          btnEl.style.opacity = '0';
-          btnEl.style.pointerEvents = 'none';
+        controls.target.z = THREE.MathUtils.damp(
+          controls.target.z,
+          _camGoalTarget.z,
+          lambda,
+          delta,
+        );
+        if (
+          camera.position.distanceTo(_camGoalPos) < 0.015 &&
+          controls.target.distanceTo(_camGoalTarget) < 0.015
+        ) {
+          presetAnimatingRef.current = false;
         }
       }
+      controls.update();
 
-      // Vessel & Recipe Visuals
+      // 2. Vessel Shell Style & Per-Recipe Material Switching (only update on tea change to save Unisoc T612 CPU)
       if (lastAppliedTeaId !== state.tea.id) {
         lastAppliedTeaId = state.tea.id;
 
@@ -966,6 +828,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         vessel.leafMaterial.color.copy(_targetLeafColor);
       }
 
+      // Subtle tool idle / active animation
       if (!reducedMotion) {
         if (chasen.root.visible && state.step === 'STEEP_TEA') {
           chasen.whiskGroup.rotation.y = elapsed * 4.2;
@@ -988,6 +851,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         }
       }
 
+      // 3. Liquid Fill & Color Interpolation
       smoothedLevel = THREE.MathUtils.damp(
         smoothedLevel,
         state.waterLevel,
@@ -1021,11 +885,13 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         vessel.liquidGroup.visible = false;
       }
 
+      // 4. Tea Leaves Visibility & Gentle Swirl
       vessel.leavesGroup.visible = state.step !== 'SERVED';
       if (state.isPouring || state.step === 'STEEP_TEA') {
         vessel.leavesGroup.rotation.y += delta * 0.65;
       }
 
+      // 5. Kettle Pouring Kinematics
       const targetSlide = state.isPouring ? 1 : 0;
       kettleSlide = THREE.MathUtils.damp(kettleSlide, targetSlide, 6.5, delta);
       kettle.bodyGroup.position.x = -kettleSlide * 0.48;
@@ -1034,6 +900,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       kettle.bodyGroup.rotation.z = kettleSlide * 0.42;
       kettle.streamMesh.visible = state.isPouring && kettleSlide > 0.45;
 
+      // 6. Toppings Visibility & Bobbing
       const liquidSurfaceY =
         0.11 +
         smoothedLevel *
@@ -1042,7 +909,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       const showToppings = smoothedLevel > 0.45;
       const isChawan = state.tea.vesselStyle === 'chawan';
 
-      vessel.iceGroup.visible = showToppings && state.toppings.includes('ice');
+      vessel.iceGroup.visible =
+        showToppings && state.toppings.includes('ice');
       if (vessel.iceGroup.visible && !reducedMotion) {
         vessel.iceGroup.position.y = liquidSurfaceY - 0.04;
         vessel.iceCubes.forEach((cube, idx) => {
@@ -1091,6 +959,18 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         vessel.mintGroup.position.y = liquidSurfaceY + 0.01;
       }
 
+      // 7. Player Tea Master & Seated Customer Characters Animation
+      shopCharacters.animate(
+        elapsed,
+        delta,
+        state.step,
+        state.isPouring,
+        state.mode,
+        state.guestId,
+        reducedMotion,
+      );
+
+      // 8. Rising Steam Wisps (Hot teas without ice, controlled by particlesEnabled)
       const emitSteam =
         state.settings.particlesEnabled &&
         !reducedMotion &&
@@ -1116,14 +996,13 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         s.sprite.material.opacity = Math.sin(s.phase * Math.PI) * 0.42;
       }
 
+      // Smart Shadow Caching on lite GPU mode (avoid re-rendering shadow map on static frames)
       if (liteGpuMode && renderer.shadowMap.enabled) {
         shadowTickCounter = (shadowTickCounter + 1) % 3;
         const movingShadowCasters =
           state.isPouring ||
           kettleSlide > 0.015 ||
-          state.step === 'STEEP_TEA' ||
-          isThirdPerson ||
-          charTick.customerPhase === 'ENTERING';
+          state.step === 'STEEP_TEA';
         if (
           shadowDirtyRef.current ||
           (movingShadowCasters && shadowTickCounter === 0)
@@ -1149,9 +1028,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       cancelAnimationFrame(frameId);
       clearTimeout(frameId);
       resizeObserver.disconnect();
+      controls.removeEventListener('start', handleControlStart);
+      controls.dispose();
       renderer.domElement.removeEventListener('pointerdown', onPointerDown);
-      window.removeEventListener('pointerup', onPointerUp);
-      window.removeEventListener('pointermove', onPointerMove);
+      renderer.domElement.removeEventListener('pointerup', onPointerUp);
+      renderer.domElement.removeEventListener('pointermove', onPointerMove);
       renderer.domElement.removeEventListener(
         'webglcontextlost',
         handleContextLost,
@@ -1197,9 +1078,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       renderer.dispose();
       rendererRef.current = null;
       keyLightRef.current = null;
-      charactersRef.current = null;
     };
-  }, [settings.antialiasEnabled, liteGpuMode, isUltraLowRam, isMaliG71Hardware, playerMoveRef]);
+  }, [settings.antialiasEnabled, liteGpuMode, isUltraLowRam, isMaliG71Hardware]);
 
   if (webglError) {
     return (
@@ -1213,29 +1093,10 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   }
 
   return (
-    <div className="relative h-full w-full select-none overflow-hidden">
-      <div
-        ref={mountRef}
-        className="h-full w-full select-none"
-        aria-label={`ฉากร้านน้ำชา 3 มิติ: ${tea.name}`}
-      />
-
-      {/* World-Anchored Button directly over the Tea Counter when Player Walks Near */}
-      <button
-        ref={tableBtnRef}
-        type="button"
-        onClick={onBrewAtTableClick}
-        style={{
-          opacity: 0,
-          pointerEvents: 'none',
-          top: 0,
-          left: 0,
-        }}
-        className="fixed z-20 inline-flex min-h-[48px] items-center gap-2 rounded-2xl border-2 border-[#C5DCBA] bg-[#2E6F40] px-5 py-2.5 text-sm font-bold text-white shadow-xl transition-opacity duration-150 hover:bg-[#245732] active:scale-95 whitespace-nowrap"
-      >
-        <Coffee className="h-4 w-4 shrink-0" aria-hidden="true" />
-        <span>ชงชาที่โต๊ะ</span>
-      </button>
-    </div>
+    <div
+      ref={mountRef}
+      className="h-full w-full select-none"
+      aria-label={`ฉากโต๊ะชงชา 3 มิติ: ${tea.name}`}
+    />
   );
 });

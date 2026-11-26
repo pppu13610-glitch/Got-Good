@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {AnimatePresence, motion} from 'motion/react';
 import {
   BookOpen,
+  Camera,
   ChevronRight,
   CloudRain,
   Coffee,
@@ -21,7 +22,7 @@ import {
 import {CURRENT_APP_VERSION} from '../data/changelog';
 import {getUnlockedTeas, getXpProgress} from '../data/progression';
 import {TEAS} from '../data/teas';
-import {AmbienceMode, GameMode, ScreenView} from '../types/tea';
+import {AmbienceMode, CameraPreset, GameMode, ScreenView} from '../types/tea';
 import {soundEngine} from '../utils/soundEngine';
 import {PWAInstallButton} from './PWAInstallButton';
 
@@ -31,6 +32,8 @@ interface CornerMenuProps {
   level: number;
   mode: GameMode;
   onModeChange: (mode: GameMode) => void;
+  cameraPreset: CameraPreset;
+  onCameraPresetChange: (preset: CameraPreset) => void;
   ambience: AmbienceMode;
   onAmbienceChange: (mode: AmbienceMode) => void;
   isMuted: boolean;
@@ -44,6 +47,12 @@ interface CornerMenuProps {
   latestBrowserVersion?: string | null;
 }
 
+const CAMERA_OPTIONS: {id: CameraPreset; label: string}[] = [
+  {id: 'table', label: 'โต๊ะชา'},
+  {id: 'cup', label: 'ถ้วยชา'},
+  {id: 'overhead', label: 'มุมสูง'},
+];
+
 const TAP_SPRING = {type: 'spring' as const, stiffness: 440, damping: 28};
 const DRAWER_TRANSITION = {
   duration: 0.24,
@@ -56,6 +65,8 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
   level,
   mode,
   onModeChange,
+  cameraPreset,
+  onCameraPresetChange,
   ambience,
   onAmbienceChange,
   isMuted,
@@ -284,6 +295,47 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                     </motion.button>
                   </div>
                 </div>
+
+                {/* 3D Camera Angle */}
+                {screen === 'BREWING' && (
+                  <div>
+                    <h3 className="flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2">
+                      <Camera className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>มุมกล้อง 3 มิติ</span>
+                    </h3>
+                    <div className="grid grid-cols-3 gap-1.5 rounded-xl border border-[#1F2823]/10 bg-white p-1">
+                      {CAMERA_OPTIONS.map((cam) => (
+                        <motion.button
+                          key={cam.id}
+                          type="button"
+                          whileTap={{scale: 0.95}}
+                          onClick={() => {
+                            soundEngine.playTap();
+                            onCameraPresetChange(cam.id);
+                          }}
+                          className="relative min-h-[42px] rounded-lg text-xs font-medium"
+                        >
+                          {cameraPreset === cam.id && (
+                            <motion.span
+                              layoutId="drawer-camera-pill"
+                              transition={{type: 'spring', stiffness: 420, damping: 32}}
+                              className="absolute inset-0 rounded-lg bg-[#233029]"
+                            />
+                          )}
+                          <span
+                            className={`relative z-10 ${
+                              cameraPreset === cam.id
+                                ? 'text-[#F3F1EC]'
+                                : 'text-[#4A534D]'
+                            }`}
+                          >
+                            {cam.label}
+                          </span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Sound & Ambience */}
                 <div>

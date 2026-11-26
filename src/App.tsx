@@ -16,6 +16,7 @@ import {TitleScreen} from './components/TitleScreen';
 import {UpdateCheckScreen} from './components/UpdateCheckScreen';
 import {
   AmbienceMode,
+  CameraPreset,
   GameMode,
   GameSettings,
   JournalRecord,
@@ -59,6 +60,7 @@ const SCREEN_EASE = [0.16, 1, 0.3, 1] as const;
 export default function App() {
   const [screen, setScreen] = useState<ScreenView>('TITLE_MENU');
   const [mode, setMode] = useState<GameMode>('guest');
+  const [cameraPreset, setCameraPreset] = useState<CameraPreset>('table');
   const [settings, setSettings] = useState<GameSettings>(() => loadSettings());
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [updatesOpen, setUpdatesOpen] = useState<boolean>(false);
@@ -355,6 +357,8 @@ export default function App() {
               level={saveData.level}
               mode={mode}
               onModeChange={setMode}
+              cameraPreset={cameraPreset}
+              onCameraPresetChange={setCameraPreset}
               ambience={settings.ambience}
               onAmbienceChange={handleAmbienceChange}
               isMuted={settings.isMuted}
@@ -429,6 +433,7 @@ export default function App() {
                   playerLevel={saveData.level}
                   mode={mode}
                   onModeChange={setMode}
+                  cameraPreset={cameraPreset}
                   settings={settings}
                   onBrewComplete={handleBrewComplete}
                 />

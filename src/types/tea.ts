@@ -42,25 +42,14 @@ export type GameMode = 'guest' | 'free';
 
 export type ScreenView = 'TITLE_MENU' | 'BREWING' | 'JOURNAL' | 'HOW_TO_PLAY';
 
-export type CameraPerspective = 'third-person' | 'first-person';
+export type CameraPreset = 'table' | 'cup' | 'overhead';
 
 export type BrewStep =
-  | 'EXPLORE_SHOP'
   | 'SELECT_TEA'
   | 'POUR_WATER'
   | 'STEEP_TEA'
   | 'ADD_TOPPING'
   | 'SERVED';
-
-export type CustomerPhase =
-  | 'ENTERING'
-  | 'SEATED_ORDERING'
-  | 'SERVED_ENJOYING';
-
-export interface PlayerMoveInput {
-  x: number;
-  y: number;
-}
 
 export interface TeaFlavorProfile {
   aroma: number; // 1..5
