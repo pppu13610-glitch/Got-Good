@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   CloudRain,
   Cpu,
+  Gamepad2,
   Gauge,
   Maximize2,
   Minimize2,
@@ -25,6 +26,7 @@ import {
   TargetFps,
 } from '../types/tea';
 import {
+  getGalaxyA10Preset,
   getLowRam2GbPreset,
   getRealmeNote50Preset,
   probeDeviceOptimization,
@@ -80,13 +82,6 @@ const AMBIENCE_OPTIONS: {id: AmbienceMode; label: string}[] = [
   {id: 'breeze', label: 'ลมสวนไผ่'},
 ];
 
-const OPTIMIZATION_OPTIONS: {value: OptimizationProfile; label: string}[] = [
-  {value: 'auto', label: 'อัตโนมัติ'},
-  {value: 'realme-note-50', label: 'realme Note 50'},
-  {value: 'low-ram-2gb', label: 'RAM 2 GB'},
-  {value: 'standard', label: 'มาตรฐาน'},
-];
-
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   settings,
   isFullscreen,
@@ -99,6 +94,33 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   onClose,
 }) => {
   const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+  const visibleOptimizationOptions: {
+    value: OptimizationProfile;
+    label: string;
+  }[] = [{value: 'auto', label: 'อัตโนมัติ'}];
+  if (deviceReport.showRealmeNote50Option) {
+    visibleOptimizationOptions.push({
+      value: 'realme-note-50',
+      label: 'realme Note 50',
+    });
+  }
+  if (deviceReport.showGalaxyA10Option) {
+    visibleOptimizationOptions.push({
+      value: 'galaxy-a10',
+      label: 'Galaxy A10',
+    });
+  }
+  if (deviceReport.showLowRam2GbOption) {
+    visibleOptimizationOptions.push({
+      value: 'low-ram-2gb',
+      label: 'RAM 2 GB',
+    });
+  }
+  visibleOptimizationOptions.push({value: 'standard', label: 'มาตรฐาน'});
+
+  const optGridColsClass =
+    visibleOptimizationOptions.length >= 3 ? 'grid-cols-3' : 'grid-cols-2';
+
   const allowedFpsValues = getAllowedFpsOptions(detectedRefreshRate);
   const visibleFpsOptions = FPS_OPTIONS.filter((opt) =>
     allowedFpsValues.includes(opt.value),
@@ -618,21 +640,42 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               ))}
             </div>
 
-            {/* Device Optimization Profile (realme Note 50 Mali-G57 90Hz) */}
+            {/* Hardware + OS Detection & Strict Device-Exclusive Optimizer */}
             <div className="space-y-2.5 border-t border-[#1F2823]/8 pt-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]">
                   <Smartphone className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
-                  <span>โหมดเร่งประสิทธิภาพมือถือ (realme Note 50)</span>
+                  <span>ปรับจูนตามฮาร์ดแวร์และซอฟต์แวร์เครื่อง</span>
                 </span>
                 <span className="text-[11px] font-medium text-[#2E6F40]">
                   {deviceReport.detectedModelLabel}
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
-                {OPTIMIZATION_OPTIONS.map((opt) => {
-                  const active = settings.optimizationProfile === opt.value;
+              {/* Detected Hardware + OS Software Summary Card */}
+              <div className="rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] px-3 py-2 text-[11px] text-[#39423C] space-y-1">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <span className="font-semibold text-[#1F2823]">
+                    ฮาร์ดแวร์: {deviceReport.hardwareSpecSummary}
+                  </span>
+                  <span className="font-mono-num font-semibold text-[#2E6F40]">
+                    {deviceReport.osVersionLabel}
+                  </span>
+                </div>
+                {deviceReport.gameBoosterReady && (
+                  <div className="flex items-center gap-1.5 text-[#255F30]">
+                    <Gamepad2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    <span>
+                      รองรับ Game Booster / Game Space อัตโนมัติบนแอปเกมมือถือทุกรุ่น
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div className={`grid ${optGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`}>
+                {visibleOptimizationOptions.map((opt) => {
+                  const active =
+                    deviceReport.effectiveProfile === opt.value;
                   return (
                     <motion.button
                       key={opt.value}
@@ -663,7 +706,8 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 })}
               </div>
 
-              <div className="grid grid-cols-1 gap-2">
+              {/* Strict Device-Exclusive Quick Optimization Presets */}
+              {deviceReport.showRealmeNote50Option && (
                 <motion.button
                   type="button"
                   whileTap={{scale: 0.95}}
@@ -672,17 +716,44 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                     soundEngine.playTap();
                     onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
                   }}
-                  className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]"
+                  className="flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]"
                 >
                   <span className="inline-flex items-center gap-2 text-left">
                     <Zap className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                    <span>ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)</span>
+                    <span>
+                      จูนเฉพาะ realme Note 50 (Unisoc T612 · Mali-G57 · เปิด 90 FPS)
+                    </span>
                   </span>
                   <span className="text-[11px] font-bold text-[#2E6F40] shrink-0">
                     ปรับทันที
                   </span>
                 </motion.button>
+              )}
 
+              {deviceReport.showGalaxyA10Option && (
+                <motion.button
+                  type="button"
+                  whileTap={{scale: 0.95}}
+                  transition={TAP_SPRING}
+                  onClick={() => {
+                    soundEngine.playTap();
+                    onUpdateSettings(getGalaxyA10Preset(detectedRefreshRate));
+                  }}
+                  className="flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]"
+                >
+                  <span className="inline-flex items-center gap-2 text-left">
+                    <Zap className="h-4 w-4 text-[#2B4E72] shrink-0" aria-hidden="true" />
+                    <span>
+                      จูนเฉพาะ Samsung Galaxy A10 (Exynos 7884 · Mali-G71 MP2)
+                    </span>
+                  </span>
+                  <span className="text-[11px] font-bold text-[#2B4E72] shrink-0">
+                    ปรับทันที
+                  </span>
+                </motion.button>
+              )}
+
+              {deviceReport.showLowRam2GbOption && (
                 <motion.button
                   type="button"
                   whileTap={{scale: 0.95}}
@@ -691,19 +762,22 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                     soundEngine.playTap();
                     onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
                   }}
-                  className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]"
+                  className="flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]"
                 >
                   <span className="inline-flex items-center gap-2 text-left">
                     <Cpu className="h-4 w-4 text-[#7D5A3C] shrink-0" aria-hidden="true" />
-                    <span>โหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB (ความละเอียด HD)</span>
+                    <span>
+                      โหมดประหยัดแรมพิเศษสำหรับเครื่อง RAM ≤ 2 GB (ความละเอียด HD)
+                    </span>
                   </span>
                   <span className="text-[11px] font-bold text-[#7D5A3C] shrink-0">
                     ปรับทันที
                   </span>
                 </motion.button>
-              </div>
+              )}
+
               <p className="text-[11px] text-[#5A655D] leading-relaxed">
-                ใช้เชดเดอร์ highp + โครงสร้างแก้ว/น้ำชาไร้การแหว่งขณะหมุนกล้อง, ปิด Mipmap Bleed, แคชเงา 512px และโหมด RAM 2 GB ที่รีดขนาดเทกซ์เจอร์และโมเดลลงเพื่อป้องกันเกมเด้ง
+                ระบบจะตรวจสเปกเครื่องและเวอร์ชั่นซอฟต์แวร์อัตโนมัติ ตัวเลือกจูนเฉพาะรุ่นจะแสดงเฉพาะเครื่องที่ตรงรุ่นเท่านั้น เพื่อความเสถียรและไม่เกิดบั๊กเทกซ์เจอร์หาย
               </p>
             </div>
 

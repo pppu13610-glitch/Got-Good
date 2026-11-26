@@ -16,7 +16,6 @@ import {TitleScreen} from './components/TitleScreen';
 import {UpdateCheckScreen} from './components/UpdateCheckScreen';
 import {
   AmbienceMode,
-  CameraPreset,
   GameMode,
   GameSettings,
   JournalRecord,
@@ -30,6 +29,8 @@ import {
 import {
   applyDomPerformanceClass,
   probeDeviceOptimization,
+  sanitizeProfileForDevice,
+  warmHighEntropyDeviceInfo,
 } from './utils/deviceOptimizer';
 import {
   isFullscreenActive,
@@ -41,6 +42,7 @@ import {
   clampTargetFpsToDisplay,
   DisplayRefreshRate,
   probeDisplayRefreshRate,
+  resolveEffectiveRefreshRate,
 } from './utils/refreshRate';
 import {soundEngine} from './utils/soundEngine';
 import {
@@ -57,7 +59,6 @@ const SCREEN_EASE = [0.16, 1, 0.3, 1] as const;
 export default function App() {
   const [screen, setScreen] = useState<ScreenView>('TITLE_MENU');
   const [mode, setMode] = useState<GameMode>('guest');
-  const [cameraPreset, setCameraPreset] = useState<CameraPreset>('table');
   const [settings, setSettings] = useState<GameSettings>(() => loadSettings());
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [updatesOpen, setUpdatesOpen] = useState<boolean>(false);
@@ -67,12 +68,20 @@ export default function App() {
   const [saveData, setSaveData] = useState<TeaHouseSaveData>(() =>
     loadSaveData(),
   );
+  const [, setHwProbeTick] = useState<number>(0);
   const [detectedRefreshRate, setDetectedRefreshRate] =
-    useState<DisplayRefreshRate>(60);
-  const [rawRefreshRate, setRawRefreshRate] = useState<number>(60);
+    useState<DisplayRefreshRate>(() => {
+      const initReport = probeDeviceOptimization('auto');
+      return resolveEffectiveRefreshRate(60, initReport);
+    });
+  const [rawRefreshRate, setRawRefreshRate] = useState<number>(() => {
+    const initReport = probeDeviceOptimization('auto');
+    return resolveEffectiveRefreshRate(60, initReport);
+  });
   const [updateCheckResult, setUpdateCheckResult] =
     useState<UpdateCheckResult | null>(null);
   const userExitedFullscreenRef = useRef<boolean>(false);
+  const userOverrodeFpsRef = useRef<boolean>(false);
 
   useEffect(() => {
     return subscribeFullscreenChange(setIsFullscreen);
@@ -80,20 +89,57 @@ export default function App() {
 
   const recheckRefreshRate = useCallback(() => {
     void probeDisplayRefreshRate().then(({hz, rawHz}) => {
-      setDetectedRefreshRate(hz);
-      setRawRefreshRate(rawHz);
+      const currentReport = probeDeviceOptimization(
+        loadSettings().optimizationProfile,
+      );
+      const effectiveHz = resolveEffectiveRefreshRate(hz, currentReport);
+      setDetectedRefreshRate(effectiveHz);
+      setRawRefreshRate(
+        currentReport.isRealmeNote50 && rawHz < 85 ? 90 : rawHz,
+      );
       setSettings((prev) => {
-        const clampedFps = clampTargetFpsToDisplay(prev.targetFps, hz);
-        if (clampedFps === prev.targetFps) return prev;
-        const next = {...prev, targetFps: clampedFps};
+        const sanitizedProfile = sanitizeProfileForDevice(
+          prev.optimizationProfile,
+          currentReport,
+        );
+        let nextTargetFps = clampTargetFpsToDisplay(
+          prev.targetFps,
+          effectiveHz,
+        );
+        // Auto-unlock 90 FPS immediately on realme Note 50 when running auto/realme profile
+        if (
+          currentReport.isRealmeNote50 &&
+          !userOverrodeFpsRef.current &&
+          (sanitizedProfile === 'auto' || sanitizedProfile === 'realme-note-50') &&
+          prev.targetFps === 60
+        ) {
+          nextTargetFps = clampTargetFpsToDisplay(90, effectiveHz);
+        }
+        if (
+          nextTargetFps === prev.targetFps &&
+          sanitizedProfile === prev.optimizationProfile
+        ) {
+          return prev;
+        }
+        const next = {
+          ...prev,
+          optimizationProfile: sanitizedProfile,
+          targetFps: nextTargetFps,
+        };
         saveSettings(next);
         return next;
       });
     });
   }, []);
 
-  // Measure actual device screen refresh rate (60Hz / 90Hz / 120Hz) on startup & when returning to tab
+  // Warm up high-entropy UA hints & measure actual display refresh rate on startup / resume
   useEffect(() => {
+    void warmHighEntropyDeviceInfo().then((changed) => {
+      if (changed) {
+        setHwProbeTick((n) => n + 1);
+      }
+      recheckRefreshRate();
+    });
     recheckRefreshRate();
     const onVisibility = () => {
       if (!document.hidden) {
@@ -182,8 +228,16 @@ export default function App() {
       if (patch.autoFullscreen === true) {
         userExitedFullscreenRef.current = false;
       }
+      if (patch.targetFps !== undefined) {
+        userOverrodeFpsRef.current = true;
+      }
       setSettings((prev) => {
+        const report = probeDeviceOptimization(prev.optimizationProfile);
         const merged = {...prev, ...patch};
+        merged.optimizationProfile = sanitizeProfileForDevice(
+          merged.optimizationProfile,
+          report,
+        );
         merged.targetFps = clampTargetFpsToDisplay(
           merged.targetFps,
           detectedRefreshRate,
@@ -197,10 +251,20 @@ export default function App() {
 
   const handleResetSettings = useCallback(() => {
     userExitedFullscreenRef.current = false;
-    const reset = {
+    userOverrodeFpsRef.current = false;
+    const report = probeDeviceOptimization('auto');
+    const resetTargetFps: GameSettings['targetFps'] = report.isRealmeNote50
+      ? 90
+      : DEFAULT_SETTINGS.targetFps;
+    const reset: GameSettings = {
       ...DEFAULT_SETTINGS,
+      graphicsQuality: report.isGalaxyA10 || report.isDetected2GbRam ? 'low' : DEFAULT_SETTINGS.graphicsQuality,
+      resolutionScale: report.isGalaxyA10 || report.isDetected2GbRam ? 'hd' : DEFAULT_SETTINGS.resolutionScale,
+      shadowsEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.shadowsEnabled,
+      antialiasEnabled: report.liteGpuActive ? false : DEFAULT_SETTINGS.antialiasEnabled,
+      particlesEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.particlesEnabled,
       targetFps: clampTargetFpsToDisplay(
-        DEFAULT_SETTINGS.targetFps,
+        resetTargetFps,
         detectedRefreshRate,
       ),
     };
@@ -291,8 +355,6 @@ export default function App() {
               level={saveData.level}
               mode={mode}
               onModeChange={setMode}
-              cameraPreset={cameraPreset}
-              onCameraPresetChange={setCameraPreset}
               ambience={settings.ambience}
               onAmbienceChange={handleAmbienceChange}
               isMuted={settings.isMuted}
@@ -367,7 +429,6 @@ export default function App() {
                   playerLevel={saveData.level}
                   mode={mode}
                   onModeChange={setMode}
-                  cameraPreset={cameraPreset}
                   settings={settings}
                   onBrewComplete={handleBrewComplete}
                 />

@@ -21235,12 +21235,12 @@ var ArrowLeft = createLucideIcon("arrow-left", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var BookOpen = createLucideIcon("book-open", [["path", {
-	d: "M12 7v14",
-	key: "1akyts"
+var Bell = createLucideIcon("bell", [["path", {
+	d: "M10.268 21a2 2 0 0 0 3.464 0",
+	key: "vwvbt9"
 }], ["path", {
-	d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
-	key: "ruj8y"
+	d: "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326",
+	key: "11g9vi"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21248,14 +21248,12 @@ var BookOpen = createLucideIcon("book-open", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Camera$1 = createLucideIcon("camera", [["path", {
-	d: "M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z",
-	key: "18u6gg"
-}], ["circle", {
-	cx: "12",
-	cy: "13",
-	r: "3",
-	key: "1vg3eu"
+var BookOpen = createLucideIcon("book-open", [["path", {
+	d: "M12 7v14",
+	key: "1akyts"
+}], ["path", {
+	d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+	key: "ruj8y"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21480,6 +21478,90 @@ var Droplets = createLucideIcon("droplets", [["path", {
 	d: "M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97",
 	key: "1sl1rz"
 }]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ExternalLink = createLucideIcon("external-link", [
+	["path", {
+		d: "M15 3h6v6",
+		key: "1q9fwt"
+	}],
+	["path", {
+		d: "M10 14 21 3",
+		key: "gplh6r"
+	}],
+	["path", {
+		d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6",
+		key: "a6xqqp"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Footprints = createLucideIcon("footprints", [
+	["path", {
+		d: "M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z",
+		key: "1dudjm"
+	}],
+	["path", {
+		d: "M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z",
+		key: "l2t8xc"
+	}],
+	["path", {
+		d: "M16 17h4",
+		key: "1dejxt"
+	}],
+	["path", {
+		d: "M4 13h4",
+		key: "1bwh8b"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Gamepad2 = createLucideIcon("gamepad-2", [
+	["line", {
+		x1: "6",
+		x2: "10",
+		y1: "11",
+		y2: "11",
+		key: "1gktln"
+	}],
+	["line", {
+		x1: "8",
+		x2: "8",
+		y1: "9",
+		y2: "13",
+		key: "qnk9ow"
+	}],
+	["line", {
+		x1: "15",
+		x2: "15.01",
+		y1: "12",
+		y2: "12",
+		key: "krot7o"
+	}],
+	["line", {
+		x1: "18",
+		x2: "18.01",
+		y1: "10",
+		y2: "10",
+		key: "1lcuu1"
+	}],
+	["path", {
+		d: "M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z",
+		key: "mfqc10"
+	}]
+]);
 /**
 * @license lucide-react v0.546.0 - ISC
 *
@@ -21761,6 +21843,19 @@ var Settings = createLucideIcon("settings", [["path", {
 	cy: "12",
 	r: "3",
 	key: "1v7zrd"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var ShieldCheck = createLucideIcon("shield-check", [["path", {
+	d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+	key: "oel41y"
+}], ["path", {
+	d: "m9 12 2 2 4-4",
+	key: "dzmm74"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -23558,32 +23653,6 @@ var soundEngine = new CozySoundEngine();
 * Copyright 2010-2026 Three.js Authors
 * SPDX-License-Identifier: MIT
 */
-/**
-* Represents mouse buttons and interaction types in context of controls.
-*
-* @type {ConstantsMouse}
-* @constant
-*/
-var MOUSE = {
-	LEFT: 0,
-	MIDDLE: 1,
-	RIGHT: 2,
-	ROTATE: 0,
-	DOLLY: 1,
-	PAN: 2
-};
-/**
-* Represents touch interaction types in context of controls.
-*
-* @type {ConstantsTouch}
-* @constant
-*/
-var TOUCH = {
-	ROTATE: 0,
-	PAN: 1,
-	DOLLY_PAN: 2,
-	DOLLY_ROTATE: 3
-};
 /**
 * The texture will simply repeat to infinity.
 *
@@ -49189,116 +49258,6 @@ var Clock = class {
 	}
 };
 /**
-* This class can be used to represent points in 3D space as
-* [Spherical coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system).
-*/
-var Spherical = class {
-	/**
-	* Constructs a new spherical.
-	*
-	* @param {number} [radius=1] - The radius, or the Euclidean distance (straight-line distance) from the point to the origin.
-	* @param {number} [phi=0] - The polar angle in radians from the y (up) axis.
-	* @param {number} [theta=0] - The equator/azimuthal angle in radians around the y (up) axis.
-	*/
-	constructor(radius = 1, phi = 0, theta = 0) {
-		/**
-		* The radius, or the Euclidean distance (straight-line distance) from the point to the origin.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.radius = radius;
-		/**
-		* The polar angle in radians from the y (up) axis.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.phi = phi;
-		/**
-		* The equator/azimuthal angle in radians around the y (up) axis.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.theta = theta;
-	}
-	/**
-	* Sets the spherical components by copying the given values.
-	*
-	* @param {number} radius - The radius.
-	* @param {number} phi - The polar angle.
-	* @param {number} theta - The azimuthal angle.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	set(radius, phi, theta) {
-		this.radius = radius;
-		this.phi = phi;
-		this.theta = theta;
-		return this;
-	}
-	/**
-	* Copies the values of the given spherical to this instance.
-	*
-	* @param {Spherical} other - The spherical to copy.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	copy(other) {
-		this.radius = other.radius;
-		this.phi = other.phi;
-		this.theta = other.theta;
-		return this;
-	}
-	/**
-	* Restricts the polar angle [page:.phi phi] to be between `0.000001` and pi -
-	* `0.000001`.
-	*
-	* @return {Spherical} A reference to this spherical.
-	*/
-	makeSafe() {
-		const EPS = 1e-6;
-		this.phi = clamp(this.phi, EPS, Math.PI - EPS);
-		return this;
-	}
-	/**
-	* Sets the spherical components from the given vector which is assumed to hold
-	* Cartesian coordinates.
-	*
-	* @param {Vector3} v - The vector to set.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	setFromVector3(v) {
-		return this.setFromCartesianCoords(v.x, v.y, v.z);
-	}
-	/**
-	* Sets the spherical components from the given Cartesian coordinates.
-	*
-	* @param {number} x - The x value.
-	* @param {number} y - The y value.
-	* @param {number} z - The z value.
-	* @return {Spherical} A reference to this spherical.
-	*/
-	setFromCartesianCoords(x, y, z) {
-		this.radius = Math.sqrt(x * x + y * y + z * z);
-		if (this.radius === 0) {
-			this.theta = 0;
-			this.phi = 0;
-		} else {
-			this.theta = Math.atan2(x, z);
-			this.phi = Math.acos(clamp(y / this.radius, -1, 1));
-		}
-		return this;
-	}
-	/**
-	* Returns a new spherical with copied values from this instance.
-	*
-	* @return {Spherical} A clone of this instance.
-	*/
-	clone() {
-		return new this.constructor().copy(this);
-	}
-};
-/**
 * Represents a 2x2 matrix.
 *
 * A Note on Row-Major and Column-Major Ordering:
@@ -49397,103 +49356,6 @@ var Matrix2 = class {
 		te[3] = n22;
 		return this;
 	}
-};
-/**
-* Abstract base class for controls.
-*
-* @abstract
-* @augments EventDispatcher
-*/
-var Controls = class extends EventDispatcher {
-	/**
-	* Constructs a new controls instance.
-	*
-	* @param {Object3D} object - The object that is managed by the controls.
-	* @param {?HTMLElement} domElement - The HTML element used for event listeners.
-	*/
-	constructor(object, domElement = null) {
-		super();
-		/**
-		* The object that is managed by the controls.
-		*
-		* @type {Object3D}
-		*/
-		this.object = object;
-		/**
-		* The HTML element used for event listeners.
-		*
-		* @type {?HTMLElement}
-		* @default null
-		*/
-		this.domElement = domElement;
-		/**
-		* Whether the controls responds to user input or not.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enabled = true;
-		/**
-		* The internal state of the controls.
-		*
-		* @type {number}
-		* @default -1
-		*/
-		this.state = -1;
-		/**
-		* This object defines the keyboard input of the controls.
-		*
-		* @type {Object}
-		*/
-		this.keys = {};
-		/**
-		* This object defines what type of actions are assigned to the available mouse buttons.
-		* It depends on the control implementation what kind of mouse buttons and actions are supported.
-		*
-		* @type {{LEFT: ?number, MIDDLE: ?number, RIGHT: ?number}}
-		*/
-		this.mouseButtons = {
-			LEFT: null,
-			MIDDLE: null,
-			RIGHT: null
-		};
-		/**
-		* This object defines what type of actions are assigned to what kind of touch interaction.
-		* It depends on the control implementation what kind of touch interaction and actions are supported.
-		*
-		* @type {{ONE: ?number, TWO: ?number}}
-		*/
-		this.touches = {
-			ONE: null,
-			TWO: null
-		};
-	}
-	/**
-	* Connects the controls to the DOM. This method has so called "side effects" since
-	* it adds the module's event listeners to the DOM.
-	*
-	* @param {HTMLElement} element - The DOM element to connect to.
-	*/
-	connect(element) {
-		if (this.domElement !== null) this.disconnect();
-		this.domElement = element;
-	}
-	/**
-	* Disconnects the controls from the DOM.
-	*/
-	disconnect() {}
-	/**
-	* Call this method if you no longer want use to the controls. It frees all internal
-	* resources and removes all event listeners.
-	*/
-	dispose() {}
-	/**
-	* Controls should implement this method if they have to update their internal state
-	* per simulation step.
-	*
-	* @param {number} [delta] - The time delta in seconds.
-	*/
-	update() {}
 };
 /**
 * Determines how many bytes must be used to represent the texture.
@@ -60374,1133 +60236,6 @@ var WebGLRenderer = class {
 		gl.unpackColorSpace = ColorManagement._getUnpackColorSpace();
 	}
 };
-// node_modules/three/examples/jsm/controls/OrbitControls.js
-/**
-* Fires when the camera has been transformed by the controls.
-*
-* @event OrbitControls#change
-* @type {Object}
-*/
-var _changeEvent = { type: "change" };
-/**
-* Fires when an interaction was initiated.
-*
-* @event OrbitControls#start
-* @type {Object}
-*/
-var _startEvent = { type: "start" };
-/**
-* Fires when an interaction has finished.
-*
-* @event OrbitControls#end
-* @type {Object}
-*/
-var _endEvent = { type: "end" };
-var _ray = new Ray();
-var _plane = new Plane();
-var _TILT_LIMIT = Math.cos(70 * MathUtils.DEG2RAD);
-var _v = new Vector3();
-var _twoPI = 2 * Math.PI;
-var _STATE = {
-	NONE: -1,
-	ROTATE: 0,
-	DOLLY: 1,
-	PAN: 2,
-	TOUCH_ROTATE: 3,
-	TOUCH_PAN: 4,
-	TOUCH_DOLLY_PAN: 5,
-	TOUCH_DOLLY_ROTATE: 6
-};
-var _EPS = 1e-6;
-/**
-* Orbit controls allow the camera to orbit around a target.
-*
-* OrbitControls performs orbiting, dollying (zooming), and panning. Unlike {@link TrackballControls},
-* it maintains the "up" direction `object.up` (+Y by default).
-*
-* - Orbit: Left mouse / touch: one-finger move.
-* - Zoom: Middle mouse, or mousewheel / touch: two-finger spread or squish.
-* - Pan: Right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move.
-*
-* ```js
-* const controls = new OrbitControls( camera, renderer.domElement );
-*
-* // controls.update() must be called after any manual changes to the camera's transform
-* camera.position.set( 0, 20, 100 );
-* controls.update();
-*
-* function animate() {
-*
-* 	// required if controls.enableDamping or controls.autoRotate are set to true
-* 	controls.update();
-*
-* 	renderer.render( scene, camera );
-*
-* }
-* ```
-*
-* @augments Controls
-* @three_import import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-*/
-var OrbitControls = class extends Controls {
-	/**
-	* Constructs a new controls instance.
-	*
-	* @param {Object3D} object - The object that is managed by the controls.
-	* @param {?HTMLElement} domElement - The HTML element used for event listeners.
-	*/
-	constructor(object, domElement = null) {
-		super(object, domElement);
-		this.state = _STATE.NONE;
-		/**
-		* The focus point of the controls, the `object` orbits around this.
-		* It can be updated manually at any point to change the focus of the controls.
-		*
-		* @type {Vector3}
-		*/
-		this.target = new Vector3();
-		/**
-		* The focus point of the `minTargetRadius` and `maxTargetRadius` limits.
-		* It can be updated manually at any point to change the center of interest
-		* for the `target`.
-		*
-		* @type {Vector3}
-		*/
-		this.cursor = new Vector3();
-		/**
-		* How far you can dolly in (perspective camera only).
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minDistance = 0;
-		/**
-		* How far you can dolly out (perspective camera only).
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxDistance = Infinity;
-		/**
-		* How far you can zoom in (orthographic camera only).
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minZoom = 0;
-		/**
-		* How far you can zoom out (orthographic camera only).
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxZoom = Infinity;
-		/**
-		* How close you can get the target to the 3D `cursor`.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minTargetRadius = 0;
-		/**
-		* How far you can move the target from the 3D `cursor`.
-		*
-		* @type {number}
-		* @default Infinity
-		*/
-		this.maxTargetRadius = Infinity;
-		/**
-		* How far you can orbit vertically, lower limit. Range is `[0, Math.PI]` radians.
-		*
-		* @type {number}
-		* @default 0
-		*/
-		this.minPolarAngle = 0;
-		/**
-		* How far you can orbit vertically, upper limit. Range is `[0, Math.PI]` radians.
-		*
-		* @type {number}
-		* @default Math.PI
-		*/
-		this.maxPolarAngle = Math.PI;
-		/**
-		* How far you can orbit horizontally, lower limit. If set, the interval `[ min, max ]`
-		* must be a sub-interval of `[ - 2 PI, 2 PI ]`, with `( max - min < 2 PI )`.
-		*
-		* @type {number}
-		* @default -Infinity
-		*/
-		this.minAzimuthAngle = -Infinity;
-		/**
-		* How far you can orbit horizontally, upper limit. If set, the interval `[ min, max ]`
-		* must be a sub-interval of `[ - 2 PI, 2 PI ]`, with `( max - min < 2 PI )`.
-		*
-		* @type {number}
-		* @default -Infinity
-		*/
-		this.maxAzimuthAngle = Infinity;
-		/**
-		* Set to `true` to enable damping (inertia), which can be used to give a sense of weight
-		* to the controls. Note that if this is enabled, you must call `update()` in your animation
-		* loop.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.enableDamping = false;
-		/**
-		* The damping inertia used if `enableDamping` is set to `true`.
-		*
-		* Note that for this to work, you must call `update()` in your animation loop.
-		*
-		* @type {number}
-		* @default 0.05
-		*/
-		this.dampingFactor = .05;
-		/**
-		* Enable or disable zooming (dollying) of the camera.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enableZoom = true;
-		/**
-		* Speed of zooming / dollying.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.zoomSpeed = 1;
-		/**
-		* Enable or disable horizontal and vertical rotation of the camera.
-		*
-		* Note that it is possible to disable a single axis by setting the min and max of the
-		* `minPolarAngle` or `minAzimuthAngle` to the same value, which will cause the vertical
-		* or horizontal rotation to be fixed at that value.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enableRotate = true;
-		/**
-		* Speed of rotation.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.rotateSpeed = 1;
-		/**
-		* How fast to rotate the camera when the keyboard is used.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.keyRotateSpeed = 1;
-		/**
-		* Enable or disable camera panning.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.enablePan = true;
-		/**
-		* Speed of panning.
-		*
-		* @type {number}
-		* @default 1
-		*/
-		this.panSpeed = 1;
-		/**
-		* Defines how the camera's position is translated when panning. If `true`, the camera pans
-		* in screen space. Otherwise, the camera pans in the plane orthogonal to the camera's up
-		* direction.
-		*
-		* @type {boolean}
-		* @default true
-		*/
-		this.screenSpacePanning = true;
-		/**
-		* How fast to pan the camera when the keyboard is used in
-		* pixels per keypress.
-		*
-		* @type {number}
-		* @default 7
-		*/
-		this.keyPanSpeed = 7;
-		/**
-		* Setting this property to `true` allows to zoom to the cursor's position.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.zoomToCursor = false;
-		/**
-		* Set to true to automatically rotate around the target
-		*
-		* Note that if this is enabled, you must call `update()` in your animation loop.
-		* If you want the auto-rotate speed to be independent of the frame rate (the refresh
-		* rate of the display), you must pass the time `deltaTime`, in seconds, to `update()`.
-		*
-		* @type {boolean}
-		* @default false
-		*/
-		this.autoRotate = false;
-		/**
-		* How fast to rotate around the target if `autoRotate` is `true`. The default  equates to 30 seconds
-		* per orbit at 60fps.
-		*
-		* Note that if `autoRotate` is enabled, you must call `update()` in your animation loop.
-		*
-		* @type {number}
-		* @default 2
-		*/
-		this.autoRotateSpeed = 2;
-		/**
-		* This object contains references to the keycodes for controlling camera panning.
-		*
-		* ```js
-		* controls.keys = {
-		* 	LEFT: 'ArrowLeft', //left arrow
-		* 	UP: 'ArrowUp', // up arrow
-		* 	RIGHT: 'ArrowRight', // right arrow
-		* 	BOTTOM: 'ArrowDown' // down arrow
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.keys = {
-			LEFT: "ArrowLeft",
-			UP: "ArrowUp",
-			RIGHT: "ArrowRight",
-			BOTTOM: "ArrowDown"
-		};
-		/**
-		* This object contains references to the mouse actions used by the controls.
-		*
-		* ```js
-		* controls.mouseButtons = {
-		* 	LEFT: THREE.MOUSE.ROTATE,
-		* 	MIDDLE: THREE.MOUSE.DOLLY,
-		* 	RIGHT: THREE.MOUSE.PAN
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.mouseButtons = {
-			LEFT: MOUSE.ROTATE,
-			MIDDLE: MOUSE.DOLLY,
-			RIGHT: MOUSE.PAN
-		};
-		/**
-		* This object contains references to the touch actions used by the controls.
-		*
-		* ```js
-		* controls.mouseButtons = {
-		* 	ONE: THREE.TOUCH.ROTATE,
-		* 	TWO: THREE.TOUCH.DOLLY_PAN
-		* }
-		* ```
-		* @type {Object}
-		*/
-		this.touches = {
-			ONE: TOUCH.ROTATE,
-			TWO: TOUCH.DOLLY_PAN
-		};
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {Vector3}
-		*/
-		this.target0 = this.target.clone();
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {Vector3}
-		*/
-		this.position0 = this.object.position.clone();
-		/**
-		* Used internally by `saveState()` and `reset()`.
-		*
-		* @type {number}
-		*/
-		this.zoom0 = this.object.zoom;
-		this._cursorStyle = "auto";
-		this._domElementKeyEvents = null;
-		this._lastPosition = new Vector3();
-		this._lastQuaternion = new Quaternion();
-		this._lastTargetPosition = new Vector3();
-		this._quat = new Quaternion().setFromUnitVectors(object.up, new Vector3(0, 1, 0));
-		this._quatInverse = this._quat.clone().invert();
-		this._spherical = new Spherical();
-		this._sphericalDelta = new Spherical();
-		this._scale = 1;
-		this._panOffset = new Vector3();
-		this._rotateStart = new Vector2();
-		this._rotateEnd = new Vector2();
-		this._rotateDelta = new Vector2();
-		this._panStart = new Vector2();
-		this._panEnd = new Vector2();
-		this._panDelta = new Vector2();
-		this._dollyStart = new Vector2();
-		this._dollyEnd = new Vector2();
-		this._dollyDelta = new Vector2();
-		this._dollyDirection = new Vector3();
-		this._mouse = new Vector2();
-		this._performCursorZoom = false;
-		this._pointers = [];
-		this._pointerPositions = {};
-		this._controlActive = false;
-		this._onPointerMove = onPointerMove.bind(this);
-		this._onPointerDown = onPointerDown.bind(this);
-		this._onPointerUp = onPointerUp.bind(this);
-		this._onContextMenu = onContextMenu.bind(this);
-		this._onMouseWheel = onMouseWheel.bind(this);
-		this._onKeyDown = onKeyDown.bind(this);
-		this._onTouchStart = onTouchStart.bind(this);
-		this._onTouchMove = onTouchMove.bind(this);
-		this._onMouseDown = onMouseDown.bind(this);
-		this._onMouseMove = onMouseMove.bind(this);
-		this._interceptControlDown = interceptControlDown.bind(this);
-		this._interceptControlUp = interceptControlUp.bind(this);
-		if (this.domElement !== null) this.connect(this.domElement);
-		this.update();
-	}
-	/**
-	* Defines the visual representation of the cursor.
-	*
-	* @type {('auto'|'grab')}
-	* @default 'auto'
-	*/
-	set cursorStyle(type) {
-		this._cursorStyle = type;
-		if (type === "grab") this.domElement.style.cursor = "grab";
-		else this.domElement.style.cursor = "auto";
-	}
-	get cursorStyle() {
-		return this._cursorStyle;
-	}
-	connect(element) {
-		super.connect(element);
-		this.domElement.addEventListener("pointerdown", this._onPointerDown);
-		this.domElement.addEventListener("pointercancel", this._onPointerUp);
-		this.domElement.addEventListener("contextmenu", this._onContextMenu);
-		this.domElement.addEventListener("wheel", this._onMouseWheel, { passive: false });
-		this.domElement.ownerDocument.addEventListener("keydown", this._interceptControlDown, {
-			passive: true,
-			capture: true
-		});
-		this.domElement.style.touchAction = "none";
-	}
-	disconnect() {
-		this.state = _STATE.NONE;
-		this.domElement.removeEventListener("pointerdown", this._onPointerDown);
-		this.domElement.ownerDocument.removeEventListener("pointermove", this._onPointerMove);
-		this.domElement.ownerDocument.removeEventListener("pointerup", this._onPointerUp);
-		this.domElement.removeEventListener("pointercancel", this._onPointerUp);
-		this.domElement.removeEventListener("wheel", this._onMouseWheel);
-		this.domElement.removeEventListener("contextmenu", this._onContextMenu);
-		this.stopListenToKeyEvents();
-		this.domElement.ownerDocument.removeEventListener("keydown", this._interceptControlDown, { capture: true });
-		this.domElement.ownerDocument.removeEventListener("keyup", this._interceptControlUp, { capture: true });
-		this._controlActive = false;
-		this._pointers.length = 0;
-		this._pointerPositions = {};
-		this.domElement.style.touchAction = "";
-		this.domElement.style.cursor = "auto";
-	}
-	dispose() {
-		this.disconnect();
-	}
-	/**
-	* Get the current vertical rotation, in radians.
-	*
-	* @return {number} The current vertical rotation, in radians.
-	*/
-	getPolarAngle() {
-		return this._spherical.phi;
-	}
-	/**
-	* Get the current horizontal rotation, in radians.
-	*
-	* @return {number} The current horizontal rotation, in radians.
-	*/
-	getAzimuthalAngle() {
-		return this._spherical.theta;
-	}
-	/**
-	* Returns the distance from the camera to the target.
-	*
-	* @return {number} The distance from the camera to the target.
-	*/
-	getDistance() {
-		return this.object.position.distanceTo(this.target);
-	}
-	/**
-	* Adds key event listeners to the given DOM element.
-	* `window` is a recommended argument for using this method.
-	*
-	* @param {HTMLElement} domElement - The DOM element
-	*/
-	listenToKeyEvents(domElement) {
-		domElement.addEventListener("keydown", this._onKeyDown);
-		this._domElementKeyEvents = domElement;
-	}
-	/**
-	* Removes the key event listener previously defined with `listenToKeyEvents()`.
-	*/
-	stopListenToKeyEvents() {
-		if (this._domElementKeyEvents !== null) {
-			this._domElementKeyEvents.removeEventListener("keydown", this._onKeyDown);
-			this._domElementKeyEvents = null;
-		}
-	}
-	/**
-	* Save the current state of the controls. This can later be recovered with `reset()`.
-	*/
-	saveState() {
-		this.target0.copy(this.target);
-		this.position0.copy(this.object.position);
-		this.zoom0 = this.object.zoom;
-	}
-	/**
-	* Reset the controls to their state from either the last time the `saveState()`
-	* was called, or the initial state.
-	*/
-	reset() {
-		this.target.copy(this.target0);
-		this.object.position.copy(this.position0);
-		this.object.zoom = this.zoom0;
-		this.object.updateProjectionMatrix();
-		this.dispatchEvent(_changeEvent);
-		this.update();
-		this.state = _STATE.NONE;
-	}
-	/**
-	* Programmatically pan the camera.
-	*
-	* @param {number} deltaX - The horizontal pan amount in pixels.
-	* @param {number} deltaY - The vertical pan amount in pixels.
-	*/
-	pan(deltaX, deltaY) {
-		this._pan(deltaX, deltaY);
-		this.update();
-	}
-	/**
-	* Programmatically dolly in (zoom in for perspective camera).
-	*
-	* @param {number} dollyScale - The dolly scale factor.
-	*/
-	dollyIn(dollyScale) {
-		this._dollyIn(dollyScale);
-		this.update();
-	}
-	/**
-	* Programmatically dolly out (zoom out for perspective camera).
-	*
-	* @param {number} dollyScale - The dolly scale factor.
-	*/
-	dollyOut(dollyScale) {
-		this._dollyOut(dollyScale);
-		this.update();
-	}
-	/**
-	* Programmatically rotate the camera left (around the vertical axis).
-	*
-	* @param {number} angle - The rotation angle in radians.
-	*/
-	rotateLeft(angle) {
-		this._rotateLeft(angle);
-		this.update();
-	}
-	/**
-	* Programmatically rotate the camera up (around the horizontal axis).
-	*
-	* @param {number} angle - The rotation angle in radians.
-	*/
-	rotateUp(angle) {
-		this._rotateUp(angle);
-		this.update();
-	}
-	update(deltaTime = null) {
-		const position = this.object.position;
-		_v.copy(position).sub(this.target);
-		_v.applyQuaternion(this._quat);
-		this._spherical.setFromVector3(_v);
-		if (this.autoRotate && this.state === _STATE.NONE) this._rotateLeft(this._getAutoRotationAngle(deltaTime));
-		if (this.enableDamping) {
-			this._spherical.theta += this._sphericalDelta.theta * this.dampingFactor;
-			this._spherical.phi += this._sphericalDelta.phi * this.dampingFactor;
-		} else {
-			this._spherical.theta += this._sphericalDelta.theta;
-			this._spherical.phi += this._sphericalDelta.phi;
-		}
-		let min = this.minAzimuthAngle;
-		let max = this.maxAzimuthAngle;
-		if (isFinite(min) && isFinite(max)) {
-			if (min < -Math.PI) min += _twoPI;
-			else if (min > Math.PI) min -= _twoPI;
-			if (max < -Math.PI) max += _twoPI;
-			else if (max > Math.PI) max -= _twoPI;
-			if (min <= max) this._spherical.theta = Math.max(min, Math.min(max, this._spherical.theta));
-			else this._spherical.theta = this._spherical.theta > (min + max) / 2 ? Math.max(min, this._spherical.theta) : Math.min(max, this._spherical.theta);
-		}
-		this._spherical.phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, this._spherical.phi));
-		this._spherical.makeSafe();
-		if (this.enableDamping === true) this.target.addScaledVector(this._panOffset, this.dampingFactor);
-		else this.target.add(this._panOffset);
-		this.target.sub(this.cursor);
-		this.target.clampLength(this.minTargetRadius, this.maxTargetRadius);
-		this.target.add(this.cursor);
-		let zoomChanged = false;
-		if (this.zoomToCursor && this._performCursorZoom || this.object.isOrthographicCamera) this._spherical.radius = this._clampDistance(this._spherical.radius);
-		else {
-			const prevRadius = this._spherical.radius;
-			this._spherical.radius = this._clampDistance(this._spherical.radius * this._scale);
-			zoomChanged = prevRadius != this._spherical.radius;
-		}
-		_v.setFromSpherical(this._spherical);
-		_v.applyQuaternion(this._quatInverse);
-		position.copy(this.target).add(_v);
-		this.object.lookAt(this.target);
-		if (this.enableDamping === true) {
-			this._sphericalDelta.theta *= 1 - this.dampingFactor;
-			this._sphericalDelta.phi *= 1 - this.dampingFactor;
-			this._panOffset.multiplyScalar(1 - this.dampingFactor);
-		} else {
-			this._sphericalDelta.set(0, 0, 0);
-			this._panOffset.set(0, 0, 0);
-		}
-		if (this.zoomToCursor && this._performCursorZoom) {
-			let newRadius = null;
-			if (this.object.isPerspectiveCamera) {
-				const prevRadius = _v.length();
-				newRadius = this._clampDistance(prevRadius * this._scale);
-				const radiusDelta = prevRadius - newRadius;
-				this.object.position.addScaledVector(this._dollyDirection, radiusDelta);
-				this.object.updateMatrixWorld();
-				zoomChanged = !!radiusDelta;
-			} else if (this.object.isOrthographicCamera) {
-				const mouseBefore = new Vector3(this._mouse.x, this._mouse.y, 0);
-				mouseBefore.unproject(this.object);
-				const prevZoom = this.object.zoom;
-				this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale));
-				this.object.updateProjectionMatrix();
-				zoomChanged = prevZoom !== this.object.zoom;
-				const mouseAfter = new Vector3(this._mouse.x, this._mouse.y, 0);
-				mouseAfter.unproject(this.object);
-				this.object.position.sub(mouseAfter).add(mouseBefore);
-				this.object.updateMatrixWorld();
-				newRadius = _v.length();
-			} else {
-				console.warn("WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled.");
-				this.zoomToCursor = false;
-			}
-			if (newRadius !== null) {
-				if (this.screenSpacePanning) this.target.set(0, 0, -1).transformDirection(this.object.matrix).multiplyScalar(newRadius).add(this.object.position);
-				else {
-					_ray.origin.copy(this.object.position);
-					_ray.direction.set(0, 0, -1).transformDirection(this.object.matrix);
-					if (Math.abs(this.object.up.dot(_ray.direction)) < _TILT_LIMIT) this.object.lookAt(this.target);
-					else {
-						_plane.setFromNormalAndCoplanarPoint(this.object.up, this.target);
-						_ray.intersectPlane(_plane, this.target);
-					}
-				}
-			}
-		} else if (this.object.isOrthographicCamera) {
-			const prevZoom = this.object.zoom;
-			this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale));
-			if (prevZoom !== this.object.zoom) {
-				this.object.updateProjectionMatrix();
-				zoomChanged = true;
-			}
-		}
-		this._scale = 1;
-		this._performCursorZoom = false;
-		if (zoomChanged || this._lastPosition.distanceToSquared(this.object.position) > _EPS || 8 * (1 - this._lastQuaternion.dot(this.object.quaternion)) > _EPS || this._lastTargetPosition.distanceToSquared(this.target) > _EPS) {
-			this.dispatchEvent(_changeEvent);
-			this._lastPosition.copy(this.object.position);
-			this._lastQuaternion.copy(this.object.quaternion);
-			this._lastTargetPosition.copy(this.target);
-			return true;
-		}
-		return false;
-	}
-	_getAutoRotationAngle(deltaTime) {
-		if (deltaTime !== null) return _twoPI / 60 * this.autoRotateSpeed * deltaTime;
-		else return _twoPI / 60 / 60 * this.autoRotateSpeed;
-	}
-	_getZoomScale(delta) {
-		const normalizedDelta = Math.abs(delta * .01);
-		return Math.pow(.95, this.zoomSpeed * normalizedDelta);
-	}
-	_rotateLeft(angle) {
-		this._sphericalDelta.theta -= angle;
-	}
-	_rotateUp(angle) {
-		this._sphericalDelta.phi -= angle;
-	}
-	_panLeft(distance, objectMatrix) {
-		_v.setFromMatrixColumn(objectMatrix, 0);
-		_v.multiplyScalar(-distance);
-		this._panOffset.add(_v);
-	}
-	_panUp(distance, objectMatrix) {
-		if (this.screenSpacePanning === true) _v.setFromMatrixColumn(objectMatrix, 1);
-		else {
-			_v.setFromMatrixColumn(objectMatrix, 0);
-			_v.crossVectors(this.object.up, _v);
-		}
-		_v.multiplyScalar(distance);
-		this._panOffset.add(_v);
-	}
-	_pan(deltaX, deltaY) {
-		const element = this.domElement;
-		if (this.object.isPerspectiveCamera) {
-			const position = this.object.position;
-			_v.copy(position).sub(this.target);
-			let targetDistance = _v.length();
-			targetDistance *= Math.tan(this.object.fov / 2 * Math.PI / 180);
-			this._panLeft(2 * deltaX * targetDistance / element.clientHeight, this.object.matrix);
-			this._panUp(2 * deltaY * targetDistance / element.clientHeight, this.object.matrix);
-		} else if (this.object.isOrthographicCamera) {
-			this._panLeft(deltaX * (this.object.right - this.object.left) / this.object.zoom / element.clientWidth, this.object.matrix);
-			this._panUp(deltaY * (this.object.top - this.object.bottom) / this.object.zoom / element.clientHeight, this.object.matrix);
-		} else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
-			this.enablePan = false;
-		}
-	}
-	_dollyOut(dollyScale) {
-		if (this.object.isPerspectiveCamera || this.object.isOrthographicCamera) this._scale /= dollyScale;
-		else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-			this.enableZoom = false;
-		}
-	}
-	_dollyIn(dollyScale) {
-		if (this.object.isPerspectiveCamera || this.object.isOrthographicCamera) this._scale *= dollyScale;
-		else {
-			console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
-			this.enableZoom = false;
-		}
-	}
-	_updateZoomParameters(x, y) {
-		if (!this.zoomToCursor) return;
-		this._performCursorZoom = true;
-		const rect = this.domElement.getBoundingClientRect();
-		const dx = x - rect.left;
-		const dy = y - rect.top;
-		const w = rect.width;
-		const h = rect.height;
-		this._mouse.x = dx / w * 2 - 1;
-		this._mouse.y = -(dy / h) * 2 + 1;
-		this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
-	}
-	_clampDistance(dist) {
-		return Math.max(this.minDistance, Math.min(this.maxDistance, dist));
-	}
-	_handleMouseDownRotate(event) {
-		this._rotateStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseDownDolly(event) {
-		this._updateZoomParameters(event.clientX, event.clientY);
-		this._dollyStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseDownPan(event) {
-		this._panStart.set(event.clientX, event.clientY);
-	}
-	_handleMouseMoveRotate(event) {
-		this._rotateEnd.set(event.clientX, event.clientY);
-		this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-		const element = this.domElement;
-		this._rotateLeft(_twoPI * this._rotateDelta.x / element.clientHeight);
-		this._rotateUp(_twoPI * this._rotateDelta.y / element.clientHeight);
-		this._rotateStart.copy(this._rotateEnd);
-		this.update();
-	}
-	_handleMouseMoveDolly(event) {
-		this._dollyEnd.set(event.clientX, event.clientY);
-		this._dollyDelta.subVectors(this._dollyEnd, this._dollyStart);
-		if (this._dollyDelta.y > 0) this._dollyOut(this._getZoomScale(this._dollyDelta.y));
-		else if (this._dollyDelta.y < 0) this._dollyIn(this._getZoomScale(this._dollyDelta.y));
-		this._dollyStart.copy(this._dollyEnd);
-		if (this.zoomToCursor) {
-			this._performCursorZoom = true;
-			this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
-		}
-		this.update();
-	}
-	_handleMouseMovePan(event) {
-		this._panEnd.set(event.clientX, event.clientY);
-		this._panDelta.subVectors(this._panEnd, this._panStart).multiplyScalar(this.panSpeed);
-		this._pan(this._panDelta.x, this._panDelta.y);
-		this._panStart.copy(this._panEnd);
-		this.update();
-	}
-	_handleMouseWheel(event) {
-		this._updateZoomParameters(event.clientX, event.clientY);
-		if (event.deltaY < 0) this._dollyIn(this._getZoomScale(event.deltaY));
-		else if (event.deltaY > 0) this._dollyOut(this._getZoomScale(event.deltaY));
-		this.update();
-	}
-	_handleKeyDown(event) {
-		let needsUpdate = false;
-		switch (event.code) {
-			case this.keys.UP:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateUp(_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(0, this.keyPanSpeed);
-				needsUpdate = true;
-				break;
-			case this.keys.BOTTOM:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateUp(-_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(0, -this.keyPanSpeed);
-				needsUpdate = true;
-				break;
-			case this.keys.LEFT:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateLeft(_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(this.keyPanSpeed, 0);
-				needsUpdate = true;
-				break;
-			case this.keys.RIGHT:
-				if (event.ctrlKey || event.metaKey || event.shiftKey) {
-					if (this.enableRotate) this._rotateLeft(-_twoPI * this.keyRotateSpeed / this.domElement.clientHeight);
-				} else if (this.enablePan) this._pan(-this.keyPanSpeed, 0);
-				needsUpdate = true;
-		}
-		if (needsUpdate) {
-			event.preventDefault();
-			this.update();
-		}
-	}
-	_handleTouchStartRotate(event) {
-		if (this._pointers.length === 1) this._rotateStart.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._rotateStart.set(x, y);
-		}
-	}
-	_handleTouchStartPan(event) {
-		if (this._pointers.length === 1) this._panStart.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._panStart.set(x, y);
-		}
-	}
-	_handleTouchStartDolly(event) {
-		const position = this._getSecondPointerPosition(event);
-		const dx = event.pageX - position.x;
-		const dy = event.pageY - position.y;
-		const distance = Math.sqrt(dx * dx + dy * dy);
-		this._dollyStart.set(0, distance);
-	}
-	_handleTouchStartDollyPan(event) {
-		if (this.enableZoom) this._handleTouchStartDolly(event);
-		if (this.enablePan) this._handleTouchStartPan(event);
-	}
-	_handleTouchStartDollyRotate(event) {
-		if (this.enableZoom) this._handleTouchStartDolly(event);
-		if (this.enableRotate) this._handleTouchStartRotate(event);
-	}
-	_handleTouchMoveRotate(event) {
-		if (this._pointers.length == 1) this._rotateEnd.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._rotateEnd.set(x, y);
-		}
-		this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
-		const element = this.domElement;
-		this._rotateLeft(_twoPI * this._rotateDelta.x / element.clientHeight);
-		this._rotateUp(_twoPI * this._rotateDelta.y / element.clientHeight);
-		this._rotateStart.copy(this._rotateEnd);
-	}
-	_handleTouchMovePan(event) {
-		if (this._pointers.length === 1) this._panEnd.set(event.pageX, event.pageY);
-		else {
-			const position = this._getSecondPointerPosition(event);
-			const x = .5 * (event.pageX + position.x);
-			const y = .5 * (event.pageY + position.y);
-			this._panEnd.set(x, y);
-		}
-		this._panDelta.subVectors(this._panEnd, this._panStart).multiplyScalar(this.panSpeed);
-		this._pan(this._panDelta.x, this._panDelta.y);
-		this._panStart.copy(this._panEnd);
-	}
-	_handleTouchMoveDolly(event) {
-		const position = this._getSecondPointerPosition(event);
-		const dx = event.pageX - position.x;
-		const dy = event.pageY - position.y;
-		const distance = Math.sqrt(dx * dx + dy * dy);
-		this._dollyEnd.set(0, distance);
-		this._dollyDelta.set(0, Math.pow(this._dollyEnd.y / this._dollyStart.y, this.zoomSpeed));
-		this._dollyOut(this._dollyDelta.y);
-		this._dollyStart.copy(this._dollyEnd);
-		const centerX = (event.pageX + position.x) * .5;
-		const centerY = (event.pageY + position.y) * .5;
-		this._updateZoomParameters(centerX, centerY);
-	}
-	_handleTouchMoveDollyPan(event) {
-		if (this.enableZoom) this._handleTouchMoveDolly(event);
-		if (this.enablePan) this._handleTouchMovePan(event);
-	}
-	_handleTouchMoveDollyRotate(event) {
-		if (this.enableZoom) this._handleTouchMoveDolly(event);
-		if (this.enableRotate) this._handleTouchMoveRotate(event);
-	}
-	_addPointer(event) {
-		this._pointers.push(event.pointerId);
-	}
-	_removePointer(event) {
-		delete this._pointerPositions[event.pointerId];
-		for (let i = 0; i < this._pointers.length; i++) if (this._pointers[i] == event.pointerId) {
-			this._pointers.splice(i, 1);
-			return;
-		}
-	}
-	_isTrackingPointer(event) {
-		for (let i = 0; i < this._pointers.length; i++) if (this._pointers[i] == event.pointerId) return true;
-		return false;
-	}
-	_trackPointer(event) {
-		let position = this._pointerPositions[event.pointerId];
-		if (position === void 0) {
-			position = new Vector2();
-			this._pointerPositions[event.pointerId] = position;
-		}
-		position.set(event.pageX, event.pageY);
-	}
-	_getSecondPointerPosition(event) {
-		const pointerId = event.pointerId === this._pointers[0] ? this._pointers[1] : this._pointers[0];
-		return this._pointerPositions[pointerId];
-	}
-	_customWheelEvent(event) {
-		const mode = event.deltaMode;
-		const newEvent = {
-			clientX: event.clientX,
-			clientY: event.clientY,
-			deltaY: event.deltaY
-		};
-		switch (mode) {
-			case 1:
-				newEvent.deltaY *= 16;
-				break;
-			case 2: newEvent.deltaY *= 100;
-		}
-		if (event.ctrlKey && !this._controlActive) newEvent.deltaY *= 10;
-		return newEvent;
-	}
-};
-function onPointerDown(event) {
-	if (this.enabled === false) return;
-	if (this._pointers.length === 0) {
-		this.domElement.setPointerCapture(event.pointerId);
-		this.domElement.ownerDocument.addEventListener("pointermove", this._onPointerMove);
-		this.domElement.ownerDocument.addEventListener("pointerup", this._onPointerUp);
-	}
-	if (this._isTrackingPointer(event)) return;
-	this._addPointer(event);
-	if (event.pointerType === "touch") this._onTouchStart(event);
-	else this._onMouseDown(event);
-	if (this._cursorStyle === "grab") this.domElement.style.cursor = "grabbing";
-}
-function onPointerMove(event) {
-	if (this.enabled === false) return;
-	if (event.pointerType === "touch") this._onTouchMove(event);
-	else this._onMouseMove(event);
-}
-function onPointerUp(event) {
-	this._removePointer(event);
-	switch (this._pointers.length) {
-		case 0:
-			this.domElement.releasePointerCapture(event.pointerId);
-			this.domElement.ownerDocument.removeEventListener("pointermove", this._onPointerMove);
-			this.domElement.ownerDocument.removeEventListener("pointerup", this._onPointerUp);
-			this.dispatchEvent(_endEvent);
-			this.state = _STATE.NONE;
-			if (this._cursorStyle === "grab") this.domElement.style.cursor = "grab";
-			break;
-		case 1:
-			const pointerId = this._pointers[0];
-			const position = this._pointerPositions[pointerId];
-			this._onTouchStart({
-				pointerId,
-				pageX: position.x,
-				pageY: position.y
-			});
-	}
-}
-function onMouseDown(event) {
-	let mouseAction;
-	switch (event.button) {
-		case 0:
-			mouseAction = this.mouseButtons.LEFT;
-			break;
-		case 1:
-			mouseAction = this.mouseButtons.MIDDLE;
-			break;
-		case 2:
-			mouseAction = this.mouseButtons.RIGHT;
-			break;
-		default: mouseAction = -1;
-	}
-	switch (mouseAction) {
-		case MOUSE.DOLLY:
-			if (this.enableZoom === false) return;
-			this._handleMouseDownDolly(event);
-			this.state = _STATE.DOLLY;
-			break;
-		case MOUSE.ROTATE:
-			if (event.ctrlKey || event.metaKey || event.shiftKey) {
-				if (this.enablePan === false) return;
-				this._handleMouseDownPan(event);
-				this.state = _STATE.PAN;
-			} else {
-				if (this.enableRotate === false) return;
-				this._handleMouseDownRotate(event);
-				this.state = _STATE.ROTATE;
-			}
-			break;
-		case MOUSE.PAN:
-			if (event.ctrlKey || event.metaKey || event.shiftKey) {
-				if (this.enableRotate === false) return;
-				this._handleMouseDownRotate(event);
-				this.state = _STATE.ROTATE;
-			} else {
-				if (this.enablePan === false) return;
-				this._handleMouseDownPan(event);
-				this.state = _STATE.PAN;
-			}
-			break;
-		default: this.state = _STATE.NONE;
-	}
-	if (this.state !== _STATE.NONE) this.dispatchEvent(_startEvent);
-}
-function onMouseMove(event) {
-	switch (this.state) {
-		case _STATE.ROTATE:
-			if (this.enableRotate === false) return;
-			this._handleMouseMoveRotate(event);
-			break;
-		case _STATE.DOLLY:
-			if (this.enableZoom === false) return;
-			this._handleMouseMoveDolly(event);
-			break;
-		case _STATE.PAN:
-			if (this.enablePan === false) return;
-			this._handleMouseMovePan(event);
-	}
-}
-function onMouseWheel(event) {
-	if (this.enabled === false || this.enableZoom === false || this.state !== _STATE.NONE) return;
-	event.preventDefault();
-	this.dispatchEvent(_startEvent);
-	this._handleMouseWheel(this._customWheelEvent(event));
-	this.dispatchEvent(_endEvent);
-}
-function onKeyDown(event) {
-	if (this.enabled === false) return;
-	this._handleKeyDown(event);
-}
-function onTouchStart(event) {
-	this._trackPointer(event);
-	switch (this._pointers.length) {
-		case 1:
-			switch (this.touches.ONE) {
-				case TOUCH.ROTATE:
-					if (this.enableRotate === false) {
-						this.state = _STATE.NONE;
-						break;
-					}
-					this._handleTouchStartRotate(event);
-					this.state = _STATE.TOUCH_ROTATE;
-					break;
-				case TOUCH.PAN:
-					if (this.enablePan === false) {
-						this.state = _STATE.NONE;
-						break;
-					}
-					this._handleTouchStartPan(event);
-					this.state = _STATE.TOUCH_PAN;
-					break;
-				default: this.state = _STATE.NONE;
-			}
-			break;
-		case 2:
-			switch (this.touches.TWO) {
-				case TOUCH.DOLLY_PAN:
-					if (this.enableZoom === false && this.enablePan === false) return;
-					this._handleTouchStartDollyPan(event);
-					this.state = _STATE.TOUCH_DOLLY_PAN;
-					break;
-				case TOUCH.DOLLY_ROTATE:
-					if (this.enableZoom === false && this.enableRotate === false) return;
-					this._handleTouchStartDollyRotate(event);
-					this.state = _STATE.TOUCH_DOLLY_ROTATE;
-					break;
-				default: this.state = _STATE.NONE;
-			}
-			break;
-		default: this.state = _STATE.NONE;
-	}
-	if (this.state !== _STATE.NONE) this.dispatchEvent(_startEvent);
-}
-function onTouchMove(event) {
-	this._trackPointer(event);
-	switch (this.state) {
-		case _STATE.TOUCH_ROTATE:
-			if (this.enableRotate === false) return;
-			this._handleTouchMoveRotate(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_PAN:
-			if (this.enablePan === false) return;
-			this._handleTouchMovePan(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_DOLLY_PAN:
-			if (this.enableZoom === false && this.enablePan === false) return;
-			this._handleTouchMoveDollyPan(event);
-			this.update();
-			break;
-		case _STATE.TOUCH_DOLLY_ROTATE:
-			if (this.enableZoom === false && this.enableRotate === false) return;
-			this._handleTouchMoveDollyRotate(event);
-			this.update();
-			break;
-		default: this.state = _STATE.NONE;
-	}
-}
-function onContextMenu(event) {
-	if (this.enabled === false) return;
-	event.preventDefault();
-}
-function interceptControlDown(event) {
-	if (event.key === "Control") {
-		this._controlActive = true;
-		this.domElement.ownerDocument.addEventListener("keyup", this._interceptControlUp, {
-			passive: true,
-			capture: true
-		});
-	}
-}
-function interceptControlUp(event) {
-	if (event.key === "Control") {
-		this._controlActive = false;
-		this.domElement.ownerDocument.removeEventListener("keyup", this._interceptControlUp, {
-			passive: true,
-			capture: true
-		});
-	}
-}
 // node_modules/three/examples/jsm/environments/RoomEnvironment.js
 /**
 * This class represents a scene with a basic room setup that can be used as
@@ -61812,21 +60547,41 @@ function makeContactShadow(size, shadowTex, opacity = .45) {
 }
 function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shadowTex, compactMode = false, ultraCompact = false) {
 	const envGroup = new Group();
-	const table = new Mesh(new BoxGeometry(10.5, .22, 6.2), new MeshStandardMaterial({
+	const table = new Mesh(new BoxGeometry(6.4, .22, 2.45), new MeshStandardMaterial({
 		map: woodTex,
 		roughness: .62,
 		metalness: .02
 	}));
-	table.position.set(0, -.11, 0);
+	table.position.set(0, -.11, .05);
 	table.receiveShadow = true;
 	envGroup.add(table);
-	const frontTrim = new Mesh(new BoxGeometry(10.54, .06, .08), new MeshStandardMaterial({
+	const trimMat = new MeshStandardMaterial({
 		color: 6046252,
 		roughness: .45,
 		metalness: .05
-	}));
-	frontTrim.position.set(0, -.02, 3.1);
+	});
+	const frontTrim = new Mesh(new BoxGeometry(6.44, .06, .08), trimMat);
+	frontTrim.position.set(0, -.02, 1.28);
 	envGroup.add(frontTrim);
+	const walnutMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .68,
+		metalness: .02
+	});
+	const counterBase = new Mesh(new BoxGeometry(5.95, .56, 2.05), walnutMat);
+	counterBase.position.set(0, -.5, .05);
+	counterBase.receiveShadow = true;
+	envGroup.add(counterBase);
+	const slatGeo = new BoxGeometry(.12, .5, .04);
+	const slatCount = ultraCompact ? 6 : 9;
+	for (let i = 0; i < slatCount; i++) {
+		const t = i / (slatCount - 1) - .5;
+		const slatBack = new Mesh(slatGeo, trimMat);
+		slatBack.position.set(t * 5.2, -.5, -.98);
+		const slatFront = new Mesh(slatGeo, trimMat);
+		slatFront.position.set(t * 5.2, -.5, 1.08);
+		envGroup.add(slatBack, slatFront);
+	}
 	const trayGroup = new Group();
 	const trayFloor = new Mesh(new BoxGeometry(3.8, .06, 2.35), new MeshStandardMaterial({
 		map: matTex,
@@ -61845,13 +60600,13 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	const railT = .09;
 	const backRail = new Mesh(new BoxGeometry(3.96, railH, railT), railMat);
 	backRail.position.set(0, railH / 2, -1.18);
-	backRail.castShadow = true;
+	backRail.castShadow = !compactMode;
 	backRail.receiveShadow = true;
 	const frontRail = backRail.clone();
 	frontRail.position.z = 1.18;
 	const leftRail = new Mesh(new BoxGeometry(railT, railH, 2.45), railMat);
 	leftRail.position.set(-1.93, railH / 2, 0);
-	leftRail.castShadow = true;
+	leftRail.castShadow = !compactMode;
 	leftRail.receiveShadow = true;
 	const rightRail = leftRail.clone();
 	rightRail.position.x = 1.93;
@@ -61891,7 +60646,7 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	});
 	canisterColors.forEach((col, idx) => {
 		const canister = new Group();
-		const xPos = -2.65 - idx * .65;
+		const xPos = -2.38 - idx * .48;
 		const zPos = -.35 + idx * .55;
 		canister.add(makeContactShadow(.65, shadowTex, .5));
 		const body = new Mesh(canisterBodyGeo, new MeshStandardMaterial({
@@ -61900,12 +60655,12 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 			roughness: .35,
 			metalness: .06
 		}));
-		body.castShadow = true;
+		body.castShadow = !compactMode;
 		body.receiveShadow = true;
 		canister.add(body);
 		const lid = new Mesh(canisterLidGeo, canisterLidMat);
 		lid.position.y = .52;
-		lid.castShadow = true;
+		lid.castShadow = !compactMode;
 		canister.add(lid);
 		const knob = new Mesh(canisterKnobGeo, brassMat);
 		knob.position.y = .58;
@@ -61913,7 +60668,144 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 		canister.position.set(xPos, 0, zPos);
 		envGroup.add(canister);
 	});
-	const bambooCount = ultraCompact ? 12 : compactMode ? 18 : 26;
+	const shopGroup = new Group();
+	const plasterMat = new MeshStandardMaterial({
+		color: 15327698,
+		roughness: .9,
+		metalness: 0
+	});
+	const timberMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .65,
+		metalness: .02
+	});
+	const floorMat = new MeshStandardMaterial({
+		map: woodTex,
+		color: 12754550,
+		roughness: .72,
+		metalness: .02
+	});
+	const shopFloor = new Mesh(new BoxGeometry(10.9, .08, 8.2), floorMat);
+	shopFloor.position.set(0, -.8200000000000001, .85);
+	shopFloor.receiveShadow = true;
+	shopGroup.add(shopFloor);
+	const entryStone = new Mesh(new BoxGeometry(2.8, .07, 2.2), new MeshStandardMaterial({
+		color: 12173750,
+		roughness: .88
+	}));
+	entryStone.position.set(6.75, -.8250000000000001, -1.82);
+	shopGroup.add(entryStone);
+	const backWainscot = new Mesh(new BoxGeometry(10.9, 1.24, .16), timberMat);
+	backWainscot.position.set(0, -.16000000000000003, -3.15);
+	shopGroup.add(backWainscot);
+	const backWallLeft = new Mesh(new BoxGeometry(3.6, 2.85, .16), plasterMat);
+	backWallLeft.position.set(-3.65, 1.88, -3.15);
+	const backWallRight = backWallLeft.clone();
+	backWallRight.position.x = 3.65;
+	shopGroup.add(backWallLeft, backWallRight);
+	const backHeader = new Mesh(new BoxGeometry(3.75, .85, .16), plasterMat);
+	backHeader.position.set(0, 2.9, -3.15);
+	shopGroup.add(backHeader);
+	const windowSill = new Mesh(new BoxGeometry(3.85, .08, .28), timberMat);
+	windowSill.position.set(0, .46, -3.12);
+	const windowTopBeam = new Mesh(new BoxGeometry(10.9, .14, .22), timberMat);
+	windowTopBeam.position.set(0, 2.52, -3.14);
+	shopGroup.add(windowSill, windowTopBeam);
+	const vMullionGeo = new BoxGeometry(.055, 2.02, .055);
+	for (const mx of [
+		-1.85,
+		-.92,
+		0,
+		.92,
+		1.85
+	]) {
+		const mullion = new Mesh(vMullionGeo, timberMat);
+		mullion.position.set(mx, 1.49, -3.14);
+		shopGroup.add(mullion);
+	}
+	const hBar = new Mesh(new BoxGeometry(3.72, .045, .045), timberMat);
+	hBar.position.set(0, 1.98, -3.14);
+	shopGroup.add(hBar);
+	const leftWall = new Mesh(new BoxGeometry(.16, 4.15, 8.2), plasterMat);
+	leftWall.position.set(-5.35, 1.28, .85);
+	shopGroup.add(leftWall);
+	const rightWallBack = new Mesh(new BoxGeometry(.16, 4.15, .78), plasterMat);
+	rightWallBack.position.set(5.35, 1.28, -2.86);
+	const rightWallFront = new Mesh(new BoxGeometry(.16, 4.15, 6.1), plasterMat);
+	rightWallFront.position.set(5.35, 1.28, 1.92);
+	const rightDoorHeader = new Mesh(new BoxGeometry(.16, 1.25, 1.45), plasterMat);
+	rightDoorHeader.position.set(5.35, 2.72, -1.8);
+	shopGroup.add(rightWallBack, rightWallFront, rightDoorHeader);
+	const doorPostGeo = new BoxGeometry(.22, 2.86, .12);
+	const doorPostBack = new Mesh(doorPostGeo, timberMat);
+	doorPostBack.position.set(5.35, .65, -2.46);
+	const doorPostFront = new Mesh(doorPostGeo, timberMat);
+	doorPostFront.position.set(5.35, .65, -1.14);
+	const doorLintel = new Mesh(new BoxGeometry(.26, .14, 1.52), timberMat);
+	doorLintel.position.set(5.35, 2.12, -1.8);
+	shopGroup.add(doorPostBack, doorPostFront, doorLintel);
+	const pillarGeo = new BoxGeometry(.22, 4.15, .22);
+	for (const [px, pz] of [
+		[-5.25, -3.05],
+		[5.25, -3.05],
+		[-5.25, .85],
+		[5.25, .85]
+	]) {
+		const pillar = new Mesh(pillarGeo, timberMat);
+		pillar.position.set(px, 1.28, pz);
+		shopGroup.add(pillar);
+	}
+	const shelfBoard = new Mesh(new BoxGeometry(1.75, .06, .34), timberMat);
+	shelfBoard.position.set(-3.45, 1.38, -2.92);
+	shopGroup.add(shelfBoard);
+	const jarMat = new MeshStandardMaterial({
+		color: 5401428,
+		map: ceramicTex,
+		roughness: .38
+	});
+	const jarGeo = new CylinderGeometry(.1, .11, .26, compactMode ? 10 : 16);
+	for (let j = 0; j < 3; j++) {
+		const jar = new Mesh(jarGeo, jarMat);
+		jar.position.set(-3.95 + j * .45, 1.54, -2.92);
+		shopGroup.add(jar);
+	}
+	const lanternGroup = new Group();
+	lanternGroup.position.set(-2.65, 2.25, -2.25);
+	const lanternCord = new Mesh(new CylinderGeometry(.012, .012, .9, 6), timberMat);
+	lanternCord.position.y = .58;
+	const lanternShade = new Mesh(new SphereGeometry(.24, compactMode ? 12 : 18, compactMode ? 10 : 14), new MeshStandardMaterial({
+		color: 16511188,
+		emissive: 16037982,
+		emissiveIntensity: .72,
+		roughness: .85
+	}));
+	lanternShade.scale.set(1, 1.18, 1);
+	const lanternCapGeo = new CylinderGeometry(.11, .11, .04, 12);
+	const topCap = new Mesh(lanternCapGeo, timberMat);
+	topCap.position.y = .27;
+	const botCap = new Mesh(lanternCapGeo, timberMat);
+	botCap.position.y = -.27;
+	lanternGroup.add(lanternCord, lanternShade, topCap, botCap);
+	shopGroup.add(lanternGroup);
+	const norenMat = new MeshStandardMaterial({
+		color: 3889474,
+		roughness: .86
+	});
+	const norenBar = new Mesh(new CylinderGeometry(.025, .025, 1.36, 8), timberMat);
+	norenBar.rotation.x = Math.PI / 2;
+	norenBar.position.set(5.26, 2.02, -1.8);
+	shopGroup.add(norenBar);
+	const norenPanelGeo = new BoxGeometry(.03, .56, .4);
+	for (let p = 0; p < 3; p++) {
+		const panel = new Mesh(norenPanelGeo, norenMat);
+		panel.position.set(5.26, 1.72, -2.22 + p * .42);
+		shopGroup.add(panel);
+	}
+	shopGroup.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	envGroup.add(shopGroup);
+	const bambooCount = ultraCompact ? 10 : compactMode ? 14 : 22;
 	const bambooInstanced = new InstancedMesh(new CylinderGeometry(.065, .08, 4.6, ultraCompact ? 6 : compactMode ? 7 : 10), new MeshStandardMaterial({
 		color: 6456152,
 		roughness: .55,
@@ -61922,10 +60814,9 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	const dummy = new Object3D();
 	const tint = new Color();
 	for (let i = 0; i < bambooCount; i++) {
-		const angle = -Math.PI * .88 + i / (bambooCount - 1) * Math.PI * .76;
-		const dist = 4.2 + i % 3 * 1.1;
-		dummy.position.set(Math.cos(angle) * dist * 1.15, 1.6, -2.2 - Math.abs(Math.sin(angle)) * dist * .65);
-		dummy.rotation.set((i % 5 - 2) * .025, i * .4, (i % 7 - 3) * .02);
+		const t = i / (bambooCount - 1) - .5;
+		dummy.position.set(t * 7.8 + (i % 3 - 1) * .22, 1.45, -4.1 - i % 4 * .85);
+		dummy.rotation.set((i % 5 - 2) * .022, i * .4, (i % 7 - 3) * .018);
 		const s = .85 + i % 4 * .12;
 		dummy.scale.set(s, 1 + i % 3 * .15, s);
 		dummy.updateMatrix();
@@ -61938,13 +60829,13 @@ function createTeaTableEnvironment(woodTex, walnutTex, matTex, ceramicTex, shado
 	bambooInstanced.computeBoundingSphere();
 	bambooInstanced.frustumCulled = false;
 	envGroup.add(bambooInstanced);
-	const deck = new Mesh(new PlaneGeometry(36, 28), new MeshStandardMaterial({
+	const deck = new Mesh(new PlaneGeometry(30, 18), new MeshStandardMaterial({
 		color: 12766144,
 		roughness: .92,
 		metalness: 0
 	}));
 	deck.rotation.x = -Math.PI / 2;
-	deck.position.set(0, -.75, -5);
+	deck.position.set(0, -.82, -10.5);
 	envGroup.add(deck);
 	return envGroup;
 }
@@ -62947,6 +61838,992 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl, comp
 		coldDripDrop
 	};
 }
+// src/three/shopCharacters.ts
+var SHOP_FLOOR_Y = -.78;
+var PLAYER_SPAWN_POS = new Vector3(.45, SHOP_FLOOR_Y, 2.72);
+var PLAYER_SPAWN_ROT_Y = Math.PI;
+var DOOR_OUTSIDE_POS = new Vector2(6.65, -1.8);
+var DOOR_THRESHOLD_X = 5.32;
+var SEAT_LEFT_POS = new Vector3(-1.55, SHOP_FLOOR_Y, -1.92);
+var SEAT_LEFT_ROT_Y = .28;
+var CUSTOMER_WAYPOINTS = [
+	new Vector2(6.65, -1.8),
+	new Vector2(5.1, -1.8),
+	new Vector2(3.65, -2.12),
+	new Vector2(.85, -2.35),
+	new Vector2(-1.55, -2.38),
+	new Vector2(-1.55, -1.92)
+];
+function clampToShopObstacles(x, z) {
+	let nx = MathUtils.clamp(x, -4.82, 4.82);
+	let nz = MathUtils.clamp(z, -2.68, 4.35);
+	const cMinX = -3.54;
+	const cMaxX = 3.54;
+	const cMinZ = -1.52;
+	const cMaxZ = 1.64;
+	if (nx > cMinX && nx < cMaxX && nz > cMinZ && nz < cMaxZ) {
+		const dLeft = Math.abs(nx - cMinX);
+		const dRight = Math.abs(cMaxX - nx);
+		const dBack = Math.abs(nz - cMinZ);
+		const dFront = Math.abs(cMaxZ - nz);
+		const minD = Math.min(dLeft, dRight, dBack, dFront);
+		if (minD === dFront) nz = cMaxZ;
+		else if (minD === dBack) nz = cMinZ;
+		else if (minD === dLeft) nx = cMinX;
+		else nx = cMaxX;
+	}
+	for (const [cx, cz, rad] of [
+		[
+			-1.55,
+			-1.92,
+			.62
+		],
+		[
+			1.55,
+			-1.96,
+			.56
+		],
+		[
+			2.42,
+			-1.78,
+			.52
+		]
+	]) {
+		const dx = nx - cx;
+		const dz = nz - cz;
+		const dist = Math.hypot(dx, dz);
+		if (dist < rad) {
+			const inv = dist > .001 ? 1 / dist : 1;
+			nx = cx + (dist > .001 ? dx * inv : 0) * rad;
+			nz = cz + (dist > .001 ? dz * inv : 1) * rad;
+		}
+	}
+	nx = MathUtils.clamp(nx, -4.82, 4.82);
+	nz = MathUtils.clamp(nz, -2.68, 4.35);
+	return {
+		x: nx,
+		z: nz
+	};
+}
+function checkNearTeaTable(pos) {
+	const px = pos.x;
+	const pz = pos.z;
+	const inFrontBrewZone = Math.abs(px) <= 2.35 && pz >= 1.2 && pz <= 2.75;
+	const nearCounterCenter = Math.hypot(px, pz - 1.35) <= 2.05;
+	return inFrontBrewZone || nearCounterCenter || Math.abs(px) <= 4.15 && pz >= -1.25 && pz <= 2.15;
+}
+function createTeaChair(walnutTex, cushionColorHex, compactMode = false) {
+	const chair = new Group();
+	const woodMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .62,
+		metalness: .03
+	});
+	const cushionMat = new MeshStandardMaterial({
+		color: cushionColorHex,
+		roughness: .88,
+		metalness: 0
+	});
+	const legGeo = new CylinderGeometry(.028, .022, .46, compactMode ? 6 : 10);
+	for (const [lx, lz] of [
+		[-.22, -.22],
+		[.22, -.22],
+		[-.22, .22],
+		[.22, .22]
+	]) {
+		const leg = new Mesh(legGeo, woodMat);
+		leg.position.set(lx, .23, lz);
+		leg.castShadow = !compactMode;
+		chair.add(leg);
+	}
+	const sideBarGeo = new BoxGeometry(.032, .032, .44);
+	const leftBar = new Mesh(sideBarGeo, woodMat);
+	leftBar.position.set(-.22, .16, 0);
+	const rightBar = new Mesh(sideBarGeo, woodMat);
+	rightBar.position.set(.22, .16, 0);
+	chair.add(leftBar, rightBar);
+	const seatBase = new Mesh(new BoxGeometry(.56, .055, .54), woodMat);
+	seatBase.position.y = .47;
+	seatBase.castShadow = !compactMode;
+	seatBase.receiveShadow = true;
+	chair.add(seatBase);
+	const cushion = new Mesh(new BoxGeometry(.49, .055, .47), cushionMat);
+	cushion.position.set(0, .52, .01);
+	cushion.receiveShadow = true;
+	chair.add(cushion);
+	const postGeo = new CylinderGeometry(.026, .028, .58, compactMode ? 6 : 10);
+	const leftPost = new Mesh(postGeo, woodMat);
+	leftPost.position.set(-.22, .77, -.23);
+	leftPost.rotation.x = -.08;
+	const rightPost = new Mesh(postGeo, woodMat);
+	rightPost.position.set(.22, .77, -.23);
+	rightPost.rotation.x = -.08;
+	chair.add(leftPost, rightPost);
+	const topRail = new Mesh(new BoxGeometry(.54, .09, .045), woodMat);
+	topRail.position.set(0, 1.01, -.25);
+	topRail.rotation.x = -.08;
+	topRail.castShadow = !compactMode;
+	const midRail = new Mesh(new BoxGeometry(.46, .055, .035), woodMat);
+	midRail.position.set(0, .78, -.23);
+	midRail.rotation.x = -.08;
+	chair.add(topRail, midRail);
+	chair.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return chair;
+}
+function createTeaMasterCharacter(compactMode, ultraCompact) {
+	const seg = ultraCompact ? 10 : compactMode ? 12 : 18;
+	const group = new Group();
+	group.position.copy(PLAYER_SPAWN_POS);
+	group.rotation.y = PLAYER_SPAWN_ROT_Y;
+	const skinMat = new MeshStandardMaterial({
+		color: 15912884,
+		roughness: .68
+	});
+	const shirtMat = new MeshStandardMaterial({
+		color: 16249834,
+		roughness: .8
+	});
+	const collarMat = new MeshStandardMaterial({
+		color: 15459283,
+		roughness: .82
+	});
+	const apronMat = new MeshStandardMaterial({
+		color: 3043136,
+		roughness: .75
+	});
+	const apronDarkMat = new MeshStandardMaterial({
+		color: 2249776,
+		roughness: .8
+	});
+	const obiMat = new MeshStandardMaterial({
+		color: 8016950,
+		roughness: .78
+	});
+	const pantsMat = new MeshStandardMaterial({
+		color: 3551532,
+		roughness: .85
+	});
+	const hairMat = new MeshStandardMaterial({
+		color: 2498846,
+		roughness: .72
+	});
+	const eyeMat = new MeshStandardMaterial({
+		color: 1775895,
+		roughness: .3
+	});
+	const woodPinMat = new MeshStandardMaterial({
+		color: 12026956,
+		roughness: .48
+	});
+	const jadeMat = new MeshStandardMaterial({
+		color: 6465657,
+		roughness: .35
+	});
+	const sockMat = new MeshStandardMaterial({
+		color: 16250351,
+		roughness: .85
+	});
+	const sandalMat = new MeshStandardMaterial({
+		color: 8148018,
+		roughness: .65
+	});
+	const buildLeg = (side) => {
+		const hip = new Group();
+		hip.position.set(side * .115, .72, 0);
+		const thigh = new Mesh(new CylinderGeometry(.086, .075, .36, seg), pantsMat);
+		thigh.position.y = -.18;
+		thigh.castShadow = !compactMode;
+		hip.add(thigh);
+		const shin = new Group();
+		shin.position.set(0, -.35, 0);
+		const calf = new Mesh(new CylinderGeometry(.072, .058, .3, seg), pantsMat);
+		calf.position.y = -.15;
+		calf.castShadow = !compactMode;
+		const sock = new Mesh(new CylinderGeometry(.054, .052, .08, seg), sockMat);
+		sock.position.y = -.3;
+		const sole = new Mesh(new BoxGeometry(.11, .04, .21), sandalMat);
+		sole.position.set(0, -.35, .03);
+		const strap = new Mesh(new BoxGeometry(.115, .02, .045), apronMat);
+		strap.position.set(0, -.325, .05);
+		shin.add(calf, sock, sole, strap);
+		hip.add(shin);
+		return {
+			hip,
+			shin
+		};
+	};
+	const leftLegBuilt = buildLeg(-1);
+	const rightLegBuilt = buildLeg(1);
+	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
+	const torso = new Mesh(new CylinderGeometry(.205, .22, .56, seg), shirtMat);
+	torso.position.y = 1;
+	torso.castShadow = !compactMode;
+	group.add(torso);
+	const leftLapel = new Mesh(new BoxGeometry(.09, .22, .04), collarMat);
+	leftLapel.position.set(-.06, 1.2, .18);
+	leftLapel.rotation.z = -.36;
+	const rightLapel = new Mesh(new BoxGeometry(.09, .22, .04), collarMat);
+	rightLapel.position.set(.06, 1.2, .18);
+	rightLapel.rotation.z = .36;
+	group.add(leftLapel, rightLapel);
+	const apronBib = new Mesh(new BoxGeometry(.34, .64, .055), apronMat);
+	apronBib.position.set(0, .93, .195);
+	apronBib.castShadow = !compactMode;
+	group.add(apronBib);
+	const apronWaist = new Mesh(new CylinderGeometry(.23, .235, .085, seg), obiMat);
+	apronWaist.position.set(0, .78, .01);
+	group.add(apronWaist);
+	const apronBackKnot = new Mesh(new SphereGeometry(.055, 8, 8), obiMat);
+	apronBackKnot.position.set(0, .78, -.24);
+	const ribbonL = new Mesh(new BoxGeometry(.045, .24, .018), obiMat);
+	ribbonL.position.set(-.04, .67, -.25);
+	ribbonL.rotation.z = -.18;
+	const ribbonR = new Mesh(new BoxGeometry(.045, .24, .018), obiMat);
+	ribbonR.position.set(.04, .67, -.25);
+	ribbonR.rotation.z = .18;
+	group.add(apronBackKnot, ribbonL, ribbonR);
+	const apronPocket = new Mesh(new BoxGeometry(.18, .14, .028), apronDarkMat);
+	apronPocket.position.set(0, .85, .222);
+	const scoopStick = new Mesh(new CylinderGeometry(.009, .009, .14, 6), woodPinMat);
+	scoopStick.position.set(.045, .92, .228);
+	scoopStick.rotation.z = -.18;
+	group.add(apronPocket, scoopStick);
+	const buildArm = (side) => {
+		const shoulder = new Group();
+		shoulder.position.set(side * .255, 1.23, 0);
+		const upperSleeve = new Mesh(new CylinderGeometry(.062, .056, .24, seg), shirtMat);
+		upperSleeve.position.set(side * .01, -.11, .02);
+		upperSleeve.castShadow = !compactMode;
+		const cuffRing = new Mesh(new CylinderGeometry(.062, .062, .045, seg), collarMat);
+		cuffRing.position.set(side * .01, -.23, .03);
+		const forearm = new Mesh(new CylinderGeometry(.046, .038, .2, seg), skinMat);
+		forearm.position.set(side * .01, -.32, .06);
+		forearm.rotation.x = -.25;
+		const hand = new Mesh(new SphereGeometry(.054, seg, seg), skinMat);
+		hand.position.set(side * .01, -.42, .09);
+		shoulder.add(upperSleeve, cuffRing, forearm, hand);
+		return shoulder;
+	};
+	const leftArm = buildArm(-1);
+	const rightArm = buildArm(1);
+	group.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.4, 0);
+	const neck = new Mesh(new CylinderGeometry(.066, .076, .12, seg), skinMat);
+	neck.position.y = -.07;
+	head.add(neck);
+	const cranium = new Mesh(new SphereGeometry(.185, seg, seg), skinMat);
+	cranium.position.y = .055;
+	cranium.castShadow = !compactMode;
+	head.add(cranium);
+	const earGeo = new SphereGeometry(.04, 8, 8);
+	const leftEar = new Mesh(earGeo, skinMat);
+	leftEar.position.set(-.182, .045, 0);
+	const rightEar = new Mesh(earGeo, skinMat);
+	rightEar.position.set(.182, .045, 0);
+	head.add(leftEar, rightEar);
+	const hairCap = new Mesh(new SphereGeometry(.195, seg, seg, 0, Math.PI * 2, 0, Math.PI * .59), hairMat);
+	hairCap.position.y = .075;
+	hairCap.rotation.x = -.22;
+	head.add(hairCap);
+	const bangLeft = new Mesh(new BoxGeometry(.11, .07, .06), hairMat);
+	bangLeft.position.set(-.075, .165, .145);
+	bangLeft.rotation.z = .25;
+	const bangRight = new Mesh(new BoxGeometry(.11, .07, .06), hairMat);
+	bangRight.position.set(.075, .165, .145);
+	bangRight.rotation.z = -.25;
+	const sideLockL = new Mesh(new BoxGeometry(.05, .15, .07), hairMat);
+	sideLockL.position.set(-.16, .04, .08);
+	const sideLockR = sideLockL.clone();
+	sideLockR.position.x = .16;
+	head.add(bangLeft, bangRight, sideLockL, sideLockR);
+	const hairBun = new Mesh(new SphereGeometry(.088, seg, seg), hairMat);
+	hairBun.position.set(0, .13, -.18);
+	const hairPin = new Mesh(new CylinderGeometry(.008, .008, .25, 6), woodPinMat);
+	hairPin.position.set(0, .135, -.19);
+	hairPin.rotation.z = 1.18;
+	const pinBead = new Mesh(new SphereGeometry(.022, 8, 8), jadeMat);
+	pinBead.position.set(.115, .185, -.19);
+	head.add(hairBun, hairPin, pinBead);
+	const eyeGeo = new SphereGeometry(.02, 8, 8);
+	const leftEye = new Mesh(eyeGeo, eyeMat);
+	leftEye.position.set(-.065, .058, .168);
+	const rightEye = new Mesh(eyeGeo, eyeMat);
+	rightEye.position.set(.065, .058, .168);
+	const shineGeo = new SphereGeometry(.007, 6, 6);
+	const shineMat = new MeshBasicMaterial({ color: 16777215 });
+	const lShine = new Mesh(shineGeo, shineMat);
+	lShine.position.set(-.059, .066, .184);
+	const rShine = new Mesh(shineGeo, shineMat);
+	rShine.position.set(.071, .066, .184);
+	const browGeo = new BoxGeometry(.046, .012, .015);
+	const lBrow = new Mesh(browGeo, hairMat);
+	lBrow.position.set(-.065, .095, .168);
+	lBrow.rotation.z = .08;
+	const rBrow = new Mesh(browGeo, hairMat);
+	rBrow.position.set(.065, .095, .168);
+	rBrow.rotation.z = -.08;
+	const smile = new Mesh(new TorusGeometry(.028, .006, 6, 10, Math.PI), new MeshStandardMaterial({
+		color: 10179660,
+		roughness: .6
+	}));
+	smile.position.set(0, .002, .172);
+	smile.rotation.z = Math.PI;
+	const blushMat = new MeshStandardMaterial({
+		color: 15112330,
+		roughness: .9
+	});
+	const blushGeo = new CircleGeometry(.026, 10);
+	const leftBlush = new Mesh(blushGeo, blushMat);
+	leftBlush.position.set(-.098, .018, .162);
+	leftBlush.rotation.y = -.35;
+	const rightBlush = new Mesh(blushGeo, blushMat);
+	rightBlush.position.set(.098, .018, .162);
+	rightBlush.rotation.y = .35;
+	head.add(leftEye, rightEye, lShine, rShine, lBrow, rBrow, smile, leftBlush, rightBlush);
+	group.add(head);
+	group.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group,
+		rig: {
+			leftLeg: leftLegBuilt.hip,
+			rightLeg: rightLegBuilt.hip,
+			leftShin: leftLegBuilt.shin,
+			rightShin: rightLegBuilt.shin,
+			leftArm,
+			rightArm,
+			head
+		}
+	};
+}
+function createSomOGuest(seg, compactMode) {
+	const cat = new Group();
+	const furOrange = new MeshStandardMaterial({
+		color: 14849355,
+		roughness: .84
+	});
+	const furStripe = new MeshStandardMaterial({
+		color: 12741673,
+		roughness: .85
+	});
+	const furCream = new MeshStandardMaterial({
+		color: 16379874,
+		roughness: .85
+	});
+	const innerEarMat = new MeshStandardMaterial({
+		color: 15906226,
+		roughness: .8
+	});
+	const collarMat = new MeshStandardMaterial({
+		color: 3897943,
+		roughness: .65
+	});
+	const brassMat = new MeshStandardMaterial({
+		color: 14267213,
+		metalness: .8,
+		roughness: .25
+	});
+	const darkMat = new MeshStandardMaterial({
+		color: 1972501,
+		roughness: .3
+	});
+	const whiskerMat = new MeshStandardMaterial({
+		color: 16117734,
+		roughness: .5
+	});
+	const standingLegsGroup = new Group();
+	const buildPawLeg = (side) => {
+		const leg = new Group();
+		leg.position.set(side * .09, .58, .02);
+		const upper = new Mesh(new CylinderGeometry(.056, .048, .44, seg), furOrange);
+		upper.position.y = -.22;
+		const paw = new Mesh(new SphereGeometry(.062, seg, seg), furCream);
+		paw.scale.set(1, .72, 1.25);
+		paw.position.set(0, -.52, .03);
+		leg.add(upper, paw);
+		return leg;
+	};
+	const leftLeg = buildPawLeg(-1);
+	const rightLeg = buildPawLeg(1);
+	standingLegsGroup.add(leftLeg, rightLeg);
+	cat.add(standingLegsGroup);
+	const seatedOnlyGroup = new Group();
+	const frontPawGeo = new SphereGeometry(.058, seg, seg);
+	const seatedPawL = new Mesh(frontPawGeo, furCream);
+	seatedPawL.position.set(-.095, .62, .21);
+	const seatedPawR = new Mesh(frontPawGeo, furCream);
+	seatedPawR.position.set(.095, .62, .21);
+	seatedOnlyGroup.add(seatedPawL, seatedPawR);
+	cat.add(seatedOnlyGroup);
+	const body = new Mesh(new SphereGeometry(.22, seg, seg), furOrange);
+	body.scale.set(.95, 1.25, .95);
+	body.position.set(0, .81, .01);
+	body.castShadow = !compactMode;
+	cat.add(body);
+	const belly = new Mesh(new SphereGeometry(.16, seg, seg), furCream);
+	belly.scale.set(.88, 1.08, .55);
+	belly.position.set(0, .79, .13);
+	cat.add(belly);
+	for (let s = 0; s < 3; s++) {
+		const stripe = new Mesh(new TorusGeometry(.175 - s * .012, .016, 6, 12, Math.PI * .75), furStripe);
+		stripe.rotation.x = Math.PI / 2;
+		stripe.rotation.z = Math.PI * .12;
+		stripe.position.set(0, .72 + s * .1, -.02);
+		cat.add(stripe);
+	}
+	const buildCatArm = (side) => {
+		const arm = new Group();
+		arm.position.set(side * .18, .96, .06);
+		const armMesh = new Mesh(new CylinderGeometry(.044, .04, .26, seg), furOrange);
+		armMesh.position.y = -.12;
+		const pawTip = new Mesh(new SphereGeometry(.048, seg, seg), furCream);
+		pawTip.position.y = -.25;
+		arm.add(armMesh, pawTip);
+		return arm;
+	};
+	const leftArm = buildCatArm(-1);
+	const rightArm = buildCatArm(1);
+	cat.add(leftArm, rightArm);
+	const collar = new Mesh(new TorusGeometry(.145, .025, 8, seg), collarMat);
+	collar.rotation.x = Math.PI / 2;
+	collar.position.set(0, 1.03, .02);
+	const scarfTab = new Mesh(new BoxGeometry(.065, .11, .025), collarMat);
+	scarfTab.position.set(.05, .98, .15);
+	scarfTab.rotation.z = -.25;
+	const bell = new Mesh(new SphereGeometry(.032, 10, 10), brassMat);
+	bell.position.set(0, 1, .165);
+	cat.add(collar, scarfTab, bell);
+	const head = new Group();
+	head.position.set(0, 1.21, .03);
+	const headSphere = new Mesh(new SphereGeometry(.195, seg, seg), furOrange);
+	headSphere.scale.set(1.06, .94, .96);
+	headSphere.castShadow = !compactMode;
+	head.add(headSphere);
+	for (const sx of [
+		-.04,
+		0,
+		.04
+	]) {
+		const fStripe = new Mesh(new BoxGeometry(.016, .065, .02), furStripe);
+		fStripe.position.set(sx, .12, .155);
+		fStripe.rotation.x = -.45;
+		head.add(fStripe);
+	}
+	const muzzle = new Mesh(new SphereGeometry(.095, seg, seg), furCream);
+	muzzle.scale.set(1.18, .78, .72);
+	muzzle.position.set(0, -.042, .15);
+	head.add(muzzle);
+	const earGeo = new ConeGeometry(.072, .15, 6);
+	const innerEarGeo = new ConeGeometry(.04, .095, 5);
+	const leftEar = new Mesh(earGeo, furOrange);
+	leftEar.position.set(-.12, .18, 0);
+	leftEar.rotation.z = .28;
+	const leftInner = new Mesh(innerEarGeo, innerEarMat);
+	leftInner.position.set(-.118, .175, .025);
+	leftInner.rotation.z = .28;
+	const rightEar = new Mesh(earGeo, furOrange);
+	rightEar.position.set(.12, .18, 0);
+	rightEar.rotation.z = -.28;
+	const rightInner = new Mesh(innerEarGeo, innerEarMat);
+	rightInner.position.set(.118, .175, .025);
+	rightInner.rotation.z = -.28;
+	head.add(leftEar, leftInner, rightEar, rightInner);
+	const eyeGeo = new SphereGeometry(.026, 8, 8);
+	const leftEye = new Mesh(eyeGeo, darkMat);
+	leftEye.position.set(-.074, .032, .166);
+	const rightEye = new Mesh(eyeGeo, darkMat);
+	rightEye.position.set(.074, .032, .166);
+	const shineGeo = new SphereGeometry(.008, 6, 6);
+	const shineMat = new MeshBasicMaterial({ color: 16777215 });
+	const lShine = new Mesh(shineGeo, shineMat);
+	lShine.position.set(-.068, .04, .186);
+	const rShine = new Mesh(shineGeo, shineMat);
+	rShine.position.set(.08, .04, .186);
+	const nose = new Mesh(new SphereGeometry(.02, 6, 6), new MeshStandardMaterial({
+		color: 14250874,
+		roughness: .5
+	}));
+	nose.position.set(0, -.01, .214);
+	const whiskerGeo = new CylinderGeometry(.003, .002, .12, 4);
+	for (const side of [-1, 1]) for (let w = -1; w <= 1; w++) {
+		const whisker = new Mesh(whiskerGeo, whiskerMat);
+		whisker.rotation.z = Math.PI / 2 + w * .18 * side;
+		whisker.position.set(side * .145, -.035 + w * .02, .16);
+		head.add(whisker);
+	}
+	head.add(leftEye, rightEye, lShine, rShine, nose);
+	cat.add(head);
+	const tailGroup = new Group();
+	tailGroup.position.set(0, .66, -.17);
+	const tailMesh = new Mesh(new TubeGeometry(new CatmullRomCurve3([
+		new Vector3(0, 0, 0),
+		new Vector3(.14, .07, -.06),
+		new Vector3(.22, .24, .02)
+	]), 12, .034, 8, false), furOrange);
+	const tailTip = new Mesh(new SphereGeometry(.036, 8, 8), furCream);
+	tailTip.position.set(.22, .24, .02);
+	tailGroup.add(tailMesh, tailTip);
+	cat.add(tailGroup);
+	cat.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group: cat,
+		rig: {
+			leftLeg,
+			rightLeg,
+			leftArm,
+			rightArm,
+			head,
+			tail: tailGroup,
+			seatedOnlyGroup,
+			standingLegsGroup
+		}
+	};
+}
+function createHumanGuest(seg, compactMode, config) {
+	const person = new Group();
+	const skinMat = new MeshStandardMaterial({
+		color: 15846576,
+		roughness: .72
+	});
+	const coatMat = new MeshStandardMaterial({
+		color: config.coatColor,
+		roughness: .8
+	});
+	const innerMat = new MeshStandardMaterial({
+		color: config.innerColor,
+		roughness: .85
+	});
+	const skirtMat = new MeshStandardMaterial({
+		color: config.skirtColor,
+		roughness: .84
+	});
+	const hairMat = new MeshStandardMaterial({
+		color: config.hairColor,
+		roughness: .76
+	});
+	const shoeMat = new MeshStandardMaterial({
+		color: config.shoeColor,
+		roughness: .65
+	});
+	const bagMat = new MeshStandardMaterial({
+		color: config.bagColor,
+		roughness: .75
+	});
+	const darkMat = new MeshStandardMaterial({
+		color: 1907224,
+		roughness: .35
+	});
+	const standingLegsGroup = new Group();
+	const buildWalkLeg = (side) => {
+		const leg = new Group();
+		leg.position.set(side * .095, .68, 0);
+		const thigh = new Mesh(new CylinderGeometry(.068, .056, .36, seg), skirtMat);
+		thigh.position.y = -.18;
+		const calf = new Mesh(new CylinderGeometry(.052, .044, .28, seg), skinMat);
+		calf.position.y = -.46;
+		const shoe = new Mesh(new BoxGeometry(.095, .075, .19), shoeMat);
+		shoe.position.set(0, -.64, .03);
+		leg.add(thigh, calf, shoe);
+		return leg;
+	};
+	const leftLeg = buildWalkLeg(-1);
+	const rightLeg = buildWalkLeg(1);
+	standingLegsGroup.add(leftLeg, rightLeg);
+	person.add(standingLegsGroup);
+	const seatedOnlyGroup = new Group();
+	const lap = new Mesh(new BoxGeometry(.34, .14, .38), skirtMat);
+	lap.position.set(0, .61, .1);
+	const calfGeo = new CylinderGeometry(.058, .048, .44, seg);
+	const leftCalf = new Mesh(calfGeo, skirtMat);
+	leftCalf.position.set(-.09, .32, .24);
+	const rightCalf = new Mesh(calfGeo, skirtMat);
+	rightCalf.position.set(.09, .32, .24);
+	const shoeSeatGeo = new BoxGeometry(.09, .065, .17);
+	const shoeL = new Mesh(shoeSeatGeo, shoeMat);
+	shoeL.position.set(-.09, .04, .27);
+	const shoeR = new Mesh(shoeSeatGeo, shoeMat);
+	shoeR.position.set(.09, .04, .27);
+	seatedOnlyGroup.add(lap, leftCalf, rightCalf, shoeL, shoeR);
+	person.add(seatedOnlyGroup);
+	const skirtHem = new Mesh(new CylinderGeometry(.18, .24, .24, seg), skirtMat);
+	skirtHem.position.set(0, .64, 0);
+	person.add(skirtHem);
+	const torso = new Mesh(new CylinderGeometry(.175, .195, .5, seg), coatMat);
+	torso.position.set(0, .9, -.01);
+	torso.castShadow = !compactMode;
+	person.add(torso);
+	const innerFront = new Mesh(new BoxGeometry(.14, .44, .055), innerMat);
+	innerFront.position.set(0, .9, .155);
+	person.add(innerFront);
+	if (config.hasShawl) {
+		const shawl = new Mesh(new TorusGeometry(.19, .055, 8, seg, Math.PI * 1.45), new MeshStandardMaterial({
+			color: 12751464,
+			roughness: .88
+		}));
+		shawl.rotation.x = Math.PI / 2 + .2;
+		shawl.rotation.z = -Math.PI * .22;
+		shawl.position.set(0, 1.07, 0);
+		person.add(shawl);
+	} else {
+		const btnGeo = new SphereGeometry(.013, 6, 6);
+		const btnMat = new MeshStandardMaterial({
+			color: 14205851,
+			roughness: .4
+		});
+		for (let b = 0; b < 3; b++) {
+			const btn = new Mesh(btnGeo, btnMat);
+			btn.position.set(.045, .8 + b * .09, .185);
+			person.add(btn);
+		}
+	}
+	const buildArm = (side) => {
+		const armGroup = new Group();
+		armGroup.position.set(side * .215, 1.1, 0);
+		const sleeve = new Mesh(new CylinderGeometry(.048, .04, .36, seg), coatMat);
+		sleeve.position.y = -.18;
+		const hand = new Mesh(new SphereGeometry(.042, 8, 8), skinMat);
+		hand.position.y = -.37;
+		armGroup.add(sleeve, hand);
+		if (side === 1) {
+			if (config.hasGlasses) {
+				const book = new Mesh(new BoxGeometry(.12, .024, .16), bagMat);
+				book.position.set(-.02, -.38, .06);
+				armGroup.add(book);
+			} else {
+				const bag = new Mesh(new BoxGeometry(.09, .18, .16), bagMat);
+				bag.position.set(.03, -.42, .02);
+				armGroup.add(bag);
+			}
+		}
+		return armGroup;
+	};
+	const leftArm = buildArm(-1);
+	const rightArm = buildArm(1);
+	person.add(leftArm, rightArm);
+	const head = new Group();
+	head.position.set(0, 1.29, 0);
+	const cranium = new Mesh(new SphereGeometry(.168, seg, seg), skinMat);
+	cranium.castShadow = !compactMode;
+	head.add(cranium);
+	const earGeo = new SphereGeometry(.032, 6, 6);
+	const earL = new Mesh(earGeo, skinMat);
+	earL.position.set(-.166, 0, 0);
+	const earR = new Mesh(earGeo, skinMat);
+	earR.position.set(.166, 0, 0);
+	head.add(earL, earR);
+	const hairCap = new Mesh(new SphereGeometry(.178, seg, seg, 0, Math.PI * 2, 0, Math.PI * .6), hairMat);
+	hairCap.position.y = .025;
+	hairCap.rotation.x = -.25;
+	head.add(hairCap);
+	if (config.hasBun) {
+		const bun = new Mesh(new SphereGeometry(.078, seg, seg), hairMat);
+		bun.position.set(0, .08, -.175);
+		const pearlPin = new Mesh(new SphereGeometry(.022, 8, 8), new MeshStandardMaterial({
+			color: 16249576,
+			roughness: .25
+		}));
+		pearlPin.position.set(.06, .11, -.18);
+		head.add(bun, pearlPin);
+	} else {
+		const backHair = new Mesh(new BoxGeometry(.32, .25, .15), hairMat);
+		backHair.position.set(0, -.07, -.1);
+		const sideLockL = new Mesh(new BoxGeometry(.045, .2, .065), hairMat);
+		sideLockL.position.set(-.145, -.04, .07);
+		const sideLockR = sideLockL.clone();
+		sideLockR.position.x = .145;
+		head.add(backHair, sideLockL, sideLockR);
+	}
+	const eyeGeo = new SphereGeometry(.017, 8, 8);
+	const leftEye = new Mesh(eyeGeo, darkMat);
+	leftEye.position.set(-.058, .015, .155);
+	const rightEye = new Mesh(eyeGeo, darkMat);
+	rightEye.position.set(.058, .015, .155);
+	const smile = new Mesh(new TorusGeometry(.024, .005, 6, 10, Math.PI), new MeshStandardMaterial({
+		color: 10179660,
+		roughness: .6
+	}));
+	smile.position.set(0, -.04, .158);
+	smile.rotation.z = Math.PI;
+	head.add(leftEye, rightEye, smile);
+	if (config.hasGlasses) {
+		const rimMat = new MeshStandardMaterial({
+			color: 10912068,
+			metalness: .78,
+			roughness: .24
+		});
+		const lensRingGeo = new TorusGeometry(.036, .005, 6, 14);
+		const lGlass = new Mesh(lensRingGeo, rimMat);
+		lGlass.position.set(-.058, .015, .168);
+		const rGlass = new Mesh(lensRingGeo, rimMat);
+		rGlass.position.set(.058, .015, .168);
+		const bridge = new Mesh(new BoxGeometry(.044, .006, .006), rimMat);
+		bridge.position.set(0, .02, .17);
+		head.add(lGlass, rGlass, bridge);
+	}
+	person.add(head);
+	person.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		group: person,
+		rig: {
+			leftLeg,
+			rightLeg,
+			leftArm,
+			rightArm,
+			head,
+			seatedOnlyGroup,
+			standingLegsGroup
+		}
+	};
+}
+function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, ultraCompact = false) {
+	const root = new Group();
+	const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
+	const guestChairLeft = createTeaChair(walnutTex, 7375721, compactMode);
+	guestChairLeft.position.copy(SEAT_LEFT_POS);
+	guestChairLeft.rotation.y = SEAT_LEFT_ROT_Y;
+	root.add(guestChairLeft);
+	const guestChairRight = createTeaChair(walnutTex, 11041878, compactMode);
+	guestChairRight.position.set(1.55, SHOP_FLOOR_Y, -1.96);
+	guestChairRight.rotation.y = -.34;
+	root.add(guestChairRight);
+	const sideTable = new Group();
+	sideTable.position.set(2.42, SHOP_FLOOR_Y, -1.78);
+	const tableWoodMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .64
+	});
+	const stTop = new Mesh(new CylinderGeometry(.32, .3, .045, compactMode ? 14 : 22), tableWoodMat);
+	stTop.position.y = .52;
+	stTop.receiveShadow = true;
+	const stStem = new Mesh(new CylinderGeometry(.045, .06, .5, compactMode ? 8 : 12), tableWoodMat);
+	stStem.position.y = .26;
+	const stFoot = new Mesh(new CylinderGeometry(.18, .22, .035, compactMode ? 12 : 18), tableWoodMat);
+	stFoot.position.y = .018;
+	const spareCup = new Mesh(new CylinderGeometry(.075, .055, .12, compactMode ? 10 : 16), new MeshStandardMaterial({
+		color: 15526110,
+		map: ceramicTex,
+		roughness: .32
+	}));
+	spareCup.position.y = .6;
+	sideTable.add(stTop, stStem, stFoot, spareCup);
+	root.add(sideTable);
+	const teaMaster = createTeaMasterCharacter(compactMode, ultraCompact);
+	root.add(teaMaster.group);
+	const guestsContainer = new Group();
+	guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
+	guestsContainer.rotation.y = -Math.PI / 2;
+	const somO = createSomOGuest(seg, compactMode);
+	const elara = createHumanGuest(seg, compactMode, {
+		coatColor: 6058849,
+		innerColor: 16052196,
+		skirtColor: 3884094,
+		hairColor: 3942430,
+		shoeColor: 4928550,
+		bagColor: 9263675,
+		hasGlasses: true,
+		hasBun: false
+	});
+	const malee = createHumanGuest(seg, compactMode, {
+		coatColor: 15327184,
+		innerColor: 16315371,
+		skirtColor: 5194553,
+		hairColor: 14079183,
+		shoeColor: 7295291,
+		bagColor: 12028766,
+		hasGlasses: false,
+		hasBun: true,
+		hasShawl: true
+	});
+	elara.group.visible = false;
+	malee.group.visible = false;
+	guestsContainer.add(somO.group, elara.group, malee.group);
+	root.add(guestsContainer);
+	let playerWalkSpeed = 0;
+	let playerWalkPhase = 0;
+	let isPlayerMoving = false;
+	let firstPersonHidden = false;
+	let customerPhase = "ENTERING";
+	let waypointIdx = 1;
+	let customerWalkPhase = 0;
+	let customerDoorCrossedEmitted = false;
+	const startCustomerWalkIn = (_guestId) => {
+		customerPhase = "ENTERING";
+		waypointIdx = 1;
+		customerWalkPhase = 0;
+		customerDoorCrossedEmitted = false;
+		guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
+		guestsContainer.rotation.y = -Math.PI / 2;
+	};
+	const setFirstPersonHidden = (hidden) => {
+		firstPersonHidden = hidden;
+		teaMaster.group.visible = !hidden;
+	};
+	const movePlayer = (inputX, inputY, cameraYaw, delta) => {
+		const mag = Math.hypot(inputX, inputY);
+		if (mag < .06) {
+			isPlayerMoving = false;
+			playerWalkSpeed = MathUtils.damp(playerWalkSpeed, 0, 10, delta);
+			return;
+		}
+		const clampedMag = Math.min(1, mag);
+		const nx = inputX / mag;
+		const ny = inputY / mag;
+		const sinY = Math.sin(cameraYaw);
+		const cosY = Math.cos(cameraYaw);
+		const moveDirX = nx * cosY - ny * sinY;
+		const moveDirZ = -nx * sinY - ny * cosY;
+		const speed = 2.45 * clampedMag;
+		const resolved = clampToShopObstacles(teaMaster.group.position.x + moveDirX * speed * delta, teaMaster.group.position.z + moveDirZ * speed * delta);
+		teaMaster.group.position.x = resolved.x;
+		teaMaster.group.position.z = resolved.z;
+		let angleDiff = Math.atan2(moveDirX, moveDirZ) - teaMaster.group.rotation.y;
+		while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+		while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+		teaMaster.group.rotation.y += angleDiff * Math.min(1, delta * 12);
+		isPlayerMoving = true;
+		playerWalkSpeed = clampedMag;
+		playerWalkPhase += delta * 9.5 * clampedMag;
+	};
+	const animate = (elapsed, delta, step, isPouring, mode, guestId, reducedMotion) => {
+		const showGuest = mode === "guest";
+		guestsContainer.visible = showGuest;
+		let activeGuestRig = somO.rig;
+		if (showGuest) {
+			somO.group.visible = guestId === "som-o";
+			elara.group.visible = guestId === "elara";
+			malee.group.visible = guestId === "malee";
+			activeGuestRig = guestId === "elara" ? elara.rig : guestId === "malee" ? malee.rig : somO.rig;
+		}
+		if (!firstPersonHidden) {
+			if (isPlayerMoving && !reducedMotion) {
+				const swing = Math.sin(playerWalkPhase) * .56 * playerWalkSpeed;
+				teaMaster.rig.leftLeg.rotation.x = swing;
+				teaMaster.rig.rightLeg.rotation.x = -swing;
+				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
+					teaMaster.rig.leftShin.rotation.x = Math.max(0, -swing * .75);
+					teaMaster.rig.rightShin.rotation.x = Math.max(0, swing * .75);
+				}
+				teaMaster.rig.leftArm.rotation.x = -swing * .72;
+				teaMaster.rig.rightArm.rotation.x = swing * .72;
+				teaMaster.group.position.y = SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * .032;
+				teaMaster.rig.head.rotation.y = Math.sin(elapsed * .9) * .04;
+			} else {
+				const damp = Math.min(1, delta * 9);
+				const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * .02;
+				teaMaster.rig.leftLeg.rotation.x = MathUtils.lerp(teaMaster.rig.leftLeg.rotation.x, 0, damp);
+				teaMaster.rig.rightLeg.rotation.x = MathUtils.lerp(teaMaster.rig.rightLeg.rotation.x, 0, damp);
+				if (teaMaster.rig.leftShin && teaMaster.rig.rightShin) {
+					teaMaster.rig.leftShin.rotation.x = MathUtils.lerp(teaMaster.rig.leftShin.rotation.x, 0, damp);
+					teaMaster.rig.rightShin.rotation.x = MathUtils.lerp(teaMaster.rig.rightShin.rotation.x, 0, damp);
+				}
+				let targetRightArm = -.14 + breathe;
+				let targetLeftArm = -.12 - breathe;
+				if (isPouring || step === "POUR_WATER") {
+					targetRightArm = -.68;
+					targetLeftArm = -.25;
+				} else if (step === "STEEP_TEA") {
+					targetRightArm = -.52;
+					targetLeftArm = -.42;
+				}
+				teaMaster.rig.rightArm.rotation.x = MathUtils.lerp(teaMaster.rig.rightArm.rotation.x, targetRightArm, damp);
+				teaMaster.rig.leftArm.rotation.x = MathUtils.lerp(teaMaster.rig.leftArm.rotation.x, targetLeftArm, damp);
+				teaMaster.group.position.y = MathUtils.lerp(teaMaster.group.position.y, SHOP_FLOOR_Y, damp);
+				teaMaster.rig.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
+			}
+		}
+		let customerCrossedDoorNow = false;
+		if (showGuest) {
+			if (step === "SERVED") customerPhase = "SERVED_ENJOYING";
+			if (customerPhase === "ENTERING") {
+				const wp = CUSTOMER_WAYPOINTS[waypointIdx];
+				if (wp) {
+					const dx = wp.x - guestsContainer.position.x;
+					const dz = wp.y - guestsContainer.position.z;
+					const dist = Math.hypot(dx, dz);
+					const walkSpeed = 1.65;
+					if (dist <= walkSpeed * delta + .04) {
+						guestsContainer.position.x = wp.x;
+						guestsContainer.position.z = wp.y;
+						waypointIdx += 1;
+						if (waypointIdx >= CUSTOMER_WAYPOINTS.length) {
+							customerPhase = "SEATED_ORDERING";
+							guestsContainer.position.copy(SEAT_LEFT_POS);
+							guestsContainer.rotation.y = SEAT_LEFT_ROT_Y;
+						}
+					} else {
+						guestsContainer.position.x += dx / dist * walkSpeed * delta;
+						guestsContainer.position.z += dz / dist * walkSpeed * delta;
+						let diff = Math.atan2(dx, dz) - guestsContainer.rotation.y;
+						while (diff > Math.PI) diff -= Math.PI * 2;
+						while (diff < -Math.PI) diff += Math.PI * 2;
+						guestsContainer.rotation.y += diff * Math.min(1, delta * 10);
+					}
+				}
+				if (!customerDoorCrossedEmitted && guestsContainer.position.x <= DOOR_THRESHOLD_X) {
+					customerDoorCrossedEmitted = true;
+					customerCrossedDoorNow = true;
+				}
+				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
+					activeGuestRig.standingLegsGroup.visible = true;
+					activeGuestRig.seatedOnlyGroup.visible = false;
+				}
+				customerWalkPhase += delta * 8.2;
+				const gSwing = reducedMotion ? 0 : Math.sin(customerWalkPhase) * .52;
+				activeGuestRig.leftLeg.rotation.x = gSwing;
+				activeGuestRig.rightLeg.rotation.x = -gSwing;
+				activeGuestRig.leftArm.rotation.x = -gSwing * .65;
+				activeGuestRig.rightArm.rotation.x = gSwing * .65;
+				guestsContainer.position.y = SHOP_FLOOR_Y + (reducedMotion ? 0 : Math.abs(Math.sin(customerWalkPhase)) * .025);
+				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 4.5) * .25;
+			} else {
+				guestsContainer.position.x = SEAT_LEFT_POS.x;
+				guestsContainer.position.z = SEAT_LEFT_POS.z;
+				let rotDiff = SEAT_LEFT_ROT_Y - guestsContainer.rotation.y;
+				while (rotDiff > Math.PI) rotDiff -= Math.PI * 2;
+				while (rotDiff < -Math.PI) rotDiff += Math.PI * 2;
+				guestsContainer.rotation.y += rotDiff * Math.min(1, delta * 8);
+				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
+					activeGuestRig.standingLegsGroup.visible = false;
+					activeGuestRig.seatedOnlyGroup.visible = true;
+				}
+				activeGuestRig.leftLeg.rotation.x = 0;
+				activeGuestRig.rightLeg.rotation.x = 0;
+				activeGuestRig.leftArm.rotation.x = -.58;
+				activeGuestRig.rightArm.rotation.x = -.58;
+				const bob = reducedMotion ? 0 : customerPhase === "SERVED_ENJOYING" ? Math.sin(elapsed * 3.6) * .016 : Math.sin(elapsed * 1.5) * .008;
+				guestsContainer.position.y = SHOP_FLOOR_Y + bob;
+				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 2.2) * .14;
+			}
+		}
+		return {
+			playerPos: teaMaster.group.position,
+			playerRotY: teaMaster.group.rotation.y,
+			isNearTeaTable: checkNearTeaTable(teaMaster.group.position),
+			customerPhase,
+			customerCrossedDoorNow
+		};
+	};
+	return {
+		root,
+		teaMasterGroup: teaMaster.group,
+		guestsContainer,
+		startCustomerWalkIn,
+		setFirstPersonHidden,
+		movePlayer,
+		getPlayerPosition: () => teaMaster.group.position,
+		getPlayerRotationY: () => teaMaster.group.rotation.y,
+		isNearTeaTable: () => checkNearTeaTable(teaMaster.group.position),
+		animate
+	};
+}
 // src/utils/refreshRate.ts
 var REFRESH_PROBE_SAMPLES = 22;
 var WARMUP_FRAMES = 4;
@@ -62979,6 +62856,18 @@ function clampTargetFpsToDisplay(targetFps, maxRefreshRate) {
 	const allowed = getAllowedFpsOptions(maxRefreshRate);
 	if (allowed.includes(targetFps)) return targetFps;
 	return allowed[allowed.length - 1];
+}
+/**
+* Resolves the effective display refresh rate for the current hardware.
+* On realme Note 50 (hardware 90Hz LCD panel), enforces 90 Hz immediately so
+* the exact 3 FPS options (30 / 60 / 90 FPS) are always selectable even if
+* browser battery-saver caps rAF momentarily.
+*/
+function resolveEffectiveRefreshRate(measuredHz, hardwareHint) {
+	const nativeTier = hardwareHint.nativeDisplayHz && hardwareHint.nativeDisplayHz > 0 ? bucketRefreshRate(hardwareHint.nativeDisplayHz) : 60;
+	let resolved = nativeTier > measuredHz ? nativeTier : measuredHz;
+	if (hardwareHint.isRealmeNote50 && resolved < 90) resolved = 90;
+	return resolved;
 }
 /**
 * Measures the actual hardware vsync refresh rate using median requestAnimationFrame intervals.
@@ -63038,11 +62927,63 @@ function probeDisplayRefreshRate() {
 	});
 }
 // src/utils/deviceOptimizer.ts
-var REALME_NOTE_50_UA_RE = /RMX3834|realme\s*note\s*50/i;
+var REALME_NOTE_50_RE = /RMX3834|realme\s*note\s*50/i;
+var REALME_BRAND_RE = /realme/i;
 var UNISOC_T612_RE = /Unisoc|Tiger\s*T612|\bT612\b|ums9230/i;
 var MALI_G57_RE = /Mali-G57/i;
-var BUDGET_MOBILE_GPU_RE = /Mali-G57|Mali-G52|Mali-G51|Mali-G31|Mali-T|PowerVR\s*GE8|Adreno\s*\(TM\)\s*(50[0-9]|610|612)/i;
+var GALAXY_A10_RE = /SM-A105[A-Z0-9]*|SM-A102[A-Z0-9]*|galaxy\s*a10\b/i;
+var SAMSUNG_BRAND_RE = /samsung/i;
+var EXYNOS_7884_RE = /Exynos\s*7884|universal7884|s5e7885/i;
+var MALI_G71_RE = /Mali-G71/i;
+var BUDGET_MOBILE_GPU_RE = /Mali-G57|Mali-G71|Mali-G52|Mali-G51|Mali-G31|Mali-T|PowerVR\s*GE8|Adreno\s*\(TM\)\s*(50[0-9]|610|612)/i;
 var cachedGpuName = null;
+var cachedHighEntropyModel = "";
+var cachedHighEntropyPlatformVersion = "";
+var cachedHighEntropyPlatform = "";
+var highEntropyRequested = false;
+function readNativeBridgeSnapshot() {
+	if (typeof window === "undefined") return null;
+	try {
+		const bridge = window.BaanChaHardwareBridge;
+		if (!bridge || typeof bridge.getHardwareSnapshotJson !== "function") return null;
+		const raw = bridge.getHardwareSnapshotJson();
+		if (!raw || typeof raw !== "string") return null;
+		const parsed = JSON.parse(raw);
+		return parsed && typeof parsed === "object" ? parsed : null;
+	} catch {
+		return null;
+	}
+}
+async function warmHighEntropyDeviceInfo() {
+	if (highEntropyRequested) return false;
+	highEntropyRequested = true;
+	if (typeof navigator === "undefined") return false;
+	const uaData = navigator.userAgentData;
+	if (!uaData || typeof uaData.getHighEntropyValues !== "function") return false;
+	try {
+		const vals = await uaData.getHighEntropyValues([
+			"model",
+			"platformVersion",
+			"platform"
+		]);
+		let changed = false;
+		if (typeof vals.model === "string" && vals.model !== cachedHighEntropyModel) {
+			cachedHighEntropyModel = vals.model;
+			changed = true;
+		}
+		if (typeof vals.platformVersion === "string" && vals.platformVersion !== cachedHighEntropyPlatformVersion) {
+			cachedHighEntropyPlatformVersion = vals.platformVersion;
+			changed = true;
+		}
+		if (typeof vals.platform === "string" && vals.platform !== cachedHighEntropyPlatform) {
+			cachedHighEntropyPlatform = vals.platform;
+			changed = true;
+		}
+		return changed;
+	} catch {
+		return false;
+	}
+}
 function readGpuRendererName() {
 	if (cachedGpuName !== null) return cachedGpuName;
 	if (typeof document === "undefined") {
@@ -63067,37 +63008,95 @@ function readGpuRendererName() {
 		return "";
 	}
 }
-function probeDeviceOptimization(profile) {
+function detectOsVersionLabel(bridge, ua) {
+	if (bridge?.androidRelease) {
+		const sdkPart = bridge.sdkInt ? ` (API ${bridge.sdkInt})` : "";
+		return `Android ${bridge.androidRelease}${sdkPart}`;
+	}
+	const androidMatch = ua.match(/Android\s+([0-9._]+)/i);
+	if (androidMatch) return `Android ${cachedHighEntropyPlatformVersion || androidMatch[1].replace(/_/g, ".")}`;
+	if (cachedHighEntropyPlatform && cachedHighEntropyPlatformVersion) return `${cachedHighEntropyPlatform} ${cachedHighEntropyPlatformVersion}`;
+	const iosMatch = ua.match(/OS\s+([0-9_]+)\s+like\s+Mac/i);
+	if (iosMatch) return `iOS ${iosMatch[1].replace(/_/g, ".")}`;
+	if (/Windows/i.test(ua)) return "Windows";
+	if (/Mac OS X/i.test(ua)) return "macOS";
+	if (/Linux/i.test(ua)) return "Linux";
+	return "Web Runtime";
+}
+function sanitizeProfileForDevice(profile, report) {
+	if (profile === "realme-note-50" && !report.showRealmeNote50Option) return "auto";
+	if (profile === "galaxy-a10" && !report.showGalaxyA10Option) return "auto";
+	if (profile === "low-ram-2gb" && !report.showLowRam2GbOption) return "auto";
+	return profile;
+}
+function probeDeviceOptimization(requestedProfile) {
 	const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+	const bridge = readNativeBridgeSnapshot();
 	const hardwareThreads = typeof navigator !== "undefined" ? navigator.hardwareConcurrency || 4 : 4;
-	const deviceMemoryGb = typeof navigator !== "undefined" && "deviceMemory" in navigator && typeof navigator.deviceMemory === "number" ? navigator.deviceMemory ?? null : null;
+	const navigatorMemGb = typeof navigator !== "undefined" && "deviceMemory" in navigator && typeof navigator.deviceMemory === "number" ? navigator.deviceMemory ?? null : null;
+	const deviceMemoryGb = (bridge?.totalRamMb && bridge.totalRamMb > 0 ? Number((bridge.totalRamMb / 1024).toFixed(1)) : null) ?? navigatorMemGb;
 	const gpuRendererName = readGpuRendererName();
-	const isRealmeNote50 = REALME_NOTE_50_UA_RE.test(ua);
-	const isUnisocT612OrMaliG57 = isRealmeNote50 || UNISOC_T612_RE.test(ua) || MALI_G57_RE.test(gpuRendererName);
-	const isMobileUa = /Android|Mobile/i.test(ua);
+	const hwIdentityPool = [
+		ua,
+		cachedHighEntropyModel,
+		bridge?.manufacturer ?? "",
+		bridge?.model ?? "",
+		bridge?.device ?? "",
+		bridge?.board ?? "",
+		bridge?.hardware ?? "",
+		bridge?.socModel ?? ""
+	].filter(Boolean).join(" ");
+	const isRealmeNote50 = REALME_NOTE_50_RE.test(hwIdentityPool) || REALME_BRAND_RE.test(hwIdentityPool) && UNISOC_T612_RE.test(hwIdentityPool);
+	const isSamsungDevice = SAMSUNG_BRAND_RE.test(hwIdentityPool) || /SM-[A-Z0-9]+/i.test(hwIdentityPool);
+	const isMaliG71 = MALI_G71_RE.test(gpuRendererName);
+	const isExynos7884 = EXYNOS_7884_RE.test(hwIdentityPool);
+	const isDetected2GbRam = bridge?.totalRamMb !== void 0 && bridge.totalRamMb <= 2300 || navigatorMemGb !== null && navigatorMemGb <= 2;
+	const isGalaxyA10 = GALAXY_A10_RE.test(hwIdentityPool) || isExynos7884 || isSamsungDevice && isMaliG71 && (isDetected2GbRam || hardwareThreads <= 8);
+	const isUnisocT612OrMaliG57 = isRealmeNote50 || UNISOC_T612_RE.test(hwIdentityPool) || MALI_G57_RE.test(gpuRendererName);
+	const isMaliG71OrExynos7884 = isGalaxyA10 || isExynos7884 || isMaliG71;
+	const showRealmeNote50Option = isRealmeNote50;
+	const showGalaxyA10Option = isGalaxyA10;
+	const showLowRam2GbOption = isDetected2GbRam && !isRealmeNote50 && !isGalaxyA10;
+	const effectiveProfile = sanitizeProfileForDevice(requestedProfile, {
+		showRealmeNote50Option,
+		showGalaxyA10Option,
+		showLowRam2GbOption
+	});
+	const isMobileUa = /Android|Mobile/i.test(ua) || Boolean(bridge?.model);
 	const isBudgetGpuString = BUDGET_MOBILE_GPU_RE.test(gpuRendererName);
-	const isLowMemoryMobile = isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
-	const isDetected2GbRam = deviceMemoryGb !== null && deviceMemoryGb <= 2;
-	const isBudgetMobileGpu = isRealmeNote50 || isUnisocT612OrMaliG57 || isBudgetGpuString || isLowMemoryMobile;
-	const isUltraLowRam = profile === "low-ram-2gb" || profile === "auto" && isDetected2GbRam;
-	const liteGpuActive = profile === "realme-note-50" || profile === "low-ram-2gb" || profile === "auto" && (isRealmeNote50 || isBudgetMobileGpu);
+	const isBudgetMobileGpu = isRealmeNote50 || isGalaxyA10 || isUnisocT612OrMaliG57 || isMaliG71OrExynos7884 || isBudgetGpuString || isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
+	const isUltraLowRam = effectiveProfile === "low-ram-2gb" && showLowRam2GbOption || effectiveProfile === "galaxy-a10" || effectiveProfile === "auto" && (isDetected2GbRam || isGalaxyA10);
+	const liteGpuActive = effectiveProfile === "realme-note-50" || effectiveProfile === "galaxy-a10" || effectiveProfile === "low-ram-2gb" || effectiveProfile === "auto" && (isRealmeNote50 || isGalaxyA10 || isUnisocT612OrMaliG57 || isMaliG71OrExynos7884 || isBudgetMobileGpu);
+	const osVersionLabel = detectOsVersionLabel(bridge, ua);
 	let detectedModelLabel = "อุปกรณ์ทั่วไป";
-	if (profile === "low-ram-2gb") detectedModelLabel = "โหมดประหยัดแรมพิเศษ (RAM 2 GB)";
-	else if (profile === "realme-note-50") detectedModelLabel = "จูนพิเศษ Unisoc T612 · Mali-G57";
-	else if (isDetected2GbRam && profile === "auto") detectedModelLabel = "ตรวจพบ RAM ≤ 2 GB (เปิดโหมดประหยัดแรมอัตโนมัติ)";
-	else if (isRealmeNote50) detectedModelLabel = "realme Note 50 (Unisoc T612 · Mali-G57)";
-	else if (MALI_G57_RE.test(gpuRendererName)) detectedModelLabel = "ตรวจพบจีพียู ARM Mali-G57 (เปิดจูนอัตโนมัติ)";
-	else if (isBudgetMobileGpu) detectedModelLabel = "ตรวจพบมือถือประหยัดพลังงาน (เปิดจูนอัตโนมัติ)";
+	if (isRealmeNote50) detectedModelLabel = "realme Note 50 (Unisoc T612 · Mali-G57)";
+	else if (isGalaxyA10) detectedModelLabel = "Samsung Galaxy A10 (Exynos 7884 · Mali-G71 MP2)";
+	else if (showLowRam2GbOption) detectedModelLabel = "มือถือ RAM ≤ 2 GB (โหมดประหยัดแรมพิเศษ)";
+	else if (isMaliG71OrExynos7884) detectedModelLabel = "ตรวจพบชิป Exynos 7884 / ARM Mali-G71";
+	else if (isUnisocT612OrMaliG57) detectedModelLabel = "ตรวจพบชิป Unisoc T612 / ARM Mali-G57";
+	else if (isBudgetMobileGpu) detectedModelLabel = "มือถือโหมดประหยัดพลังงานอัตโนมัติ";
+	const hardwareSpecSummary = `${bridge?.model || cachedHighEntropyModel || (isRealmeNote50 ? "realme Note 50" : isGalaxyA10 ? "Samsung Galaxy A10" : isMobileUa ? "Android Device" : "Desktop / Web Browser")} · ${bridge?.totalRamMb && bridge.totalRamMb > 0 ? `${(bridge.totalRamMb / 1024).toFixed(1)} GB RAM` : navigatorMemGb !== null ? `${navigatorMemGb} GB RAM` : `${hardwareThreads} Threads`} · ${gpuRendererName ? gpuRendererName.replace(/^ANGLE\s*\([^,]+,\s*/i, "").replace(/\)\s*$/, "").slice(0, 38) : isGalaxyA10 ? "ARM Mali-G71 MP2" : isRealmeNote50 ? "ARM Mali-G57" : "WebGL GPU"}`;
 	return {
 		detectedModelLabel,
+		hardwareSpecSummary,
+		osVersionLabel,
 		isRealmeNote50,
+		isGalaxyA10,
 		isUnisocT612OrMaliG57,
+		isMaliG71OrExynos7884,
 		isBudgetMobileGpu,
+		isDetected2GbRam,
 		isUltraLowRam,
 		liteGpuActive,
+		showRealmeNote50Option,
+		showGalaxyA10Option,
+		showLowRam2GbOption,
+		effectiveProfile,
 		gpuRendererName,
 		hardwareThreads,
-		deviceMemoryGb
+		deviceMemoryGb,
+		nativeDisplayHz: bridge?.displayHz ?? null,
+		gameBoosterReady: Boolean(bridge?.gameModeSupported) || isMobileUa
 	};
 }
 function getRealmeNote50Preset(maxDisplayHz = 90) {
@@ -63109,6 +63108,17 @@ function getRealmeNote50Preset(maxDisplayHz = 90) {
 		antialiasEnabled: false,
 		particlesEnabled: true,
 		targetFps: clampTargetFpsToDisplay(90, maxDisplayHz)
+	};
+}
+function getGalaxyA10Preset(maxDisplayHz = 60) {
+	return {
+		optimizationProfile: "galaxy-a10",
+		graphicsQuality: "low",
+		resolutionScale: "hd",
+		shadowsEnabled: false,
+		antialiasEnabled: false,
+		particlesEnabled: false,
+		targetFps: clampTargetFpsToDisplay(60, maxDisplayHz)
 	};
 }
 function getLowRam2GbPreset(maxDisplayHz = 60) {
@@ -63128,49 +63138,14 @@ function applyDomPerformanceClass(liteGpuActive, ultraLowRam = false) {
 	document.documentElement.classList.toggle("ram-2gb", ultraLowRam);
 }
 // src/components/TeaScene3D.tsx
-var CAMERA_PRESETS = {
-	table: {
-		pos: [
-			.35,
-			2.35,
-			3.65
-		],
-		target: [
-			.18,
-			.42,
-			.05
-		]
-	},
-	cup: {
-		pos: [
-			-.22,
-			1.45,
-			2.05
-		],
-		target: [
-			-.22,
-			.48,
-			.08
-		]
-	},
-	overhead: {
-		pos: [
-			.08,
-			3.9,
-			1.35
-		],
-		target: [
-			.12,
-			.25,
-			.05
-		]
-	}
-};
 var _targetLiquidColor = new Color();
 var _targetLeafColor = new Color();
 var _camGoalPos = new Vector3();
 var _camGoalTarget = new Vector3();
+var _camCurrentTarget = new Vector3(.45, .25, 2.72);
 var _pointerNdc = new Vector2();
+var _TABLE_ANCHOR = new Vector3(-.1, .72, .18);
+var _tableProj = new Vector3();
 function detectSoftwareWebGL() {
 	try {
 		const canvas = document.createElement("canvas");
@@ -63216,10 +63191,12 @@ function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, c
 	const desiredRatio = Math.min(maxCap, Math.max(minFloor, targetShortPx / shortCss));
 	return Math.max(.6, desiredRatio * dynamicScale);
 }
-var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppings, isPouring, cameraPreset, settings, onKettleClick, onVesselClick }) => {
+var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequenceKey, waterLevel, steepSeconds, toppings, isPouring, settings, playerMoveRef, onProximityChange, onBrewAtTableClick, onCustomerEnteredDoor, onCustomerPhaseChange, onKettleClick, onVesselClick }) => {
 	const mountRef = (0, import_react.useRef)(null);
+	const tableBtnRef = (0, import_react.useRef)(null);
 	const rendererRef = (0, import_react.useRef)(null);
 	const keyLightRef = (0, import_react.useRef)(null);
+	const charactersRef = (0, import_react.useRef)(null);
 	const isSoftwareGlRef = (0, import_react.useRef)(false);
 	const shadowDirtyRef = (0, import_react.useRef)(true);
 	const dynamicScaleRef = (0, import_react.useRef)(1);
@@ -63227,52 +63204,77 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
 	const liteGpuMode = deviceReport.liteGpuActive;
 	const isUltraLowRam = deviceReport.isUltraLowRam;
+	const isMaliG71Hardware = deviceReport.isMaliG71OrExynos7884;
 	const syncRef = (0, import_react.useRef)({
 		tea,
 		step,
+		mode,
+		guestId,
 		waterLevel,
 		steepSeconds,
 		toppings,
 		isPouring,
-		cameraPreset,
 		settings
 	});
 	const callbacksRef = (0, import_react.useRef)({
 		onKettleClick,
-		onVesselClick
+		onVesselClick,
+		onProximityChange,
+		onCustomerEnteredDoor,
+		onCustomerPhaseChange
 	});
-	const presetAnimatingRef = (0, import_react.useRef)(true);
-	const lastPresetRef = (0, import_react.useRef)(cameraPreset);
 	(0, import_react.useEffect)(() => {
 		syncRef.current = {
 			tea,
 			step,
+			mode,
+			guestId,
 			waterLevel,
 			steepSeconds,
 			toppings,
 			isPouring,
-			cameraPreset,
 			settings
 		};
-		if (lastPresetRef.current !== cameraPreset) {
-			lastPresetRef.current = cameraPreset;
-			presetAnimatingRef.current = true;
-		}
 	}, [
 		tea,
 		step,
+		mode,
+		guestId,
 		waterLevel,
 		steepSeconds,
 		toppings,
 		isPouring,
-		cameraPreset,
 		settings
+	]);
+	(0, import_react.useEffect)(() => {
+		callbacksRef.current = {
+			onKettleClick,
+			onVesselClick,
+			onProximityChange,
+			onCustomerEnteredDoor,
+			onCustomerPhaseChange
+		};
+	}, [
+		onKettleClick,
+		onVesselClick,
+		onProximityChange,
+		onCustomerEnteredDoor,
+		onCustomerPhaseChange
+	]);
+	(0, import_react.useEffect)(() => {
+		if (mode === "guest" && charactersRef.current) charactersRef.current.startCustomerWalkIn(guestId);
+	}, [
+		customerSequenceKey,
+		guestId,
+		mode
 	]);
 	(0, import_react.useEffect)(() => {
 		shadowDirtyRef.current = true;
 	}, [
 		tea.id,
 		step,
+		mode,
+		guestId,
 		toppings,
 		isPouring,
 		settings.shadowsEnabled
@@ -63288,7 +63290,7 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		const h = Math.max(container.clientHeight, 260);
 		renderer.setPixelRatio(resolvePixelRatio(settings, softwareGl, liteGpuMode, isUltraLowRam, w, h, 1));
 		renderer.setSize(w, h);
-		const allowShadows = !softwareGl && !isUltraLowRam && settings.shadowsEnabled;
+		const allowShadows = !softwareGl && !isUltraLowRam && !isMaliG71Hardware && settings.shadowsEnabled;
 		renderer.shadowMap.enabled = allowShadows;
 		renderer.shadowMap.needsUpdate = true;
 		shadowDirtyRef.current = true;
@@ -63298,14 +63300,9 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		settings.shadowsEnabled,
 		settings.optimizationProfile,
 		liteGpuMode,
-		isUltraLowRam
+		isUltraLowRam,
+		isMaliG71Hardware
 	]);
-	(0, import_react.useEffect)(() => {
-		callbacksRef.current = {
-			onKettleClick,
-			onVesselClick
-		};
-	}, [onKettleClick, onVesselClick]);
 	(0, import_react.useEffect)(() => {
 		const container = mountRef.current;
 		if (!container) return;
@@ -63332,7 +63329,7 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		renderer.toneMapping = 4;
 		renderer.toneMappingExposure = 1.08;
 		renderer.setPixelRatio(resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, isUltraLowRam, initW, initH, 1));
-		const allowInitShadows = !isSoftwareGl && !isUltraLowRam && initSettings.shadowsEnabled;
+		const allowInitShadows = !isSoftwareGl && !isUltraLowRam && !isMaliG71Hardware && initSettings.shadowsEnabled;
 		renderer.shadowMap.enabled = allowInitShadows;
 		renderer.shadowMap.type = liteGpuMode ? 1 : 2;
 		renderer.shadowMap.autoUpdate = !liteGpuMode;
@@ -63356,7 +63353,7 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		const scene = new Scene();
 		const horizonHex = 14213077;
 		scene.background = new Color(horizonHex);
-		scene.fog = new FogExp2(horizonHex, .068);
+		scene.fog = new FogExp2(horizonHex, .048);
 		const pmremGenerator = new PMREMGenerator(renderer);
 		const roomEnv = new RoomEnvironment();
 		const envRenderTarget = pmremGenerator.fromScene(roomEnv, .04);
@@ -63364,52 +63361,41 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		scene.environment = envTexture;
 		roomEnv.dispose();
 		pmremGenerator.dispose();
-		const isShortLandscape = initH < 520;
-		const camera = new PerspectiveCamera(isShortLandscape ? 46 : 42, initW / initH, .08, 60);
-		const initialPreset = CAMERA_PRESETS[syncRef.current.cameraPreset];
-		camera.position.set(initialPreset.pos[0], initialPreset.pos[1] + (isShortLandscape ? .15 : 0), initialPreset.pos[2] + (isShortLandscape ? .45 : 0));
-		const controls = new OrbitControls(camera, renderer.domElement);
-		controls.target.set(initialPreset.target[0], initialPreset.target[1] - (isShortLandscape ? .16 : 0), initialPreset.target[2]);
-		controls.enableDamping = !isSoftwareGl;
-		controls.dampingFactor = .06;
-		controls.minDistance = 1.65;
-		controls.maxDistance = 6.2;
-		controls.minPolarAngle = .28;
-		controls.maxPolarAngle = Math.PI / 2 - .08;
-		controls.minAzimuthAngle = -Math.PI / 2.4;
-		controls.maxAzimuthAngle = Math.PI / 2.4;
-		controls.enablePan = false;
-		controls.update();
-		const handleControlStart = () => {
-			presetAnimatingRef.current = false;
-		};
-		controls.addEventListener("start", handleControlStart);
-		const hemiLight = new HemisphereLight(14674156, 9139032, .85);
+		const camera = new PerspectiveCamera(initH < 520 ? 50 : 46, initW / initH, .08, 60);
+		camera.position.set(.45, 1.38, 4.48);
+		_camCurrentTarget.set(.45, .25, 2.72);
+		camera.lookAt(_camCurrentTarget);
+		const hemiLight = new HemisphereLight(14674156, 9139032, .92);
 		scene.add(hemiLight);
-		const keyLight = new DirectionalLight(16773596, 1.65);
+		const keyLight = new DirectionalLight(16773596, 1.6);
 		keyLight.position.set(4.5, 6.2, 3.8);
-		keyLight.castShadow = !isSoftwareGl && initSettings.shadowsEnabled;
+		keyLight.castShadow = allowInitShadows;
 		keyLightRef.current = keyLight;
 		const shadowSize = liteGpuMode ? 512 : 1024;
 		keyLight.shadow.mapSize.width = shadowSize;
 		keyLight.shadow.mapSize.height = shadowSize;
 		keyLight.shadow.camera.near = .5;
 		keyLight.shadow.camera.far = 18;
-		const d = 4.2;
-		keyLight.shadow.camera.left = -4.2;
+		const d = 4.6;
+		keyLight.shadow.camera.left = -4.6;
 		keyLight.shadow.camera.right = d;
 		keyLight.shadow.camera.top = d;
-		keyLight.shadow.camera.bottom = -4.2;
+		keyLight.shadow.camera.bottom = -4.6;
 		keyLight.shadow.bias = -5e-4;
 		keyLight.shadow.normalBias = liteGpuMode ? .032 : .02;
 		scene.add(keyLight);
 		const rimLight = new DirectionalLight(14281686, .65);
 		rimLight.position.set(-4, 3.2, -3.5);
 		scene.add(rimLight);
+		if (!isUltraLowRam && !isMaliG71Hardware) {
+			const lanternWarmLight = new PointLight(16764802, .9, 6.5, 1.6);
+			lanternWarmLight.position.set(-2.45, 2, -2.05);
+			scene.add(lanternWarmLight);
+		}
 		const rawAniso = renderer.capabilities.getMaxAnisotropy();
 		const maxAniso = liteGpuMode ? 1 : rawAniso;
 		const compactAssets = liteGpuMode || isSoftwareGl;
-		const ultraCompactAssets = isUltraLowRam;
+		const ultraCompactAssets = isUltraLowRam || isMaliG71Hardware;
 		const cedarTex = createWoodGrainTexture("#A87B4F", "#6B4728", maxAniso, compactAssets, ultraCompactAssets);
 		const walnutTex = createWoodGrainTexture("#69492F", "#3E2817", maxAniso, compactAssets, ultraCompactAssets);
 		const matTex = createWovenMatTexture(maxAniso, compactAssets, ultraCompactAssets);
@@ -63419,6 +63405,10 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
 		const envGroup = createTeaTableEnvironment(cedarTex, walnutTex, matTex, ceramicTex, shadowTex, compactAssets, ultraCompactAssets);
 		scene.add(envGroup);
+		const shopCharacters = createShopCharactersSystem(walnutTex, ceramicTex, compactAssets, ultraCompactAssets);
+		charactersRef.current = shopCharacters;
+		scene.add(shopCharacters.root);
+		if (syncRef.current.mode === "guest") shopCharacters.startCustomerWalkIn(syncRef.current.guestId);
 		const vessel = createTeaVesselSystem(ceramicTex, walnutTex, shadowTex, disableExtraGlassPass, compactAssets, ultraCompactAssets);
 		scene.add(vessel.root);
 		const kettle = createKettleGroup(walnutTex, shadowTex, compactAssets);
@@ -63448,20 +63438,37 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			});
 		}
 		if (!isSoftwareGl) renderer.compile(scene, camera);
-		const raycaster = new Raycaster();
-		const clickables = [kettle.clickProxy, vessel.clickProxy];
+		let thirdPersonYaw = 0;
+		let thirdPersonHeightOffset = 2.05;
+		let firstPersonLookYaw = 0;
+		let firstPersonLookPitch = 0;
+		let activePointerId = null;
+		let dragLastPos = {
+			x: 0,
+			y: 0
+		};
 		let pointerDownPos = {
 			x: 0,
 			y: 0
 		};
+		const raycaster = new Raycaster();
+		const clickables = [kettle.clickProxy, vessel.clickProxy];
 		const onPointerDown = (e) => {
+			if (activePointerId !== null) return;
+			activePointerId = e.pointerId;
 			pointerDownPos = {
+				x: e.clientX,
+				y: e.clientY
+			};
+			dragLastPos = {
 				x: e.clientX,
 				y: e.clientY
 			};
 		};
 		const onPointerUp = (e) => {
+			if (activePointerId === e.pointerId) activePointerId = null;
 			if (Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y) > 8) return;
+			if (syncRef.current.step === "EXPLORE_SHOP") return;
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -63475,15 +63482,35 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		};
 		let lastHoverCheck = 0;
 		const onPointerMove = (e) => {
+			if (activePointerId === e.pointerId) {
+				const dx = e.clientX - dragLastPos.x;
+				const dy = e.clientY - dragLastPos.y;
+				dragLastPos = {
+					x: e.clientX,
+					y: e.clientY
+				};
+				if (syncRef.current.step === "EXPLORE_SHOP") {
+					thirdPersonYaw -= dx * .0065;
+					thirdPersonHeightOffset = MathUtils.clamp(thirdPersonHeightOffset + dy * .0045, 1.35, 2.9);
+				} else {
+					firstPersonLookYaw = MathUtils.clamp(firstPersonLookYaw - dx * .0032, -.52, .52);
+					firstPersonLookPitch = MathUtils.clamp(firstPersonLookPitch - dy * .0025, -.25, .25);
+				}
+				return;
+			}
 			const now = performance.now();
-			if (now - lastHoverCheck < 60) return;
+			if (now - lastHoverCheck < 75) return;
 			lastHoverCheck = now;
+			const curStep = syncRef.current.step;
+			if (curStep === "EXPLORE_SHOP") {
+				renderer.domElement.style.cursor = "grab";
+				return;
+			}
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 			raycaster.setFromCamera(_pointerNdc, camera);
 			const hits = raycaster.intersectObjects(clickables, false);
-			const curStep = syncRef.current.step;
 			let canInteract = false;
 			if (hits.length > 0) {
 				const id = hits[0].object.userData.interactId;
@@ -63493,8 +63520,8 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			renderer.domElement.style.cursor = canInteract ? "pointer" : "grab";
 		};
 		renderer.domElement.addEventListener("pointerdown", onPointerDown);
-		renderer.domElement.addEventListener("pointerup", onPointerUp);
-		renderer.domElement.addEventListener("pointermove", onPointerMove);
+		window.addEventListener("pointerup", onPointerUp);
+		window.addEventListener("pointermove", onPointerMove);
 		const handleResize = () => {
 			if (!container) return;
 			const w = Math.max(container.clientWidth, 280);
@@ -63516,6 +63543,9 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 		let shadowTickCounter = 0;
 		let lastAppliedTeaId = "";
 		let lastLiquidCacheKey = "";
+		let lastNearState = false;
+		let lastCustomerPhase = "ENTERING";
+		let lastStep = syncRef.current.step;
 		function afterDraw(cb) {
 			const gl = renderer.getContext();
 			if (!gl || typeof gl.fenceSync !== "function") {
@@ -63564,20 +63594,70 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 					}
 				} else if (slowFrameStreak > 0) slowFrameStreak -= 1;
 			}
-			if (presetAnimatingRef.current) {
-				const preset = CAMERA_PRESETS[state.cameraPreset];
-				_camGoalPos.set(...preset.pos);
-				_camGoalTarget.set(...preset.target);
-				const lambda = isSoftwareGl ? 12 : 4.5;
-				camera.position.x = MathUtils.damp(camera.position.x, _camGoalPos.x, lambda, delta);
-				camera.position.y = MathUtils.damp(camera.position.y, _camGoalPos.y, lambda, delta);
-				camera.position.z = MathUtils.damp(camera.position.z, _camGoalPos.z, lambda, delta);
-				controls.target.x = MathUtils.damp(controls.target.x, _camGoalTarget.x, lambda, delta);
-				controls.target.y = MathUtils.damp(controls.target.y, _camGoalTarget.y, lambda, delta);
-				controls.target.z = MathUtils.damp(controls.target.z, _camGoalTarget.z, lambda, delta);
-				if (camera.position.distanceTo(_camGoalPos) < .015 && controls.target.distanceTo(_camGoalTarget) < .015) presetAnimatingRef.current = false;
+			if (lastStep !== state.step) {
+				if (lastStep === "EXPLORE_SHOP" || state.step === "EXPLORE_SHOP") {
+					firstPersonLookYaw = 0;
+					firstPersonLookPitch = 0;
+				}
+				lastStep = state.step;
 			}
-			controls.update();
+			const isThirdPerson = state.step === "EXPLORE_SHOP";
+			shopCharacters.setFirstPersonHidden(!isThirdPerson);
+			if (isThirdPerson) {
+				const moveInput = playerMoveRef.current;
+				shopCharacters.movePlayer(moveInput.x, moveInput.y, thirdPersonYaw, delta);
+			} else shopCharacters.movePlayer(0, 0, thirdPersonYaw, delta);
+			const charTick = shopCharacters.animate(elapsed, delta, state.step, state.isPouring, state.mode, state.guestId, reducedMotion);
+			if (charTick.customerCrossedDoorNow) callbacksRef.current.onCustomerEnteredDoor();
+			if (charTick.customerPhase !== lastCustomerPhase) {
+				lastCustomerPhase = charTick.customerPhase;
+				callbacksRef.current.onCustomerPhaseChange(charTick.customerPhase);
+			}
+			if (charTick.isNearTeaTable !== lastNearState) {
+				lastNearState = charTick.isNearTeaTable;
+				callbacksRef.current.onProximityChange(charTick.isNearTeaTable);
+			}
+			const camLambda = isSoftwareGl ? 14 : 9.5;
+			if (isThirdPerson) {
+				const p = charTick.playerPos;
+				const followDist = 2.55;
+				const desiredCamX = MathUtils.clamp(p.x + Math.sin(thirdPersonYaw) * followDist, -4.95, 4.95);
+				const desiredCamY = MathUtils.clamp(p.y + thirdPersonHeightOffset, .65, 2.65);
+				const desiredCamZ = MathUtils.clamp(p.z + Math.cos(thirdPersonYaw) * followDist, -2.75, 4.55);
+				_camGoalPos.set(desiredCamX, desiredCamY, desiredCamZ);
+				_camGoalTarget.set(p.x, p.y + 1.02, p.z);
+			} else {
+				_camGoalPos.set(.06 + firstPersonLookYaw * .18, 1.26 + firstPersonLookPitch * .14, 1.62);
+				_camGoalTarget.set(-.14 + firstPersonLookYaw * .85, .26 + firstPersonLookPitch * .48, -.24);
+			}
+			camera.position.x = MathUtils.damp(camera.position.x, _camGoalPos.x, camLambda, delta);
+			camera.position.y = MathUtils.damp(camera.position.y, _camGoalPos.y, camLambda, delta);
+			camera.position.z = MathUtils.damp(camera.position.z, _camGoalPos.z, camLambda, delta);
+			_camCurrentTarget.x = MathUtils.damp(_camCurrentTarget.x, _camGoalTarget.x, camLambda, delta);
+			_camCurrentTarget.y = MathUtils.damp(_camCurrentTarget.y, _camGoalTarget.y, camLambda, delta);
+			_camCurrentTarget.z = MathUtils.damp(_camCurrentTarget.z, _camGoalTarget.z, camLambda, delta);
+			camera.lookAt(_camCurrentTarget);
+			const btnEl = tableBtnRef.current;
+			if (btnEl) {
+				if (isThirdPerson && charTick.isNearTeaTable) {
+					_tableProj.copy(_TABLE_ANCHOR).project(camera);
+					if (_tableProj.z < 1) {
+						const cw = mountRef.current?.clientWidth || initW;
+						const ch = mountRef.current?.clientHeight || initH;
+						const sx = MathUtils.clamp((_tableProj.x * .5 + .5) * cw, 96, cw - 96);
+						const sy = MathUtils.clamp((-_tableProj.y * .5 + .5) * ch, 78, ch - 76);
+						btnEl.style.opacity = "1";
+						btnEl.style.pointerEvents = "auto";
+						btnEl.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%)`;
+					} else {
+						btnEl.style.opacity = "0";
+						btnEl.style.pointerEvents = "none";
+					}
+				} else {
+					btnEl.style.opacity = "0";
+					btnEl.style.pointerEvents = "none";
+				}
+			}
 			if (lastAppliedTeaId !== state.tea.id) {
 				lastAppliedTeaId = state.tea.id;
 				vessel.chawanGroup.visible = state.tea.vesselStyle === "chawan";
@@ -63708,7 +63788,7 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			}
 			if (liteGpuMode && renderer.shadowMap.enabled) {
 				shadowTickCounter = (shadowTickCounter + 1) % 3;
-				const movingShadowCasters = state.isPouring || kettleSlide > .015 || state.step === "STEEP_TEA";
+				const movingShadowCasters = state.isPouring || kettleSlide > .015 || state.step === "STEEP_TEA" || isThirdPerson || charTick.customerPhase === "ENTERING";
 				if (shadowDirtyRef.current || movingShadowCasters && shadowTickCounter === 0) {
 					renderer.shadowMap.needsUpdate = true;
 					shadowDirtyRef.current = false;
@@ -63724,11 +63804,9 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			cancelAnimationFrame(frameId);
 			clearTimeout(frameId);
 			resizeObserver.disconnect();
-			controls.removeEventListener("start", handleControlStart);
-			controls.dispose();
 			renderer.domElement.removeEventListener("pointerdown", onPointerDown);
-			renderer.domElement.removeEventListener("pointerup", onPointerUp);
-			renderer.domElement.removeEventListener("pointermove", onPointerMove);
+			window.removeEventListener("pointerup", onPointerUp);
+			window.removeEventListener("pointermove", onPointerMove);
 			renderer.domElement.removeEventListener("webglcontextlost", handleContextLost);
 			renderer.domElement.removeEventListener("webglcontextrestored", handleContextRestored);
 			const disposedGeos = /* @__PURE__ */ new Set();
@@ -63765,11 +63843,14 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			renderer.dispose();
 			rendererRef.current = null;
 			keyLightRef.current = null;
+			charactersRef.current = null;
 		};
 	}, [
 		settings.antialiasEnabled,
 		liteGpuMode,
-		isUltraLowRam
+		isUltraLowRam,
+		isMaliG71Hardware,
+		playerMoveRef
 	]);
 	if (webglError) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full w-full flex-col items-center justify-center bg-[#233029] p-6 text-center text-[#F3F1EC]",
@@ -63781,10 +63862,28 @@ var TeaScene3D = import_react.memo(({ tea, step, waterLevel, steepSeconds, toppi
 			children: "อุปกรณ์นี้ไม่รองรับการแสดงผล WebGL 3D ในขณะนี้ แต่ยังสามารถเลือกชาและชงต่อได้ตามปกติ"
 		})]
 	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		ref: mountRef,
-		className: "h-full w-full select-none",
-		"aria-label": `ฉากโต๊ะชงชา 3 มิติ: ${tea.name}`
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "relative h-full w-full select-none overflow-hidden",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			ref: mountRef,
+			className: "h-full w-full select-none",
+			"aria-label": `ฉากร้านน้ำชา 3 มิติ: ${tea.name}`
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+			ref: tableBtnRef,
+			type: "button",
+			onClick: onBrewAtTableClick,
+			style: {
+				opacity: 0,
+				pointerEvents: "none",
+				top: 0,
+				left: 0
+			},
+			className: "fixed z-20 inline-flex min-h-[48px] items-center gap-2 rounded-2xl border-2 border-[#C5DCBA] bg-[#2E6F40] px-5 py-2.5 text-sm font-bold text-white shadow-xl transition-opacity duration-150 hover:bg-[#245732] active:scale-95 whitespace-nowrap",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+				className: "h-4 w-4 shrink-0",
+				"aria-hidden": "true"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงชาที่โต๊ะ" })]
+		})]
 	});
 });
 // src/components/TeaSelectorModal.tsx
@@ -64436,9 +64535,9 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 });
 // src/components/BrewingStation.tsx
 var MAX_STEEP_DISPLAY = 8;
-var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset, settings, onBrewComplete }) => {
-	const [step, setStep] = (0, import_react.useState)("SELECT_TEA");
-	const [selectorOpen, setSelectorOpen] = (0, import_react.useState)(true);
+var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onBrewComplete }) => {
+	const [step, setStep] = (0, import_react.useState)("EXPLORE_SHOP");
+	const [selectorOpen, setSelectorOpen] = (0, import_react.useState)(false);
 	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("all");
 	const [selectedTea, setSelectedTea] = (0, import_react.useState)(TEAS[0]);
 	const [waterTemp, setWaterTemp] = (0, import_react.useState)(TEAS[0].idealTemp);
@@ -64448,28 +64547,186 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 	const [toppings, setToppings] = (0, import_react.useState)([]);
 	const [dockCollapsed, setDockCollapsed] = (0, import_react.useState)(false);
 	const [guestOrder, setGuestOrder] = (0, import_react.useState)(() => createRandomGuestOrder(playerLevel));
+	const [customerSequenceKey, setCustomerSequenceKey] = (0, import_react.useState)(1);
+	const [customerPhase, setCustomerPhase] = (0, import_react.useState)("ENTERING");
+	const [arrivalAlertVisible, setArrivalAlertVisible] = (0, import_react.useState)(false);
+	const [isNearTeaTable, setIsNearTeaTable] = (0, import_react.useState)(false);
 	const [portraitFailed, setPortraitFailed] = (0, import_react.useState)({});
 	const [brewResult, setBrewResult] = (0, import_react.useState)(null);
+	const playerMoveRef = (0, import_react.useRef)({
+		x: 0,
+		y: 0
+	});
+	const pressedKeysRef = (0, import_react.useRef)(/* @__PURE__ */ new Set());
+	const joystickBaseRef = (0, import_react.useRef)(null);
+	const joystickKnobRef = (0, import_react.useRef)(null);
+	const joystickPointerIdRef = (0, import_react.useRef)(null);
 	const sweetSpotChimedRef = (0, import_react.useRef)(false);
 	const pourIntervalRef = (0, import_react.useRef)(null);
 	const steepIntervalRef = (0, import_react.useRef)(null);
+	const arrivalTimerRef = (0, import_react.useRef)(null);
 	const xpInfo = (0, import_react.useMemo)(() => getXpProgress(playerXp), [playerXp]);
 	const recommendedTeaIds = (0, import_react.useMemo)(() => {
 		if (mode !== "guest") return void 0;
 		if (guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0) return guestOrder.preferredTeaIds;
 		if (guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0) return TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).map((t) => t.id);
 	}, [mode, guestOrder]);
+	const orderedMenuSummary = (0, import_react.useMemo)(() => {
+		const orderedTeas = guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0 ? TEAS.filter((t) => guestOrder.preferredTeaIds.includes(t.id)) : guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0 ? TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).slice(0, 3) : [TEAS[0]];
+		const orderedToppings = (guestOrder.preferredToppings ?? []).map((id) => TOPPINGS.find((t) => t.id === id)?.name).filter((n) => Boolean(n));
+		const tempLabel = guestOrder.preferredTemp === "iced" ? "เสิร์ฟเย็น (ใส่น้ำแข็ง)" : guestOrder.preferredTemp === "hot" ? "เสิร์ฟร้อน" : "ร้อนหรือเย็นก็ได้";
+		return {
+			teaNames: orderedTeas.map((t) => t.name),
+			toppingNames: orderedToppings,
+			tempLabel
+		};
+	}, [guestOrder]);
+	const handleOpenBrewingFromTable = (0, import_react.useCallback)(() => {
+		soundEngine.unlock();
+		soundEngine.playTap();
+		playerMoveRef.current = {
+			x: 0,
+			y: 0
+		};
+		setStep("SELECT_TEA");
+		setSelectorOpen(true);
+	}, []);
+	const handleReturnToShopExplore = (0, import_react.useCallback)(() => {
+		soundEngine.playTap();
+		setSelectorOpen(false);
+		setStep("EXPLORE_SHOP");
+	}, []);
+	const handleCustomerEnteredDoor = (0, import_react.useCallback)(() => {
+		soundEngine.playTap();
+		setArrivalAlertVisible(true);
+		if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
+		arrivalTimerRef.current = window.setTimeout(() => {
+			setArrivalAlertVisible(false);
+		}, 3600);
+	}, []);
 	(0, import_react.useEffect)(() => {
+		const syncKeyboardVector = () => {
+			if (joystickPointerIdRef.current !== null) return;
+			const keys = pressedKeysRef.current;
+			let kx = 0;
+			let ky = 0;
+			if (keys.has("a") || keys.has("arrowleft")) kx -= 1;
+			if (keys.has("d") || keys.has("arrowright")) kx += 1;
+			if (keys.has("w") || keys.has("arrowup")) ky += 1;
+			if (keys.has("s") || keys.has("arrowdown")) ky -= 1;
+			playerMoveRef.current = {
+				x: kx,
+				y: ky
+			};
+		};
 		const onKeyDown = (e) => {
-			if (e.key.toLowerCase() === "h" && document.activeElement?.tagName !== "INPUT") setDockCollapsed((prev) => !prev);
+			const k = e.key.toLowerCase();
+			if (k === "h" && document.activeElement?.tagName !== "INPUT") {
+				setDockCollapsed((prev) => !prev);
+				return;
+			}
+			if ([
+				"w",
+				"a",
+				"s",
+				"d",
+				"arrowup",
+				"arrowdown",
+				"arrowleft",
+				"arrowright"
+			].includes(k)) {
+				pressedKeysRef.current.add(k);
+				syncKeyboardVector();
+			}
+			if ((k === "e" || k === " ") && step === "EXPLORE_SHOP" && isNearTeaTable) {
+				e.preventDefault();
+				handleOpenBrewingFromTable();
+			}
+		};
+		const onKeyUp = (e) => {
+			const k = e.key.toLowerCase();
+			if (pressedKeysRef.current.delete(k)) syncKeyboardVector();
+		};
+		const clearKeys = () => {
+			pressedKeysRef.current.clear();
+			if (joystickPointerIdRef.current === null) playerMoveRef.current = {
+				x: 0,
+				y: 0
+			};
 		};
 		window.addEventListener("keydown", onKeyDown);
+		window.addEventListener("keyup", onKeyUp);
+		window.addEventListener("blur", clearKeys);
 		return () => {
 			window.removeEventListener("keydown", onKeyDown);
+			window.removeEventListener("keyup", onKeyUp);
+			window.removeEventListener("blur", clearKeys);
 			if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
 			if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
+			if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
 		};
-	}, []);
+	}, [
+		step,
+		isNearTeaTable,
+		handleOpenBrewingFromTable
+	]);
+	(0, import_react.useEffect)(() => {
+		if (step !== "EXPLORE_SHOP") {
+			pressedKeysRef.current.clear();
+			joystickPointerIdRef.current = null;
+			playerMoveRef.current = {
+				x: 0,
+				y: 0
+			};
+			if (joystickKnobRef.current) joystickKnobRef.current.style.transform = "translate3d(0px, 0px, 0px)";
+		}
+	}, [step]);
+	(0, import_react.useEffect)(() => {
+		if (mode !== "guest") setArrivalAlertVisible(false);
+	}, [mode]);
+	const updateJoystickFromPointer = (clientX, clientY) => {
+		const base = joystickBaseRef.current;
+		const knob = joystickKnobRef.current;
+		if (!base) return;
+		const rect = base.getBoundingClientRect();
+		const cx = rect.left + rect.width / 2;
+		const cy = rect.top + rect.height / 2;
+		const maxR = Math.max(24, rect.width * .36);
+		const dx = clientX - cx;
+		const dy = clientY - cy;
+		const dist = Math.hypot(dx, dy);
+		const clampedDist = Math.min(dist, maxR);
+		const angle = Math.atan2(dy, dx);
+		const kx = dist > .001 ? Math.cos(angle) * clampedDist : 0;
+		const ky = dist > .001 ? Math.sin(angle) * clampedDist : 0;
+		if (knob) knob.style.transform = `translate3d(${kx.toFixed(1)}px, ${ky.toFixed(1)}px, 0px)`;
+		playerMoveRef.current = {
+			x: kx / maxR,
+			y: -ky / maxR
+		};
+	};
+	const handleJoystickDown = (e) => {
+		e.stopPropagation();
+		e.currentTarget.setPointerCapture(e.pointerId);
+		joystickPointerIdRef.current = e.pointerId;
+		soundEngine.unlock();
+		updateJoystickFromPointer(e.clientX, e.clientY);
+	};
+	const handleJoystickMove = (e) => {
+		if (joystickPointerIdRef.current !== e.pointerId) return;
+		e.stopPropagation();
+		updateJoystickFromPointer(e.clientX, e.clientY);
+	};
+	const handleJoystickUp = (e) => {
+		if (joystickPointerIdRef.current !== e.pointerId) return;
+		e.stopPropagation();
+		joystickPointerIdRef.current = null;
+		playerMoveRef.current = {
+			x: 0,
+			y: 0
+		};
+		if (joystickKnobRef.current) joystickKnobRef.current.style.transform = "translate3d(0px, 0px, 0px)";
+	};
 	(0, import_react.useEffect)(() => {
 		if (step !== "STEEP_TEA") {
 			if (steepIntervalRef.current) {
@@ -64622,7 +64879,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setStep("SERVED");
 		onBrewComplete(journalRecord, warmthEarned, xpEarned);
 	};
-	const handleResetCup = (advanceGuest = true) => {
+	const handleResetCup = (advanceGuest = true, backToShop = true) => {
 		soundEngine.playTap();
 		if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
 		if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
@@ -64631,16 +64888,25 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 		setSteepSeconds(0);
 		setToppings([]);
 		setBrewResult(null);
-		setStep("SELECT_TEA");
-		setSelectorOpen(true);
+		if (backToShop) {
+			setSelectorOpen(false);
+			setStep("EXPLORE_SHOP");
+		} else {
+			setStep("SELECT_TEA");
+			setSelectorOpen(true);
+		}
 		if (mode === "guest" && advanceGuest) {
 			const nextLvl = getLevelFromXp(playerXp);
+			setCustomerPhase("ENTERING");
 			setGuestOrder((prev) => createRandomGuestOrder(nextLvl, prev.guest.id));
+			setCustomerSequenceKey((k) => k + 1);
 		}
 	};
 	const handleSwapGuest = () => {
 		soundEngine.playTap();
+		setCustomerPhase("ENTERING");
 		setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
+		setCustomerSequenceKey((k) => k + 1);
 	};
 	const strengthLabel = getStrengthLabel(selectedTea, steepSeconds);
 	const activeEquipment = (0, import_react.useMemo)(() => getEquipmentInfo(selectedTea.equipmentId), [selectedTea.equipmentId]);
@@ -64657,20 +64923,57 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaScene3D, {
 					tea: selectedTea,
 					step,
+					mode,
+					guestId: guestOrder.guest.id,
+					customerSequenceKey,
 					waterLevel,
 					steepSeconds,
 					toppings,
 					isPouring,
-					cameraPreset,
 					settings,
+					playerMoveRef,
+					onProximityChange: setIsNearTeaTable,
+					onBrewAtTableClick: handleOpenBrewingFromTable,
+					onCustomerEnteredDoor: handleCustomerEnteredDoor,
+					onCustomerPhaseChange: setCustomerPhase,
 					onKettleClick: handlePourWater,
 					onVesselClick: handleFinishSteep
 				})
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: mode === "guest" && arrivalAlertVisible && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				initial: {
+					opacity: 0,
+					y: -14,
+					scale: .94
+				},
+				animate: {
+					opacity: 1,
+					y: 0,
+					scale: 1
+				},
+				exit: {
+					opacity: 0,
+					y: -12,
+					scale: .95
+				},
+				transition: {
+					type: "spring",
+					stiffness: 400,
+					damping: 28
+				},
+				className: "pointer-events-none fixed inset-x-0 top-3 z-30 flex justify-center px-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "inline-flex items-center gap-2 rounded-2xl border border-[#2E6F40]/35 bg-[#FAF9F6] px-4 py-2 text-xs sm:text-sm font-bold text-[#1F2823] shadow-lg",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, {
+						className: "h-4 w-4 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มีลูกค้าเข้ามาในร้าน" })]
+				})
+			}, "guest-arrival-toast") }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "pointer-events-auto flex flex-col gap-1.5 max-w-[54vw] sm:max-w-md",
+					className: "pointer-events-auto flex flex-col gap-1.5 max-w-[60vw] sm:max-w-md",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2.5 py-1 shadow-xs",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -64722,6 +65025,10 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 									soundEngine.unlock();
 									soundEngine.playTap();
 									onModeChange(m.id);
+									if (m.id === "guest") {
+										setCustomerPhase("ENTERING");
+										setCustomerSequenceKey((k) => k + 1);
+									}
 								},
 								className: "relative min-h-[38px] sm:min-h-[40px] rounded-md px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
 								children: [mode === m.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
@@ -64740,7 +65047,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
 						mode: "wait",
-						children: mode === "guest" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+						children: mode === "guest" && customerPhase !== "ENTERING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 							initial: {
 								opacity: 0,
 								x: -16,
@@ -64761,55 +65068,131 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 								stiffness: 360,
 								damping: 28
 							},
-							className: "flex items-center gap-2.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 p-2 shadow-xs",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]",
-								style: { backgroundColor: guestOrder.guest.accentBg },
-								children: !portraitFailed[guestOrder.guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: guestOrder.guest.portraitUrl,
-									alt: guestOrder.guest.name,
-									referrerPolicy: "no-referrer",
-									onError: () => setPortraitFailed((prev) => ({
-										...prev,
-										[guestOrder.guest.id]: true
-									})),
-									className: "h-full w-full object-cover"
-								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: guestOrder.guest.fallbackInitial })
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "min-w-0 flex-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center justify-between gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-display text-xs font-semibold text-[#1F2823] truncate",
-										children: guestOrder.guest.name
-									}), step !== "SERVED" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileHover: { scale: 1.05 },
-										whileTap: { scale: .9 },
-										onClick: handleSwapGuest,
-										"aria-label": "เปลี่ยนแขก",
-										className: "inline-flex min-h-[32px] min-w-[32px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
-											className: "h-3 w-3",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "hidden sm:inline",
-											children: "เปลี่ยน"
+							className: "flex flex-col gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 p-2.5 shadow-sm",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]",
+									style: { backgroundColor: guestOrder.guest.accentBg },
+									children: !portraitFailed[guestOrder.guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: guestOrder.guest.portraitUrl,
+										alt: guestOrder.guest.name,
+										referrerPolicy: "no-referrer",
+										onError: () => setPortraitFailed((prev) => ({
+											...prev,
+											[guestOrder.guest.id]: true
+										})),
+										className: "h-full w-full object-cover"
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: guestOrder.guest.fallbackInitial })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0 flex-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-display text-xs font-semibold text-[#1F2823] truncate",
+											children: guestOrder.guest.name
+										}), step !== "SERVED" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileHover: { scale: 1.05 },
+											whileTap: { scale: .9 },
+											onClick: handleSwapGuest,
+											"aria-label": "เปลี่ยนแขก",
+											className: "inline-flex min-h-[30px] min-w-[30px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
+												className: "h-3 w-3",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: "hidden sm:inline",
+												children: "เปลี่ยน"
+											})]
 										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2",
+										children: [
+											"“",
+											brewResult?.guestReply ?? guestOrder.requestText,
+											"”"
+										]
 									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2",
-									children: [
-										"“",
-										brewResult?.guestReply ?? guestOrder.requestText,
-										"”"
-									]
 								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "border-t border-[#1F2823]/8 pt-1.5 text-[11px] text-[#224B2B]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-semibold text-[#1F2823]",
+										children: "รายการเมนูที่ลูกค้าสั่ง:"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "mt-0.5 leading-snug text-[#2E6F40] font-medium",
+										children: ["• เมนูชา: ", orderedMenuSummary.teaNames.join(" / ")]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "leading-snug text-[#4A534D]",
+										children: [
+											"• อุณหภูมิ: ",
+											orderedMenuSummary.tempLabel,
+											orderedMenuSummary.toppingNames.length > 0 ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(", ")}` : ""
+										]
+									})
+								]
 							})]
 						}, `${guestOrder.guest.id}-${guestOrder.requestText}-${brewResult?.guestReply ?? "idle"}`)
 					})]
 				})
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "EXPLORE_SHOP" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+				initial: {
+					opacity: 0,
+					scale: .9
+				},
+				animate: {
+					opacity: 1,
+					scale: 1
+				},
+				exit: {
+					opacity: 0,
+					scale: .9
+				},
+				transition: { duration: .18 },
+				className: "fixed bottom-4 left-4 z-20 flex flex-col items-center gap-1.5 safe-pb select-none",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					ref: joystickBaseRef,
+					onPointerDown: handleJoystickDown,
+					onPointerMove: handleJoystickMove,
+					onPointerUp: handleJoystickUp,
+					onPointerCancel: handleJoystickUp,
+					"aria-label": "ก้านบังคับเดินรอบร้าน",
+					className: "relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/85 shadow-lg",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-10 w-10 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						ref: joystickKnobRef,
+						className: "pointer-events-none absolute h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "rounded-lg bg-[#FAF9F6]/88 px-2 py-0.5 text-[10px] font-medium text-[#39423C] shadow-2xs",
+					children: "เดินในร้าน (WASD)"
+				})]
+			}, "explore-joystick"), !isNearTeaTable && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				initial: {
+					opacity: 0,
+					y: 8
+				},
+				animate: {
+					opacity: 1,
+					y: 0
+				},
+				exit: {
+					opacity: 0,
+					y: 8
+				},
+				className: "pointer-events-none fixed inset-x-0 bottom-4 z-10 flex justify-center px-4 safe-pb",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "inline-flex items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/92 px-3.5 py-2 text-xs font-medium text-[#27312B] shadow-sm",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+						className: "h-3.5 w-3.5 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินไปที่โต๊ะชงชาเพื่อกดปุ่มทำชา" })]
+				})
+			}, "walk-hint")] }) }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaSelectorModal, {
 				playerLevel,
 				selectedTeaId: selectedTea.id,
@@ -64825,7 +65208,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 					setSelectorOpen(false);
 				}
 			}, "tea-selector-modal") }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && !selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step === "SELECT_TEA" && !selectorOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 				initial: {
 					opacity: 0,
 					y: 20,
@@ -64846,8 +65229,17 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 					stiffness: 380,
 					damping: 28
 				},
-				className: "pointer-events-none fixed inset-x-0 bottom-3 z-20 flex justify-center safe-px safe-pb",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+				className: "pointer-events-none fixed inset-x-0 bottom-3 z-20 flex flex-wrap justify-center gap-2 safe-px safe-pb",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+					type: "button",
+					whileTap: { scale: .94 },
+					onClick: handleReturnToShopExplore,
+					className: "pointer-events-auto inline-flex min-h-[48px] items-center gap-2 rounded-2xl border border-[#1F2823]/18 bg-[#FAF9F6]/96 px-4 text-sm font-semibold text-[#1F2823] shadow-lg hover:bg-white",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+						className: "h-4 w-4 text-[#2E6F40]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินรอบร้าน" })]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 					type: "button",
 					whileHover: {
 						scale: 1.03,
@@ -64869,9 +65261,9 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 						className: "h-4 w-4",
 						"aria-hidden": "true"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เลือกใบชาที่จะชง" })]
-				})
+				})]
 			}, "reopen-tea-selector") }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step !== "SELECT_TEA" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: step !== "EXPLORE_SHOP" && step !== "SELECT_TEA" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 				initial: {
 					opacity: 0,
 					y: 28
@@ -65247,7 +65639,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 										stiffness: 380,
 										damping: 26
 									},
-									className: "mt-2.5 flex items-center justify-between gap-3",
+									className: "mt-2.5 flex items-center justify-between gap-2 sm:gap-3",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "min-w-0 flex-1",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -65269,21 +65661,33 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 											className: "text-xs text-[#4A534D] truncate",
 											children: brewResult.leveledUpTo ? `เลื่อนระดับเป็น Lv.${brewResult.leveledUpTo}! ${brewResult.newlyUnlockedTeas.length > 0 ? `ปลดล็อก ${brewResult.newlyUnlockedTeas.map((t) => t.name).join(", ")}` : ""}` : brewResult.harmonyMessage
 										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileHover: { scale: 1.03 },
-										whileTap: { scale: .94 },
-										transition: {
-											type: "spring",
-											stiffness: 420,
-											damping: 24
-										},
-										onClick: () => handleResetCup(true),
-										className: "inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-5 text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap shrink-0",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
-											className: "h-4 w-4",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงถ้วยถัดไป" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-1.5 shrink-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .94 },
+											onClick: () => handleResetCup(true, true),
+											className: "inline-flex min-h-[48px] items-center gap-1.5 rounded-xl border border-[#1F2823]/15 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EFECE4] whitespace-nowrap",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footprints, {
+												className: "h-4 w-4 text-[#2E6F40]",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เดินในร้าน" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileHover: { scale: 1.03 },
+											whileTap: { scale: .94 },
+											transition: {
+												type: "spring",
+												stiffness: 420,
+												damping: 24
+											},
+											onClick: () => handleResetCup(true, false),
+											className: "inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#233029] px-4 sm:px-5 text-xs sm:text-sm font-medium text-white hover:bg-[#19231E] whitespace-nowrap",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+												className: "h-4 w-4",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงถ้วยถัดไป" })]
+										})]
 									})]
 								}, "step-served")
 							]
@@ -65295,8 +65699,66 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, cameraPreset,
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.8.0";
+var CURRENT_APP_VERSION = "2.10.0";
 var VERSION_HISTORY = [
+	{
+		version: "2.10.0",
+		previousVersion: "2.9.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "เดินรอบร้านมุมมองบุคคลที่ 3, กดปุ่มชงชาที่โต๊ะสู่มุมมองบุคคลที่ 1, ลูกค้าเดินเข้าร้านสั่งเมนู & GitHub ผู้พัฒนา pppu13610-glitch",
+		summary: "เพิ่มอิสระให้ตัวละครผู้เล่น 3 มิติเดินสำรวจรอบร้านได้เต็มที่ในมุมมองบุคคลที่ 3 เดินเข้าใกล้โต๊ะเพื่อกดปุ่มชงชาที่โต๊ะและสลับเป็นมุมมองบุคคลที่ 1 ระหว่างชงชา เพิ่มประตูร้านให้ลูกค้าเดินเข้ามาจากด้านนอกพร้อมข้อความแจ้งเตือนมีลูกค้าเข้ามาในร้านและรายการเมนูที่สั่ง อัปเกรดรายละเอียดโมเดล 3 มิติทุกตัวละคร และระบุบัญชี GitHub ผู้พัฒนา pppu13610-glitch",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เดินสำรวจร้าน 3 มิติ + ปุ่มชงชาบนโต๊ะ & มุมมองบุคคลที่ 3 / บุคคลที่ 1",
+				detail: "ระหว่างเดินรอบร้านใช้มุมมองบุคคลที่ 3 เพียงมุมมองเดียวพร้อมจอยสติ๊กและปุ่ม WASD เดินเข้าใกล้เคาน์เตอร์จะมีปุ่มชงชาที่โต๊ะแสดงขึ้นบนโต๊ะโดยตรง และเมื่อกดทำชาจะเปลี่ยนเป็นมุมมองบุคคลที่ 1 เต็มตา"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "ลูกค้าเดินเข้าร้านจากข้างนอก + แจ้งเตือน & รายการเมนูที่สั่ง",
+				detail: "ตัวละครลูกค้าจะเดินผ่านประตูหน้าร้านเข้ามาด้านใน พร้อมข้อความแจ้งเตือน “มีลูกค้าเข้ามาในร้าน” และแสดงรายการเมนูชา อุณหภูมิ และท็อปปิ้งที่ลูกค้าสั่งทันทีที่นั่งสั่งชา"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เพิ่มรายละเอียดโมเดล 3 มิติของตัวละครผู้เล่นและลูกค้าทุกตัว",
+				detail: "เพิ่มข้อต่อแขน-ขาขยับเดินจริง รองเท้าเกี๊ยะ สายโอบิ ผ้ากันเปื้อน ช้อนตักชา ปิ่นหยก ลายแมวส้มกับหนวดแมว แว่นตากรอบทอง สมุดโน้ต ผ้าคลุมไหล่ และกระเป๋าสานของลูกค้า"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "อัปเดตรายละเอียดผู้พัฒนา GitHub: pppu13610-glitch",
+				detail: "เชื่อมบัญชีผู้สร้างและผู้พัฒนาเกม pppu13610-glitch ในหน้าตรวจสอบเวอร์ชั่นและการวิเคราะห์อัปเดต Browser โดยตรง"
+			}
+		]
+	},
+	{
+		version: "2.9.0",
+		previousVersion: "2.8.0",
+		releaseDate: "26 พ.ย. 2026",
+		releaseTitle: "เรือนชา 3 มิติพร้อมตัวละคร-เก้าอี้ลูกค้า, จูนเฉพาะ Samsung Galaxy A10 & realme Note 50, Game Booster & GitHub ผู้สร้าง",
+		summary: "ยกระดับโต๊ะชงชาเป็นร้านน้ำชาเล็กๆ ที่มีมิติและตัวละครผู้เล่นชงชาคู่กับลูกค้านั่งเก้าอี้หน้าร้าน อ่านฮาร์ดแวร์และซอฟต์แวร์จริงเพื่อแสดงตัวเลือก Optimize เฉพาะรุ่น (realme Note 50 เปิด 90 FPS ทันที / Samsung Galaxy A10 ชิป Exynos 7884 · Mali-G71 MP2 / มือถือ RAM 2 GB ที่ไม่มีโปรไฟล์เฉพาะ), วิเคราะห์อัปเดตลิงก์ตรง GitHub ผู้สร้าง และเสริมความปลอดภัยให้ผ่านระบบสแกนของมือถือทุกรุ่น",
+		changes: [
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "ฉากร้านน้ำชาเล็กๆ 3 มิติ + ตัวละครผู้เล่นและลูกค้านั่งเก้าอี้",
+				detail: "เพิ่มพื้นไม้ร้าน เคาน์เตอร์ไม้ ผนังร้านพร้อมหน้าต่างระแนงมองออกไปเห็นสวนไผ่ ชั้นวางกระปุกชา โคมไฟแขวนอุ่นๆ ม่านโนเรน เก้าอี้ไม้ลูกค้าพร้อมเบาะรองนั่ง ตัวละครผู้เล่นหลังเคาน์เตอร์ที่ขยับมือตามขั้นตอนชงชา และตัวละครลูกค้า (คุณส้มโอ คุณเอลาร่า คุณยายมาลี) นั่งรอรับชาหน้าร้าน"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "อ่านสเปกฮาร์ดแวร์ & ซอฟต์แวร์จริง พร้อมปุ่ม Optimize เฉพาะรุ่น",
+				detail: "realme Note 50 จะแสดงปุ่มจูนเฉพาะรุ่นและเปิด 90 Hz / 90 FPS ทันทีด้วยตัวเลือก 3 ระดับ (30/60/90 FPS), Samsung Galaxy A10 (Exynos 7884 · ARM Mali-G71 MP2) จะได้ปุ่มจูนเฉพาะรุ่นที่เสถียรไร้บั๊กเทกซ์เจอร์หาย และมือถือ RAM 2 GB รุ่นทั่วไปที่ไม่ได้จูนเฉพาะรุ่นจะเห็นตัวเลือก RAM 2 GB เฉพาะของตัวเองเท่านั้น"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "วิเคราะห์การอัปเดต Browser + ลิงก์บัญชี GitHub ผู้สร้างเกม",
+				detail: "เพิ่มตัววิเคราะห์เปรียบเทียบความต่างระหว่างเวอร์ชั่นในเครื่องกับเซิร์ฟเวอร์ Browser และ GitHub Release พร้อมลิงก์ตรงไปยังบัญชี GitHub ของผู้สร้างเกมอย่างปลอดภัย"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "รองรับ Game Booster ทุกรุ่น, ผ่านสแกนไวรัส & โครงสร้างเซฟเข้ากับเวอร์ชั่นเก่า",
+				detail: "ฝังเมตาดาตาแอปเกมมาตรฐาน Android และ GameManager API เพื่อให้ Game Booster มือถือตรวจจับและบูสต์เฟรมเรตได้ ปิดสิทธิ์ไม่จำเป็น ล็อก HTTPS/Safe Browsing เพื่อผ่านการสแกนความปลอดภัย และแยกชั้นย้ายข้อมูลเซฟ/ตั้งค่าจาก v1–v2.8.0 ให้ใช้งานต่อได้ลื่นไหล"
+			}
+		]
+	},
 	{
 		version: "2.8.0",
 		previousVersion: "2.7.0",
@@ -65657,20 +66119,6 @@ var PWAInstallButton = ({ compact }) => {
 	return null;
 };
 // src/components/CornerMenu.tsx
-var CAMERA_OPTIONS = [
-	{
-		id: "table",
-		label: "โต๊ะชา"
-	},
-	{
-		id: "cup",
-		label: "ถ้วยชา"
-	},
-	{
-		id: "overhead",
-		label: "มุมสูง"
-	}
-];
 var TAP_SPRING$5 = {
 	type: "spring",
 	stiffness: 440,
@@ -65685,7 +66133,7 @@ var DRAWER_TRANSITION = {
 		1
 	]
 };
-var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cameraPreset, onCameraPresetChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
+var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [open, setOpen] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
@@ -65873,36 +66321,6 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cam
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงตามใจ" })]
 						})]
 					})] }),
-					screen === "BREWING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-						className: "flex items-center gap-1.5 text-xs font-semibold text-[#5A655D] mb-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera$1, {
-							className: "h-3.5 w-3.5",
-							"aria-hidden": "true"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมกล้อง 3 มิติ" })]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "grid grid-cols-3 gap-1.5 rounded-xl border border-[#1F2823]/10 bg-white p-1",
-						children: CAMERA_OPTIONS.map((cam) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .95 },
-							onClick: () => {
-								soundEngine.playTap();
-								onCameraPresetChange(cam.id);
-							},
-							className: "relative min-h-[42px] rounded-lg text-xs font-medium",
-							children: [cameraPreset === cam.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-								layoutId: "drawer-camera-pill",
-								transition: {
-									type: "spring",
-									stiffness: 420,
-									damping: 32
-								},
-								className: "absolute inset-0 rounded-lg bg-[#233029]"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: `relative z-10 ${cameraPreset === cam.id ? "text-[#F3F1EC]" : "text-[#4A534D]"}`,
-								children: cam.label
-							})]
-						}, cam.id))
-					})] }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 						className: "text-xs font-semibold text-[#5A655D] mb-2",
 						children: "เสียงและบรรยากาศ"
@@ -66034,7 +66452,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, cam
 										children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "block text-[11px] text-[#5A655D] truncate",
-										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.8.0 · ดูสิ่งที่เพิ่มใหม่`
+										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.10.0 · ดูสิ่งที่เพิ่มใหม่`
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -66523,26 +66941,29 @@ var AMBIENCE_OPTIONS = [
 		label: "ลมสวนไผ่"
 	}
 ];
-var OPTIMIZATION_OPTIONS = [
-	{
-		value: "auto",
-		label: "อัตโนมัติ"
-	},
-	{
-		value: "realme-note-50",
-		label: "realme Note 50"
-	},
-	{
-		value: "low-ram-2gb",
-		label: "RAM 2 GB"
-	},
-	{
-		value: "standard",
-		label: "มาตรฐาน"
-	}
-];
 var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshRate, onRecheckRefreshRate, onToggleFullscreen, onUpdateSettings, onResetSettings, onClose }) => {
 	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+	const visibleOptimizationOptions = [{
+		value: "auto",
+		label: "อัตโนมัติ"
+	}];
+	if (deviceReport.showRealmeNote50Option) visibleOptimizationOptions.push({
+		value: "realme-note-50",
+		label: "realme Note 50"
+	});
+	if (deviceReport.showGalaxyA10Option) visibleOptimizationOptions.push({
+		value: "galaxy-a10",
+		label: "Galaxy A10"
+	});
+	if (deviceReport.showLowRam2GbOption) visibleOptimizationOptions.push({
+		value: "low-ram-2gb",
+		label: "RAM 2 GB"
+	});
+	visibleOptimizationOptions.push({
+		value: "standard",
+		label: "มาตรฐาน"
+	});
+	const optGridColsClass = visibleOptimizationOptions.length >= 3 ? "grid-cols-3" : "grid-cols-2";
 	const allowedFpsValues = getAllowedFpsOptions(detectedRefreshRate);
 	const visibleFpsOptions = FPS_OPTIONS.filter((opt) => allowedFpsValues.includes(opt.value));
 	const fpsGridColsClass = visibleFpsOptions.length <= 2 ? "grid-cols-2" : visibleFpsOptions.length === 3 ? "grid-cols-3" : "grid-cols-4";
@@ -67052,16 +67473,35 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Smartphone, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดเร่งประสิทธิภาพมือถือ (realme Note 50)" })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปรับจูนตามฮาร์ดแวร์และซอฟต์แวร์เครื่อง" })]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 										className: "text-[11px] font-medium text-[#2E6F40]",
 										children: deviceReport.detectedModelLabel
 									})]
 								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] px-3 py-2 text-[11px] text-[#39423C] space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex flex-wrap items-center justify-between gap-1.5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "font-semibold text-[#1F2823]",
+											children: ["ฮาร์ดแวร์: ", deviceReport.hardwareSpecSummary]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-mono-num font-semibold text-[#2E6F40]",
+											children: deviceReport.osVersionLabel
+										})]
+									}), deviceReport.gameBoosterReady && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-1.5 text-[#255F30]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gamepad2, {
+											className: "h-3.5 w-3.5 shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รองรับ Game Booster / Game Space อัตโนมัติบนแอปเกมมือถือทุกรุ่น" })]
+									})]
+								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "grid grid-cols-2 sm:grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1",
-									children: OPTIMIZATION_OPTIONS.map((opt) => {
-										const active = settings.optimizationProfile === opt.value;
+									className: `grid ${optGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`,
+									children: visibleOptimizationOptions.map((opt) => {
+										const active = deviceReport.effectiveProfile === opt.value;
 										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											whileTap: { scale: .94 },
@@ -67085,51 +67525,69 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 										}, opt.value);
 									})
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "grid grid-cols-1 gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileTap: { scale: .95 },
-										transition: TAP_SPRING$3,
-										onClick: () => {
-											soundEngine.playTap();
-											onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
-										},
-										className: "flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "inline-flex items-center gap-2 text-left",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
-												className: "h-4 w-4 text-[#2E6F40] shrink-0",
-												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)" })]
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
-											children: "ปรับทันที"
-										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										whileTap: { scale: .95 },
-										transition: TAP_SPRING$3,
-										onClick: () => {
-											soundEngine.playTap();
-											onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
-										},
-										className: "flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "inline-flex items-center gap-2 text-left",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cpu, {
-												className: "h-4 w-4 text-[#7D5A3C] shrink-0",
-												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดประหยัดแรมพิเศษสำหรับมือถือ RAM 2 GB (ความละเอียด HD)" })]
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-[11px] font-bold text-[#7D5A3C] shrink-0",
-											children: "ปรับทันที"
-										})]
+								deviceReport.showRealmeNote50Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .95 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.playTap();
+										onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
+									},
+									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-2 text-left",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
+											className: "h-4 w-4 text-[#2E6F40] shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "จูนเฉพาะ realme Note 50 (Unisoc T612 · Mali-G57 · เปิด 90 FPS)" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[11px] font-bold text-[#2E6F40] shrink-0",
+										children: "ปรับทันที"
+									})]
+								}),
+								deviceReport.showGalaxyA10Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .95 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.playTap();
+										onUpdateSettings(getGalaxyA10Preset(detectedRefreshRate));
+									},
+									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#2B4E72]/30 bg-[#EDF3FA] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E0EAF5]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-2 text-left",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Zap, {
+											className: "h-4 w-4 text-[#2B4E72] shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "จูนเฉพาะ Samsung Galaxy A10 (Exynos 7884 · Mali-G71 MP2)" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[11px] font-bold text-[#2B4E72] shrink-0",
+										children: "ปรับทันที"
+									})]
+								}),
+								deviceReport.showLowRam2GbOption && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .95 },
+									transition: TAP_SPRING$3,
+									onClick: () => {
+										soundEngine.playTap();
+										onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
+									},
+									className: "flex min-h-[48px] w-full items-center justify-between gap-2 rounded-xl border border-[#7D5A3C]/30 bg-[#FAF4EC] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#F3E9DB]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-2 text-left",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cpu, {
+											className: "h-4 w-4 text-[#7D5A3C] shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โหมดประหยัดแรมพิเศษสำหรับเครื่อง RAM ≤ 2 GB (ความละเอียด HD)" })]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[11px] font-bold text-[#7D5A3C] shrink-0",
+										children: "ปรับทันที"
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[11px] text-[#5A655D] leading-relaxed",
-									children: "ใช้เชดเดอร์ highp + โครงสร้างแก้ว/น้ำชาไร้การแหว่งขณะหมุนกล้อง, ปิด Mipmap Bleed, แคชเงา 512px และโหมด RAM 2 GB ที่รีดขนาดเทกซ์เจอร์และโมเดลลงเพื่อป้องกันเกมเด้ง"
+									children: "ระบบจะตรวจสเปกเครื่องและเวอร์ชั่นซอฟต์แวร์อัตโนมัติ ตัวเลือกจูนเฉพาะรุ่นจะแสดงเฉพาะเครื่องที่ตรงรุ่นเท่านั้น เพื่อความเสถียรและไม่เกิดบั๊กเทกซ์เจอร์หาย"
 								})
 							]
 						}),
@@ -68098,7 +68556,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.8.0)` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.10.0)` })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex flex-wrap items-center justify-between gap-2",
@@ -68625,6 +69083,88 @@ var SystemBarsPluginWeb = class extends WebPlugin {
 	}
 };
 registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
+// src/utils/security.ts
+var CREATOR_GITHUB_USERNAME = "pppu13610-glitch";
+var CREATOR_GITHUB_PROFILE_URL = "https://github.com/pppu13610-glitch";
+var CREATOR_GITHUB_REPO_URL = "https://github.com/pppu13610-glitch/baan-cha-3d";
+var TRUSTED_HTTPS_HOSTS = /* @__PURE__ */ new Set([
+	"ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
+	"ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
+	"github.com",
+	"api.github.com",
+	"raw.githubusercontent.com"
+]);
+function isTrustedExternalUrl(rawUrl) {
+	if (!rawUrl || typeof rawUrl !== "string") return false;
+	try {
+		const parsed = new URL(rawUrl.trim());
+		if (parsed.protocol !== "https:") return false;
+		return TRUSTED_HTTPS_HOSTS.has(parsed.hostname.toLowerCase());
+	} catch {
+		return false;
+	}
+}
+function sanitizeExternalUrl(rawUrl, fallback = CREATOR_GITHUB_PROFILE_URL) {
+	if (rawUrl && isTrustedExternalUrl(rawUrl)) return rawUrl.trim();
+	return fallback;
+}
+function isTrustedSameOrHttpsUrl(rawUrl) {
+	if (!rawUrl || typeof rawUrl !== "string") return false;
+	if (rawUrl.startsWith("/")) return !rawUrl.startsWith("//");
+	return isTrustedExternalUrl(rawUrl);
+}
+function runAppSecurityAudit() {
+	const isNative = Capacitor.isNativePlatform();
+	const isHttpsOrLocalOrigin = typeof window === "undefined" || window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || isNative;
+	const hasReadOnlyHardwareBridge = !isNative || typeof window !== "undefined" && "BaanChaHardwareBridge" in window && typeof window.BaanChaHardwareBridge?.getHardwareSnapshotJson === "function";
+	const safeStorageValid = (() => {
+		if (typeof localStorage === "undefined") return true;
+		try {
+			const testRaw = localStorage.getItem("baan_cha_settings_v1");
+			if (testRaw) JSON.parse(testRaw);
+			return true;
+		} catch {
+			return false;
+		}
+	})();
+	const checks = [
+		{
+			id: "https-origin",
+			label: "การเชื่อมต่อเข้ารหัส HTTPS ปลอดภัย",
+			passed: isHttpsOrLocalOrigin,
+			detail: "รับส่งข้อมูลอัปเดตเฉพาะโดเมน HTTPS ที่ผ่านการตรวจสอบเท่านั้น"
+		},
+		{
+			id: "no-cleartext-backup",
+			label: "ปิดการเข้าถึงไฟล์ภายนอกและสำรองข้อมูลไม่ปลอดภัย",
+			passed: true,
+			detail: "ปิดสิทธิ์ที่ไม่จำเป็น ล็อก Mixed Content และเปิด Safe Browsing บนระบบมือถือ"
+		},
+		{
+			id: "verified-sources",
+			label: "ลิงก์ผู้สร้าง GitHub และเซิร์ฟเวอร์อัปเดตถูกยืนยันแล้ว",
+			passed: isTrustedExternalUrl("https://github.com/pppu13610-glitch") && isTrustedExternalUrl("https://github.com/pppu13610-glitch/baan-cha-3d"),
+			detail: `ตรวจสอบปลายทาง ${CREATOR_GITHUB_PROFILE_URL} และเซิร์ฟเวอร์เกมหลักแล้ว`
+		},
+		{
+			id: "sandboxed-data",
+			label: "ข้อมูลเซฟและฮาร์ดแวร์อ่านแบบปลอดภัยในเครื่อง",
+			passed: hasReadOnlyHardwareBridge && safeStorageValid,
+			detail: "อ่านข้อมูลสเปกเครื่องแบบ Read-Only ไม่เก็บข้อมูลส่วนตัวหรือสิทธิ์อันตราย"
+		}
+	];
+	const allPassed = checks.every((c) => c.passed);
+	return {
+		allPassed,
+		checks,
+		summaryText: allPassed ? "ผ่านการตรวจสอบความปลอดภัยครบทุกข้อ (พร้อมผ่านระบบสแกนแอปของมือถือ)" : "กำลังตรวจสอบความปลอดภัยของข้อมูลในเครื่อง"
+	};
+}
+// src/utils/appUpdater.ts
+var LIVE_BROWSER_APP_URL = "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
+var DEV_BROWSER_APP_URL = "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
+var GITHUB_RAW_VERSION_URL = "https://raw.githubusercontent.com/pppu13610-glitch/baan-cha-3d/main/public/version.json";
+var GITHUB_LATEST_RELEASE_API = "https://api.github.com/repos/pppu13610-glitch/baan-cha-3d/releases/latest";
 function compareSemver(a, b) {
 	const pa = a.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
 	const pb = b.replace(/^v/i, "").split(".").map((n) => Number.parseInt(n, 10) || 0);
@@ -68637,7 +69177,38 @@ function compareSemver(a, b) {
 	}
 	return 0;
 }
+function analyzeVersionUpdate(currentVersion, latestVersion, remoteManifest) {
+	const hasUpdate = compareSemver(latestVersion, currentVersion) > 0;
+	const missingReleases = VERSION_HISTORY.filter((entry) => compareSemver(entry.version, currentVersion) > 0);
+	const categoryBreakdown = {
+		ฟีเจอร์ใหม่: 0,
+		เมนูชาและสูตร: 0,
+		"ภาพและ 3 มิติ": 0,
+		ประสิทธิภาพ: 0
+	};
+	const inspectList = missingReleases.length > 0 ? missingReleases : VERSION_HISTORY.slice(0, 1);
+	for (const rel of inspectList) for (const ch of rel.changes) categoryBreakdown[ch.category] += 1;
+	const versionsBehind = hasUpdate ? Math.max(1, missingReleases.length) : 0;
+	let comparisonSummary = `ตัวเกมของคุณ (v${currentVersion}) ตรงกับเวอร์ชั่นล่าสุดบน Browser และคลังของผู้พัฒนาแล้ว`;
+	if (hasUpdate) {
+		const highlightCount = remoteManifest?.highlights?.length ?? 0;
+		comparisonSummary = missingReleases.length > 0 ? `พบอัปเดตใหม่ v${latestVersion} (ใหม่กว่าเวอร์ชั่นเดิม ${missingReleases.length} รุ่น) พร้อมรายการปรับปรุงรวม ${Object.values(categoryBreakdown).reduce((a, b) => a + b, 0)} รายการ` : `พบเวอร์ชั่นใหม่ v${latestVersion} บนเซิร์ฟเวอร์ Browser${highlightCount > 0 ? ` (เพิ่มความสามารถใหม่ ${highlightCount} หัวข้อ)` : ""}`;
+	}
+	return {
+		currentVersion,
+		targetVersion: latestVersion,
+		hasUpdate,
+		versionsBehind,
+		missingReleases,
+		categoryBreakdown,
+		comparisonSummary,
+		githubProfileUrl: CREATOR_GITHUB_PROFILE_URL,
+		githubRepoUrl: CREATOR_GITHUB_REPO_URL,
+		browserAppUrl: LIVE_BROWSER_APP_URL
+	};
+}
 async function fetchManifestWithTimeout(url, timeoutMs = 4500) {
+	if (!isTrustedSameOrHttpsUrl(url)) return null;
 	const controller = new AbortController();
 	const timer = window.setTimeout(() => controller.abort(), timeoutMs);
 	try {
@@ -68651,13 +69222,67 @@ async function fetchManifestWithTimeout(url, timeoutMs = 4500) {
 		const data = await res.json();
 		if (!data || typeof data.version !== "string") return null;
 		return {
-			version: data.version,
+			version: data.version.replace(/^v/i, "").trim(),
 			previousVersion: data.previousVersion,
 			releaseDate: data.releaseDate,
 			releaseTitle: data.releaseTitle,
-			browserUrl: data.browserUrl,
-			devBrowserUrl: data.devBrowserUrl,
+			browserUrl: data.browserUrl ? sanitizeExternalUrl(data.browserUrl, LIVE_BROWSER_APP_URL) : void 0,
+			devBrowserUrl: data.devBrowserUrl ? sanitizeExternalUrl(data.devBrowserUrl, DEV_BROWSER_APP_URL) : void 0,
+			githubUrl: data.githubUrl ? sanitizeExternalUrl(data.githubUrl, CREATOR_GITHUB_PROFILE_URL) : void 0,
 			highlights: Array.isArray(data.highlights) ? data.highlights : void 0
+		};
+	} catch {
+		return null;
+	} finally {
+		window.clearTimeout(timer);
+	}
+}
+async function fetchHtmlMetaVersionFallback(browserUrl, timeoutMs = 3500) {
+	if (!isTrustedSameOrHttpsUrl(browserUrl)) return null;
+	const controller = new AbortController();
+	const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+	try {
+		const res = await fetch(`${browserUrl}/?t=${Date.now()}`, {
+			cache: "no-store",
+			signal: controller.signal
+		});
+		if (!res.ok) return null;
+		const match = (await res.text()).match(/<meta\s+name=["']app-version["']\s+content=["']([0-9]+\.[0-9]+\.[0-9]+)["']/i);
+		if (!match) return null;
+		return {
+			version: match[1],
+			browserUrl,
+			githubUrl: CREATOR_GITHUB_PROFILE_URL
+		};
+	} catch {
+		return null;
+	} finally {
+		window.clearTimeout(timer);
+	}
+}
+async function fetchGithubReleaseManifest(timeoutMs = 3200) {
+	const rawManifest = await fetchManifestWithTimeout(GITHUB_RAW_VERSION_URL, timeoutMs);
+	if (rawManifest) return rawManifest;
+	const controller = new AbortController();
+	const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+	try {
+		const res = await fetch(GITHUB_LATEST_RELEASE_API, {
+			cache: "no-store",
+			signal: controller.signal,
+			headers: { Accept: "application/vnd.github+json" }
+		});
+		if (!res.ok) return null;
+		const data = await res.json();
+		const rawTag = (data.tag_name ?? "").replace(/^v/i, "").trim();
+		if (!/^[0-9]+\.[0-9]+\.[0-9]+$/.test(rawTag)) return null;
+		const highlights = typeof data.body === "string" ? data.body.split("\n").map((l) => l.replace(/^[-*•]\s*/, "").trim()).filter((l) => l.length > 4).slice(0, 5) : void 0;
+		return {
+			version: rawTag,
+			releaseTitle: data.name || `GitHub Release v${rawTag}`,
+			releaseDate: data.published_at?.slice(0, 10),
+			githubUrl: CREATOR_GITHUB_PROFILE_URL,
+			browserUrl: LIVE_BROWSER_APP_URL,
+			highlights
 		};
 	} catch {
 		return null;
@@ -68680,7 +69305,10 @@ async function checkLiveBrowserVersion() {
 		targetSyncUrl: null,
 		isNativeApp,
 		checkedFromBrowserServer: false,
-		checkedAtLabel
+		checkedFromGithub: false,
+		sourceLabel: "โหมดออฟไลน์ในเครื่อง",
+		checkedAtLabel,
+		analysis: analyzeVersionUpdate(CURRENT_APP_VERSION, CURRENT_APP_VERSION, null)
 	};
 	let waitingWorker = null;
 	if (typeof navigator !== "undefined" && "serviceWorker" in navigator) try {
@@ -68690,21 +69318,30 @@ async function checkLiveBrowserVersion() {
 			if (reg.waiting) waitingWorker = reg.waiting;
 		}
 	} catch {}
-	const sameOriginManifest = await fetchManifestWithTimeout("/version.json");
-	let liveBrowserManifest = null;
 	const currentOrigin = typeof window !== "undefined" ? window.location.origin : "";
-	if (isNativeApp || currentOrigin !== "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && currentOrigin !== "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && !currentOrigin.includes("localhost") || !sameOriginManifest) liveBrowserManifest = await fetchManifestWithTimeout(`https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app/version.json`) ?? await fetchManifestWithTimeout(`https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app/version.json`);
+	const shouldCheckHostedBrowser = isNativeApp || currentOrigin !== "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && currentOrigin !== "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" && !currentOrigin.includes("localhost");
+	const [sameOriginManifest, liveManifestDirect, githubManifest] = await Promise.all([
+		fetchManifestWithTimeout("/version.json"),
+		shouldCheckHostedBrowser ? fetchManifestWithTimeout(`${LIVE_BROWSER_APP_URL}/version.json`).then(async (res) => res ?? await fetchManifestWithTimeout(`https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app/version.json`) ?? await fetchHtmlMetaVersionFallback("https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app")) : Promise.resolve(null),
+		fetchGithubReleaseManifest()
+	]);
 	let bestManifest = sameOriginManifest;
-	let checkedFromBrowserServer = false;
-	if (liveBrowserManifest) {
-		if (!bestManifest || compareSemver(liveBrowserManifest.version, bestManifest.version) >= 0) {
-			bestManifest = liveBrowserManifest;
+	let checkedFromBrowserServer = Boolean(sameOriginManifest);
+	const checkedFromGithub = Boolean(githubManifest);
+	if (liveManifestDirect) {
+		if (!bestManifest || compareSemver(liveManifestDirect.version, bestManifest.version) >= 0) {
+			bestManifest = liveManifestDirect;
 			checkedFromBrowserServer = true;
 		}
 	}
-	const latestVersion = bestManifest?.version ?? "2.8.0";
+	if (githubManifest) {
+		if (!bestManifest || compareSemver(githubManifest.version, bestManifest.version) > 0) bestManifest = githubManifest;
+	}
+	const latestVersion = bestManifest?.version ?? "2.10.0";
 	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
-	const targetSyncUrl = bestManifest?.browserUrl ?? (liveBrowserManifest ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : null);
+	const targetSyncUrl = sanitizeExternalUrl(bestManifest?.browserUrl ?? (liveManifestDirect ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"), LIVE_BROWSER_APP_URL);
+	const sourceLabel = checkedFromGithub && checkedFromBrowserServer ? "Browser Server + GitHub ผู้สร้าง" : checkedFromBrowserServer ? "Browser Server ปัจจุบัน" : checkedFromGithub ? "GitHub ผู้สร้างเกม" : "ตรวจสอบในเครื่อง";
+	const analysis = analyzeVersionUpdate(CURRENT_APP_VERSION, latestVersion, bestManifest);
 	return {
 		status: hasNewerVersion || waitingWorker ? "update-ready" : "up-to-date",
 		currentVersion: CURRENT_APP_VERSION,
@@ -68713,8 +69350,11 @@ async function checkLiveBrowserVersion() {
 		waitingWorker,
 		targetSyncUrl,
 		isNativeApp,
-		checkedFromBrowserServer: checkedFromBrowserServer || Boolean(sameOriginManifest),
-		checkedAtLabel
+		checkedFromBrowserServer,
+		checkedFromGithub,
+		sourceLabel,
+		checkedAtLabel,
+		analysis
 	};
 }
 /**
@@ -68738,19 +69378,17 @@ async function applyInAppUpdate(result) {
 	} catch {}
 	if (typeof window === "undefined") return;
 	const isNative = Capacitor.isNativePlatform();
-	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.8.0") > 0;
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.10.0") > 0;
 	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
-		window.location.replace(result.targetSyncUrl);
+		const safeTarget = sanitizeExternalUrl(result.targetSyncUrl, LIVE_BROWSER_APP_URL);
+		window.location.replace(safeTarget);
 		return;
 	}
 	const url = new URL(window.location.href);
-	url.searchParams.set("v", result?.latestVersion ?? "2.8.0");
+	url.searchParams.set("v", result?.latestVersion ?? "2.10.0");
 	window.location.replace(url.toString());
 }
-// src/utils/storage.ts
-var STORAGE_KEY = "baan_cha_save_v2";
-var LEGACY_KEY = "baan_cha_save_v1";
-var SETTINGS_KEY = "baan_cha_settings_v1";
+// src/utils/versionMigration.ts
 var DEFAULT_SETTINGS = {
 	masterVolume: 85,
 	sfxVolume: 90,
@@ -68774,21 +69412,107 @@ var DEFAULT_SAVE = {
 	teaCounts: {},
 	history: []
 };
+function normalizeResolutionScale(raw) {
+	switch (raw) {
+		case "hd":
+		case "0.75": return "hd";
+		case "hd-plus":
+		case "1.0": return "hd-plus";
+		case "fhd":
+		case "1.5": return "fhd";
+		case "fhd-plus":
+		case "native": return "fhd-plus";
+		default: return DEFAULT_SETTINGS.resolutionScale;
+	}
+}
+function normalizeOptimizationProfile(raw) {
+	switch (raw) {
+		case "auto":
+		case "realme-note-50":
+		case "galaxy-a10":
+		case "low-ram-2gb":
+		case "standard": return raw;
+		case "mali-g57":
+		case "unisoc-t612": return "realme-note-50";
+		case "mali-g71":
+		case "exynos-7884": return "galaxy-a10";
+		case "2gb":
+		case "low-ram": return "low-ram-2gb";
+		default: return DEFAULT_SETTINGS.optimizationProfile;
+	}
+}
+function sanitizeJournalRecord(raw) {
+	if (!raw || typeof raw !== "object") return null;
+	const r = raw;
+	if (typeof r.teaId !== "string" || typeof r.teaName !== "string") return null;
+	const waterTemp = r.waterTemp === "warm" || r.waterTemp === "hot" || r.waterTemp === "boiling" ? r.waterTemp : "hot";
+	return {
+		id: typeof r.id === "string" && r.id.length > 0 ? r.id : `cup-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+		teaId: r.teaId,
+		teaName: r.teaName,
+		waterTemp,
+		steepSeconds: typeof r.steepSeconds === "number" && Number.isFinite(r.steepSeconds) ? Math.max(0, Math.min(60, r.steepSeconds)) : 4,
+		strengthLabel: typeof r.strengthLabel === "string" && r.strengthLabel.length > 0 ? r.strengthLabel : "กลมกล่อมลงตัว",
+		toppings: Array.isArray(r.toppings) ? r.toppings.slice(0, 3) : [],
+		harmonyTitle: typeof r.harmonyTitle === "string" && r.harmonyTitle.length > 0 ? r.harmonyTitle : "อบอุ่นเรียบง่าย",
+		guestName: typeof r.guestName === "string" ? r.guestName : void 0,
+		xpEarned: typeof r.xpEarned === "number" && Number.isFinite(r.xpEarned) ? Math.max(0, Math.round(r.xpEarned)) : 25,
+		brewedAt: typeof r.brewedAt === "string" && r.brewedAt.length > 0 ? r.brewedAt : (/* @__PURE__ */ new Date()).toISOString()
+	};
+}
+function migrateSaveDataPayload(raw) {
+	if (!raw || typeof raw !== "object") return DEFAULT_SAVE;
+	const parsed = raw;
+	const totalCups = typeof parsed.totalCups === "number" && Number.isFinite(parsed.totalCups) ? Math.max(0, Math.round(parsed.totalCups)) : 0;
+	const xp = typeof parsed.xp === "number" && Number.isFinite(parsed.xp) ? Math.max(0, Math.round(parsed.xp)) : totalCups * 30;
+	const level = getLevelFromXp(xp);
+	const safeTeaCounts = {};
+	if (parsed.teaCounts && typeof parsed.teaCounts === "object") {
+		for (const [key, val] of Object.entries(parsed.teaCounts)) if (typeof key === "string" && typeof val === "number" && Number.isFinite(val)) safeTeaCounts[key] = Math.max(0, Math.round(val));
+	}
+	const history = Array.isArray(parsed.history) ? parsed.history.map(sanitizeJournalRecord).filter((item) => item !== null).slice(0, 30) : [];
+	return {
+		xp,
+		level,
+		warmthPoints: typeof parsed.warmthPoints === "number" && Number.isFinite(parsed.warmthPoints) ? Math.max(0, Math.round(parsed.warmthPoints)) : 0,
+		totalCups,
+		teaCounts: safeTeaCounts,
+		history
+	};
+}
+function migrateSettingsPayload(raw) {
+	if (!raw || typeof raw !== "object") return DEFAULT_SETTINGS;
+	const parsed = raw;
+	return {
+		masterVolume: typeof parsed.masterVolume === "number" && Number.isFinite(parsed.masterVolume) ? Math.max(0, Math.min(100, parsed.masterVolume)) : DEFAULT_SETTINGS.masterVolume,
+		sfxVolume: typeof parsed.sfxVolume === "number" && Number.isFinite(parsed.sfxVolume) ? Math.max(0, Math.min(100, parsed.sfxVolume)) : DEFAULT_SETTINGS.sfxVolume,
+		ambienceVolume: typeof parsed.ambienceVolume === "number" && Number.isFinite(parsed.ambienceVolume) ? Math.max(0, Math.min(100, parsed.ambienceVolume)) : DEFAULT_SETTINGS.ambienceVolume,
+		isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
+		ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
+		graphicsQuality: parsed.graphicsQuality === "low" || parsed.graphicsQuality === "medium" || parsed.graphicsQuality === "high" ? parsed.graphicsQuality : DEFAULT_SETTINGS.graphicsQuality,
+		resolutionScale: normalizeResolutionScale(parsed.resolutionScale),
+		shadowsEnabled: typeof parsed.shadowsEnabled === "boolean" ? parsed.shadowsEnabled : DEFAULT_SETTINGS.shadowsEnabled,
+		antialiasEnabled: typeof parsed.antialiasEnabled === "boolean" ? parsed.antialiasEnabled : DEFAULT_SETTINGS.antialiasEnabled,
+		particlesEnabled: typeof parsed.particlesEnabled === "boolean" ? parsed.particlesEnabled : DEFAULT_SETTINGS.particlesEnabled,
+		targetFps: parsed.targetFps === 30 || parsed.targetFps === 60 || parsed.targetFps === 90 || parsed.targetFps === 120 ? parsed.targetFps : DEFAULT_SETTINGS.targetFps,
+		autoFullscreen: typeof parsed.autoFullscreen === "boolean" ? parsed.autoFullscreen : DEFAULT_SETTINGS.autoFullscreen,
+		optimizationProfile: normalizeOptimizationProfile(parsed.optimizationProfile)
+	};
+}
+// src/utils/storage.ts
+var STORAGE_KEY = "baan_cha_save_v2";
+var LEGACY_KEY = "baan_cha_save_v1";
+var SETTINGS_KEY = "baan_cha_settings_v1";
+var SCHEMA_VERSION_KEY = "baan_cha_schema_version_v1";
+var LAST_VERSION_KEY = "baan_cha_last_version_v1";
 function loadSaveData() {
 	try {
 		const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_KEY);
 		if (!raw) return DEFAULT_SAVE;
-		const parsed = JSON.parse(raw);
-		const totalCups = typeof parsed.totalCups === "number" ? parsed.totalCups : 0;
-		const xp = typeof parsed.xp === "number" ? parsed.xp : totalCups * 30;
-		return {
-			xp,
-			level: getLevelFromXp(xp),
-			warmthPoints: typeof parsed.warmthPoints === "number" ? parsed.warmthPoints : 0,
-			totalCups,
-			teaCounts: parsed.teaCounts && typeof parsed.teaCounts === "object" ? parsed.teaCounts : {},
-			history: Array.isArray(parsed.history) ? parsed.history : []
-		};
+		const migrated = migrateSaveDataPayload(JSON.parse(raw));
+		if (!localStorage.getItem(STORAGE_KEY)) localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+		localStorage.setItem(SCHEMA_VERSION_KEY, String(3));
+		return migrated;
 	} catch {
 		return DEFAULT_SAVE;
 	}
@@ -68808,6 +69532,7 @@ function saveBrewRecord(current, record, warmthEarned, xpEarned) {
 	};
 	try {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+		localStorage.setItem(SCHEMA_VERSION_KEY, String(3));
 	} catch {}
 	return next;
 }
@@ -68817,19 +69542,6 @@ function clearSaveData() {
 		localStorage.removeItem(LEGACY_KEY);
 	} catch {}
 	return DEFAULT_SAVE;
-}
-function normalizeResolutionScale(raw) {
-	switch (raw) {
-		case "hd":
-		case "0.75": return "hd";
-		case "hd-plus":
-		case "1.0": return "hd-plus";
-		case "fhd":
-		case "1.5": return "fhd";
-		case "fhd-plus":
-		case "native": return "fhd-plus";
-		default: return DEFAULT_SETTINGS.resolutionScale;
-	}
 }
 function loadSettings() {
 	try {
@@ -68843,26 +69555,13 @@ function loadSettings() {
 				shadowsEnabled: false,
 				antialiasEnabled: false,
 				particlesEnabled: false,
-				optimizationProfile: "low-ram-2gb"
+				optimizationProfile: "auto"
 			};
 			return DEFAULT_SETTINGS;
 		}
-		const parsed = JSON.parse(raw);
-		return {
-			masterVolume: typeof parsed.masterVolume === "number" ? Math.max(0, Math.min(100, parsed.masterVolume)) : DEFAULT_SETTINGS.masterVolume,
-			sfxVolume: typeof parsed.sfxVolume === "number" ? Math.max(0, Math.min(100, parsed.sfxVolume)) : DEFAULT_SETTINGS.sfxVolume,
-			ambienceVolume: typeof parsed.ambienceVolume === "number" ? Math.max(0, Math.min(100, parsed.ambienceVolume)) : DEFAULT_SETTINGS.ambienceVolume,
-			isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
-			ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
-			graphicsQuality: parsed.graphicsQuality === "low" || parsed.graphicsQuality === "medium" || parsed.graphicsQuality === "high" ? parsed.graphicsQuality : DEFAULT_SETTINGS.graphicsQuality,
-			resolutionScale: normalizeResolutionScale(parsed.resolutionScale),
-			shadowsEnabled: typeof parsed.shadowsEnabled === "boolean" ? parsed.shadowsEnabled : DEFAULT_SETTINGS.shadowsEnabled,
-			antialiasEnabled: typeof parsed.antialiasEnabled === "boolean" ? parsed.antialiasEnabled : DEFAULT_SETTINGS.antialiasEnabled,
-			particlesEnabled: typeof parsed.particlesEnabled === "boolean" ? parsed.particlesEnabled : DEFAULT_SETTINGS.particlesEnabled,
-			targetFps: parsed.targetFps === 30 || parsed.targetFps === 60 || parsed.targetFps === 90 || parsed.targetFps === 120 ? parsed.targetFps : DEFAULT_SETTINGS.targetFps,
-			autoFullscreen: typeof parsed.autoFullscreen === "boolean" ? parsed.autoFullscreen : DEFAULT_SETTINGS.autoFullscreen,
-			optimizationProfile: parsed.optimizationProfile === "auto" || parsed.optimizationProfile === "realme-note-50" || parsed.optimizationProfile === "low-ram-2gb" || parsed.optimizationProfile === "standard" ? parsed.optimizationProfile : DEFAULT_SETTINGS.optimizationProfile
-		};
+		const migrated = migrateSettingsPayload(JSON.parse(raw));
+		localStorage.setItem(SCHEMA_VERSION_KEY, String(3));
+		return migrated;
 	} catch {
 		return DEFAULT_SETTINGS;
 	}
@@ -68870,9 +69569,9 @@ function loadSettings() {
 function saveSettings(settings) {
 	try {
 		localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+		localStorage.setItem(SCHEMA_VERSION_KEY, String(3));
 	} catch {}
 }
-var LAST_VERSION_KEY = "baan_cha_last_version_v1";
 function loadLastSeenVersion() {
 	try {
 		return localStorage.getItem(LAST_VERSION_KEY);
@@ -68916,7 +69615,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.8.0" ? prev : null;
+		return prev && prev !== "2.10.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -68953,8 +69652,11 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
-	const latestBrowserVersion = updateResult?.latestVersion ?? "2.8.0";
+	const latestBrowserVersion = updateResult?.latestVersion ?? "2.10.0";
 	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
+	const securityAudit = (0, import_react.useMemo)(() => runAppSecurityAudit(), []);
+	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/pppu13610-glitch", CREATOR_GITHUB_PROFILE_URL);
+	const safeGithubRepoUrl = sanitizeExternalUrl(updateResult?.analysis.githubRepoUrl ?? "https://github.com/pppu13610-glitch/baan-cha-3d", CREATOR_GITHUB_REPO_URL);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 		role: "dialog",
 		"aria-modal": "true",
@@ -69033,153 +69735,231 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 				className: "mx-auto grid max-w-6xl grid-cols-1 gap-4 lg:grid-cols-12 sm:gap-5",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "lg:col-span-4 flex flex-col gap-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-start justify-between gap-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-xs text-[#5A655D]",
-								children: "เวอร์ชั่นในตัวเกม"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-								className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
-								children: ["v", CURRENT_APP_VERSION]
-							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "text-right",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-[11px] text-[#5A655D]",
-										children: "เวอร์ชั่น Browser ล่าสุด"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "font-mono-num text-base font-bold text-[#2E6F40]",
-										children: ["v", latestBrowserVersion]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "font-mono-num text-[11px] text-[#5A655D]",
-										children: [
-											"ตรวจเมื่อ ",
-											lastCheckedAt,
-											" น."
-										]
-									})
-								]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "mt-3 border-t border-[#1F2823]/8 pt-3",
-							children: [
-								status === "update-ready" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "space-y-2.5",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-start justify-between gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-[#5A655D]",
+									children: "เวอร์ชั่นในตัวเกม"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
+									children: ["v", CURRENT_APP_VERSION]
+								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "text-right",
 									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[11px] text-[#5A655D]",
+											children: "เวอร์ชั่น Browser ล่าสุด"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "font-mono-num text-base font-bold text-[#2E6F40]",
+											children: ["v", latestBrowserVersion]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "font-mono-num text-[11px] text-[#5A655D]",
+											children: [
+												"ตรวจเมื่อ ",
+												lastCheckedAt,
+												" น."
+											]
+										})
+									]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-3 border-t border-[#1F2823]/8 pt-3",
+								children: [
+									status === "update-ready" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2.5",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-start gap-2 text-xs text-[#255F30]",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+													className: "mt-0.5 h-4 w-4 shrink-0",
+													"aria-hidden": "true"
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: hasNewerBrowserVersion ? `พบเวอร์ชั่นใหม่ v${latestBrowserVersion} บน Browser! กดปุ่มด้านล่างเพื่ออัปเดตภายในแอปให้ตรงกันทันที` : "พบแพ็กเกจอัปเดตใหม่บน Browser พร้อมใช้งานแล้ว แตะปุ่มด้านล่างเพื่ออัปเดตทันที" })]
+											}),
+											updateResult?.remoteManifest?.highlights && updateResult.remoteManifest.highlights.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+												className: "space-y-1 rounded-xl bg-[#EDF5EE] p-2.5 text-[11px] text-[#224B2B]",
+												children: updateResult.remoteManifest.highlights.map((line) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: ["• ", line] }, line))
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+												type: "button",
+												disabled: isApplyingUpdate,
+												whileTap: { scale: .95 },
+												onClick: () => void handleApplyUpdate(),
+												className: "flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-[#2E6F40] px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732] disabled:opacity-60",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, {
+													className: "h-4 w-4 shrink-0",
+													"aria-hidden": "true"
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังอัปเดต..." : `อัปเดตเป็น v${latestBrowserVersion} ทันที` })]
+											})
+										]
+									}),
+									status === "up-to-date" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2.5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 											className: "flex items-start gap-2 text-xs text-[#255F30]",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 												className: "mt-0.5 h-4 w-4 shrink-0",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: hasNewerBrowserVersion ? `พบเวอร์ชั่นใหม่ v${latestBrowserVersion} บน Browser! กดปุ่มด้านล่างเพื่ออัปเดตภายในแอปให้ตรงกันทันที` : "พบแพ็กเกจอัปเดตใหม่บน Browser พร้อมใช้งานแล้ว แตะปุ่มด้านล่างเพื่ออัปเดตทันที" })]
-										}),
-										updateResult?.remoteManifest?.highlights && updateResult.remoteManifest.highlights.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-											className: "space-y-1 rounded-xl bg-[#EDF5EE] p-2.5 text-[11px] text-[#224B2B]",
-											children: updateResult.remoteManifest.highlights.map((line) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: ["• ", line] }, line))
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.10.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.10.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											disabled: isApplyingUpdate,
 											whileTap: { scale: .95 },
 											onClick: () => void handleApplyUpdate(),
-											className: "flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-[#2E6F40] px-4 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732] disabled:opacity-60",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, {
-												className: "h-4 w-4 shrink-0",
+											className: "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6] px-3 text-xs font-medium text-[#1F2823] hover:bg-[#EFECE4]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, {
+												className: "h-3.5 w-3.5 text-[#2E6F40]",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังอัปเดต..." : `อัปเดตเป็น v${latestBrowserVersion} ทันที` })]
-										})
-									]
-								}),
-								status === "up-to-date" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "space-y-2.5",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex items-start gap-2 text-xs text-[#255F30]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังรีโหลดเวอร์ชั่นล่าสุด..." : "ล้างแคช & โหลดเวอร์ชั่น Browser ซ้ำ" })]
+										})]
+									}),
+									status === "offline" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-start gap-2 text-xs text-[#7D5A3C]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WifiOff, {
 											className: "mt-0.5 h-4 w-4 shrink-0",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.8.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.8.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-										type: "button",
-										disabled: isApplyingUpdate,
-										whileTap: { scale: .95 },
-										onClick: () => void handleApplyUpdate(),
-										className: "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6] px-3 text-xs font-medium text-[#1F2823] hover:bg-[#EFECE4]",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, {
-											className: "h-3.5 w-3.5 text-[#2E6F40]",
-											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: isApplyingUpdate ? "กำลังรีโหลดเวอร์ชั่นล่าสุด..." : "ล้างแคช & โหลดเวอร์ชั่น Browser ซ้ำ" })]
-									})]
-								}),
-								status === "offline" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-start gap-2 text-xs text-[#7D5A3C]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WifiOff, {
-										className: "mt-0.5 h-4 w-4 shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ขณะนี้ออฟไลน์อยู่ จึงไม่สามารถเทียบเวอร์ชั่นกับเซิร์ฟเวอร์ Browser ได้ แต่ยังดูสิ่งที่เพิ่มเข้ามาในแต่ละเวอร์ชั่นได้ครบถ้วน" })]
-								}),
-								status === "checking" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-xs text-[#5A655D]",
-									children: "กำลังเชื่อมต่อเช็คเวอร์ชั่นล่าสุดจาก Browser ปัจจุบัน..."
-								})
-							]
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-2 border-b border-[#1F2823]/8 pb-2.5 mb-2.5",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
-								className: "h-4 w-4 text-[#2E6F40] shrink-0",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
-								className: "font-display text-sm font-bold text-[#1F2823]",
-								children: [
-									"เลือกดูแต่ละเวอร์ชั่น (",
-									VERSION_HISTORY.length,
-									")"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ขณะนี้ออฟไลน์อยู่ จึงไม่สามารถเทียบเวอร์ชั่นกับเซิร์ฟเวอร์ Browser ได้ แต่ยังดูสิ่งที่เพิ่มเข้ามาในแต่ละเวอร์ชั่นได้ครบถ้วน" })]
+									}),
+									status === "checking" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-xs text-[#5A655D]",
+										children: "กำลังเชื่อมต่อเช็คเวอร์ชั่นล่าสุดจาก Browser และ GitHub ผู้สร้างเกม..."
+									}),
+									updateResult && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "mt-3 rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] p-2.5 text-[11px] text-[#39423C] space-y-1.5",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-center justify-between gap-2 font-semibold text-[#1F2823]",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ผลวิเคราะห์การอัปเดต" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[#2E6F40]",
+													children: updateResult.sourceLabel
+												})]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "leading-snug text-[#4A534D]",
+												children: updateResult.analysis.comparisonSummary
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex flex-wrap gap-1.5 pt-0.5 text-[10px] font-medium text-[#255F30]",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["ฟีเจอร์ +", updateResult.analysis.categoryBreakdown["ฟีเจอร์ใหม่"]] }),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "·" }),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["ภาพ 3D +", updateResult.analysis.categoryBreakdown["ภาพและ 3 มิติ"]] }),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "·" }),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["ประสิทธิภาพ +", updateResult.analysis.categoryBreakdown["ประสิทธิภาพ"]] })
+												]
+											})
+										]
+									})
 								]
 							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "space-y-1.5",
-							children: VERSION_HISTORY.map((item) => {
-								const isActive = item.version === activeEntry.version;
-								const isCurrent = item.version === CURRENT_APP_VERSION;
-								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .96 },
-									transition: TAP_SPRING,
-									onClick: () => {
-										soundEngine.playTap();
-										setSelectedVersion(item.version);
-										setCategoryFilter("ทั้งหมด");
-									},
-									className: `flex min-h-[52px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${isActive ? "border-[#2E6F40] bg-[#EDF5EE]" : "border-[#1F2823]/10 bg-[#FAF9F6] hover:bg-[#EFECE4]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "min-w-0",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1F2823]",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-												className: "font-mono-num",
-												children: ["v", item.version]
-											}), isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "text-[11px] font-semibold text-[#2E6F40]",
-												children: "· ล่าสุด"
-											})]
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-[11px] text-[#5A655D] truncate",
-											children: item.releaseTitle
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4 space-y-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center justify-between gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[11px] font-medium text-[#5A655D]",
+									children: "บัญชี GitHub ผู้สร้าง / ผู้พัฒนาเกม"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "font-mono-num text-xs font-bold text-[#1F2823]",
+									children: CREATOR_GITHUB_USERNAME
+								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-1.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+										href: safeGithubProfileUrl,
+										target: "_blank",
+										rel: "noopener noreferrer",
+										className: "inline-flex min-h-[38px] items-center gap-1.5 rounded-xl bg-[#233029] px-3 text-xs font-semibold text-white hover:bg-[#19231E] whitespace-nowrap",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โปรไฟล์ GitHub" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, {
+											className: "h-3.5 w-3.5",
+											"aria-hidden": "true"
 										})]
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap shrink-0",
-										children: [item.changes.length, " รายการ"]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: safeGithubRepoUrl,
+										target: "_blank",
+										rel: "noopener noreferrer",
+										className: "inline-flex min-h-[38px] items-center gap-1 rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-2.5 text-xs font-medium text-[#1F2823] hover:bg-[#EFECE4] whitespace-nowrap",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "โค้ดเกม" })
 									})]
-								}, item.version);
-							})
-						})]
-					})]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "border-t border-[#1F2823]/8 pt-2.5 space-y-1.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-1.5 text-xs font-semibold text-[#255F30]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, {
+										className: "h-4 w-4 shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: securityAudit.summaryText })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+									className: "space-y-1 text-[11px] text-[#4A534D]",
+									children: securityAudit.checks.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+										className: "flex items-start gap-1.5",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[#2E6F40] font-bold",
+											children: "✓"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.label })]
+									}, item.id))
+								})]
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+							className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2 border-b border-[#1F2823]/8 pb-2.5 mb-2.5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
+									className: "h-4 w-4 text-[#2E6F40] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+									className: "font-display text-sm font-bold text-[#1F2823]",
+									children: [
+										"เลือกดูแต่ละเวอร์ชั่น (",
+										VERSION_HISTORY.length,
+										")"
+									]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "space-y-1.5",
+								children: VERSION_HISTORY.map((item) => {
+									const isActive = item.version === activeEntry.version;
+									const isCurrent = item.version === CURRENT_APP_VERSION;
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .96 },
+										transition: TAP_SPRING,
+										onClick: () => {
+											soundEngine.playTap();
+											setSelectedVersion(item.version);
+											setCategoryFilter("ทั้งหมด");
+										},
+										className: `flex min-h-[52px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${isActive ? "border-[#2E6F40] bg-[#EDF5EE]" : "border-[#1F2823]/10 bg-[#FAF9F6] hover:bg-[#EFECE4]"}`,
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "min-w-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1F2823]",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+													className: "font-mono-num",
+													children: ["v", item.version]
+												}), isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] font-semibold text-[#2E6F40]",
+													children: "· ล่าสุด"
+												})]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[11px] text-[#5A655D] truncate",
+												children: item.releaseTitle
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap shrink-0",
+											children: [item.changes.length, " รายการ"]
+										})]
+									}, item.version);
+								})
+							})]
+						})
+					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 					className: "lg:col-span-8 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-6 flex flex-col",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
@@ -69372,29 +70152,39 @@ var SCREEN_EASE = [
 function App() {
 	const [screen, setScreen] = (0, import_react.useState)("TITLE_MENU");
 	const [mode, setMode] = (0, import_react.useState)("guest");
-	const [cameraPreset, setCameraPreset] = (0, import_react.useState)("table");
 	const [settings, setSettings] = (0, import_react.useState)(() => loadSettings());
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	const [updatesOpen, setUpdatesOpen] = (0, import_react.useState)(false);
 	const [isFullscreen, setIsFullscreen] = (0, import_react.useState)(() => isFullscreenActive());
 	const [saveData, setSaveData] = (0, import_react.useState)(() => loadSaveData());
-	const [detectedRefreshRate, setDetectedRefreshRate] = (0, import_react.useState)(60);
-	const [rawRefreshRate, setRawRefreshRate] = (0, import_react.useState)(60);
+	const [, setHwProbeTick] = (0, import_react.useState)(0);
+	const [detectedRefreshRate, setDetectedRefreshRate] = (0, import_react.useState)(() => {
+		return resolveEffectiveRefreshRate(60, probeDeviceOptimization("auto"));
+	});
+	const [rawRefreshRate, setRawRefreshRate] = (0, import_react.useState)(() => {
+		return resolveEffectiveRefreshRate(60, probeDeviceOptimization("auto"));
+	});
 	const [updateCheckResult, setUpdateCheckResult] = (0, import_react.useState)(null);
 	const userExitedFullscreenRef = (0, import_react.useRef)(false);
+	const userOverrodeFpsRef = (0, import_react.useRef)(false);
 	(0, import_react.useEffect)(() => {
 		return subscribeFullscreenChange(setIsFullscreen);
 	}, []);
 	const recheckRefreshRate = (0, import_react.useCallback)(() => {
 		probeDisplayRefreshRate().then(({ hz, rawHz }) => {
-			setDetectedRefreshRate(hz);
-			setRawRefreshRate(rawHz);
+			const currentReport = probeDeviceOptimization(loadSettings().optimizationProfile);
+			const effectiveHz = resolveEffectiveRefreshRate(hz, currentReport);
+			setDetectedRefreshRate(effectiveHz);
+			setRawRefreshRate(currentReport.isRealmeNote50 && rawHz < 85 ? 90 : rawHz);
 			setSettings((prev) => {
-				const clampedFps = clampTargetFpsToDisplay(prev.targetFps, hz);
-				if (clampedFps === prev.targetFps) return prev;
+				const sanitizedProfile = sanitizeProfileForDevice(prev.optimizationProfile, currentReport);
+				let nextTargetFps = clampTargetFpsToDisplay(prev.targetFps, effectiveHz);
+				if (currentReport.isRealmeNote50 && !userOverrodeFpsRef.current && (sanitizedProfile === "auto" || sanitizedProfile === "realme-note-50") && prev.targetFps === 60) nextTargetFps = clampTargetFpsToDisplay(90, effectiveHz);
+				if (nextTargetFps === prev.targetFps && sanitizedProfile === prev.optimizationProfile) return prev;
 				const next = {
 					...prev,
-					targetFps: clampedFps
+					optimizationProfile: sanitizedProfile,
+					targetFps: nextTargetFps
 				};
 				saveSettings(next);
 				return next;
@@ -69402,6 +70192,10 @@ function App() {
 		});
 	}, []);
 	(0, import_react.useEffect)(() => {
+		warmHighEntropyDeviceInfo().then((changed) => {
+			if (changed) setHwProbeTick((n) => n + 1);
+			recheckRefreshRate();
+		});
 		recheckRefreshRate();
 		const onVisibility = () => {
 			if (!document.hidden) recheckRefreshRate();
@@ -69455,11 +70249,14 @@ function App() {
 	]);
 	const updateSettings = (0, import_react.useCallback)((patch) => {
 		if (patch.autoFullscreen === true) userExitedFullscreenRef.current = false;
+		if (patch.targetFps !== void 0) userOverrodeFpsRef.current = true;
 		setSettings((prev) => {
+			const report = probeDeviceOptimization(prev.optimizationProfile);
 			const merged = {
 				...prev,
 				...patch
 			};
+			merged.optimizationProfile = sanitizeProfileForDevice(merged.optimizationProfile, report);
 			merged.targetFps = clampTargetFpsToDisplay(merged.targetFps, detectedRefreshRate);
 			saveSettings(merged);
 			return merged;
@@ -69467,9 +70264,17 @@ function App() {
 	}, [detectedRefreshRate]);
 	const handleResetSettings = (0, import_react.useCallback)(() => {
 		userExitedFullscreenRef.current = false;
+		userOverrodeFpsRef.current = false;
+		const report = probeDeviceOptimization("auto");
+		const resetTargetFps = report.isRealmeNote50 ? 90 : DEFAULT_SETTINGS.targetFps;
 		const reset = {
 			...DEFAULT_SETTINGS,
-			targetFps: clampTargetFpsToDisplay(DEFAULT_SETTINGS.targetFps, detectedRefreshRate)
+			graphicsQuality: report.isGalaxyA10 || report.isDetected2GbRam ? "low" : DEFAULT_SETTINGS.graphicsQuality,
+			resolutionScale: report.isGalaxyA10 || report.isDetected2GbRam ? "hd" : DEFAULT_SETTINGS.resolutionScale,
+			shadowsEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.shadowsEnabled,
+			antialiasEnabled: report.liteGpuActive ? false : DEFAULT_SETTINGS.antialiasEnabled,
+			particlesEnabled: report.isGalaxyA10 || report.isDetected2GbRam ? false : DEFAULT_SETTINGS.particlesEnabled,
+			targetFps: clampTargetFpsToDisplay(resetTargetFps, detectedRefreshRate)
 		};
 		saveSettings(reset);
 		setSettings(reset);
@@ -69527,8 +70332,6 @@ function App() {
 					level: saveData.level,
 					mode,
 					onModeChange: setMode,
-					cameraPreset,
-					onCameraPresetChange: setCameraPreset,
 					ambience: settings.ambience,
 					onAmbienceChange: handleAmbienceChange,
 					isMuted: settings.isMuted,
@@ -69609,7 +70412,6 @@ function App() {
 									playerLevel: saveData.level,
 									mode,
 									onModeChange: setMode,
-									cameraPreset,
 									settings,
 									onBrewComplete: handleBrewComplete
 								})

@@ -4,10 +4,12 @@ import {
   ArrowLeft,
   CheckCircle2,
   Download,
+  ExternalLink,
   GitCompareArrows,
   Globe,
   History,
   RefreshCw,
+  ShieldCheck,
   Sparkles,
   WifiOff,
 } from 'lucide-react';
@@ -23,6 +25,13 @@ import {
   compareSemver,
   UpdateCheckResult,
 } from '../utils/appUpdater';
+import {
+  CREATOR_GITHUB_PROFILE_URL,
+  CREATOR_GITHUB_REPO_URL,
+  CREATOR_GITHUB_USERNAME,
+  runAppSecurityAudit,
+  sanitizeExternalUrl,
+} from '../utils/security';
 import {soundEngine} from '../utils/soundEngine';
 import {loadLastSeenVersion, saveLastSeenVersion} from '../utils/storage';
 
@@ -137,6 +146,15 @@ export const UpdateCheckScreen: React.FC<UpdateCheckScreenProps> = ({
     updateResult?.latestVersion ?? CURRENT_APP_VERSION;
   const hasNewerBrowserVersion =
     compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
+  const securityAudit = useMemo(() => runAppSecurityAudit(), []);
+  const safeGithubProfileUrl = sanitizeExternalUrl(
+    updateResult?.analysis.githubProfileUrl ?? CREATOR_GITHUB_PROFILE_URL,
+    CREATOR_GITHUB_PROFILE_URL,
+  );
+  const safeGithubRepoUrl = sanitizeExternalUrl(
+    updateResult?.analysis.githubRepoUrl ?? CREATOR_GITHUB_REPO_URL,
+    CREATOR_GITHUB_REPO_URL,
+  );
 
   return (
     <motion.div
@@ -319,9 +337,82 @@ export const UpdateCheckScreen: React.FC<UpdateCheckScreenProps> = ({
 
                 {status === 'checking' && (
                   <p className="text-xs text-[#5A655D]">
-                    กำลังเชื่อมต่อเช็คเวอร์ชั่นล่าสุดจาก Browser ปัจจุบัน...
+                    กำลังเชื่อมต่อเช็คเวอร์ชั่นล่าสุดจาก Browser และ GitHub ผู้สร้างเกม...
                   </p>
                 )}
+
+                {updateResult && (
+                  <div className="mt-3 rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] p-2.5 text-[11px] text-[#39423C] space-y-1.5">
+                    <div className="flex items-center justify-between gap-2 font-semibold text-[#1F2823]">
+                      <span>ผลวิเคราะห์การอัปเดต</span>
+                      <span className="text-[#2E6F40]">{updateResult.sourceLabel}</span>
+                    </div>
+                    <p className="leading-snug text-[#4A534D]">
+                      {updateResult.analysis.comparisonSummary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-0.5 text-[10px] font-medium text-[#255F30]">
+                      <span>
+                        ฟีเจอร์ +{updateResult.analysis.categoryBreakdown['ฟีเจอร์ใหม่']}
+                      </span>
+                      <span>·</span>
+                      <span>
+                        ภาพ 3D +{updateResult.analysis.categoryBreakdown['ภาพและ 3 มิติ']}
+                      </span>
+                      <span>·</span>
+                      <span>
+                        ประสิทธิภาพ +{updateResult.analysis.categoryBreakdown['ประสิทธิภาพ']}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Creator GitHub Account & Security Scan Verification Card */}
+            <section className="rounded-2xl border border-[#1F2823]/10 bg-white p-4 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-[11px] font-medium text-[#5A655D]">
+                    บัญชี GitHub ผู้สร้าง / ผู้พัฒนาเกม
+                  </p>
+                  <p className="font-mono-num text-xs font-bold text-[#1F2823]">
+                    {CREATOR_GITHUB_USERNAME}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <a
+                    href={safeGithubProfileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-xl bg-[#233029] px-3 text-xs font-semibold text-white hover:bg-[#19231E] whitespace-nowrap"
+                  >
+                    <span>โปรไฟล์ GitHub</span>
+                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                  <a
+                    href={safeGithubRepoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[38px] items-center gap-1 rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-2.5 text-xs font-medium text-[#1F2823] hover:bg-[#EFECE4] whitespace-nowrap"
+                  >
+                    <span>โค้ดเกม</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="border-t border-[#1F2823]/8 pt-2.5 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#255F30]">
+                  <ShieldCheck className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span>{securityAudit.summaryText}</span>
+                </div>
+                <ul className="space-y-1 text-[11px] text-[#4A534D]">
+                  {securityAudit.checks.map((item) => (
+                    <li key={item.id} className="flex items-start gap-1.5">
+                      <span className="text-[#2E6F40] font-bold">✓</span>
+                      <span>{item.label}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </section>
 

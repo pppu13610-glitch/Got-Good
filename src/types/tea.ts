@@ -42,14 +42,25 @@ export type GameMode = 'guest' | 'free';
 
 export type ScreenView = 'TITLE_MENU' | 'BREWING' | 'JOURNAL' | 'HOW_TO_PLAY';
 
-export type CameraPreset = 'table' | 'cup' | 'overhead';
+export type CameraPerspective = 'third-person' | 'first-person';
 
 export type BrewStep =
+  | 'EXPLORE_SHOP'
   | 'SELECT_TEA'
   | 'POUR_WATER'
   | 'STEEP_TEA'
   | 'ADD_TOPPING'
   | 'SERVED';
+
+export type CustomerPhase =
+  | 'ENTERING'
+  | 'SEATED_ORDERING'
+  | 'SERVED_ENJOYING';
+
+export interface PlayerMoveInput {
+  x: number;
+  y: number;
+}
 
 export interface TeaFlavorProfile {
   aroma: number; // 1..5
@@ -162,6 +173,7 @@ export type ResolutionScale = 'hd' | 'hd-plus' | 'fhd' | 'fhd-plus';
 export type OptimizationProfile =
   | 'auto'
   | 'realme-note-50'
+  | 'galaxy-a10'
   | 'low-ram-2gb'
   | 'standard';
 

@@ -89,29 +89,58 @@ export function createTeaTableEnvironment(
   ultraCompact = false,
 ): THREE.Group {
   const envGroup = new THREE.Group();
+  const SHOP_FLOOR_Y = -0.78;
 
-  // 1. Wide Cedar Tea Countertop (y = -0.22 to 0)
-  const tableGeo = new THREE.BoxGeometry(10.5, 0.22, 6.2);
+  // 1. Cedar Tea Countertop (y = -0.22 to 0, sized with walkable aisles all around)
+  const tableGeo = new THREE.BoxGeometry(6.4, 0.22, 2.45);
   const tableMat = new THREE.MeshStandardMaterial({
     map: woodTex,
     roughness: 0.62,
     metalness: 0.02,
   });
   const table = new THREE.Mesh(tableGeo, tableMat);
-  table.position.set(0, -0.11, 0);
+  table.position.set(0, -0.11, 0.05);
   table.receiveShadow = true;
   envGroup.add(table);
 
   // Subtle front edge bevel moulding
-  const trimGeo = new THREE.BoxGeometry(10.54, 0.06, 0.08);
   const trimMat = new THREE.MeshStandardMaterial({
     color: 0x5c422c,
     roughness: 0.45,
     metalness: 0.05,
   });
-  const frontTrim = new THREE.Mesh(trimGeo, trimMat);
-  frontTrim.position.set(0, -0.02, 3.1);
+  const frontTrim = new THREE.Mesh(
+    new THREE.BoxGeometry(6.44, 0.06, 0.08),
+    trimMat,
+  );
+  frontTrim.position.set(0, -0.02, 1.28);
   envGroup.add(frontTrim);
+
+  // Counter Cabinet Apron & Support Pillars down to Shop Floor (y = -0.78..-0.22)
+  const walnutMat = new THREE.MeshStandardMaterial({
+    map: walnutTex,
+    roughness: 0.68,
+    metalness: 0.02,
+  });
+  const counterBase = new THREE.Mesh(
+    new THREE.BoxGeometry(5.95, 0.56, 2.05),
+    walnutMat,
+  );
+  counterBase.position.set(0, -0.50, 0.05);
+  counterBase.receiveShadow = true;
+  envGroup.add(counterBase);
+
+  // Vertical slatted paneling across both customer & tea-master sides
+  const slatGeo = new THREE.BoxGeometry(0.12, 0.50, 0.04);
+  const slatCount = ultraCompact ? 6 : 9;
+  for (let i = 0; i < slatCount; i++) {
+    const t = i / (slatCount - 1) - 0.5;
+    const slatBack = new THREE.Mesh(slatGeo, trimMat);
+    slatBack.position.set(t * 5.2, -0.50, -0.98);
+    const slatFront = new THREE.Mesh(slatGeo, trimMat);
+    slatFront.position.set(t * 5.2, -0.50, 1.08);
+    envGroup.add(slatBack, slatFront);
+  }
 
   // 2. Woven Bamboo Tea Tray (multi-part group grounded at y = 0)
   const trayGroup = new THREE.Group();
@@ -139,7 +168,7 @@ export function createTeaTableEnvironment(
     railMat,
   );
   backRail.position.set(0, railH / 2, -1.18);
-  backRail.castShadow = true;
+  backRail.castShadow = !compactMode;
   backRail.receiveShadow = true;
 
   const frontRail = backRail.clone();
@@ -150,7 +179,7 @@ export function createTeaTableEnvironment(
     railMat,
   );
   leftRail.position.set(-1.93, railH / 2, 0);
-  leftRail.castShadow = true;
+  leftRail.castShadow = !compactMode;
   leftRail.receiveShadow = true;
 
   const rightRail = leftRail.clone();
@@ -178,7 +207,7 @@ export function createTeaTableEnvironment(
   }
   envGroup.add(trayGroup);
 
-  // 3. Decorative Tea Canisters (shared geometry buffers across canisters)
+  // 3. Decorative Tea Canisters (positioned neatly on counter beside tray)
   const canisterColors = [0x3c5844, 0x8b5a3c];
   const canisterSeg = ultraCompact ? 14 : compactMode ? 18 : 28;
   const bodyPts = [
@@ -208,7 +237,7 @@ export function createTeaTableEnvironment(
 
   canisterColors.forEach((col, idx) => {
     const canister = new THREE.Group();
-    const xPos = -2.65 - idx * 0.65;
+    const xPos = -2.38 - idx * 0.48;
     const zPos = -0.35 + idx * 0.55;
 
     canister.add(makeContactShadow(0.65, shadowTex, 0.5));
@@ -222,13 +251,13 @@ export function createTeaTableEnvironment(
         metalness: 0.06,
       }),
     );
-    body.castShadow = true;
+    body.castShadow = !compactMode;
     body.receiveShadow = true;
     canister.add(body);
 
     const lid = new THREE.Mesh(canisterLidGeo, canisterLidMat);
     lid.position.y = 0.52;
-    lid.castShadow = true;
+    lid.castShadow = !compactMode;
     canister.add(lid);
 
     const knob = new THREE.Mesh(canisterKnobGeo, brassMat);
@@ -239,8 +268,221 @@ export function createTeaTableEnvironment(
     envGroup.add(canister);
   });
 
-  // 4. Courtyard Bamboo Garden Backdrop (InstancedMesh with frustumCulled=false so stalks never vanish when rotating)
-  const bambooCount = ultraCompact ? 12 : compactMode ? 18 : 26;
+  // 4. Small Wooden Tea Shop Architecture (Walkable floor, Plaster & Timber walls, Lattice Window, Open Entry Door)
+  const shopGroup = new THREE.Group();
+  const plasterMat = new THREE.MeshStandardMaterial({
+    color: 0xe9e1d2,
+    roughness: 0.9,
+    metalness: 0,
+  });
+  const timberMat = new THREE.MeshStandardMaterial({
+    map: walnutTex,
+    roughness: 0.65,
+    metalness: 0.02,
+  });
+  const floorMat = new THREE.MeshStandardMaterial({
+    map: woodTex,
+    color: 0xc29e76,
+    roughness: 0.72,
+    metalness: 0.02,
+  });
+
+  // Expanded Walkable Shop Plank Floor (x: -5.45..5.45, z: -3.25..4.95)
+  const shopFloor = new THREE.Mesh(
+    new THREE.BoxGeometry(10.9, 0.08, 8.2),
+    floorMat,
+  );
+  shopFloor.position.set(0, SHOP_FLOOR_Y - 0.04, 0.85);
+  shopFloor.receiveShadow = true;
+  shopGroup.add(shopFloor);
+
+  // Outdoor stone stepping patio outside the right-side Noren doorway
+  const entryStone = new THREE.Mesh(
+    new THREE.BoxGeometry(2.8, 0.07, 2.2),
+    new THREE.MeshStandardMaterial({color: 0xb9c1b6, roughness: 0.88}),
+  );
+  entryStone.position.set(6.75, SHOP_FLOOR_Y - 0.045, -1.82);
+  shopGroup.add(entryStone);
+
+  // Back Wall (z = -3.15) with Wide Central Lattice Window Opening (-1.85..1.85, y = 0.45..2.52)
+  const backWainscot = new THREE.Mesh(
+    new THREE.BoxGeometry(10.9, 1.24, 0.16),
+    timberMat,
+  );
+  backWainscot.position.set(0, SHOP_FLOOR_Y + 0.62, -3.15);
+  shopGroup.add(backWainscot);
+
+  const backWallLeft = new THREE.Mesh(
+    new THREE.BoxGeometry(3.6, 2.85, 0.16),
+    plasterMat,
+  );
+  backWallLeft.position.set(-3.65, 1.88, -3.15);
+  const backWallRight = backWallLeft.clone();
+  backWallRight.position.x = 3.65;
+  shopGroup.add(backWallLeft, backWallRight);
+
+  const backHeader = new THREE.Mesh(
+    new THREE.BoxGeometry(3.75, 0.85, 0.16),
+    plasterMat,
+  );
+  backHeader.position.set(0, 2.90, -3.15);
+  shopGroup.add(backHeader);
+
+  // Window Sill & Timber Frame
+  const windowSill = new THREE.Mesh(
+    new THREE.BoxGeometry(3.85, 0.08, 0.28),
+    timberMat,
+  );
+  windowSill.position.set(0, 0.46, -3.12);
+  const windowTopBeam = new THREE.Mesh(
+    new THREE.BoxGeometry(10.9, 0.14, 0.22),
+    timberMat,
+  );
+  windowTopBeam.position.set(0, 2.52, -3.14);
+  shopGroup.add(windowSill, windowTopBeam);
+
+  // Slender Lattice Window Mullions framing bamboo outside
+  const vMullionGeo = new THREE.BoxGeometry(0.055, 2.02, 0.055);
+  for (const mx of [-1.85, -0.92, 0, 0.92, 1.85]) {
+    const mullion = new THREE.Mesh(vMullionGeo, timberMat);
+    mullion.position.set(mx, 1.49, -3.14);
+    shopGroup.add(mullion);
+  }
+  const hMullionGeo = new THREE.BoxGeometry(3.72, 0.045, 0.045);
+  const hBar = new THREE.Mesh(hMullionGeo, timberMat);
+  hBar.position.set(0, 1.98, -3.14);
+  shopGroup.add(hBar);
+
+  // Left Wall (x = -5.35)
+  const leftWall = new THREE.Mesh(
+    new THREE.BoxGeometry(0.16, 4.15, 8.2),
+    plasterMat,
+  );
+  leftWall.position.set(-5.35, 1.28, 0.85);
+  shopGroup.add(leftWall);
+
+  // Right Wall (x = 5.35) split cleanly for Open Customer Entrance Doorway (z: -2.48..-1.12)
+  const rightWallBack = new THREE.Mesh(
+    new THREE.BoxGeometry(0.16, 4.15, 0.78),
+    plasterMat,
+  );
+  rightWallBack.position.set(5.35, 1.28, -2.86);
+  const rightWallFront = new THREE.Mesh(
+    new THREE.BoxGeometry(0.16, 4.15, 6.1),
+    plasterMat,
+  );
+  rightWallFront.position.set(5.35, 1.28, 1.92);
+  const rightDoorHeader = new THREE.Mesh(
+    new THREE.BoxGeometry(0.16, 1.25, 1.45),
+    plasterMat,
+  );
+  rightDoorHeader.position.set(5.35, 2.72, -1.80);
+  shopGroup.add(rightWallBack, rightWallFront, rightDoorHeader);
+
+  // Wooden Doorway Frame around Entrance
+  const doorPostGeo = new THREE.BoxGeometry(0.22, 2.86, 0.12);
+  const doorPostBack = new THREE.Mesh(doorPostGeo, timberMat);
+  doorPostBack.position.set(5.35, 0.65, -2.46);
+  const doorPostFront = new THREE.Mesh(doorPostGeo, timberMat);
+  doorPostFront.position.set(5.35, 0.65, -1.14);
+  const doorLintel = new THREE.Mesh(
+    new THREE.BoxGeometry(0.26, 0.14, 1.52),
+    timberMat,
+  );
+  doorLintel.position.set(5.35, 2.12, -1.80);
+  shopGroup.add(doorPostBack, doorPostFront, doorLintel);
+
+  // Corner Timber Columns
+  const pillarGeo = new THREE.BoxGeometry(0.22, 4.15, 0.22);
+  const pillarPositions: [number, number][] = [
+    [-5.25, -3.05],
+    [5.25, -3.05],
+    [-5.25, 0.85],
+    [5.25, 0.85],
+  ];
+  for (const [px, pz] of pillarPositions) {
+    const pillar = new THREE.Mesh(pillarGeo, timberMat);
+    pillar.position.set(px, 1.28, pz);
+    shopGroup.add(pillar);
+  }
+
+  // Wall Tea Shelf on Back-Left Wall + 3 Ceramic Tea Jars
+  const shelfBoard = new THREE.Mesh(
+    new THREE.BoxGeometry(1.75, 0.06, 0.34),
+    timberMat,
+  );
+  shelfBoard.position.set(-3.45, 1.38, -2.92);
+  shopGroup.add(shelfBoard);
+
+  const jarMat = new THREE.MeshStandardMaterial({
+    color: 0x526b54,
+    map: ceramicTex,
+    roughness: 0.38,
+  });
+  const jarGeo = new THREE.CylinderGeometry(
+    0.10,
+    0.11,
+    0.26,
+    compactMode ? 10 : 16,
+  );
+  for (let j = 0; j < 3; j++) {
+    const jar = new THREE.Mesh(jarGeo, jarMat);
+    jar.position.set(-3.95 + j * 0.45, 1.54, -2.92);
+    shopGroup.add(jar);
+  }
+
+  // Warm Hanging Paper Lantern above guest corner
+  const lanternGroup = new THREE.Group();
+  lanternGroup.position.set(-2.65, 2.25, -2.25);
+  const lanternCord = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.012, 0.012, 0.9, 6),
+    timberMat,
+  );
+  lanternCord.position.y = 0.58;
+  const lanternShade = new THREE.Mesh(
+    new THREE.SphereGeometry(0.24, compactMode ? 12 : 18, compactMode ? 10 : 14),
+    new THREE.MeshStandardMaterial({
+      color: 0xfbf0d4,
+      emissive: 0xf4b85e,
+      emissiveIntensity: 0.72,
+      roughness: 0.85,
+    }),
+  );
+  lanternShade.scale.set(1, 1.18, 1);
+  const lanternCapGeo = new THREE.CylinderGeometry(0.11, 0.11, 0.04, 12);
+  const topCap = new THREE.Mesh(lanternCapGeo, timberMat);
+  topCap.position.y = 0.27;
+  const botCap = new THREE.Mesh(lanternCapGeo, timberMat);
+  botCap.position.y = -0.27;
+  lanternGroup.add(lanternCord, lanternShade, topCap, botCap);
+  shopGroup.add(lanternGroup);
+
+  // Matcha Noren Curtains hung high at the Right Doorway Entrance so guests walk cleanly underneath
+  const norenMat = new THREE.MeshStandardMaterial({
+    color: 0x3b5942,
+    roughness: 0.86,
+  });
+  const norenBar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.025, 0.025, 1.36, 8),
+    timberMat,
+  );
+  norenBar.rotation.x = Math.PI / 2;
+  norenBar.position.set(5.26, 2.02, -1.80);
+  shopGroup.add(norenBar);
+  const norenPanelGeo = new THREE.BoxGeometry(0.03, 0.56, 0.40);
+  for (let p = 0; p < 3; p++) {
+    const panel = new THREE.Mesh(norenPanelGeo, norenMat);
+    panel.position.set(5.26, 1.72, -2.22 + p * 0.42);
+    shopGroup.add(panel);
+  }
+
+  shopGroup.traverse((obj) => {
+    obj.frustumCulled = false;
+  });
+  envGroup.add(shopGroup);
+
+  // 5. Courtyard Bamboo Garden Backdrop seen through the Lattice Window
+  const bambooCount = ultraCompact ? 10 : compactMode ? 14 : 22;
   const stalkGeo = new THREE.CylinderGeometry(
     0.065,
     0.08,
@@ -261,17 +503,16 @@ export function createTeaTableEnvironment(
   const tint = new THREE.Color();
 
   for (let i = 0; i < bambooCount; i++) {
-    const angle = -Math.PI * 0.88 + (i / (bambooCount - 1)) * Math.PI * 0.76;
-    const dist = 4.2 + (i % 3) * 1.1;
+    const t = i / (bambooCount - 1) - 0.5;
     dummy.position.set(
-      Math.cos(angle) * dist * 1.15,
-      1.6,
-      -2.2 - Math.abs(Math.sin(angle)) * dist * 0.65,
+      t * 7.8 + ((i % 3) - 1) * 0.22,
+      1.45,
+      -4.1 - (i % 4) * 0.85,
     );
     dummy.rotation.set(
-      ((i % 5) - 2) * 0.025,
+      ((i % 5) - 2) * 0.022,
       i * 0.4,
-      ((i % 7) - 3) * 0.02,
+      ((i % 7) - 3) * 0.018,
     );
     const s = 0.85 + (i % 4) * 0.12;
     dummy.scale.set(s, 1 + (i % 3) * 0.15, s);
@@ -289,9 +530,9 @@ export function createTeaTableEnvironment(
   bambooInstanced.frustumCulled = false;
   envGroup.add(bambooInstanced);
 
-  // Soft courtyard stone deck beyond counter
+  // Soft courtyard stone ground outside the window
   const deck = new THREE.Mesh(
-    new THREE.PlaneGeometry(36, 28),
+    new THREE.PlaneGeometry(30, 18),
     new THREE.MeshStandardMaterial({
       color: 0xc2cbc0,
       roughness: 0.92,
@@ -299,7 +540,7 @@ export function createTeaTableEnvironment(
     }),
   );
   deck.rotation.x = -Math.PI / 2;
-  deck.position.set(0, -0.75, -5);
+  deck.position.set(0, -0.82, -10.5);
   envGroup.add(deck);
 
   return envGroup;

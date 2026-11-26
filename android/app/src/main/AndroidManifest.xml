@@ -2,12 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:appCategory="game"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
+        android:isGame="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false">
+
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="true" />
+        <meta-data
+            android:name="com.android.graphics.game"
+            android:value="true" />
+        <meta-data
+            android:name="com.samsung.android.game.is_game"
+            android:value="true" />
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
@@ -15,6 +29,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask"
+            android:hardwareAccelerated="true"
             android:screenOrientation="sensorLandscape"
             android:exported="true">
 
@@ -36,7 +51,6 @@
         </provider>
     </application>
 
-    <!-- Permissions -->
-
+    <!-- Permissions: minimal network access only for live version sync -->
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

@@ -45,6 +45,33 @@ export function clampTargetFpsToDisplay(
 }
 
 /**
+ * Resolves the effective display refresh rate for the current hardware.
+ * On realme Note 50 (hardware 90Hz LCD panel), enforces 90 Hz immediately so
+ * the exact 3 FPS options (30 / 60 / 90 FPS) are always selectable even if
+ * browser battery-saver caps rAF momentarily.
+ */
+export function resolveEffectiveRefreshRate(
+  measuredHz: DisplayRefreshRate,
+  hardwareHint: {
+    isRealmeNote50: boolean;
+    nativeDisplayHz?: number | null;
+  },
+): DisplayRefreshRate {
+  const nativeTier =
+    hardwareHint.nativeDisplayHz && hardwareHint.nativeDisplayHz > 0
+      ? bucketRefreshRate(hardwareHint.nativeDisplayHz)
+      : 60;
+
+  let resolved: DisplayRefreshRate =
+    nativeTier > measuredHz ? nativeTier : measuredHz;
+
+  if (hardwareHint.isRealmeNote50 && resolved < 90) {
+    resolved = 90;
+  }
+  return resolved;
+}
+
+/**
  * Measures the actual hardware vsync refresh rate using median requestAnimationFrame intervals.
  * Resolves with { hz, rawHz } and falls back cleanly to 60 Hz if interrupted or hidden.
  */

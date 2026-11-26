@@ -1,19 +1,32 @@
 package com.baancha.cozyteahouse;
 
+import android.app.ActivityManager;
+import android.app.GameManager;
+import android.app.GameState;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import com.getcapacitor.BridgeActivity;
+import org.json.JSONObject;
 
 public class MainActivity extends BridgeActivity {
+    private int detectedDisplayHz = 60;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         enableHighRefreshRate();
+        engageAndroidGameMode();
+        hardenWebViewAndAttachHardwareBridge();
         hideSystemBars();
     }
 
@@ -22,7 +35,37 @@ public class MainActivity extends BridgeActivity {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
             enableHighRefreshRate();
+            engageAndroidGameMode();
             hideSystemBars();
+        }
+    }
+
+    private void engageAndroidGameMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            try {
+                GameManager gm = getSystemService(GameManager.class);
+                if (gm != null) {
+                    gm.setGameState(new GameState(false, GameState.MODE_GAMEPLAY_INTERRUPTIBLE));
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+    }
+
+    private void hardenWebViewAndAttachHardwareBridge() {
+        try {
+            if (getBridge() == null || getBridge().getWebView() == null) return;
+            WebView webView = getBridge().getWebView();
+            WebSettings settings = webView.getSettings();
+            settings.setAllowFileAccessFromFileURLs(false);
+            settings.setAllowUniversalAccessFromFileURLs(false);
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+            settings.setGeolocationEnabled(false);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                settings.setSafeBrowsingEnabled(true);
+            }
+            webView.addJavascriptInterface(new HardwareBridge(), "BaanChaHardwareBridge");
+        } catch (Throwable ignored) {
         }
     }
 
@@ -44,6 +87,7 @@ public class MainActivity extends BridgeActivity {
                     bestMode = m;
                 }
             }
+            detectedDisplayHz = Math.round(bestMode.getRefreshRate());
             if (bestMode.getModeId() != current.getModeId()) {
                 WindowManager.LayoutParams lp = getWindow().getAttributes();
                 lp.preferredDisplayModeId = bestMode.getModeId();
@@ -76,6 +120,39 @@ public class MainActivity extends BridgeActivity {
             controller.hide(
                 WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.navigationBars()
             );
+        }
+    }
+
+    private class HardwareBridge {
+        @JavascriptInterface
+        public String getHardwareSnapshotJson() {
+            try {
+                JSONObject json = new JSONObject();
+                json.put("manufacturer", Build.MANUFACTURER != null ? Build.MANUFACTURER : "");
+                json.put("model", Build.MODEL != null ? Build.MODEL : "");
+                json.put("device", Build.DEVICE != null ? Build.DEVICE : "");
+                json.put("board", Build.BOARD != null ? Build.BOARD : "");
+                json.put("hardware", Build.HARDWARE != null ? Build.HARDWARE : "");
+                json.put("androidRelease", Build.VERSION.RELEASE != null ? Build.VERSION.RELEASE : "");
+                json.put("sdkInt", Build.VERSION.SDK_INT);
+                json.put("displayId", Build.DISPLAY != null ? Build.DISPLAY : "");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    json.put("socModel", Build.SOC_MODEL != null ? Build.SOC_MODEL : "");
+                } else {
+                    json.put("socModel", "");
+                }
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                if (am != null) {
+                    ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+                    am.getMemoryInfo(mi);
+                    json.put("totalRamMb", Math.round(mi.totalMem / (1024.0 * 1024.0)));
+                }
+                json.put("displayHz", detectedDisplayHz);
+                json.put("gameModeSupported", Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU);
+                return json.toString();
+            } catch (Throwable ignored) {
+                return "{}";
+            }
         }
     }
 }
