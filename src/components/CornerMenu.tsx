@@ -43,6 +43,8 @@ interface CornerMenuProps {
   onNavigate: (target: ScreenView) => void;
   onOpenSettings: () => void;
   onOpenUpdates: () => void;
+  updateAvailable?: boolean;
+  latestBrowserVersion?: string | null;
 }
 
 const CAMERA_OPTIONS: {id: CameraPreset; label: string}[] = [
@@ -74,6 +76,8 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
   onNavigate,
   onOpenSettings,
   onOpenUpdates,
+  updateAvailable = false,
+  latestBrowserVersion = null,
 }) => {
   const [open, setOpen] = useState(false);
   const xpInfo = getXpProgress(xp);
@@ -120,6 +124,12 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
         className="fixed top-2.5 sm:top-3.5 z-40 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6]/96 text-[#1F2823] shadow-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40] will-change-transform"
       >
         <Menu className="h-5 w-5" aria-hidden="true" />
+        {updateAvailable && (
+          <span
+            aria-label="มีอัปเดตใหม่"
+            className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[#2E6F40]"
+          />
+        )}
       </motion.button>
 
       {/* Right-Side Slide-Over Drawer */}
@@ -452,7 +462,11 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       setOpen(false);
                       onOpenUpdates();
                     }}
-                    className="flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 py-2 text-left hover:bg-[#F3F0E8]"
+                    className={`flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border px-3.5 py-2 text-left ${
+                      updateAvailable
+                        ? 'border-[#2E6F40]/40 bg-[#EDF5EE] hover:bg-[#E2EFE4]'
+                        : 'border-[#1F2823]/12 bg-white hover:bg-[#F3F0E8]'
+                    }`}
                   >
                     <span className="flex items-center gap-2.5 min-w-0">
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#EFECE4] text-[#2E6F40] shrink-0">
@@ -460,10 +474,14 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       </span>
                       <span className="min-w-0">
                         <span className="block text-sm font-bold text-[#1F2823] truncate">
-                          เช็คอัปเดตเวอร์ชั่น
+                          {updateAvailable && latestBrowserVersion
+                            ? `อัปเดตใหม่ v${latestBrowserVersion}`
+                            : 'เช็คอัปเดตเวอร์ชั่น'}
                         </span>
                         <span className="block text-[11px] text-[#5A655D] truncate">
-                          เวอร์ชั่น v{CURRENT_APP_VERSION} · ดูสิ่งที่เพิ่มใหม่
+                          {updateAvailable
+                            ? 'แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที'
+                            : `เวอร์ชั่น v${CURRENT_APP_VERSION} · ดูสิ่งที่เพิ่มใหม่`}
                         </span>
                       </span>
                     </span>
@@ -491,7 +509,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                           การตั้งค่า
                         </span>
                         <span className="block text-[11px] text-[#4A5E4E] truncate">
-                          เสียง กราฟิก 3 มิติ & สูงสุด 120 FPS
+                          เสียง กราฟิก 3 มิติ & ค่ารีเฟรชเรทตามจอ
                         </span>
                       </span>
                     </span>

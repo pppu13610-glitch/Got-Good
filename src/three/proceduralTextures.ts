@@ -37,7 +37,10 @@ export function createWoodGrainTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.anisotropy = Math.min(compact ? 2 : 8, maxAnisotropy);
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = compact ? 1 : Math.min(8, maxAnisotropy);
+  texture.needsUpdate = true;
   return texture;
 }
 
@@ -72,8 +75,11 @@ export function createWovenMatTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
   texture.repeat.set(3, 2);
-  texture.anisotropy = Math.min(compact ? 2 : 8, maxAnisotropy);
+  texture.anisotropy = compact ? 1 : Math.min(8, maxAnisotropy);
+  texture.needsUpdate = true;
   return texture;
 }
 
@@ -117,7 +123,10 @@ export function createCeramicSpeckleTexture(
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.anisotropy = Math.min(compact ? 2 : 4, maxAnisotropy);
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = compact ? 1 : Math.min(4, maxAnisotropy);
+  texture.needsUpdate = true;
   return texture;
 }
 
@@ -128,7 +137,8 @@ export function createContactShadowTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    const grad = ctx.createRadialGradient(64, 64, 8, 64, 64, 62);
+    ctx.clearRect(0, 0, 128, 128);
+    const grad = ctx.createRadialGradient(64, 64, 8, 64, 64, 60);
     grad.addColorStop(0, 'rgba(18, 22, 18, 0.55)');
     grad.addColorStop(0.55, 'rgba(18, 22, 18, 0.22)');
     grad.addColorStop(1, 'rgba(18, 22, 18, 0)');
@@ -138,6 +148,13 @@ export function createContactShadowTexture(): THREE.CanvasTexture {
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = 1;
+  texture.needsUpdate = true;
   return texture;
 }
 
@@ -148,7 +165,8 @@ export function createSteamPuffTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    const grad = ctx.createRadialGradient(64, 64, 4, 64, 64, 58);
+    ctx.clearRect(0, 0, 128, 128);
+    const grad = ctx.createRadialGradient(64, 64, 4, 64, 64, 56);
     grad.addColorStop(0, 'rgba(248, 248, 244, 0.45)');
     grad.addColorStop(0.5, 'rgba(248, 248, 244, 0.16)');
     grad.addColorStop(1, 'rgba(248, 248, 244, 0)');
@@ -158,5 +176,12 @@ export function createSteamPuffTexture(): THREE.CanvasTexture {
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = 1;
+  texture.needsUpdate = true;
   return texture;
 }

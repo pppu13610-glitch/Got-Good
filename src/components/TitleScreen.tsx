@@ -43,9 +43,13 @@ interface TitleScreenProps {
   onOpenHowToPlay: () => void;
   onOpenSettings?: () => void;
   onOpenUpdates?: () => void;
+  isOverlayOpen?: boolean;
+  updateAvailable?: boolean;
+  latestBrowserVersion?: string | null;
 }
 
-const TAP_SPRING = {type: 'spring' as const, stiffness: 420, damping: 24};
+const TAP_SPRING = {type: 'spring' as const, stiffness: 420, damping: 26};
+const MODAL_EASE = [0.16, 1, 0.3, 1] as const;
 
 export const TitleScreen: React.FC<TitleScreenProps> = ({
   xp,
@@ -66,11 +70,15 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   onOpenHowToPlay,
   onOpenSettings,
   onOpenUpdates,
+  isOverlayOpen = false,
+  updateAvailable = false,
+  latestBrowserVersion = null,
 }) => {
   const [bgFailed, setBgFailed] = useState(false);
   const [showMenuModal, setShowMenuModal] = useState(false);
   const xpInfo = getXpProgress(xp);
   const unlockedCount = getUnlockedTeas(level).length;
+  const pauseBackgroundFx = showMenuModal || isOverlayOpen;
 
   useEffect(() => {
     if (!showMenuModal) return;
@@ -98,21 +106,19 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
     <div className="relative h-dvh min-h-[300px] w-full overflow-hidden bg-[#222B24] select-none">
       {/* Full-bleed Wooden Tea Pavilion & Bamboo Garden Artwork */}
       {!bgFailed ? (
-        <motion.img
+        <img
           src="/src/assets/images/tea_house_backdrop_1795626509107.jpg"
           alt="บรรยากาศเรือนชาไม้ท่ามกลางสวนไผ่ในแสงแดดรำไร"
           referrerPolicy="no-referrer"
+          decoding="async"
           onError={() => setBgFailed(true)}
-          initial={{scale: 1.04, opacity: 0.85}}
-          animate={{scale: 1, opacity: 1}}
-          transition={{duration: 0.9, ease: 'easeOut'}}
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E31] via-[#475B48] to-[#1D261F]" />
       )}
 
-      {/* Subtle Warm Sunlit Wash & Dappled Light Rays */}
+      {/* Subtle Warm Sunlit Wash & Dappled Light Rays (pure gradient, zero CSS filter:blur for mobile smoothness) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -125,25 +131,23 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
           }}
         />
         <div
-          className="animate-sunbeam-1 absolute -top-[20%] left-[10%] h-[135%] w-[24%] origin-top"
+          className={`${pauseBackgroundFx ? '' : 'animate-sunbeam-1'} absolute -top-[20%] left-[8%] h-[135%] w-[30%] origin-top`}
           style={{
             background:
-              'linear-gradient(180deg, rgba(255, 244, 210, 0.24) 0%, rgba(255, 238, 194, 0.08) 55%, transparent 90%)',
-            filter: 'blur(18px)',
+              'linear-gradient(90deg, transparent 0%, rgba(255, 244, 210, 0.14) 50%, transparent 100%)',
           }}
         />
         <div
-          className="animate-sunbeam-2 absolute -top-[20%] left-[34%] h-[130%] w-[18%] origin-top"
+          className={`${pauseBackgroundFx ? '' : 'animate-sunbeam-2'} absolute -top-[20%] left-[32%] h-[130%] w-[24%] origin-top`}
           style={{
             background:
-              'linear-gradient(180deg, rgba(255, 246, 216, 0.18) 0%, rgba(244, 230, 185, 0.06) 50%, transparent 88%)',
-            filter: 'blur(22px)',
+              'linear-gradient(90deg, transparent 0%, rgba(255, 246, 216, 0.11) 50%, transparent 100%)',
           }}
         />
       </div>
 
-      {/* Drifting Sunlit Tea Mist & Golden Dust Motes */}
-      {particlesEnabled && <SunlitParticles />}
+      {/* Drifting Sunlit Tea Mist & Golden Dust Motes (paused while menus/settings open) */}
+      {particlesEnabled && <SunlitParticles paused={pauseBackgroundFx} />}
 
       {/* Edge-only Contrast Scrims */}
       <div
@@ -194,15 +198,14 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
 
           {/* Bottom-Right: Fullscreen Quick Toggle + Grouped Sub-menu & Settings Trigger */}
           <motion.div
-            initial={{opacity: 0, y: 18}}
+            initial={{opacity: 0, y: 14}}
             animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.08, type: 'spring', stiffness: 320, damping: 28}}
-            className="flex items-center gap-2.5"
+            transition={{duration: 0.24, ease: MODAL_EASE}}
+            className="flex items-center gap-2.5 will-change-transform"
           >
             {onToggleFullscreen && (
               <motion.button
                 type="button"
-                whileHover={{scale: 1.04, y: -1}}
                 whileTap={{scale: 0.92}}
                 transition={TAP_SPRING}
                 onClick={() => {
@@ -212,7 +215,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                 }}
                 aria-label={isFullscreen ? 'ออกจากเต็มหน้าจอ' : 'ขยายเต็มหน้าจอ'}
                 title={isFullscreen ? 'ออกจากเต็มหน้าจอ' : 'ขยายเต็มหน้าจอ'}
-                className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/70 backdrop-blur-md text-[#FAF7F0] shadow-lg shadow-black/20 hover:bg-[#1E251F]/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] shrink-0"
+                className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/88 text-[#FAF7F0] shadow-lg shadow-black/25 hover:bg-[#252E26] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] shrink-0"
               >
                 {isFullscreen ? (
                   <Minimize2 className="h-4 w-4 text-[#DFC48C]" aria-hidden="true" />
@@ -224,14 +227,19 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
 
             <motion.button
               type="button"
-              whileHover={{scale: 1.03, y: -1}}
               whileTap={{scale: 0.94}}
               transition={TAP_SPRING}
               onClick={openModal}
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/70 backdrop-blur-md px-4 sm:px-5 py-2.5 text-sm font-medium text-[#FAF7F0] shadow-lg shadow-black/20 hover:bg-[#1E251F]/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0"
+              className="relative inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-[#FAF7F0]/25 bg-[#1E251F]/88 px-4 sm:px-5 py-2.5 text-sm font-medium text-[#FAF7F0] shadow-lg shadow-black/25 hover:bg-[#252E26] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap shrink-0"
             >
               <SlidersHorizontal className="h-4 w-4 text-[#DFC48C]" aria-hidden="true" />
               <span>เมนูและตั้งค่า</span>
+              {updateAvailable && (
+                <span
+                  aria-label="มีอัปเดตใหม่"
+                  className="h-2 w-2 rounded-full bg-[#6EE787]"
+                />
+              )}
             </motion.button>
           </motion.div>
         </div>
@@ -244,20 +252,21 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            transition={{duration: 0.18}}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-[2px] p-3 sm:p-5"
+            transition={{duration: 0.16, ease: 'easeOut'}}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/58 p-3 sm:p-5"
             onClick={closeModal}
           >
             <motion.div
               role="dialog"
               aria-modal="true"
               aria-labelledby="title-submenu-heading"
-              initial={{opacity: 0, scale: 0.92, y: 18}}
+              initial={{opacity: 0, scale: 0.96, y: 12}}
               animate={{opacity: 1, scale: 1, y: 0}}
-              exit={{opacity: 0, scale: 0.94, y: 14}}
-              transition={{type: 'spring', stiffness: 380, damping: 28}}
+              exit={{opacity: 0, scale: 0.96, y: 8}}
+              transition={{duration: 0.2, ease: MODAL_EASE}}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl p-4 sm:p-6"
+              style={{contain: 'layout style paint'}}
+              className="w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl p-4 sm:p-6 will-change-transform"
             >
               {/* Modal Header */}
               <div className="flex items-start justify-between gap-4 border-b border-[#1F2823]/10 pb-3">
@@ -509,7 +518,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                         className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#2E6F40] px-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#245732]"
                       >
                         <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
-                        <span>ตั้งค่ากราฟิก 3D · เสียง · 120 FPS</span>
+                        <span>ตั้งค่ากราฟิก 3D · เสียง · FPS ตามจอ</span>
                       </motion.button>
                     )}
                     {onOpenUpdates && (
@@ -522,10 +531,18 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                           setShowMenuModal(false);
                           onOpenUpdates();
                         }}
-                        className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EAE6DC]"
+                        className={`flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${
+                          updateAvailable
+                            ? 'border-[#2E6F40] bg-[#EDF5EE] text-[#1D542C] font-semibold'
+                            : 'border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#EAE6DC]'
+                        }`}
                       >
                         <History className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
-                        <span>เช็คอัปเดตเวอร์ชั่น (v{CURRENT_APP_VERSION})</span>
+                        <span>
+                          {updateAvailable && latestBrowserVersion
+                            ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})`
+                            : `เช็คอัปเดตเวอร์ชั่น (v${CURRENT_APP_VERSION})`}
+                        </span>
                       </motion.button>
                     )}
                     <div className="flex flex-wrap items-center justify-between gap-2">

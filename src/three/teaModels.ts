@@ -15,7 +15,7 @@ export interface TeaVesselHandles {
   glassGroup: THREE.Group;
   liquidGroup: THREE.Group;
   liquidMesh: THREE.Mesh;
-  liquidMaterial: THREE.MeshPhysicalMaterial;
+  liquidMaterial: THREE.MeshStandardMaterial;
   leavesGroup: THREE.Group;
   leafMeshes: THREE.Mesh[];
   leafMaterial: THREE.MeshStandardMaterial;
@@ -68,6 +68,9 @@ function makeContactShadow(
       map: shadowTex,
       transparent: true,
       depthWrite: false,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1,
       opacity,
     }),
   );
@@ -504,18 +507,28 @@ export function createTeaVesselSystem(
     new THREE.Vector2(0.28, 0.06),
     new THREE.Vector2(0, 0.06),
   ];
-  const glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 0,
-    roughness: 0.08,
-    transmission: isSoftwareGl ? 0 : 0.78,
-    transparent: true,
-    opacity: isSoftwareGl ? 0.34 : 0.92,
-    ior: 1.5,
-    thickness: 0.25,
-    clearcoat: 1.0,
-    depthWrite: false,
-  });
+  const liteShader = isSoftwareGl || compactMode;
+  const glassMat = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0xeaf2ef,
+        metalness: 0.05,
+        roughness: 0.14,
+        transparent: true,
+        opacity: 0.36,
+        depthWrite: false,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0,
+        roughness: 0.08,
+        transmission: 0.78,
+        transparent: true,
+        opacity: 0.92,
+        ior: 1.5,
+        thickness: 0.25,
+        clearcoat: 1.0,
+        depthWrite: false,
+      });
   const glassMesh = new THREE.Mesh(
     new THREE.LatheGeometry(glassPts, radialLg),
     glassMat,
@@ -536,15 +549,23 @@ export function createTeaVesselSystem(
   const liquidGroup = new THREE.Group();
   liquidGroup.position.y = 0.11;
 
-  const liquidMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0xe8e6df,
-    roughness: 0.12,
-    metalness: 0.02,
-    clearcoat: 0.9,
-    clearcoatRoughness: 0.08,
-    transparent: true,
-    opacity: 0.92,
-  });
+  const liquidMaterial: THREE.MeshStandardMaterial = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0xe8e6df,
+        roughness: 0.14,
+        metalness: 0.04,
+        transparent: true,
+        opacity: 0.92,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xe8e6df,
+        roughness: 0.12,
+        metalness: 0.02,
+        clearcoat: 0.9,
+        clearcoatRoughness: 0.08,
+        transparent: true,
+        opacity: 0.92,
+      });
 
   const liquidGeo = new THREE.CylinderGeometry(0.415, 0.285, 0.56, radialMd);
   liquidGeo.translate(0, 0.28, 0);
@@ -585,15 +606,23 @@ export function createTeaVesselSystem(
   // === Toppings: Ice Cubes (shared geometry) ===
   const iceGroup = new THREE.Group();
   iceGroup.position.y = 0.56;
-  const iceMat = new THREE.MeshPhysicalMaterial({
-    color: 0xe6f4fa,
-    roughness: 0.12,
-    metalness: 0,
-    transparent: true,
-    opacity: 0.65,
-    clearcoat: 1,
-    ior: 1.31,
-  });
+  const iceMat = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0xe6f4fa,
+        roughness: 0.16,
+        metalness: 0.05,
+        transparent: true,
+        opacity: 0.65,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xe6f4fa,
+        roughness: 0.12,
+        metalness: 0,
+        transparent: true,
+        opacity: 0.65,
+        clearcoat: 1,
+        ior: 1.31,
+      });
   const iceGeo = new THREE.BoxGeometry(0.16, 0.15, 0.16);
   const iceCubes: THREE.Mesh[] = [];
   const icePositions: [number, number, number, number][] = [
@@ -641,14 +670,21 @@ export function createTeaVesselSystem(
   ]);
   const honeyGroup = new THREE.Group();
   const honeyTube = new THREE.Mesh(
-    new THREE.TubeGeometry(honeyCurve, 28, 0.018, 8, false),
-    new THREE.MeshPhysicalMaterial({
-      color: 0xe29d23,
-      roughness: 0.18,
-      clearcoat: 1,
-      transparent: true,
-      opacity: 0.85,
-    }),
+    new THREE.TubeGeometry(honeyCurve, compactMode ? 18 : 28, 0.018, 8, false),
+    liteShader
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe29d23,
+          roughness: 0.2,
+          transparent: true,
+          opacity: 0.85,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe29d23,
+          roughness: 0.18,
+          clearcoat: 1,
+          transparent: true,
+          opacity: 0.85,
+        }),
   );
   honeyGroup.add(honeyTube);
   honeyGroup.visible = false;
@@ -675,15 +711,22 @@ export function createTeaVesselSystem(
 
   // === Toppings: Strawberry Puree Layer & Berry Garnish ===
   const strawberryGroup = new THREE.Group();
-  const berryLayerMat = new THREE.MeshPhysicalMaterial({
-    color: 0xd95670,
-    roughness: 0.22,
-    clearcoat: 0.65,
-    transparent: true,
-    opacity: 0.92,
-  });
+  const berryLayerMat = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0xd95670,
+        roughness: 0.24,
+        transparent: true,
+        opacity: 0.92,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xd95670,
+        roughness: 0.22,
+        clearcoat: 0.65,
+        transparent: true,
+        opacity: 0.92,
+      });
   const berryBase = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.31, 0.275, 0.14, 32),
+    new THREE.CylinderGeometry(0.31, 0.275, 0.14, compactMode ? 22 : 32),
     berryLayerMat,
   );
   berryBase.position.y = 0.185;
@@ -691,7 +734,7 @@ export function createTeaVesselSystem(
   strawberryGroup.add(berryBase);
 
   const berryBody = new THREE.Mesh(
-    new THREE.ConeGeometry(0.075, 0.14, 16),
+    new THREE.ConeGeometry(0.075, 0.14, compactMode ? 12 : 16),
     new THREE.MeshStandardMaterial({color: 0xd1364f, roughness: 0.45}),
   );
   berryBody.rotation.x = Math.PI;
@@ -712,24 +755,36 @@ export function createTeaVesselSystem(
   // === Toppings: Brown Sugar Caramel Layer & Tapioca/Sugar Pearls ===
   const brownSugarGroup = new THREE.Group();
   const caramelLayer = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.31, 0.275, 0.13, 32),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x7a4218,
-      roughness: 0.18,
-      clearcoat: 0.85,
-      transparent: true,
-      opacity: 0.92,
-    }),
+    new THREE.CylinderGeometry(0.31, 0.275, 0.13, compactMode ? 22 : 32),
+    liteShader
+      ? new THREE.MeshStandardMaterial({
+          color: 0x7a4218,
+          roughness: 0.2,
+          transparent: true,
+          opacity: 0.92,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0x7a4218,
+          roughness: 0.18,
+          clearcoat: 0.85,
+          transparent: true,
+          opacity: 0.92,
+        }),
   );
   caramelLayer.position.y = 0.18;
   caramelLayer.renderOrder = 2;
   brownSugarGroup.add(caramelLayer);
 
-  const pearlMat = new THREE.MeshPhysicalMaterial({
-    color: 0x3b200d,
-    roughness: 0.15,
-    clearcoat: 0.9,
-  });
+  const pearlMat = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0x3b200d,
+        roughness: 0.18,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0x3b200d,
+        roughness: 0.15,
+        clearcoat: 0.9,
+      });
   const pearlGeo = new THREE.SphereGeometry(0.038, 12, 12);
   for (let i = 0; i < 8; i++) {
     const a = (i / 8) * Math.PI * 2;
@@ -978,13 +1033,20 @@ export function createKettleGroup(
   ]);
   const streamMesh = new THREE.Mesh(
     new THREE.TubeGeometry(streamCurve, compactMode ? 14 : 20, 0.024, compactMode ? 7 : 10, false),
-    new THREE.MeshPhysicalMaterial({
-      color: 0xe6f4fa,
-      roughness: 0.08,
-      transparent: true,
-      opacity: 0.78,
-      clearcoat: 1,
-    }),
+    compactMode
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe6f4fa,
+          roughness: 0.12,
+          transparent: true,
+          opacity: 0.78,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe6f4fa,
+          roughness: 0.08,
+          transparent: true,
+          opacity: 0.78,
+          clearcoat: 1,
+        }),
   );
   streamMesh.visible = false;
   bodyGroup.add(streamMesh);
@@ -1077,12 +1139,18 @@ export function createChasenGroup(
   caddyGroup.position.set(-1.26, TRAY_SURFACE_Y, -0.45);
   caddyGroup.add(makeContactShadow(0.75, shadowTex, 0.45));
 
-  const lacquerMat = new THREE.MeshPhysicalMaterial({
-    color: 0x231d19,
-    roughness: 0.2,
-    metalness: 0.08,
-    clearcoat: 0.9,
-  });
+  const lacquerMat = compactMode
+    ? new THREE.MeshStandardMaterial({
+        color: 0x231d19,
+        roughness: 0.22,
+        metalness: 0.08,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0x231d19,
+        roughness: 0.2,
+        metalness: 0.08,
+        clearcoat: 0.9,
+      });
   const caddyPts = [
     new THREE.Vector2(0, 0),
     new THREE.Vector2(0.16, 0),
@@ -1176,17 +1244,27 @@ export function createEquipmentRig(
     roughness: 0.68,
     metalness: 0.02,
   });
-  const glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 0,
-    roughness: 0.08,
-    transmission: isSoftwareGl ? 0 : 0.76,
-    transparent: true,
-    opacity: isSoftwareGl ? 0.36 : 0.92,
-    ior: 1.5,
-    clearcoat: 1,
-    depthWrite: false,
-  });
+  const liteShader = isSoftwareGl || compactMode;
+  const glassMat = liteShader
+    ? new THREE.MeshStandardMaterial({
+        color: 0xeaf2ef,
+        metalness: 0.05,
+        roughness: 0.14,
+        transparent: true,
+        opacity: 0.36,
+        depthWrite: false,
+      })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0,
+        roughness: 0.08,
+        transmission: 0.76,
+        transparent: true,
+        opacity: 0.92,
+        ior: 1.5,
+        clearcoat: 1,
+        depthWrite: false,
+      });
 
   // =========================================================
   // 1. Milk Frother Pitcher + Frother Wand Set (milk-frother)
@@ -1444,13 +1522,20 @@ export function createEquipmentRig(
   herbalPot.add(glassBowl);
 
   const herbalInfuseTea = new THREE.Mesh(
-    new THREE.SphereGeometry(0.26, 24, 16, 0, Math.PI * 2, Math.PI * 0.25, Math.PI * 0.75),
-    new THREE.MeshPhysicalMaterial({
-      color: 0xe6c86e,
-      roughness: 0.12,
-      transparent: true,
-      opacity: 0.84,
-    }),
+    new THREE.SphereGeometry(0.26, compactMode ? 18 : 24, compactMode ? 12 : 16, 0, Math.PI * 2, Math.PI * 0.25, Math.PI * 0.75),
+    liteShader
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe6c86e,
+          roughness: 0.16,
+          transparent: true,
+          opacity: 0.84,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe6c86e,
+          roughness: 0.12,
+          transparent: true,
+          opacity: 0.84,
+        }),
   );
   herbalInfuseTea.scale.set(1, 0.82, 1);
   herbalInfuseTea.position.y = 0.26;
@@ -1526,26 +1611,40 @@ export function createEquipmentRig(
   tower.add(bottomCarafe);
 
   const dripMatcha = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.14, 0.18, 0.18, 20),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x5d9d47,
-      roughness: 0.14,
-      transparent: true,
-      opacity: 0.88,
-    }),
+    new THREE.CylinderGeometry(0.14, 0.18, 0.18, compactMode ? 14 : 20),
+    liteShader
+      ? new THREE.MeshStandardMaterial({
+          color: 0x5d9d47,
+          roughness: 0.18,
+          transparent: true,
+          opacity: 0.88,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0x5d9d47,
+          roughness: 0.14,
+          transparent: true,
+          opacity: 0.88,
+        }),
   );
   dripMatcha.position.y = 0.15;
   dripMatcha.renderOrder = 3;
   tower.add(dripMatcha);
 
   const coldDripDrop = new THREE.Mesh(
-    new THREE.SphereGeometry(0.022, 10, 10),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x82c768,
-      roughness: 0.08,
-      transparent: true,
-      opacity: 0.88,
-    }),
+    new THREE.SphereGeometry(0.022, 8, 8),
+    liteShader
+      ? new THREE.MeshStandardMaterial({
+          color: 0x82c768,
+          roughness: 0.12,
+          transparent: true,
+          opacity: 0.88,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0x82c768,
+          roughness: 0.08,
+          transparent: true,
+          opacity: 0.88,
+        }),
   );
   coldDripDrop.position.y = 0.55;
   tower.add(coldDripDrop);

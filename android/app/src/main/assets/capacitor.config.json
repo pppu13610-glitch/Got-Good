@@ -3,7 +3,11 @@
 	"appName": "บ้านชาอุ่นใจ 3D",
 	"webDir": "dist",
 	"server": {
-		"androidScheme": "https"
+		"androidScheme": "https",
+		"allowNavigation": [
+			"ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
+			"ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"
+		]
 	},
 	"android": {
 		"backgroundColor": "#233029"

@@ -24,6 +24,10 @@ import {
   TeaHouseSaveData,
 } from './types/tea';
 import {
+  checkLiveBrowserVersion,
+  UpdateCheckResult,
+} from './utils/appUpdater';
+import {
   applyDomPerformanceClass,
   probeDeviceOptimization,
 } from './utils/deviceOptimizer';
@@ -33,6 +37,11 @@ import {
   subscribeFullscreenChange,
   toggleAppFullscreen,
 } from './utils/fullscreen';
+import {
+  clampTargetFpsToDisplay,
+  DisplayRefreshRate,
+  probeDisplayRefreshRate,
+} from './utils/refreshRate';
 import {soundEngine} from './utils/soundEngine';
 import {
   clearSaveData,
@@ -58,10 +67,49 @@ export default function App() {
   const [saveData, setSaveData] = useState<TeaHouseSaveData>(() =>
     loadSaveData(),
   );
+  const [detectedRefreshRate, setDetectedRefreshRate] =
+    useState<DisplayRefreshRate>(60);
+  const [rawRefreshRate, setRawRefreshRate] = useState<number>(60);
+  const [updateCheckResult, setUpdateCheckResult] =
+    useState<UpdateCheckResult | null>(null);
   const userExitedFullscreenRef = useRef<boolean>(false);
 
   useEffect(() => {
     return subscribeFullscreenChange(setIsFullscreen);
+  }, []);
+
+  const recheckRefreshRate = useCallback(() => {
+    void probeDisplayRefreshRate().then(({hz, rawHz}) => {
+      setDetectedRefreshRate(hz);
+      setRawRefreshRate(rawHz);
+      setSettings((prev) => {
+        const clampedFps = clampTargetFpsToDisplay(prev.targetFps, hz);
+        if (clampedFps === prev.targetFps) return prev;
+        const next = {...prev, targetFps: clampedFps};
+        saveSettings(next);
+        return next;
+      });
+    });
+  }, []);
+
+  // Measure actual device screen refresh rate (60Hz / 90Hz / 120Hz) on startup & when returning to tab
+  useEffect(() => {
+    recheckRefreshRate();
+    const onVisibility = () => {
+      if (!document.hidden) {
+        recheckRefreshRate();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, [recheckRefreshRate]);
+
+  // Quietly check live browser version in background so update badge is accurate
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void checkLiveBrowserVersion().then(setUpdateCheckResult);
+    }, 900);
+    return () => window.clearTimeout(timer);
   }, []);
 
   // Enter full screen automatically as the default game behavior (immediately if allowed, or on very first gesture)
@@ -125,23 +173,36 @@ export default function App() {
     settings.ambience,
   ]);
 
-  const updateSettings = useCallback((patch: Partial<GameSettings>) => {
-    if (patch.autoFullscreen === true) {
-      userExitedFullscreenRef.current = false;
-    }
-    setSettings((prev) => {
-      const next = {...prev, ...patch};
-      saveSettings(next);
-      return next;
-    });
-  }, []);
+  const updateSettings = useCallback(
+    (patch: Partial<GameSettings>) => {
+      if (patch.autoFullscreen === true) {
+        userExitedFullscreenRef.current = false;
+      }
+      setSettings((prev) => {
+        const merged = {...prev, ...patch};
+        merged.targetFps = clampTargetFpsToDisplay(
+          merged.targetFps,
+          detectedRefreshRate,
+        );
+        saveSettings(merged);
+        return merged;
+      });
+    },
+    [detectedRefreshRate],
+  );
 
   const handleResetSettings = useCallback(() => {
     userExitedFullscreenRef.current = false;
-    const reset = {...DEFAULT_SETTINGS};
+    const reset = {
+      ...DEFAULT_SETTINGS,
+      targetFps: clampTargetFpsToDisplay(
+        DEFAULT_SETTINGS.targetFps,
+        detectedRefreshRate,
+      ),
+    };
     saveSettings(reset);
     setSettings(reset);
-  }, []);
+  }, [detectedRefreshRate]);
 
   const handleToggleFullscreen = useCallback(() => {
     const currentlyActive = isFullscreenActive();
@@ -237,6 +298,8 @@ export default function App() {
               onNavigate={navigateTo}
               onOpenSettings={() => setSettingsOpen(true)}
               onOpenUpdates={() => setUpdatesOpen(true)}
+              updateAvailable={updateCheckResult?.status === 'update-ready'}
+              latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
             />
           )}
         </AnimatePresence>
@@ -278,6 +341,9 @@ export default function App() {
                   onOpenHowToPlay={() => navigateTo('HOW_TO_PLAY')}
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenUpdates={() => setUpdatesOpen(true)}
+                  isOverlayOpen={settingsOpen || updatesOpen}
+                  updateAvailable={updateCheckResult?.status === 'update-ready'}
+                  latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
                 />
               </motion.div>
             )}
@@ -342,6 +408,9 @@ export default function App() {
               key="settings-screen"
               settings={settings}
               isFullscreen={isFullscreen}
+              detectedRefreshRate={detectedRefreshRate}
+              rawRefreshRate={rawRefreshRate}
+              onRecheckRefreshRate={recheckRefreshRate}
               onToggleFullscreen={handleToggleFullscreen}
               onUpdateSettings={updateSettings}
               onResetSettings={handleResetSettings}
@@ -355,6 +424,8 @@ export default function App() {
           {updatesOpen && (
             <UpdateCheckScreen
               key="updates-screen"
+              initialUpdateResult={updateCheckResult}
+              onUpdateResult={setUpdateCheckResult}
               onClose={() => setUpdatesOpen(false)}
             />
           )}

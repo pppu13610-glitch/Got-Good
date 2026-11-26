@@ -1,8 +1,13 @@
-import {GameSettings, OptimizationProfile} from '../types/tea';
+import {GameSettings, OptimizationProfile, TargetFps} from '../types/tea';
+import {
+  clampTargetFpsToDisplay,
+  DisplayRefreshRate,
+} from './refreshRate';
 
 export interface DeviceOptimizationReport {
   detectedModelLabel: string;
   isRealmeNote50: boolean;
+  isUnisocT612OrMaliG57: boolean;
   isBudgetMobileGpu: boolean;
   liteGpuActive: boolean;
   gpuRendererName: string;
@@ -11,6 +16,8 @@ export interface DeviceOptimizationReport {
 }
 
 const REALME_NOTE_50_UA_RE = /RMX3834|realme\s*note\s*50/i;
+const UNISOC_T612_RE = /Unisoc|Tiger\s*T612|\bT612\b|ums9230/i;
+const MALI_G57_RE = /Mali-G57/i;
 const BUDGET_MOBILE_GPU_RE =
   /Mali-G57|Mali-G52|Mali-G51|Mali-G31|Mali-T|PowerVR\s*GE8|Adreno\s*\(TM\)\s*(50[0-9]|610|612)/i;
 
@@ -58,13 +65,20 @@ export function probeDeviceOptimization(
 
   const gpuRendererName = readGpuRendererName();
   const isRealmeNote50 = REALME_NOTE_50_UA_RE.test(ua);
+  const isUnisocT612OrMaliG57 =
+    isRealmeNote50 ||
+    UNISOC_T612_RE.test(ua) ||
+    MALI_G57_RE.test(gpuRendererName);
   const isMobileUa = /Android|Mobile/i.test(ua);
   const isBudgetGpuString = BUDGET_MOBILE_GPU_RE.test(gpuRendererName);
   const isLowMemoryMobile =
     isMobileUa && deviceMemoryGb !== null && deviceMemoryGb <= 4;
 
   const isBudgetMobileGpu =
-    isRealmeNote50 || isBudgetGpuString || isLowMemoryMobile;
+    isRealmeNote50 ||
+    isUnisocT612OrMaliG57 ||
+    isBudgetGpuString ||
+    isLowMemoryMobile;
 
   const liteGpuActive =
     profile === 'realme-note-50' ||
@@ -72,9 +86,11 @@ export function probeDeviceOptimization(
 
   let detectedModelLabel = 'อุปกรณ์ทั่วไป';
   if (profile === 'realme-note-50') {
-    detectedModelLabel = 'โหมด realme Note 50 (Mali-G57 · 90Hz)';
+    detectedModelLabel = 'จูนพิเศษ Unisoc T612 · Mali-G57';
   } else if (isRealmeNote50) {
-    detectedModelLabel = 'ตรวจพบ realme Note 50 (RMX3834)';
+    detectedModelLabel = 'realme Note 50 (Unisoc T612 · Mali-G57)';
+  } else if (MALI_G57_RE.test(gpuRendererName)) {
+    detectedModelLabel = 'ตรวจพบจีพียู ARM Mali-G57 (เปิดจูนอัตโนมัติ)';
   } else if (isBudgetMobileGpu) {
     detectedModelLabel = 'ตรวจพบมือถือประหยัดพลังงาน (เปิดจูนอัตโนมัติ)';
   }
@@ -82,6 +98,7 @@ export function probeDeviceOptimization(
   return {
     detectedModelLabel,
     isRealmeNote50,
+    isUnisocT612OrMaliG57,
     isBudgetMobileGpu,
     liteGpuActive,
     gpuRendererName,
@@ -90,7 +107,10 @@ export function probeDeviceOptimization(
   };
 }
 
-export function getRealmeNote50Preset(): Partial<GameSettings> {
+export function getRealmeNote50Preset(
+  maxDisplayHz: DisplayRefreshRate = 90,
+): Partial<GameSettings> {
+  const idealFps: TargetFps = clampTargetFpsToDisplay(90, maxDisplayHz);
   return {
     optimizationProfile: 'realme-note-50',
     graphicsQuality: 'medium',
@@ -98,7 +118,7 @@ export function getRealmeNote50Preset(): Partial<GameSettings> {
     shadowsEnabled: true,
     antialiasEnabled: false,
     particlesEnabled: true,
-    targetFps: 90,
+    targetFps: idealFps,
   };
 }
 

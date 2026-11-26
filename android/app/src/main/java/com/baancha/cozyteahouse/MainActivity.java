@@ -2,6 +2,7 @@ package com.baancha.cozyteahouse;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.WindowManager;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -12,6 +13,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        enableHighRefreshRate();
         hideSystemBars();
     }
 
@@ -19,7 +21,35 @@ public class MainActivity extends BridgeActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
+            enableHighRefreshRate();
             hideSystemBars();
+        }
+    }
+
+    private void enableHighRefreshRate() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
+        try {
+            Display display =
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                    ? getDisplay()
+                    : getWindowManager().getDefaultDisplay();
+            if (display == null) return;
+            Display.Mode current = display.getMode();
+            Display.Mode[] modes = display.getSupportedModes();
+            Display.Mode bestMode = current;
+            for (Display.Mode m : modes) {
+                if (m.getPhysicalWidth() == current.getPhysicalWidth()
+                    && m.getPhysicalHeight() == current.getPhysicalHeight()
+                    && m.getRefreshRate() > bestMode.getRefreshRate()) {
+                    bestMode = m;
+                }
+            }
+            if (bestMode.getModeId() != current.getModeId()) {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.preferredDisplayModeId = bestMode.getModeId();
+                getWindow().setAttributes(lp);
+            }
+        } catch (Throwable ignored) {
         }
     }
 

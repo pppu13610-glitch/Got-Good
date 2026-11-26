@@ -27,11 +27,18 @@ import {
   getRealmeNote50Preset,
   probeDeviceOptimization,
 } from '../utils/deviceOptimizer';
+import {
+  DisplayRefreshRate,
+  getAllowedFpsOptions,
+} from '../utils/refreshRate';
 import {soundEngine} from '../utils/soundEngine';
 
 interface SettingsScreenProps {
   settings: GameSettings;
   isFullscreen: boolean;
+  detectedRefreshRate: DisplayRefreshRate;
+  rawRefreshRate?: number;
+  onRecheckRefreshRate?: () => void;
   onToggleFullscreen: () => void;
   onUpdateSettings: (patch: Partial<GameSettings>) => void;
   onResetSettings: () => void;
@@ -39,6 +46,7 @@ interface SettingsScreenProps {
 }
 
 const TAP_SPRING = {type: 'spring' as const, stiffness: 430, damping: 26};
+const PANEL_EASE = [0.16, 1, 0.3, 1] as const;
 
 const FPS_OPTIONS: {value: TargetFps; label: string; hint: string}[] = [
   {value: 30, label: '30 FPS', hint: 'ประหยัดแบต'},
@@ -75,12 +83,25 @@ const OPTIMIZATION_OPTIONS: {value: OptimizationProfile; label: string}[] = [
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   settings,
   isFullscreen,
+  detectedRefreshRate,
+  rawRefreshRate,
+  onRecheckRefreshRate,
   onToggleFullscreen,
   onUpdateSettings,
   onResetSettings,
   onClose,
 }) => {
   const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+  const allowedFpsValues = getAllowedFpsOptions(detectedRefreshRate);
+  const visibleFpsOptions = FPS_OPTIONS.filter((opt) =>
+    allowedFpsValues.includes(opt.value),
+  );
+  const fpsGridColsClass =
+    visibleFpsOptions.length <= 2
+      ? 'grid-cols-2'
+      : visibleFpsOptions.length === 3
+        ? 'grid-cols-3'
+        : 'grid-cols-4';
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -126,18 +147,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="settings-screen-title"
-      initial={{opacity: 0, y: 24}}
+      initial={{opacity: 0, y: 14}}
       animate={{opacity: 1, y: 0}}
-      exit={{opacity: 0, y: 20}}
-      transition={{type: 'spring', stiffness: 360, damping: 30}}
-      className="fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823]"
+      exit={{opacity: 0, y: 10}}
+      transition={{duration: 0.2, ease: PANEL_EASE}}
+      style={{contain: 'layout style paint'}}
+      className="fixed inset-0 z-50 flex flex-col bg-[#F5F2EB] text-[#1F2823] will-change-transform"
     >
       {/* Full-Screen Sticky Header with Back Button on Top-Left */}
-      <header className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3]/96 safe-px py-2.5 sm:py-3.5">
+      <header className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-[#1F2823]/10 bg-[#FAF8F3] safe-px py-2.5 sm:py-3.5">
         <div className="flex items-center gap-3 min-w-0">
           <motion.button
             type="button"
-            whileHover={{scale: 1.03}}
             whileTap={{scale: 0.92}}
             transition={TAP_SPRING}
             onClick={() => {
@@ -159,14 +180,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               การตั้งค่าเกม
             </h1>
             <p className="hidden sm:block text-xs text-[#5A655D] truncate">
-              ปรับแต่งเสียง ระบบภาพ 3 มิติ และความลื่นไหลสูงสุด 120 FPS
+              ปรับแต่งเสียง ระบบภาพ 3 มิติ และค่า FPS สูงสุดตามหน้าจอเครื่อง ({detectedRefreshRate} Hz)
             </p>
           </div>
         </div>
 
         <motion.button
           type="button"
-          whileHover={{scale: 1.03}}
           whileTap={{scale: 0.93}}
           transition={TAP_SPRING}
           onClick={() => {
@@ -185,12 +205,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       <div className="flex-1 overflow-y-auto safe-px py-4 sm:py-6 safe-pb">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 sm:gap-5">
           {/* SECTION 1: SOUND & AMBIENCE */}
-          <motion.section
-            initial={{opacity: 0, y: 12}}
-            animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.04, duration: 0.22}}
-            className="flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs"
-          >
+          <section className="flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs">
             <div className="flex items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3">
               <div className="flex items-center gap-2">
                 <Volume2 className="h-5 w-5 text-[#2E6F40]" aria-hidden="true" />
@@ -368,15 +383,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 })}
               </div>
             </div>
-          </motion.section>
+          </section>
 
-          {/* SECTION 2: GRAPHICS & 120 FPS REFRESH RATE */}
-          <motion.section
-            initial={{opacity: 0, y: 12}}
-            animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.08, duration: 0.22}}
-            className="flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs"
-          >
+          {/* SECTION 2: GRAPHICS & DISPLAY-SYNCED FPS */}
+          <section className="flex flex-col gap-4 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs">
             <div className="flex items-center gap-2 border-b border-[#1F2823]/8 pb-3">
               <Monitor className="h-5 w-5 text-[#2E6F40]" aria-hidden="true" />
               <div>
@@ -384,25 +394,39 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   กราฟิกและความลื่นไหล (FPS)
                 </h2>
                 <p className="text-xs text-[#5A655D]">
-                  ปรับคุณภาพฉาก 3 มิติ และอัตรารีเฟรชสูงสุด 120 เฟรมต่อวินาที
+                  หน้าจอของคุณรองรับ {detectedRefreshRate} Hz · ปรับได้สูงสุด {detectedRefreshRate} FPS
                 </p>
               </div>
             </div>
 
-            {/* Refresh Rate / Frame Rate Target up to 120 FPS */}
+            {/* Refresh Rate / Frame Rate Target matched to device display Hz */}
             <div className="space-y-2">
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1F2823]">
                   <Gauge className="h-4 w-4 text-[#2E6F40]" aria-hidden="true" />
-                  <span>ค่ารีเฟรชเรท (Max FPS)</span>
+                  <span>ค่ารีเฟรชเรท (หน้าจอ {detectedRefreshRate} Hz)</span>
                 </span>
-                <span className="font-mono-num text-xs font-bold text-[#2E6F40]">
-                  {settings.targetFps} FPS
-                </span>
+                <div className="flex items-center gap-2">
+                  {onRecheckRefreshRate && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        soundEngine.playTap();
+                        onRecheckRefreshRate();
+                      }}
+                      className="text-[11px] font-medium text-[#5A655D] underline underline-offset-2 hover:text-[#1F2823]"
+                    >
+                      วัด Hz ใหม่{rawRefreshRate ? ` (${rawRefreshRate}Hz)` : ''}
+                    </button>
+                  )}
+                  <span className="font-mono-num text-xs font-bold text-[#2E6F40]">
+                    {settings.targetFps} FPS
+                  </span>
+                </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-1.5 rounded-xl bg-[#EFECE4] p-1">
-                {FPS_OPTIONS.map((fps) => {
+              <div className={`grid ${fpsGridColsClass} gap-1.5 rounded-xl bg-[#EFECE4] p-1`}>
+                {visibleFpsOptions.map((fps) => {
                   const active = settings.targetFps === fps.value;
                   return (
                     <motion.button
@@ -441,7 +465,11 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 })}
               </div>
               <p className="text-[11px] text-[#5A655D]">
-                รองรับการแสดงผลสูงสุด 120 เฟรมต่อวินาที ตามอัตราการรีเฟรชหน้าจอของอุปกรณ์
+                {detectedRefreshRate >= 120
+                  ? 'ตรวจพบจอ 120 Hz · สามารถปรับได้ครบ 30 / 60 / 90 / 120 FPS'
+                  : detectedRefreshRate >= 90
+                    ? 'ตรวจพบจอ 90 Hz · ปรับได้สูงสุด 90 FPS (30 / 60 / 90 FPS)'
+                    : 'ตรวจพบจอ 60 Hz · ปรับได้สูงสุด 60 FPS (30 / 60 FPS)'}
               </p>
             </div>
 
@@ -621,20 +649,20 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 transition={TAP_SPRING}
                 onClick={() => {
                   soundEngine.playTap();
-                  onUpdateSettings(getRealmeNote50Preset());
+                  onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
                 }}
                 className="flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/30 bg-[#EDF5EE] px-3.5 text-xs font-semibold text-[#1F2823] hover:bg-[#E1EEE3]"
               >
                 <span className="inline-flex items-center gap-2">
                   <Zap className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                  <span>ใช้ค่าแนะนำสำหรับ realme Note 50 (90Hz · Mali-G57)</span>
+                  <span>ปรับจูนพิเศษ realme Note 50 (Unisoc T612 · Mali-G57)</span>
                 </span>
                 <span className="text-[11px] font-bold text-[#2E6F40] shrink-0">
                   ปรับทันที
                 </span>
               </motion.button>
               <p className="text-[11px] text-[#5A655D] leading-relaxed">
-                ลดภาระการเรนเดอร์แก้ว 2 ชั้น แคชเงา 512px ลดรอยหยักที่กินสเปก และปรับความคมชัดอัตโนมัติเพื่อให้รัน 60–90 FPS ได้นิ่งบน Unisoc T612
+                ใช้เชดเดอร์ highp + MeshStandardMaterial ไร้บั๊ก Texture, ปิด Mipmap Bleed, แคชเงา 512px และลดการคำนวณสีบน CPU เพื่อให้ Unisoc Tiger T612 & ARM Mali-G57 รันลื่นเต็มหน้าจอ
               </p>
             </div>
 
@@ -697,7 +725,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 </span>
               </motion.button>
             </div>
-          </motion.section>
+          </section>
         </div>
       </div>
     </motion.div>

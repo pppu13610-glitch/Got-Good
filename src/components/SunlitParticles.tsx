@@ -1,5 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 
+interface SunlitParticlesProps {
+  paused?: boolean;
+}
+
 interface Mote {
   x: number;
   y: number;
@@ -11,12 +15,36 @@ interface Mote {
   warm: boolean;
 }
 
-export const SunlitParticles: React.FC = () => {
+function createMoteSprite(warm: boolean): HTMLCanvasElement {
+  const sprite = document.createElement('canvas');
+  sprite.width = 32;
+  sprite.height = 32;
+  const sctx = sprite.getContext('2d');
+  if (sctx) {
+    const grad = sctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    if (warm) {
+      grad.addColorStop(0, 'rgba(255, 241, 198, 1)');
+      grad.addColorStop(0.5, 'rgba(255, 241, 198, 0.35)');
+      grad.addColorStop(1, 'rgba(255, 241, 198, 0)');
+    } else {
+      grad.addColorStop(0, 'rgba(220, 236, 212, 1)');
+      grad.addColorStop(0.5, 'rgba(220, 236, 212, 0.35)');
+      grad.addColorStop(1, 'rgba(220, 236, 212, 0)');
+    }
+    sctx.fillStyle = grad;
+    sctx.fillRect(0, 0, 32, 32);
+  }
+  return sprite;
+}
+
+export const SunlitParticles: React.FC<SunlitParticlesProps> = ({
+  paused = false,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || paused) return;
 
     const reducedMotion =
       typeof window !== 'undefined' &&
@@ -30,11 +58,14 @@ export const SunlitParticles: React.FC = () => {
     let height = 0;
     let frameId = 0;
 
+    const warmSprite = createMoteSprite(true);
+    const coolSprite = createMoteSprite(false);
+
     const resize = () => {
       const parent = canvas.parentElement;
       width = parent ? parent.clientWidth : window.innerWidth;
       height = parent ? parent.clientHeight : window.innerHeight;
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -44,13 +75,13 @@ export const SunlitParticles: React.FC = () => {
     const ro = new ResizeObserver(resize);
     if (canvas.parentElement) ro.observe(canvas.parentElement);
 
-    const motes: Mote[] = Array.from({length: 26}, (_, i) => ({
+    const motes: Mote[] = Array.from({length: 18}, (_, i) => ({
       x: Math.random() * Math.max(width, 400),
       y: Math.random() * Math.max(height, 300),
-      r: 1.3 + (i % 4) * 0.85,
+      r: 1.4 + (i % 4) * 0.85,
       vx: 4 + Math.random() * 8,
       vy: -(5 + Math.random() * 9),
-      alpha: 0.18 + (i % 5) * 0.08,
+      alpha: 0.2 + (i % 5) * 0.08,
       phase: Math.random() * Math.PI * 2,
       warm: i % 3 !== 0,
     }));
@@ -73,22 +104,17 @@ export const SunlitParticles: React.FC = () => {
         if (m.x < -12) m.x = width + 12;
 
         const twinkle = 0.65 + 0.35 * Math.sin(m.phase * 1.6);
-        const a = m.alpha * twinkle;
-
-        const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 3.2);
-        if (m.warm) {
-          grad.addColorStop(0, `rgba(255, 241, 198, ${a})`);
-          grad.addColorStop(1, 'rgba(255, 241, 198, 0)');
-        } else {
-          grad.addColorStop(0, `rgba(220, 236, 212, ${a})`);
-          grad.addColorStop(1, 'rgba(220, 236, 212, 0)');
-        }
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, m.r * 3.2, 0, Math.PI * 2);
-        ctx.fill();
+        const size = m.r * 6.4;
+        ctx.globalAlpha = m.alpha * twinkle;
+        ctx.drawImage(
+          m.warm ? warmSprite : coolSprite,
+          m.x - size * 0.5,
+          m.y - size * 0.5,
+          size,
+          size,
+        );
       }
+      ctx.globalAlpha = 1;
 
       frameId = requestAnimationFrame(tick);
     };
@@ -99,7 +125,7 @@ export const SunlitParticles: React.FC = () => {
       cancelAnimationFrame(frameId);
       ro.disconnect();
     };
-  }, []);
+  }, [paused]);
 
   return (
     <canvas

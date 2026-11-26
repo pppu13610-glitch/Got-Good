@@ -97,7 +97,7 @@ function resolvePixelRatio(
       break;
     case 'native':
     default:
-      baseRatio = liteGpuMode ? Math.min(deviceDpr, 1.05) : Math.min(deviceDpr, 2.5);
+      baseRatio = liteGpuMode ? Math.min(deviceDpr, 1.0) : Math.min(deviceDpr, 2.5);
       break;
   }
   return Math.max(0.65, baseRatio * dynamicScale);
@@ -227,7 +227,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       renderer = new THREE.WebGLRenderer({
         antialias: !isSoftwareGl && !liteGpuMode && initSettings.antialiasEnabled,
         powerPreference: 'high-performance',
-        precision: liteGpuMode ? 'mediump' : 'highp',
+        precision: 'highp',
       });
     } catch {
       setWebglError(true);
@@ -342,16 +342,16 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     keyLight.shadow.camera.top = d;
     keyLight.shadow.camera.bottom = -d;
     keyLight.shadow.bias = -0.0005;
-    keyLight.shadow.normalBias = 0.02;
+    keyLight.shadow.normalBias = liteGpuMode ? 0.032 : 0.02;
     scene.add(keyLight);
 
     const rimLight = new THREE.DirectionalLight(0xd9ebd6, 0.65);
     rimLight.position.set(-4.0, 3.2, -3.5);
     scene.add(rimLight);
 
-    // Procedural Textures (compact 256/128 buffers when liteGpuMode is active -> ~75% less RAM)
+    // Procedural Textures (compact 256/128 buffers & anisotropy=1 when liteGpuMode is active)
     const rawAniso = renderer.capabilities.getMaxAnisotropy();
-    const maxAniso = liteGpuMode ? Math.min(2, rawAniso) : rawAniso;
+    const maxAniso = liteGpuMode ? 1 : rawAniso;
     const compactAssets = liteGpuMode || isSoftwareGl;
     const cedarTex = createWoodGrainTexture('#A87B4F', '#6B4728', maxAniso, compactAssets);
     const walnutTex = createWoodGrainTexture('#69492F', '#3E2817', maxAniso, compactAssets);
@@ -507,6 +507,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     let lastDrawMs = 0;
     let slowFrameStreak = 0;
     let shadowTickCounter = 0;
+    let lastAppliedTeaId = '';
+    let lastLiquidCacheKey = '';
 
     function afterDraw(cb: () => void) {
       const gl = renderer.getContext() as WebGL2RenderingContext;
@@ -631,76 +633,83 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       }
       controls.update();
 
-      // 2. Vessel Shell Style & Per-Recipe Material Switching
-      vessel.chawanGroup.visible = state.tea.vesselStyle === 'chawan';
-      vessel.ceramicGroup.visible = state.tea.vesselStyle === 'ceramic';
-      vessel.glassGroup.visible = state.tea.vesselStyle === 'glass';
+      // 2. Vessel Shell Style & Per-Recipe Material Switching (only update on tea change to save Unisoc T612 CPU)
+      if (lastAppliedTeaId !== state.tea.id) {
+        lastAppliedTeaId = state.tea.id;
 
-      // Per-recipe ceramic/chawan customization
-      vessel.saucerMesh.visible = state.tea.id === 'matcha-rosetta-latte';
-      if (state.tea.id === 'matcha-rosetta-latte') {
-        vessel.ceramicBodyMat.color.setHex(0xf9f7f2);
-        vessel.ceramicHandleMat.color.setHex(0xf9f7f2);
-      } else {
-        vessel.ceramicBodyMat.color.setHex(0xf2efe6);
-        vessel.ceramicHandleMat.color.setHex(0xf2efe6);
+        vessel.chawanGroup.visible = state.tea.vesselStyle === 'chawan';
+        vessel.ceramicGroup.visible = state.tea.vesselStyle === 'ceramic';
+        vessel.glassGroup.visible = state.tea.vesselStyle === 'glass';
+
+        vessel.saucerMesh.visible = state.tea.id === 'matcha-rosetta-latte';
+        if (state.tea.id === 'matcha-rosetta-latte') {
+          vessel.ceramicBodyMat.color.setHex(0xf9f7f2);
+          vessel.ceramicHandleMat.color.setHex(0xf9f7f2);
+        } else {
+          vessel.ceramicBodyMat.color.setHex(0xf2efe6);
+          vessel.ceramicHandleMat.color.setHex(0xf2efe6);
+        }
+
+        vessel.kintsugiSeam.visible = state.tea.id === 'kintsugi-matcha';
+        if (state.tea.id === 'kintsugi-matcha') {
+          vessel.chawanBodyMat.color.setHex(0x232629);
+          vessel.chawanRimMat.color.setHex(0xd8b04a);
+        } else if (state.tea.id === 'classic-heritage-matcha') {
+          vessel.chawanBodyMat.color.setHex(0x6d2f29);
+          vessel.chawanRimMat.color.setHex(0xc99c46);
+        } else if (state.tea.id === 'uji-roasted-matcha') {
+          vessel.chawanBodyMat.color.setHex(0x78533f);
+          vessel.chawanRimMat.color.setHex(0xc49a6c);
+        } else if (state.tea.id === 'sakura-matcha') {
+          vessel.chawanBodyMat.color.setHex(0xf0e1da);
+          vessel.chawanRimMat.color.setHex(0xd88e99);
+        } else if (
+          state.tea.id === 'uji-matcha' ||
+          state.tea.id === 'stone-milled-koicha'
+        ) {
+          vessel.chawanBodyMat.color.setHex(0x2c3138);
+          vessel.chawanRimMat.color.setHex(0x5a6068);
+        } else if (
+          state.tea.id === 'ceremonial-matcha' ||
+          state.tea.id === 'pumpkin-spice-matcha'
+        ) {
+          vessel.chawanBodyMat.color.setHex(0xf0ece0);
+          vessel.chawanRimMat.color.setHex(0x4e823c);
+        } else {
+          vessel.chawanBodyMat.color.setHex(0x3b483d);
+          vessel.chawanRimMat.color.setHex(0xb6956a);
+        }
+
+        chasen.root.visible =
+          state.tea.category === 'matcha' || state.tea.category === 'latte';
+        equipmentRig.frotherSet.visible =
+          state.tea.equipmentId === 'milk-frother';
+        equipmentRig.clayTeapotSet.visible =
+          state.tea.equipmentId === 'clay-teapot';
+        equipmentRig.strainerSet.visible =
+          state.tea.equipmentId === 'strainer-kettle';
+        equipmentRig.herbalInfuserSet.visible =
+          state.tea.equipmentId === 'herbal-infuser';
+        equipmentRig.coldDripSet.visible =
+          state.tea.equipmentId === 'cold-drip';
+
+        _targetLeafColor.set(state.tea.deepColor);
+        vessel.leafMaterial.color.copy(_targetLeafColor);
       }
-
-      vessel.kintsugiSeam.visible = state.tea.id === 'kintsugi-matcha';
-      if (state.tea.id === 'kintsugi-matcha') {
-        vessel.chawanBodyMat.color.setHex(0x232629);
-        vessel.chawanRimMat.color.setHex(0xd8b04a);
-      } else if (state.tea.id === 'classic-heritage-matcha') {
-        vessel.chawanBodyMat.color.setHex(0x6d2f29);
-        vessel.chawanRimMat.color.setHex(0xc99c46);
-      } else if (state.tea.id === 'uji-roasted-matcha') {
-        vessel.chawanBodyMat.color.setHex(0x78533f);
-        vessel.chawanRimMat.color.setHex(0xc49a6c);
-      } else if (state.tea.id === 'sakura-matcha') {
-        vessel.chawanBodyMat.color.setHex(0xf0e1da);
-        vessel.chawanRimMat.color.setHex(0xd88e99);
-      } else if (
-        state.tea.id === 'uji-matcha' ||
-        state.tea.id === 'stone-milled-koicha'
-      ) {
-        vessel.chawanBodyMat.color.setHex(0x2c3138);
-        vessel.chawanRimMat.color.setHex(0x5a6068);
-      } else if (
-        state.tea.id === 'ceremonial-matcha' ||
-        state.tea.id === 'pumpkin-spice-matcha'
-      ) {
-        vessel.chawanBodyMat.color.setHex(0xf0ece0);
-        vessel.chawanRimMat.color.setHex(0x4e823c);
-      } else {
-        vessel.chawanBodyMat.color.setHex(0x3b483d);
-        vessel.chawanRimMat.color.setHex(0xb6956a);
-      }
-
-      // Show Chasen & category-specific 3D equipment on the tray
-      chasen.root.visible =
-        state.tea.category === 'matcha' || state.tea.category === 'latte';
-      equipmentRig.frotherSet.visible = state.tea.equipmentId === 'milk-frother';
-      equipmentRig.clayTeapotSet.visible =
-        state.tea.equipmentId === 'clay-teapot';
-      equipmentRig.strainerSet.visible =
-        state.tea.equipmentId === 'strainer-kettle';
-      equipmentRig.herbalInfuserSet.visible =
-        state.tea.equipmentId === 'herbal-infuser';
-      equipmentRig.coldDripSet.visible = state.tea.equipmentId === 'cold-drip';
 
       // Subtle tool idle / active animation
       if (!reducedMotion) {
         if (chasen.root.visible && state.step === 'STEEP_TEA') {
           chasen.whiskGroup.rotation.y = elapsed * 4.2;
           chasen.whiskGroup.position.y = 0.22 + Math.sin(elapsed * 6) * 0.03;
-        } else {
+        } else if (chasen.whiskGroup.rotation.y !== 0) {
           chasen.whiskGroup.rotation.y = 0;
           chasen.whiskGroup.position.y = 0.16;
         }
 
         if (equipmentRig.frotherSet.visible && state.step === 'STEEP_TEA') {
           equipmentRig.frotherWand.rotation.y = elapsed * 8;
-        } else {
+        } else if (equipmentRig.frotherWand.rotation.y !== 0) {
           equipmentRig.frotherWand.rotation.y = 0;
         }
 
@@ -727,27 +736,30 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
         vessel.liquidGroup.scale.z =
           state.tea.vesselStyle === 'chawan' ? 1.12 : 1.0;
 
-        const targetHex = getLiquidColor(
-          state.tea,
-          state.steepSeconds,
-          state.toppings,
-        );
-        _targetLiquidColor.set(targetHex);
+        const liquidKey = `${state.tea.id}:${state.steepSeconds}:${state.toppings.join(',')}`;
+        if (liquidKey !== lastLiquidCacheKey) {
+          lastLiquidCacheKey = liquidKey;
+          const targetHex = getLiquidColor(
+            state.tea,
+            state.steepSeconds,
+            state.toppings,
+          );
+          _targetLiquidColor.set(targetHex);
+          vessel.liquidMaterial.opacity =
+            state.toppings.includes('milk') ||
+            state.toppings.includes('milk-foam')
+              ? 0.98
+              : 0.9;
+        }
         vessel.liquidMaterial.color.lerp(
           _targetLiquidColor,
           Math.min(1, delta * 5),
         );
-        vessel.liquidMaterial.opacity =
-          state.toppings.includes('milk') || state.toppings.includes('milk-foam')
-            ? 0.98
-            : 0.9;
       } else {
         vessel.liquidGroup.visible = false;
       }
 
-      // 4. Tea Leaves Color & Gentle Swirl
-      _targetLeafColor.set(state.tea.deepColor);
-      vessel.leafMaterial.color.copy(_targetLeafColor);
+      // 4. Tea Leaves Visibility & Gentle Swirl
       vessel.leavesGroup.visible = state.step !== 'SERVED';
       if (state.isPouring || state.step === 'STEEP_TEA') {
         vessel.leavesGroup.rotation.y += delta * 0.65;
