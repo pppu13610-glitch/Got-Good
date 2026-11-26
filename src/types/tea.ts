@@ -1,8 +1,40 @@
-export type TeaCategory = 'green' | 'matcha' | 'oolong' | 'black' | 'herbal';
+export type TeaCategory =
+  | 'matcha'
+  | 'latte'
+  | 'green'
+  | 'oolong'
+  | 'black'
+  | 'herbal';
 
 export type WaterTemp = 'warm' | 'hot' | 'boiling';
 
-export type ToppingId = 'honey' | 'milk' | 'ice' | 'lemon' | 'osmanthus';
+export type ToppingId =
+  | 'honey'
+  | 'milk'
+  | 'ice'
+  | 'lemon'
+  | 'osmanthus'
+  | 'strawberry'
+  | 'brown-sugar'
+  | 'cinnamon'
+  | 'milk-foam'
+  | 'mint';
+
+export type EquipmentId =
+  | 'chasen-whisk'
+  | 'milk-frother'
+  | 'clay-teapot'
+  | 'strainer-kettle'
+  | 'herbal-infuser'
+  | 'cold-drip';
+
+export interface EquipmentInfo {
+  id: EquipmentId;
+  name: string;
+  actionLabel: string;
+  finishSteepLabel: string;
+  description: string;
+}
 
 export type AmbienceMode = 'none' | 'rain' | 'breeze';
 
@@ -48,6 +80,8 @@ export interface TeaType {
   description: string;
   flavorProfile: TeaFlavorProfile;
   recommendedToppings: ToppingId[];
+  equipmentId: EquipmentId;
+  baseIngredients: string[];
   leafShape: 'powder' | 'needle' | 'rolled' | 'broken' | 'blossom';
   vesselStyle: 'chawan' | 'ceramic' | 'glass';
 }
@@ -121,3 +155,25 @@ export interface TeaHouseSaveData {
   teaCounts: Record<string, number>;
   history: JournalRecord[];
 }
+
+export type GraphicsQuality = 'low' | 'medium' | 'high';
+export type TargetFps = 30 | 60 | 90 | 120;
+export type ResolutionScale = '0.75' | '1.0' | '1.5' | 'native';
+export type OptimizationProfile = 'auto' | 'realme-note-50' | 'standard';
+
+export interface GameSettings {
+  masterVolume: number;
+  sfxVolume: number;
+  ambienceVolume: number;
+  isMuted: boolean;
+  ambience: AmbienceMode;
+  graphicsQuality: GraphicsQuality;
+  resolutionScale: ResolutionScale;
+  shadowsEnabled: boolean;
+  antialiasEnabled: boolean;
+  particlesEnabled: boolean;
+  targetFps: TargetFps;
+  autoFullscreen: boolean;
+  optimizationProfile: OptimizationProfile;
+}
+

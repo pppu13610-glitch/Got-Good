@@ -5,7 +5,13 @@ export const TRAY_SURFACE_Y = 0.08;
 export interface TeaVesselHandles {
   root: THREE.Group;
   ceramicGroup: THREE.Group;
+  ceramicBodyMat: THREE.MeshStandardMaterial;
+  ceramicHandleMat: THREE.MeshStandardMaterial;
+  saucerMesh: THREE.Mesh;
   chawanGroup: THREE.Group;
+  chawanBodyMat: THREE.MeshStandardMaterial;
+  chawanRimMat: THREE.MeshStandardMaterial;
+  kintsugiSeam: THREE.Mesh;
   glassGroup: THREE.Group;
   liquidGroup: THREE.Group;
   liquidMesh: THREE.Mesh;
@@ -18,6 +24,11 @@ export interface TeaVesselHandles {
   lemonGroup: THREE.Group;
   honeyGroup: THREE.Group;
   osmanthusGroup: THREE.Group;
+  strawberryGroup: THREE.Group;
+  brownSugarGroup: THREE.Group;
+  cinnamonGroup: THREE.Group;
+  milkFoamGroup: THREE.Group;
+  mintGroup: THREE.Group;
   clickProxy: THREE.Mesh;
 }
 
@@ -31,6 +42,38 @@ export interface KettleHandles {
 export interface ChasenHandles {
   root: THREE.Group;
   whiskGroup: THREE.Group;
+  caddyGroup: THREE.Group;
+  chashakuGroup: THREE.Group;
+}
+
+export interface EquipmentRigHandles {
+  root: THREE.Group;
+  frotherSet: THREE.Group;
+  frotherWand: THREE.Group;
+  clayTeapotSet: THREE.Group;
+  strainerSet: THREE.Group;
+  herbalInfuserSet: THREE.Group;
+  coldDripSet: THREE.Group;
+  coldDripDrop: THREE.Mesh;
+}
+
+function makeContactShadow(
+  size: number,
+  shadowTex: THREE.CanvasTexture,
+  opacity = 0.45,
+): THREE.Mesh {
+  const m = new THREE.Mesh(
+    new THREE.PlaneGeometry(size, size),
+    new THREE.MeshBasicMaterial({
+      map: shadowTex,
+      transparent: true,
+      depthWrite: false,
+      opacity,
+    }),
+  );
+  m.rotation.x = -Math.PI / 2;
+  m.position.y = 0.004;
+  return m;
 }
 
 export function createTeaTableEnvironment(
@@ -42,7 +85,7 @@ export function createTeaTableEnvironment(
 ): THREE.Group {
   const envGroup = new THREE.Group();
 
-  // 1. Wide Cedar Tea Countertop (y = -0.18 to 0)
+  // 1. Wide Cedar Tea Countertop (y = -0.22 to 0)
   const tableGeo = new THREE.BoxGeometry(10.5, 0.22, 6.2);
   const tableMat = new THREE.MeshStandardMaterial({
     map: woodTex,
@@ -139,18 +182,7 @@ export function createTeaTableEnvironment(
     const xPos = -2.65 - idx * 0.65;
     const zPos = -0.35 + idx * 0.55;
 
-    const contact = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.65, 0.65),
-      new THREE.MeshBasicMaterial({
-        map: shadowTex,
-        transparent: true,
-        depthWrite: false,
-        opacity: 0.5,
-      }),
-    );
-    contact.rotation.x = -Math.PI / 2;
-    contact.position.y = 0.005;
-    canister.add(contact);
+    canister.add(makeContactShadow(0.65, shadowTex, 0.5));
 
     const bodyPts = [
       new THREE.Vector2(0, 0),
@@ -265,18 +297,7 @@ export function createTeaVesselSystem(
   root.position.set(-0.22, TRAY_SURFACE_Y, 0.08);
 
   // Contact shadow disc
-  const contactShadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.55, 1.55),
-    new THREE.MeshBasicMaterial({
-      map: shadowTex,
-      transparent: true,
-      depthWrite: false,
-      opacity: 0.55,
-    }),
-  );
-  contactShadow.rotation.x = -Math.PI / 2;
-  contactShadow.position.y = 0.004;
-  root.add(contactShadow);
+  root.add(makeContactShadow(1.55, shadowTex, 0.55));
 
   // Wooden Coaster (LatheGeometry)
   const coasterPts = [
@@ -299,7 +320,7 @@ export function createTeaVesselSystem(
   coaster.receiveShadow = true;
   root.add(coaster);
 
-  // === Style A: Glazed Ceramic Cup (for Green / Oolong / Black) ===
+  // === Style A: Glazed Ceramic Cup (for Green / Oolong / Black / Rosetta Latte) ===
   const ceramicGroup = new THREE.Group();
   ceramicGroup.position.y = 0.035;
 
@@ -315,14 +336,15 @@ export function createTeaVesselSystem(
     new THREE.Vector2(0.27, 0.07),
     new THREE.Vector2(0, 0.07),
   ];
+  const ceramicBodyMat = new THREE.MeshStandardMaterial({
+    color: 0xf2efe6,
+    map: ceramicTex,
+    roughness: 0.28,
+    metalness: 0.04,
+  });
   const mugBody = new THREE.Mesh(
     new THREE.LatheGeometry(mugPts, 44),
-    new THREE.MeshStandardMaterial({
-      color: 0xf2efe6,
-      map: ceramicTex,
-      roughness: 0.28,
-      metalness: 0.04,
-    }),
+    ceramicBodyMat,
   );
   mugBody.castShadow = true;
   mugBody.receiveShadow = true;
@@ -340,6 +362,29 @@ export function createTeaVesselSystem(
   mugFoot.position.y = 0.022;
   ceramicGroup.add(mugFoot);
 
+  // Ceramic saucer (shown for rosetta latte)
+  const saucerPts = [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.34, 0),
+    new THREE.Vector2(0.62, 0.045),
+    new THREE.Vector2(0.66, 0.07),
+    new THREE.Vector2(0.63, 0.075),
+    new THREE.Vector2(0.32, 0.022),
+    new THREE.Vector2(0, 0.022),
+  ];
+  const saucerMesh = new THREE.Mesh(
+    new THREE.LatheGeometry(saucerPts, 44),
+    new THREE.MeshStandardMaterial({
+      color: 0xf8f6ef,
+      roughness: 0.24,
+      metalness: 0.04,
+    }),
+  );
+  saucerMesh.castShadow = true;
+  saucerMesh.receiveShadow = true;
+  saucerMesh.visible = false;
+  ceramicGroup.add(saucerMesh);
+
   // Ceramic handle via TubeGeometry
   const handleCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(0.43, 0.60, 0),
@@ -347,14 +392,15 @@ export function createTeaVesselSystem(
     new THREE.Vector3(0.66, 0.34, 0),
     new THREE.Vector3(0.40, 0.22, 0),
   ]);
+  const ceramicHandleMat = new THREE.MeshStandardMaterial({
+    color: 0xf2efe6,
+    map: ceramicTex,
+    roughness: 0.28,
+    metalness: 0.04,
+  });
   const mugHandle = new THREE.Mesh(
     new THREE.TubeGeometry(handleCurve, 24, 0.045, 14, false),
-    new THREE.MeshStandardMaterial({
-      color: 0xf2efe6,
-      map: ceramicTex,
-      roughness: 0.28,
-      metalness: 0.04,
-    }),
+    ceramicHandleMat,
   );
   mugHandle.castShadow = true;
   ceramicGroup.add(mugHandle);
@@ -376,35 +422,55 @@ export function createTeaVesselSystem(
     new THREE.Vector2(0.24, 0.08),
     new THREE.Vector2(0, 0.08),
   ];
+  const chawanBodyMat = new THREE.MeshStandardMaterial({
+    color: 0x3b483d,
+    map: ceramicTex,
+    roughness: 0.34,
+    metalness: 0.06,
+  });
   const chawanBody = new THREE.Mesh(
     new THREE.LatheGeometry(chawanPts, 48),
-    new THREE.MeshStandardMaterial({
-      color: 0x3b483d,
-      map: ceramicTex,
-      roughness: 0.34,
-      metalness: 0.06,
-    }),
+    chawanBodyMat,
   );
   chawanBody.castShadow = true;
   chawanBody.receiveShadow = true;
   chawanGroup.add(chawanBody);
 
+  const chawanRimMat = new THREE.MeshStandardMaterial({
+    color: 0xb6956a,
+    roughness: 0.55,
+    metalness: 0.12,
+  });
   const chawanRim = new THREE.Mesh(
     new THREE.TorusGeometry(0.505, 0.025, 14, 48),
-    new THREE.MeshStandardMaterial({
-      color: 0xb6956a,
-      roughness: 0.62,
-      metalness: 0.04,
-    }),
+    chawanRimMat,
   );
   chawanRim.rotation.x = Math.PI / 2;
   chawanRim.position.y = 0.595;
   chawanGroup.add(chawanRim);
 
+  // Golden Kintsugi Repair Seam (for kintsugi-matcha)
+  const kintsugiCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.06, 0.57, 0.52),
+    new THREE.Vector3(0.03, 0.42, 0.50),
+    new THREE.Vector3(-0.04, 0.27, 0.45),
+    new THREE.Vector3(0.04, 0.11, 0.32),
+  ]);
+  const kintsugiSeam = new THREE.Mesh(
+    new THREE.TubeGeometry(kintsugiCurve, 20, 0.013, 8, false),
+    new THREE.MeshStandardMaterial({
+      color: 0xe6be53,
+      metalness: 0.9,
+      roughness: 0.2,
+    }),
+  );
+  kintsugiSeam.visible = false;
+  chawanGroup.add(kintsugiSeam);
+
   chawanGroup.visible = false;
   root.add(chawanGroup);
 
-  // === Style C: Heatproof Glass Cup (for Thai Tea / Butterfly Pea / Chamomile) ===
+  // === Style C: Heatproof Glass Cup (for Latte / Thai Tea / Butterfly Pea / Chamomile) ===
   const glassGroup = new THREE.Group();
   glassGroup.position.y = 0.035;
 
@@ -449,7 +515,7 @@ export function createTeaVesselSystem(
 
   // === Dynamic Liquid Volume ===
   const liquidGroup = new THREE.Group();
-  liquidGroup.position.y = 0.11; // Bottom inside cup
+  liquidGroup.position.y = 0.11;
 
   const liquidMaterial = new THREE.MeshPhysicalMaterial({
     color: 0xe8e6df,
@@ -461,7 +527,6 @@ export function createTeaVesselSystem(
     opacity: 0.92,
   });
 
-  // Tapered liquid body scaled along Y (height = 0.56 at full)
   const liquidGeo = new THREE.CylinderGeometry(0.415, 0.285, 0.56, 36);
   liquidGeo.translate(0, 0.28, 0);
   const liquidMesh = new THREE.Mesh(liquidGeo, liquidMaterial);
@@ -590,6 +655,168 @@ export function createTeaVesselSystem(
   osmanthusGroup.visible = false;
   root.add(osmanthusGroup);
 
+  // === Toppings: Strawberry Puree Layer & Berry Garnish ===
+  const strawberryGroup = new THREE.Group();
+  const berryLayerMat = new THREE.MeshPhysicalMaterial({
+    color: 0xd95670,
+    roughness: 0.22,
+    clearcoat: 0.65,
+    transparent: true,
+    opacity: 0.92,
+  });
+  const berryBase = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.31, 0.275, 0.14, 32),
+    berryLayerMat,
+  );
+  berryBase.position.y = 0.185;
+  berryBase.renderOrder = 2;
+  strawberryGroup.add(berryBase);
+
+  const berryBody = new THREE.Mesh(
+    new THREE.ConeGeometry(0.075, 0.14, 16),
+    new THREE.MeshStandardMaterial({color: 0xd1364f, roughness: 0.45}),
+  );
+  berryBody.rotation.x = Math.PI;
+  berryBody.position.set(0.34, 0.76, 0.15);
+  berryBody.rotation.z = -0.35;
+  strawberryGroup.add(berryBody);
+
+  const berryLeaf = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.055, 0.02, 0.02, 6),
+    new THREE.MeshStandardMaterial({color: 0x458038, roughness: 0.6}),
+  );
+  berryLeaf.position.set(0.36, 0.82, 0.15);
+  berryLeaf.rotation.z = -0.35;
+  strawberryGroup.add(berryLeaf);
+  strawberryGroup.visible = false;
+  root.add(strawberryGroup);
+
+  // === Toppings: Brown Sugar Caramel Layer & Tapioca/Sugar Pearls ===
+  const brownSugarGroup = new THREE.Group();
+  const caramelLayer = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.31, 0.275, 0.13, 32),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x7a4218,
+      roughness: 0.18,
+      clearcoat: 0.85,
+      transparent: true,
+      opacity: 0.92,
+    }),
+  );
+  caramelLayer.position.y = 0.18;
+  caramelLayer.renderOrder = 2;
+  brownSugarGroup.add(caramelLayer);
+
+  const pearlMat = new THREE.MeshPhysicalMaterial({
+    color: 0x3b200d,
+    roughness: 0.15,
+    clearcoat: 0.9,
+  });
+  const pearlGeo = new THREE.SphereGeometry(0.038, 12, 12);
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const pearl = new THREE.Mesh(pearlGeo, pearlMat);
+    pearl.position.set(
+      Math.cos(a) * 0.17,
+      0.15 + (i % 2) * 0.03,
+      Math.sin(a) * 0.17,
+    );
+    pearl.renderOrder = 2;
+    brownSugarGroup.add(pearl);
+  }
+  brownSugarGroup.visible = false;
+  root.add(brownSugarGroup);
+
+  // === Toppings: Cinnamon Stick & Pumpkin Spice Garnish ===
+  const cinnamonGroup = new THREE.Group();
+  const cinnamonBarkMat = new THREE.MeshStandardMaterial({
+    color: 0x7b421f,
+    roughness: 0.82,
+    metalness: 0.02,
+  });
+  const stick = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.034, 0.038, 0.62, 12),
+    cinnamonBarkMat,
+  );
+  stick.position.set(0.24, 0.64, 0.06);
+  stick.rotation.set(0.2, 0.15, -1.08);
+  stick.castShadow = true;
+  cinnamonGroup.add(stick);
+
+  const spiceDotGeo = new THREE.SphereGeometry(0.014, 8, 8);
+  const spiceDotMat = new THREE.MeshStandardMaterial({
+    color: 0x994a1c,
+    roughness: 0.9,
+  });
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 7) * Math.PI * 2;
+    const dot = new THREE.Mesh(spiceDotGeo, spiceDotMat);
+    dot.scale.set(1.2, 0.35, 1.2);
+    dot.position.set(Math.cos(a) * 0.13, 0.675, Math.sin(a) * 0.13);
+    cinnamonGroup.add(dot);
+  }
+  cinnamonGroup.visible = false;
+  root.add(cinnamonGroup);
+
+  // === Toppings: Creamy Milk Foam Cap ===
+  const milkFoamGroup = new THREE.Group();
+  milkFoamGroup.position.y = 0.67;
+  const foamMat = new THREE.MeshStandardMaterial({
+    color: 0xfbf7ee,
+    roughness: 0.72,
+    metalness: 0,
+  });
+  const foamCap = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.38, 0.405, 0.055, 36),
+    foamMat,
+  );
+  foamCap.renderOrder = 5;
+  milkFoamGroup.add(foamCap);
+
+  const foamCrown = new THREE.Mesh(
+    new THREE.SphereGeometry(0.38, 28, 16, 0, Math.PI * 2, 0, Math.PI * 0.32),
+    foamMat,
+  );
+  foamCrown.scale.y = 0.28;
+  foamCrown.position.y = -0.04;
+  foamCrown.renderOrder = 5;
+  milkFoamGroup.add(foamCrown);
+
+  // Delicate green matcha art leaf on foam
+  const artDisc = new THREE.Mesh(
+    new THREE.CircleGeometry(0.12, 16),
+    new THREE.MeshStandardMaterial({color: 0x629b45, roughness: 0.78}),
+  );
+  artDisc.rotation.x = -Math.PI / 2;
+  artDisc.position.y = 0.068;
+  artDisc.renderOrder = 5;
+  milkFoamGroup.add(artDisc);
+
+  milkFoamGroup.visible = false;
+  root.add(milkFoamGroup);
+
+  // === Toppings: Fresh Mint Sprig ===
+  const mintGroup = new THREE.Group();
+  mintGroup.position.set(0.08, 0.68, 0.12);
+  const mintMat = new THREE.MeshStandardMaterial({
+    color: 0x438a4b,
+    roughness: 0.55,
+  });
+  const leafAngles = [-0.6, 0.1, 0.8];
+  leafAngles.forEach((a, idx) => {
+    const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.055, 10, 10), mintMat);
+    leaf.scale.set(1.4, 0.22, 0.78);
+    leaf.position.set(
+      Math.cos(a) * 0.06,
+      0.015 + idx * 0.008,
+      Math.sin(a) * 0.06,
+    );
+    leaf.rotation.set(0.2, -a, 0.15);
+    mintGroup.add(leaf);
+  });
+  mintGroup.visible = false;
+  root.add(mintGroup);
+
   // Invisible raycast proxy for easy click-to-steep interaction
   const clickProxy = new THREE.Mesh(
     new THREE.CylinderGeometry(0.56, 0.45, 0.9, 16),
@@ -602,7 +829,13 @@ export function createTeaVesselSystem(
   return {
     root,
     ceramicGroup,
+    ceramicBodyMat,
+    ceramicHandleMat,
+    saucerMesh,
     chawanGroup,
+    chawanBodyMat,
+    chawanRimMat,
+    kintsugiSeam,
     glassGroup,
     liquidGroup,
     liquidMesh,
@@ -615,6 +848,11 @@ export function createTeaVesselSystem(
     lemonGroup,
     honeyGroup,
     osmanthusGroup,
+    strawberryGroup,
+    brownSugarGroup,
+    cinnamonGroup,
+    milkFoamGroup,
+    mintGroup,
     clickProxy,
   };
 }
@@ -626,19 +864,7 @@ export function createKettleGroup(
   const root = new THREE.Group();
   root.position.set(1.12, TRAY_SURFACE_Y, -0.15);
 
-  // Bamboo warmer coaster
-  const contact = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.45, 1.45),
-    new THREE.MeshBasicMaterial({
-      map: shadowTex,
-      transparent: true,
-      depthWrite: false,
-      opacity: 0.5,
-    }),
-  );
-  contact.rotation.x = -Math.PI / 2;
-  contact.position.y = 0.004;
-  root.add(contact);
+  root.add(makeContactShadow(1.45, shadowTex, 0.5));
 
   const stand = new THREE.Mesh(
     new THREE.CylinderGeometry(0.46, 0.50, 0.06, 32),
@@ -667,7 +893,6 @@ export function createKettleGroup(
     metalness: 0.85,
   });
 
-  // Kettle Vessel (LatheGeometry)
   const kettlePts = [
     new THREE.Vector2(0, 0),
     new THREE.Vector2(0.32, 0),
@@ -685,7 +910,6 @@ export function createKettleGroup(
   potBody.receiveShadow = true;
   bodyGroup.add(potBody);
 
-  // Brass Lid & Knob
   const lid = new THREE.Mesh(
     new THREE.CylinderGeometry(0.23, 0.25, 0.04, 28),
     brassMat,
@@ -697,7 +921,6 @@ export function createKettleGroup(
   knob.position.y = 0.65;
   bodyGroup.add(knob);
 
-  // Gooseneck Spout pointing toward -X (towards tea cup)
   const spoutCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(-0.36, 0.22, 0),
     new THREE.Vector3(-0.56, 0.34, 0),
@@ -711,7 +934,6 @@ export function createKettleGroup(
   spout.castShadow = true;
   bodyGroup.add(spout);
 
-  // Arching Top Handle
   const handleCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(0.38, 0.42, 0),
     new THREE.Vector3(0.32, 0.84, 0),
@@ -726,7 +948,6 @@ export function createKettleGroup(
   handle.castShadow = true;
   bodyGroup.add(handle);
 
-  // Pouring Water Stream (attached to bodyGroup world-aligned or root)
   const streamCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(-0.76, 0.62, 0),
     new THREE.Vector3(-0.92, 0.40, 0),
@@ -760,25 +981,16 @@ export function createKettleGroup(
 
 export function createChasenGroup(
   ceramicTex: THREE.CanvasTexture,
+  walnutTex: THREE.CanvasTexture,
   shadowTex: THREE.CanvasTexture,
 ): ChasenHandles {
   const root = new THREE.Group();
-  root.position.set(1.22, TRAY_SURFACE_Y, 0.72);
 
-  const contact = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.65, 0.65),
-    new THREE.MeshBasicMaterial({
-      map: shadowTex,
-      transparent: true,
-      depthWrite: false,
-      opacity: 0.45,
-    }),
-  );
-  contact.rotation.x = -Math.PI / 2;
-  contact.position.y = 0.004;
-  root.add(contact);
+  // 1. Chasen + Ceramic Stand (front-right of tray)
+  const whiskStandRoot = new THREE.Group();
+  whiskStandRoot.position.set(1.18, TRAY_SURFACE_Y, 0.72);
+  whiskStandRoot.add(makeContactShadow(0.65, shadowTex, 0.45));
 
-  // Ceramic holder stand
   const holderPts = [
     new THREE.Vector2(0, 0),
     new THREE.Vector2(0.14, 0),
@@ -797,9 +1009,8 @@ export function createChasenGroup(
     }),
   );
   holder.castShadow = true;
-  root.add(holder);
+  whiskStandRoot.add(holder);
 
-  // Bamboo whisk resting upright on stand
   const whiskGroup = new THREE.Group();
   whiskGroup.position.y = 0.16;
   const bambooMat = new THREE.MeshStandardMaterial({
@@ -834,6 +1045,498 @@ export function createChasenGroup(
   tines.position.y = 0.12;
   whiskGroup.add(tines);
 
-  root.add(whiskGroup);
-  return {root, whiskGroup};
+  whiskStandRoot.add(whiskGroup);
+  root.add(whiskStandRoot);
+
+  // 2. Lacquered Natsume Matcha Powder Caddy (back-left of tray)
+  const caddyGroup = new THREE.Group();
+  caddyGroup.position.set(-1.26, TRAY_SURFACE_Y, -0.45);
+  caddyGroup.add(makeContactShadow(0.75, shadowTex, 0.45));
+
+  const lacquerMat = new THREE.MeshPhysicalMaterial({
+    color: 0x231d19,
+    roughness: 0.2,
+    metalness: 0.08,
+    clearcoat: 0.9,
+  });
+  const caddyPts = [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.16, 0),
+    new THREE.Vector2(0.24, 0.18),
+    new THREE.Vector2(0.23, 0.36),
+    new THREE.Vector2(0.19, 0.38),
+    new THREE.Vector2(0, 0.38),
+  ];
+  const caddyBody = new THREE.Mesh(
+    new THREE.LatheGeometry(caddyPts, 32),
+    lacquerMat,
+  );
+  caddyBody.castShadow = true;
+  caddyGroup.add(caddyBody);
+
+  const goldBand = new THREE.Mesh(
+    new THREE.TorusGeometry(0.232, 0.008, 8, 32),
+    new THREE.MeshStandardMaterial({
+      color: 0xd4a948,
+      metalness: 0.85,
+      roughness: 0.22,
+    }),
+  );
+  goldBand.rotation.x = Math.PI / 2;
+  goldBand.position.y = 0.27;
+  caddyGroup.add(goldBand);
+
+  root.add(caddyGroup);
+
+  // 3. Curved Bamboo Chashaku Scoop + Resting Tray (front-left)
+  const chashakuGroup = new THREE.Group();
+  chashakuGroup.position.set(-1.18, TRAY_SURFACE_Y, 0.62);
+
+  const rest = new THREE.Mesh(
+    new THREE.BoxGeometry(0.32, 0.035, 0.12),
+    new THREE.MeshStandardMaterial({map: walnutTex, roughness: 0.7}),
+  );
+  rest.position.y = 0.018;
+  chashakuGroup.add(rest);
+
+  const scoopCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.32, 0.055, 0),
+    new THREE.Vector3(0.05, 0.065, 0),
+    new THREE.Vector3(0.26, 0.075, 0),
+    new THREE.Vector3(0.33, 0.04, 0),
+  ]);
+  const scoopStick = new THREE.Mesh(
+    new THREE.TubeGeometry(scoopCurve, 20, 0.016, 8, false),
+    bambooMat,
+  );
+  scoopStick.scale.set(1, 0.45, 1.45);
+  scoopStick.rotation.y = 0.35;
+  chashakuGroup.add(scoopStick);
+
+  const powderPinch = new THREE.Mesh(
+    new THREE.SphereGeometry(0.032, 10, 10),
+    new THREE.MeshStandardMaterial({color: 0x5c9642, roughness: 0.9}),
+  );
+  powderPinch.scale.set(1.2, 0.55, 0.9);
+  powderPinch.position.set(0.26, 0.04, -0.09);
+  chashakuGroup.add(powderPinch);
+
+  root.add(chashakuGroup);
+
+  return {root, whiskGroup, caddyGroup, chashakuGroup};
+}
+
+export function createEquipmentRig(
+  ceramicTex: THREE.CanvasTexture,
+  walnutTex: THREE.CanvasTexture,
+  shadowTex: THREE.CanvasTexture,
+  isSoftwareGl: boolean,
+): EquipmentRigHandles {
+  const root = new THREE.Group();
+
+  const steelMat = new THREE.MeshStandardMaterial({
+    color: 0xd3d8dc,
+    metalness: 0.88,
+    roughness: 0.24,
+  });
+  const brassMat = new THREE.MeshStandardMaterial({
+    color: 0xc99c4c,
+    metalness: 0.85,
+    roughness: 0.24,
+  });
+  const walnutMat = new THREE.MeshStandardMaterial({
+    map: walnutTex,
+    roughness: 0.68,
+    metalness: 0.02,
+  });
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    metalness: 0,
+    roughness: 0.08,
+    transmission: isSoftwareGl ? 0 : 0.76,
+    transparent: true,
+    opacity: isSoftwareGl ? 0.36 : 0.92,
+    ior: 1.5,
+    clearcoat: 1,
+    depthWrite: false,
+  });
+
+  // =========================================================
+  // 1. Milk Frother Pitcher + Frother Wand Set (milk-frother)
+  // =========================================================
+  const frotherSet = new THREE.Group();
+
+  // Stainless Steel Milk Pitcher at back-left
+  const pitcher = new THREE.Group();
+  pitcher.position.set(-1.24, TRAY_SURFACE_Y, -0.45);
+  pitcher.add(makeContactShadow(0.85, shadowTex, 0.45));
+
+  const pitcherPts = [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.24, 0),
+    new THREE.Vector2(0.25, 0.28),
+    new THREE.Vector2(0.21, 0.54),
+    new THREE.Vector2(0.24, 0.58),
+    new THREE.Vector2(0.20, 0.58),
+    new THREE.Vector2(0, 0.04),
+  ];
+  const pitcherBody = new THREE.Mesh(
+    new THREE.LatheGeometry(pitcherPts, 32),
+    steelMat,
+  );
+  pitcherBody.castShadow = true;
+  pitcher.add(pitcherBody);
+
+  const pitcherHandleCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.21, 0.48, 0),
+    new THREE.Vector3(0.36, 0.44, 0),
+    new THREE.Vector3(0.35, 0.18, 0),
+    new THREE.Vector3(0.24, 0.12, 0),
+  ]);
+  const pitcherHandle = new THREE.Mesh(
+    new THREE.TubeGeometry(pitcherHandleCurve, 18, 0.022, 8, false),
+    steelMat,
+  );
+  pitcher.add(pitcherHandle);
+
+  const milkInside = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.19, 0.19, 0.04, 24),
+    new THREE.MeshStandardMaterial({color: 0xf7f3ea, roughness: 0.3}),
+  );
+  milkInside.position.y = 0.44;
+  pitcher.add(milkInside);
+  frotherSet.add(pitcher);
+
+  // Handheld Milk Frother on Walnut Stand at front-right
+  const frotherStand = new THREE.Group();
+  frotherStand.position.set(1.22, TRAY_SURFACE_Y, 0.72);
+  frotherStand.add(makeContactShadow(0.55, shadowTex, 0.42));
+
+  const basePad = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.14, 0.16, 0.05, 24),
+    walnutMat,
+  );
+  basePad.position.y = 0.025;
+  frotherStand.add(basePad);
+
+  const frotherWand = new THREE.Group();
+  frotherWand.position.y = 0.05;
+  const wandHandle = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.045, 0.038, 0.32, 16),
+    walnutMat,
+  );
+  wandHandle.position.y = 0.44;
+  wandHandle.castShadow = true;
+  frotherWand.add(wandHandle);
+
+  const wandShaft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.01, 0.01, 0.28, 10),
+    steelMat,
+  );
+  wandShaft.position.y = 0.16;
+  frotherWand.add(wandShaft);
+
+  const wandCoil = new THREE.Mesh(
+    new THREE.TorusGeometry(0.05, 0.008, 8, 20),
+    steelMat,
+  );
+  wandCoil.rotation.x = Math.PI / 2;
+  wandCoil.position.y = 0.025;
+  frotherWand.add(wandCoil);
+
+  frotherStand.add(frotherWand);
+  frotherSet.add(frotherStand);
+  frotherSet.visible = false;
+  root.add(frotherSet);
+
+  // =========================================================
+  // 2. Yixing Clay Teapot & Bamboo Strainer (clay-teapot)
+  // =========================================================
+  const clayTeapotSet = new THREE.Group();
+  const clayMat = new THREE.MeshStandardMaterial({
+    color: 0x8f4c36,
+    map: ceramicTex,
+    roughness: 0.68,
+    metalness: 0.04,
+  });
+
+  const teapot = new THREE.Group();
+  teapot.position.set(-1.24, TRAY_SURFACE_Y, -0.38);
+  teapot.add(makeContactShadow(0.95, shadowTex, 0.48));
+
+  const potPts = [
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.24, 0),
+    new THREE.Vector2(0.36, 0.16),
+    new THREE.Vector2(0.34, 0.34),
+    new THREE.Vector2(0.20, 0.44),
+    new THREE.Vector2(0, 0.44),
+  ];
+  const clayBody = new THREE.Mesh(new THREE.LatheGeometry(potPts, 32), clayMat);
+  clayBody.castShadow = true;
+  teapot.add(clayBody);
+
+  const clayLid = new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.45),
+    clayMat,
+  );
+  clayLid.position.y = 0.40;
+  teapot.add(clayLid);
+
+  const clayFinial = new THREE.Mesh(
+    new THREE.SphereGeometry(0.042, 12, 12),
+    clayMat,
+  );
+  clayFinial.position.y = 0.59;
+  teapot.add(clayFinial);
+
+  const claySpoutCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.31, 0.18, 0),
+    new THREE.Vector3(0.46, 0.28, 0),
+    new THREE.Vector3(0.52, 0.40, 0),
+  ]);
+  const claySpout = new THREE.Mesh(
+    new THREE.TubeGeometry(claySpoutCurve, 16, 0.032, 10, false),
+    clayMat,
+  );
+  teapot.add(claySpout);
+
+  const clayHandleCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.28, 0.36, 0),
+    new THREE.Vector3(-0.48, 0.34, 0),
+    new THREE.Vector3(-0.46, 0.14, 0),
+    new THREE.Vector3(-0.26, 0.10, 0),
+  ]);
+  const clayHandle = new THREE.Mesh(
+    new THREE.TubeGeometry(clayHandleCurve, 16, 0.028, 10, false),
+    clayMat,
+  );
+  teapot.add(clayHandle);
+  teapot.rotation.y = -0.35;
+  clayTeapotSet.add(teapot);
+
+  // Bamboo Strainer resting on left-front
+  const strainer = new THREE.Group();
+  strainer.position.set(-1.14, TRAY_SURFACE_Y + 0.04, 0.62);
+  const bambooMat = new THREE.MeshStandardMaterial({
+    color: 0xd4b67d,
+    roughness: 0.74,
+  });
+  const strainerRim = new THREE.Mesh(
+    new THREE.TorusGeometry(0.19, 0.02, 10, 28),
+    bambooMat,
+  );
+  strainerRim.rotation.x = Math.PI / 2;
+  strainer.add(strainerRim);
+
+  const strainerMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 18, 10, 0, Math.PI * 2, Math.PI * 0.5, Math.PI * 0.5),
+    new THREE.MeshStandardMaterial({
+      color: 0xc2a26b,
+      roughness: 0.85,
+      wireframe: true,
+    }),
+  );
+  strainer.add(strainerMesh);
+
+  const strainerStem = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.018, 0.022, 0.34, 10),
+    bambooMat,
+  );
+  strainerStem.rotation.z = Math.PI / 2;
+  strainerStem.position.set(-0.34, 0, 0);
+  strainer.add(strainerStem);
+  clayTeapotSet.add(strainer);
+
+  clayTeapotSet.visible = false;
+  root.add(clayTeapotSet);
+
+  // =========================================================
+  // 3. Traditional Cloth Tea Filter & Brass Pitcher (strainer-kettle)
+  // =========================================================
+  const strainerSet = new THREE.Group();
+  const clothHolder = new THREE.Group();
+  clothHolder.position.set(-1.20, TRAY_SURFACE_Y, -0.36);
+  clothHolder.add(makeContactShadow(0.85, shadowTex, 0.45));
+
+  const tallMug = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.24, 0.21, 0.62, 28),
+    steelMat,
+  );
+  tallMug.position.y = 0.31;
+  tallMug.castShadow = true;
+  clothHolder.add(tallMug);
+
+  const clothRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.23, 0.016, 10, 28),
+    brassMat,
+  );
+  clothRing.rotation.x = Math.PI / 2;
+  clothRing.position.y = 0.63;
+  clothHolder.add(clothRing);
+
+  const clothBag = new THREE.Mesh(
+    new THREE.ConeGeometry(0.21, 0.38, 22, 1, true),
+    new THREE.MeshStandardMaterial({
+      color: 0xd9b38c,
+      roughness: 0.92,
+      side: THREE.DoubleSide,
+    }),
+  );
+  clothBag.rotation.x = Math.PI;
+  clothBag.position.y = 0.44;
+  clothHolder.add(clothBag);
+
+  const clothHandle = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.014, 0.014, 0.32, 8),
+    steelMat,
+  );
+  clothHandle.rotation.z = Math.PI / 2;
+  clothHandle.position.set(0.38, 0.63, 0);
+  clothHolder.add(clothHandle);
+
+  strainerSet.add(clothHolder);
+  strainerSet.visible = false;
+  root.add(strainerSet);
+
+  // =========================================================
+  // 4. Glass Herbal Infuser & Honey Dipper (herbal-infuser)
+  // =========================================================
+  const herbalInfuserSet = new THREE.Group();
+  const herbalPot = new THREE.Group();
+  herbalPot.position.set(-1.22, TRAY_SURFACE_Y, -0.38);
+  herbalPot.add(makeContactShadow(0.9, shadowTex, 0.45));
+
+  const glassBowl = new THREE.Mesh(
+    new THREE.SphereGeometry(0.32, 28, 20),
+    glassMat,
+  );
+  glassBowl.scale.set(1, 0.85, 1);
+  glassBowl.position.y = 0.28;
+  glassBowl.renderOrder = 6;
+  herbalPot.add(glassBowl);
+
+  const herbalInfuseTea = new THREE.Mesh(
+    new THREE.SphereGeometry(0.26, 24, 16, 0, Math.PI * 2, Math.PI * 0.25, Math.PI * 0.75),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xe6c86e,
+      roughness: 0.12,
+      transparent: true,
+      opacity: 0.84,
+    }),
+  );
+  herbalInfuseTea.scale.set(1, 0.82, 1);
+  herbalInfuseTea.position.y = 0.26;
+  herbalInfuseTea.renderOrder = 3;
+  herbalPot.add(herbalInfuseTea);
+
+  const bambooLid = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.18, 0.19, 0.05, 24),
+    walnutMat,
+  );
+  bambooLid.position.y = 0.53;
+  herbalPot.add(bambooLid);
+  herbalInfuserSet.add(herbalPot);
+
+  // Honey Dipper on front-left
+  const dipper = new THREE.Group();
+  dipper.position.set(-1.14, TRAY_SURFACE_Y + 0.04, 0.62);
+  const dipperRod = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.015, 0.015, 0.44, 10),
+    walnutMat,
+  );
+  dipperRod.rotation.z = Math.PI / 2;
+  dipper.add(dipperRod);
+  for (let i = 0; i < 4; i++) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(0.036, 0.01, 8, 16),
+      walnutMat,
+    );
+    ring.rotation.y = Math.PI / 2;
+    ring.position.x = 0.17 + i * 0.022;
+    dipper.add(ring);
+  }
+  herbalInfuserSet.add(dipper);
+  herbalInfuserSet.visible = false;
+  root.add(herbalInfuserSet);
+
+  // =========================================================
+  // 5. Cold-Drip Dew Glass Tower (cold-drip)
+  // =========================================================
+  const coldDripSet = new THREE.Group();
+  const tower = new THREE.Group();
+  tower.position.set(-1.24, TRAY_SURFACE_Y, -0.35);
+  tower.add(makeContactShadow(0.85, shadowTex, 0.45));
+
+  const towerBase = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.28, 0.30, 0.05, 28),
+    walnutMat,
+  );
+  towerBase.position.y = 0.025;
+  tower.add(towerBase);
+
+  const postLeft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.022, 0.022, 0.96, 12),
+    walnutMat,
+  );
+  postLeft.position.set(-0.22, 0.50, 0);
+  const postRight = postLeft.clone();
+  postRight.position.x = 0.22;
+  tower.add(postLeft, postRight);
+
+  const topChamber = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.16, 0.05, 0.32, 24),
+    glassMat,
+  );
+  topChamber.position.y = 0.80;
+  topChamber.renderOrder = 6;
+  tower.add(topChamber);
+
+  const bottomCarafe = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12, 0.21, 0.36, 24),
+    glassMat,
+  );
+  bottomCarafe.position.y = 0.24;
+  bottomCarafe.renderOrder = 6;
+  tower.add(bottomCarafe);
+
+  const dripMatcha = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.14, 0.18, 0.18, 20),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x5d9d47,
+      roughness: 0.14,
+      transparent: true,
+      opacity: 0.88,
+    }),
+  );
+  dripMatcha.position.y = 0.15;
+  dripMatcha.renderOrder = 3;
+  tower.add(dripMatcha);
+
+  const coldDripDrop = new THREE.Mesh(
+    new THREE.SphereGeometry(0.022, 10, 10),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x82c768,
+      roughness: 0.08,
+      transparent: true,
+      opacity: 0.88,
+    }),
+  );
+  coldDripDrop.position.y = 0.55;
+  tower.add(coldDripDrop);
+
+  coldDripSet.add(tower);
+  coldDripSet.visible = false;
+  root.add(coldDripSet);
+
+  return {
+    root,
+    frotherSet,
+    frotherWand,
+    clayTeapotSet,
+    strainerSet,
+    herbalInfuserSet,
+    coldDripSet,
+    coldDripDrop,
+  };
 }

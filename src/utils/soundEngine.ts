@@ -3,6 +3,9 @@ import {AmbienceMode} from '../types/tea';
 class CozySoundEngine {
   private ctx: AudioContext | null = null;
   private isMuted = false;
+  private masterVolume = 0.85;
+  private sfxVolume = 0.9;
+  private ambienceVolume = 0.75;
   private ambienceMode: AmbienceMode = 'none';
   private ambienceGain: GainNode | null = null;
   private ambienceSource: AudioBufferSourceNode | null = null;
@@ -28,6 +31,21 @@ class CozySoundEngine {
     this.ensureContext();
   }
 
+  public setVolumes(masterPct: number, sfxPct: number, ambiencePct: number) {
+    this.masterVolume = Math.max(0, Math.min(1, masterPct / 100));
+    this.sfxVolume = Math.max(0, Math.min(1, sfxPct / 100));
+    this.ambienceVolume = Math.max(0, Math.min(1, ambiencePct / 100));
+    if (this.ambienceGain && this.ctx) {
+      this.ambienceGain.gain.setTargetAtTime(
+        this.isMuted || this.ambienceMode === 'none'
+          ? 0
+          : this.getAmbienceVolume(),
+        this.ctx.currentTime,
+        0.1,
+      );
+    }
+  }
+
   public setMuted(muted: boolean) {
     this.isMuted = muted;
     if (this.ambienceGain && this.ctx) {
@@ -43,12 +61,18 @@ class CozySoundEngine {
     return this.isMuted;
   }
 
+  private getSfxScale(): number {
+    return this.masterVolume * this.sfxVolume;
+  }
+
   private getAmbienceVolume(): number {
-    return this.ambienceMode === 'rain' ? 0.045 : 0.035;
+    const base = this.ambienceMode === 'rain' ? 0.055 : 0.042;
+    return base * this.masterVolume * this.ambienceVolume;
   }
 
   public playTap() {
-    if (this.isMuted) return;
+    const scale = this.getSfxScale();
+    if (this.isMuted || scale <= 0.001) return;
     const ctx = this.ensureContext();
     if (!ctx) return;
 
@@ -59,7 +83,7 @@ class CozySoundEngine {
     osc.frequency.setValueAtTime(520, now);
     osc.frequency.exponentialRampToValueAtTime(280, now + 0.055);
 
-    gain.gain.setValueAtTime(0.06, now);
+    gain.gain.setValueAtTime(0.065 * scale, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
 
     osc.connect(gain);
@@ -69,7 +93,8 @@ class CozySoundEngine {
   }
 
   public playLeafDrop() {
-    if (this.isMuted) return;
+    const scale = this.getSfxScale();
+    if (this.isMuted || scale <= 0.001) return;
     const ctx = this.ensureContext();
     if (!ctx) return;
 
@@ -80,7 +105,7 @@ class CozySoundEngine {
     osc.frequency.setValueAtTime(660, now);
     osc.frequency.exponentialRampToValueAtTime(880, now + 0.09);
 
-    gain.gain.setValueAtTime(0.05, now);
+    gain.gain.setValueAtTime(0.055 * scale, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
 
     osc.connect(gain);
@@ -90,7 +115,8 @@ class CozySoundEngine {
   }
 
   public playPourWater() {
-    if (this.isMuted) return;
+    const scale = this.getSfxScale();
+    if (this.isMuted || scale <= 0.001) return;
     const ctx = this.ensureContext();
     if (!ctx) return;
 
@@ -119,8 +145,8 @@ class CozySoundEngine {
 
     const gain = ctx.createGain();
     gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(0.09, now + 0.18);
-    gain.gain.setValueAtTime(0.085, now + duration - 0.3);
+    gain.gain.linearRampToValueAtTime(0.095 * scale, now + 0.18);
+    gain.gain.setValueAtTime(0.09 * scale, now + duration - 0.3);
     gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
     noise.connect(filter);
@@ -131,7 +157,8 @@ class CozySoundEngine {
   }
 
   public playSweetSpotChime() {
-    if (this.isMuted) return;
+    const scale = this.getSfxScale();
+    if (this.isMuted || scale <= 0.001) return;
     const ctx = this.ensureContext();
     if (!ctx) return;
 
@@ -143,7 +170,7 @@ class CozySoundEngine {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now + idx * 0.09);
       gain.gain.setValueAtTime(0.001, now + idx * 0.09);
-      gain.gain.linearRampToValueAtTime(0.06, now + idx * 0.09 + 0.02);
+      gain.gain.linearRampToValueAtTime(0.065 * scale, now + idx * 0.09 + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.45);
       osc.connect(gain);
       gain.connect(ctx.destination);
@@ -153,7 +180,8 @@ class CozySoundEngine {
   }
 
   public playServeChime() {
-    if (this.isMuted) return;
+    const scale = this.getSfxScale();
+    if (this.isMuted || scale <= 0.001) return;
     const ctx = this.ensureContext();
     if (!ctx) return;
 
@@ -166,7 +194,7 @@ class CozySoundEngine {
       const t = now + idx * 0.07;
       osc.frequency.setValueAtTime(freq, t);
       gain.gain.setValueAtTime(0.001, t);
-      gain.gain.linearRampToValueAtTime(0.055, t + 0.03);
+      gain.gain.linearRampToValueAtTime(0.06 * scale, t + 0.03);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.75);
       osc.connect(gain);
       gain.connect(ctx.destination);

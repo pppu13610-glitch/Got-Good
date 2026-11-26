@@ -26,7 +26,8 @@ export default defineConfig(() => {
           description: 'เกมจำลองการชงชาแบบสบายๆ เล่นเพลินและเล่นแบบออฟไลน์ได้',
           theme_color: '#233029',
           background_color: '#F3F1EC',
-          display: 'standalone',
+          display: 'fullscreen',
+          display_override: ['fullscreen', 'standalone'],
           orientation: 'landscape',
           start_url: '/',
           scope: '/',
@@ -110,9 +111,13 @@ export default defineConfig(() => {
       },
     ],
     resolve: {
+      dedupe: ['react', 'react-dom'],
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'motion/react'],
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

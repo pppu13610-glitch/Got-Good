@@ -1,8 +1,29 @@
 import {getLevelFromXp} from '../data/progression';
-import {JournalRecord, TeaHouseSaveData} from '../types/tea';
+import {
+  GameSettings,
+  JournalRecord,
+  TeaHouseSaveData,
+} from '../types/tea';
 
 const STORAGE_KEY = 'baan_cha_save_v2';
 const LEGACY_KEY = 'baan_cha_save_v1';
+const SETTINGS_KEY = 'baan_cha_settings_v1';
+
+export const DEFAULT_SETTINGS: GameSettings = {
+  masterVolume: 85,
+  sfxVolume: 90,
+  ambienceVolume: 75,
+  isMuted: false,
+  ambience: 'none',
+  graphicsQuality: 'high',
+  resolutionScale: 'native',
+  shadowsEnabled: true,
+  antialiasEnabled: true,
+  particlesEnabled: true,
+  targetFps: 60,
+  autoFullscreen: true,
+  optimizationProfile: 'auto',
+};
 
 const DEFAULT_SAVE: TeaHouseSaveData = {
   xp: 0,
@@ -79,3 +100,106 @@ export function clearSaveData(): TeaHouseSaveData {
   }
   return DEFAULT_SAVE;
 }
+
+export function loadSettings(): GameSettings {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return DEFAULT_SETTINGS;
+    const parsed = JSON.parse(raw) as Partial<GameSettings>;
+    return {
+      masterVolume:
+        typeof parsed.masterVolume === 'number'
+          ? Math.max(0, Math.min(100, parsed.masterVolume))
+          : DEFAULT_SETTINGS.masterVolume,
+      sfxVolume:
+        typeof parsed.sfxVolume === 'number'
+          ? Math.max(0, Math.min(100, parsed.sfxVolume))
+          : DEFAULT_SETTINGS.sfxVolume,
+      ambienceVolume:
+        typeof parsed.ambienceVolume === 'number'
+          ? Math.max(0, Math.min(100, parsed.ambienceVolume))
+          : DEFAULT_SETTINGS.ambienceVolume,
+      isMuted:
+        typeof parsed.isMuted === 'boolean'
+          ? parsed.isMuted
+          : DEFAULT_SETTINGS.isMuted,
+      ambience:
+        parsed.ambience === 'rain' ||
+        parsed.ambience === 'breeze' ||
+        parsed.ambience === 'none'
+          ? parsed.ambience
+          : DEFAULT_SETTINGS.ambience,
+      graphicsQuality:
+        parsed.graphicsQuality === 'low' ||
+        parsed.graphicsQuality === 'medium' ||
+        parsed.graphicsQuality === 'high'
+          ? parsed.graphicsQuality
+          : DEFAULT_SETTINGS.graphicsQuality,
+      resolutionScale:
+        parsed.resolutionScale === '0.75' ||
+        parsed.resolutionScale === '1.0' ||
+        parsed.resolutionScale === '1.5' ||
+        parsed.resolutionScale === 'native'
+          ? parsed.resolutionScale
+          : DEFAULT_SETTINGS.resolutionScale,
+      shadowsEnabled:
+        typeof parsed.shadowsEnabled === 'boolean'
+          ? parsed.shadowsEnabled
+          : DEFAULT_SETTINGS.shadowsEnabled,
+      antialiasEnabled:
+        typeof parsed.antialiasEnabled === 'boolean'
+          ? parsed.antialiasEnabled
+          : DEFAULT_SETTINGS.antialiasEnabled,
+      particlesEnabled:
+        typeof parsed.particlesEnabled === 'boolean'
+          ? parsed.particlesEnabled
+          : DEFAULT_SETTINGS.particlesEnabled,
+      targetFps:
+        parsed.targetFps === 30 ||
+        parsed.targetFps === 60 ||
+        parsed.targetFps === 90 ||
+        parsed.targetFps === 120
+          ? parsed.targetFps
+          : DEFAULT_SETTINGS.targetFps,
+      autoFullscreen:
+        typeof parsed.autoFullscreen === 'boolean'
+          ? parsed.autoFullscreen
+          : DEFAULT_SETTINGS.autoFullscreen,
+      optimizationProfile:
+        parsed.optimizationProfile === 'auto' ||
+        parsed.optimizationProfile === 'realme-note-50' ||
+        parsed.optimizationProfile === 'standard'
+          ? parsed.optimizationProfile
+          : DEFAULT_SETTINGS.optimizationProfile,
+    };
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
+
+export function saveSettings(settings: GameSettings): void {
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+const LAST_VERSION_KEY = 'baan_cha_last_version_v1';
+
+export function loadLastSeenVersion(): string | null {
+  try {
+    return localStorage.getItem(LAST_VERSION_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function saveLastSeenVersion(version: string): void {
+  try {
+    localStorage.setItem(LAST_VERSION_KEY, version);
+  } catch {
+    // Ignore storage errors
+  }
+}
+

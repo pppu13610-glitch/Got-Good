@@ -12,11 +12,13 @@ import {
 } from '../three/proceduralTextures';
 import {
   createChasenGroup,
+  createEquipmentRig,
   createKettleGroup,
   createTeaTableEnvironment,
   createTeaVesselSystem,
 } from '../three/teaModels';
-import {BrewStep, CameraPreset, TeaType, ToppingId} from '../types/tea';
+import {BrewStep, CameraPreset, GameSettings, TeaType, ToppingId} from '../types/tea';
+import {probeDeviceOptimization} from '../utils/deviceOptimizer';
 
 interface TeaScene3DProps {
   tea: TeaType;
@@ -26,6 +28,7 @@ interface TeaScene3DProps {
   toppings: ToppingId[];
   isPouring: boolean;
   cameraPreset: CameraPreset;
+  settings: GameSettings;
   onKettleClick?: () => void;
   onVesselClick?: () => void;
 }
@@ -38,6 +41,7 @@ interface SceneSyncState {
   toppings: ToppingId[];
   isPouring: boolean;
   cameraPreset: CameraPreset;
+  settings: GameSettings;
 }
 
 const CAMERA_PRESETS: Record<
@@ -71,6 +75,34 @@ function detectSoftwareWebGL(): boolean {
   }
 }
 
+function resolvePixelRatio(
+  settings: GameSettings,
+  isSoftwareGl: boolean,
+  liteGpuMode: boolean,
+  dynamicScale = 1,
+): number {
+  if (isSoftwareGl) return 1;
+  const deviceDpr =
+    typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+  let baseRatio = 1;
+  switch (settings.resolutionScale) {
+    case '0.75':
+      baseRatio = 0.75;
+      break;
+    case '1.0':
+      baseRatio = 1;
+      break;
+    case '1.5':
+      baseRatio = liteGpuMode ? 1.15 : 1.5;
+      break;
+    case 'native':
+    default:
+      baseRatio = liteGpuMode ? Math.min(deviceDpr, 1.05) : Math.min(deviceDpr, 2.5);
+      break;
+  }
+  return Math.max(0.65, baseRatio * dynamicScale);
+}
+
 export const TeaScene3D: React.FC<TeaScene3DProps> = ({
   tea,
   step,
@@ -79,11 +111,20 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
   toppings,
   isPouring,
   cameraPreset,
+  settings,
   onKettleClick,
   onVesselClick,
 }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const keyLightRef = useRef<THREE.DirectionalLight | null>(null);
+  const isSoftwareGlRef = useRef<boolean>(false);
+  const shadowDirtyRef = useRef<boolean>(true);
+  const dynamicScaleRef = useRef<number>(1);
   const [webglError, setWebglError] = useState(false);
+
+  const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
+  const liteGpuMode = deviceReport.liteGpuActive;
 
   const syncRef = useRef<SceneSyncState>({
     tea,
@@ -93,6 +134,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     toppings,
     isPouring,
     cameraPreset,
+    settings,
   });
 
   const callbacksRef = useRef({
@@ -112,12 +154,44 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       toppings,
       isPouring,
       cameraPreset,
+      settings,
     };
+    shadowDirtyRef.current = true;
+    dynamicScaleRef.current = 1;
     if (lastPresetRef.current !== cameraPreset) {
       lastPresetRef.current = cameraPreset;
       presetAnimatingRef.current = true;
     }
-  }, [tea, step, waterLevel, steepSeconds, toppings, isPouring, cameraPreset]);
+
+    const renderer = rendererRef.current;
+    const keyLight = keyLightRef.current;
+    const container = mountRef.current;
+    const softwareGl = isSoftwareGlRef.current;
+    if (renderer && container) {
+      renderer.setPixelRatio(
+        resolvePixelRatio(settings, softwareGl, liteGpuMode, 1),
+      );
+      const w = Math.max(container.clientWidth, 280);
+      const h = Math.max(container.clientHeight, 260);
+      renderer.setSize(w, h);
+      const allowShadows = !softwareGl && settings.shadowsEnabled;
+      renderer.shadowMap.enabled = allowShadows;
+      renderer.shadowMap.needsUpdate = true;
+      if (keyLight) {
+        keyLight.castShadow = allowShadows;
+      }
+    }
+  }, [
+    tea,
+    step,
+    waterLevel,
+    steepSeconds,
+    toppings,
+    isPouring,
+    cameraPreset,
+    settings,
+    liteGpuMode,
+  ]);
 
   useEffect(() => {
     callbacksRef.current = {onKettleClick, onVesselClick};
@@ -128,29 +202,38 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     if (!container) return;
 
     const isSoftwareGl = detectSoftwareWebGL();
+    isSoftwareGlRef.current = isSoftwareGl;
     const reducedMotion =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const initSettings = syncRef.current.settings;
+    dynamicScaleRef.current = 1;
 
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
-        antialias: !isSoftwareGl,
+        antialias: !isSoftwareGl && !liteGpuMode && initSettings.antialiasEnabled,
         powerPreference: 'high-performance',
+        precision: liteGpuMode ? 'mediump' : 'highp',
       });
     } catch {
       setWebglError(true);
       return;
     }
+    rendererRef.current = renderer;
 
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
     renderer.setPixelRatio(
-      isSoftwareGl ? 1 : Math.min(window.devicePixelRatio || 1, 2),
+      resolvePixelRatio(initSettings, isSoftwareGl, liteGpuMode, 1),
     );
-    renderer.shadowMap.enabled = !isSoftwareGl;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled = !isSoftwareGl && initSettings.shadowsEnabled;
+    renderer.shadowMap.type = liteGpuMode
+      ? THREE.PCFShadowMap
+      : THREE.PCFSoftShadowMap;
+    renderer.shadowMap.autoUpdate = !liteGpuMode;
+    renderer.shadowMap.needsUpdate = true;
 
     const initW = Math.max(container.clientWidth, 320);
     const initH = Math.max(container.clientHeight, 260);
@@ -233,9 +316,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
 
     const keyLight = new THREE.DirectionalLight(0xfff1dc, 1.65);
     keyLight.position.set(4.5, 6.2, 3.8);
-    keyLight.castShadow = !isSoftwareGl;
-    keyLight.shadow.mapSize.width = 1024;
-    keyLight.shadow.mapSize.height = 1024;
+    keyLight.castShadow = !isSoftwareGl && initSettings.shadowsEnabled;
+    keyLightRef.current = keyLight;
+    const shadowSize = liteGpuMode ? 512 : 1024;
+    keyLight.shadow.mapSize.width = shadowSize;
+    keyLight.shadow.mapSize.height = shadowSize;
     keyLight.shadow.camera.near = 0.5;
     keyLight.shadow.camera.far = 18;
     const d = 4.2;
@@ -252,7 +337,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     scene.add(rimLight);
 
     // Procedural Textures
-    const maxAniso = renderer.capabilities.getMaxAnisotropy();
+    const rawAniso = renderer.capabilities.getMaxAnisotropy();
+    const maxAniso = liteGpuMode ? Math.min(2, rawAniso) : rawAniso;
     const cedarTex = createWoodGrainTexture('#A87B4F', '#6B4728', maxAniso);
     const walnutTex = createWoodGrainTexture('#69492F', '#3E2817', maxAniso);
     const matTex = createWovenMatTexture(maxAniso);
@@ -260,7 +346,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     const shadowTex = createContactShadowTexture();
     const steamTex = createSteamPuffTexture();
 
-    // Assemble Multi-Part 3D Models
+    // Assemble Multi-Part 3D Models (bypass extra transmission pass on Software GL & realme Note 50 Mali-G57)
+    const disableExtraGlassPass = isSoftwareGl || liteGpuMode;
     const envGroup = createTeaTableEnvironment(
       cedarTex,
       walnutTex,
@@ -274,24 +361,33 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       ceramicTex,
       walnutTex,
       shadowTex,
-      isSoftwareGl,
+      disableExtraGlassPass,
     );
     scene.add(vessel.root);
 
     const kettle = createKettleGroup(walnutTex, shadowTex);
     scene.add(kettle.root);
 
-    const chasen = createChasenGroup(ceramicTex, shadowTex);
+    const chasen = createChasenGroup(ceramicTex, walnutTex, shadowTex);
     scene.add(chasen.root);
 
-    // Rising Steam Wisps (Sprites above tea vessel)
+    const equipmentRig = createEquipmentRig(
+      ceramicTex,
+      walnutTex,
+      shadowTex,
+      disableExtraGlassPass,
+    );
+    scene.add(equipmentRig.root);
+
+    // Rising Steam Wisps (fewer sprites on budget mobile TBDR GPUs to avoid overdraw)
+    const steamCount = liteGpuMode ? 3 : 6;
     const steamSprites: {
       sprite: THREE.Sprite;
       phase: number;
       speed: number;
       driftX: number;
     }[] = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < steamCount; i++) {
       const mat = new THREE.SpriteMaterial({
         map: steamTex,
         transparent: true,
@@ -304,7 +400,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       scene.add(sprite);
       steamSprites.push({
         sprite,
-        phase: i / 6,
+        phase: i / steamCount,
         speed: 0.24 + (i % 3) * 0.05,
         driftX: ((i % 2 === 0 ? 1 : -1) * (0.04 + i * 0.015)),
       });
@@ -391,6 +487,9 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     let isDisposed = false;
     let kettleSlide = 0;
     let smoothedLevel = 0;
+    let lastDrawMs = 0;
+    let slowFrameStreak = 0;
+    let shadowTickCounter = 0;
 
     function afterDraw(cb: () => void) {
       const gl = renderer.getContext() as WebGL2RenderingContext;
@@ -419,9 +518,50 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
     function tick() {
       if (isDisposed) return;
 
+      const state = syncRef.current;
+      const nowMs = performance.now();
+      if (!isSoftwareGl && state.settings.targetFps < 120 && lastDrawMs > 0) {
+        const minInterval = 1000 / state.settings.targetFps;
+        if (nowMs - lastDrawMs < minInterval - 1.2) {
+          frameId = requestAnimationFrame(tick);
+          return;
+        }
+      }
+      const prevDrawMs = lastDrawMs;
+      lastDrawMs = nowMs;
+
       const delta = Math.min(clock.getDelta(), 0.1);
       const elapsed = clock.getElapsedTime();
-      const state = syncRef.current;
+
+      // Adaptive Resolution Guard for realme Note 50 / Mali-G57 MP1
+      if (
+        liteGpuMode &&
+        !isSoftwareGl &&
+        prevDrawMs > 0 &&
+        state.settings.targetFps >= 60
+      ) {
+        const frameSpanMs = nowMs - prevDrawMs;
+        if (frameSpanMs > 28) {
+          slowFrameStreak += 1;
+          if (slowFrameStreak >= 18 && dynamicScaleRef.current > 0.78) {
+            dynamicScaleRef.current = Math.max(
+              0.75,
+              dynamicScaleRef.current - 0.12,
+            );
+            slowFrameStreak = 0;
+            renderer.setPixelRatio(
+              resolvePixelRatio(
+                state.settings,
+                isSoftwareGl,
+                liteGpuMode,
+                dynamicScaleRef.current,
+              ),
+            );
+          }
+        } else if (slowFrameStreak > 0) {
+          slowFrameStreak -= 1;
+        }
+      }
 
       // 1. Camera Preset Smooth Interpolation
       if (presetAnimatingRef.current) {
@@ -474,13 +614,85 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       }
       controls.update();
 
-      // 2. Vessel Shell Style Switching
+      // 2. Vessel Shell Style & Per-Recipe Material Switching
       vessel.chawanGroup.visible = state.tea.vesselStyle === 'chawan';
       vessel.ceramicGroup.visible = state.tea.vesselStyle === 'ceramic';
       vessel.glassGroup.visible = state.tea.vesselStyle === 'glass';
 
-      // Show Chasen whisk prominently when brewing Matcha
-      chasen.root.visible = state.tea.category === 'matcha';
+      // Per-recipe ceramic/chawan customization
+      vessel.saucerMesh.visible = state.tea.id === 'matcha-rosetta-latte';
+      if (state.tea.id === 'matcha-rosetta-latte') {
+        vessel.ceramicBodyMat.color.setHex(0xf9f7f2);
+        vessel.ceramicHandleMat.color.setHex(0xf9f7f2);
+      } else {
+        vessel.ceramicBodyMat.color.setHex(0xf2efe6);
+        vessel.ceramicHandleMat.color.setHex(0xf2efe6);
+      }
+
+      vessel.kintsugiSeam.visible = state.tea.id === 'kintsugi-matcha';
+      if (state.tea.id === 'kintsugi-matcha') {
+        vessel.chawanBodyMat.color.setHex(0x232629);
+        vessel.chawanRimMat.color.setHex(0xd8b04a);
+      } else if (state.tea.id === 'classic-heritage-matcha') {
+        vessel.chawanBodyMat.color.setHex(0x6d2f29);
+        vessel.chawanRimMat.color.setHex(0xc99c46);
+      } else if (state.tea.id === 'uji-roasted-matcha') {
+        vessel.chawanBodyMat.color.setHex(0x78533f);
+        vessel.chawanRimMat.color.setHex(0xc49a6c);
+      } else if (state.tea.id === 'sakura-matcha') {
+        vessel.chawanBodyMat.color.setHex(0xf0e1da);
+        vessel.chawanRimMat.color.setHex(0xd88e99);
+      } else if (
+        state.tea.id === 'uji-matcha' ||
+        state.tea.id === 'stone-milled-koicha'
+      ) {
+        vessel.chawanBodyMat.color.setHex(0x2c3138);
+        vessel.chawanRimMat.color.setHex(0x5a6068);
+      } else if (
+        state.tea.id === 'ceremonial-matcha' ||
+        state.tea.id === 'pumpkin-spice-matcha'
+      ) {
+        vessel.chawanBodyMat.color.setHex(0xf0ece0);
+        vessel.chawanRimMat.color.setHex(0x4e823c);
+      } else {
+        vessel.chawanBodyMat.color.setHex(0x3b483d);
+        vessel.chawanRimMat.color.setHex(0xb6956a);
+      }
+
+      // Show Chasen & category-specific 3D equipment on the tray
+      chasen.root.visible =
+        state.tea.category === 'matcha' || state.tea.category === 'latte';
+      equipmentRig.frotherSet.visible = state.tea.equipmentId === 'milk-frother';
+      equipmentRig.clayTeapotSet.visible =
+        state.tea.equipmentId === 'clay-teapot';
+      equipmentRig.strainerSet.visible =
+        state.tea.equipmentId === 'strainer-kettle';
+      equipmentRig.herbalInfuserSet.visible =
+        state.tea.equipmentId === 'herbal-infuser';
+      equipmentRig.coldDripSet.visible = state.tea.equipmentId === 'cold-drip';
+
+      // Subtle tool idle / active animation
+      if (!reducedMotion) {
+        if (chasen.root.visible && state.step === 'STEEP_TEA') {
+          chasen.whiskGroup.rotation.y = elapsed * 4.2;
+          chasen.whiskGroup.position.y = 0.22 + Math.sin(elapsed * 6) * 0.03;
+        } else {
+          chasen.whiskGroup.rotation.y = 0;
+          chasen.whiskGroup.position.y = 0.16;
+        }
+
+        if (equipmentRig.frotherSet.visible && state.step === 'STEEP_TEA') {
+          equipmentRig.frotherWand.rotation.y = elapsed * 8;
+        } else {
+          equipmentRig.frotherWand.rotation.y = 0;
+        }
+
+        if (equipmentRig.coldDripSet.visible) {
+          const dropPhase = (elapsed * 0.85) % 1;
+          equipmentRig.coldDripDrop.position.y = 0.62 - dropPhase * 0.36;
+          equipmentRig.coldDripDrop.visible = dropPhase < 0.85;
+        }
+      }
 
       // 3. Liquid Fill & Color Interpolation
       smoothedLevel = THREE.MathUtils.damp(
@@ -508,9 +720,10 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
           _targetLiquidColor,
           Math.min(1, delta * 5),
         );
-        vessel.liquidMaterial.opacity = state.toppings.includes('milk')
-          ? 0.98
-          : 0.9;
+        vessel.liquidMaterial.opacity =
+          state.toppings.includes('milk') || state.toppings.includes('milk-foam')
+            ? 0.98
+            : 0.9;
       } else {
         vessel.liquidGroup.visible = false;
       }
@@ -539,6 +752,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
           (state.tea.vesselStyle === 'chawan' ? 0.82 : 1.0) *
           0.56;
       const showToppings = smoothedLevel > 0.45;
+      const isChawan = state.tea.vesselStyle === 'chawan';
 
       vessel.iceGroup.visible =
         showToppings && state.toppings.includes('ice');
@@ -551,8 +765,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
 
       vessel.lemonGroup.visible =
         showToppings && state.toppings.includes('lemon');
-      vessel.lemonGroup.position.y =
-        state.tea.vesselStyle === 'chawan' ? 0.59 : 0.73;
+      vessel.lemonGroup.position.y = isChawan ? 0.59 : 0.73;
 
       vessel.honeyGroup.visible =
         showToppings && state.toppings.includes('honey');
@@ -566,8 +779,34 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
         }
       }
 
-      // 7. Rising Steam Wisps (Hot teas without ice)
+      vessel.strawberryGroup.visible =
+        showToppings && state.toppings.includes('strawberry');
+      vessel.brownSugarGroup.visible =
+        showToppings && state.toppings.includes('brown-sugar');
+      vessel.cinnamonGroup.visible =
+        showToppings && state.toppings.includes('cinnamon');
+      vessel.cinnamonGroup.position.y = isChawan ? -0.08 : 0;
+
+      vessel.milkFoamGroup.visible =
+        showToppings && state.toppings.includes('milk-foam');
+      if (vessel.milkFoamGroup.visible) {
+        vessel.milkFoamGroup.position.y = liquidSurfaceY - 0.01;
+        vessel.milkFoamGroup.scale.set(
+          isChawan ? 1.08 : 1.0,
+          1,
+          isChawan ? 1.08 : 1.0,
+        );
+      }
+
+      vessel.mintGroup.visible =
+        showToppings && state.toppings.includes('mint');
+      if (vessel.mintGroup.visible) {
+        vessel.mintGroup.position.y = liquidSurfaceY + 0.01;
+      }
+
+      // 7. Rising Steam Wisps (Hot teas without ice, controlled by particlesEnabled)
       const emitSteam =
+        state.settings.particlesEnabled &&
         !reducedMotion &&
         smoothedLevel > 0.45 &&
         !state.toppings.includes('ice') &&
@@ -589,6 +828,22 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
         const scale = 0.28 + s.phase * 0.35;
         s.sprite.scale.set(scale, scale, 1);
         s.sprite.material.opacity = Math.sin(s.phase * Math.PI) * 0.42;
+      }
+
+      // Smart Shadow Caching on lite GPU mode (avoid re-rendering shadow map on static frames)
+      if (liteGpuMode && renderer.shadowMap.enabled) {
+        shadowTickCounter = (shadowTickCounter + 1) % 3;
+        const movingShadowCasters =
+          state.isPouring ||
+          kettleSlide > 0.015 ||
+          state.step === 'STEEP_TEA';
+        if (
+          shadowDirtyRef.current ||
+          (movingShadowCasters && shadowTickCounter === 0)
+        ) {
+          renderer.shadowMap.needsUpdate = true;
+          shadowDirtyRef.current = false;
+        }
       }
 
       renderer.render(scene, camera);
@@ -642,8 +897,10 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = ({
       steamTex.dispose();
       envTexture.dispose();
       renderer.dispose();
+      rendererRef.current = null;
+      keyLightRef.current = null;
     };
-  }, []);
+  }, [settings.antialiasEnabled, liteGpuMode]);
 
   if (webglError) {
     return (

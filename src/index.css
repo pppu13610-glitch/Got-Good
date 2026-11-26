@@ -7,6 +7,15 @@
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   }
 
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     font-family: var(--font-body);
     background-color: #f3f1ec;
@@ -17,6 +26,16 @@
 
   body {
     overscroll-behavior: none;
+  }
+
+  :fullscreen,
+  ::backdrop {
+    background-color: #233029;
+  }
+
+  .perf-lite [class*='backdrop-blur'] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   button,

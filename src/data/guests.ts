@@ -102,6 +102,49 @@ const ORDER_TEMPLATES: OrderTemplate[] = [
     gentleReply: 'ดื่มแล้วชื่นใจจังเลย ขอบใจนะจ๊ะที่ชงให้ยาย',
   },
   {
+    guestId: 'som-o',
+    minLevel: 1,
+    requestText:
+      'บ่ายนี้อากาศอุ่นจัง เมี๊ยว~ อยากได้มัทฉะลาเต้เย็น หรือ Matcha คลาสสิกใส่น้ำแข็งสักแก้วจัง',
+    preferredTeaIds: [
+      'iced-matcha-latte',
+      'classic-matcha',
+      'strawberry-matcha-latte',
+    ],
+    preferredToppings: ['milk', 'ice'],
+    happyReply: 'เย็นชื่นใจหอมนมสดเลย... ขอบคุณนะ เมี๊ยว~',
+    gentleReply: 'รสชาตินุ่มนวลดีจัง ดื่มแล้วสดชื่นเลย เมี๊ยว',
+  },
+  {
+    guestId: 'elara',
+    minLevel: 3,
+    requestText:
+      'วันนี้อยากลองชิมมัทฉะฟักทองสไปซ์ หรืออูจิ ชิซึคุ ไอซ์ เป็นแรงบันดาลใจเขียนนิยายสักหน่อยค่ะ',
+    preferredTeaIds: [
+      'pumpkin-spice-matcha',
+      'uji-shizuku-ice',
+      'brown-sugar-matcha-latte',
+    ],
+    preferredToppings: ['milk', 'ice', 'honey'],
+    happyReply: 'กลิ่นหอมเป็นเอกลักษณ์มากค่ะ มีไอเดียแต่งเรื่องต่อยาวเลย',
+    gentleReply: 'ขอบคุณนะคะ อุ่นใจและสดชื่นดีมากเลยค่ะ',
+  },
+  {
+    guestId: 'malee',
+    minLevel: 2,
+    requestText:
+      'ช่วงบ่ายแก่ๆ แบบนี้ ยายอยากได้มัทฉะตีฟองนุ่มๆ อย่าง Uji Matcha หรือ Matcha สำหรับพิธีกรรมจ้ะ',
+    preferredTeaIds: [
+      'uji-matcha',
+      'ceremonial-matcha',
+      'matcha-rosetta-latte',
+      'kintsugi-matcha',
+    ],
+    preferredTemp: 'hot',
+    happyReply: 'ฟองนุ่มหอมเข้มถูกใจยายเหลือเกิน ชงเก่งขึ้นเยอะเลยนะหลาน',
+    gentleReply: 'ได้จิบมัทฉะหอมๆ แบบนี้ ยายก็ชื่นใจมากแล้วจ้ะ',
+  },
+  {
     guestId: 'malee',
     minLevel: 4,
     requestText:
