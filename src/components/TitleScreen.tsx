@@ -7,6 +7,7 @@ import {
   Compass,
   History,
   Maximize2,
+  MessageSquarePlus,
   Minimize2,
   Play,
   SlidersHorizontal,
@@ -43,6 +44,7 @@ interface TitleScreenProps {
   onOpenHowToPlay: () => void;
   onOpenSettings?: () => void;
   onOpenUpdates?: () => void;
+  onOpenRequest?: () => void;
   isOverlayOpen?: boolean;
   isUltraLowRam?: boolean;
   updateAvailable?: boolean;
@@ -71,6 +73,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   onOpenHowToPlay,
   onOpenSettings,
   onOpenUpdates,
+  onOpenRequest,
   isOverlayOpen = false,
   isUltraLowRam = false,
   updateAvailable = false,
@@ -163,8 +166,48 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
         }}
       />
 
-      {/* Minimal Foreground UI */}
-      <div className="relative z-10 flex h-full w-full flex-col justify-end safe-px safe-pb pb-4 sm:pb-6 lg:pb-8">
+      {/* Minimal Foreground UI: Top Separated Knowledge Strip + Bottom Enter-Game Lockup */}
+      <div className="relative z-10 flex h-full w-full flex-col justify-between safe-px safe-pt safe-pb pt-3 sm:pt-5 pb-4 sm:pb-6 lg:pb-8">
+        {/* Top-Right: Separated สมุดชงชา & วิธีชง (away from cute title lockup & Enter Game CTA) */}
+        <motion.div
+          initial={{opacity: 0, y: -10}}
+          animate={{opacity: 1, y: 0}}
+          transition={{duration: 0.24, ease: MODAL_EASE}}
+          className="flex justify-end"
+        >
+          <div className="flex items-center gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25">
+            <motion.button
+              type="button"
+              whileTap={{scale: 0.94}}
+              transition={TAP_SPRING}
+              onClick={() => {
+                soundEngine.unlock();
+                onOpenJournal();
+              }}
+              className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap"
+            >
+              <BookOpen className="h-4 w-4 text-[#8CD19A] shrink-0" aria-hidden="true" />
+              <span>
+                สมุดชงชา ({unlockedCount}/{TEAS.length})
+              </span>
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{scale: 0.94}}
+              transition={TAP_SPRING}
+              onClick={() => {
+                soundEngine.unlock();
+                onOpenHowToPlay();
+              }}
+              className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap"
+            >
+              <Compass className="h-4 w-4 text-[#DFC48C] shrink-0" aria-hidden="true" />
+              <span>วิธีชง</span>
+            </motion.button>
+          </div>
+        </motion.div>
+
         <div className="flex flex-wrap items-end justify-between gap-4">
           {/* Bottom-Left: Calm Title Lockup & Primary Start CTA */}
           <motion.div
@@ -397,45 +440,6 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                       </motion.button>
                     </div>
                   </div>
-
-                  <div>
-                    <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
-                      สมุดชาและคู่มือ
-                    </h3>
-                    <div className="grid grid-cols-2 gap-2">
-                      <motion.button
-                        type="button"
-                        whileHover={{scale: 1.02}}
-                        whileTap={{scale: 0.95}}
-                        transition={TAP_SPRING}
-                        onClick={() => {
-                          setShowMenuModal(false);
-                          onOpenJournal();
-                        }}
-                        className="flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]"
-                      >
-                        <BookOpen className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                        <span>
-                          สมุดชา ({unlockedCount}/{TEAS.length})
-                        </span>
-                      </motion.button>
-
-                      <motion.button
-                        type="button"
-                        whileHover={{scale: 1.02}}
-                        whileTap={{scale: 0.95}}
-                        transition={TAP_SPRING}
-                        onClick={() => {
-                          setShowMenuModal(false);
-                          onOpenHowToPlay();
-                        }}
-                        className="flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]"
-                      >
-                        <Compass className="h-4 w-4 text-[#7D5A3C] shrink-0" aria-hidden="true" />
-                        <span>วิธีชงและปลดล็อก</span>
-                      </motion.button>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Column 2: Audio & Offline Install */}
@@ -567,6 +571,22 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                             ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})`
                             : `เช็คอัปเดตเวอร์ชั่น (v${CURRENT_APP_VERSION})`}
                         </span>
+                      </motion.button>
+                    )}
+                    {onOpenRequest && (
+                      <motion.button
+                        type="button"
+                        whileTap={{scale: 0.95}}
+                        transition={TAP_SPRING}
+                        onClick={() => {
+                          soundEngine.playTap();
+                          setShowMenuModal(false);
+                          onOpenRequest();
+                        }}
+                        className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EAE6DC]"
+                      >
+                        <MessageSquarePlus className="h-4 w-4 text-[#7D5A3C]" aria-hidden="true" />
+                        <span>หน้าร้องขอถึงผู้สร้าง (Gmail · GitHub)</span>
                       </motion.button>
                     )}
                     <div className="flex flex-wrap items-center justify-between gap-2">

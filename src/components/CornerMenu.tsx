@@ -10,7 +10,9 @@ import {
   Home,
   Maximize2,
   Menu,
+  MessageSquarePlus,
   Minimize2,
+  Power,
   Settings,
   Sparkles,
   Volume2,
@@ -22,6 +24,7 @@ import {CURRENT_APP_VERSION} from '../data/changelog';
 import {getUnlockedTeas, getXpProgress} from '../data/progression';
 import {TEAS} from '../data/teas';
 import {AmbienceMode, GameMode, ScreenView} from '../types/tea';
+import {exitAppCompletely, isNativeMobileApp} from '../utils/appLifecycle';
 import {soundEngine} from '../utils/soundEngine';
 import {PWAInstallButton} from './PWAInstallButton';
 
@@ -40,6 +43,7 @@ interface CornerMenuProps {
   onNavigate: (target: ScreenView) => void;
   onOpenSettings: () => void;
   onOpenUpdates: () => void;
+  onOpenRequest: () => void;
   updateAvailable?: boolean;
   latestBrowserVersion?: string | null;
 }
@@ -65,6 +69,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
   onNavigate,
   onOpenSettings,
   onOpenUpdates,
+  onOpenRequest,
   updateAvailable = false,
   latestBrowserVersion = null,
 }) => {
@@ -171,10 +176,10 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
 
               {/* Scrollable Drawer Content */}
               <div className="flex-1 overflow-y-auto p-4 space-y-5">
-                {/* Navigation */}
+                {/* Main & Enter Game Navigation */}
                 <div>
                   <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
-                    ไปยังหน้าต่างๆ
+                    หน้าหลักและเข้าเล่น
                   </h3>
                   <nav className="grid grid-cols-2 gap-2" aria-label="เมนูหลัก">
                     <motion.button
@@ -189,7 +194,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       }`}
                     >
                       <Home className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                      <span>หน้าแรก</span>
+                      <span>หน้าเข้าเกม</span>
                     </motion.button>
 
                     <motion.button
@@ -206,7 +211,15 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       <Coffee className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
                       <span>มุมชงชา 3D</span>
                     </motion.button>
+                  </nav>
+                </div>
 
+                {/* Separated Tea Journal & How To Brew Section */}
+                <div className="border-t border-[#1F2823]/10 pt-3">
+                  <h3 className="text-xs font-semibold text-[#5A655D] mb-2">
+                    สมุดชงชาและวิธีชง
+                  </h3>
+                  <div className="grid grid-cols-2 gap-2">
                     <motion.button
                       type="button"
                       whileTap={{scale: 0.96}}
@@ -219,7 +232,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       }`}
                     >
                       <BookOpen className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
-                      <span>สมุดชา</span>
+                      <span>สมุดชงชา</span>
                     </motion.button>
 
                     <motion.button
@@ -236,7 +249,7 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       <Compass className="h-4 w-4 text-[#7D5A3C] shrink-0" aria-hidden="true" />
                       <span>วิธีชง</span>
                     </motion.button>
-                  </nav>
+                  </div>
                 </div>
 
                 {/* Game Mode */}
@@ -444,6 +457,34 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       soundEngine.unlock();
                       soundEngine.playTap();
                       setOpen(false);
+                      onOpenRequest();
+                    }}
+                    className="flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 py-2 text-left hover:bg-[#F3F0E8]"
+                  >
+                    <span className="flex items-center gap-2.5 min-w-0">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#EFECE4] text-[#7D5A3C] shrink-0">
+                        <MessageSquarePlus className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-bold text-[#1F2823] truncate">
+                          หน้าร้องขอถึงผู้สร้าง
+                        </span>
+                        <span className="block text-[11px] text-[#5A655D] truncate">
+                          ส่งคำร้องขอทุกชนิดทาง Gmail · GitHub
+                        </span>
+                      </span>
+                    </span>
+                    <ChevronRight className="h-4 w-4 text-[#5A655D] shrink-0" aria-hidden="true" />
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    whileTap={{scale: 0.96}}
+                    transition={TAP_SPRING}
+                    onClick={() => {
+                      soundEngine.unlock();
+                      soundEngine.playTap();
+                      setOpen(false);
                       onOpenSettings();
                     }}
                     className="flex min-h-[54px] w-full items-center justify-between gap-3 rounded-xl border border-[#2E6F40]/25 bg-[#EDF5EE] px-3.5 py-2.5 text-left hover:bg-[#E2EFE4]"
@@ -463,6 +504,22 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                     </span>
                     <ChevronRight className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
                   </motion.button>
+
+                  {isNativeMobileApp() && (
+                    <motion.button
+                      type="button"
+                      whileTap={{scale: 0.96}}
+                      transition={TAP_SPRING}
+                      onClick={() => {
+                        setOpen(false);
+                        exitAppCompletely();
+                      }}
+                      className="flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl border border-[#8E3535]/25 bg-[#FDF2F2] px-3.5 text-xs sm:text-sm font-semibold text-[#8E3535] hover:bg-[#F9E4E4]"
+                    >
+                      <Power className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span>ปิดแอปและออกจากเกมทั้งหมด</span>
+                    </motion.button>
+                  )}
                 </div>
               </div>
             </motion.aside>

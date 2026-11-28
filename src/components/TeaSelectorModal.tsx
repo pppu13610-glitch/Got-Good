@@ -380,7 +380,7 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
       animate={{opacity: 1}}
       exit={{opacity: 0}}
       transition={{duration: 0.16, ease: 'easeOut'}}
-      className="pointer-events-none fixed inset-0 z-30 flex items-center justify-center p-2.5 sm:p-4"
+      className="pointer-events-none fixed inset-0 z-40 flex items-center justify-center p-2 sm:p-4"
     >
       <motion.div
         role="dialog"
@@ -390,11 +390,11 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
         animate={{opacity: 1, scale: 1, y: 0}}
         exit={{opacity: 0, scale: 0.95, y: 14}}
         transition={{duration: 0.24, ease: MODAL_EASE}}
-        className="pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform"
+        className="pointer-events-auto flex w-full max-w-[440px] max-h-[88dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform"
         style={{contain: 'layout style paint'}}
       >
         {/* Header matching reference card */}
-        <div className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-2">
+        <div className="flex shrink-0 items-center justify-between gap-3 px-4 pt-3 pb-1.5">
           <AnimatePresence mode="wait">
             <motion.h2
               key={activeCat.id}
@@ -415,14 +415,14 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
             whileTap={{scale: 0.92}}
             transition={{type: 'spring', stiffness: 420, damping: 26}}
             aria-label="ซ่อนหน้าต่างเลือกชา"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0"
           >
             <X className="h-5 w-5 stroke-[2.5]" aria-hidden="true" />
           </motion.button>
         </div>
 
-        {/* Category Filter Strip with Sliding Pill */}
-        <div className="flex items-center gap-1 overflow-x-auto px-4 pb-2.5 touch-pan-x">
+        {/* Category Filter Strip with Sliding Pill (shrink-0 prevents vertical clipping) */}
+        <div className="flex shrink-0 items-center gap-1.5 overflow-x-auto overflow-y-hidden border-b border-[#1F2823]/10 px-4 py-2 touch-pan-x">
           {CATEGORIES.map((cat) => {
             const active = categoryFilter === cat.id;
             return (
@@ -431,7 +431,7 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
                 type="button"
                 whileTap={{scale: 0.95}}
                 onClick={() => onCategoryChange(cat.id)}
-                className="relative min-h-[36px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0"
+                className="relative min-h-[34px] rounded-xl px-3 py-1 text-xs font-medium whitespace-nowrap shrink-0"
               >
                 {active && (
                   <motion.span
@@ -452,8 +452,8 @@ export const TeaSelectorModal: React.FC<TeaSelectorModalProps> = React.memo(({
           })}
         </div>
 
-        {/* Vertical Scrollable Recipe Cards (single compositor transition per filter switch) */}
-        <div className="flex-1 overflow-y-auto px-4 pb-4">
+        {/* Vertical Scrollable Recipe Cards (min-h-0 ensures clean inner scroll without squishing tabs) */}
+        <div className="flex-1 min-h-0 overflow-y-auto px-4 pt-2.5 pb-4">
           <motion.div
             key={categoryFilter}
             initial={{opacity: 0, y: 6}}

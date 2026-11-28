@@ -3,6 +3,7 @@ import {Capacitor} from '@capacitor/core';
 export const CREATOR_GITHUB_USERNAME = 'pppu13610-glitch';
 export const CREATOR_GITHUB_PROFILE_URL = 'https://github.com/pppu13610-glitch';
 export const CREATOR_GITHUB_REPO_URL = 'https://github.com/pppu13610-glitch/baan-cha-3d';
+export const CREATOR_GMAIL_ADDRESS = 'pppu13610@gmail.com';
 
 const TRUSTED_HTTPS_HOSTS = new Set<string>([
   'ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app',
@@ -10,6 +11,7 @@ const TRUSTED_HTTPS_HOSTS = new Set<string>([
   'github.com',
   'api.github.com',
   'raw.githubusercontent.com',
+  'mail.google.com',
 ]);
 
 export function isTrustedExternalUrl(rawUrl: string): boolean {
@@ -37,6 +39,26 @@ export function isTrustedSameOrHttpsUrl(rawUrl: string): boolean {
   if (!rawUrl || typeof rawUrl !== 'string') return false;
   if (rawUrl.startsWith('/')) return !rawUrl.startsWith('//');
   return isTrustedExternalUrl(rawUrl);
+}
+
+export function buildCreatorMailtoUrl(subject: string, body: string): string {
+  const safeSubject = subject.trim().slice(0, 180);
+  const safeBody = body.trim().slice(0, 1800);
+  return `mailto:${CREATOR_GMAIL_ADDRESS}?subject=${encodeURIComponent(safeSubject)}&body=${encodeURIComponent(safeBody)}`;
+}
+
+export function buildCreatorGmailComposeUrl(subject: string, body: string): string {
+  const safeSubject = subject.trim().slice(0, 180);
+  const safeBody = body.trim().slice(0, 1800);
+  const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CREATOR_GMAIL_ADDRESS)}&su=${encodeURIComponent(safeSubject)}&body=${encodeURIComponent(safeBody)}`;
+  return sanitizeExternalUrl(url, `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CREATOR_GMAIL_ADDRESS)}`);
+}
+
+export function buildCreatorGithubIssueUrl(title: string, body: string): string {
+  const safeTitle = title.trim().slice(0, 180);
+  const safeBody = body.trim().slice(0, 1800);
+  const url = `${CREATOR_GITHUB_REPO_URL}/issues/new?title=${encodeURIComponent(safeTitle)}&body=${encodeURIComponent(safeBody)}`;
+  return sanitizeExternalUrl(url, CREATOR_GITHUB_PROFILE_URL);
 }
 
 export interface SecurityCheckItem {

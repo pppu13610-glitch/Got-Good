@@ -8,15 +8,19 @@ export interface ChillTrackMeta {
   audioSrc?: string;
 }
 
+export const JUST_THE_TWO_OF_US_AUDIO_URL =
+  '/assets/aistudio/Grover_Washington__Jr_-_Just_the_Two_of_Us__Edit___________Bill_Withers__c940e5a8.m4a';
+
 export const SMOKE_IN_THE_GLASS_AUDIO_URL =
   '/assets/aistudio/_____-_Smoke_in_the_Glass_402718f9.m4a';
 
 export const CHILL_MUSIC_TRACKS: ChillTrackMeta[] = [
   {
-    id: 'morning-bamboo',
-    title: 'สายลมอุ่นในสวนไผ่',
-    subtitle: 'คอร์ดเปียโนไฟฟ้าอุ่นๆ ผสมระฆังไม้ไผ่สบายใจ',
-    bpmLabel: '74 BPM',
+    id: 'just-the-two-of-us',
+    title: 'Just the Two of Us',
+    subtitle: 'Grover Washington, Jr. · ไฟล์เพลงต้นฉบับ',
+    bpmLabel: '3:57',
+    audioSrc: JUST_THE_TWO_OF_US_AUDIO_URL,
   },
   {
     id: 'rainy-teahouse',
@@ -45,7 +49,7 @@ export const CHILL_MUSIC_TRACKS: ChillTrackMeta[] = [
   },
 ];
 
-type SynthTrackId = 'morning-bamboo' | 'rainy-teahouse' | 'twilight-lantern';
+type SynthTrackId = 'rainy-teahouse' | 'twilight-lantern';
 
 interface ChillPattern {
   stepMs: number;
@@ -56,28 +60,6 @@ interface ChillPattern {
 }
 
 const CHILL_PATTERNS: Record<SynthTrackId, ChillPattern> = {
-  // Warm sunlit garden: Fmaj7 -> Em7 -> Dm9 -> Cmaj7
-  'morning-bamboo': {
-    stepMs: 405,
-    chords: [
-      [174.61, 220.0, 261.63, 329.63], // Fmaj7
-      [164.81, 196.0, 246.94, 293.66], // Em7
-      [146.83, 174.61, 220.0, 329.63], // Dm9
-      [130.81, 164.81, 196.0, 246.94], // Cmaj7
-    ],
-    melody: [
-      523.25, null, 659.25, 587.33,
-      440.0, null, 392.0, null,
-      493.88, null, 587.33, 523.25,
-      392.0, null, 440.0, null,
-      587.33, null, 659.25, 783.99,
-      659.25, null, 523.25, null,
-      440.0, 493.88, 523.25, null,
-      392.0, null, 329.63, null,
-    ],
-    bass: [87.31, 82.41, 73.42, 65.41],
-    leadWave: 'sine',
-  },
   // Mellow rainy cafe lo-fi: Am9 -> Fmaj7 -> Dm7 -> E7sus4
   'rainy-teahouse': {
     stepMs: 440,
@@ -125,11 +107,7 @@ const CHILL_PATTERNS: Record<SynthTrackId, ChillPattern> = {
 };
 
 function isSynthTrack(track: MusicTrackId): track is SynthTrackId {
-  return (
-    track === 'morning-bamboo' ||
-    track === 'rainy-teahouse' ||
-    track === 'twilight-lantern'
-  );
+  return track === 'rainy-teahouse' || track === 'twilight-lantern';
 }
 
 class CozySoundEngine {
@@ -140,7 +118,7 @@ class CozySoundEngine {
   private ambienceVolume = 0.75;
   private musicVolume = 0.7;
   private ambienceMode: AmbienceMode = 'none';
-  private musicTrack: MusicTrackId = 'morning-bamboo';
+  private musicTrack: MusicTrackId = 'just-the-two-of-us';
 
   private ambienceGain: GainNode | null = null;
   private ambienceSource: AudioBufferSourceNode | null = null;
@@ -152,10 +130,20 @@ class CozySoundEngine {
   private musicStepIdx = 0;
 
   private audioEl: HTMLAudioElement | null = null;
+  private currentAudioSrc: string | null = null;
   private audioUnlocked = false;
+  private isBackgrounded = false;
+
+  private isAudioSuppressed(): boolean {
+    return (
+      this.isBackgrounded ||
+      (typeof document !== 'undefined' && document.hidden)
+    );
+  }
 
   private ensureContext(createIfMissing = true): AudioContext | null {
     if (typeof window === 'undefined') return null;
+    if (this.isAudioSuppressed()) return null;
     if (!this.ctx) {
       if (!createIfMissing) return null;
       const AudioCtx =
@@ -166,7 +154,9 @@ class CozySoundEngine {
       this.ctx = new AudioCtx();
     }
     if (this.ctx.state === 'suspended') {
-      void this.ctx.resume();
+      void this.ctx.resume().catch(() => {
+        // Ignore resume failure if no user gesture yet
+      });
     }
     return this.ctx;
   }
@@ -183,23 +173,27 @@ class CozySoundEngine {
     if (!this.audioEl) return;
     const isAudioTrack = Boolean(this.getAudioFileMeta());
     this.audioEl.volume =
-      this.isMuted || !isAudioTrack ? 0 : this.getAudioFileVolume();
+      this.isMuted || !isAudioTrack || this.isAudioSuppressed()
+        ? 0
+        : this.getAudioFileVolume();
   }
 
   private startAudioFileTrack(src: string) {
     if (typeof window === 'undefined' || typeof Audio === 'undefined') return;
+    if (this.isAudioSuppressed()) return;
     if (!this.audioEl) {
       const audio = new Audio();
       audio.loop = true;
       audio.preload = 'auto';
       this.audioEl = audio;
     }
-    if (!this.audioEl.src.endsWith(src)) {
+    if (this.currentAudioSrc !== src) {
+      this.currentAudioSrc = src;
       this.audioEl.src = src;
       this.audioEl.currentTime = 0;
     }
     this.syncAudioElementVolume();
-    if (!this.isMuted && this.audioUnlocked) {
+    if (!this.isMuted && this.audioUnlocked && !this.isAudioSuppressed()) {
       void this.audioEl.play().catch(() => {
         // Ignore browser autoplay rejection until next user gesture
       });
@@ -209,6 +203,7 @@ class CozySoundEngine {
   private stopAudioFileTrack(resetPosition = true) {
     if (!this.audioEl) return;
     this.audioEl.pause();
+    this.audioEl.volume = 0;
     if (resetPosition) {
       try {
         this.audioEl.currentTime = 0;
@@ -218,7 +213,76 @@ class CozySoundEngine {
     }
   }
 
+  public pauseForBackground() {
+    this.isBackgrounded = true;
+    this.stopMusicLoop();
+    this.stopAudioFileTrack(false);
+    this.stopAmbienceNodes();
+    if (this.ctx && this.ctx.state === 'running') {
+      void this.ctx.suspend().catch(() => {
+        // Ignore suspend errors
+      });
+    }
+  }
+
+  public resumeFromForeground() {
+    if (typeof document !== 'undefined' && document.hidden) return;
+    this.isBackgrounded = false;
+    if (this.ctx && this.ctx.state === 'suspended') {
+      void this.ctx.resume().catch(() => {
+        // Ignore resume errors until user gesture
+      });
+    }
+    if (this.isMuted) return;
+
+    const fileTrack = this.getAudioFileMeta();
+    if (fileTrack?.audioSrc && this.audioUnlocked) {
+      this.startAudioFileTrack(fileTrack.audioSrc);
+    } else if (
+      this.ctx &&
+      isSynthTrack(this.musicTrack) &&
+      this.audioUnlocked &&
+      this.musicTimer === null
+    ) {
+      this.startMusicLoop();
+    }
+
+    if (this.ambienceMode !== 'none' && this.audioUnlocked && !this.ambienceSource) {
+      this.setAmbience(this.ambienceMode);
+    }
+  }
+
+  public hardStopForExit() {
+    this.isBackgrounded = true;
+    this.stopMusicLoop();
+    this.stopAmbienceNodes();
+    if (this.audioEl) {
+      try {
+        this.audioEl.pause();
+        this.audioEl.volume = 0;
+        this.audioEl.removeAttribute('src');
+        this.audioEl.load();
+      } catch {
+        // Ignore cleanup errors
+      }
+      this.audioEl = null;
+      this.currentAudioSrc = null;
+    }
+    if (this.ctx) {
+      try {
+        void this.ctx.suspend().catch(() => {});
+        void this.ctx.close().catch(() => {});
+      } catch {
+        // Ignore close errors
+      }
+      this.ctx = null;
+      this.musicBusGain = null;
+      this.musicFilter = null;
+    }
+  }
+
   public unlock() {
+    if (this.isAudioSuppressed()) return;
     this.audioUnlocked = true;
     const ctx = this.ensureContext(true);
     const fileTrack = this.getAudioFileMeta();
@@ -302,7 +366,9 @@ class CozySoundEngine {
       if (changed) {
         this.stopAudioFileTrack(true);
       }
-      this.startAudioFileTrack(fileTrack.audioSrc);
+      if (!this.isAudioSuppressed()) {
+        this.startAudioFileTrack(fileTrack.audioSrc);
+      }
       return;
     }
 
@@ -311,7 +377,7 @@ class CozySoundEngine {
       this.musicStepIdx = 0;
       this.stopMusicLoop();
     }
-    if (this.ctx && !this.isMuted && this.musicTimer === null) {
+    if (this.ctx && !this.isMuted && !this.isAudioSuppressed() && this.musicTimer === null) {
       this.startMusicLoop();
     }
   }
@@ -467,7 +533,7 @@ class CozySoundEngine {
   }
 
   private startMusicLoop() {
-    if (!isSynthTrack(this.musicTrack)) return;
+    if (!isSynthTrack(this.musicTrack) || this.isAudioSuppressed()) return;
     const ctx = this.ensureContext(true);
     if (!ctx) return;
     this.ensureMusicBus(ctx);
@@ -628,7 +694,7 @@ class CozySoundEngine {
   public setAmbience(mode: AmbienceMode) {
     this.ambienceMode = mode;
     this.stopAmbienceNodes();
-    if (mode === 'none') return;
+    if (mode === 'none' || this.isAudioSuppressed()) return;
 
     const ctx = this.ensureContext();
     if (!ctx) return;

@@ -1,16 +1,16 @@
 {
-  "version": "2.12.0",
-  "previousVersion": "2.11.0",
-  "releaseDate": "26 พ.ย. 2026",
-  "releaseTitle": "โมเดล 3D ใหม่ 3 ตัว (Spirit Blossom Kindred, Body, Ultimate CICADA Suit V2) & เพลง Smoke in the Glass",
+  "version": "2.14.0",
+  "previousVersion": "2.13.0",
+  "releaseDate": "27 พ.ย. 2026",
+  "releaseTitle": "โมเดล 3D ไร้รอยต่อสมจริงยิ่งขึ้น ทรงผม-ชุดตัดเย็บใหม่ & ลูกค้าทุกตัวเป็นมนุษย์",
   "browserUrl": "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
   "devBrowserUrl": "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
   "githubUrl": "https://github.com/pppu13610-glitch",
   "developer": "pppu13610-glitch",
   "highlights": [
-    "เพิ่มโมเดล 3D Spirit Blossom Kindred โดย Retronous (@Retronous) [85187f9]",
-    "เพิ่มโมเดล 3D Body โดย Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]",
-    "เพิ่มโมเดล 3D Ultimate CICADA Suit V2 โดย rendysix (@rendysix) [21122d8]",
-    "เพิ่มเพลง “Smoke in the Glass” ด้วยไฟล์เพลงต้นฉบับให้เลือกฟังในหน้าตั้งค่า"
+    "เชื่อมรอยต่อแขนเสื้อ-มือ ขา-ถุงน่อง-รองเท้า และลำตัว-คอเป็น Multi-Material SkinnedMesh ไร้รอยต่อขั้นสุด",
+    "อัปเกรดทรงผม 3D แบบคลุมศีรษะและปอยผมริบบิ้นปลายเรียวพร้อมประกายเส้นผมเงางามทุกตัวละคร",
+    "เพิ่มลวดลายชุดตัดเย็บ คาร์ดิแกนถัก เสื้อกั๊ก เทรนช์โค้ท และเสื้อคอตั้งปักลายไทยของคุณยายมาลี",
+    "ปรับอวาตาร์ 2D และโมเดล 3D ลูกค้าทั้งหมด (คุณส้มโอ คุณเอลาร่า คุณยายมาลี) ให้เป็นตัวละครมนุษย์เต็มตัว"
   ]
 }

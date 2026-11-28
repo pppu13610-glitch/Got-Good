@@ -264,7 +264,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     const rect = base.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    const maxR = Math.max(24, rect.width * 0.36);
+    const maxR = Math.max(22, rect.width * 0.30);
 
     const dx = clientX - cx;
     const dy = clientY - cy;
@@ -606,24 +606,24 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
 
       {/* Top Landscape HUD Bar */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px">
-        {/* Top-Left: Level + Mode + Customer Ordered Menu Card */}
-        <div className="pointer-events-auto flex flex-col gap-1.5 max-w-[60vw] sm:max-w-md">
-          <div className="flex items-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2.5 py-1 shadow-xs">
+        {/* Top-Left: Compact Level + Mode + Customer Ordered Menu Card */}
+        <div className="pointer-events-auto flex flex-col items-start gap-1 max-w-[245px] sm:max-w-[270px]">
+          <div className="flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs">
             <div className="min-w-0">
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-xs sm:text-sm font-semibold text-[#1F2823] whitespace-nowrap">
+              <div className="flex items-baseline gap-1">
+                <span className="font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap">
                   Lv.{xpInfo.level}
                 </span>
-                <span className="hidden md:inline text-xs font-medium text-[#2E6F40] truncate">
+                <span className="hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate">
                   {xpInfo.title}
                 </span>
-                <span className="font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap">
+                <span className="font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap">
                   {xpInfo.nextLevelXp !== null
                     ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}`
                     : 'MAX'}
                 </span>
               </div>
-              <div className="mt-1 h-1.5 w-20 sm:w-28 overflow-hidden rounded-full bg-[#1F2823]/12">
+              <div className="mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12">
                 <motion.div
                   className="h-full w-full origin-left rounded-full bg-[#2E6F40]"
                   animate={{scaleX: Math.max(0.02, xpInfo.progressRatio)}}
@@ -632,7 +632,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-1 rounded-lg bg-[#EAE6DC] p-0.5">
+            <div className="flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5">
               {(
                 [
                   {id: 'guest', label: 'รับรองแขก'},
@@ -652,7 +652,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                       setCustomerSequenceKey((k) => k + 1);
                     }
                   }}
-                  className="relative min-h-[38px] sm:min-h-[40px] rounded-md px-2.5 text-xs font-medium whitespace-nowrap shrink-0"
+                  className="relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0"
                 >
                   {mode === m.id && (
                     <motion.span
@@ -673,7 +673,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
             </div>
           </div>
 
-          {/* Customer Ordered Menu Card (shown as customer sits and starts ordering) */}
+          {/* Customer Ordered Menu Card (compact top-left footprint so center 3D view stays clear) */}
           <AnimatePresence mode="wait">
             {mode === 'guest' && customerPhase !== 'ENTERING' && (
               <motion.div
@@ -682,11 +682,11 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                 animate={{opacity: 1, x: 0, scale: 1}}
                 exit={{opacity: 0, x: 12, scale: 0.96}}
                 transition={{type: 'spring', stiffness: 360, damping: 28}}
-                className="flex flex-col gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 p-2.5 shadow-sm"
+                className="flex w-full max-w-[235px] sm:max-w-[258px] flex-col gap-1 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 p-1.5 sm:p-2 shadow-sm"
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-start gap-2">
                   <div
-                    className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]"
+                    className="relative h-8 w-8 sm:h-9 sm:w-9 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-xs font-semibold text-[#1F2823]"
                     style={{backgroundColor: guestOrder.guest.accentBg}}
                   >
                     {!portraitFailed[guestOrder.guest.id] ? (
@@ -708,8 +708,8 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-display text-xs font-semibold text-[#1F2823] truncate">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="font-display text-[11px] font-semibold text-[#1F2823] truncate">
                         {guestOrder.guest.name}
                       </span>
                       {step !== 'SERVED' && (
@@ -719,29 +719,26 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                           whileTap={{scale: 0.9}}
                           onClick={handleSwapGuest}
                           aria-label="เปลี่ยนแขก"
-                          className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0"
+                          className="inline-flex min-h-[24px] min-w-[24px] items-center justify-center gap-0.5 rounded-md px-1.5 text-[10px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0"
                         >
-                          <RefreshCw className="h-3 w-3" aria-hidden="true" />
-                          <span className="hidden sm:inline">เปลี่ยน</span>
+                          <RefreshCw className="h-2.5 w-2.5" aria-hidden="true" />
+                          <span>เปลี่ยน</span>
                         </motion.button>
                       )}
                     </div>
-                    <p className="text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2">
+                    <p className="text-[10px] sm:text-[10.5px] text-[#27312B] leading-tight line-clamp-2">
                       “{brewResult?.guestReply ?? guestOrder.requestText}”
                     </p>
                   </div>
                 </div>
 
-                {/* Ordered Menu List */}
-                <div className="border-t border-[#1F2823]/8 pt-1.5 text-[11px] text-[#224B2B]">
-                  <p className="font-semibold text-[#1F2823]">
-                    รายการเมนูที่ลูกค้าสั่ง:
+                {/* Compact Ordered Menu Summary */}
+                <div className="border-t border-[#1F2823]/8 pt-1 text-[10px] leading-tight text-[#224B2B]">
+                  <p className="font-medium text-[#2E6F40] line-clamp-1">
+                    สั่ง: {orderedMenuSummary.teaNames.join(' / ')}
                   </p>
-                  <p className="mt-0.5 leading-snug text-[#2E6F40] font-medium">
-                    • เมนูชา: {orderedMenuSummary.teaNames.join(' / ')}
-                  </p>
-                  <p className="leading-snug text-[#4A534D]">
-                    • อุณหภูมิ: {orderedMenuSummary.tempLabel}
+                  <p className="text-[#4A534D] truncate">
+                    {orderedMenuSummary.tempLabel}
                     {orderedMenuSummary.toppingNames.length > 0
                       ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(', ')}`
                       : ''}
@@ -757,14 +754,14 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
       <AnimatePresence>
         {step === 'EXPLORE_SHOP' && (
           <>
-            {/* Bottom-Left Touch Analog Joystick for Walking Around the Shop */}
+            {/* Bottom-Left Touch Analog Joystick (shifted right for thumb comfort & bigger green stick) */}
             <motion.div
               key="explore-joystick"
               initial={{opacity: 0, scale: 0.9}}
               animate={{opacity: 1, scale: 1}}
               exit={{opacity: 0, scale: 0.9}}
               transition={{duration: 0.18}}
-              className="fixed bottom-4 left-4 z-20 flex flex-col items-center gap-1.5 safe-pb select-none"
+              className="fixed bottom-3.5 left-10 sm:left-16 z-20 flex flex-col items-center gap-1 safe-pb select-none"
             >
               <div
                 ref={joystickBaseRef}
@@ -773,12 +770,12 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                 onPointerUp={handleJoystickUp}
                 onPointerCancel={handleJoystickUp}
                 aria-label="ก้านบังคับเดินรอบร้าน"
-                className="relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/85 shadow-lg"
+                className="relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/86 shadow-lg"
               >
-                <div className="h-10 w-10 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" />
+                <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" />
                 <div
                   ref={joystickKnobRef}
-                  className="pointer-events-none absolute h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
+                  className="pointer-events-none absolute h-14 w-14 sm:h-16 sm:w-16 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
                 />
               </div>
               <span className="rounded-lg bg-[#FAF9F6]/88 px-2 py-0.5 text-[10px] font-medium text-[#39423C] shadow-2xs">

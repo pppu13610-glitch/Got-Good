@@ -15,8 +15,8 @@ export const DEFAULT_SETTINGS: GameSettings = {
   sfxVolume: 90,
   ambienceVolume: 75,
   musicVolume: 70,
-  musicTrack: 'morning-bamboo',
-  playerCharacter: 'tea-master',
+  musicTrack: 'just-the-two-of-us',
+  playerCharacter: 'tea-artisan',
   isMuted: false,
   ambience: 'none',
   graphicsQuality: 'high',
@@ -80,16 +80,8 @@ export function normalizeOptimizationProfile(raw: unknown): OptimizationProfile 
   }
 }
 
-export function normalizePlayerCharacter(raw: unknown): PlayerCharacterId {
-  switch (raw) {
-    case 'tea-master':
-    case 'spirit-blossom-kindred':
-    case 'diego-body':
-    case 'cicada-suit-v2':
-      return raw;
-    default:
-      return DEFAULT_SETTINGS.playerCharacter;
-  }
+export function normalizePlayerCharacter(_raw: unknown): PlayerCharacterId {
+  return 'tea-artisan';
 }
 
 function sanitizeJournalRecord(raw: unknown): JournalRecord | null {
@@ -203,7 +195,7 @@ export function migrateSettingsPayload(raw: unknown): GameSettings {
         : DEFAULT_SETTINGS.musicVolume,
     musicTrack:
       parsed.musicTrack === 'none' ||
-      parsed.musicTrack === 'morning-bamboo' ||
+      parsed.musicTrack === 'just-the-two-of-us' ||
       parsed.musicTrack === 'rainy-teahouse' ||
       parsed.musicTrack === 'twilight-lantern' ||
       parsed.musicTrack === 'smoke-in-the-glass'

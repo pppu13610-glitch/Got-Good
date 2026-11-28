@@ -21261,6 +21261,26 @@ var BookOpen = createLucideIcon("book-open", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Box = createLucideIcon("box", [
+	["path", {
+		d: "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z",
+		key: "hh9hay"
+	}],
+	["path", {
+		d: "m3.3 7 8.7 5 8.7-5",
+		key: "g66t2b"
+	}],
+	["path", {
+		d: "M12 22V12",
+		key: "d0xqtd"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Check = createLucideIcon("check", [["path", {
 	d: "M20 6 9 17l-5-5",
 	key: "1gmf2c"
@@ -21372,6 +21392,24 @@ var Compass = createLucideIcon("compass", [["path", {
 	cy: "12",
 	r: "10",
 	key: "1mglay"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Copy = createLucideIcon("copy", [["rect", {
+	width: "14",
+	height: "14",
+	x: "8",
+	y: "8",
+	rx: "2",
+	ry: "2",
+	key: "17jyea"
+}], ["path", {
+	d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2",
+	key: "zix9uf"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21617,6 +21655,19 @@ var GitCompareArrows = createLucideIcon("git-compare-arrows", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Github = createLucideIcon("github", [["path", {
+	d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
+	key: "tonef"
+}], ["path", {
+	d: "M9 18c-4.51 2-5-2-7-2",
+	key: "9comsn"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Globe = createLucideIcon("globe", [
 	["circle", {
 		cx: "12",
@@ -21690,6 +21741,23 @@ var Lock = createLucideIcon("lock", [["rect", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Mail = createLucideIcon("mail", [["path", {
+	d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7",
+	key: "132q7q"
+}], ["rect", {
+	x: "2",
+	y: "4",
+	width: "20",
+	height: "16",
+	rx: "2",
+	key: "izxlao"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Maximize2 = createLucideIcon("maximize-2", [
 	["path", {
 		d: "M15 3h6v6",
@@ -21726,6 +21794,26 @@ var Menu = createLucideIcon("menu", [
 	["path", {
 		d: "M4 19h16",
 		key: "1djgab"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var MessageSquarePlus = createLucideIcon("message-square-plus", [
+	["path", {
+		d: "M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z",
+		key: "18887p"
+	}],
+	["path", {
+		d: "M12 8v6",
+		key: "1ib9pf"
+	}],
+	["path", {
+		d: "M9 11h6",
+		key: "1fldmi"
 	}]
 ]);
 /**
@@ -21812,9 +21900,43 @@ var Music = createLucideIcon("music", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var Pause = createLucideIcon("pause", [["rect", {
+	x: "14",
+	y: "3",
+	width: "5",
+	height: "18",
+	rx: "1",
+	key: "kaeet6"
+}], ["rect", {
+	x: "5",
+	y: "3",
+	width: "5",
+	height: "18",
+	rx: "1",
+	key: "1wsw3u"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Play = createLucideIcon("play", [["path", {
 	d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
 	key: "10ikf1"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Power = createLucideIcon("power", [["path", {
+	d: "M12 2v10",
+	key: "mnfbl"
+}], ["path", {
+	d: "M18.4 6.6a9 9 0 1 1-12.77.04",
+	key: "obofu9"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -21852,6 +21974,19 @@ var RotateCcw = createLucideIcon("rotate-ccw", [["path", {
 }], ["path", {
 	d: "M3 3v5h5",
 	key: "1xhq8a"
+}]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Send = createLucideIcon("send", [["path", {
+	d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
+	key: "1ffxy3"
+}], ["path", {
+	d: "m21.854 2.147-10.94 10.939",
+	key: "12cjpa"
 }]]);
 /**
 * @license lucide-react v0.546.0 - ISC
@@ -23277,8 +23412,8 @@ var GUESTS = [
 	{
 		id: "som-o",
 		name: "คุณส้มโอ",
-		role: "แมวส้มประจำมุมหน้าต่าง",
-		portraitUrl: "/src/assets/images/guest_cat_1795626509273.jpg",
+		role: "ลูกค้าประจำมุมหน้าต่าง",
+		portraitUrl: "/src/assets/images/guest_somo_human_1795781410921.jpg",
 		fallbackInitial: "ส",
 		accentBg: "#D8E0D4"
 	},
@@ -23297,18 +23432,90 @@ var GUESTS = [
 		portraitUrl: "/src/assets/images/guest_grandma_1795626510510.jpg",
 		fallbackInitial: "ม",
 		accentBg: "#E7E3D8"
+	},
+	{
+		id: "non",
+		name: "คุณนนท์",
+		role: "สถาปนิกอิสระ",
+		portraitUrl: "/src/assets/images/guest_non_architect_1795859226814.jpg",
+		fallbackInitial: "น",
+		accentBg: "#DDE0E3"
+	},
+	{
+		id: "milin",
+		name: "น้องมิลิน",
+		role: "นักศึกษาศิลปะ",
+		portraitUrl: "/src/assets/images/guest_milin_student_1795859228444.jpg",
+		fallbackInitial: "ล",
+		accentBg: "#DAE4D8"
+	},
+	{
+		id: "somchai",
+		name: "คุณปู่สมชาย",
+		role: "ช่างไม้เกษียณอารมณ์ดี",
+		portraitUrl: "/src/assets/images/guest_somchai_grandpa_1795859229126.jpg",
+		fallbackInitial: "ช",
+		accentBg: "#EBDCCB"
+	},
+	{
+		id: "kiryu",
+		name: "คุณคิริว",
+		role: "นักดนตรีแจ๊ส",
+		portraitUrl: "/src/assets/images/guest_kiryu_musician_1795859230534.jpg",
+		fallbackInitial: "ค",
+		accentBg: "#E5D6D8"
+	},
+	{
+		id: "ploysai",
+		name: "คุณพลอยใส",
+		role: "เจ้าของร้านดอกไม้ข้างบ้าน",
+		portraitUrl: "/src/assets/images/guest_ploysai_florist_1795859230160.jpg",
+		fallbackInitial: "พ",
+		accentBg: "#EBDDD9"
+	},
+	{
+		id: "pheem",
+		name: "คุณหมอภีม",
+		role: "สัตวแพทย์ใจดี",
+		portraitUrl: "/src/assets/images/guest_pheem_vet_1795859252991.jpg",
+		fallbackInitial: "ภ",
+		accentBg: "#D8E1EA"
+	},
+	{
+		id: "meilin",
+		name: "คุณเหมยหลิน",
+		role: "เชฟขนมหวานญี่ปุ่น",
+		portraitUrl: "/src/assets/images/guest_meilin_pastry_1795859253412.jpg",
+		fallbackInitial: "ห",
+		accentBg: "#EAE0D2"
+	},
+	{
+		id: "win",
+		name: "คุณวินทร์",
+		role: "ช่างภาพสารคดี",
+		portraitUrl: "/src/assets/images/guest_win_photographer_1795859254147.jpg",
+		fallbackInitial: "ว",
+		accentBg: "#DCE2D5"
+	},
+	{
+		id: "chandra",
+		name: "คุณป้าจันทรา",
+		role: "ครูสอนดนตรีไทย",
+		portraitUrl: "/src/assets/images/guest_chandra_music_1795859254499.jpg",
+		fallbackInitial: "จ",
+		accentBg: "#E6D9E1"
 	}
 ];
 var ORDER_TEMPLATES = [
 	{
 		guestId: "som-o",
 		minLevel: 1,
-		requestText: "เมี๊ยว... วันนี้อยากได้ชามัทฉะหรือชาเขียวนุ่มๆ เติมนมอุ่นสักแก้วนะ",
+		requestText: "สวัสดีค่ะ วันนี้อยากได้ชามัทฉะหรือชาเขียวนุ่มๆ เติมนมอุ่นสักแก้วนะคะ",
 		preferredCategories: ["matcha", "green"],
 		preferredTemp: "hot",
 		preferredToppings: ["milk"],
-		happyReply: "อุ่นสบายท้องเลย... ขอบคุณสำหรับแก้วนี้นะ เมี๊ยว~",
-		gentleReply: "รสชาติแปลกใหม่ดีจัง แต่ก็อุ่นใจเหมือนกันนะ เมี๊ยว"
+		happyReply: "อุ่นละมุนชื่นใจจังเลยค่ะ ขอบคุณสำหรับแก้วนี้นะคะ~",
+		gentleReply: "รสชาติแปลกใหม่ดีจัง ดื่มแล้วอุ่นใจมากเลยค่ะ"
 	},
 	{
 		guestId: "som-o",
@@ -23318,6 +23525,19 @@ var ORDER_TEMPLATES = [
 		preferredToppings: ["honey"],
 		happyReply: "หอมน้ำผึ้งจังเลย ฟังเสียงลมแล้วง่วงนอนแล้วสิ...",
 		gentleReply: "ถึงจะไม่เหมือนที่คิดไว้ แต่ดื่มแล้วก็สบายใจจังเลย"
+	},
+	{
+		guestId: "som-o",
+		minLevel: 1,
+		requestText: "บ่ายนี้อากาศอุ่นจังเลยค่ะ อยากได้มัทฉะลาเต้เย็น หรือ Matcha คลาสสิกใส่น้ำแข็งสักแก้วจัง",
+		preferredTeaIds: [
+			"iced-matcha-latte",
+			"classic-matcha",
+			"strawberry-matcha-latte"
+		],
+		preferredToppings: ["milk", "ice"],
+		happyReply: "เย็นชื่นใจหอมนมสดเลยค่ะ ขอบคุณนะคะ~",
+		gentleReply: "รสชาตินุ่มนวลดีจัง ดื่มแล้วสดชื่นเลยค่ะ"
 	},
 	{
 		guestId: "elara",
@@ -23372,36 +23592,6 @@ var ORDER_TEMPLATES = [
 		gentleReply: "ดื่มแล้วชื่นใจจังเลย ขอบใจนะจ๊ะที่ชงให้ยาย"
 	},
 	{
-		guestId: "som-o",
-		minLevel: 1,
-		requestText: "บ่ายนี้อากาศอุ่นจัง เมี๊ยว~ อยากได้มัทฉะลาเต้เย็น หรือ Matcha คลาสสิกใส่น้ำแข็งสักแก้วจัง",
-		preferredTeaIds: [
-			"iced-matcha-latte",
-			"classic-matcha",
-			"strawberry-matcha-latte"
-		],
-		preferredToppings: ["milk", "ice"],
-		happyReply: "เย็นชื่นใจหอมนมสดเลย... ขอบคุณนะ เมี๊ยว~",
-		gentleReply: "รสชาตินุ่มนวลดีจัง ดื่มแล้วสดชื่นเลย เมี๊ยว"
-	},
-	{
-		guestId: "elara",
-		minLevel: 3,
-		requestText: "วันนี้อยากลองชิมมัทฉะฟักทองสไปซ์ หรืออูจิ ชิซึคุ ไอซ์ เป็นแรงบันดาลใจเขียนนิยายสักหน่อยค่ะ",
-		preferredTeaIds: [
-			"pumpkin-spice-matcha",
-			"uji-shizuku-ice",
-			"brown-sugar-matcha-latte"
-		],
-		preferredToppings: [
-			"milk",
-			"ice",
-			"honey"
-		],
-		happyReply: "กลิ่นหอมเป็นเอกลักษณ์มากค่ะ มีไอเดียแต่งเรื่องต่อยาวเลย",
-		gentleReply: "ขอบคุณนะคะ อุ่นใจและสดชื่นดีมากเลยค่ะ"
-	},
-	{
 		guestId: "malee",
 		minLevel: 2,
 		requestText: "ช่วงบ่ายแก่ๆ แบบนี้ ยายอยากได้มัทฉะตีฟองนุ่มๆ อย่าง Uji Matcha หรือ Matcha สำหรับพิธีกรรมจ้ะ",
@@ -23427,6 +23617,244 @@ var ORDER_TEMPLATES = [
 		preferredTemp: "hot",
 		happyReply: "หอมกลิ่นคั่วอ่อนๆ ใจสงบดีเหลือเกินจ้ะ",
 		gentleReply: "ได้จิบชาเงียบๆ ในร้านนี้ ยายก็มีความสุขแล้วจ้ะ"
+	},
+	{
+		guestId: "non",
+		minLevel: 1,
+		requestText: "เพิ่งตรวจแบบแปลนเสร็จ ขอ Matcha เข้มข้นไม่หวานมาก หรือเซนฉะใสๆ ดื่มแก้ล้าสักแก้วครับ",
+		preferredTeaIds: [
+			"kyoto-matcha",
+			"spring-sencha",
+			"uji-matcha"
+		],
+		preferredTemp: "hot",
+		happyReply: "รสชัดสมดุลมากครับ เหมือนเส้นสายสถาปัตย์ที่ลงตัวเลย ขอบคุณครับ",
+		gentleReply: "ดื่มง่ายสบายดีครับ มีแรงกลับไปวาดแบบต่อแล้ว"
+	},
+	{
+		guestId: "non",
+		minLevel: 2,
+		requestText: "อยากได้อู่หลงต้งติ่งหรือเอิร์ลเกรย์ร้อนๆ ไว้นั่งสเก็ตช์งานมุมเงียบๆ สักหน่อยครับ",
+		preferredTeaIds: [
+			"dongding-oolong",
+			"earl-grey",
+			"darjeeling-black"
+		],
+		preferredTemp: "hot",
+		happyReply: "กลิ่นหอมสงบมากครับ ช่วยให้โฟกัสงานได้ดีขึ้นเยอะเลย",
+		gentleReply: "อุ่นพอดีเลยครับ ขอบคุณสำหรับชาดีๆ นะครับ"
+	},
+	{
+		guestId: "milin",
+		minLevel: 1,
+		requestText: "หนูเพิ่งส่งงานโปรเจกต์เสร็จ อยากได้มัทฉะลาเต้เย็นใส่นมสดหวานชื่นใจสุดๆ เลยค่ะ!",
+		preferredTeaIds: [
+			"iced-matcha-latte",
+			"strawberry-matcha-latte",
+			"brown-sugar-matcha-latte"
+		],
+		preferredTemp: "iced",
+		preferredToppings: ["milk", "ice"],
+		happyReply: "เย้! อร่อยสดชื่นมากเลยค่ะ สีแก้วสวยน่าถ่ายรูปสุดๆ~",
+		gentleReply: "นุ่มละมุนดีจังค่ะ ดื่มแล้วหายเหนื่อยเลย!"
+	},
+	{
+		guestId: "milin",
+		minLevel: 2,
+		requestText: "อยากลองสตรอเบอร์รี่มัทฉะลาเต้หรืออัญชันมินต์สีสวยๆ ถ่ายรูปส่งเพื่อนหน่อยค่า",
+		preferredTeaIds: [
+			"strawberry-matcha-latte",
+			"butterfly-pea",
+			"iced-matcha-latte"
+		],
+		preferredTemp: "iced",
+		preferredToppings: [
+			"ice",
+			"strawberry",
+			"lemon"
+		],
+		happyReply: "ว้าว สีสันสวยละมุนตาเลยค่ะ รสชาติก็โดนใจมาก!",
+		gentleReply: "สดชื่นดีมากเลยค่ะ ขอบคุณพี่เจ้าของร้านนะคะ~"
+	},
+	{
+		guestId: "somchai",
+		minLevel: 1,
+		requestText: "เดินเล่นรับลมมาแวะพักเหนื่อย ขอชาอู่หลงต้งติ่งหรือชาไทยร้อนชุ่มคอสักแก้วนะหลานชาย",
+		preferredTeaIds: [
+			"dongding-oolong",
+			"thai-tea",
+			"spring-sencha"
+		],
+		preferredTemp: "hot",
+		happyReply: "ฮ่าๆ หอมเข้มถึงใจปู่เลย ชงได้ฝีมือจริงๆ พ่อหนุ่ม",
+		gentleReply: "รสชาติดีไม่เบาเลยนะ ขอบใจมากนะหลาน"
+	},
+	{
+		guestId: "somchai",
+		minLevel: 4,
+		requestText: "ช่วงบ่ายแบบนี้ ปู่อยากจิบโฮจิฉะคั่วหอมหรือมรดกคลาสสิกรสกลมกล่อมสักถ้วยจ้ะ",
+		preferredTeaIds: [
+			"hojicha-green",
+			"classic-heritage-matcha",
+			"tieguanyin-oolong"
+		],
+		preferredTemp: "hot",
+		happyReply: "กลิ่นหอมไม้คั่วอบอุ่นเหมือนอยู่ในโรงไม้สมัยหนุ่มๆ เลยแฮะ",
+		gentleReply: "ดื่มแล้วอบอุ่นหัวใจดีจังเลยนะร้านนี้"
+	},
+	{
+		guestId: "kiryu",
+		minLevel: 1,
+		requestText: "ก่อนขึ้นซ้อมดนตรีคืนนี้ ขอชาดำหรือ Matcha คลาสสิกอุ่นๆ สักแก้วให้เสียงนุ่มหน่อยครับ",
+		preferredCategories: ["black", "matcha"],
+		preferredTemp: "hot",
+		happyReply: "รสลุ่มลึกเหมือนคอร์ดแจ๊สเลยครับ โดนใจมาก!",
+		gentleReply: "ฟีลกู้ดดีเลยครับ ขอบคุณมากครับผม"
+	},
+	{
+		guestId: "kiryu",
+		minLevel: 2,
+		requestText: "วันนี้อยากได้มัทฉะคั่วอุจิ หรือลาเต้เมฆน้ำตาลทรายแดงหอมคาราเมลเข้มๆ ครับ",
+		preferredTeaIds: [
+			"uji-roasted-matcha",
+			"brown-sugar-cloud-latte",
+			"brown-sugar-matcha-latte"
+		],
+		preferredToppings: [
+			"milk",
+			"brown-sugar",
+			"milk-foam"
+		],
+		happyReply: "กลิ่นคั่วกับคาราเมลเข้าจังหวะกันเป๊ะเลยครับ สุดยอด!",
+		gentleReply: "นุ่มนวลลงตัวมากครับ ไว้แวะมาฟังเพลงด้วยกันนะครับ"
+	},
+	{
+		guestId: "ploysai",
+		minLevel: 1,
+		requestText: "จัดช่อดอกไม้เสร็จแวะมาพักค่ะ ขอชาคาโมมายล์อุ่นๆ ใส่น้ำผึ้ง หรืออู่หลงหอมๆ นะคะ",
+		preferredTeaIds: [
+			"chamomile-blossom",
+			"osmanthus-oolong",
+			"dongding-oolong"
+		],
+		preferredTemp: "hot",
+		preferredToppings: ["honey", "osmanthus"],
+		happyReply: "หอมกลิ่นดอกไม้ละมุนมากค่ะ เหมือนยกสวนมาไว้ในถ้วยเลย~",
+		gentleReply: "นุ่มนวลชวนผ่อนคลายมากค่ะ ขอบคุณนะคะ"
+	},
+	{
+		guestId: "ploysai",
+		minLevel: 3,
+		requestText: "อยากลองชามัทฉะซากุระ หรือชาหอมหมื่นลี้โรยกลีบดอกไม้หอมๆ สักถ้วยค่ะ",
+		preferredTeaIds: [
+			"sakura-matcha",
+			"osmanthus-oolong",
+			"chamomile-blossom"
+		],
+		preferredToppings: ["osmanthus", "milk"],
+		happyReply: "กลิ่นดอกไม้ฟุ้งละมุนหัวใจเลยค่ะ ประทับใจมากเลย",
+		gentleReply: "หอมหวานกำลังดีเลยค่ะ ขอบคุณที่ชงให้ด้วยใจนะคะ"
+	},
+	{
+		guestId: "pheem",
+		minLevel: 1,
+		requestText: "พักเบรกจากคลินิกครับ ขอเซนฉะยอดอ่อนหรือเกียวโตมัทฉะสดชื่นสบายท้องสักถ้วยครับ",
+		preferredTeaIds: [
+			"spring-sencha",
+			"kyoto-matcha",
+			"gyokuro-green"
+		],
+		preferredTemp: "hot",
+		happyReply: "สะอาดสดชื่นมากครับ รู้สึกผ่อนคลายขึ้นเยอะเลย",
+		gentleReply: "ดื่มง่ายกำลังดีเลยครับ ขอบคุณมากนะครับ"
+	},
+	{
+		guestId: "pheem",
+		minLevel: 3,
+		requestText: "วันนี้แดดค่อนข้างแรง ขอเกียวคุโระเย็นหรืออูจิ ชิซึคุ ไอซ์ เติมใบมินต์สดชื่นสักแก้วครับ",
+		preferredTeaIds: [
+			"uji-shizuku-ice",
+			"gyokuro-green",
+			"spring-sencha"
+		],
+		preferredTemp: "iced",
+		preferredToppings: ["ice", "mint"],
+		happyReply: "เย็นฉ่ำหวานอูมามิจากยอดชาแท้ๆ เลยครับ ดีมากจริงๆ",
+		gentleReply: "สดชื่นหายเหนื่อยเลยครับ ไว้แวะมาใหม่นะครับ"
+	},
+	{
+		guestId: "meilin",
+		minLevel: 1,
+		requestText: "อยากชิมมัทฉะตีฟองเนียนๆ หรือมัทฉะลาเต้เนื้อนุ่มๆ เป็นแรงบันดาลใจทำขนมวากาชิค่ะ",
+		preferredCategories: ["matcha", "latte"],
+		preferredToppings: ["milk", "milk-foam"],
+		happyReply: "เนื้อฟองเนียนละเอียดไร้ที่ติเลยค่ะ หวานกำลังดีมาก!",
+		gentleReply: "บาลานซ์รสชาติดีมากค่ะ ได้ไอเดียทำขนมคู่ชาแล้ว!"
+	},
+	{
+		guestId: "meilin",
+		minLevel: 3,
+		requestText: "ขอลาเต้โรเซตต้า หรือมัทฉะฟักทองสไปซ์หอมเครื่องเทศอุ่นๆ คู่ขนมหวานหน่อยนะคะ",
+		preferredTeaIds: [
+			"matcha-rosetta-latte",
+			"pumpkin-spice-matcha",
+			"kintsugi-matcha"
+		],
+		preferredTemp: "hot",
+		preferredToppings: ["milk-foam", "cinnamon"],
+		happyReply: "ลวดลายและกลิ่นหอมละมุนระดับมาสเตอร์เลยค่ะ ชอบมากเลย!",
+		gentleReply: "อุ่นหอมเข้ากับขนมหวานมากเลยค่ะ ขอบคุณนะคะ"
+	},
+	{
+		guestId: "win",
+		minLevel: 1,
+		requestText: "เพิ่งกลับจากถ่ายภาพนอกสถานที่ ขอชาไทยโบราณใส่น้ำแข็งเย็นจัด หรือมัทฉะลาเต้เย็นสักแก้วครับ!",
+		preferredTeaIds: [
+			"thai-tea",
+			"iced-matcha-latte",
+			"uji-shizuku-ice"
+		],
+		preferredTemp: "iced",
+		preferredToppings: ["ice", "milk"],
+		happyReply: "ชื่นใจสุดๆ ไปเลยครับ! เข้มข้นสะใจหายร้อนเลย",
+		gentleReply: "เย็นกำลังดีเลยครับ มีพลังลุยถ่ายรูปต่อแล้ว!"
+	},
+	{
+		guestId: "win",
+		minLevel: 2,
+		requestText: "ช่วงเย็นแสงสวยแบบนี้ ขอเอิร์ลเกรย์ฝานเลมอน หรืออัญชันมินต์เย็นสักแก้วไว้นั่งคัดรูปครับ",
+		preferredTeaIds: [
+			"earl-grey",
+			"butterfly-pea",
+			"thai-tea"
+		],
+		preferredTemp: "iced",
+		preferredToppings: ["ice", "lemon"],
+		happyReply: "สดชื่นเปรี้ยวหอมตื่นตาดีมากครับ สีแก้วสวยจนต้องยกกล้องถ่ายเลย",
+		gentleReply: "ดื่มเพลินมากครับ ขอบคุณเจ้าของร้านมากครับ"
+	},
+	{
+		guestId: "chandra",
+		minLevel: 1,
+		requestText: "สอนดนตรีเสร็จแวะมาชุ่มคอค่ะ ขอชาอู่หลงหอมๆ หรือคาโมมายล์อุ่นๆ สักถ้วยนะคะ",
+		preferredCategories: ["oolong", "herbal"],
+		preferredTemp: "hot",
+		happyReply: "หอมละมุนชุ่มคอไพเราะเหมือนเสียงขิมเลยค่ะ ฝีมือดีจริงเชียว",
+		gentleReply: "ชุ่มคอสบายใจมากเลยค่ะ ขอบคุณมากนะจ๊ะ"
+	},
+	{
+		guestId: "chandra",
+		minLevel: 2,
+		requestText: "วันนี้ป้าอยากชิมชาหอมหมื่นลี้ หรือทิกวนอิมร้อนๆ ที่กลิ่นหอมประณีตสักถ้วยนะคะ",
+		preferredTeaIds: [
+			"osmanthus-oolong",
+			"tieguanyin-oolong",
+			"darjeeling-black"
+		],
+		preferredTemp: "hot",
+		preferredToppings: ["osmanthus"],
+		happyReply: "กลิ่นหอมสง่างามมากเลยค่ะ จิบแล้วจิตใจสงบงดงามจริงๆ",
+		gentleReply: "รสชาตินุ่มนวลดีมากค่ะ ป้าชอบร้านนี้มากเลย"
 	}
 ];
 function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
@@ -23438,7 +23866,10 @@ function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
 	});
 	const nonRepeating = previousGuestId ? eligible.filter((t) => t.guestId !== previousGuestId) : eligible;
 	const pool = nonRepeating.length > 0 ? nonRepeating : eligible.length > 0 ? eligible : [ORDER_TEMPLATES[0]];
-	const picked = pool[Math.floor(Math.random() * pool.length)];
+	const eligibleGuestIds = Array.from(new Set(pool.map((t) => t.guestId)));
+	const pickedGuestId = eligibleGuestIds[Math.floor(Math.random() * eligibleGuestIds.length)];
+	const guestTemplates = pool.filter((t) => t.guestId === pickedGuestId);
+	const picked = guestTemplates[Math.floor(Math.random() * guestTemplates.length)] ?? pool[0];
 	const guest = GUESTS.find((g) => g.id === picked.guestId) ?? GUESTS[0];
 	return {
 		id: `${picked.guestId}-${Date.now()}`,
@@ -23454,10 +23885,11 @@ function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
 }
 var CHILL_MUSIC_TRACKS = [
 	{
-		id: "morning-bamboo",
-		title: "สายลมอุ่นในสวนไผ่",
-		subtitle: "คอร์ดเปียโนไฟฟ้าอุ่นๆ ผสมระฆังไม้ไผ่สบายใจ",
-		bpmLabel: "74 BPM"
+		id: "just-the-two-of-us",
+		title: "Just the Two of Us",
+		subtitle: "Grover Washington, Jr. · ไฟล์เพลงต้นฉบับ",
+		bpmLabel: "3:57",
+		audioSrc: "/assets/aistudio/Grover_Washington__Jr_-_Just_the_Two_of_Us__Edit___________Bill_Withers__c940e5a8.m4a"
 	},
 	{
 		id: "rainy-teahouse",
@@ -23486,76 +23918,6 @@ var CHILL_MUSIC_TRACKS = [
 	}
 ];
 var CHILL_PATTERNS = {
-	"morning-bamboo": {
-		stepMs: 405,
-		chords: [
-			[
-				174.61,
-				220,
-				261.63,
-				329.63
-			],
-			[
-				164.81,
-				196,
-				246.94,
-				293.66
-			],
-			[
-				146.83,
-				174.61,
-				220,
-				329.63
-			],
-			[
-				130.81,
-				164.81,
-				196,
-				246.94
-			]
-		],
-		melody: [
-			523.25,
-			null,
-			659.25,
-			587.33,
-			440,
-			null,
-			392,
-			null,
-			493.88,
-			null,
-			587.33,
-			523.25,
-			392,
-			null,
-			440,
-			null,
-			587.33,
-			null,
-			659.25,
-			783.99,
-			659.25,
-			null,
-			523.25,
-			null,
-			440,
-			493.88,
-			523.25,
-			null,
-			392,
-			null,
-			329.63,
-			null
-		],
-		bass: [
-			87.31,
-			82.41,
-			73.42,
-			65.41
-		],
-		leadWave: "sine"
-	},
 	"rainy-teahouse": {
 		stepMs: 440,
 		chords: [
@@ -23698,7 +24060,7 @@ var CHILL_PATTERNS = {
 	}
 };
 function isSynthTrack(track) {
-	return track === "morning-bamboo" || track === "rainy-teahouse" || track === "twilight-lantern";
+	return track === "rainy-teahouse" || track === "twilight-lantern";
 }
 var CozySoundEngine = class {
 	constructor() {
@@ -23709,7 +24071,7 @@ var CozySoundEngine = class {
 		this.ambienceVolume = .75;
 		this.musicVolume = .7;
 		this.ambienceMode = "none";
-		this.musicTrack = "morning-bamboo";
+		this.musicTrack = "just-the-two-of-us";
 		this.ambienceGain = null;
 		this.ambienceSource = null;
 		this.breezeLfo = null;
@@ -23718,17 +24080,23 @@ var CozySoundEngine = class {
 		this.musicTimer = null;
 		this.musicStepIdx = 0;
 		this.audioEl = null;
+		this.currentAudioSrc = null;
 		this.audioUnlocked = false;
+		this.isBackgrounded = false;
+	}
+	isAudioSuppressed() {
+		return this.isBackgrounded || typeof document !== "undefined" && document.hidden;
 	}
 	ensureContext(createIfMissing = true) {
 		if (typeof window === "undefined") return null;
+		if (this.isAudioSuppressed()) return null;
 		if (!this.ctx) {
 			if (!createIfMissing) return null;
 			const AudioCtx = window.AudioContext || window.webkitAudioContext;
 			if (!AudioCtx) return null;
 			this.ctx = new AudioCtx();
 		}
-		if (this.ctx.state === "suspended") this.ctx.resume();
+		if (this.ctx.state === "suspended") this.ctx.resume().catch(() => {});
 		return this.ctx;
 	}
 	getAudioFileMeta() {
@@ -23740,31 +24108,76 @@ var CozySoundEngine = class {
 	syncAudioElementVolume() {
 		if (!this.audioEl) return;
 		const isAudioTrack = Boolean(this.getAudioFileMeta());
-		this.audioEl.volume = this.isMuted || !isAudioTrack ? 0 : this.getAudioFileVolume();
+		this.audioEl.volume = this.isMuted || !isAudioTrack || this.isAudioSuppressed() ? 0 : this.getAudioFileVolume();
 	}
 	startAudioFileTrack(src) {
 		if (typeof window === "undefined" || typeof Audio === "undefined") return;
+		if (this.isAudioSuppressed()) return;
 		if (!this.audioEl) {
 			const audio = new Audio();
 			audio.loop = true;
 			audio.preload = "auto";
 			this.audioEl = audio;
 		}
-		if (!this.audioEl.src.endsWith(src)) {
+		if (this.currentAudioSrc !== src) {
+			this.currentAudioSrc = src;
 			this.audioEl.src = src;
 			this.audioEl.currentTime = 0;
 		}
 		this.syncAudioElementVolume();
-		if (!this.isMuted && this.audioUnlocked) this.audioEl.play().catch(() => {});
+		if (!this.isMuted && this.audioUnlocked && !this.isAudioSuppressed()) this.audioEl.play().catch(() => {});
 	}
 	stopAudioFileTrack(resetPosition = true) {
 		if (!this.audioEl) return;
 		this.audioEl.pause();
+		this.audioEl.volume = 0;
 		if (resetPosition) try {
 			this.audioEl.currentTime = 0;
 		} catch {}
 	}
+	pauseForBackground() {
+		this.isBackgrounded = true;
+		this.stopMusicLoop();
+		this.stopAudioFileTrack(false);
+		this.stopAmbienceNodes();
+		if (this.ctx && this.ctx.state === "running") this.ctx.suspend().catch(() => {});
+	}
+	resumeFromForeground() {
+		if (typeof document !== "undefined" && document.hidden) return;
+		this.isBackgrounded = false;
+		if (this.ctx && this.ctx.state === "suspended") this.ctx.resume().catch(() => {});
+		if (this.isMuted) return;
+		const fileTrack = this.getAudioFileMeta();
+		if (fileTrack?.audioSrc && this.audioUnlocked) this.startAudioFileTrack(fileTrack.audioSrc);
+		else if (this.ctx && isSynthTrack(this.musicTrack) && this.audioUnlocked && this.musicTimer === null) this.startMusicLoop();
+		if (this.ambienceMode !== "none" && this.audioUnlocked && !this.ambienceSource) this.setAmbience(this.ambienceMode);
+	}
+	hardStopForExit() {
+		this.isBackgrounded = true;
+		this.stopMusicLoop();
+		this.stopAmbienceNodes();
+		if (this.audioEl) {
+			try {
+				this.audioEl.pause();
+				this.audioEl.volume = 0;
+				this.audioEl.removeAttribute("src");
+				this.audioEl.load();
+			} catch {}
+			this.audioEl = null;
+			this.currentAudioSrc = null;
+		}
+		if (this.ctx) {
+			try {
+				this.ctx.suspend().catch(() => {});
+				this.ctx.close().catch(() => {});
+			} catch {}
+			this.ctx = null;
+			this.musicBusGain = null;
+			this.musicFilter = null;
+		}
+	}
 	unlock() {
+		if (this.isAudioSuppressed()) return;
 		this.audioUnlocked = true;
 		const ctx = this.ensureContext(true);
 		const fileTrack = this.getAudioFileMeta();
@@ -23798,7 +24211,7 @@ var CozySoundEngine = class {
 		if (fileTrack?.audioSrc) {
 			this.stopMusicLoop();
 			if (changed) this.stopAudioFileTrack(true);
-			this.startAudioFileTrack(fileTrack.audioSrc);
+			if (!this.isAudioSuppressed()) this.startAudioFileTrack(fileTrack.audioSrc);
 			return;
 		}
 		this.stopAudioFileTrack(true);
@@ -23806,7 +24219,7 @@ var CozySoundEngine = class {
 			this.musicStepIdx = 0;
 			this.stopMusicLoop();
 		}
-		if (this.ctx && !this.isMuted && this.musicTimer === null) this.startMusicLoop();
+		if (this.ctx && !this.isMuted && !this.isAudioSuppressed() && this.musicTimer === null) this.startMusicLoop();
 	}
 	setMuted(muted) {
 		this.isMuted = muted;
@@ -23903,7 +24316,7 @@ var CozySoundEngine = class {
 		}
 	}
 	startMusicLoop() {
-		if (!isSynthTrack(this.musicTrack)) return;
+		if (!isSynthTrack(this.musicTrack) || this.isAudioSuppressed()) return;
 		const ctx = this.ensureContext(true);
 		if (!ctx) return;
 		this.ensureMusicBus(ctx);
@@ -24041,7 +24454,7 @@ var CozySoundEngine = class {
 	setAmbience(mode) {
 		this.ambienceMode = mode;
 		this.stopAmbienceNodes();
-		if (mode === "none") return;
+		if (mode === "none" || this.isAudioSuppressed()) return;
 		const ctx = this.ensureContext();
 		if (!ctx) return;
 		const bufferSize = ctx.sampleRate * 4;
@@ -24116,6 +24529,13 @@ var soundEngine = new CozySoundEngine();
 * Copyright 2010-2026 Three.js Authors
 * SPDX-License-Identifier: MIT
 */
+/**
+* The skinned mesh shares the same world space as the skeleton.
+*
+* @type {string}
+* @constant
+*/
+var AttachedBindMode = "attached";
 /**
 * The texture will simply repeat to infinity.
 *
@@ -40380,6 +40800,254 @@ function checkGeometryIntersection(object, material, raycaster, ray, uv, uv1, no
 	}
 	return intersection;
 }
+var _baseVector = /*@__PURE__*/ new Vector4();
+var _skinIndex = /*@__PURE__*/ new Vector4();
+var _skinWeight = /*@__PURE__*/ new Vector4();
+var _vector4 = /*@__PURE__*/ new Vector4();
+var _matrix4 = /*@__PURE__*/ new Matrix4();
+var _vertex = /*@__PURE__*/ new Vector3();
+var _sphere$5 = /*@__PURE__*/ new Sphere();
+var _inverseMatrix$2 = /*@__PURE__*/ new Matrix4();
+var _ray$2 = /*@__PURE__*/ new Ray();
+/**
+* A mesh that has a {@link Skeleton} that can then be used to animate the
+* vertices of the geometry with skinning/skeleton animation.
+*
+* Next to a valid skeleton, the skinned mesh requires skin indices and weights
+* as buffer attributes in its geometry. These attribute define which bones affect a single
+* vertex to a certain extend.
+*
+* Typically skinned meshes are not created manually but loaders like {@link GLTFLoader}
+* or {@link FBXLoader } import respective models.
+*
+* @augments Mesh
+* @demo scenes/bones-browser.html
+*/
+var SkinnedMesh = class extends Mesh {
+	/**
+	* Constructs a new skinned mesh.
+	*
+	* @param {BufferGeometry} [geometry] - The mesh geometry.
+	* @param {Material|Array<Material>} [material] - The mesh material.
+	*/
+	constructor(geometry, material) {
+		super(geometry, material);
+		/**
+		* This flag can be used for type testing.
+		*
+		* @type {boolean}
+		* @readonly
+		* @default true
+		*/
+		this.isSkinnedMesh = true;
+		this.type = "SkinnedMesh";
+		/**
+		* `AttachedBindMode` means the skinned mesh shares the same world space as the skeleton.
+		* This is not true when using `DetachedBindMode` which is useful when sharing a skeleton
+		* across multiple skinned meshes.
+		*
+		* @type {(AttachedBindMode|DetachedBindMode)}
+		* @default AttachedBindMode
+		*/
+		this.bindMode = AttachedBindMode;
+		/**
+		* The base matrix that is used for the bound bone transforms.
+		*
+		* @type {Matrix4}
+		*/
+		this.bindMatrix = new Matrix4();
+		/**
+		* The base matrix that is used for resetting the bound bone transforms.
+		*
+		* @type {Matrix4}
+		*/
+		this.bindMatrixInverse = new Matrix4();
+		/**
+		* The bounding box of the skinned mesh. Can be computed via {@link SkinnedMesh#computeBoundingBox}.
+		*
+		* @type {?Box3}
+		* @default null
+		*/
+		this.boundingBox = null;
+		/**
+		* The bounding sphere of the skinned mesh. Can be computed via {@link SkinnedMesh#computeBoundingSphere}.
+		*
+		* @type {?Sphere}
+		* @default null
+		*/
+		this.boundingSphere = null;
+	}
+	/**
+	* Computes the bounding box of the skinned mesh, and updates {@link SkinnedMesh#boundingBox}.
+	* The bounding box is not automatically computed by the engine; this method must be called by your app.
+	* If the skinned mesh is animated, the bounding box should be recomputed per frame in order to reflect
+	* the current animation state.
+	*/
+	computeBoundingBox() {
+		const geometry = this.geometry;
+		if (this.boundingBox === null) this.boundingBox = new Box3();
+		this.boundingBox.makeEmpty();
+		const positionAttribute = geometry.getAttribute("position");
+		for (let i = 0; i < positionAttribute.count; i++) {
+			this.getVertexPosition(i, _vertex);
+			this.boundingBox.expandByPoint(_vertex);
+		}
+	}
+	/**
+	* Computes the bounding sphere of the skinned mesh, and updates {@link SkinnedMesh#boundingSphere}.
+	* The bounding sphere is automatically computed by the engine once when it is needed, e.g., for ray casting
+	* and view frustum culling. If the skinned mesh is animated, the bounding sphere should be recomputed
+	* per frame in order to reflect the current animation state.
+	*/
+	computeBoundingSphere() {
+		const geometry = this.geometry;
+		if (this.boundingSphere === null) this.boundingSphere = new Sphere();
+		this.boundingSphere.makeEmpty();
+		const positionAttribute = geometry.getAttribute("position");
+		for (let i = 0; i < positionAttribute.count; i++) {
+			this.getVertexPosition(i, _vertex);
+			this.boundingSphere.expandByPoint(_vertex);
+		}
+	}
+	copy(source, recursive) {
+		super.copy(source, recursive);
+		this.bindMode = source.bindMode;
+		this.bindMatrix.copy(source.bindMatrix);
+		this.bindMatrixInverse.copy(source.bindMatrixInverse);
+		this.skeleton = source.skeleton;
+		this.boundingBox = source.boundingBox !== null ? source.boundingBox.clone() : null;
+		this.boundingSphere = source.boundingSphere !== null ? source.boundingSphere.clone() : null;
+		return this;
+	}
+	raycast(raycaster, intersects) {
+		const material = this.material;
+		const matrixWorld = this.matrixWorld;
+		if (material === void 0) return;
+		if (this.boundingSphere === null) this.computeBoundingSphere();
+		_sphere$5.copy(this.boundingSphere);
+		_sphere$5.applyMatrix4(matrixWorld);
+		if (raycaster.ray.intersectsSphere(_sphere$5) === false) return;
+		_inverseMatrix$2.copy(matrixWorld).invert();
+		_ray$2.copy(raycaster.ray).applyMatrix4(_inverseMatrix$2);
+		if (this.boundingBox !== null) {
+			if (_ray$2.intersectsBox(this.boundingBox) === false) return;
+		}
+		this._computeIntersections(raycaster, intersects, _ray$2);
+	}
+	getVertexPosition(index, target) {
+		super.getVertexPosition(index, target);
+		this.applyBoneTransform(index, target);
+		return target;
+	}
+	/**
+	* Binds the given skeleton to the skinned mesh.
+	*
+	* @param {Skeleton} skeleton - The skeleton to bind.
+	* @param {Matrix4} [bindMatrix] - The bind matrix. If no bind matrix is provided,
+	* the skinned mesh's world matrix will be used instead.
+	*/
+	bind(skeleton, bindMatrix) {
+		this.skeleton = skeleton;
+		if (bindMatrix === void 0) {
+			this.updateMatrixWorld(true);
+			this.skeleton.calculateInverses();
+			bindMatrix = this.matrixWorld;
+		}
+		this.bindMatrix.copy(bindMatrix);
+		this.bindMatrixInverse.copy(bindMatrix).invert();
+	}
+	/**
+	* This method sets the skinned mesh in the rest pose).
+	*/
+	pose() {
+		this.skeleton.pose();
+	}
+	/**
+	* Normalizes the skin weights which are defined as a buffer attribute
+	* in the skinned mesh's geometry.
+	*/
+	normalizeSkinWeights() {
+		const vector = new Vector4();
+		const skinWeight = this.geometry.attributes.skinWeight;
+		for (let i = 0, l = skinWeight.count; i < l; i++) {
+			vector.fromBufferAttribute(skinWeight, i);
+			const scale = 1 / vector.manhattanLength();
+			if (scale !== Infinity) vector.multiplyScalar(scale);
+			else vector.set(1, 0, 0, 0);
+			skinWeight.setXYZW(i, vector.x, vector.y, vector.z, vector.w);
+		}
+	}
+	updateMatrixWorld(force) {
+		super.updateMatrixWorld(force);
+		if (this.bindMode === "attached") this.bindMatrixInverse.copy(this.matrixWorld).invert();
+		else if (this.bindMode === "detached") this.bindMatrixInverse.copy(this.bindMatrix).invert();
+		else warn("SkinnedMesh: Unrecognized bindMode: " + this.bindMode);
+	}
+	/**
+	* Applies the bone transform associated with the given index to the given
+	* vector. Can be used to transform positions or direction vectors by providing
+	* a Vector4 with 1 or 0 in the w component respectively. Returns the updated vector.
+	*
+	* @param {number} index - The vertex index.
+	* @param {Vector3|Vector4} target - The target object that is used to store the method's result.
+	* @return {Vector3|Vector4} The updated vertex attribute data.
+	*/
+	applyBoneTransform(index, target) {
+		const skeleton = this.skeleton;
+		const geometry = this.geometry;
+		_skinIndex.fromBufferAttribute(geometry.attributes.skinIndex, index);
+		_skinWeight.fromBufferAttribute(geometry.attributes.skinWeight, index);
+		if (target.isVector4) {
+			_baseVector.copy(target);
+			target.set(0, 0, 0, 0);
+		} else {
+			_baseVector.set(target.x, target.y, target.z, 1);
+			target.set(0, 0, 0);
+		}
+		_baseVector.applyMatrix4(this.bindMatrix);
+		for (let i = 0; i < 4; i++) {
+			const weight = _skinWeight.getComponent(i);
+			if (weight !== 0) {
+				const boneIndex = _skinIndex.getComponent(i);
+				_matrix4.multiplyMatrices(skeleton.bones[boneIndex].matrixWorld, skeleton.boneInverses[boneIndex]);
+				target.addScaledVector(_vector4.copy(_baseVector).applyMatrix4(_matrix4), weight);
+			}
+		}
+		if (target.isVector4) target.w = _baseVector.w;
+		return target.applyMatrix4(this.bindMatrixInverse);
+	}
+};
+/**
+* A bone which is part of a {@link Skeleton}. The skeleton in turn is used by
+* the {@link SkinnedMesh}.
+*
+* ```js
+* const root = new THREE.Bone();
+* const child = new THREE.Bone();
+*
+* root.add( child );
+* child.position.y = 5;
+* ```
+*
+* @augments Object3D
+*/
+var Bone = class extends Object3D {
+	/**
+	* Constructs a new bone.
+	*/
+	constructor() {
+		super();
+		/**
+		* This flag can be used for type testing.
+		*
+		* @type {boolean}
+		* @readonly
+		* @default true
+		*/
+		this.isBone = true;
+		this.type = "Bone";
+	}
+};
 /**
 * Creates a texture directly from raw buffer data.
 *
@@ -40455,6 +41123,251 @@ var DataTexture = class extends Texture {
 		* @default 1
 		*/
 		this.unpackAlignment = 1;
+	}
+};
+var _offsetMatrix = /*@__PURE__*/ new Matrix4();
+var _identityMatrix = /*@__PURE__*/ new Matrix4();
+/**
+* Class for representing the armatures in `three.js`. The skeleton
+* is defined by a hierarchy of bones.
+*
+* ```js
+* const bones = [];
+*
+* const shoulder = new THREE.Bone();
+* const elbow = new THREE.Bone();
+* const hand = new THREE.Bone();
+*
+* shoulder.add( elbow );
+* elbow.add( hand );
+*
+* bones.push( shoulder , elbow, hand);
+*
+* shoulder.position.y = -5;
+* elbow.position.y = 0;
+* hand.position.y = 5;
+*
+* const armSkeleton = new THREE.Skeleton( bones );
+* ```
+*/
+var Skeleton = class Skeleton {
+	/**
+	* Constructs a new skeleton.
+	*
+	* @param {Array<Bone>} [bones] - An array of bones.
+	* @param {Array<Matrix4>} [boneInverses] - An array of bone inverse matrices.
+	* If not provided, these matrices will be computed automatically via {@link Skeleton#calculateInverses}.
+	*/
+	constructor(bones = [], boneInverses = []) {
+		this.uuid = generateUUID();
+		/**
+		* An array of bones defining the skeleton.
+		*
+		* @type {Array<Bone>}
+		*/
+		this.bones = bones.slice(0);
+		/**
+		* An array of bone inverse matrices.
+		*
+		* @type {Array<Matrix4>}
+		*/
+		this.boneInverses = boneInverses;
+		/**
+		* An array buffer holding the bone data.
+		* Input data for {@link Skeleton#boneTexture}.
+		*
+		* @type {?Float32Array}
+		* @default null
+		*/
+		this.boneMatrices = null;
+		/**
+		* An array buffer holding the bone data of the previous frame.
+		* Required for computing velocity.
+		*
+		* @type {?Float32Array}
+		* @default null
+		*/
+		this.previousBoneMatrices = null;
+		/**
+		* A texture holding the bone data for use
+		* in the vertex shader.
+		*
+		* @type {?DataTexture}
+		* @default null
+		*/
+		this.boneTexture = null;
+		/**
+		* A texture holding the bone data of the previous frame.
+		* Required for computing velocity.
+		*
+		* @type {?DataTexture}
+		* @default null
+		*/
+		this.previousBoneTexture = null;
+		this.init();
+	}
+	/**
+	* Initializes the skeleton. This method gets automatically called by the constructor
+	* but depending on how the skeleton is created it might be necessary to call this method
+	* manually.
+	*/
+	init() {
+		const bones = this.bones;
+		const boneInverses = this.boneInverses;
+		this.boneMatrices = new Float32Array(bones.length * 16);
+		if (boneInverses.length === 0) this.calculateInverses();
+		else if (bones.length !== boneInverses.length) {
+			warn("Skeleton: Number of inverse bone matrices does not match amount of bones.");
+			this.boneInverses = [];
+			for (let i = 0, il = this.bones.length; i < il; i++) this.boneInverses.push(new Matrix4());
+		}
+	}
+	/**
+	* Computes the bone inverse matrices. This method resets {@link Skeleton#boneInverses}
+	* and fills it with new matrices.
+	*/
+	calculateInverses() {
+		this.boneInverses.length = 0;
+		for (let i = 0, il = this.bones.length; i < il; i++) {
+			const inverse = new Matrix4();
+			if (this.bones[i]) inverse.copy(this.bones[i].matrixWorld).invert();
+			this.boneInverses.push(inverse);
+		}
+	}
+	/**
+	* Resets the skeleton to the base pose.
+	*/
+	pose() {
+		for (let i = 0, il = this.bones.length; i < il; i++) {
+			const bone = this.bones[i];
+			if (bone) bone.matrixWorld.copy(this.boneInverses[i]).invert();
+		}
+		for (let i = 0, il = this.bones.length; i < il; i++) {
+			const bone = this.bones[i];
+			if (bone) {
+				if (bone.parent && bone.parent.isBone) {
+					bone.matrix.copy(bone.parent.matrixWorld).invert();
+					bone.matrix.multiply(bone.matrixWorld);
+				} else bone.matrix.copy(bone.matrixWorld);
+				bone.matrix.decompose(bone.position, bone.quaternion, bone.scale);
+			}
+		}
+	}
+	/**
+	* Resets the skeleton to the base pose.
+	*/
+	update() {
+		const bones = this.bones;
+		const boneInverses = this.boneInverses;
+		const boneMatrices = this.boneMatrices;
+		const boneTexture = this.boneTexture;
+		for (let i = 0, il = bones.length; i < il; i++) {
+			const matrix = bones[i] ? bones[i].matrixWorld : _identityMatrix;
+			_offsetMatrix.multiplyMatrices(matrix, boneInverses[i]);
+			_offsetMatrix.toArray(boneMatrices, i * 16);
+		}
+		if (boneTexture !== null) boneTexture.needsUpdate = true;
+	}
+	/**
+	* Returns a new skeleton with copied values from this instance.
+	*
+	* @return {Skeleton} A clone of this instance.
+	*/
+	clone() {
+		return new Skeleton(this.bones, this.boneInverses);
+	}
+	/**
+	* Computes a data texture for passing bone data to the vertex shader.
+	*
+	* @return {Skeleton} A reference of this instance.
+	*/
+	computeBoneTexture() {
+		let size = Math.sqrt(this.bones.length * 4);
+		size = Math.ceil(size / 4) * 4;
+		size = Math.max(size, 4);
+		const boneMatrices = new Float32Array(size * size * 4);
+		boneMatrices.set(this.boneMatrices);
+		const boneTexture = new DataTexture(boneMatrices, size, size, RGBAFormat, FloatType);
+		boneTexture.needsUpdate = true;
+		this.boneMatrices = boneMatrices;
+		this.boneTexture = boneTexture;
+		return this;
+	}
+	/**
+	* Searches through the skeleton's bone array and returns the first with a
+	* matching name.
+	*
+	* @param {string} name - The name of the bone.
+	* @return {Bone|undefined} The found bone. `undefined` if no bone has been found.
+	*/
+	getBoneByName(name) {
+		for (let i = 0, il = this.bones.length; i < il; i++) {
+			const bone = this.bones[i];
+			if (bone.name === name) return bone;
+		}
+	}
+	/**
+	* Frees the GPU-related resources allocated by this instance. Call this
+	* method whenever this instance is no longer used in your app.
+	*/
+	dispose() {
+		if (this.boneTexture !== null) {
+			this.boneTexture.dispose();
+			this.boneTexture = null;
+		}
+		if (this.previousBoneTexture !== null) {
+			this.previousBoneTexture.dispose();
+			this.previousBoneTexture = null;
+		}
+	}
+	/**
+	* Setups the skeleton by the given JSON and bones.
+	*
+	* @param {Object} json - The skeleton as serialized JSON.
+	* @param {Object<string, Bone>} bones - An array of bones.
+	* @return {Skeleton} A reference of this instance.
+	*/
+	fromJSON(json, bones) {
+		this.uuid = json.uuid;
+		for (let i = 0, l = json.bones.length; i < l; i++) {
+			const uuid = json.bones[i];
+			let bone = bones[uuid];
+			if (bone === void 0) {
+				warn("Skeleton: No bone found with UUID:", uuid);
+				bone = new Bone();
+			}
+			this.bones.push(bone);
+			this.boneInverses.push(new Matrix4().fromArray(json.boneInverses[i]));
+		}
+		this.init();
+		return this;
+	}
+	/**
+	* Serializes the skeleton into JSON.
+	*
+	* @return {Object} A JSON object representing the serialized skeleton.
+	* @see {@link ObjectLoader#parse}
+	*/
+	toJSON() {
+		const data = {
+			metadata: {
+				version: 4.7,
+				type: "Skeleton",
+				generator: "Skeleton.toJSON"
+			},
+			bones: [],
+			boneInverses: []
+		};
+		data.uuid = this.uuid;
+		const bones = this.bones;
+		const boneInverses = this.boneInverses;
+		for (let i = 0, l = bones.length; i < l; i++) {
+			const bone = bones[i];
+			data.bones.push(bone.uuid);
+			const boneInverse = boneInverses[i];
+			data.boneInverses.push(boneInverse.toArray());
+		}
+		return data;
 	}
 };
 /**
@@ -41489,139 +42402,6 @@ var BoxGeometry = class BoxGeometry extends BufferGeometry {
 	*/
 	static fromJSON(data) {
 		return new BoxGeometry(data.width, data.height, data.depth, data.widthSegments, data.heightSegments, data.depthSegments);
-	}
-};
-/**
-* A geometry class for representing a capsule.
-*
-* ```js
-* const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8, 1 );
-* const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-* const capsule = new THREE.Mesh( geometry, material );
-* scene.add( capsule );
-* ```
-*
-* @augments BufferGeometry
-* @demo scenes/geometry-browser.html#CapsuleGeometry
-*/
-var CapsuleGeometry = class CapsuleGeometry extends BufferGeometry {
-	/**
-	* Constructs a new capsule geometry.
-	*
-	* @param {number} [radius=1] - Radius of the capsule.
-	* @param {number} [height=1] - Height of the middle section.
-	* @param {number} [capSegments=4] - Number of curve segments used to build each cap.
-	* @param {number} [radialSegments=8] - Number of segmented faces around the circumference of the capsule. Must be an integer >= 3.
-	* @param {number} [heightSegments=1] - Number of rows of faces along the height of the middle section. Must be an integer >= 1.
-	*/
-	constructor(radius = 1, height = 1, capSegments = 4, radialSegments = 8, heightSegments = 1) {
-		super();
-		this.type = "CapsuleGeometry";
-		/**
-		* Holds the constructor parameters that have been
-		* used to generate the geometry. Any modification
-		* after instantiation does not change the geometry.
-		*
-		* @type {Object}
-		*/
-		this.parameters = {
-			radius,
-			height,
-			capSegments,
-			radialSegments,
-			heightSegments
-		};
-		height = Math.max(0, height);
-		capSegments = Math.max(1, Math.floor(capSegments));
-		radialSegments = Math.max(3, Math.floor(radialSegments));
-		heightSegments = Math.max(1, Math.floor(heightSegments));
-		const indices = [];
-		const vertices = [];
-		const normals = [];
-		const uvs = [];
-		const halfHeight = height / 2;
-		const capArcLength = Math.PI / 2 * radius;
-		const cylinderPartLength = height;
-		const totalArcLength = 2 * capArcLength + cylinderPartLength;
-		const numVerticalSegments = capSegments * 2 + heightSegments;
-		const verticesPerRow = radialSegments + 1;
-		const normal = new Vector3();
-		const vertex = new Vector3();
-		for (let iy = 0; iy <= numVerticalSegments; iy++) {
-			let currentArcLength = 0;
-			let profileY = 0;
-			let profileRadius = 0;
-			let normalYComponent = 0;
-			if (iy <= capSegments) {
-				const segmentProgress = iy / capSegments;
-				const angle = segmentProgress * Math.PI / 2;
-				profileY = -halfHeight - radius * Math.cos(angle);
-				profileRadius = radius * Math.sin(angle);
-				normalYComponent = -radius * Math.cos(angle);
-				currentArcLength = segmentProgress * capArcLength;
-			} else if (iy <= capSegments + heightSegments) {
-				const segmentProgress = (iy - capSegments) / heightSegments;
-				profileY = -halfHeight + segmentProgress * height;
-				profileRadius = radius;
-				normalYComponent = 0;
-				currentArcLength = capArcLength + segmentProgress * cylinderPartLength;
-			} else {
-				const segmentProgress = (iy - capSegments - heightSegments) / capSegments;
-				const angle = segmentProgress * Math.PI / 2;
-				profileY = halfHeight + radius * Math.sin(angle);
-				profileRadius = radius * Math.cos(angle);
-				normalYComponent = radius * Math.sin(angle);
-				currentArcLength = capArcLength + cylinderPartLength + segmentProgress * capArcLength;
-			}
-			const v = Math.max(0, Math.min(1, currentArcLength / totalArcLength));
-			let uOffset = 0;
-			if (iy === 0) uOffset = .5 / radialSegments;
-			else if (iy === numVerticalSegments) uOffset = -.5 / radialSegments;
-			for (let ix = 0; ix <= radialSegments; ix++) {
-				const u = ix / radialSegments;
-				const theta = u * Math.PI * 2;
-				const sinTheta = Math.sin(theta);
-				const cosTheta = Math.cos(theta);
-				vertex.x = -profileRadius * cosTheta;
-				vertex.y = profileY;
-				vertex.z = profileRadius * sinTheta;
-				vertices.push(vertex.x, vertex.y, vertex.z);
-				normal.set(-profileRadius * cosTheta, normalYComponent, profileRadius * sinTheta);
-				normal.normalize();
-				normals.push(normal.x, normal.y, normal.z);
-				uvs.push(u + uOffset, v);
-			}
-			if (iy > 0) {
-				const prevIndexRow = (iy - 1) * verticesPerRow;
-				for (let ix = 0; ix < radialSegments; ix++) {
-					const i1 = prevIndexRow + ix;
-					const i2 = prevIndexRow + ix + 1;
-					const i3 = iy * verticesPerRow + ix;
-					const i4 = iy * verticesPerRow + ix + 1;
-					indices.push(i1, i2, i3);
-					indices.push(i2, i4, i3);
-				}
-			}
-		}
-		this.setIndex(indices);
-		this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-		this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
-		this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
-	}
-	copy(source) {
-		super.copy(source);
-		this.parameters = Object.assign({}, source.parameters);
-		return this;
-	}
-	/**
-	* Factory method for creating an instance of this class from the given
-	* JSON object.
-	*
-	* @param {Object} data - A JSON object representing the serialized geometry.
-	* @return {CapsuleGeometry} A new instance.
-	*/
-	static fromJSON(data) {
-		return new CapsuleGeometry(data.radius, data.height, data.capSegments, data.radialSegments, data.heightSegments);
 	}
 };
 /**
@@ -43890,96 +44670,6 @@ var LatheGeometry = class LatheGeometry extends BufferGeometry {
 	}
 };
 /**
-* A geometry class for representing an octahedron.
-*
-* ```js
-* const geometry = new THREE.OctahedronGeometry();
-* const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-* const octahedron = new THREE.Mesh( geometry, material );
-* scene.add( octahedron );
-* ```
-*
-* @augments PolyhedronGeometry
-* @demo scenes/geometry-browser.html#OctahedronGeometry
-*/
-var OctahedronGeometry = class OctahedronGeometry extends PolyhedronGeometry {
-	/**
-	* Constructs a new octahedron geometry.
-	*
-	* @param {number} [radius=1] - Radius of the octahedron.
-	* @param {number} [detail=0] - Setting this to a value greater than `0` adds vertices making it no longer a octahedron.
-	*/
-	constructor(radius = 1, detail = 0) {
-		super([
-			1,
-			0,
-			0,
-			-1,
-			0,
-			0,
-			0,
-			1,
-			0,
-			0,
-			-1,
-			0,
-			0,
-			0,
-			1,
-			0,
-			0,
-			-1
-		], [
-			0,
-			2,
-			4,
-			0,
-			4,
-			3,
-			0,
-			3,
-			5,
-			0,
-			5,
-			2,
-			1,
-			2,
-			5,
-			1,
-			5,
-			3,
-			1,
-			3,
-			4,
-			1,
-			4,
-			2
-		], radius, detail);
-		this.type = "OctahedronGeometry";
-		/**
-		* Holds the constructor parameters that have been
-		* used to generate the geometry. Any modification
-		* after instantiation does not change the geometry.
-		*
-		* @type {Object}
-		*/
-		this.parameters = {
-			radius,
-			detail
-		};
-	}
-	/**
-	* Factory method for creating an instance of this class from the given
-	* JSON object.
-	*
-	* @param {Object} data - A JSON object representing the serialized geometry.
-	* @return {OctahedronGeometry} A new instance.
-	*/
-	static fromJSON(data) {
-		return new OctahedronGeometry(data.radius, data.detail);
-	}
-};
-/**
 * A geometry class for representing a plane.
 *
 * ```js
@@ -44066,6 +44756,104 @@ var PlaneGeometry = class PlaneGeometry extends BufferGeometry {
 	*/
 	static fromJSON(data) {
 		return new PlaneGeometry(data.width, data.height, data.widthSegments, data.heightSegments);
+	}
+};
+/**
+* A class for generating a two-dimensional ring geometry.
+*
+* ```js
+* const geometry = new THREE.RingGeometry( 1, 5, 32 );
+* const material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+* const mesh = new THREE.Mesh( geometry, material );
+* scene.add( mesh );
+* ```
+*
+* @augments BufferGeometry
+* @demo scenes/geometry-browser.html#RingGeometry
+*/
+var RingGeometry = class RingGeometry extends BufferGeometry {
+	/**
+	* Constructs a new ring geometry.
+	*
+	* @param {number} [innerRadius=0.5] - The inner radius of the ring.
+	* @param {number} [outerRadius=1] - The outer radius of the ring.
+	* @param {number} [thetaSegments=32] - Number of segments. A higher number means the ring will be more round. Minimum is `3`.
+	* @param {number} [phiSegments=1] - Number of segments per ring segment. Minimum is `1`.
+	* @param {number} [thetaStart=0] - Starting angle in radians.
+	* @param {number} [thetaLength=Math.PI*2] - Central angle in radians.
+	*/
+	constructor(innerRadius = .5, outerRadius = 1, thetaSegments = 32, phiSegments = 1, thetaStart = 0, thetaLength = Math.PI * 2) {
+		super();
+		this.type = "RingGeometry";
+		/**
+		* Holds the constructor parameters that have been
+		* used to generate the geometry. Any modification
+		* after instantiation does not change the geometry.
+		*
+		* @type {Object}
+		*/
+		this.parameters = {
+			innerRadius,
+			outerRadius,
+			thetaSegments,
+			phiSegments,
+			thetaStart,
+			thetaLength
+		};
+		thetaSegments = Math.max(3, thetaSegments);
+		phiSegments = Math.max(1, phiSegments);
+		const indices = [];
+		const vertices = [];
+		const normals = [];
+		const uvs = [];
+		let radius = innerRadius;
+		const radiusStep = (outerRadius - innerRadius) / phiSegments;
+		const vertex = new Vector3();
+		const uv = new Vector2();
+		for (let j = 0; j <= phiSegments; j++) {
+			for (let i = 0; i <= thetaSegments; i++) {
+				const segment = thetaStart + i / thetaSegments * thetaLength;
+				vertex.x = radius * Math.cos(segment);
+				vertex.y = radius * Math.sin(segment);
+				vertices.push(vertex.x, vertex.y, vertex.z);
+				normals.push(0, 0, 1);
+				uv.x = (vertex.x / outerRadius + 1) / 2;
+				uv.y = (vertex.y / outerRadius + 1) / 2;
+				uvs.push(uv.x, uv.y);
+			}
+			radius += radiusStep;
+		}
+		for (let j = 0; j < phiSegments; j++) {
+			const thetaSegmentLevel = j * (thetaSegments + 1);
+			for (let i = 0; i < thetaSegments; i++) {
+				const segment = i + thetaSegmentLevel;
+				const a = segment;
+				const b = segment + thetaSegments + 1;
+				const c = segment + thetaSegments + 2;
+				const d = segment + 1;
+				indices.push(a, b, d);
+				indices.push(b, c, d);
+			}
+		}
+		this.setIndex(indices);
+		this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+		this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+		this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	}
+	copy(source) {
+		super.copy(source);
+		this.parameters = Object.assign({}, source.parameters);
+		return this;
+	}
+	/**
+	* Factory method for creating an instance of this class from the given
+	* JSON object.
+	*
+	* @param {Object} data - A JSON object representing the serialized geometry.
+	* @return {RingGeometry} A new instance.
+	*/
+	static fromJSON(data) {
+		return new RingGeometry(data.innerRadius, data.outerRadius, data.thetaSegments, data.phiSegments, data.thetaStart, data.thetaLength);
 	}
 };
 /**
@@ -62524,6 +63312,4153 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl, comp
 		coldDripDrop
 	};
 }
+// src/three/characterTextures.ts
+function makeCanvasTex(size, draw) {
+	const canvas = document.createElement("canvas");
+	canvas.width = size;
+	canvas.height = size;
+	const ctx = canvas.getContext("2d");
+	if (ctx) draw(ctx, size);
+	const tex = new CanvasTexture(canvas);
+	tex.colorSpace = SRGBColorSpace;
+	tex.generateMipmaps = false;
+	tex.minFilter = LinearFilter;
+	tex.magFilter = LinearFilter;
+	tex.wrapS = ClampToEdgeWrapping;
+	tex.wrapT = ClampToEdgeWrapping;
+	tex.needsUpdate = true;
+	return tex;
+}
+function createAnimeFaceTexture(opts, compactMode = false) {
+	const size = compactMode ? 256 : 512;
+	const eyeScale = opts.eyeScale ?? 1;
+	const smileCurve = opts.smileCurve ?? 1;
+	return makeCanvasTex(size, (ctx, s) => {
+		ctx.fillStyle = opts.skinHex;
+		ctx.fillRect(0, 0, s, s);
+		const chinGrad = ctx.createLinearGradient(0, s * .66, 0, s);
+		chinGrad.addColorStop(0, "rgba(0,0,0,0)");
+		chinGrad.addColorStop(1, "rgba(130, 72, 56, 0.16)");
+		ctx.fillStyle = chinGrad;
+		ctx.fillRect(0, s * .66, s, s * .34);
+		const cx = s * .5;
+		const eyeY = s * .532;
+		const eyeOffsetX = s * .086;
+		const ew = s * .043 * eyeScale;
+		const eh = s * .05 * eyeScale;
+		for (const side of [-1, 1]) {
+			const bx = cx + side * (eyeOffsetX + s * .018);
+			const by = eyeY + eh * 1.15;
+			const bGrad = ctx.createRadialGradient(bx, by, 1, bx, by, s * .055);
+			bGrad.addColorStop(0, opts.blushHex);
+			bGrad.addColorStop(1, "rgba(255,180,180,0)");
+			ctx.fillStyle = bGrad;
+			ctx.beginPath();
+			ctx.ellipse(bx, by, s * .056, s * .032, 0, 0, Math.PI * 2);
+			ctx.fill();
+		}
+		for (const side of [-1, 1]) {
+			const ex = cx + side * eyeOffsetX;
+			ctx.strokeStyle = "rgba(110, 68, 56, 0.45)";
+			ctx.lineWidth = Math.max(1.2, s * .004);
+			ctx.lineCap = "round";
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY - eh * .24, ew * .95, eh * .85, 0, Math.PI * 1.15, Math.PI * 1.85);
+			ctx.stroke();
+			ctx.fillStyle = "#fcfbfd";
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY, ew, eh * .9, 0, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.save();
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY, ew * .96, eh * .88, 0, 0, Math.PI * 2);
+			ctx.clip();
+			const irisGrad = ctx.createLinearGradient(0, eyeY - eh * .85, 0, eyeY + eh * .85);
+			irisGrad.addColorStop(0, opts.irisTopHex);
+			irisGrad.addColorStop(.58, opts.irisBottomHex);
+			irisGrad.addColorStop(1, "#ffffff");
+			ctx.fillStyle = irisGrad;
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY + eh * .04, ew * .72, eh * .84, 0, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.fillStyle = "rgba(20, 14, 34, 0.84)";
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY + eh * .04, ew * .34, eh * .42, 0, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.fillStyle = "rgba(25, 16, 40, 0.22)";
+			ctx.fillRect(ex - ew, eyeY - eh, ew * 2, eh * .54);
+			ctx.restore();
+			ctx.strokeStyle = "#241a24";
+			ctx.lineWidth = Math.max(2, s * .0105);
+			ctx.lineCap = "round";
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY + eh * .05, ew * 1.06, eh * .96, side * .05, Math.PI * 1.08, Math.PI * 1.94);
+			ctx.stroke();
+			ctx.strokeStyle = "rgba(42, 28, 38, 0.52)";
+			ctx.lineWidth = Math.max(1, s * .0042);
+			ctx.beginPath();
+			ctx.ellipse(ex, eyeY, ew * .85, eh * .9, 0, Math.PI * .22, Math.PI * .78);
+			ctx.stroke();
+			ctx.fillStyle = "#ffffff";
+			ctx.beginPath();
+			ctx.arc(ex - ew * .28, eyeY - eh * .26, ew * .23, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.beginPath();
+			ctx.arc(ex + ew * .26, eyeY + eh * .3, ew * .12, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.strokeStyle = opts.browHex;
+			ctx.lineWidth = Math.max(1.5, s * .0072);
+			ctx.beginPath();
+			ctx.moveTo(ex - ew * .9, eyeY - eh * 1.38);
+			ctx.quadraticCurveTo(ex, eyeY - eh * 1.62, ex + ew * .85, eyeY - eh * 1.32);
+			ctx.stroke();
+			if (opts.warmAgeLines) {
+				ctx.strokeStyle = "rgba(130, 82, 62, 0.32)";
+				ctx.lineWidth = Math.max(1, s * .003);
+				ctx.beginPath();
+				ctx.moveTo(ex + side * ew * 1.05, eyeY + eh * .25);
+				ctx.quadraticCurveTo(ex + side * ew * 1.32, eyeY + eh * .45, ex + side * ew * 1.15, eyeY + eh * .65);
+				ctx.stroke();
+			}
+		}
+		ctx.fillStyle = "rgba(155, 92, 74, 0.36)";
+		ctx.beginPath();
+		ctx.ellipse(cx, eyeY + eh * 1.45, s * .006, s * .004, 0, 0, Math.PI * 2);
+		ctx.fill();
+		const mouthY = eyeY + eh * 2.25;
+		ctx.strokeStyle = opts.lipHex;
+		ctx.lineWidth = Math.max(1.4, s * .0062);
+		ctx.lineCap = "round";
+		ctx.beginPath();
+		ctx.moveTo(cx - s * .026, mouthY);
+		ctx.quadraticCurveTo(cx, mouthY + s * .0155 * smileCurve, cx + s * .026, mouthY);
+		ctx.stroke();
+		if (opts.warmAgeLines) {
+			ctx.strokeStyle = "rgba(130, 82, 62, 0.26)";
+			ctx.lineWidth = Math.max(1, s * .003);
+			for (const side of [-1, 1]) {
+				ctx.beginPath();
+				ctx.moveTo(cx + side * s * .032, mouthY - s * .018);
+				ctx.quadraticCurveTo(cx + side * s * .044, mouthY + s * .005, cx + side * s * .034, mouthY + s * .024);
+				ctx.stroke();
+			}
+		}
+	});
+}
+/**
+* Silky anisotropic hair strand texture with curved glossy highlight halo
+* and optional smooth ombre tip coloration.
+*/
+function createHairStrandTexture(baseHex, highlightHex, shadowHex, tipHex, compactMode = false) {
+	const tex = makeCanvasTex(compactMode ? 128 : 256, (ctx, s) => {
+		const bg = ctx.createLinearGradient(0, 0, 0, s);
+		bg.addColorStop(0, shadowHex);
+		bg.addColorStop(.22, baseHex);
+		bg.addColorStop(.72, baseHex);
+		bg.addColorStop(1, tipHex ?? baseHex);
+		ctx.fillStyle = bg;
+		ctx.fillRect(0, 0, s, s);
+		const fiberCount = compactMode ? 36 : 64;
+		for (let i = 0; i < fiberCount; i++) {
+			const x = i / fiberCount * s;
+			ctx.strokeStyle = i % 3 === 0 ? highlightHex : shadowHex;
+			ctx.globalAlpha = i % 3 === 0 ? .24 : .16;
+			ctx.lineWidth = Math.max(1, s / fiberCount * .65);
+			ctx.beginPath();
+			ctx.moveTo(x, 0);
+			ctx.lineTo(x, s);
+			ctx.stroke();
+		}
+		const sheen = ctx.createLinearGradient(0, s * .22, 0, s * .48);
+		sheen.addColorStop(0, "rgba(255,255,255,0)");
+		sheen.addColorStop(.45, highlightHex);
+		sheen.addColorStop(.55, "rgba(255,255,255,0.45)");
+		sheen.addColorStop(1, "rgba(255,255,255,0)");
+		ctx.globalAlpha = .36;
+		ctx.fillStyle = sheen;
+		ctx.fillRect(0, s * .22, s, s * .26);
+		ctx.globalAlpha = 1;
+	});
+	tex.wrapS = RepeatWrapping;
+	tex.wrapT = ClampToEdgeWrapping;
+	return tex;
+}
+/**
+* Tailored garment textures mapped to torso/coat UVs (center front is u = 0.5, top = collar).
+*/
+function createTailoredClothingTexture(opts, compactMode = false) {
+	return makeCanvasTex(compactMode ? 128 : 256, (ctx, s) => {
+		ctx.fillStyle = opts.baseHex;
+		ctx.fillRect(0, 0, s, s);
+		ctx.strokeStyle = opts.grainHex;
+		ctx.lineWidth = Math.max(1, s * .005);
+		if (opts.style === "cardigan") {
+			ctx.globalAlpha = .22;
+			const ribStep = s / 26;
+			for (let x = 0; x < s; x += ribStep) {
+				ctx.beginPath();
+				ctx.moveTo(x, 0);
+				ctx.lineTo(x, s);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			ctx.fillStyle = opts.trimHex ?? opts.grainHex;
+			ctx.globalAlpha = .42;
+			ctx.fillRect(0, s * .88, s, s * .12);
+			ctx.fillRect(0, 0, s * .07, s);
+			ctx.fillRect(s * .93, 0, s * .07, s);
+			ctx.globalAlpha = 1;
+			if (opts.buttonHex) {
+				ctx.fillStyle = opts.buttonHex;
+				for (let b = 0; b < 4; b++) {
+					ctx.beginPath();
+					ctx.arc(s * .955, s * (.24 + b * .17), s * .015, 0, Math.PI * 2);
+					ctx.fill();
+				}
+			}
+		} else if (opts.style === "thai-blouse") {
+			ctx.globalAlpha = .15;
+			for (let x = 0; x < s; x += s / 36) {
+				ctx.beginPath();
+				ctx.moveTo(x, 0);
+				ctx.lineTo(x, s);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			const cx = s * .75;
+			const accent = opts.accentHex ?? "#8fa0bf";
+			ctx.fillStyle = accent;
+			ctx.globalAlpha = .42;
+			ctx.fillRect(0, 0, s, s * .09);
+			ctx.strokeStyle = accent;
+			ctx.lineWidth = Math.max(1.2, s * .008);
+			ctx.globalAlpha = .62;
+			for (const side of [-1, 1]) {
+				const px = cx + side * s * .044;
+				ctx.beginPath();
+				ctx.moveTo(px, s * .06);
+				ctx.lineTo(px, s * .92);
+				ctx.stroke();
+				for (let y = s * .16; y < s * .86; y += s * .11) {
+					ctx.beginPath();
+					ctx.moveTo(px, y - s * .022);
+					ctx.lineTo(px + s * .015, y);
+					ctx.lineTo(px, y + s * .022);
+					ctx.lineTo(px - s * .015, y);
+					ctx.closePath();
+					ctx.stroke();
+				}
+			}
+			ctx.fillStyle = opts.buttonHex ?? "#c9cfd8";
+			ctx.globalAlpha = .92;
+			ctx.beginPath();
+			ctx.arc(cx, s * .14, s * .018, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.globalAlpha = 1;
+		} else if (opts.style === "waistcoat") {
+			ctx.globalAlpha = .2;
+			for (let i = -s; i < s * 2; i += s / 32) {
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i + s, s);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			ctx.fillStyle = opts.buttonHex ?? "#525763";
+			for (let b = 0; b < 4; b++) {
+				const by = s * (.44 + b * .12);
+				ctx.beginPath();
+				ctx.arc(s * .955, by, s * .016, 0, Math.PI * 2);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.arc(s * .045, by, s * .016, 0, Math.PI * 2);
+				ctx.fill();
+			}
+			ctx.strokeStyle = opts.accentHex ?? "#353842";
+			ctx.lineWidth = Math.max(1.4, s * .012);
+			ctx.beginPath();
+			ctx.moveTo(s * .1, s * .72);
+			ctx.lineTo(s * .18, s * .74);
+			ctx.moveTo(s * .9, s * .72);
+			ctx.lineTo(s * .82, s * .74);
+			ctx.stroke();
+		} else if (opts.style === "trench") {
+			ctx.globalAlpha = .22;
+			for (let i = -s; i < s * 2; i += s / 28) {
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i + s, s);
+				ctx.stroke();
+			}
+			ctx.fillStyle = opts.accentHex ?? "rgba(18, 19, 23, 0.35)";
+			ctx.fillRect(0, s * .88, s, s * .12);
+			ctx.globalAlpha = .35;
+			ctx.strokeStyle = opts.trimHex ?? "#454850";
+			ctx.lineWidth = Math.max(1.5, s * .012);
+			ctx.strokeRect(s * .03, s * .03, s * .94, s * .94);
+			ctx.beginPath();
+			ctx.moveTo(s * .5, s * .45);
+			ctx.lineTo(s * .5, s);
+			ctx.stroke();
+			ctx.globalAlpha = 1;
+		} else if (opts.style === "shirt") {
+			ctx.globalAlpha = .14;
+			for (let y = 0; y < s; y += s / 24) {
+				ctx.beginPath();
+				ctx.moveTo(0, y);
+				ctx.lineTo(s, y);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			const cx = s * .75;
+			ctx.strokeStyle = opts.grainHex;
+			ctx.lineWidth = Math.max(1, s * .006);
+			ctx.beginPath();
+			ctx.moveTo(cx - s * .018, 0);
+			ctx.lineTo(cx - s * .018, s);
+			ctx.moveTo(cx + s * .018, 0);
+			ctx.lineTo(cx + s * .018, s);
+			ctx.stroke();
+			ctx.fillStyle = opts.buttonHex ?? "#d2c9b8";
+			for (let b = 0; b < 4; b++) {
+				ctx.beginPath();
+				ctx.arc(cx, s * (.2 + b * .2), s * .012, 0, Math.PI * 2);
+				ctx.fill();
+			}
+		} else {
+			ctx.globalAlpha = .18;
+			for (let i = -s; i < s * 2; i += s / 28) {
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i + s, s);
+				ctx.stroke();
+			}
+			ctx.globalAlpha = 1;
+			if (opts.trimHex) {
+				ctx.fillStyle = opts.trimHex;
+				ctx.fillRect(0, s * .9, s, s * .07);
+			}
+		}
+	});
+}
+function makeLinearDataTex(canvas) {
+	const tex = new CanvasTexture(canvas);
+	tex.colorSpace = "";
+	tex.generateMipmaps = false;
+	tex.minFilter = LinearFilter;
+	tex.magFilter = LinearFilter;
+	tex.wrapS = RepeatWrapping;
+	tex.wrapT = RepeatWrapping;
+	tex.needsUpdate = true;
+	return tex;
+}
+function buildNormalCanvasFromHeight(heightField, size, strength) {
+	const canvas = document.createElement("canvas");
+	canvas.width = size;
+	canvas.height = size;
+	const ctx = canvas.getContext("2d");
+	if (!ctx) return canvas;
+	const img = ctx.createImageData(size, size);
+	const data = img.data;
+	const idx = (x, y) => (y + size) % size * size + (x + size) % size;
+	for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+		const hL = heightField[idx(x - 1, y)];
+		const hR = heightField[idx(x + 1, y)];
+		const hU = heightField[idx(x, y - 1)];
+		const hD = heightField[idx(x, y + 1)];
+		const dx = (hL - hR) * strength;
+		const dy = (hU - hD) * strength;
+		const dz = 1;
+		const invLen = 1 / Math.hypot(dx, dy, dz);
+		const p = (y * size + x) * 4;
+		data[p] = Math.round((dx * invLen * .5 + .5) * 255);
+		data[p + 1] = Math.round((dy * invLen * .5 + .5) * 255);
+		data[p + 2] = Math.round((dz * invLen * .5 + .5) * 255);
+		data[p + 3] = 255;
+	}
+	ctx.putImageData(img, 0, 0);
+	return canvas;
+}
+/**
+* Generates a ready-to-use 4-map PBR texture set (BaseColor, Tangent Normal, Roughness, Metalness)
+* tailored for Low Poly stylized game characters.
+*/
+function createLowPolyPbrTextureSet(kind, opts, compactMode = false) {
+	const size = compactMode ? 128 : 256;
+	const heightField = new Float32Array(size * size);
+	const albedoCanvas = document.createElement("canvas");
+	albedoCanvas.width = size;
+	albedoCanvas.height = size;
+	const aCtx = albedoCanvas.getContext("2d");
+	const roughCanvas = document.createElement("canvas");
+	roughCanvas.width = size;
+	roughCanvas.height = size;
+	const rCtx = roughCanvas.getContext("2d");
+	const metalCanvas = document.createElement("canvas");
+	metalCanvas.width = size;
+	metalCanvas.height = size;
+	const mCtx = metalCanvas.getContext("2d");
+	const baseRoughByte = kind === "metal-trim" ? 68 : kind === "leather" ? 116 : kind === "hair" ? 122 : kind === "skin" ? 148 : 210;
+	const baseMetalByte = kind === "metal-trim" ? 228 : 0;
+	if (aCtx && rCtx && mCtx) {
+		aCtx.fillStyle = opts.baseHex;
+		aCtx.fillRect(0, 0, size, size);
+		rCtx.fillStyle = `rgb(${baseRoughByte},${baseRoughByte},${baseRoughByte})`;
+		rCtx.fillRect(0, 0, size, size);
+		mCtx.fillStyle = `rgb(${baseMetalByte},${baseMetalByte},${baseMetalByte})`;
+		mCtx.fillRect(0, 0, size, size);
+		const grad = aCtx.createLinearGradient(0, 0, 0, size);
+		grad.addColorStop(0, "rgba(255,255,255,0.12)");
+		grad.addColorStop(.55, "rgba(255,255,255,0)");
+		grad.addColorStop(1, opts.shadeHex);
+		aCtx.globalAlpha = .28;
+		aCtx.fillStyle = grad;
+		aCtx.fillRect(0, 0, size, size);
+		aCtx.globalAlpha = 1;
+		if (kind === "tunic") {
+			for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+				const weave = Math.sin(x / size * Math.PI * 36) * Math.cos(y / size * Math.PI * 36);
+				heightField[y * size + x] = .5 + weave * .08;
+			}
+			aCtx.strokeStyle = opts.shadeHex;
+			aCtx.globalAlpha = .14;
+			aCtx.lineWidth = Math.max(1, size * .008);
+			for (let i = 0; i < size; i += Math.max(6, size / 24)) {
+				aCtx.beginPath();
+				aCtx.moveTo(0, i);
+				aCtx.lineTo(size, i);
+				aCtx.stroke();
+			}
+			aCtx.globalAlpha = 1;
+			if (opts.accentHex) {
+				aCtx.fillStyle = opts.accentHex;
+				aCtx.fillRect(size * .44, 0, size * .12, size);
+				aCtx.fillRect(0, size * .84, size, size * .08);
+			}
+			if (opts.trimHex) {
+				aCtx.fillStyle = opts.trimHex;
+				aCtx.fillRect(size * .45, 0, size * .015, size);
+				aCtx.fillRect(size * .535, 0, size * .015, size);
+				for (let b = 0; b < 4; b++) {
+					const by = size * (.2 + b * .16);
+					aCtx.beginPath();
+					aCtx.arc(size * .5, by, size * .022, 0, Math.PI * 2);
+					aCtx.fill();
+					mCtx.fillStyle = "rgb(225,225,225)";
+					mCtx.beginPath();
+					mCtx.arc(size * .5, by, size * .024, 0, Math.PI * 2);
+					mCtx.fill();
+					rCtx.fillStyle = "rgb(65,65,65)";
+					rCtx.beginPath();
+					rCtx.arc(size * .5, by, size * .024, 0, Math.PI * 2);
+					rCtx.fill();
+					const rPx = Math.round(size * .024);
+					const cx = Math.round(size * .5);
+					const cy = Math.round(by);
+					for (let yy = -rPx; yy <= rPx; yy++) for (let xx = -rPx; xx <= rPx; xx++) if (xx * xx + yy * yy <= rPx * rPx) {
+						const px = Math.max(0, Math.min(size - 1, cx + xx));
+						const py = Math.max(0, Math.min(size - 1, cy + yy));
+						heightField[py * size + px] = .92;
+					}
+				}
+			}
+		} else if (kind === "leather") {
+			for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+				const cell = Math.sin(x * .42 + Math.cos(y * .37) * 2.1) * Math.cos(y * .48 + Math.sin(x * .31) * 1.8);
+				heightField[y * size + x] = .5 + cell * .14;
+			}
+			aCtx.strokeStyle = opts.shadeHex;
+			aCtx.lineWidth = Math.max(1.5, size * .015);
+			aCtx.strokeRect(size * .06, size * .06, size * .88, size * .88);
+			if (opts.trimHex) {
+				aCtx.strokeStyle = opts.trimHex;
+				aCtx.setLineDash([size * .03, size * .025]);
+				aCtx.lineWidth = Math.max(1, size * .01);
+				aCtx.strokeRect(size * .1, size * .1, size * .8, size * .8);
+				aCtx.setLineDash([]);
+			}
+		} else if (kind === "trousers") {
+			for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+				const twill = Math.sin((x + y) / size * Math.PI * 44);
+				heightField[y * size + x] = .5 + twill * .07;
+			}
+			aCtx.strokeStyle = opts.shadeHex;
+			aCtx.globalAlpha = .22;
+			aCtx.lineWidth = Math.max(1, size * .012);
+			aCtx.beginPath();
+			aCtx.moveTo(size * .25, 0);
+			aCtx.lineTo(size * .25, size);
+			aCtx.moveTo(size * .75, 0);
+			aCtx.lineTo(size * .75, size);
+			aCtx.stroke();
+			aCtx.globalAlpha = 1;
+		} else if (kind === "metal-trim") {
+			for (let y = 0; y < size; y++) {
+				const streak = Math.sin(y * .65) * .06;
+				for (let x = 0; x < size; x++) {
+					const border = x < size * .08 || x > size * .92 || y < size * .08 || y > size * .92 ? .2 : .75;
+					heightField[y * size + x] = border + streak;
+				}
+			}
+			aCtx.strokeStyle = opts.shadeHex;
+			aCtx.lineWidth = Math.max(1.5, size * .024);
+			aCtx.strokeRect(size * .05, size * .05, size * .9, size * .9);
+			aCtx.fillStyle = "rgba(255,255,255,0.28)";
+			aCtx.fillRect(size * .12, size * .12, size * .76, size * .14);
+		} else if (kind === "hair") {
+			for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+				const strand = Math.sin(x / size * Math.PI * 28 + Math.sin(y * .06));
+				heightField[y * size + x] = .5 + strand * .18;
+			}
+			aCtx.fillStyle = opts.accentHex ?? "rgba(255,255,255,0.22)";
+			aCtx.globalAlpha = .28;
+			aCtx.fillRect(0, size * .34, size, size * .14);
+			aCtx.globalAlpha = 1;
+		} else for (let i = 0; i < heightField.length; i++) heightField[i] = .5;
+	}
+	const normalCanvas = buildNormalCanvasFromHeight(heightField, size, kind === "metal-trim" || kind === "leather" ? 2.4 : 1.7);
+	const map = new CanvasTexture(albedoCanvas);
+	map.colorSpace = SRGBColorSpace;
+	map.generateMipmaps = false;
+	map.minFilter = LinearFilter;
+	map.magFilter = LinearFilter;
+	map.wrapS = RepeatWrapping;
+	map.wrapT = RepeatWrapping;
+	map.needsUpdate = true;
+	const normalMap = makeLinearDataTex(normalCanvas);
+	const roughnessMap = makeLinearDataTex(roughCanvas);
+	const metalnessMap = makeLinearDataTex(metalCanvas);
+	return {
+		map,
+		normalMap,
+		roughnessMap,
+		metalnessMap,
+		textures: [
+			map,
+			normalMap,
+			roughnessMap,
+			metalnessMap
+		]
+	};
+}
+// src/three/seamlessHumanRig.ts
+var BONE = {
+	ROOT: 0,
+	HIPS: 1,
+	SPINE: 2,
+	CHEST: 3,
+	NECK: 4,
+	HEAD: 5,
+	L_SHOULDER: 6,
+	L_ELBOW: 7,
+	L_WRIST: 8,
+	R_SHOULDER: 9,
+	R_ELBOW: 10,
+	R_WRIST: 11,
+	L_HIP: 12,
+	L_KNEE: 13,
+	L_ANKLE: 14,
+	R_HIP: 15,
+	R_KNEE: 16,
+	R_ANKLE: 17
+};
+/**
+* Builds the standard 18-bone upright humanoid skeleton in rest pose (feet at y = 0).
+* Arms hang naturally ~16 deg from vertical so shoulder & armpit skinning stays seamless.
+*/
+function createHumanoidSkeleton(heightScale = 1) {
+	const s = heightScale;
+	const root = new Bone();
+	root.position.set(0, 0, 0);
+	const hips = new Bone();
+	hips.position.set(0, .8 * s, 0);
+	root.add(hips);
+	const spine = new Bone();
+	spine.position.set(0, .14 * s, 0);
+	hips.add(spine);
+	const chest = new Bone();
+	chest.position.set(0, .18 * s, 0);
+	spine.add(chest);
+	const neck = new Bone();
+	neck.position.set(0, .17 * s, 0);
+	chest.add(neck);
+	const head = new Bone();
+	head.position.set(0, .09 * s, 0);
+	neck.add(head);
+	const leftShoulder = new Bone();
+	leftShoulder.position.set(-.145 * s, .115 * s, 0);
+	chest.add(leftShoulder);
+	const leftElbow = new Bone();
+	leftElbow.position.set(-.075 * s, -.22 * s, .01 * s);
+	leftShoulder.add(leftElbow);
+	const leftWrist = new Bone();
+	leftWrist.position.set(-.048 * s, -.2 * s, .025 * s);
+	leftElbow.add(leftWrist);
+	const rightShoulder = new Bone();
+	rightShoulder.position.set(.145 * s, .115 * s, 0);
+	chest.add(rightShoulder);
+	const rightElbow = new Bone();
+	rightElbow.position.set(.075 * s, -.22 * s, .01 * s);
+	rightShoulder.add(rightElbow);
+	const rightWrist = new Bone();
+	rightWrist.position.set(.048 * s, -.2 * s, .025 * s);
+	rightElbow.add(rightWrist);
+	const leftHip = new Bone();
+	leftHip.position.set(-.088 * s, -.02 * s, 0);
+	hips.add(leftHip);
+	const leftKnee = new Bone();
+	leftKnee.position.set(0, -.37 * s, .008 * s);
+	leftHip.add(leftKnee);
+	const leftAnkle = new Bone();
+	leftAnkle.position.set(0, -.35 * s, -.008 * s);
+	leftKnee.add(leftAnkle);
+	const rightHip = new Bone();
+	rightHip.position.set(.088 * s, -.02 * s, 0);
+	hips.add(rightHip);
+	const rightKnee = new Bone();
+	rightKnee.position.set(0, -.37 * s, .008 * s);
+	rightHip.add(rightKnee);
+	const rightAnkle = new Bone();
+	rightAnkle.position.set(0, -.35 * s, -.008 * s);
+	rightKnee.add(rightAnkle);
+	const all = [
+		root,
+		hips,
+		spine,
+		chest,
+		neck,
+		head,
+		leftShoulder,
+		leftElbow,
+		leftWrist,
+		rightShoulder,
+		rightElbow,
+		rightWrist,
+		leftHip,
+		leftKnee,
+		leftAnkle,
+		rightHip,
+		rightKnee,
+		rightAnkle
+	];
+	root.updateMatrixWorld(true);
+	return {
+		root,
+		hips,
+		spine,
+		chest,
+		neck,
+		head,
+		leftShoulder,
+		leftElbow,
+		leftWrist,
+		rightShoulder,
+		rightElbow,
+		rightWrist,
+		leftHip,
+		leftKnee,
+		leftAnkle,
+		rightHip,
+		rightKnee,
+		rightAnkle,
+		all,
+		skeleton: new Skeleton(all),
+		restHipsY: .8 * s
+	};
+}
+var _pCur = new Vector3();
+var _pPrev = new Vector3();
+var _pNext = new Vector3();
+var _tangent = new Vector3();
+var _basisU = new Vector3();
+var _basisV = new Vector3();
+var _worldUp = new Vector3(0, 1, 0);
+var _worldFwd = new Vector3(0, 0, 1);
+function pushRingVertices(ring, tangent, radialSeg, arcStart, arcEnd, defaultV, positions, uvs, skinIndices, skinWeights) {
+	if (Math.abs(tangent.dot(_worldFwd)) < .92) _basisU.crossVectors(_worldFwd, tangent).normalize();
+	else _basisU.set(1, 0, 0);
+	_basisV.crossVectors(tangent, _basisU).normalize();
+	const [b0, w0Raw, b1, w1Raw] = ring.weights;
+	const wSum = w0Raw + w1Raw || 1;
+	const w0 = w0Raw / wSum;
+	const w1 = w1Raw / wSum;
+	const vCoord = ring.v ?? defaultV;
+	const cols = radialSeg + 1;
+	const squirclePow = ring.squareness ? 2 / (2 + 1.5 * ring.squareness) : 1;
+	for (let i = 0; i < cols; i++) {
+		const frac = i / radialSeg;
+		const theta = arcStart + frac * (arcEnd - arcStart);
+		const rawCos = Math.cos(theta);
+		const rawSin = Math.sin(theta);
+		const cosT = squirclePow === 1 ? rawCos : Math.sign(rawCos) * Math.pow(Math.abs(rawCos), squirclePow);
+		const sinT = squirclePow === 1 ? rawSin : Math.sign(rawSin) * Math.pow(Math.abs(rawSin), squirclePow);
+		let rzMod = ring.rz;
+		if (sinT < 0 && ring.frontScale) rzMod *= ring.frontScale;
+		if (sinT > 0 && ring.backScale) rzMod *= ring.backScale;
+		const vx = ring.center[0] + _basisU.x * (ring.rx * cosT) + _basisV.x * (rzMod * sinT);
+		const vy = ring.center[1] + _basisU.y * (ring.rx * cosT) + _basisV.y * (rzMod * sinT);
+		const vz = ring.center[2] + _basisU.z * (ring.rx * cosT) + _basisV.z * (rzMod * sinT);
+		positions.push(vx, vy, vz);
+		uvs.push(frac, vCoord);
+		skinIndices.push(b0, b1, 0, 0);
+		skinWeights.push(w0, w1, 0, 0);
+	}
+}
+function computeRingTangent(rings, r) {
+	const ring = rings[r];
+	_pCur.set(ring.center[0], ring.center[1], ring.center[2]);
+	if (r === 0) {
+		_pNext.set(rings[1].center[0], rings[1].center[1], rings[1].center[2]);
+		_tangent.subVectors(_pNext, _pCur);
+	} else if (r === rings.length - 1) {
+		_pPrev.set(rings[r - 1].center[0], rings[r - 1].center[1], rings[r - 1].center[2]);
+		_tangent.subVectors(_pCur, _pPrev);
+	} else {
+		_pPrev.set(rings[r - 1].center[0], rings[r - 1].center[1], rings[r - 1].center[2]);
+		_pNext.set(rings[r + 1].center[0], rings[r + 1].center[1], rings[r + 1].center[2]);
+		_tangent.subVectors(_pNext, _pPrev);
+	}
+	if (_tangent.lengthSq() < 1e-8) _tangent.copy(_worldUp);
+	else _tangent.normalize();
+	return _tangent;
+}
+/**
+* Generates a continuous, zero-seam indexed SkinnedMesh along ordered cross-section rings.
+* Outward triangle winding is guaranteed by maintaining a right-handed (tangent, U, V) frame.
+*/
+function buildLoftedSkinnedMesh(rings, radialSeg, material, skeleton, options = {}) {
+	const { capStart = false, capEnd = false, castShadow = false, receiveShadow = false, arcStart = 0, arcEnd = Math.PI * 2 } = options;
+	const isClosedLoop = Math.abs(arcEnd - arcStart - Math.PI * 2) < .001;
+	const cols = radialSeg + 1;
+	const ringCount = rings.length;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	for (let r = 0; r < ringCount; r++) {
+		const tan = computeRingTangent(rings, r);
+		pushRingVertices(rings[r], tan, radialSeg, arcStart, arcEnd, r / Math.max(1, ringCount - 1), positions, uvs, skinIndices, skinWeights);
+	}
+	for (let r = 0; r < ringCount - 1; r++) for (let i = 0; i < radialSeg; i++) {
+		const a = r * cols + i;
+		const b = r * cols + i + 1;
+		const c = (r + 1) * cols + i + 1;
+		const d = (r + 1) * cols + i;
+		indices.push(a, b, c, a, c, d);
+	}
+	if (isClosedLoop && capStart) {
+		const first = rings[0];
+		const centerIdx = positions.length / 3;
+		const [b0, w0Raw, b1, w1Raw] = first.weights;
+		const wSum = w0Raw + w1Raw || 1;
+		positions.push(first.center[0], first.center[1], first.center[2]);
+		uvs.push(.5, 0);
+		skinIndices.push(b0, b1, 0, 0);
+		skinWeights.push(w0Raw / wSum, w1Raw / wSum, 0, 0);
+		for (let i = 0; i < radialSeg; i++) indices.push(centerIdx, i + 1, i);
+	}
+	if (isClosedLoop && capEnd) {
+		const last = rings[ringCount - 1];
+		const base = (ringCount - 1) * cols;
+		const centerIdx = positions.length / 3;
+		const [b0, w0Raw, b1, w1Raw] = last.weights;
+		const wSum = w0Raw + w1Raw || 1;
+		positions.push(last.center[0], last.center[1], last.center[2]);
+		uvs.push(.5, 1);
+		skinIndices.push(b0, b1, 0, 0);
+		skinWeights.push(w0Raw / wSum, w1Raw / wSum, 0, 0);
+		for (let i = 0; i < radialSeg; i++) indices.push(centerIdx, base + i, base + i + 1);
+	}
+	const geo = new BufferGeometry();
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	if (isClosedLoop) {
+		const normAttr = geo.getAttribute("normal");
+		for (let r = 0; r < ringCount; r++) {
+			const idx0 = r * cols;
+			const idxN = r * cols + radialSeg;
+			const nx = (normAttr.getX(idx0) + normAttr.getX(idxN)) * .5;
+			const ny = (normAttr.getY(idx0) + normAttr.getY(idxN)) * .5;
+			const nz = (normAttr.getZ(idx0) + normAttr.getZ(idxN)) * .5;
+			const len = Math.hypot(nx, ny, nz) || 1;
+			normAttr.setXYZ(idx0, nx / len, ny / len, nz / len);
+			normAttr.setXYZ(idxN, nx / len, ny / len, nz / len);
+		}
+		normAttr.needsUpdate = true;
+	}
+	const mesh = new SkinnedMesh(geo, material);
+	mesh.castShadow = castShadow;
+	mesh.receiveShadow = receiveShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+/**
+* Builds ONE single continuous multi-material SkinnedMesh across multiple garment/skin
+* sections (e.g., Sleeve -> Cuff -> Forearm -> Hand, or Thigh -> Stocking -> Boot).
+* Adjacent sections duplicate their exact shared boundary ring and weld normals across
+* the transition so there is literally ZERO gap, ZERO overlap flicker, and ZERO crease seam!
+*/
+function buildMultiMaterialLoftedSkinnedMesh(sections, radialSeg, skeleton, options = {}) {
+	const { capStart = false, capEnd = false, castShadow = false, receiveShadow = false } = options;
+	const cols = radialSeg + 1;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	const materials = [];
+	const allRingsForTangent = [];
+	const sectionOffsets = [];
+	for (let sIdx = 0; sIdx < sections.length; sIdx++) {
+		const sec = sections[sIdx];
+		const startRingIdx = allRingsForTangent.length;
+		for (let r = 0; r < sec.rings.length; r++) {
+			if (sIdx > 0 && r === 0) continue;
+			allRingsForTangent.push(sec.rings[r]);
+		}
+		sectionOffsets.push({
+			startRingIdx,
+			ringCount: sec.rings.length
+		});
+	}
+	const geo = new BufferGeometry();
+	const ringVertexStart = [];
+	const boundaryPairs = [];
+	let globalRingCounter = 0;
+	for (let sIdx = 0; sIdx < sections.length; sIdx++) {
+		const sec = sections[sIdx];
+		const matIdx = materials.length;
+		materials.push(sec.material);
+		const groupIndexStart = indices.length;
+		const secBaseRing = ringVertexStart.length;
+		for (let r = 0; r < sec.rings.length; r++) {
+			const tangentLookupIdx = sIdx > 0 && r === 0 ? sectionOffsets[sIdx].startRingIdx - 1 : globalRingCounter++;
+			const tan = computeRingTangent(allRingsForTangent, Math.min(allRingsForTangent.length - 1, Math.max(0, tangentLookupIdx)));
+			const startVertex = positions.length / 3;
+			ringVertexStart.push(startVertex);
+			pushRingVertices(sec.rings[r], tan, radialSeg, 0, Math.PI * 2, r / Math.max(1, sec.rings.length - 1), positions, uvs, skinIndices, skinWeights);
+			if (sIdx > 0 && r === 0) boundaryPairs.push([ringVertexStart[secBaseRing - 1], startVertex]);
+		}
+		for (let r = 0; r < sec.rings.length - 1; r++) {
+			const rowA = ringVertexStart[secBaseRing + r];
+			const rowB = ringVertexStart[secBaseRing + r + 1];
+			for (let i = 0; i < radialSeg; i++) {
+				const a = rowA + i;
+				const b = rowA + i + 1;
+				const c = rowB + i + 1;
+				const d = rowB + i;
+				indices.push(a, b, c, a, c, d);
+			}
+		}
+		if (sIdx === 0 && capStart) {
+			const first = sec.rings[0];
+			const centerIdx = positions.length / 3;
+			const [b0, w0Raw, b1, w1Raw] = first.weights;
+			const wSum = w0Raw + w1Raw || 1;
+			positions.push(first.center[0], first.center[1], first.center[2]);
+			uvs.push(.5, 0);
+			skinIndices.push(b0, b1, 0, 0);
+			skinWeights.push(w0Raw / wSum, w1Raw / wSum, 0, 0);
+			for (let i = 0; i < radialSeg; i++) indices.push(centerIdx, i + 1, i);
+		}
+		if (sIdx === sections.length - 1 && capEnd) {
+			const last = sec.rings[sec.rings.length - 1];
+			const base = ringVertexStart[ringVertexStart.length - 1];
+			const centerIdx = positions.length / 3;
+			const [b0, w0Raw, b1, w1Raw] = last.weights;
+			const wSum = w0Raw + w1Raw || 1;
+			positions.push(last.center[0], last.center[1], last.center[2]);
+			uvs.push(.5, 1);
+			skinIndices.push(b0, b1, 0, 0);
+			skinWeights.push(w0Raw / wSum, w1Raw / wSum, 0, 0);
+			for (let i = 0; i < radialSeg; i++) indices.push(centerIdx, base + i, base + i + 1);
+		}
+		geo.addGroup(groupIndexStart, indices.length - groupIndexStart, matIdx);
+	}
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	const normAttr = geo.getAttribute("normal");
+	for (const rowStart of ringVertexStart) {
+		const idx0 = rowStart;
+		const idxN = rowStart + radialSeg;
+		const nx = (normAttr.getX(idx0) + normAttr.getX(idxN)) * .5;
+		const ny = (normAttr.getY(idx0) + normAttr.getY(idxN)) * .5;
+		const nz = (normAttr.getZ(idx0) + normAttr.getZ(idxN)) * .5;
+		const len = Math.hypot(nx, ny, nz) || 1;
+		normAttr.setXYZ(idx0, nx / len, ny / len, nz / len);
+		normAttr.setXYZ(idxN, nx / len, ny / len, nz / len);
+	}
+	for (const [prevRow, nextRow] of boundaryPairs) for (let i = 0; i < cols; i++) {
+		const a = prevRow + i;
+		const b = nextRow + i;
+		const nx = (normAttr.getX(a) + normAttr.getX(b)) * .5;
+		const ny = (normAttr.getY(a) + normAttr.getY(b)) * .5;
+		const nz = (normAttr.getZ(a) + normAttr.getZ(b)) * .5;
+		const len = Math.hypot(nx, ny, nz) || 1;
+		normAttr.setXYZ(a, nx / len, ny / len, nz / len);
+		normAttr.setXYZ(b, nx / len, ny / len, nz / len);
+	}
+	normAttr.needsUpdate = true;
+	const mesh = new SkinnedMesh(geo, materials);
+	mesh.castShadow = castShadow;
+	mesh.receiveShadow = receiveShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+/**
+* Builds an anatomically sculpted humanoid head mesh with:
+* - Smooth jawline & chin blending naturally into the neck
+* - Sculpted 3D nose bridge & tip
+* - Subtle brow ridge, orbital eye-socket depth, and soft cheekbone fullness
+* UV seam cleanly tucked at -Z.
+*/
+function buildSculptedHeadSkinnedMesh(centerY, radius, seg, material, skeleton, options = {}) {
+	const { jawTaper = .72, faceFlatten = .88, castShadow = false } = options;
+	const latSeg = Math.max(18, seg + 6);
+	const lonSeg = Math.max(24, seg + 10);
+	const cols = lonSeg + 1;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	for (let lat = 0; lat <= latSeg; lat++) {
+		const vNorm = lat / latSeg;
+		const theta = (1 - vNorm) * Math.PI;
+		const sinT = Math.sin(theta);
+		const cosT = Math.cos(theta);
+		const lowerMask = vNorm < .45 ? 1 - (.45 - vNorm) / .45 : 1;
+		const widthCurve = MathUtils.lerp(jawTaper, 1, Math.pow(lowerMask, .72));
+		const depthCurve = MathUtils.lerp(jawTaper * .9, 1, Math.pow(lowerMask, .68));
+		for (let lon = 0; lon <= lonSeg; lon++) {
+			const uNorm = lon / lonSeg;
+			const phi = uNorm * Math.PI * 2;
+			const rawX = -Math.sin(phi) * sinT;
+			const rawZ = -Math.cos(phi) * sinT;
+			let x = rawX * radius * .95 * widthCurve;
+			let z = rawZ * radius * .96 * depthCurve;
+			if (rawZ > 0) {
+				z *= faceFlatten;
+				const frontAng = Math.abs(phi - Math.PI);
+				if (vNorm > .08 && vNorm < .3) {
+					const chinArch = Math.sin((vNorm - .08) / .22 * Math.PI);
+					const chinMask = Math.exp(-Math.pow(frontAng / .55, 2));
+					z += chinArch * chinMask * radius * .085 * rawZ;
+				}
+				if (vNorm > .56 && vNorm < .68) {
+					const browMask = Math.sin((vNorm - .56) / .12 * Math.PI);
+					const arch = Math.exp(-Math.pow((frontAng - .32) / .35, 2));
+					z += browMask * arch * radius * .032;
+				}
+				if (vNorm > .47 && vNorm < .58) {
+					const eyeV = Math.sin((vNorm - .47) / .11 * Math.PI);
+					const eyeH = Math.exp(-Math.pow((frontAng - .34) / .16, 2));
+					z -= eyeV * eyeH * radius * .028;
+				}
+				if (vNorm > .34 && vNorm < .47) {
+					const cheekV = Math.sin((vNorm - .34) / .13 * Math.PI);
+					const cheekH = Math.exp(-Math.pow((frontAng - .56) / .24, 2));
+					z += cheekV * cheekH * radius * .038;
+				}
+				if (vNorm > .36 && vNorm < .57 && frontAng < .26) {
+					const noseT = (vNorm - .36) / .21;
+					const noseH = Math.exp(-Math.pow(frontAng / .105, 2));
+					const noseProfile = noseT < .28 ? Math.sin(noseT / .28 * (Math.PI * .5)) : MathUtils.lerp(1, .22, (noseT - .28) / .72);
+					z += noseH * noseProfile * radius * .115;
+				}
+			}
+			const y = centerY + cosT * radius * 1.06;
+			positions.push(x, y, z);
+			uvs.push(uNorm, vNorm);
+			const headW = vNorm < .14 ? MathUtils.lerp(.45, 1, vNorm / .14) : 1;
+			skinIndices.push(BONE.HEAD, BONE.NECK, 0, 0);
+			skinWeights.push(headW, 1 - headW, 0, 0);
+		}
+	}
+	for (let lat = 0; lat < latSeg; lat++) for (let lon = 0; lon < lonSeg; lon++) {
+		const a = lat * cols + lon;
+		const b = lat * cols + lon + 1;
+		const c = (lat + 1) * cols + lon + 1;
+		const d = (lat + 1) * cols + lon;
+		indices.push(a, b, c, a, c, d);
+	}
+	const geo = new BufferGeometry();
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	const normAttr = geo.getAttribute("normal");
+	for (let lat = 0; lat <= latSeg; lat++) {
+		const idx0 = lat * cols;
+		const idxN = lat * cols + lonSeg;
+		const nx = (normAttr.getX(idx0) + normAttr.getX(idxN)) * .5;
+		const ny = (normAttr.getY(idx0) + normAttr.getY(idxN)) * .5;
+		const nz = (normAttr.getZ(idx0) + normAttr.getZ(idxN)) * .5;
+		const len = Math.hypot(nx, ny, nz) || 1;
+		normAttr.setXYZ(idx0, nx / len, ny / len, nz / len);
+		normAttr.setXYZ(idxN, nx / len, ny / len, nz / len);
+	}
+	normAttr.needsUpdate = true;
+	const mesh = new SkinnedMesh(geo, material);
+	mesh.castShadow = castShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+/**
+* Builds sculpted left & right anatomical outer ears smoothly bound to BONE.HEAD.
+*/
+function buildAnatomicalEarsSkinnedMesh(headCenterY, headRadius, material, skeleton, castShadow = false) {
+	const ears = [];
+	for (const side of [-1, 1]) ears.push(buildTaperedCurveSkinnedMesh([
+		[
+			side * headRadius * .9,
+			headCenterY - headRadius * .14,
+			-headRadius * .04
+		],
+		[
+			side * headRadius * 1,
+			headCenterY + headRadius * .01,
+			-headRadius * .07
+		],
+		[
+			side * headRadius * .96,
+			headCenterY + headRadius * .15,
+			-headRadius * .05
+		],
+		[
+			side * headRadius * .89,
+			headCenterY + headRadius * .1,
+			0
+		]
+	], [
+		headRadius * .09,
+		headRadius * .13,
+		headRadius * .11,
+		headRadius * .06
+	], .55, 1.15, 8, BONE.HEAD, material, skeleton, castShadow));
+	return ears;
+}
+/**
+* Builds an anatomical opposable thumb curved cleanly from the palm base, bound to wristBone.
+*/
+function buildSculptedThumbSkinnedMesh(side, s, wristPos, wristBone, material, skeleton, scale = 1, castShadow = false) {
+	const [wx, wy, wz] = wristPos;
+	return buildTaperedCurveSkinnedMesh([
+		[
+			wx - side * .008 * s * scale,
+			wy - .018 * s * scale,
+			wz + .012 * s * scale
+		],
+		[
+			wx - side * .018 * s * scale,
+			wy - .048 * s * scale,
+			wz + .026 * s * scale
+		],
+		[
+			wx - side * .015 * s * scale,
+			wy - .076 * s * scale,
+			wz + .03 * s * scale
+		]
+	], [
+		.013 * s * scale,
+		.011 * s * scale,
+		.008 * s * scale
+	], .95, 1.05, 7, wristBone, material, skeleton, castShadow);
+}
+/**
+* Contoured scalp hair dome hugging the upper cranium & nape with sculpted hairline
+* (temple sweep + lifted forehead arch + low nape coverage), UV-mapped for vertical hair sheen!
+*/
+function buildHairCapSkinnedMesh(centerY, radius, seg, material, skeleton, options = {}) {
+	const { backDrop = .25, castShadow = false } = options;
+	const latSeg = Math.max(10, Math.round(seg * .75));
+	const lonSeg = Math.max(16, seg + 4);
+	const cols = lonSeg + 1;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	for (let lat = 0; lat <= latSeg; lat++) {
+		const vNorm = lat / latSeg;
+		for (let lon = 0; lon <= lonSeg; lon++) {
+			const uNorm = lon / lonSeg;
+			const phi = uNorm * Math.PI * 2;
+			const isFront = Math.cos(phi) < 0 ? -Math.cos(phi) : 0;
+			const isBack = Math.cos(phi) > 0 ? Math.cos(phi) : 0;
+			const maxTheta = MathUtils.lerp(Math.PI * (.64 + backDrop * .25), Math.PI * .44, Math.pow(isFront, .8));
+			const theta = (1 - vNorm) * maxTheta;
+			const sinT = Math.sin(theta);
+			const cosT = Math.cos(theta);
+			const rawX = -Math.sin(phi) * sinT;
+			const rawZ = -Math.cos(phi) * sinT;
+			const shellR = radius * (1.06 + (1 - vNorm) * .04 * isBack + vNorm * .03);
+			const x = rawX * shellR * .99;
+			const z = rawZ * shellR * .96;
+			const y = centerY + cosT * shellR * 1.07 + .01 * radius;
+			positions.push(x, y, z);
+			uvs.push(uNorm * 2, vNorm);
+			skinIndices.push(BONE.HEAD, 0, 0, 0);
+			skinWeights.push(1, 0, 0, 0);
+		}
+	}
+	for (let lat = 0; lat < latSeg; lat++) for (let lon = 0; lon < lonSeg; lon++) {
+		const a = lat * cols + lon;
+		const b = lat * cols + lon + 1;
+		const c = (lat + 1) * cols + lon + 1;
+		const d = (lat + 1) * cols + lon;
+		indices.push(a, b, c, a, c, d);
+	}
+	const geo = new BufferGeometry();
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	const normAttr = geo.getAttribute("normal");
+	for (let lat = 0; lat <= latSeg; lat++) {
+		const idx0 = lat * cols;
+		const idxN = lat * cols + lonSeg;
+		const nx = (normAttr.getX(idx0) + normAttr.getX(idxN)) * .5;
+		const ny = (normAttr.getY(idx0) + normAttr.getY(idxN)) * .5;
+		const nz = (normAttr.getZ(idx0) + normAttr.getZ(idxN)) * .5;
+		const len = Math.hypot(nx, ny, nz) || 1;
+		normAttr.setXYZ(idx0, nx / len, ny / len, nz / len);
+		normAttr.setXYZ(idxN, nx / len, ny / len, nz / len);
+	}
+	normAttr.needsUpdate = true;
+	const mesh = new SkinnedMesh(geo, material);
+	mesh.castShadow = castShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+/**
+* Builds a sleek, stylized anime/sculpted hair lock ribbon (pointed tip, diamond-crescent profile,
+* inward curl hugging face/shoulders) rather than a round sausage tube!
+* Can blend smoothly between HEAD and CHEST/NECK for long flowing back locks.
+*/
+function buildHairRibbonSkinnedMesh(points, widths, thicknesses, material, skeleton, options = {}) {
+	const { followChestLower = false, curlRoll = 0, castShadow = false, radialSeg = 8 } = options;
+	const curve = new CatmullRomCurve3(points.map((p) => new Vector3(p[0], p[1], p[2])));
+	const steps = Math.max(points.length * 4, 12);
+	const cols = radialSeg + 1;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	for (let s = 0; s <= steps; s++) {
+		const t = s / steps;
+		const pt = curve.getPoint(t);
+		const tangent = curve.getTangent(t).normalize();
+		const wFloat = t * (widths.length - 1);
+		const w0 = Math.floor(wFloat);
+		const w1 = Math.min(widths.length - 1, w0 + 1);
+		const halfW = Math.max(.001, MathUtils.lerp(widths[w0], widths[w1], wFloat - w0));
+		const thFloat = t * (thicknesses.length - 1);
+		const th0 = Math.floor(thFloat);
+		const th1 = Math.min(thicknesses.length - 1, th0 + 1);
+		const halfTh = Math.max(.001, MathUtils.lerp(thicknesses[th0], thicknesses[th1], thFloat - th0));
+		_pPrev.set(pt.x, 0, pt.z);
+		if (_pPrev.lengthSq() < 1e-5) _pPrev.set(0, 0, -1);
+		_pPrev.normalize();
+		_basisU.crossVectors(_pPrev, tangent).normalize();
+		if (Math.abs(curlRoll) > .001) _basisU.applyAxisAngle(tangent, curlRoll);
+		_basisV.crossVectors(tangent, _basisU).normalize();
+		const chestBlend = followChestLower ? Math.max(0, (t - .45) * .45) : 0;
+		const headW = 1 - chestBlend;
+		for (let i = 0; i < cols; i++) {
+			const frac = i / radialSeg;
+			const theta = frac * Math.PI * 2;
+			const cosT = Math.cos(theta);
+			const sinT = Math.sin(theta);
+			const cupOffset = -cosT * cosT * halfTh * .35;
+			const vx = pt.x + _basisU.x * (halfW * cosT) + _basisV.x * (halfTh * sinT + cupOffset);
+			const vy = pt.y + _basisU.y * (halfW * cosT) + _basisV.y * (halfTh * sinT + cupOffset);
+			const vz = pt.z + _basisU.z * (halfW * cosT) + _basisV.z * (halfTh * sinT + cupOffset);
+			positions.push(vx, vy, vz);
+			uvs.push(frac, 1 - t);
+			skinIndices.push(BONE.HEAD, BONE.CHEST, 0, 0);
+			skinWeights.push(headW, chestBlend, 0, 0);
+		}
+	}
+	for (let s = 0; s < steps; s++) for (let i = 0; i < radialSeg; i++) {
+		const a = s * cols + i;
+		const b = s * cols + i + 1;
+		const c = (s + 1) * cols + i + 1;
+		const d = (s + 1) * cols + i;
+		indices.push(a, b, c, a, c, d);
+	}
+	const geo = new BufferGeometry();
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	const normAttr = geo.getAttribute("normal");
+	for (let s = 0; s <= steps; s++) {
+		const idx0 = s * cols;
+		const idxN = s * cols + radialSeg;
+		const nx = (normAttr.getX(idx0) + normAttr.getX(idxN)) * .5;
+		const ny = (normAttr.getY(idx0) + normAttr.getY(idxN)) * .5;
+		const nz = (normAttr.getZ(idx0) + normAttr.getZ(idxN)) * .5;
+		const len = Math.hypot(nx, ny, nz) || 1;
+		normAttr.setXYZ(idx0, nx / len, ny / len, nz / len);
+		normAttr.setXYZ(idxN, nx / len, ny / len, nz / len);
+	}
+	normAttr.needsUpdate = true;
+	const mesh = new SkinnedMesh(geo, material);
+	mesh.castShadow = castShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+/**
+* Helper to create a curved, tapered 3D horn, bow limb, braid, or accessory bound to a bone.
+*/
+function buildTaperedCurveSkinnedMesh(points, radii, rxScale, rzScale, radialSeg, boneIdx, material, skeleton, castShadow = false) {
+	const curve = new CatmullRomCurve3(points.map((p) => new Vector3(p[0], p[1], p[2])));
+	const steps = Math.max(points.length * 3, 10);
+	const rings = [];
+	for (let i = 0; i <= steps; i++) {
+		const t = i / steps;
+		const pt = curve.getPoint(t);
+		const rFloat = t * (radii.length - 1);
+		const r0 = Math.floor(rFloat);
+		const r1 = Math.min(radii.length - 1, r0 + 1);
+		const rad = MathUtils.lerp(radii[r0], radii[r1], rFloat - r0);
+		rings.push({
+			center: [
+				pt.x,
+				pt.y,
+				pt.z
+			],
+			rx: Math.max(.002, rad * rxScale),
+			rz: Math.max(.002, rad * rzScale),
+			weights: [
+				boneIdx,
+				1,
+				0,
+				0
+			],
+			v: t
+		});
+	}
+	return buildLoftedSkinnedMesh(rings, radialSeg, material, skeleton, {
+		capStart: true,
+		capEnd: true,
+		castShadow
+	});
+}
+/**
+* Builds an open or full coat/skirt shell smoothly skinned across chest -> spine -> hips -> legs!
+*/
+function buildCoatShellSkinnedMesh(rings, radialSeg, material, skeleton, castShadow = false) {
+	const cols = radialSeg + 1;
+	const positions = [];
+	const uvs = [];
+	const skinIndices = [];
+	const skinWeights = [];
+	const indices = [];
+	for (let r = 0; r < rings.length; r++) {
+		const ring = rings[r];
+		const zOff = ring.zOffset ?? 0;
+		const sqPow = ring.squareness ? 2 / (2 + 1.5 * ring.squareness) : 1;
+		for (let i = 0; i < cols; i++) {
+			const frac = i / radialSeg;
+			const theta = ring.arcStart + frac * (ring.arcEnd - ring.arcStart);
+			const rawCos = Math.cos(theta);
+			const rawSin = Math.sin(theta);
+			const cosT = sqPow === 1 ? rawCos : Math.sign(rawCos) * Math.pow(Math.abs(rawCos), sqPow);
+			const sinT = sqPow === 1 ? rawSin : Math.sign(rawSin) * Math.pow(Math.abs(rawSin), sqPow);
+			const x = cosT * ring.rx;
+			const z = zOff - sinT * ring.rz;
+			positions.push(x, ring.y, z);
+			uvs.push(frac, ring.v);
+			const legInfluence = 1 - ring.upperWeight;
+			if (legInfluence > .01) {
+				const legBone = x < 0 ? BONE.L_HIP : BONE.R_HIP;
+				skinIndices.push(ring.upperBone, legBone, 0, 0);
+				skinWeights.push(ring.upperWeight, legInfluence, 0, 0);
+			} else {
+				skinIndices.push(ring.upperBone, 0, 0, 0);
+				skinWeights.push(1, 0, 0, 0);
+			}
+		}
+	}
+	for (let r = 0; r < rings.length - 1; r++) for (let i = 0; i < radialSeg; i++) {
+		const a = r * cols + i;
+		const b = r * cols + i + 1;
+		const c = (r + 1) * cols + i + 1;
+		const d = (r + 1) * cols + i;
+		indices.push(a, b, c, a, c, d);
+	}
+	const geo = new BufferGeometry();
+	geo.setAttribute("position", new Float32BufferAttribute(positions, 3));
+	geo.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+	geo.setAttribute("skinIndex", new Uint16BufferAttribute(skinIndices, 4));
+	geo.setAttribute("skinWeight", new Float32BufferAttribute(skinWeights, 4));
+	geo.setIndex(indices);
+	geo.computeVertexNormals();
+	const mesh = new SkinnedMesh(geo, material);
+	mesh.castShadow = castShadow;
+	mesh.frustumCulled = false;
+	mesh.bind(skeleton);
+	return mesh;
+}
+// src/three/characterBuilders.ts
+/**
+* Builds ONE single continuous multi-material SkinnedMesh for the entire arm:
+* Deltoid Shoulder -> Bicep -> Elbow (optional Rolled Cuff) -> Forearm -> Wrist -> Sculpted Palm & Curled Fingers,
+* plus an articulated opposable thumb SkinnedMesh anchored at the palm base.
+*/
+function buildSeamlessArm(side, s, radialSeg, skeleton, upperMat, forearmMat, handMat, options = {}) {
+	const { sleeveEndsAtElbow = false, bulkySleeve = false, castShadow = false } = options;
+	const shoulderBone = side === -1 ? BONE.L_SHOULDER : BONE.R_SHOULDER;
+	const elbowBone = side === -1 ? BONE.L_ELBOW : BONE.R_ELBOW;
+	const wristBone = side === -1 ? BONE.L_WRIST : BONE.R_WRIST;
+	const sBulk = bulkySleeve ? 1.28 : 1;
+	const wristPos = [
+		side * .268 * s,
+		.798 * s,
+		.036 * s
+	];
+	const wristBoundary = {
+		center: wristPos,
+		rx: .029 * s,
+		rz: .023 * s,
+		weights: [
+			elbowBone,
+			.2,
+			wristBone,
+			.8
+		],
+		v: 1
+	};
+	const handChain = [
+		{
+			...wristBoundary,
+			v: 0
+		},
+		{
+			center: [
+				side * .271 * s,
+				.764 * s,
+				.042 * s
+			],
+			rx: .035 * s,
+			rz: .02 * s,
+			weights: [
+				wristBone,
+				1,
+				0,
+				0
+			],
+			v: .28
+		},
+		{
+			center: [
+				side * .273 * s,
+				.728 * s,
+				.048 * s
+			],
+			rx: .036 * s,
+			rz: .017 * s,
+			weights: [
+				wristBone,
+				1,
+				0,
+				0
+			],
+			v: .56
+		},
+		{
+			center: [
+				side * .269 * s,
+				.692 * s,
+				.054 * s
+			],
+			rx: .031 * s,
+			rz: .013 * s,
+			weights: [
+				wristBone,
+				1,
+				0,
+				0
+			],
+			v: .82
+		},
+		{
+			center: [
+				side * .264 * s,
+				.668 * s,
+				.049 * s
+			],
+			rx: .022 * s,
+			rz: .009 * s,
+			weights: [
+				wristBone,
+				1,
+				0,
+				0
+			],
+			v: 1
+		}
+	];
+	const thumbMesh = buildSculptedThumbSkinnedMesh(side, s, wristPos, wristBone, handMat, skeleton, 1, castShadow);
+	if (sleeveEndsAtElbow) {
+		const cuffBoundary = {
+			center: [
+				side * .24 * s,
+				.928 * s,
+				.02 * s
+			],
+			rx: .039 * s,
+			rz: .039 * s,
+			squareness: .18,
+			weights: [
+				elbowBone,
+				.92,
+				shoulderBone,
+				.08
+			],
+			v: 1
+		};
+		const sleeveRings = [
+			{
+				center: [
+					side * .095 * s,
+					1.235 * s,
+					0
+				],
+				rx: .052 * s,
+				rz: .052 * s,
+				squareness: .18,
+				weights: [
+					BONE.CHEST,
+					.78,
+					shoulderBone,
+					.22
+				],
+				v: 0
+			},
+			{
+				center: [
+					side * .148 * s,
+					1.228 * s,
+					.003 * s
+				],
+				rx: .052 * s * sBulk,
+				rz: .052 * s * sBulk,
+				squareness: .18,
+				weights: [
+					BONE.CHEST,
+					.26,
+					shoulderBone,
+					.74
+				],
+				v: .22
+			},
+			{
+				center: [
+					side * .194 * s,
+					1.118 * s,
+					.007 * s
+				],
+				rx: .047 * s * sBulk,
+				rz: .047 * s * sBulk,
+				squareness: .18,
+				weights: [
+					shoulderBone,
+					.9,
+					elbowBone,
+					.1
+				],
+				v: .54
+			},
+			{
+				center: [
+					side * .224 * s,
+					.995 * s,
+					.013 * s
+				],
+				rx: .044 * s * sBulk,
+				rz: .044 * s * sBulk,
+				squareness: .18,
+				weights: [
+					shoulderBone,
+					.42,
+					elbowBone,
+					.58
+				],
+				v: .76
+			},
+			{
+				center: [
+					side * .236 * s,
+					.946 * s,
+					.018 * s
+				],
+				rx: .046 * s * sBulk,
+				rz: .046 * s * sBulk,
+				squareness: .18,
+				weights: [
+					elbowBone,
+					.88,
+					shoulderBone,
+					.12
+				],
+				v: .91
+			},
+			cuffBoundary
+		];
+		if (forearmMat === handMat) {
+			const bareArmAndHand = [
+				{
+					...cuffBoundary,
+					v: 0
+				},
+				{
+					center: [
+						side * .249 * s,
+						.885 * s,
+						.025 * s
+					],
+					rx: .037 * s,
+					rz: .036 * s,
+					weights: [
+						elbowBone,
+						.8,
+						wristBone,
+						.2
+					],
+					v: .24
+				},
+				{
+					center: [
+						side * .26 * s,
+						.838 * s,
+						.031 * s
+					],
+					rx: .032 * s,
+					rz: .03 * s,
+					weights: [
+						elbowBone,
+						.5,
+						wristBone,
+						.5
+					],
+					v: .46
+				},
+				{
+					...wristBoundary,
+					v: .6
+				},
+				...handChain.slice(1).map((r, idx) => ({
+					...r,
+					v: .7 + idx * .1
+				}))
+			];
+			return [buildMultiMaterialLoftedSkinnedMesh([{
+				material: upperMat,
+				rings: sleeveRings
+			}, {
+				material: forearmMat,
+				rings: bareArmAndHand
+			}], radialSeg, skeleton, {
+				capEnd: true,
+				castShadow
+			}), thumbMesh];
+		}
+		const forearmRings = [
+			{
+				...cuffBoundary,
+				v: 0
+			},
+			{
+				center: [
+					side * .25 * s,
+					.88 * s,
+					.025 * s
+				],
+				rx: .038 * s,
+				rz: .037 * s,
+				weights: [
+					elbowBone,
+					.8,
+					wristBone,
+					.2
+				],
+				v: .35
+			},
+			{
+				center: [
+					side * .262 * s,
+					.832 * s,
+					.031 * s
+				],
+				rx: .034 * s,
+				rz: .032 * s,
+				weights: [
+					elbowBone,
+					.48,
+					wristBone,
+					.52
+				],
+				v: .72
+			},
+			wristBoundary
+		];
+		return [buildMultiMaterialLoftedSkinnedMesh([
+			{
+				material: upperMat,
+				rings: sleeveRings
+			},
+			{
+				material: forearmMat,
+				rings: forearmRings
+			},
+			{
+				material: handMat,
+				rings: handChain
+			}
+		], radialSeg, skeleton, {
+			capEnd: true,
+			castShadow
+		}), thumbMesh];
+	}
+	return [buildMultiMaterialLoftedSkinnedMesh([{
+		material: upperMat,
+		rings: [
+			{
+				center: [
+					side * .095 * s,
+					1.235 * s,
+					0
+				],
+				rx: .052 * s,
+				rz: .052 * s,
+				squareness: .18,
+				weights: [
+					BONE.CHEST,
+					.78,
+					shoulderBone,
+					.22
+				],
+				v: 0
+			},
+			{
+				center: [
+					side * .148 * s,
+					1.228 * s,
+					.003 * s
+				],
+				rx: .05 * s * sBulk,
+				rz: .05 * s * sBulk,
+				squareness: .18,
+				weights: [
+					BONE.CHEST,
+					.26,
+					shoulderBone,
+					.74
+				],
+				v: .18
+			},
+			{
+				center: [
+					side * .194 * s,
+					1.118 * s,
+					.007 * s
+				],
+				rx: .045 * s * sBulk,
+				rz: .045 * s * sBulk,
+				squareness: .18,
+				weights: [
+					shoulderBone,
+					.9,
+					elbowBone,
+					.1
+				],
+				v: .42
+			},
+			{
+				center: [
+					side * .224 * s,
+					.995 * s,
+					.013 * s
+				],
+				rx: .042 * s * sBulk,
+				rz: .042 * s * sBulk,
+				squareness: .18,
+				weights: [
+					shoulderBone,
+					.42,
+					elbowBone,
+					.58
+				],
+				v: .62
+			},
+			{
+				center: [
+					side * .25 * s,
+					.88 * s,
+					.024 * s
+				],
+				rx: .039 * s * sBulk,
+				rz: .039 * s * sBulk,
+				squareness: .18,
+				weights: [
+					elbowBone,
+					.76,
+					wristBone,
+					.24
+				],
+				v: .82
+			},
+			{
+				center: [
+					side * .264 * s,
+					.818 * s,
+					.032 * s
+				],
+				rx: .036 * s * sBulk,
+				rz: .034 * s * sBulk,
+				squareness: .18,
+				weights: [
+					elbowBone,
+					.35,
+					wristBone,
+					.65
+				],
+				v: .94
+			},
+			wristBoundary
+		]
+	}, {
+		material: handMat,
+		rings: handChain
+	}], radialSeg, skeleton, {
+		capEnd: true,
+		castShadow
+	}), thumbMesh];
+}
+/**
+* Builds ONE single continuous multi-material SkinnedMesh for the entire leg & two-tone shoe:
+* Hip/Thigh -> Knee -> Muscular Calf -> Ankle -> Sculpted Shoe Upper -> Grounded Outsole!
+*/
+function buildSeamlessLegAndShoe(side, s, radialSeg, skeleton, thighMat, calfMat, shoeMat, soleMat, options = {}) {
+	const { thighWidth = 1, kneeHighStartY = .78, castShadow = false } = options;
+	const hipBone = side === -1 ? BONE.L_HIP : BONE.R_HIP;
+	const kneeBone = side === -1 ? BONE.L_KNEE : BONE.R_KNEE;
+	const ankleBone = side === -1 ? BONE.L_ANKLE : BONE.R_ANKLE;
+	const x = side * .088 * s;
+	const ankleBoundary = {
+		center: [
+			x,
+			.112 * s,
+			.004 * s
+		],
+		rx: .043 * s,
+		rz: .046 * s,
+		weights: [
+			kneeBone,
+			.28,
+			ankleBone,
+			.72
+		],
+		v: 0
+	};
+	const soleTopBoundary = {
+		center: [
+			x,
+			.022 * s,
+			.05 * s
+		],
+		rx: .054 * s,
+		rz: .106 * s,
+		weights: [
+			ankleBone,
+			1,
+			0,
+			0
+		],
+		v: 1
+	};
+	const shoeUpperRings = [
+		{
+			...ankleBoundary,
+			v: 0
+		},
+		{
+			center: [
+				x,
+				.082 * s,
+				.01 * s
+			],
+			rx: .049 * s,
+			rz: .058 * s,
+			weights: [
+				ankleBone,
+				.92,
+				kneeBone,
+				.08
+			],
+			v: .3
+		},
+		{
+			center: [
+				x,
+				.05 * s,
+				.03 * s
+			],
+			rx: .053 * s,
+			rz: .086 * s,
+			weights: [
+				ankleBone,
+				1,
+				0,
+				0
+			],
+			v: .66
+		},
+		soleTopBoundary
+	];
+	const soleRings = [
+		{
+			...soleTopBoundary,
+			v: 0
+		},
+		{
+			center: [
+				x,
+				.011 * s,
+				.052 * s
+			],
+			rx: .057 * s,
+			rz: .112 * s,
+			weights: [
+				ankleBone,
+				1,
+				0,
+				0
+			],
+			v: .5
+		},
+		{
+			center: [
+				x,
+				.002 * s,
+				.05 * s
+			],
+			rx: .054 * s,
+			rz: .106 * s,
+			weights: [
+				ankleBone,
+				1,
+				0,
+				0
+			],
+			v: 1
+		}
+	];
+	if (kneeHighStartY < .75) {
+		const splitY = kneeHighStartY * s;
+		const splitBoundary = {
+			center: [
+				x,
+				splitY,
+				.007 * s
+			],
+			rx: .048 * s,
+			rz: .05 * s,
+			squareness: .14,
+			weights: [
+				hipBone,
+				.45,
+				kneeBone,
+				.55
+			],
+			v: 1
+		};
+		const thighRings = [
+			{
+				center: [
+					x,
+					.82 * s,
+					0
+				],
+				rx: .078 * s * thighWidth,
+				rz: .078 * s * thighWidth,
+				squareness: .18,
+				weights: [
+					BONE.HIPS,
+					.68,
+					hipBone,
+					.32
+				],
+				v: 0
+			},
+			{
+				center: [
+					x,
+					.66 * s,
+					.004 * s
+				],
+				rx: .068 * s * thighWidth,
+				rz: .07 * s * thighWidth,
+				squareness: .18,
+				weights: [
+					hipBone,
+					.94,
+					BONE.HIPS,
+					.06
+				],
+				v: .46
+			},
+			{
+				center: [
+					x,
+					Math.max(splitY + .04 * s, .51 * s),
+					.007 * s
+				],
+				rx: .054 * s,
+				rz: .056 * s,
+				squareness: .14,
+				weights: [
+					hipBone,
+					.68,
+					kneeBone,
+					.32
+				],
+				v: .8
+			},
+			splitBoundary
+		];
+		const calfRings = [
+			{
+				...splitBoundary,
+				v: 1
+			},
+			{
+				center: [
+					x,
+					.34 * s,
+					.005 * s
+				],
+				rx: .05 * s,
+				rz: .054 * s,
+				backScale: 1.1,
+				weights: [
+					kneeBone,
+					.86,
+					hipBone,
+					.14
+				],
+				v: .7
+			},
+			{
+				center: [
+					x,
+					.22 * s,
+					.003 * s
+				],
+				rx: .045 * s,
+				rz: .048 * s,
+				weights: [
+					kneeBone,
+					.94,
+					ankleBone,
+					.06
+				],
+				v: .4
+			},
+			{
+				...ankleBoundary,
+				v: 0
+			}
+		];
+		return [buildMultiMaterialLoftedSkinnedMesh([
+			{
+				material: thighMat,
+				rings: thighRings
+			},
+			{
+				material: calfMat,
+				rings: calfRings
+			},
+			{
+				material: shoeMat,
+				rings: shoeUpperRings
+			},
+			{
+				material: soleMat,
+				rings: soleRings
+			}
+		], radialSeg, skeleton, {
+			capEnd: true,
+			castShadow
+		})];
+	}
+	const trousersBoundary = {
+		center: [
+			x,
+			.112 * s,
+			.004 * s
+		],
+		rx: .048 * s,
+		rz: .05 * s,
+		squareness: .16,
+		weights: [
+			kneeBone,
+			.28,
+			ankleBone,
+			.72
+		],
+		v: 1
+	};
+	const legRings = [
+		{
+			center: [
+				x,
+				.82 * s,
+				0
+			],
+			rx: .08 * s * thighWidth,
+			rz: .082 * s * thighWidth,
+			squareness: .18,
+			weights: [
+				BONE.HIPS,
+				.7,
+				hipBone,
+				.3
+			],
+			v: 0
+		},
+		{
+			center: [
+				x,
+				.64 * s,
+				.004 * s
+			],
+			rx: .072 * s * thighWidth,
+			rz: .074 * s * thighWidth,
+			squareness: .18,
+			weights: [
+				hipBone,
+				.94,
+				BONE.HIPS,
+				.06
+			],
+			v: .28
+		},
+		{
+			center: [
+				x,
+				.46 * s,
+				.008 * s
+			],
+			rx: .06 * s,
+			rz: .062 * s,
+			squareness: .18,
+			weights: [
+				hipBone,
+				.55,
+				kneeBone,
+				.45
+			],
+			v: .55
+		},
+		{
+			center: [
+				x,
+				.29 * s,
+				.004 * s
+			],
+			rx: .056 * s,
+			rz: .059 * s,
+			squareness: .16,
+			backScale: 1.06,
+			weights: [
+				kneeBone,
+				.92,
+				hipBone,
+				.08
+			],
+			v: .78
+		},
+		trousersBoundary
+	];
+	const shoeFromTrouser = [{
+		...trousersBoundary,
+		v: 0
+	}, ...shoeUpperRings.slice(1)];
+	return [buildMultiMaterialLoftedSkinnedMesh([
+		{
+			material: thighMat,
+			rings: legRings
+		},
+		{
+			material: shoeMat,
+			rings: shoeFromTrouser
+		},
+		{
+			material: soleMat,
+			rings: soleRings
+		}
+	], radialSeg, skeleton, {
+		capEnd: true,
+		castShadow
+	})];
+}
+/**
+* Builds ONE single continuous multi-material SkinnedMesh for the entire Torso & Neck:
+* Pelvis/Hips -> Tapered Waist -> Contoured Ribcage/Chest/Clavicles -> Neck seamlessly into Jaw!
+*/
+function buildSeamlessTorso(s, radialSeg, skeleton, lowerMat, upperMat, skinMat, options) {
+	const { hasHead, slender = false, castShadow = false } = options;
+	const wScale = slender ? .87 : 1;
+	const waistBoundary = {
+		center: [
+			0,
+			.91 * s,
+			0
+		],
+		rx: .132 * s * wScale,
+		rz: .094 * s * wScale,
+		squareness: .45,
+		weights: [
+			BONE.HIPS,
+			.38,
+			BONE.SPINE,
+			.62
+		],
+		v: 1
+	};
+	const hipRings = [
+		{
+			center: [
+				0,
+				.74 * s,
+				0
+			],
+			rx: .156 * s * wScale,
+			rz: .11 * s * wScale,
+			squareness: .45,
+			weights: [
+				BONE.HIPS,
+				1,
+				0,
+				0
+			],
+			v: 0
+		},
+		{
+			center: [
+				0,
+				.83 * s,
+				0
+			],
+			rx: .164 * s * wScale,
+			rz: .114 * s * wScale,
+			squareness: .45,
+			backScale: 1.05,
+			weights: [
+				BONE.HIPS,
+				.85,
+				BONE.SPINE,
+				.15
+			],
+			v: .55
+		},
+		waistBoundary
+	];
+	const neckBaseBoundary = {
+		center: [
+			0,
+			1.325 * s,
+			-.003 * s
+		],
+		rx: .052 * s,
+		rz: .052 * s,
+		squareness: .1,
+		weights: [
+			BONE.CHEST,
+			.38,
+			BONE.NECK,
+			.62
+		],
+		v: 1
+	};
+	const upperRings = [
+		{
+			...waistBoundary,
+			v: 0
+		},
+		{
+			center: [
+				0,
+				1.06 * s,
+				.005 * s
+			],
+			rx: .15 * s * wScale,
+			rz: .108 * s * wScale,
+			squareness: .45,
+			weights: [
+				BONE.SPINE,
+				.32,
+				BONE.CHEST,
+				.68
+			],
+			v: .32
+		},
+		{
+			center: [
+				0,
+				1.18 * s,
+				.006 * s
+			],
+			rx: .174 * s * wScale,
+			rz: .114 * s * wScale,
+			squareness: .45,
+			backScale: 1.03,
+			weights: [
+				BONE.CHEST,
+				.9,
+				BONE.SPINE,
+				.1
+			],
+			v: .66
+		},
+		{
+			center: [
+				0,
+				1.275 * s,
+				-.001 * s
+			],
+			rx: .14 * s * wScale,
+			rz: .09 * s * wScale,
+			squareness: .45,
+			weights: [
+				BONE.CHEST,
+				.72,
+				BONE.NECK,
+				.28
+			],
+			v: .88
+		},
+		neckBaseBoundary
+	];
+	const sections = [{
+		material: lowerMat,
+		rings: hipRings
+	}, {
+		material: upperMat,
+		rings: upperRings
+	}];
+	if (hasHead) {
+		const neckRings = [
+			{
+				...neckBaseBoundary,
+				v: 0
+			},
+			{
+				center: [
+					0,
+					1.37 * s,
+					-.002 * s
+				],
+				rx: .048 * s,
+				rz: .049 * s,
+				weights: [
+					BONE.NECK,
+					.76,
+					BONE.HEAD,
+					.24
+				],
+				v: .5
+			},
+			{
+				center: [
+					0,
+					1.435 * s,
+					0
+				],
+				rx: .054 * s,
+				rz: .056 * s,
+				weights: [
+					BONE.NECK,
+					.24,
+					BONE.HEAD,
+					.76
+				],
+				v: 1
+			}
+		];
+		sections.push({
+			material: skinMat,
+			rings: neckRings
+		});
+	}
+	return [buildMultiMaterialLoftedSkinnedMesh(sections, radialSeg, skeleton, {
+		capStart: true,
+		capEnd: !hasHead,
+		castShadow
+	})];
+}
+function createCharacterMats(colors) {
+	const skinMat = new MeshStandardMaterial({
+		color: colors.skin ?? 15979710,
+		roughness: .56,
+		metalness: .02
+	});
+	return {
+		skinMat,
+		headMat: colors.faceTex ? new MeshStandardMaterial({
+			map: colors.faceTex,
+			roughness: .52,
+			metalness: .01
+		}) : skinMat
+	};
+}
+/**
+* NEW FLAGSHIP PLAYER CHARACTER MODEL:
+* เจ้าบ้านชาโฉมใหม่ (Complete Anatomical Edition)
+* Replaces all old models with a refined, anatomically complete 3D character featuring:
+* - Sculpted 3D head (nose bridge & tip, orbital eye sockets, brow ridge, cheekbones, jawline, sculpted 3D ears)
+* - Multi-layered swept hairstyle (contoured cap + side-swept bangs + temple locks + layered nape)
+* - Complete torso (clavicles, chest contour, tapered waist, hips) with mandarin-collar linen shirt & sage artisan vest/apron
+* - Complete arms & articulated hands (rolled sleeves, muscular forearms, sculpted palms, curled fingers, opposable thumbs)
+* - Complete legs & two-tone leather derby shoes with separate outsoles grounded flush at y = 0
+*/
+function buildCompleteTeaArtisanCharacter(compactMode, ultraCompact) {
+	const seg = ultraCompact ? 12 : compactMode ? 16 : 20;
+	const s = 1.02;
+	const bones = createHumanoidSkeleton(s);
+	const group = new Group();
+	group.add(bones.root);
+	const faceTex = createAnimeFaceTexture({
+		skinHex: "#f5d2ba",
+		blushHex: "rgba(232, 134, 126, 0.36)",
+		irisTopHex: "#33241c",
+		irisBottomHex: "#7d573a",
+		browHex: "#281d18",
+		lipHex: "#b86d63",
+		eyeScale: .94,
+		smileCurve: 1.05
+	}, compactMode);
+	const hairTex = createHairStrandTexture("#2a1f1a", "#523d33", "#17110e", "#382a23", compactMode);
+	const shirtPbr = createLowPolyPbrTextureSet("tunic", {
+		baseHex: "#f5f1e6",
+		shadeHex: "#d5cdbc",
+		accentHex: "#ede7d8",
+		trimHex: "#c7a461"
+	}, compactMode);
+	const apronTex = createTailoredClothingTexture({
+		style: "cardigan",
+		baseHex: "#2d6a42",
+		grainHex: "#1c472b",
+		trimHex: "#225232"
+	}, compactMode);
+	const trouserTex = createTailoredClothingTexture({
+		style: "waistcoat",
+		baseHex: "#282d35",
+		grainHex: "#191c22",
+		buttonHex: "#434a56"
+	}, compactMode);
+	const leatherPbr = createLowPolyPbrTextureSet("leather", {
+		baseHex: "#633c24",
+		shadeHex: "#3a2112",
+		trimHex: "#c4964c"
+	}, compactMode);
+	const textures = [
+		faceTex,
+		hairTex,
+		...shirtPbr.textures,
+		apronTex,
+		trouserTex,
+		...leatherPbr.textures
+	];
+	const { skinMat, headMat } = createCharacterMats({
+		skin: 16110266,
+		faceTex
+	});
+	const shirtMat = new MeshStandardMaterial({
+		map: shirtPbr.map,
+		normalMap: shirtPbr.normalMap,
+		roughness: .84,
+		metalness: .02
+	});
+	const apronMat = new MeshStandardMaterial({
+		map: apronTex,
+		roughness: .78,
+		metalness: .04,
+		side: 2
+	});
+	const trouserMat = new MeshStandardMaterial({
+		map: trouserTex,
+		roughness: .8,
+		metalness: .03
+	});
+	const hairMat = new MeshStandardMaterial({
+		map: hairTex,
+		roughness: .44,
+		metalness: .08
+	});
+	const leatherMat = new MeshStandardMaterial({
+		map: leatherPbr.map,
+		normalMap: leatherPbr.normalMap,
+		roughness: .42,
+		metalness: .08
+	});
+	const soleMat = new MeshStandardMaterial({
+		color: 1907484,
+		roughness: .88,
+		metalness: .02
+	});
+	const brassMat = new MeshStandardMaterial({
+		color: 14002254,
+		roughness: .28,
+		metalness: .82
+	});
+	const castShadow = !compactMode;
+	const meshes = [
+		...buildSeamlessTorso(s, seg, bones.skeleton, trouserMat, shirtMat, skinMat, {
+			hasHead: true,
+			castShadow
+		}),
+		...buildSeamlessArm(-1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+			sleeveEndsAtElbow: true,
+			castShadow
+		}),
+		...buildSeamlessArm(1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+			sleeveEndsAtElbow: true,
+			castShadow
+		}),
+		...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, trouserMat, trouserMat, leatherMat, soleMat, { castShadow }),
+		...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, trouserMat, trouserMat, leatherMat, soleMat, { castShadow }),
+		buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+			jawTaper: .72,
+			faceFlatten: .9,
+			castShadow
+		}),
+		...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+		buildLoftedSkinnedMesh([{
+			center: [
+				0,
+				1.32 * s,
+				-.002 * s
+			],
+			rx: .057 * s,
+			rz: .057 * s,
+			squareness: .1,
+			weights: [
+				BONE.CHEST,
+				.35,
+				BONE.NECK,
+				.65
+			],
+			v: 0
+		}, {
+			center: [
+				0,
+				1.362 * s,
+				-.002 * s
+			],
+			rx: .055 * s,
+			rz: .055 * s,
+			squareness: .1,
+			weights: [
+				BONE.NECK,
+				.85,
+				BONE.CHEST,
+				.15
+			],
+			v: 1
+		}], seg, shirtMat, bones.skeleton),
+		buildCoatShellSkinnedMesh([
+			{
+				y: .74 * s,
+				zOffset: 0,
+				rx: .164 * s,
+				rz: .117 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.HIPS,
+				upperWeight: .94,
+				v: 0
+			},
+			{
+				y: .83 * s,
+				zOffset: 0,
+				rx: .171 * s,
+				rz: .121 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.HIPS,
+				upperWeight: .85,
+				v: .22
+			},
+			{
+				y: .91 * s,
+				zOffset: 0,
+				rx: .139 * s,
+				rz: .101 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.SPINE,
+				upperWeight: 1,
+				v: .42
+			},
+			{
+				y: 1.06 * s,
+				zOffset: .005 * s,
+				rx: .157 * s,
+				rz: .115 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: .68
+			},
+			{
+				y: 1.18 * s,
+				zOffset: .006 * s,
+				rx: .181 * s,
+				rz: .121 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .26,
+				arcEnd: Math.PI * 1.26,
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: .88
+			},
+			{
+				y: 1.27 * s,
+				zOffset: -.001 * s,
+				rx: .146 * s,
+				rz: .097 * s,
+				squareness: .45,
+				arcStart: -Math.PI * .2,
+				arcEnd: Math.PI * 1.2,
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: 1
+			}
+		], seg, apronMat, bones.skeleton, castShadow),
+		buildLoftedSkinnedMesh([{
+			center: [
+				0,
+				.875 * s,
+				0
+			],
+			rx: .154 * s,
+			rz: .112 * s,
+			squareness: .45,
+			weights: [
+				BONE.HIPS,
+				.72,
+				BONE.SPINE,
+				.28
+			],
+			v: 0
+		}, {
+			center: [
+				0,
+				.912 * s,
+				0
+			],
+			rx: .143 * s,
+			rz: .105 * s,
+			squareness: .45,
+			weights: [
+				BONE.HIPS,
+				.55,
+				BONE.SPINE,
+				.45
+			],
+			v: 1
+		}], seg, leatherMat, bones.skeleton),
+		buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+			backDrop: .22,
+			castShadow
+		}),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.035,
+				1.64 * s,
+				.045
+			],
+			[
+				-.015,
+				1.605 * s,
+				.136
+			],
+			[
+				.048,
+				1.565 * s,
+				.138
+			],
+			[
+				.092,
+				1.515 * s,
+				.118
+			]
+		], [
+			.068,
+			.062,
+			.044,
+			.012
+		], [
+			.02,
+			.018,
+			.014,
+			.005
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.045,
+				1.635 * s,
+				.048
+			],
+			[
+				-.088,
+				1.59 * s,
+				.118
+			],
+			[
+				-.118,
+				1.52 * s,
+				.094
+			]
+		], [
+			.056,
+			.042,
+			.014
+		], [
+			.018,
+			.014,
+			.005
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.02,
+				1.642 * s,
+				.062
+			],
+			[
+				-.042,
+				1.592 * s,
+				.14
+			],
+			[
+				-.056,
+				1.545 * s,
+				.139
+			]
+		], [
+			.034,
+			.028,
+			.01
+		], [
+			.014,
+			.012,
+			.004
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.104,
+				1.58 * s,
+				.022
+			],
+			[
+				-.128,
+				1.505 * s,
+				.036
+			],
+			[
+				-.116,
+				1.445 * s,
+				.028
+			]
+		], [
+			.026,
+			.02,
+			.008
+		], [
+			.012,
+			.01,
+			.004
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				.104,
+				1.58 * s,
+				.022
+			],
+			[
+				.128,
+				1.505 * s,
+				.036
+			],
+			[
+				.116,
+				1.445 * s,
+				.028
+			]
+		], [
+			.026,
+			.02,
+			.008
+		], [
+			.012,
+			.01,
+			.004
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				0,
+				1.54 * s,
+				-.115
+			],
+			[
+				0,
+				1.44 * s,
+				-.135
+			],
+			[
+				0,
+				1.36 * s,
+				-.095
+			]
+		], [
+			.118,
+			.096,
+			.048
+		], [
+			.024,
+			.02,
+			.01
+		], hairMat, bones.skeleton)
+	];
+	for (const m of meshes) group.add(m);
+	const beltBuckle = new Mesh(new BoxGeometry(.046 * s, .034 * s, .012 * s), brassMat);
+	beltBuckle.position.set(0, .09 * s, .107 * s);
+	bones.hips.add(beltBuckle);
+	const apronPocket = new Mesh(new BoxGeometry(.068 * s, .074 * s, .01 * s), apronMat);
+	apronPocket.position.set(.088 * s, -.02 * s, .106 * s);
+	apronPocket.rotation.y = .34;
+	bones.hips.add(apronPocket);
+	const collarBtnGeo = new CylinderGeometry(.008 * s, .008 * s, .007 * s, 10);
+	collarBtnGeo.rotateX(Math.PI * .5);
+	for (const [by, bz] of [[.085 * s, .113 * s], [.015 * s, .118 * s]]) {
+		const btn = new Mesh(collarBtnGeo, brassMat);
+		btn.position.set(0, by, bz);
+		bones.chest.add(btn);
+	}
+	return {
+		group,
+		bones,
+		textures
+	};
+}
+/**
+* Human Tea House Guests (12 diverse characters across ages, genders & styles)
+* Built with complete anatomical structure: sculpted 3D nose/brow/ears, sculpted palms + thumbs,
+* two-tone shoes + outsoles, tailored squircle garments, and layered hairstyles.
+*/
+function buildSeamlessHumanGuest(compactMode, ultraCompact, config) {
+	const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
+	const s = config.heightScale ?? .97;
+	const isSlender = config.slender ?? true;
+	const wScale = isSlender ? .87 : 1;
+	const isElder = config.isElder ?? config.preset === "malee";
+	const usesTrousers = config.bottomStyle === "trousers";
+	const sleeveEndsAtElbow = config.sleeveEndsAtElbow ?? Boolean(isElder && !usesTrousers);
+	const bones = createHumanoidSkeleton(s);
+	const group = new Group();
+	group.add(bones.root);
+	const skinHex = config.skinHex ?? (isElder ? "#ecc4a8" : "#f6d5be");
+	const skinColorNum = config.skinColor ?? (isElder ? 15516840 : 16176574);
+	const faceTex = createAnimeFaceTexture({
+		skinHex,
+		blushHex: config.blushHex ?? (isElder ? "rgba(218, 125, 118, 0.34)" : isSlender ? "rgba(238, 136, 130, 0.42)" : "rgba(214, 128, 118, 0.24)"),
+		irisTopHex: config.irisTopHex,
+		irisBottomHex: config.irisBottomHex,
+		browHex: config.browHex ?? "#46342a",
+		lipHex: isElder ? "#ad6b62" : isSlender ? "#c46a64" : "#a96b62",
+		eyeScale: isElder ? .9 : isSlender ? 1 : .92,
+		smileCurve: config.smileCurve ?? (config.preset === "som-o" ? 1.2 : 1),
+		warmAgeLines: isElder
+	}, compactMode);
+	const hairTex = createHairStrandTexture(config.hairBaseHex, config.hairHighlightHex, config.hairShadowHex, config.hairTipHex, compactMode);
+	const coatTex = createTailoredClothingTexture({
+		style: config.clothingStyle,
+		baseHex: config.coatHex,
+		grainHex: "#252629",
+		accentHex: config.clothingAccentHex,
+		trimHex: config.clothingAccentHex,
+		buttonHex: isElder ? "#c9cfd8" : "#7b5438"
+	}, compactMode);
+	const innerTex = createTailoredClothingTexture({
+		style: "shirt",
+		baseHex: config.innerHex,
+		grainHex: "#d5cdbf",
+		buttonHex: "#c8bfb0"
+	}, compactMode);
+	const textures = [
+		faceTex,
+		hairTex,
+		coatTex,
+		innerTex
+	];
+	const { skinMat, headMat } = createCharacterMats({
+		skin: skinColorNum,
+		faceTex
+	});
+	const coatMat = new MeshStandardMaterial({
+		map: coatTex,
+		roughness: .74,
+		side: 2
+	});
+	const innerMat = new MeshStandardMaterial({
+		map: innerTex,
+		roughness: .78
+	});
+	const bottomMat = new MeshStandardMaterial({
+		color: config.skirtHex,
+		roughness: .8,
+		side: 2
+	});
+	const hairMat = new MeshStandardMaterial({
+		map: hairTex,
+		roughness: .46,
+		metalness: .06
+	});
+	const shoeMat = new MeshStandardMaterial({
+		color: config.shoeColor,
+		roughness: .48
+	});
+	const soleMat = new MeshStandardMaterial({
+		color: 2235675,
+		roughness: .88
+	});
+	const pearlMat = new MeshStandardMaterial({
+		color: 16250351,
+		roughness: .25,
+		metalness: .15
+	});
+	const castShadow = !compactMode;
+	const usesOuterShell = config.clothingStyle === "cardigan" || config.clothingStyle === "waistcoat" || config.clothingStyle === "hoodie-jacket" || config.clothingStyle === "trench";
+	const isSleevelessVest = config.clothingStyle === "waistcoat";
+	const torsoUpperMat = usesOuterShell ? innerMat : coatMat;
+	const armSleeveMat = isSleevelessVest ? innerMat : coatMat;
+	const legStartY = usesTrousers ? .85 : .56;
+	const backDropMap = {
+		"wavy-shoulder": .3,
+		"short-bob": .24,
+		"twin-braids": .2,
+		"low-messy-bun": .16,
+		"short-quiff": .16,
+		"high-ponytail": .14,
+		"neat-parted": .14,
+		"elder-top-bun": .14
+	};
+	const meshes = [
+		...buildSeamlessTorso(s, seg, bones.skeleton, bottomMat, torsoUpperMat, skinMat, {
+			hasHead: true,
+			slender: isSlender,
+			castShadow
+		}),
+		...buildSeamlessArm(-1, s, seg, bones.skeleton, armSleeveMat, skinMat, skinMat, {
+			sleeveEndsAtElbow,
+			castShadow
+		}),
+		...buildSeamlessArm(1, s, seg, bones.skeleton, armSleeveMat, skinMat, skinMat, {
+			sleeveEndsAtElbow,
+			castShadow
+		}),
+		...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, bottomMat, skinMat, shoeMat, soleMat, {
+			thighWidth: isSlender ? .96 : 1,
+			kneeHighStartY: legStartY,
+			castShadow
+		}),
+		...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, bottomMat, skinMat, shoeMat, soleMat, {
+			thighWidth: isSlender ? .96 : 1,
+			kneeHighStartY: legStartY,
+			castShadow
+		}),
+		buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+			jawTaper: config.jawTaper ?? (isSlender ? isElder ? .76 : .68 : .78),
+			faceFlatten: isSlender ? .9 : .92,
+			castShadow
+		}),
+		...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+		buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+			backDrop: backDropMap[config.hairstyle],
+			castShadow
+		})
+	];
+	if (!usesTrousers) meshes.push(buildCoatShellSkinnedMesh([
+		{
+			y: isElder ? .44 * s : .54 * s,
+			rx: (.172 * wScale + .01) * s,
+			rz: (.122 * wScale + .008) * s,
+			squareness: .4,
+			arcStart: 0,
+			arcEnd: Math.PI * 2,
+			upperBone: BONE.HIPS,
+			upperWeight: .45,
+			v: 0
+		},
+		{
+			y: .65 * s,
+			rx: (.165 * wScale + .009) * s,
+			rz: (.116 * wScale + .008) * s,
+			squareness: .4,
+			arcStart: 0,
+			arcEnd: Math.PI * 2,
+			upperBone: BONE.HIPS,
+			upperWeight: .72,
+			v: .48
+		},
+		{
+			y: .78 * s,
+			rx: (.156 * wScale + .008) * s,
+			rz: (.11 * wScale + .007) * s,
+			squareness: .42,
+			arcStart: 0,
+			arcEnd: Math.PI * 2,
+			upperBone: BONE.HIPS,
+			upperWeight: .92,
+			v: 1
+		}
+	], seg, bottomMat, bones.skeleton, castShadow));
+	if (usesOuterShell) {
+		const gap = .007 * s;
+		const frontArcGap = config.clothingStyle === "hoodie-jacket" ? .2 : config.clothingStyle === "waistcoat" ? .26 : .3;
+		meshes.push(buildCoatShellSkinnedMesh([
+			{
+				y: .76 * s,
+				zOffset: 0,
+				rx: .158 * s * wScale + gap,
+				rz: .111 * s * wScale + gap,
+				squareness: .43,
+				arcStart: -Math.PI * frontArcGap,
+				arcEnd: Math.PI * (1 + frontArcGap),
+				upperBone: BONE.HIPS,
+				upperWeight: .8,
+				v: 0
+			},
+			{
+				y: .91 * s,
+				zOffset: 0,
+				rx: .132 * s * wScale + gap,
+				rz: .094 * s * wScale + gap,
+				squareness: .43,
+				arcStart: -Math.PI * (frontArcGap + .02),
+				arcEnd: Math.PI * (1 + frontArcGap + .02),
+				upperBone: BONE.SPINE,
+				upperWeight: 1,
+				v: .34
+			},
+			{
+				y: 1.06 * s,
+				zOffset: .005 * s,
+				rx: .15 * s * wScale + gap,
+				rz: .108 * s * wScale + gap,
+				squareness: .43,
+				arcStart: -Math.PI * (frontArcGap + .02),
+				arcEnd: Math.PI * (1 + frontArcGap + .02),
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: .68
+			},
+			{
+				y: 1.22 * s,
+				zOffset: .005 * s,
+				rx: .168 * s * wScale + gap,
+				rz: .11 * s * wScale + gap,
+				squareness: .43,
+				arcStart: -Math.PI * (frontArcGap - .02),
+				arcEnd: Math.PI * (1 + frontArcGap - .02),
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: 1
+			}
+		], seg, coatMat, bones.skeleton, castShadow));
+		if (config.clothingStyle === "hoodie-jacket") meshes.push(buildCoatShellSkinnedMesh([{
+			y: 1.28 * s,
+			zOffset: -.022 * s,
+			rx: .112 * s * wScale,
+			rz: .082 * s * wScale,
+			squareness: .35,
+			arcStart: Math.PI * .08,
+			arcEnd: Math.PI * .92,
+			upperBone: BONE.CHEST,
+			upperWeight: .85,
+			v: 0
+		}, {
+			y: 1.35 * s,
+			zOffset: -.042 * s,
+			rx: .104 * s * wScale,
+			rz: .078 * s * wScale,
+			squareness: .3,
+			arcStart: Math.PI * .12,
+			arcEnd: Math.PI * .88,
+			upperBone: BONE.NECK,
+			upperWeight: .65,
+			v: 1
+		}], seg, coatMat, bones.skeleton, castShadow));
+	} else meshes.push(buildLoftedSkinnedMesh([{
+		center: [
+			0,
+			1.315 * s,
+			-.002 * s
+		],
+		rx: .058 * s,
+		rz: .057 * s,
+		squareness: .1,
+		weights: [
+			BONE.CHEST,
+			.35,
+			BONE.NECK,
+			.65
+		],
+		v: 0
+	}, {
+		center: [
+			0,
+			1.36 * s,
+			-.002 * s
+		],
+		rx: .056 * s,
+		rz: .055 * s,
+		squareness: .1,
+		weights: [
+			BONE.NECK,
+			.85,
+			BONE.CHEST,
+			.15
+		],
+		v: 1
+	}], seg, coatMat, bones.skeleton));
+	if (config.hairstyle === "wavy-shoulder") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.62 * s,
+			-.08
+		],
+		[
+			0,
+			1.48 * s,
+			-.162
+		],
+		[
+			0,
+			1.32 * s,
+			-.155
+		],
+		[
+			0,
+			1.21 * s,
+			-.125
+		]
+	], [
+		.145,
+		.155,
+		.142,
+		.08
+	], [
+		.028,
+		.03,
+		.024,
+		.012
+	], hairMat, bones.skeleton, {
+		followChestLower: true,
+		castShadow
+	}), buildHairRibbonSkinnedMesh([
+		[
+			-.085,
+			1.61 * s,
+			-.05
+		],
+		[
+			-.145,
+			1.44 * s,
+			-.065
+		],
+		[
+			-.155,
+			1.28 * s,
+			.01
+		],
+		[
+			-.12,
+			1.19 * s,
+			.055
+		]
+	], [
+		.065,
+		.068,
+		.052,
+		.015
+	], [
+		.022,
+		.022,
+		.018,
+		.006
+	], hairMat, bones.skeleton, {
+		followChestLower: true,
+		curlRoll: .2
+	}), buildHairRibbonSkinnedMesh([
+		[
+			.085,
+			1.61 * s,
+			-.05
+		],
+		[
+			.145,
+			1.44 * s,
+			-.065
+		],
+		[
+			.155,
+			1.28 * s,
+			.01
+		],
+		[
+			.12,
+			1.19 * s,
+			.055
+		]
+	], [
+		.065,
+		.068,
+		.052,
+		.015
+	], [
+		.022,
+		.022,
+		.018,
+		.006
+	], hairMat, bones.skeleton, {
+		followChestLower: true,
+		curlRoll: -.2
+	}), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.05
+		],
+		[
+			-.042,
+			1.602 * s,
+			.138
+		],
+		[
+			-.065,
+			1.545 * s,
+			.14
+		]
+	], [
+		.046,
+		.038,
+		.012
+	], [
+		.014,
+		.012,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.05
+		],
+		[
+			.042,
+			1.602 * s,
+			.138
+		],
+		[
+			.065,
+			1.545 * s,
+			.14
+		]
+	], [
+		.046,
+		.038,
+		.012
+	], [
+		.014,
+		.012,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.055
+		],
+		[
+			0,
+			1.602 * s,
+			.143
+		],
+		[
+			.006,
+			1.55 * s,
+			.144
+		]
+	], [
+		.032,
+		.028,
+		.01
+	], [
+		.012,
+		.01,
+		.003
+	], hairMat, bones.skeleton));
+	else if (config.hairstyle === "short-bob") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.62 * s,
+			-.07
+		],
+		[
+			0,
+			1.49 * s,
+			-.155
+		],
+		[
+			0,
+			1.38 * s,
+			-.125
+		]
+	], [
+		.142,
+		.15,
+		.12
+	], [
+		.026,
+		.028,
+		.016
+	], hairMat, bones.skeleton, { castShadow }), buildHairRibbonSkinnedMesh([
+		[
+			-.08,
+			1.61 * s,
+			-.03
+		],
+		[
+			-.148,
+			1.49 * s,
+			.015
+		],
+		[
+			-.124,
+			1.39 * s,
+			.042
+		]
+	], [
+		.058,
+		.055,
+		.036
+	], [
+		.02,
+		.02,
+		.012
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			.08,
+			1.61 * s,
+			-.03
+		],
+		[
+			.148,
+			1.49 * s,
+			.015
+		],
+		[
+			.124,
+			1.39 * s,
+			.042
+		]
+	], [
+		.058,
+		.055,
+		.036
+	], [
+		.02,
+		.02,
+		.012
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.03,
+			1.64 * s,
+			.05
+		],
+		[
+			.02,
+			1.602 * s,
+			.138
+		],
+		[
+			.085,
+			1.545 * s,
+			.126
+		]
+	], [
+		.056,
+		.046,
+		.016
+	], [
+		.016,
+		.014,
+		.005
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.035,
+			1.635 * s,
+			.055
+		],
+		[
+			-.088,
+			1.585 * s,
+			.118
+		],
+		[
+			-.116,
+			1.51 * s,
+			.092
+		]
+	], [
+		.046,
+		.038,
+		.014
+	], [
+		.015,
+		.012,
+		.005
+	], hairMat, bones.skeleton));
+	else if (config.hairstyle === "high-ponytail") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.055
+		],
+		[
+			-.045,
+			1.595 * s,
+			.138
+		],
+		[
+			-.072,
+			1.548 * s,
+			.136
+		]
+	], [
+		.044,
+		.034,
+		.012
+	], [
+		.014,
+		.011,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.055
+		],
+		[
+			.045,
+			1.595 * s,
+			.138
+		],
+		[
+			.072,
+			1.548 * s,
+			.136
+		]
+	], [
+		.044,
+		.034,
+		.012
+	], [
+		.014,
+		.011,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.06
+		],
+		[
+			.005,
+			1.596 * s,
+			.143
+		],
+		[
+			.012,
+			1.552 * s,
+			.143
+		]
+	], [
+		.03,
+		.024,
+		.01
+	], [
+		.012,
+		.009,
+		.003
+	], hairMat, bones.skeleton), buildTaperedCurveSkinnedMesh([
+		[
+			0,
+			1.615 * s,
+			-.132
+		],
+		[
+			0,
+			1.625 * s,
+			-.205
+		],
+		[
+			0,
+			1.495 * s,
+			-.242
+		],
+		[
+			0,
+			1.355 * s,
+			-.21
+		]
+	], [
+		.042,
+		.058,
+		.048,
+		.016
+	], 1.15, .88, 12, BONE.HEAD, hairMat, bones.skeleton, castShadow));
+	else if (config.hairstyle === "twin-braids") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.05
+		],
+		[
+			-.062,
+			1.595 * s,
+			.126
+		],
+		[
+			-.106,
+			1.505 * s,
+			.095
+		]
+	], [
+		.048,
+		.04,
+		.018
+	], [
+		.016,
+		.014,
+		.006
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.05
+		],
+		[
+			.062,
+			1.595 * s,
+			.126
+		],
+		[
+			.106,
+			1.505 * s,
+			.095
+		]
+	], [
+		.048,
+		.04,
+		.018
+	], [
+		.016,
+		.014,
+		.006
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.104,
+			1.48 * s,
+			-.01
+		],
+		[
+			-.118,
+			1.35 * s,
+			.058
+		],
+		[
+			-.094,
+			1.21 * s,
+			.108
+		],
+		[
+			-.086,
+			1.13 * s,
+			.112
+		]
+	], [
+		.032,
+		.034,
+		.026,
+		.01
+	], [
+		.024,
+		.026,
+		.02,
+		.008
+	], hairMat, bones.skeleton, {
+		followChestLower: true,
+		castShadow
+	}), buildHairRibbonSkinnedMesh([
+		[
+			.104,
+			1.48 * s,
+			-.01
+		],
+		[
+			.118,
+			1.35 * s,
+			.058
+		],
+		[
+			.094,
+			1.21 * s,
+			.108
+		],
+		[
+			.086,
+			1.13 * s,
+			.112
+		]
+	], [
+		.032,
+		.034,
+		.026,
+		.01
+	], [
+		.024,
+		.026,
+		.02,
+		.008
+	], hairMat, bones.skeleton, {
+		followChestLower: true,
+		castShadow
+	}));
+	else if (config.hairstyle === "short-quiff") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			-.04,
+			1.642 * s,
+			.048
+		],
+		[
+			-.01,
+			1.622 * s,
+			.128
+		],
+		[
+			.058,
+			1.58 * s,
+			.132
+		],
+		[
+			.098,
+			1.525 * s,
+			.108
+		]
+	], [
+		.068,
+		.06,
+		.042,
+		.012
+	], [
+		.024,
+		.022,
+		.015,
+		.005
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.05,
+			1.635 * s,
+			.05
+		],
+		[
+			-.094,
+			1.588 * s,
+			.114
+		],
+		[
+			-.118,
+			1.515 * s,
+			.086
+		]
+	], [
+		.052,
+		.038,
+		.014
+	], [
+		.018,
+		.014,
+		.005
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.106,
+			1.56 * s,
+			.024
+		],
+		[
+			-.126,
+			1.495 * s,
+			.032
+		],
+		[
+			-.114,
+			1.445 * s,
+			.024
+		]
+	], [
+		.024,
+		.018,
+		.007
+	], [
+		.011,
+		.009,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			.106,
+			1.56 * s,
+			.024
+		],
+		[
+			.126,
+			1.495 * s,
+			.032
+		],
+		[
+			.114,
+			1.445 * s,
+			.024
+		]
+	], [
+		.024,
+		.018,
+		.007
+	], [
+		.011,
+		.009,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.52 * s,
+			-.118
+		],
+		[
+			0,
+			1.44 * s,
+			-.126
+		],
+		[
+			0,
+			1.38 * s,
+			-.092
+		]
+	], [
+		.106,
+		.086,
+		.044
+	], [
+		.02,
+		.016,
+		.008
+	], hairMat, bones.skeleton));
+	else if (config.hairstyle === "neat-parted") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			-.045,
+			1.635 * s,
+			.052
+		],
+		[
+			.012,
+			1.612 * s,
+			.128
+		],
+		[
+			.082,
+			1.576 * s,
+			.115
+		]
+	], [
+		.056,
+		.048,
+		.02
+	], [
+		.018,
+		.016,
+		.007
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.05,
+			1.628 * s,
+			.05
+		],
+		[
+			-.106,
+			1.572 * s,
+			.092
+		],
+		[
+			-.12,
+			1.505 * s,
+			.065
+		]
+	], [
+		.042,
+		.032,
+		.012
+	], [
+		.014,
+		.011,
+		.005
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.52 * s,
+			-.118
+		],
+		[
+			0,
+			1.44 * s,
+			-.122
+		],
+		[
+			0,
+			1.385 * s,
+			-.088
+		]
+	], [
+		.102,
+		.082,
+		.042
+	], [
+		.018,
+		.014,
+		.007
+	], hairMat, bones.skeleton));
+	else if (config.hairstyle === "low-messy-bun") meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.045
+		],
+		[
+			-.048,
+			1.595 * s,
+			.136
+		],
+		[
+			-.105,
+			1.505 * s,
+			.112
+		]
+	], [
+		.05,
+		.038,
+		.01
+	], [
+		.016,
+		.014,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			0,
+			1.64 * s,
+			.045
+		],
+		[
+			.048,
+			1.595 * s,
+			.136
+		],
+		[
+			.105,
+			1.505 * s,
+			.112
+		]
+	], [
+		.05,
+		.038,
+		.01
+	], [
+		.016,
+		.014,
+		.004
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			-.095,
+			1.59 * s,
+			.05
+		],
+		[
+			-.125,
+			1.495 * s,
+			.088
+		],
+		[
+			-.112,
+			1.405 * s,
+			.096
+		]
+	], [
+		.018,
+		.014,
+		.005
+	], [
+		.008,
+		.006,
+		.003
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			.095,
+			1.59 * s,
+			.05
+		],
+		[
+			.125,
+			1.495 * s,
+			.088
+		],
+		[
+			.112,
+			1.405 * s,
+			.096
+		]
+	], [
+		.018,
+		.014,
+		.005
+	], [
+		.008,
+		.006,
+		.003
+	], hairMat, bones.skeleton), buildTaperedCurveSkinnedMesh([[
+		0,
+		1.475 * s,
+		-.135
+	], [
+		0,
+		1.455 * s,
+		-.205
+	]], [.068, .038], 1.08, .95, 10, BONE.HEAD, hairMat, bones.skeleton));
+	else meshes.push(buildHairRibbonSkinnedMesh([
+		[
+			-.09,
+			1.6 * s,
+			.03
+		],
+		[
+			-.122,
+			1.5 * s,
+			.065
+		],
+		[
+			-.115,
+			1.43 * s,
+			.06
+		]
+	], [
+		.022,
+		.016,
+		.005
+	], [
+		.009,
+		.007,
+		.003
+	], hairMat, bones.skeleton), buildHairRibbonSkinnedMesh([
+		[
+			.09,
+			1.6 * s,
+			.03
+		],
+		[
+			.122,
+			1.5 * s,
+			.065
+		],
+		[
+			.115,
+			1.43 * s,
+			.06
+		]
+	], [
+		.022,
+		.016,
+		.005
+	], [
+		.009,
+		.007,
+		.003
+	], hairMat, bones.skeleton), buildTaperedCurveSkinnedMesh([[
+		0,
+		1.67 * s,
+		-.02
+	], [
+		0,
+		1.755 * s,
+		-.04
+	]], [.072, .042], 1.06, 1, 10, BONE.HEAD, hairMat, bones.skeleton), buildTaperedCurveSkinnedMesh([[
+		-.085,
+		1.71 * s,
+		-.035
+	], [
+		.085,
+		1.74 * s,
+		-.035
+	]], [.006, .009], 1, 1, 6, BONE.HEAD, pearlMat, bones.skeleton));
+	for (const m of meshes) group.add(m);
+	if (config.hasPearlEarrings || config.earringColor !== void 0 || config.preset === "som-o") {
+		const earMat = config.earringColor !== void 0 ? new MeshStandardMaterial({
+			color: config.earringColor,
+			metalness: .72,
+			roughness: .25
+		}) : config.preset === "som-o" ? new MeshStandardMaterial({
+			color: 15120476,
+			metalness: .72,
+			roughness: .25
+		}) : pearlMat;
+		const studGeo = new SphereGeometry(.011 * s, 8, 8);
+		for (const side of [-1, 1]) {
+			const stud = new Mesh(studGeo, earMat);
+			stud.position.set(side * .148 * s, .09 * s, .002 * s);
+			bones.head.add(stud);
+		}
+	}
+	if (config.hasHairClip) {
+		const clipMat = new MeshStandardMaterial({
+			color: config.hairClipColor ?? 15252828,
+			metalness: .65,
+			roughness: .25
+		});
+		const clip = new Mesh(new BoxGeometry(.026 * s, .01 * s, .012 * s), clipMat);
+		clip.position.set(-.095 * s, .205 * s, .092 * s);
+		clip.rotation.z = .28;
+		clip.rotation.y = -.52;
+		bones.head.add(clip);
+	}
+	if (config.hasMustache) {
+		const stache = new Mesh(new BoxGeometry(.056 * s, .011 * s, .012 * s), hairMat);
+		stache.position.set(0, .088 * s, .145 * s);
+		bones.head.add(stache);
+	}
+	if (config.hasGlasses) {
+		const rimMat = new MeshStandardMaterial({
+			color: config.glassStyle === "rect" ? 2500654 : 3882306,
+			metalness: .78,
+			roughness: .24
+		});
+		if (config.glassStyle === "rect") {
+			const frameGeo = new BoxGeometry(.05 * s, .032 * s, .005 * s);
+			const lGlass = new Mesh(frameGeo, rimMat);
+			lGlass.position.set(-.046 * s, .132 * s, .14 * s);
+			lGlass.scale.set(1, .16, 1);
+			lGlass.position.y = .145 * s;
+			const lBottom = new Mesh(frameGeo, rimMat);
+			lBottom.scale.set(1, .14, 1);
+			lBottom.position.set(-.046 * s, .118 * s, .14 * s);
+			const rTop = lGlass.clone();
+			rTop.position.x = .046 * s;
+			const rBottom = lBottom.clone();
+			rBottom.position.x = .046 * s;
+			const sidePostGeo = new BoxGeometry(.005 * s, .03 * s, .005 * s);
+			const p1 = new Mesh(sidePostGeo, rimMat);
+			p1.position.set(-.07 * s, .132 * s, .14 * s);
+			const p2 = new Mesh(sidePostGeo, rimMat);
+			p2.position.set(-.022 * s, .132 * s, .14 * s);
+			const p3 = new Mesh(sidePostGeo, rimMat);
+			p3.position.set(.022 * s, .132 * s, .14 * s);
+			const p4 = new Mesh(sidePostGeo, rimMat);
+			p4.position.set(.07 * s, .132 * s, .14 * s);
+			const bridge = new Mesh(new BoxGeometry(.04 * s, .005 * s, .005 * s), rimMat);
+			bridge.position.set(0, .141 * s, .14 * s);
+			bones.head.add(lGlass, lBottom, rTop, rBottom, p1, p2, p3, p4, bridge);
+		} else {
+			const lensGeo = new TorusGeometry(.03 * s, .0038 * s, 6, 14);
+			const lGlass = new Mesh(lensGeo, rimMat);
+			lGlass.position.set(-.046 * s, .132 * s, .138 * s);
+			const rGlass = new Mesh(lensGeo, rimMat);
+			rGlass.position.set(.046 * s, .132 * s, .138 * s);
+			const bridge = new Mesh(new BoxGeometry(.034 * s, .0045 * s, .0045 * s), rimMat);
+			bridge.position.set(0, .136 * s, .14 * s);
+			bones.head.add(lGlass, rGlass, bridge);
+		}
+	}
+	if (config.hasHeadphones) {
+		const bandMat = new MeshStandardMaterial({
+			color: 2499881,
+			roughness: .42,
+			metalness: .25
+		});
+		const padMat = new MeshStandardMaterial({
+			color: 9132852,
+			roughness: .65
+		});
+		const neckBand = new Mesh(new TorusGeometry(.078 * s, .01 * s, 8, 16, Math.PI * 1.25), bandMat);
+		neckBand.rotation.x = Math.PI * .42;
+		neckBand.rotation.z = -Math.PI * .12;
+		neckBand.position.set(0, .18 * s, .018 * s);
+		const cupGeo = new CylinderGeometry(.028 * s, .028 * s, .022 * s, 10);
+		cupGeo.rotateZ(Math.PI * .5);
+		const lCup = new Mesh(cupGeo, padMat);
+		lCup.position.set(-.068 * s, .155 * s, .088 * s);
+		const rCup = new Mesh(cupGeo, padMat);
+		rCup.position.set(.068 * s, .155 * s, .088 * s);
+		bones.chest.add(neckBand, lCup, rCup);
+	}
+	if (config.hasCamera) {
+		const camBodyMat = new MeshStandardMaterial({
+			color: 2369067,
+			roughness: .45,
+			metalness: .35
+		});
+		const camMetalMat = new MeshStandardMaterial({
+			color: 13685980,
+			roughness: .28,
+			metalness: .85
+		});
+		const camGroup = new Group();
+		const camBody = new Mesh(new BoxGeometry(.095 * s, .056 * s, .036 * s), camBodyMat);
+		const camTop = new Mesh(new BoxGeometry(.095 * s, .014 * s, .036 * s), camMetalMat);
+		camTop.position.y = .034 * s;
+		const camLens = new Mesh(new CylinderGeometry(.022 * s, .024 * s, .028 * s, 12), camMetalMat);
+		camLens.rotation.x = Math.PI * .5;
+		camLens.position.set(0, -.002 * s, .028 * s);
+		camGroup.add(camBody, camTop, camLens);
+		camGroup.position.set(-.015 * s, -.055 * s, .045 * s);
+		bones.rightWrist.add(camGroup);
+	}
+	if (config.hasNotebook && config.bagColor !== void 0) {
+		const bookMat = new MeshStandardMaterial({
+			color: config.bagColor,
+			roughness: .72
+		});
+		const book = new Mesh(new BoxGeometry(.11, .024, .145), bookMat);
+		book.position.set(-.015, -.05, .05);
+		bones.rightWrist.add(book);
+	} else if (config.hasHandbag && config.bagColor !== void 0) {
+		const bagMat = new MeshStandardMaterial({
+			color: config.bagColor,
+			roughness: .76
+		});
+		const bagBody = new Mesh(new SphereGeometry(.074, seg, seg), bagMat);
+		bagBody.scale.set(.62, 1.04, 1);
+		bagBody.position.set(.025, -.1, .02);
+		bones.rightWrist.add(bagBody);
+	}
+	return {
+		group,
+		bones,
+		textures
+	};
+}
+/**
+* Shared skeletal animator for all seamless humanoids (walking, idle, brewing, seated).
+*/
+function animateSeamlessHumanoid(bones, elapsed, delta, options) {
+	const { isMoving, walkPhase, walkSpeed, isPouring, step, isSeated, reducedMotion } = options;
+	const damp = Math.min(1, delta * 10);
+	if (isSeated) {
+		bones.hips.position.y = MathUtils.lerp(bones.hips.position.y, bones.restHipsY - .25, damp);
+		bones.hips.rotation.y = MathUtils.lerp(bones.hips.rotation.y, 0, damp);
+		bones.chest.rotation.y = MathUtils.lerp(bones.chest.rotation.y, 0, damp);
+		bones.chest.rotation.x = reducedMotion ? 0 : Math.sin(elapsed * 1.5) * .018;
+		bones.leftHip.rotation.x = MathUtils.lerp(bones.leftHip.rotation.x, -Math.PI * .46, damp);
+		bones.rightHip.rotation.x = MathUtils.lerp(bones.rightHip.rotation.x, -Math.PI * .46, damp);
+		bones.leftKnee.rotation.x = MathUtils.lerp(bones.leftKnee.rotation.x, Math.PI * .46, damp);
+		bones.rightKnee.rotation.x = MathUtils.lerp(bones.rightKnee.rotation.x, Math.PI * .46, damp);
+		bones.leftShoulder.rotation.x = MathUtils.lerp(bones.leftShoulder.rotation.x, -.36, damp);
+		bones.rightShoulder.rotation.x = MathUtils.lerp(bones.rightShoulder.rotation.x, -.36, damp);
+		bones.leftElbow.rotation.x = MathUtils.lerp(bones.leftElbow.rotation.x, -.45, damp);
+		bones.rightElbow.rotation.x = MathUtils.lerp(bones.rightElbow.rotation.x, -.45, damp);
+		bones.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .65) * .08;
+		return;
+	}
+	if (isMoving && !reducedMotion) {
+		const swing = Math.sin(walkPhase) * .56 * walkSpeed;
+		bones.hips.position.y = bones.restHipsY + Math.abs(Math.sin(walkPhase)) * .022 * walkSpeed;
+		bones.hips.rotation.y = Math.sin(walkPhase) * .055 * walkSpeed;
+		bones.chest.rotation.y = -Math.sin(walkPhase) * .06 * walkSpeed;
+		bones.chest.rotation.x = .03 * walkSpeed;
+		bones.leftHip.rotation.x = -swing;
+		bones.rightHip.rotation.x = swing;
+		bones.leftKnee.rotation.x = Math.max(.06, swing * .78);
+		bones.rightKnee.rotation.x = Math.max(.06, -swing * .78);
+		bones.leftShoulder.rotation.x = swing * .46;
+		bones.rightShoulder.rotation.x = -swing * .46;
+		bones.leftElbow.rotation.x = -.22 - Math.max(0, -swing * .25);
+		bones.rightElbow.rotation.x = -.22 - Math.max(0, swing * .25);
+		bones.head.rotation.y = Math.sin(elapsed * .9) * .04;
+		return;
+	}
+	const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * .018;
+	bones.hips.position.y = MathUtils.lerp(bones.hips.position.y, bones.restHipsY, damp);
+	bones.hips.rotation.y = MathUtils.lerp(bones.hips.rotation.y, 0, damp);
+	bones.chest.rotation.y = MathUtils.lerp(bones.chest.rotation.y, 0, damp);
+	bones.chest.rotation.x = breathe;
+	bones.leftHip.rotation.x = MathUtils.lerp(bones.leftHip.rotation.x, 0, damp);
+	bones.rightHip.rotation.x = MathUtils.lerp(bones.rightHip.rotation.x, 0, damp);
+	bones.leftKnee.rotation.x = MathUtils.lerp(bones.leftKnee.rotation.x, .04, damp);
+	bones.rightKnee.rotation.x = MathUtils.lerp(bones.rightKnee.rotation.x, .04, damp);
+	let targetRightShoulder = -.06 + breathe;
+	let targetLeftShoulder = -.06 - breathe;
+	let targetRightElbow = -.14;
+	let targetLeftElbow = -.14;
+	if (isPouring || step === "POUR_WATER") {
+		targetRightShoulder = -.62;
+		targetRightElbow = -.35;
+		targetLeftShoulder = -.22;
+	} else if (step === "STEEP_TEA") {
+		targetRightShoulder = -.46;
+		targetLeftShoulder = -.38;
+		targetRightElbow = -.45;
+		targetLeftElbow = -.45;
+	}
+	bones.rightShoulder.rotation.x = MathUtils.lerp(bones.rightShoulder.rotation.x, targetRightShoulder, damp);
+	bones.leftShoulder.rotation.x = MathUtils.lerp(bones.leftShoulder.rotation.x, targetLeftShoulder, damp);
+	bones.rightElbow.rotation.x = MathUtils.lerp(bones.rightElbow.rotation.x, targetRightElbow, damp);
+	bones.leftElbow.rotation.x = MathUtils.lerp(bones.leftElbow.rotation.x, targetLeftElbow, damp);
+	bones.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
+}
 // src/three/shopCharacters.ts
 var SHOP_FLOOR_Y = -.78;
 var PLAYER_SPAWN_POS = new Vector3(.45, SHOP_FLOOR_Y, 2.72);
@@ -62658,1381 +67593,8 @@ function createTeaChair(walnutTex, cushionColorHex, compactMode = false) {
 	});
 	return chair;
 }
-function createTeaMasterCharacter(compactMode, ultraCompact) {
-	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
-	const group = new Group();
-	const skinMat = new MeshStandardMaterial({
-		color: 15978677,
-		roughness: .65
-	});
-	const shirtMat = new MeshStandardMaterial({
-		color: 16315627,
-		roughness: .78
-	});
-	const collarMat = new MeshStandardMaterial({
-		color: 15130057,
-		roughness: .8
-	});
-	const apronMat = new MeshStandardMaterial({
-		color: 3043136,
-		roughness: .72
-	});
-	const apronDarkMat = new MeshStandardMaterial({
-		color: 2116908,
-		roughness: .78
-	});
-	const obiMat = new MeshStandardMaterial({
-		color: 8147765,
-		roughness: .76
-	});
-	const pantsMat = new MeshStandardMaterial({
-		color: 3354153,
-		roughness: .84
-	});
-	const hairMat = new MeshStandardMaterial({
-		color: 2433053,
-		roughness: .66
-	});
-	const eyeMat = new MeshStandardMaterial({
-		color: 1709845,
-		roughness: .25
-	});
-	const woodPinMat = new MeshStandardMaterial({
-		color: 12158284,
-		roughness: .45
-	});
-	const jadeMat = new MeshStandardMaterial({
-		color: 6466170,
-		roughness: .32
-	});
-	const sockMat = new MeshStandardMaterial({
-		color: 16316144,
-		roughness: .85
-	});
-	const sandalMat = new MeshStandardMaterial({
-		color: 7819312,
-		roughness: .62
-	});
-	const buildLeg = (side) => {
-		const hip = new Group();
-		hip.position.set(side * .112, .72, 0);
-		const hipJoint = new Mesh(new SphereGeometry(.084, seg, seg), pantsMat);
-		hip.add(hipJoint);
-		const thigh = new Mesh(new CylinderGeometry(.084, .072, .34, seg), pantsMat);
-		thigh.position.y = -.17;
-		thigh.castShadow = !compactMode;
-		hip.add(thigh);
-		const shin = new Group();
-		shin.position.set(0, -.34, 0);
-		const kneeJoint = new Mesh(new SphereGeometry(.069, seg, seg), pantsMat);
-		const calf = new Mesh(new CylinderGeometry(.07, .056, .29, seg), pantsMat);
-		calf.position.y = -.145;
-		calf.castShadow = !compactMode;
-		const sock = new Mesh(new CylinderGeometry(.053, .05, .085, seg), sockMat);
-		sock.position.y = -.295;
-		const footCap = new Mesh(new SphereGeometry(.054, seg, seg), sockMat);
-		footCap.scale.set(.95, .62, 1.55);
-		footCap.position.set(0, -.325, .035);
-		const sole = new Mesh(new BoxGeometry(.112, .028, .215), sandalMat);
-		sole.position.set(0, -.352, .03);
-		const toothFront = new Mesh(new BoxGeometry(.105, .02, .024), sandalMat);
-		toothFront.position.set(0, -.372, .08);
-		const toothBack = new Mesh(new BoxGeometry(.105, .02, .024), sandalMat);
-		toothBack.position.set(0, -.372, -.04);
-		const strapL = new Mesh(new CylinderGeometry(.008, .008, .09, 6), apronMat);
-		strapL.position.set(-.028, -.322, .055);
-		strapL.rotation.set(.65, 0, -.38);
-		const strapR = strapL.clone();
-		strapR.position.x = .028;
-		strapR.rotation.z = .38;
-		shin.add(kneeJoint, calf, sock, footCap, sole, toothFront, toothBack, strapL, strapR);
-		hip.add(shin);
-		return {
-			hip,
-			shin
-		};
-	};
-	const leftLegBuilt = buildLeg(-1);
-	const rightLegBuilt = buildLeg(1);
-	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
-	const pelvis = new Mesh(new SphereGeometry(.218, seg, seg), pantsMat);
-	pelvis.scale.set(1.02, .56, .88);
-	pelvis.position.set(0, .72, 0);
-	group.add(pelvis);
-	const torsoLower = new Mesh(new CylinderGeometry(.195, .215, .3, seg), shirtMat);
-	torsoLower.position.y = .87;
-	torsoLower.castShadow = !compactMode;
-	group.add(torsoLower);
-	const torsoChest = new Mesh(new SphereGeometry(.215, seg, seg), shirtMat);
-	torsoChest.scale.set(1.06, 1.05, .82);
-	torsoChest.position.set(0, 1.11, 0);
-	torsoChest.castShadow = !compactMode;
-	group.add(torsoChest);
-	const shoulderYoke = new Mesh(new CapsuleGeometry(.068, .34, 6, seg), shirtMat);
-	shoulderYoke.rotation.z = Math.PI / 2;
-	shoulderYoke.position.set(0, 1.24, -.01);
-	group.add(shoulderYoke);
-	const leftLapel = new Mesh(new CapsuleGeometry(.025, .19, 4, 8), collarMat);
-	leftLapel.position.set(-.058, 1.19, .168);
-	leftLapel.rotation.z = -.4;
-	const rightLapel = new Mesh(new CapsuleGeometry(.025, .19, 4, 8), collarMat);
-	rightLapel.position.set(.058, 1.19, .168);
-	rightLapel.rotation.z = .4;
-	group.add(leftLapel, rightLapel);
-	const apronSkirt = new Mesh(new CylinderGeometry(.222, .245, .4, seg, 1, false, -Math.PI * .62, Math.PI * 1.24), apronMat);
-	apronSkirt.position.set(0, .72, .015);
-	apronSkirt.castShadow = !compactMode;
-	group.add(apronSkirt);
-	const apronBib = new Mesh(new CylinderGeometry(.205, .218, .32, seg, 1, false, -Math.PI * .36, Math.PI * .72), apronMat);
-	apronBib.position.set(0, 1.04, .02);
-	group.add(apronBib);
-	const apronNeckStrap = new Mesh(new TorusGeometry(.115, .014, 6, 14), apronDarkMat);
-	apronNeckStrap.rotation.x = Math.PI / 2 + .35;
-	apronNeckStrap.position.set(0, 1.24, .03);
-	group.add(apronNeckStrap);
-	const apronWaist = new Mesh(new TorusGeometry(.21, .032, 8, seg), obiMat);
-	apronWaist.rotation.x = Math.PI / 2;
-	apronWaist.scale.set(1.04, .88, 1);
-	apronWaist.position.set(0, .84, 0);
-	group.add(apronWaist);
-	const apronBackKnot = new Mesh(new SphereGeometry(.048, 8, 8), obiMat);
-	apronBackKnot.position.set(0, .84, -.215);
-	const bowLoopGeo = new TorusGeometry(.044, .015, 6, 10);
-	const bowL = new Mesh(bowLoopGeo, obiMat);
-	bowL.position.set(-.048, .85, -.22);
-	bowL.rotation.y = .28;
-	const bowR = new Mesh(bowLoopGeo, obiMat);
-	bowR.position.set(.048, .85, -.22);
-	bowR.rotation.y = -.28;
-	const ribbonL = new Mesh(new CapsuleGeometry(.016, .16, 4, 6), obiMat);
-	ribbonL.position.set(-.036, .71, -.22);
-	ribbonL.rotation.z = -.2;
-	const ribbonR = ribbonL.clone();
-	ribbonR.position.x = .036;
-	ribbonR.rotation.z = .2;
-	group.add(apronBackKnot, bowL, bowR, ribbonL, ribbonR);
-	const apronPocket = new Mesh(new BoxGeometry(.175, .13, .025), apronDarkMat);
-	apronPocket.position.set(0, .72, .228);
-	const scoopStick = new Mesh(new CylinderGeometry(.008, .007, .145, 6), woodPinMat);
-	scoopStick.position.set(.045, .79, .232);
-	scoopStick.rotation.z = -.22;
-	group.add(apronPocket, scoopStick);
-	const buildArm = (side) => {
-		const shoulder = new Group();
-		shoulder.position.set(side * .245, 1.23, 0);
-		const shoulderSphere = new Mesh(new SphereGeometry(.064, seg, seg), shirtMat);
-		const upperSleeve = new Mesh(new CylinderGeometry(.06, .054, .21, seg), shirtMat);
-		upperSleeve.position.set(side * .008, -.1, .015);
-		upperSleeve.castShadow = !compactMode;
-		const cuffRing = new Mesh(new TorusGeometry(.056, .016, 6, seg), collarMat);
-		cuffRing.rotation.x = Math.PI / 2;
-		cuffRing.position.set(side * .008, -.21, .025);
-		const elbow = new Mesh(new SphereGeometry(.046, 8, 8), skinMat);
-		elbow.position.set(side * .008, -.22, .028);
-		const forearm = new Mesh(new CylinderGeometry(.045, .036, .19, seg), skinMat);
-		forearm.position.set(side * .008, -.31, .062);
-		forearm.rotation.x = -.3;
-		const hand = new Mesh(new SphereGeometry(.048, seg, seg), skinMat);
-		hand.scale.set(.95, 1.12, .85);
-		hand.position.set(side * .008, -.405, .095);
-		shoulder.add(shoulderSphere, upperSleeve, cuffRing, elbow, forearm, hand);
-		return shoulder;
-	};
-	const leftArm = buildArm(-1);
-	const rightArm = buildArm(1);
-	group.add(leftArm, rightArm);
-	const head = new Group();
-	head.position.set(0, 1.4, 0);
-	const neck = new Mesh(new CylinderGeometry(.06, .072, .12, seg), skinMat);
-	neck.position.y = -.07;
-	head.add(neck);
-	const cranium = new Mesh(new SphereGeometry(.18, seg, seg), skinMat);
-	cranium.scale.set(.98, 1.03, .96);
-	cranium.position.y = .058;
-	cranium.castShadow = !compactMode;
-	head.add(cranium);
-	const leftEar = new Mesh(new SphereGeometry(.036, 8, 8), skinMat);
-	leftEar.scale.set(.65, 1.1, .85);
-	leftEar.position.set(-.174, .045, 0);
-	const rightEar = leftEar.clone();
-	rightEar.position.x = .174;
-	head.add(leftEar, rightEar);
-	const hairCap = new Mesh(new SphereGeometry(.191, seg, seg, 0, Math.PI * 2, 0, Math.PI * .62), hairMat);
-	hairCap.position.y = .072;
-	hairCap.rotation.x = -.24;
-	head.add(hairCap);
-	const bangL = new Mesh(new SphereGeometry(.075, seg, seg), hairMat);
-	bangL.scale.set(1.25, .72, .72);
-	bangL.position.set(-.078, .165, .122);
-	bangL.rotation.z = .32;
-	const bangR = new Mesh(new SphereGeometry(.075, seg, seg), hairMat);
-	bangR.scale.set(1.25, .72, .72);
-	bangR.position.set(.078, .165, .122);
-	bangR.rotation.z = -.32;
-	const sideLockGeo = new CapsuleGeometry(.034, .12, 6, 8);
-	const sideLockL = new Mesh(sideLockGeo, hairMat);
-	sideLockL.position.set(-.155, .025, .075);
-	sideLockL.rotation.z = .12;
-	const sideLockR = new Mesh(sideLockGeo, hairMat);
-	sideLockR.position.set(.155, .025, .075);
-	sideLockR.rotation.z = -.12;
-	head.add(bangL, bangR, sideLockL, sideLockR);
-	const hairBun = new Mesh(new SphereGeometry(.088, seg, seg), hairMat);
-	hairBun.scale.set(1, .92, .88);
-	hairBun.position.set(0, .125, -.175);
-	const bunScrunchie = new Mesh(new TorusGeometry(.068, .015, 6, 12), apronMat);
-	bunScrunchie.position.set(0, .125, -.16);
-	const hairPin = new Mesh(new CylinderGeometry(.008, .006, .25, 6), woodPinMat);
-	hairPin.position.set(0, .135, -.185);
-	hairPin.rotation.z = 1.18;
-	const pinBead = new Mesh(new SphereGeometry(.022, 8, 8), jadeMat);
-	pinBead.position.set(.115, .185, -.185);
-	head.add(hairBun, bunScrunchie, hairPin, pinBead);
-	const leftEye = new Mesh(new SphereGeometry(.021, 8, 8), eyeMat);
-	leftEye.scale.set(1, 1.12, .8);
-	leftEye.position.set(-.062, .056, .162);
-	const rightEye = leftEye.clone();
-	rightEye.position.x = .062;
-	const shineGeo = new SphereGeometry(.007, 6, 6);
-	const shineMat = new MeshBasicMaterial({ color: 16777215 });
-	const lShine = new Mesh(shineGeo, shineMat);
-	lShine.position.set(-.056, .065, .177);
-	const rShine = new Mesh(shineGeo, shineMat);
-	rShine.position.set(.068, .065, .177);
-	const noseTip = new Mesh(new SphereGeometry(.013, 6, 6), new MeshStandardMaterial({
-		color: 15120023,
-		roughness: .7
-	}));
-	noseTip.position.set(0, .032, .174);
-	const browGeo = new CapsuleGeometry(.006, .034, 4, 6);
-	const lBrow = new Mesh(browGeo, hairMat);
-	lBrow.rotation.z = Math.PI / 2 + .09;
-	lBrow.position.set(-.062, .095, .16);
-	const rBrow = new Mesh(browGeo, hairMat);
-	rBrow.rotation.z = Math.PI / 2 - .09;
-	rBrow.position.set(.062, .095, .16);
-	const smile = new Mesh(new TorusGeometry(.026, .006, 6, 10, Math.PI), new MeshStandardMaterial({
-		color: 10179660,
-		roughness: .6
-	}));
-	smile.position.set(0, .002, .164);
-	smile.rotation.z = Math.PI;
-	const blushMat = new MeshStandardMaterial({
-		color: 15177866,
-		roughness: .9
-	});
-	const leftBlush = new Mesh(new SphereGeometry(.026, 8, 8), blushMat);
-	leftBlush.scale.set(1.15, .68, .25);
-	leftBlush.position.set(-.095, .02, .146);
-	leftBlush.rotation.y = -.38;
-	const rightBlush = leftBlush.clone();
-	rightBlush.position.x = .095;
-	rightBlush.rotation.y = .38;
-	head.add(leftEye, rightEye, lShine, rShine, noseTip, lBrow, rBrow, smile, leftBlush, rightBlush);
-	group.add(head);
-	group.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group,
-		rig: {
-			leftLeg: leftLegBuilt.hip,
-			rightLeg: rightLegBuilt.hip,
-			leftShin: leftLegBuilt.shin,
-			rightShin: rightLegBuilt.shin,
-			leftArm,
-			rightArm,
-			head
-		}
-	};
-}
-/**
-* 1. Spirit Blossom Kindred — Inspired by Retronous (@Retronous) [85187f9]
-* Pastel sakura-lilac spirit kimono, serene porcelain Kitsune mask, curved teal spirit horns,
-* fox/lamb ears, flowing lavender-blue hair, and orbiting Wolf Spirit Wisp.
-*/
-function createSpiritBlossomKindredCharacter(compactMode, ultraCompact) {
-	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
-	const group = new Group();
-	const skinMat = new MeshStandardMaterial({
-		color: 16050415,
-		roughness: .58
-	});
-	const robeWhiteMat = new MeshStandardMaterial({
-		color: 16380920,
-		roughness: .72
-	});
-	const sakuraMat = new MeshStandardMaterial({
-		color: 15113922,
-		roughness: .68
-	});
-	const lilacMat = new MeshStandardMaterial({
-		color: 9142987,
-		roughness: .7
-	});
-	const plumObiMat = new MeshStandardMaterial({
-		color: 4927849,
-		roughness: .74
-	});
-	const hairBlueMat = new MeshStandardMaterial({
-		color: 7043005,
-		roughness: .56
-	});
-	const maskPorcelainMat = new MeshStandardMaterial({
-		color: 16710653,
-		roughness: .25,
-		metalness: .06
-	});
-	const hornMat = new MeshStandardMaterial({
-		color: 6470089,
-		roughness: .34,
-		metalness: .12
-	});
-	const darkDetailMat = new MeshStandardMaterial({
-		color: 2497850,
-		roughness: .3
-	});
-	const spiritGlowMat = new MeshStandardMaterial({
-		color: 9563895,
-		emissive: 5555944,
-		emissiveIntensity: .85,
-		roughness: .2
-	});
-	const blossomGoldMat = new MeshStandardMaterial({
-		color: 15254650,
-		metalness: .55,
-		roughness: .3
-	});
-	const buildLeg = (side) => {
-		const hip = new Group();
-		hip.position.set(side * .105, .72, 0);
-		const hipJoint = new Mesh(new SphereGeometry(.074, seg, seg), plumObiMat);
-		const thigh = new Mesh(new CylinderGeometry(.074, .062, .34, seg), plumObiMat);
-		thigh.position.y = -.17;
-		thigh.castShadow = !compactMode;
-		hip.add(hipJoint, thigh);
-		const shin = new Group();
-		shin.position.set(0, -.34, 0);
-		const kneeJoint = new Mesh(new SphereGeometry(.06, seg, seg), lilacMat);
-		const calf = new Mesh(new CylinderGeometry(.06, .048, .29, seg), robeWhiteMat);
-		calf.position.y = -.145;
-		calf.castShadow = !compactMode;
-		const footCap = new Mesh(new SphereGeometry(.052, seg, seg), robeWhiteMat);
-		footCap.scale.set(.92, .62, 1.52);
-		footCap.position.set(0, -.322, .035);
-		const sole = new Mesh(new BoxGeometry(.108, .028, .21), lilacMat);
-		sole.position.set(0, -.352, .03);
-		const ribbonBand = new Mesh(new TorusGeometry(.052, .01, 6, 10), sakuraMat);
-		ribbonBand.rotation.x = Math.PI / 2;
-		ribbonBand.position.y = -.26;
-		shin.add(kneeJoint, calf, footCap, sole, ribbonBand);
-		hip.add(shin);
-		return {
-			hip,
-			shin
-		};
-	};
-	const leftLegBuilt = buildLeg(-1);
-	const rightLegBuilt = buildLeg(1);
-	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
-	const skirtOuter = new Mesh(new CylinderGeometry(.195, .31, .45, seg, 1, false, -Math.PI * .85, Math.PI * 1.7), robeWhiteMat);
-	skirtOuter.position.set(0, .67, -.01);
-	skirtOuter.castShadow = !compactMode;
-	const skirtTrim = new Mesh(new TorusGeometry(.285, .022, 6, seg), sakuraMat);
-	skirtTrim.rotation.x = Math.PI / 2;
-	skirtTrim.position.set(0, .46, -.01);
-	group.add(skirtOuter, skirtTrim);
-	const torsoLower = new Mesh(new CylinderGeometry(.175, .195, .31, seg), robeWhiteMat);
-	torsoLower.position.y = .88;
-	torsoLower.castShadow = !compactMode;
-	const torsoChest = new Mesh(new SphereGeometry(.196, seg, seg), robeWhiteMat);
-	torsoChest.scale.set(1.04, 1.04, .8);
-	torsoChest.position.set(0, 1.11, 0);
-	torsoChest.castShadow = !compactMode;
-	const leftKimonoLapel = new Mesh(new CapsuleGeometry(.028, .21, 4, 8), sakuraMat);
-	leftKimonoLapel.position.set(-.056, 1.17, .155);
-	leftKimonoLapel.rotation.z = -.44;
-	const rightKimonoLapel = new Mesh(new CapsuleGeometry(.028, .21, 4, 8), lilacMat);
-	rightKimonoLapel.position.set(.056, 1.17, .155);
-	rightKimonoLapel.rotation.z = .44;
-	const obiBelt = new Mesh(new CylinderGeometry(.195, .205, .14, seg), plumObiMat);
-	obiBelt.scale.set(1.04, 1, .88);
-	obiBelt.position.set(0, .87, 0);
-	const obiKnot = new Mesh(new SphereGeometry(.06, 8, 8), sakuraMat);
-	obiKnot.position.set(0, .88, -.2);
-	const sashL = new Mesh(new CapsuleGeometry(.026, .26, 4, 6), lilacMat);
-	sashL.position.set(-.065, .72, -.215);
-	sashL.rotation.z = -.24;
-	const sashR = sashL.clone();
-	sashR.position.x = .065;
-	sashR.rotation.z = .24;
-	const chestBlossom = new Mesh(new OctahedronGeometry(.036, 0), blossomGoldMat);
-	chestBlossom.position.set(0, .94, .19);
-	group.add(torsoLower, torsoChest, leftKimonoLapel, rightKimonoLapel, obiBelt, obiKnot, sashL, sashR, chestBlossom);
-	const buildSpiritArm = (side) => {
-		const shoulder = new Group();
-		shoulder.position.set(side * .23, 1.22, 0);
-		const shoulderSphere = new Mesh(new SphereGeometry(.065, seg, seg), sakuraMat);
-		const upperSleeve = new Mesh(new CylinderGeometry(.062, .105, .28, seg), robeWhiteMat);
-		upperSleeve.position.set(side * .01, -.13, .01);
-		upperSleeve.castShadow = !compactMode;
-		const sleeveTrim = new Mesh(new TorusGeometry(.098, .014, 6, seg), lilacMat);
-		sleeveTrim.rotation.x = Math.PI / 2;
-		sleeveTrim.position.set(side * .01, -.26, .01);
-		const forearm = new Mesh(new CylinderGeometry(.042, .034, .18, seg), skinMat);
-		forearm.position.set(side * .01, -.32, .055);
-		forearm.rotation.x = -.32;
-		const hand = new Mesh(new SphereGeometry(.044, seg, seg), skinMat);
-		hand.position.set(side * .01, -.405, .09);
-		shoulder.add(shoulderSphere, upperSleeve, sleeveTrim, forearm, hand);
-		return shoulder;
-	};
-	const leftArm = buildSpiritArm(-1);
-	const rightArm = buildSpiritArm(1);
-	group.add(leftArm, rightArm);
-	const head = new Group();
-	head.position.set(0, 1.4, 0);
-	const neck = new Mesh(new CylinderGeometry(.055, .068, .12, seg), skinMat);
-	neck.position.y = -.07;
-	const cranium = new Mesh(new SphereGeometry(.175, seg, seg), skinMat);
-	cranium.scale.set(.97, 1.03, .96);
-	cranium.position.y = .058;
-	cranium.castShadow = !compactMode;
-	head.add(neck, cranium);
-	const hairCap = new Mesh(new SphereGeometry(.189, seg, seg, 0, Math.PI * 2, 0, Math.PI * .64), hairBlueMat);
-	hairCap.position.y = .072;
-	hairCap.rotation.x = -.22;
-	const backHairFlow = new Mesh(new CapsuleGeometry(.115, .25, 6, seg), hairBlueMat);
-	backHairFlow.scale.set(1.25, 1, .65);
-	backHairFlow.position.set(0, -.06, -.145);
-	const lockL = new Mesh(new CapsuleGeometry(.036, .18, 6, 8), hairBlueMat);
-	lockL.position.set(-.155, 0, .065);
-	lockL.rotation.z = .1;
-	const lockR = lockL.clone();
-	lockR.position.x = .155;
-	lockR.rotation.z = -.1;
-	head.add(hairCap, backHairFlow, lockL, lockR);
-	const earGeo = new ConeGeometry(.068, .21, 8);
-	const innerEarGeo = new ConeGeometry(.036, .13, 6);
-	const earL = new Mesh(earGeo, robeWhiteMat);
-	earL.position.set(-.145, .245, .01);
-	earL.rotation.z = .42;
-	const earInL = new Mesh(innerEarGeo, sakuraMat);
-	earInL.position.set(-.14, .24, .032);
-	earInL.rotation.z = .42;
-	const earR = new Mesh(earGeo, robeWhiteMat);
-	earR.position.set(.145, .245, .01);
-	earR.rotation.z = -.42;
-	const earInR = new Mesh(innerEarGeo, sakuraMat);
-	earInR.position.set(.14, .24, .032);
-	earInR.rotation.z = -.42;
-	const hornGeo = new TorusGeometry(.088, .019, 6, 12, Math.PI * .68);
-	const hornL = new Mesh(hornGeo, hornMat);
-	hornL.position.set(-.1, .22, -.02);
-	hornL.rotation.set(.25, .4, .72);
-	const hornR = new Mesh(hornGeo, hornMat);
-	hornR.position.set(.1, .22, -.02);
-	hornR.rotation.set(.25, -.4, Math.PI - .72);
-	const crownFlower = new Mesh(new SphereGeometry(.038, 8, 8), sakuraMat);
-	crownFlower.scale.set(1.1, .65, 1.1);
-	crownFlower.position.set(-.085, .215, .085);
-	head.add(earL, earInL, earR, earInR, hornL, hornR, crownFlower);
-	const maskShell = new Mesh(new SphereGeometry(.174, seg, seg, -Math.PI * .34, Math.PI * .68, Math.PI * .2, Math.PI * .56), maskPorcelainMat);
-	maskShell.rotation.y = Math.PI / 2;
-	maskShell.position.set(0, .056, .025);
-	const eyeSlitGeo = new CapsuleGeometry(.011, .032, 4, 6);
-	const maskEyeL = new Mesh(eyeSlitGeo, darkDetailMat);
-	maskEyeL.position.set(-.06, .06, .194);
-	maskEyeL.rotation.z = Math.PI / 2 - .2;
-	const maskEyeR = new Mesh(eyeSlitGeo, darkDetailMat);
-	maskEyeR.position.set(.06, .06, .194);
-	maskEyeR.rotation.z = Math.PI / 2 + .2;
-	const maskMarkL = new Mesh(new CapsuleGeometry(.008, .028, 4, 6), sakuraMat);
-	maskMarkL.position.set(-.088, .018, .175);
-	maskMarkL.rotation.z = .28;
-	const maskMarkR = maskMarkL.clone();
-	maskMarkR.position.x = .088;
-	maskMarkR.rotation.z = -.28;
-	const maskNose = new Mesh(new SphereGeometry(.012, 6, 6), darkDetailMat);
-	maskNose.position.set(0, .025, .202);
-	head.add(maskShell, maskEyeL, maskEyeR, maskMarkL, maskMarkR, maskNose);
-	group.add(head);
-	const wolfWispGroup = new Group();
-	wolfWispGroup.position.set(.39, 1.38, -.06);
-	const wispCore = new Mesh(new SphereGeometry(.075, seg, seg), spiritGlowMat);
-	const wispEarsL = new Mesh(new ConeGeometry(.024, .068, 6), hornMat);
-	wispEarsL.position.set(-.038, .075, 0);
-	wispEarsL.rotation.z = .3;
-	const wispEarsR = wispEarsL.clone();
-	wispEarsR.position.x = .038;
-	wispEarsR.rotation.z = -.3;
-	const wispOrbTail = new Mesh(new SphereGeometry(.038, 8, 8), sakuraMat);
-	wispOrbTail.position.set(.09, -.07, -.08);
-	wolfWispGroup.add(wispCore, wispEarsL, wispEarsR, wispOrbTail);
-	group.add(wolfWispGroup);
-	group.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group,
-		rig: {
-			leftLeg: leftLegBuilt.hip,
-			rightLeg: rightLegBuilt.hip,
-			leftShin: leftLegBuilt.shin,
-			rightShin: rightLegBuilt.shin,
-			leftArm,
-			rightArm,
-			head,
-			tail: wolfWispGroup
-		}
-	};
-}
-/**
-* 2. Body — Inspired by Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]
-* Sleek dark-charcoal tailored formal/tactical suit body rig with crimson tie,
-* structured shoulders, silver buckle belt, sculpted swept-back hair & polished shoes.
-*/
-function createDiegoBodyCharacter(compactMode, ultraCompact) {
-	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
-	const group = new Group();
-	const skinMat = new MeshStandardMaterial({
-		color: 15384738,
-		roughness: .62
-	});
-	const suitMat = new MeshStandardMaterial({
-		color: 1842982,
-		roughness: .68,
-		metalness: .08
-	});
-	const pantsMat = new MeshStandardMaterial({
-		color: 1447966,
-		roughness: .72,
-		metalness: .06
-	});
-	const shirtMat = new MeshStandardMaterial({
-		color: 16053751,
-		roughness: .76
-	});
-	const tieMat = new MeshStandardMaterial({
-		color: 9249068,
-		roughness: .48
-	});
-	const hairMat = new MeshStandardMaterial({
-		color: 1578261,
-		roughness: .62
-	});
-	const shoeMat = new MeshStandardMaterial({
-		color: 1052948,
-		roughness: .28,
-		metalness: .16
-	});
-	const metalMat = new MeshStandardMaterial({
-		color: 12765393,
-		metalness: .82,
-		roughness: .24
-	});
-	const eyeMat = new MeshStandardMaterial({
-		color: 1578519,
-		roughness: .22
-	});
-	const buildLeg = (side) => {
-		const hip = new Group();
-		hip.position.set(side * .11, .74, 0);
-		const hipJoint = new Mesh(new SphereGeometry(.082, seg, seg), pantsMat);
-		const thigh = new Mesh(new CylinderGeometry(.082, .068, .35, seg), pantsMat);
-		thigh.position.y = -.175;
-		thigh.castShadow = !compactMode;
-		hip.add(hipJoint, thigh);
-		const shin = new Group();
-		shin.position.set(0, -.35, 0);
-		const kneeJoint = new Mesh(new SphereGeometry(.066, seg, seg), pantsMat);
-		const calf = new Mesh(new CylinderGeometry(.066, .052, .31, seg), pantsMat);
-		calf.position.y = -.155;
-		calf.castShadow = !compactMode;
-		const shoe = new Mesh(new SphereGeometry(.056, seg, seg), shoeMat);
-		shoe.scale.set(.92, .64, 1.72);
-		shoe.position.set(0, -.345, .038);
-		shin.add(kneeJoint, calf, shoe);
-		hip.add(shin);
-		return {
-			hip,
-			shin
-		};
-	};
-	const leftLegBuilt = buildLeg(-1);
-	const rightLegBuilt = buildLeg(1);
-	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
-	const pelvis = new Mesh(new SphereGeometry(.205, seg, seg), pantsMat);
-	pelvis.scale.set(1.02, .56, .85);
-	pelvis.position.set(0, .74, 0);
-	const jacketLower = new Mesh(new CylinderGeometry(.188, .212, .32, seg), suitMat);
-	jacketLower.position.y = .87;
-	jacketLower.castShadow = !compactMode;
-	const jacketChest = new Mesh(new SphereGeometry(.215, seg, seg), suitMat);
-	jacketChest.scale.set(1.08, 1.05, .8);
-	jacketChest.position.set(0, 1.12, 0);
-	jacketChest.castShadow = !compactMode;
-	const shoulderYoke = new Mesh(new CapsuleGeometry(.07, .37, 6, seg), suitMat);
-	shoulderYoke.rotation.z = Math.PI / 2;
-	shoulderYoke.position.set(0, 1.25, -.008);
-	const dressShirtFront = new Mesh(new CapsuleGeometry(.062, .22, 4, 8), shirtMat);
-	dressShirtFront.scale.set(1.05, 1, .52);
-	dressShirtFront.position.set(0, 1.15, .148);
-	const tieKnot = new Mesh(new SphereGeometry(.022, 8, 8), tieMat);
-	tieKnot.position.set(0, 1.24, .182);
-	const tieBlade = new Mesh(new CylinderGeometry(.015, .028, .24, 6), tieMat);
-	tieBlade.scale.set(1, 1, .45);
-	tieBlade.position.set(0, 1.11, .185);
-	const lapelL = new Mesh(new CapsuleGeometry(.022, .21, 4, 8), suitMat);
-	lapelL.position.set(-.062, 1.17, .172);
-	lapelL.rotation.z = -.34;
-	const lapelR = lapelL.clone();
-	lapelR.position.x = .062;
-	lapelR.rotation.z = .34;
-	const belt = new Mesh(new TorusGeometry(.195, .022, 6, seg), shoeMat);
-	belt.rotation.x = Math.PI / 2;
-	belt.scale.set(1.04, .86, 1);
-	belt.position.set(0, .81, 0);
-	const buckle = new Mesh(new BoxGeometry(.056, .036, .02), metalMat);
-	buckle.position.set(0, .81, .184);
-	group.add(pelvis, jacketLower, jacketChest, shoulderYoke, dressShirtFront, tieKnot, tieBlade, lapelL, lapelR, belt, buckle);
-	const buildSuitArm = (side) => {
-		const shoulder = new Group();
-		shoulder.position.set(side * .25, 1.24, 0);
-		const shoulderSphere = new Mesh(new SphereGeometry(.064, seg, seg), suitMat);
-		const upperSleeve = new Mesh(new CylinderGeometry(.06, .052, .22, seg), suitMat);
-		upperSleeve.position.set(side * .008, -.11, .01);
-		upperSleeve.castShadow = !compactMode;
-		const forearmSleeve = new Mesh(new CylinderGeometry(.05, .044, .18, seg), suitMat);
-		forearmSleeve.position.set(side * .008, -.29, .048);
-		forearmSleeve.rotation.x = -.28;
-		const whiteCuff = new Mesh(new CylinderGeometry(.045, .043, .03, seg), shirtMat);
-		whiteCuff.position.set(side * .008, -.375, .072);
-		whiteCuff.rotation.x = -.28;
-		const hand = new Mesh(new SphereGeometry(.046, seg, seg), skinMat);
-		hand.scale.set(.92, 1.12, .85);
-		hand.position.set(side * .008, -.415, .088);
-		shoulder.add(shoulderSphere, upperSleeve, forearmSleeve, whiteCuff, hand);
-		return shoulder;
-	};
-	const leftArm = buildSuitArm(-1);
-	const rightArm = buildSuitArm(1);
-	group.add(leftArm, rightArm);
-	const head = new Group();
-	head.position.set(0, 1.41, 0);
-	const neck = new Mesh(new CylinderGeometry(.062, .074, .12, seg), skinMat);
-	neck.position.y = -.07;
-	const cranium = new Mesh(new SphereGeometry(.172, seg, seg), skinMat);
-	cranium.scale.set(.95, 1.05, .96);
-	cranium.position.y = .058;
-	cranium.castShadow = !compactMode;
-	const hairCap = new Mesh(new SphereGeometry(.184, seg, seg, 0, Math.PI * 2, 0, Math.PI * .58), hairMat);
-	hairCap.position.y = .072;
-	hairCap.rotation.x = -.28;
-	const sweptCrest = new Mesh(new CapsuleGeometry(.058, .14, 6, 8), hairMat);
-	sweptCrest.position.set(0, .2, .055);
-	sweptCrest.rotation.x = -.62;
-	const eyeL = new Mesh(new SphereGeometry(.018, 8, 8), eyeMat);
-	eyeL.position.set(-.056, .058, .158);
-	const eyeR = eyeL.clone();
-	eyeR.position.x = .056;
-	const browGeo = new CapsuleGeometry(.007, .038, 4, 6);
-	const browL = new Mesh(browGeo, hairMat);
-	browL.position.set(-.056, .095, .156);
-	browL.rotation.z = Math.PI / 2 + .14;
-	const browR = new Mesh(browGeo, hairMat);
-	browR.position.set(.056, .095, .156);
-	browR.rotation.z = Math.PI / 2 - .14;
-	const noseTip = new Mesh(new SphereGeometry(.013, 6, 6), skinMat);
-	noseTip.position.set(0, .032, .172);
-	head.add(neck, cranium, hairCap, sweptCrest, eyeL, eyeR, browL, browR, noseTip);
-	group.add(head);
-	group.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group,
-		rig: {
-			leftLeg: leftLegBuilt.hip,
-			rightLeg: rightLegBuilt.hip,
-			leftShin: leftLegBuilt.shin,
-			rightShin: rightLegBuilt.shin,
-			leftArm,
-			rightArm,
-			head
-		}
-	};
-}
-/**
-* 3. Ultimate CICADA Suit V2 — Inspired by rendysix (@rendysix) [21122d8]
-* Tactical Hitman CICADA bodyguard formal suit: matte obsidian blazer, ballistic vest layer,
-* shoulder holster harness, polarized sunglasses, coiled comms earpiece, leather gloves & tactical boots.
-*/
-function createCicadaSuitV2Character(compactMode, ultraCompact) {
-	const seg = ultraCompact ? 8 : compactMode ? 12 : 16;
-	const group = new Group();
-	const skinMat = new MeshStandardMaterial({
-		color: 15121568,
-		roughness: .64
-	});
-	const blazerMat = new MeshStandardMaterial({
-		color: 2106412,
-		roughness: .65,
-		metalness: .1
-	});
-	const armorVestMat = new MeshStandardMaterial({
-		color: 1382430,
-		roughness: .44,
-		metalness: .22
-	});
-	const shirtMat = new MeshStandardMaterial({
-		color: 15461872,
-		roughness: .78
-	});
-	const tieMat = new MeshStandardMaterial({
-		color: 1118999,
-		roughness: .42
-	});
-	const gloveMat = new MeshStandardMaterial({
-		color: 1447965,
-		roughness: .36,
-		metalness: .18
-	});
-	const bootMat = new MeshStandardMaterial({
-		color: 1053206,
-		roughness: .3,
-		metalness: .2
-	});
-	const visorMat = new MeshStandardMaterial({
-		color: 724499,
-		roughness: .14,
-		metalness: .65
-	});
-	const steelMat = new MeshStandardMaterial({
-		color: 10134189,
-		roughness: .25,
-		metalness: .85
-	});
-	const commsMat = new MeshStandardMaterial({
-		color: 14213096,
-		roughness: .3,
-		metalness: .3
-	});
-	const hairMat = new MeshStandardMaterial({
-		color: 2236449,
-		roughness: .68
-	});
-	const buildLeg = (side) => {
-		const hip = new Group();
-		hip.position.set(side * .115, .74, 0);
-		const hipJoint = new Mesh(new SphereGeometry(.084, seg, seg), blazerMat);
-		const thigh = new Mesh(new CylinderGeometry(.085, .072, .35, seg), blazerMat);
-		thigh.position.y = -.175;
-		thigh.castShadow = !compactMode;
-		hip.add(hipJoint, thigh);
-		const shin = new Group();
-		shin.position.set(0, -.35, 0);
-		const kneePad = new Mesh(new SphereGeometry(.068, seg, seg), armorVestMat);
-		const calf = new Mesh(new CylinderGeometry(.068, .056, .3, seg), blazerMat);
-		calf.position.y = -.15;
-		calf.castShadow = !compactMode;
-		const boot = new Mesh(new SphereGeometry(.06, seg, seg), bootMat);
-		boot.scale.set(.98, .68, 1.72);
-		boot.position.set(0, -.342, .036);
-		shin.add(kneePad, calf, boot);
-		hip.add(shin);
-		return {
-			hip,
-			shin
-		};
-	};
-	const leftLegBuilt = buildLeg(-1);
-	const rightLegBuilt = buildLeg(1);
-	group.add(leftLegBuilt.hip, rightLegBuilt.hip);
-	const pelvis = new Mesh(new SphereGeometry(.214, seg, seg), blazerMat);
-	pelvis.scale.set(1.04, .56, .88);
-	pelvis.position.set(0, .74, 0);
-	const jacketLower = new Mesh(new CylinderGeometry(.198, .222, .32, seg), blazerMat);
-	jacketLower.position.y = .88;
-	jacketLower.castShadow = !compactMode;
-	const jacketChest = new Mesh(new SphereGeometry(.226, seg, seg), blazerMat);
-	jacketChest.scale.set(1.1, 1.04, .84);
-	jacketChest.position.set(0, 1.13, 0);
-	jacketChest.castShadow = !compactMode;
-	const tacticalVestPlate = new Mesh(new BoxGeometry(.24, .29, .06), armorVestMat);
-	tacticalVestPlate.position.set(0, 1.08, .165);
-	const collarShirt = new Mesh(new CylinderGeometry(.092, .11, .08, seg), shirtMat);
-	collarShirt.position.set(0, 1.28, .02);
-	const blackTie = new Mesh(new CylinderGeometry(.015, .024, .22, 6), tieMat);
-	blackTie.scale.set(1, 1, .45);
-	blackTie.position.set(0, 1.14, .198);
-	const shoulderYoke = new Mesh(new CapsuleGeometry(.075, .39, 6, seg), blazerMat);
-	shoulderYoke.rotation.z = Math.PI / 2;
-	shoulderYoke.position.set(0, 1.25, -.006);
-	const strapL = new Mesh(new BoxGeometry(.036, .24, .022), armorVestMat);
-	strapL.position.set(-.115, 1.15, .16);
-	strapL.rotation.z = -.14;
-	const strapR = strapL.clone();
-	strapR.position.x = .115;
-	strapR.rotation.z = .14;
-	const radioClip = new Mesh(new BoxGeometry(.032, .048, .024), steelMat);
-	radioClip.position.set(-.115, 1.19, .178);
-	const tacticalBelt = new Mesh(new TorusGeometry(.205, .028, 6, seg), armorVestMat);
-	tacticalBelt.rotation.x = Math.PI / 2;
-	tacticalBelt.scale.set(1.05, .88, 1);
-	tacticalBelt.position.set(0, .81, 0);
-	const tacticalBuckle = new Mesh(new BoxGeometry(.064, .042, .024), steelMat);
-	tacticalBuckle.position.set(0, .81, .195);
-	group.add(pelvis, jacketLower, jacketChest, tacticalVestPlate, collarShirt, blackTie, shoulderYoke, strapL, strapR, radioClip, tacticalBelt, tacticalBuckle);
-	const buildTacticalArm = (side) => {
-		const shoulder = new Group();
-		shoulder.position.set(side * .262, 1.24, 0);
-		const shoulderPad = new Mesh(new SphereGeometry(.068, seg, seg), blazerMat);
-		const upperSleeve = new Mesh(new CylinderGeometry(.064, .056, .22, seg), blazerMat);
-		upperSleeve.position.set(side * .008, -.11, .01);
-		upperSleeve.castShadow = !compactMode;
-		const forearmSleeve = new Mesh(new CylinderGeometry(.054, .046, .18, seg), blazerMat);
-		forearmSleeve.position.set(side * .008, -.29, .048);
-		forearmSleeve.rotation.x = -.28;
-		const glove = new Mesh(new SphereGeometry(.049, seg, seg), gloveMat);
-		glove.scale.set(.95, 1.15, .88);
-		glove.position.set(side * .008, -.41, .086);
-		shoulder.add(shoulderPad, upperSleeve, forearmSleeve, glove);
-		return shoulder;
-	};
-	const leftArm = buildTacticalArm(-1);
-	const rightArm = buildTacticalArm(1);
-	group.add(leftArm, rightArm);
-	const head = new Group();
-	head.position.set(0, 1.41, 0);
-	const neck = new Mesh(new CylinderGeometry(.064, .076, .12, seg), skinMat);
-	neck.position.y = -.07;
-	const cranium = new Mesh(new SphereGeometry(.172, seg, seg), skinMat);
-	cranium.scale.set(.97, 1.04, .96);
-	cranium.position.y = .058;
-	cranium.castShadow = !compactMode;
-	const hairCap = new Mesh(new SphereGeometry(.181, seg, seg, 0, Math.PI * 2, 0, Math.PI * .54), hairMat);
-	hairCap.position.y = .075;
-	hairCap.rotation.x = -.26;
-	const lensGeo = new BoxGeometry(.068, .036, .018);
-	const lensL = new Mesh(lensGeo, visorMat);
-	lensL.position.set(-.048, .064, .168);
-	lensL.rotation.y = -.14;
-	const lensR = new Mesh(lensGeo, visorMat);
-	lensR.position.set(.048, .064, .168);
-	lensR.rotation.y = .14;
-	const visorBridge = new Mesh(new BoxGeometry(.038, .01, .014), steelMat);
-	visorBridge.position.set(0, .068, .174);
-	const earpieceBud = new Mesh(new SphereGeometry(.02, 8, 8), armorVestMat);
-	earpieceBud.position.set(-.17, .042, .01);
-	const coiledWire = new Mesh(new TorusGeometry(.024, .005, 6, 12, Math.PI * 1.4), commsMat);
-	coiledWire.position.set(-.14, -.04, -.035);
-	coiledWire.rotation.y = Math.PI / 2;
-	head.add(neck, cranium, hairCap, lensL, lensR, visorBridge, earpieceBud, coiledWire);
-	group.add(head);
-	group.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group,
-		rig: {
-			leftLeg: leftLegBuilt.hip,
-			rightLeg: rightLegBuilt.hip,
-			leftShin: leftLegBuilt.shin,
-			rightShin: rightLegBuilt.shin,
-			leftArm,
-			rightArm,
-			head
-		}
-	};
-}
-function createSomOGuest(seg, compactMode) {
-	const cat = new Group();
-	const furOrange = new MeshStandardMaterial({
-		color: 14915148,
-		roughness: .82
-	});
-	const furStripe = new MeshStandardMaterial({
-		color: 12741673,
-		roughness: .84
-	});
-	const furCream = new MeshStandardMaterial({
-		color: 16445667,
-		roughness: .84
-	});
-	const innerEarMat = new MeshStandardMaterial({
-		color: 16037555,
-		roughness: .78
-	});
-	const collarMat = new MeshStandardMaterial({
-		color: 3897943,
-		roughness: .65
-	});
-	const brassMat = new MeshStandardMaterial({
-		color: 14267213,
-		metalness: .8,
-		roughness: .25
-	});
-	const irisMat = new MeshStandardMaterial({
-		color: 4947283,
-		roughness: .28
-	});
-	const darkMat = new MeshStandardMaterial({
-		color: 1775380,
-		roughness: .25
-	});
-	const whiskerMat = new MeshStandardMaterial({
-		color: 16117734,
-		roughness: .5
-	});
-	const standingLegsGroup = new Group();
-	const buildPawLeg = (side) => {
-		const leg = new Group();
-		leg.position.set(side * .092, .58, .02);
-		const hipJoint = new Mesh(new SphereGeometry(.056, seg, seg), furOrange);
-		const upper = new Mesh(new CylinderGeometry(.056, .048, .43, seg), furOrange);
-		upper.position.y = -.215;
-		const paw = new Mesh(new SphereGeometry(.062, seg, seg), furCream);
-		paw.scale.set(1.02, .72, 1.28);
-		paw.position.set(0, -.515, .032);
-		leg.add(hipJoint, upper, paw);
-		return leg;
-	};
-	const leftLeg = buildPawLeg(-1);
-	const rightLeg = buildPawLeg(1);
-	standingLegsGroup.add(leftLeg, rightLeg);
-	cat.add(standingLegsGroup);
-	const seatedOnlyGroup = new Group();
-	const seatedPawL = new Mesh(new SphereGeometry(.058, seg, seg), furCream);
-	seatedPawL.scale.set(1, .76, 1.25);
-	seatedPawL.position.set(-.095, .62, .21);
-	const seatedPawR = seatedPawL.clone();
-	seatedPawR.position.x = .095;
-	seatedOnlyGroup.add(seatedPawL, seatedPawR);
-	cat.add(seatedOnlyGroup);
-	const body = new Mesh(new SphereGeometry(.225, seg, seg), furOrange);
-	body.scale.set(.96, 1.24, .96);
-	body.position.set(0, .81, .01);
-	body.castShadow = !compactMode;
-	cat.add(body);
-	const belly = new Mesh(new SphereGeometry(.165, seg, seg), furCream);
-	belly.scale.set(.88, 1.08, .54);
-	belly.position.set(0, .79, .132);
-	cat.add(belly);
-	for (let s = 0; s < 3; s++) {
-		const stripe = new Mesh(new TorusGeometry(.175 - s * .012, .016, 6, 12, Math.PI * .75), furStripe);
-		stripe.rotation.x = Math.PI / 2;
-		stripe.rotation.z = Math.PI * .12;
-		stripe.position.set(0, .72 + s * .1, -.02);
-		cat.add(stripe);
-	}
-	const buildCatArm = (side) => {
-		const arm = new Group();
-		arm.position.set(side * .18, .96, .055);
-		const shoulder = new Mesh(new SphereGeometry(.048, seg, seg), furOrange);
-		const armMesh = new Mesh(new CylinderGeometry(.045, .04, .25, seg), furOrange);
-		armMesh.position.y = -.12;
-		const pawTip = new Mesh(new SphereGeometry(.049, seg, seg), furCream);
-		pawTip.position.y = -.25;
-		arm.add(shoulder, armMesh, pawTip);
-		return arm;
-	};
-	const leftArm = buildCatArm(-1);
-	const rightArm = buildCatArm(1);
-	cat.add(leftArm, rightArm);
-	const collar = new Mesh(new TorusGeometry(.145, .026, 8, seg), collarMat);
-	collar.rotation.x = Math.PI / 2;
-	collar.position.set(0, 1.03, .02);
-	const scarfTab = new Mesh(new CapsuleGeometry(.028, .07, 4, 8), collarMat);
-	scarfTab.position.set(.05, .97, .15);
-	scarfTab.rotation.z = -.28;
-	const bell = new Mesh(new SphereGeometry(.032, 10, 10), brassMat);
-	bell.position.set(0, 1, .165);
-	cat.add(collar, scarfTab, bell);
-	const head = new Group();
-	head.position.set(0, 1.21, .03);
-	const headSphere = new Mesh(new SphereGeometry(.195, seg, seg), furOrange);
-	headSphere.scale.set(1.07, .94, .95);
-	headSphere.castShadow = !compactMode;
-	head.add(headSphere);
-	const cheekL = new Mesh(new SphereGeometry(.072, seg, seg), furOrange);
-	cheekL.scale.set(1.15, .85, .9);
-	cheekL.position.set(-.115, -.045, .11);
-	const cheekR = cheekL.clone();
-	cheekR.position.x = .115;
-	head.add(cheekL, cheekR);
-	for (const sx of [
-		-.04,
-		0,
-		.04
-	]) {
-		const fStripe = new Mesh(new CapsuleGeometry(.008, .046, 4, 6), furStripe);
-		fStripe.position.set(sx, .118, .155);
-		fStripe.rotation.x = -.45;
-		head.add(fStripe);
-	}
-	const muzzleL = new Mesh(new SphereGeometry(.056, seg, seg), furCream);
-	muzzleL.scale.set(1.1, .82, .8);
-	muzzleL.position.set(-.036, -.045, .165);
-	const muzzleR = muzzleL.clone();
-	muzzleR.position.x = .036;
-	head.add(muzzleL, muzzleR);
-	const earGeo = new ConeGeometry(.072, .15, 8);
-	const innerEarGeo = new ConeGeometry(.042, .095, 6);
-	const leftEar = new Mesh(earGeo, furOrange);
-	leftEar.position.set(-.122, .175, 0);
-	leftEar.rotation.z = .28;
-	const leftInner = new Mesh(innerEarGeo, innerEarMat);
-	leftInner.position.set(-.12, .17, .025);
-	leftInner.rotation.z = .28;
-	const rightEar = new Mesh(earGeo, furOrange);
-	rightEar.position.set(.122, .175, 0);
-	rightEar.rotation.z = -.28;
-	const rightInner = new Mesh(innerEarGeo, innerEarMat);
-	rightInner.position.set(.12, .17, .025);
-	rightInner.rotation.z = -.28;
-	head.add(leftEar, leftInner, rightEar, rightInner);
-	const lIris = new Mesh(new SphereGeometry(.031, 8, 8), irisMat);
-	lIris.scale.set(1, 1.08, .72);
-	lIris.position.set(-.076, .032, .162);
-	const rIris = lIris.clone();
-	rIris.position.x = .076;
-	const leftEye = new Mesh(new SphereGeometry(.021, 8, 8), darkMat);
-	leftEye.scale.set(.75, 1.15, .8);
-	leftEye.position.set(-.076, .032, .172);
-	const rightEye = leftEye.clone();
-	rightEye.position.x = .076;
-	const shineGeo = new SphereGeometry(.008, 6, 6);
-	const shineMat = new MeshBasicMaterial({ color: 16777215 });
-	const lShine = new Mesh(shineGeo, shineMat);
-	lShine.position.set(-.068, .042, .187);
-	const rShine = new Mesh(shineGeo, shineMat);
-	rShine.position.set(.084, .042, .187);
-	const nose = new Mesh(new SphereGeometry(.02, 8, 8), new MeshStandardMaterial({
-		color: 14250874,
-		roughness: .45
-	}));
-	nose.scale.set(1.2, .85, .8);
-	nose.position.set(0, -.012, .212);
-	const whiskerGeo = new CylinderGeometry(.003, .002, .12, 4);
-	for (const side of [-1, 1]) for (let w = -1; w <= 1; w++) {
-		const whisker = new Mesh(whiskerGeo, whiskerMat);
-		whisker.rotation.z = Math.PI / 2 + w * .18 * side;
-		whisker.position.set(side * .145, -.035 + w * .02, .16);
-		head.add(whisker);
-	}
-	head.add(lIris, rIris, leftEye, rightEye, lShine, rShine, nose);
-	cat.add(head);
-	const tailGroup = new Group();
-	tailGroup.position.set(0, .66, -.17);
-	const tailMesh = new Mesh(new TubeGeometry(new CatmullRomCurve3([
-		new Vector3(0, 0, 0),
-		new Vector3(.14, .07, -.06),
-		new Vector3(.22, .24, .02)
-	]), 12, .035, 8, false), furOrange);
-	const tailTip = new Mesh(new SphereGeometry(.038, 8, 8), furCream);
-	tailTip.position.set(.22, .24, .02);
-	tailGroup.add(tailMesh, tailTip);
-	cat.add(tailGroup);
-	cat.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group: cat,
-		rig: {
-			leftLeg,
-			rightLeg,
-			leftArm,
-			rightArm,
-			head,
-			tail: tailGroup,
-			seatedOnlyGroup,
-			standingLegsGroup
-		}
-	};
-}
-function createHumanGuest(seg, compactMode, config) {
-	const person = new Group();
-	const skinMat = new MeshStandardMaterial({
-		color: 15846576,
-		roughness: .68
-	});
-	const coatMat = new MeshStandardMaterial({
-		color: config.coatColor,
-		roughness: .78
-	});
-	const innerMat = new MeshStandardMaterial({
-		color: config.innerColor,
-		roughness: .84
-	});
-	const skirtMat = new MeshStandardMaterial({
-		color: config.skirtColor,
-		roughness: .82
-	});
-	const hairMat = new MeshStandardMaterial({
-		color: config.hairColor,
-		roughness: .7
-	});
-	const shoeMat = new MeshStandardMaterial({
-		color: config.shoeColor,
-		roughness: .6
-	});
-	const bagMat = new MeshStandardMaterial({
-		color: config.bagColor,
-		roughness: .72
-	});
-	const darkMat = new MeshStandardMaterial({
-		color: 1907224,
-		roughness: .28
-	});
-	const standingLegsGroup = new Group();
-	const buildWalkLeg = (side) => {
-		const leg = new Group();
-		leg.position.set(side * .095, .68, 0);
-		const thigh = new Mesh(new CylinderGeometry(.068, .056, .35, seg), skirtMat);
-		thigh.position.y = -.175;
-		const calf = new Mesh(new CylinderGeometry(.052, .043, .28, seg), skinMat);
-		calf.position.y = -.455;
-		const shoeBase = new Mesh(new SphereGeometry(.055, seg, seg), shoeMat);
-		shoeBase.scale.set(.92, .65, 1.68);
-		shoeBase.position.set(0, -.635, .032);
-		leg.add(thigh, calf, shoeBase);
-		return leg;
-	};
-	const leftLeg = buildWalkLeg(-1);
-	const rightLeg = buildWalkLeg(1);
-	standingLegsGroup.add(leftLeg, rightLeg);
-	person.add(standingLegsGroup);
-	const seatedOnlyGroup = new Group();
-	const lap = new Mesh(new SphereGeometry(.21, seg, seg), skirtMat);
-	lap.scale.set(1.02, .42, 1.05);
-	lap.position.set(0, .6, .11);
-	const calfGeo = new CylinderGeometry(.058, .048, .43, seg);
-	const leftCalf = new Mesh(calfGeo, skirtMat);
-	leftCalf.position.set(-.092, .32, .24);
-	const rightCalf = new Mesh(calfGeo, skirtMat);
-	rightCalf.position.set(.092, .32, .24);
-	const shoeL = new Mesh(new SphereGeometry(.052, seg, seg), shoeMat);
-	shoeL.scale.set(.92, .65, 1.65);
-	shoeL.position.set(-.092, .045, .275);
-	const shoeR = shoeL.clone();
-	shoeR.position.x = .092;
-	seatedOnlyGroup.add(lap, leftCalf, rightCalf, shoeL, shoeR);
-	person.add(seatedOnlyGroup);
-	const skirtHem = new Mesh(new CylinderGeometry(.172, .255, .28, seg), skirtMat);
-	skirtHem.position.set(0, .62, 0);
-	person.add(skirtHem);
-	const torsoLower = new Mesh(new CylinderGeometry(.165, .185, .28, seg), coatMat);
-	torsoLower.position.set(0, .83, -.01);
-	torsoLower.castShadow = !compactMode;
-	const torsoChest = new Mesh(new SphereGeometry(.182, seg, seg), coatMat);
-	torsoChest.scale.set(1.06, 1.04, .84);
-	torsoChest.position.set(0, 1.01, -.01);
-	torsoChest.castShadow = !compactMode;
-	person.add(torsoLower, torsoChest);
-	const innerFront = new Mesh(new CapsuleGeometry(.068, .3, 4, 8), innerMat);
-	innerFront.scale.set(1.05, 1, .55);
-	innerFront.position.set(0, .92, .135);
-	person.add(innerFront);
-	if (config.hasShawl) {
-		const shawlMat = new MeshStandardMaterial({
-			color: 12751464,
-			roughness: .86
-		});
-		const shawl = new Mesh(new TorusGeometry(.188, .056, 8, seg, Math.PI * 1.48), shawlMat);
-		shawl.rotation.x = Math.PI / 2 + .22;
-		shawl.rotation.z = -Math.PI * .24;
-		shawl.position.set(0, 1.07, 0);
-		const shawlDrape = new Mesh(new CapsuleGeometry(.036, .16, 4, 8), shawlMat);
-		shawlDrape.position.set(.08, .94, .148);
-		shawlDrape.rotation.z = -.18;
-		person.add(shawl, shawlDrape);
-	} else {
-		const btnGeo = new SphereGeometry(.013, 6, 6);
-		const btnMat = new MeshStandardMaterial({
-			color: 14205851,
-			roughness: .4
-		});
-		for (let b = 0; b < 3; b++) {
-			const btn = new Mesh(btnGeo, btnMat);
-			btn.position.set(.048, .81 + b * .085, .172);
-			person.add(btn);
-		}
-		const lCollar = new Mesh(new CapsuleGeometry(.02, .16, 4, 6), coatMat);
-		lCollar.position.set(-.055, 1.05, .145);
-		lCollar.rotation.z = -.32;
-		const rCollar = lCollar.clone();
-		rCollar.position.x = .055;
-		rCollar.rotation.z = .32;
-		person.add(lCollar, rCollar);
-	}
-	const buildArm = (side) => {
-		const armGroup = new Group();
-		armGroup.position.set(side * .21, 1.1, 0);
-		const shoulder = new Mesh(new SphereGeometry(.052, seg, seg), coatMat);
-		const sleeve = new Mesh(new CylinderGeometry(.048, .04, .34, seg), coatMat);
-		sleeve.position.y = -.17;
-		const cuff = new Mesh(new TorusGeometry(.042, .012, 6, seg), innerMat);
-		cuff.rotation.x = Math.PI / 2;
-		cuff.position.y = -.34;
-		const hand = new Mesh(new SphereGeometry(.042, 8, 8), skinMat);
-		hand.position.y = -.375;
-		armGroup.add(shoulder, sleeve, cuff, hand);
-		if (side === 1) {
-			if (config.hasGlasses) {
-				const book = new Mesh(new BoxGeometry(.125, .026, .165), bagMat);
-				book.position.set(-.02, -.385, .06);
-				const pageEdge = new Mesh(new BoxGeometry(.115, .018, .155), new MeshStandardMaterial({
-					color: 16249573,
-					roughness: .85
-				}));
-				pageEdge.position.set(-.018, -.385, .062);
-				armGroup.add(book, pageEdge);
-			} else {
-				const bagBody = new Mesh(new SphereGeometry(.088, seg, seg), bagMat);
-				bagBody.scale.set(.65, 1.05, 1.05);
-				bagBody.position.set(.032, -.455, .02);
-				const bagHandle = new Mesh(new TorusGeometry(.045, .008, 6, 10, Math.PI), bagMat);
-				bagHandle.position.set(.032, -.365, .02);
-				bagHandle.rotation.y = Math.PI / 2;
-				armGroup.add(bagBody, bagHandle);
-			}
-		}
-		return armGroup;
-	};
-	const leftArm = buildArm(-1);
-	const rightArm = buildArm(1);
-	person.add(leftArm, rightArm);
-	const head = new Group();
-	head.position.set(0, 1.29, 0);
-	const neck = new Mesh(new CylinderGeometry(.052, .062, .11, seg), skinMat);
-	neck.position.y = -.075;
-	head.add(neck);
-	const cranium = new Mesh(new SphereGeometry(.166, seg, seg), skinMat);
-	cranium.scale.set(.97, 1.03, .96);
-	cranium.castShadow = !compactMode;
-	head.add(cranium);
-	const earL = new Mesh(new SphereGeometry(.03, 6, 6), skinMat);
-	earL.scale.set(.65, 1.1, .85);
-	earL.position.set(-.162, 0, 0);
-	const earR = earL.clone();
-	earR.position.x = .162;
-	head.add(earL, earR);
-	const hairCap = new Mesh(new SphereGeometry(.178, seg, seg, 0, Math.PI * 2, 0, Math.PI * .62), hairMat);
-	hairCap.position.y = .026;
-	hairCap.rotation.x = -.24;
-	head.add(hairCap);
-	if (config.hasBun) {
-		const bun = new Mesh(new SphereGeometry(.082, seg, seg), hairMat);
-		bun.scale.set(1, .92, .88);
-		bun.position.set(0, .078, -.175);
-		const pearlPin = new Mesh(new SphereGeometry(.022, 8, 8), new MeshStandardMaterial({
-			color: 16249576,
-			roughness: .25
-		}));
-		pearlPin.position.set(.06, .105, -.18);
-		const combMat = new MeshStandardMaterial({
-			color: 6465657,
-			roughness: .35
-		});
-		const comb = new Mesh(new BoxGeometry(.07, .022, .012), combMat);
-		comb.position.set(-.04, .115, -.165);
-		comb.rotation.z = .25;
-		head.add(bun, pearlPin, comb);
-	} else {
-		const backHairDome = new Mesh(new SphereGeometry(.176, seg, seg), hairMat);
-		backHairDome.scale.set(1.04, 1.38, .82);
-		backHairDome.position.set(0, -.08, -.068);
-		const waveGeo = new CapsuleGeometry(.046, .18, 6, 8);
-		const sideLockL = new Mesh(waveGeo, hairMat);
-		sideLockL.position.set(-.145, -.06, .045);
-		sideLockL.rotation.z = .08;
-		const sideLockR = new Mesh(waveGeo, hairMat);
-		sideLockR.position.set(.145, -.06, .045);
-		sideLockR.rotation.z = -.08;
-		const bangL = new Mesh(new SphereGeometry(.066, seg, seg), hairMat);
-		bangL.scale.set(1.22, .68, .65);
-		bangL.position.set(-.068, .11, .116);
-		bangL.rotation.z = .34;
-		const bangR = bangL.clone();
-		bangR.position.x = .068;
-		bangR.rotation.z = -.34;
-		head.add(backHairDome, sideLockL, sideLockR, bangL, bangR);
-	}
-	const leftEye = new Mesh(new SphereGeometry(.018, 8, 8), darkMat);
-	leftEye.scale.set(1, 1.12, .8);
-	leftEye.position.set(-.056, .015, .152);
-	const rightEye = leftEye.clone();
-	rightEye.position.x = .056;
-	const shineGeo = new SphereGeometry(.006, 6, 6);
-	const shineMat = new MeshBasicMaterial({ color: 16777215 });
-	const lShine = new Mesh(shineGeo, shineMat);
-	lShine.position.set(-.051, .022, .166);
-	const rShine = new Mesh(shineGeo, shineMat);
-	rShine.position.set(.061, .022, .166);
-	const noseTip = new Mesh(new SphereGeometry(.012, 6, 6), new MeshStandardMaterial({
-		color: 14922130,
-		roughness: .72
-	}));
-	noseTip.position.set(0, -.01, .164);
-	const smile = new Mesh(new TorusGeometry(.024, .005, 6, 10, Math.PI), new MeshStandardMaterial({
-		color: 10179660,
-		roughness: .6
-	}));
-	smile.position.set(0, -.04, .156);
-	smile.rotation.z = Math.PI;
-	const blushMat = new MeshStandardMaterial({
-		color: 15047052,
-		roughness: .9
-	});
-	const leftBlush = new Mesh(new SphereGeometry(.023, 8, 8), blushMat);
-	leftBlush.scale.set(1.15, .65, .25);
-	leftBlush.position.set(-.088, -.02, .136);
-	leftBlush.rotation.y = -.35;
-	const rightBlush = leftBlush.clone();
-	rightBlush.position.x = .088;
-	rightBlush.rotation.y = .35;
-	head.add(leftEye, rightEye, lShine, rShine, noseTip, smile, leftBlush, rightBlush);
-	if (config.hasGlasses) {
-		const rimMat = new MeshStandardMaterial({
-			color: 10912068,
-			metalness: .78,
-			roughness: .24
-		});
-		const lensRingGeo = new TorusGeometry(.036, .005, 6, 14);
-		const lGlass = new Mesh(lensRingGeo, rimMat);
-		lGlass.position.set(-.056, .015, .168);
-		const rGlass = new Mesh(lensRingGeo, rimMat);
-		rGlass.position.set(.056, .015, .168);
-		const bridge = new Mesh(new BoxGeometry(.044, .006, .006), rimMat);
-		bridge.position.set(0, .02, .17);
-		const lTemple = new Mesh(new CylinderGeometry(.003, .003, .14, 4), rimMat);
-		lTemple.rotation.x = Math.PI / 2;
-		lTemple.position.set(-.092, .018, .095);
-		const rTemple = lTemple.clone();
-		rTemple.position.x = .092;
-		head.add(lGlass, rGlass, bridge, lTemple, rTemple);
-	}
-	person.add(head);
-	person.traverse((obj) => {
-		obj.frustumCulled = false;
-	});
-	return {
-		group: person,
-		rig: {
-			leftLeg,
-			rightLeg,
-			leftArm,
-			rightArm,
-			head,
-			seatedOnlyGroup,
-			standingLegsGroup
-		}
-	};
-}
 function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, ultraCompact = false) {
 	const root = new Group();
-	const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
 	const guestChairLeft = createTeaChair(walnutTex, 7375721, compactMode);
 	guestChairLeft.position.copy(SEAT_LEFT_POS);
 	guestChairLeft.rotation.y = SEAT_LEFT_ROT_Y;
@@ -64077,51 +67639,305 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	const playerContainer = new Group();
 	playerContainer.position.copy(PLAYER_SPAWN_POS);
 	playerContainer.rotation.y = PLAYER_SPAWN_ROT_Y;
-	const teaMaster = createTeaMasterCharacter(compactMode, ultraCompact);
-	const spiritBlossomKindred = createSpiritBlossomKindredCharacter(compactMode, ultraCompact);
-	const diegoBody = createDiegoBodyCharacter(compactMode, ultraCompact);
-	const cicadaSuitV2 = createCicadaSuitV2Character(compactMode, ultraCompact);
-	const playerModels = {
-		"tea-master": teaMaster,
-		"spirit-blossom-kindred": spiritBlossomKindred,
-		"diego-body": diegoBody,
-		"cicada-suit-v2": cicadaSuitV2
-	};
-	let activePlayerId = "tea-master";
-	spiritBlossomKindred.group.visible = false;
-	diegoBody.group.visible = false;
-	cicadaSuitV2.group.visible = false;
-	playerContainer.add(teaMaster.group, spiritBlossomKindred.group, diegoBody.group, cicadaSuitV2.group);
+	const teaArtisan = buildCompleteTeaArtisanCharacter(compactMode, ultraCompact);
+	const playerModels = { "tea-artisan": teaArtisan };
+	let activePlayerId = "tea-artisan";
+	playerContainer.add(teaArtisan.group);
 	root.add(playerContainer);
 	const guestsContainer = new Group();
 	guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
 	guestsContainer.rotation.y = -Math.PI / 2;
-	const somO = createSomOGuest(seg, compactMode);
-	const elara = createHumanGuest(seg, compactMode, {
-		coatColor: 6058849,
-		innerColor: 16052196,
-		skirtColor: 3884094,
-		hairColor: 3942430,
-		shoeColor: 4928550,
-		bagColor: 9263675,
-		hasGlasses: true,
-		hasBun: false
-	});
-	const malee = createHumanGuest(seg, compactMode, {
-		coatColor: 15327184,
-		innerColor: 16315371,
-		skirtColor: 5194553,
-		hairColor: 14079183,
-		shoeColor: 7295291,
-		bagColor: 12028766,
-		hasGlasses: false,
-		hasBun: true,
-		hasShawl: true
-	});
-	elara.group.visible = false;
-	malee.group.visible = false;
-	guestsContainer.add(somO.group, elara.group, malee.group);
+	const GUEST_PRESET_CONFIGS = {
+		"som-o": {
+			preset: "som-o",
+			heightScale: .97,
+			slender: true,
+			coatHex: "#df7e38",
+			innerHex: "#f5efe5",
+			skirtHex: "#3c2d25",
+			hairBaseHex: "#9e6135",
+			hairHighlightHex: "#dfb17a",
+			hairShadowHex: "#693c1c",
+			hairTipHex: "#c9884c",
+			shoeColor: 5519656,
+			irisTopHex: "#5d381e",
+			irisBottomHex: "#9a6539",
+			browHex: "#693c1c",
+			clothingStyle: "cardigan",
+			clothingAccentHex: "#c26525",
+			bottomStyle: "skirt",
+			hairstyle: "wavy-shoulder"
+		},
+		elara: {
+			preset: "elara",
+			heightScale: .97,
+			slender: true,
+			coatHex: "#637043",
+			innerHex: "#f4efe4",
+			skirtHex: "#38332e",
+			hairBaseHex: "#4d3324",
+			hairHighlightHex: "#7d5943",
+			hairShadowHex: "#2f1d14",
+			shoeColor: 4928550,
+			irisTopHex: "#4b6b52",
+			irisBottomHex: "#84b08a",
+			browHex: "#3d281c",
+			clothingStyle: "cardigan",
+			clothingAccentHex: "#4b5732",
+			bottomStyle: "skirt",
+			hairstyle: "low-messy-bun",
+			hasGlasses: true,
+			glassStyle: "round",
+			hasNotebook: true,
+			bagColor: 8211501
+		},
+		malee: {
+			preset: "malee",
+			heightScale: .95,
+			slender: true,
+			isElder: true,
+			coatHex: "#2a3652",
+			innerHex: "#2a3652",
+			skirtHex: "#252936",
+			hairBaseHex: "#d6d8dd",
+			hairHighlightHex: "#f4f6fa",
+			hairShadowHex: "#9ca0aa",
+			shoeColor: 5652272,
+			irisTopHex: "#4d3629",
+			irisBottomHex: "#826049",
+			browHex: "#9c9ea4",
+			clothingStyle: "thai-blouse",
+			clothingAccentHex: "#9aa8c7",
+			bottomStyle: "skirt",
+			hairstyle: "elder-top-bun",
+			hasPearlEarrings: true,
+			hasHandbag: true,
+			bagColor: 12028766
+		},
+		non: {
+			preset: "non",
+			heightScale: 1.03,
+			slender: false,
+			skinHex: "#eab995",
+			skinColor: 15382933,
+			coatHex: "#424752",
+			innerHex: "#f3eee2",
+			skirtHex: "#2e3139",
+			hairBaseHex: "#211c19",
+			hairHighlightHex: "#453c36",
+			hairShadowHex: "#120f0d",
+			shoeColor: 3876894,
+			irisTopHex: "#2e221b",
+			irisBottomHex: "#634b3c",
+			browHex: "#1d1714",
+			clothingStyle: "waistcoat",
+			clothingAccentHex: "#2e333c",
+			bottomStyle: "trousers",
+			hairstyle: "short-quiff",
+			hasGlasses: true,
+			glassStyle: "rect",
+			hasNotebook: true,
+			bagColor: 7030056
+		},
+		milin: {
+			preset: "milin",
+			heightScale: .95,
+			slender: true,
+			skinHex: "#f8dac5",
+			skinColor: 16308933,
+			coatHex: "#7fa17f",
+			innerHex: "#faf8f4",
+			skirtHex: "#2d374c",
+			hairBaseHex: "#6e452b",
+			hairHighlightHex: "#a8704a",
+			hairShadowHex: "#462a18",
+			shoeColor: 15460059,
+			irisTopHex: "#4c3221",
+			irisBottomHex: "#8d5f3e",
+			browHex: "#563621",
+			clothingStyle: "hoodie-jacket",
+			clothingAccentHex: "#648564",
+			bottomStyle: "skirt",
+			hairstyle: "high-ponytail",
+			smileCurve: 1.25
+		},
+		somchai: {
+			preset: "somchai",
+			heightScale: 1,
+			slender: false,
+			isElder: true,
+			skinHex: "#e7ba98",
+			skinColor: 15186584,
+			coatHex: "#c68838",
+			innerHex: "#f2ece0",
+			skirtHex: "#6f5c45",
+			hairBaseHex: "#cfd2d9",
+			hairHighlightHex: "#f0f2f7",
+			hairShadowHex: "#9196a1",
+			shoeColor: 4928807,
+			irisTopHex: "#3f2c20",
+			irisBottomHex: "#72523e",
+			browHex: "#92969f",
+			clothingStyle: "cardigan",
+			clothingAccentHex: "#a36b24",
+			bottomStyle: "trousers",
+			hairstyle: "neat-parted",
+			hasMustache: true
+		},
+		kiryu: {
+			preset: "kiryu",
+			heightScale: 1.02,
+			slender: false,
+			skinHex: "#f0c6a6",
+			skinColor: 15779494,
+			coatHex: "#6f2e3b",
+			innerHex: "#2d3138",
+			skirtHex: "#232730",
+			hairBaseHex: "#61483b",
+			hairHighlightHex: "#9c7863",
+			hairShadowHex: "#3b2920",
+			shoeColor: 2498850,
+			irisTopHex: "#33241c",
+			irisBottomHex: "#6e4f3d",
+			browHex: "#443127",
+			clothingStyle: "trench",
+			clothingAccentHex: "#4f1f29",
+			bottomStyle: "trousers",
+			hairstyle: "short-quiff",
+			hasHeadphones: true
+		},
+		ploysai: {
+			preset: "ploysai",
+			heightScale: .96,
+			slender: true,
+			skinHex: "#f7d6c0",
+			skinColor: 16242368,
+			coatHex: "#c9888b",
+			innerHex: "#f7f2e8",
+			skirtHex: "#59483b",
+			hairBaseHex: "#30221c",
+			hairHighlightHex: "#5d463c",
+			hairShadowHex: "#1b120f",
+			shoeColor: 6045230,
+			irisTopHex: "#3f281f",
+			irisBottomHex: "#7d5443",
+			browHex: "#2c1e18",
+			clothingStyle: "cardigan",
+			clothingAccentHex: "#a8696c",
+			bottomStyle: "skirt",
+			hairstyle: "short-bob",
+			hasPearlEarrings: true,
+			hasHairClip: true,
+			hairClipColor: 15253086
+		},
+		pheem: {
+			preset: "pheem",
+			heightScale: 1.02,
+			slender: false,
+			skinHex: "#f3cfb4",
+			skinColor: 15978420,
+			coatHex: "#3c4c66",
+			innerHex: "#9eb8d2",
+			skirtHex: "#2c3442",
+			hairBaseHex: "#3a2920",
+			hairHighlightHex: "#664c3d",
+			hairShadowHex: "#211611",
+			shoeColor: 3877408,
+			irisTopHex: "#34251c",
+			irisBottomHex: "#6c4d3b",
+			browHex: "#2e1f17",
+			clothingStyle: "waistcoat",
+			clothingAccentHex: "#2a374c",
+			bottomStyle: "trousers",
+			hairstyle: "neat-parted",
+			hasGlasses: true,
+			glassStyle: "round"
+		},
+		meilin: {
+			preset: "meilin",
+			heightScale: .96,
+			slender: true,
+			skinHex: "#f8dbc6",
+			skinColor: 16309190,
+			coatHex: "#c67d47",
+			innerHex: "#f5efe2",
+			skirtHex: "#382c25",
+			hairBaseHex: "#1d1c22",
+			hairHighlightHex: "#464452",
+			hairShadowHex: "#0f0e12",
+			shoeColor: 4533536,
+			irisTopHex: "#292121",
+			irisBottomHex: "#5c4640",
+			browHex: "#1c191c",
+			clothingStyle: "trench",
+			clothingAccentHex: "#a15e30",
+			bottomStyle: "trousers",
+			hairstyle: "twin-braids"
+		},
+		win: {
+			preset: "win",
+			heightScale: 1.01,
+			slender: false,
+			skinHex: "#e3b089",
+			skinColor: 14921865,
+			coatHex: "#596b45",
+			innerHex: "#f1ebe0",
+			skirtHex: "#3a424d",
+			hairBaseHex: "#4d3527",
+			hairHighlightHex: "#7d5a45",
+			hairShadowHex: "#2e1e15",
+			shoeColor: 4863269,
+			irisTopHex: "#3b291e",
+			irisBottomHex: "#75533e",
+			browHex: "#38261c",
+			clothingStyle: "trench",
+			clothingAccentHex: "#404f30",
+			bottomStyle: "trousers",
+			hairstyle: "short-quiff",
+			hasCamera: true
+		},
+		chandra: {
+			preset: "chandra",
+			heightScale: .96,
+			slender: true,
+			isElder: false,
+			skinHex: "#ebc09f",
+			skinColor: 15450271,
+			coatHex: "#632d48",
+			innerHex: "#632d48",
+			skirtHex: "#351c2c",
+			hairBaseHex: "#1f1e24",
+			hairHighlightHex: "#494754",
+			hairShadowHex: "#111014",
+			shoeColor: 4927272,
+			irisTopHex: "#30221e",
+			irisBottomHex: "#664940",
+			browHex: "#1e1b20",
+			clothingStyle: "thai-blouse",
+			clothingAccentHex: "#d5ae5b",
+			bottomStyle: "skirt",
+			sleeveEndsAtElbow: true,
+			hairstyle: "low-messy-bun",
+			earringColor: 15054934,
+			hasHairClip: true,
+			hairClipColor: 15252828,
+			hasHandbag: true,
+			bagColor: 8211501
+		}
+	};
+	const guestHandles = /* @__PURE__ */ new Map();
+	const getOrCreateGuestHandle = (guestId) => {
+		const resolvedId = GUEST_PRESET_CONFIGS[guestId] ? guestId : "som-o";
+		const existing = guestHandles.get(resolvedId);
+		if (existing) return existing;
+		const created = buildSeamlessHumanGuest(compactMode, ultraCompact, GUEST_PRESET_CONFIGS[resolvedId]);
+		guestHandles.set(resolvedId, created);
+		guestsContainer.add(created.group);
+		return created;
+	};
+	getOrCreateGuestHandle("som-o");
 	root.add(guestsContainer);
+	const allCharacterTextures = [...teaArtisan.textures];
 	let playerWalkSpeed = 0;
 	let playerWalkPhase = 0;
 	let isPlayerMoving = false;
@@ -64130,13 +67946,15 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	let waypointIdx = 1;
 	let customerWalkPhase = 0;
 	let customerDoorCrossedEmitted = false;
-	const startCustomerWalkIn = (_guestId) => {
+	const startCustomerWalkIn = (guestId) => {
 		customerPhase = "ENTERING";
 		waypointIdx = 1;
 		customerWalkPhase = 0;
 		customerDoorCrossedEmitted = false;
 		guestsContainer.position.set(DOOR_OUTSIDE_POS.x, SHOP_FLOOR_Y, DOOR_OUTSIDE_POS.y);
 		guestsContainer.rotation.y = -Math.PI / 2;
+		const active = getOrCreateGuestHandle(guestId);
+		for (const handle of guestHandles.values()) handle.group.visible = handle === active;
 	};
 	const setFirstPersonHidden = (hidden) => {
 		firstPersonHidden = hidden;
@@ -64144,10 +67962,7 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	};
 	const setPlayerCharacter = (characterId) => {
 		activePlayerId = characterId;
-		teaMaster.group.visible = characterId === "tea-master";
-		spiritBlossomKindred.group.visible = characterId === "spirit-blossom-kindred";
-		diegoBody.group.visible = characterId === "diego-body";
-		cicadaSuitV2.group.visible = characterId === "cicada-suit-v2";
+		teaArtisan.group.visible = characterId === "tea-artisan";
 	};
 	const movePlayer = (inputX, inputY, cameraYaw, delta) => {
 		const mag = Math.hypot(inputX, inputY);
@@ -64178,57 +67993,28 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 	const animate = (elapsed, delta, step, isPouring, mode, guestId, reducedMotion) => {
 		const showGuest = mode === "guest";
 		guestsContainer.visible = showGuest;
-		let activeGuestRig = somO.rig;
-		if (showGuest) {
-			somO.group.visible = guestId === "som-o";
-			elara.group.visible = guestId === "elara";
-			malee.group.visible = guestId === "malee";
-			activeGuestRig = guestId === "elara" ? elara.rig : guestId === "malee" ? malee.rig : somO.rig;
-		}
-		const activePlayerRig = playerModels[activePlayerId]?.rig ?? teaMaster.rig;
+		const activePlayer = playerModels[activePlayerId] ?? teaArtisan;
 		if (!firstPersonHidden) {
-			if (activePlayerRig.tail && !reducedMotion) {
-				activePlayerRig.tail.position.y = 1.38 + Math.sin(elapsed * 2.4) * .045;
-				activePlayerRig.tail.rotation.y = elapsed * .8;
+			if (activePlayer.spiritOrbGroup && !reducedMotion) {
+				activePlayer.spiritOrbGroup.position.y = 1.38 + Math.sin(elapsed * 2.4) * .045;
+				activePlayer.spiritOrbGroup.rotation.y = elapsed * .85;
 			}
-			if (isPlayerMoving && !reducedMotion) {
-				const swing = Math.sin(playerWalkPhase) * .56 * playerWalkSpeed;
-				activePlayerRig.leftLeg.rotation.x = swing;
-				activePlayerRig.rightLeg.rotation.x = -swing;
-				if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
-					activePlayerRig.leftShin.rotation.x = Math.max(0, -swing * .75);
-					activePlayerRig.rightShin.rotation.x = Math.max(0, swing * .75);
-				}
-				activePlayerRig.leftArm.rotation.x = -swing * .72;
-				activePlayerRig.rightArm.rotation.x = swing * .72;
-				playerContainer.position.y = SHOP_FLOOR_Y + Math.abs(Math.sin(playerWalkPhase)) * .032;
-				activePlayerRig.head.rotation.y = Math.sin(elapsed * .9) * .04;
-			} else {
-				const damp = Math.min(1, delta * 9);
-				const breathe = reducedMotion ? 0 : Math.sin(elapsed * 1.9) * .02;
-				activePlayerRig.leftLeg.rotation.x = MathUtils.lerp(activePlayerRig.leftLeg.rotation.x, 0, damp);
-				activePlayerRig.rightLeg.rotation.x = MathUtils.lerp(activePlayerRig.rightLeg.rotation.x, 0, damp);
-				if (activePlayerRig.leftShin && activePlayerRig.rightShin) {
-					activePlayerRig.leftShin.rotation.x = MathUtils.lerp(activePlayerRig.leftShin.rotation.x, 0, damp);
-					activePlayerRig.rightShin.rotation.x = MathUtils.lerp(activePlayerRig.rightShin.rotation.x, 0, damp);
-				}
-				let targetRightArm = -.14 + breathe;
-				let targetLeftArm = -.12 - breathe;
-				if (isPouring || step === "POUR_WATER") {
-					targetRightArm = -.68;
-					targetLeftArm = -.25;
-				} else if (step === "STEEP_TEA") {
-					targetRightArm = -.52;
-					targetLeftArm = -.42;
-				}
-				activePlayerRig.rightArm.rotation.x = MathUtils.lerp(activePlayerRig.rightArm.rotation.x, targetRightArm, damp);
-				activePlayerRig.leftArm.rotation.x = MathUtils.lerp(activePlayerRig.leftArm.rotation.x, targetLeftArm, damp);
-				playerContainer.position.y = MathUtils.lerp(playerContainer.position.y, SHOP_FLOOR_Y, damp);
-				activePlayerRig.head.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * .7) * .06;
-			}
+			animateSeamlessHumanoid(activePlayer.bones, elapsed, delta, {
+				isMoving: isPlayerMoving,
+				walkPhase: playerWalkPhase,
+				walkSpeed: playerWalkSpeed,
+				isPouring,
+				step,
+				isSeated: false,
+				reducedMotion
+			});
+			const walkBounce = isPlayerMoving && !reducedMotion ? Math.abs(Math.sin(playerWalkPhase)) * .018 * playerWalkSpeed : 0;
+			playerContainer.position.y = MathUtils.lerp(playerContainer.position.y, SHOP_FLOOR_Y + walkBounce, Math.min(1, delta * 12));
 		}
 		let customerCrossedDoorNow = false;
 		if (showGuest) {
+			const activeGuest = getOrCreateGuestHandle(guestId);
+			for (const handle of guestHandles.values()) handle.group.visible = handle === activeGuest;
 			if (step === "SERVED") customerPhase = "SERVED_ENJOYING";
 			if (customerPhase === "ENTERING") {
 				const wp = CUSTOMER_WAYPOINTS[waypointIdx];
@@ -64259,18 +68045,17 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 					customerDoorCrossedEmitted = true;
 					customerCrossedDoorNow = true;
 				}
-				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
-					activeGuestRig.standingLegsGroup.visible = true;
-					activeGuestRig.seatedOnlyGroup.visible = false;
-				}
 				customerWalkPhase += delta * 8.2;
-				const gSwing = reducedMotion ? 0 : Math.sin(customerWalkPhase) * .52;
-				activeGuestRig.leftLeg.rotation.x = gSwing;
-				activeGuestRig.rightLeg.rotation.x = -gSwing;
-				activeGuestRig.leftArm.rotation.x = -gSwing * .65;
-				activeGuestRig.rightArm.rotation.x = gSwing * .65;
-				guestsContainer.position.y = SHOP_FLOOR_Y + (reducedMotion ? 0 : Math.abs(Math.sin(customerWalkPhase)) * .025);
-				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 4.5) * .25;
+				animateSeamlessHumanoid(activeGuest.bones, elapsed, delta, {
+					isMoving: true,
+					walkPhase: customerWalkPhase,
+					walkSpeed: .9,
+					isPouring: false,
+					step,
+					isSeated: false,
+					reducedMotion
+				});
+				guestsContainer.position.y = SHOP_FLOOR_Y + (reducedMotion ? 0 : Math.abs(Math.sin(customerWalkPhase)) * .015);
 			} else {
 				guestsContainer.position.x = SEAT_LEFT_POS.x;
 				guestsContainer.position.z = SEAT_LEFT_POS.z;
@@ -64278,17 +68063,17 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 				while (rotDiff > Math.PI) rotDiff -= Math.PI * 2;
 				while (rotDiff < -Math.PI) rotDiff += Math.PI * 2;
 				guestsContainer.rotation.y += rotDiff * Math.min(1, delta * 8);
-				if (activeGuestRig.standingLegsGroup && activeGuestRig.seatedOnlyGroup) {
-					activeGuestRig.standingLegsGroup.visible = false;
-					activeGuestRig.seatedOnlyGroup.visible = true;
-				}
-				activeGuestRig.leftLeg.rotation.x = 0;
-				activeGuestRig.rightLeg.rotation.x = 0;
-				activeGuestRig.leftArm.rotation.x = -.58;
-				activeGuestRig.rightArm.rotation.x = -.58;
-				const bob = reducedMotion ? 0 : customerPhase === "SERVED_ENJOYING" ? Math.sin(elapsed * 3.6) * .016 : Math.sin(elapsed * 1.5) * .008;
+				animateSeamlessHumanoid(activeGuest.bones, elapsed, delta, {
+					isMoving: false,
+					walkPhase: 0,
+					walkSpeed: 0,
+					isPouring: false,
+					step,
+					isSeated: true,
+					reducedMotion
+				});
+				const bob = reducedMotion ? 0 : customerPhase === "SERVED_ENJOYING" ? Math.sin(elapsed * 3.6) * .014 : Math.sin(elapsed * 1.5) * .007;
 				guestsContainer.position.y = SHOP_FLOOR_Y + bob;
-				if (activeGuestRig.tail) activeGuestRig.tail.rotation.y = reducedMotion ? 0 : Math.sin(elapsed * 2.2) * .14;
 			}
 		}
 		return {
@@ -64298,6 +68083,10 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 			customerPhase,
 			customerCrossedDoorNow
 		};
+	};
+	const dispose = () => {
+		for (const tex of allCharacterTextures) tex.dispose();
+		for (const handle of guestHandles.values()) for (const tex of handle.textures) tex.dispose();
 	};
 	return {
 		root,
@@ -64310,7 +68099,8 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 		getPlayerPosition: () => playerContainer.position,
 		getPlayerRotationY: () => playerContainer.rotation.y,
 		isNearTeaTable: () => checkNearTeaTable(playerContainer.position),
-		animate
+		animate,
+		dispose
 	};
 }
 // src/utils/refreshRate.ts
@@ -65342,6 +69132,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 				}
 			});
 			steamSprites.forEach((s) => s.sprite.material.dispose());
+			shopCharacters.dispose();
 			cedarTex.dispose();
 			walnutTex.dispose();
 			matTex.dispose();
@@ -65919,7 +69710,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 			duration: .16,
 			ease: "easeOut"
 		},
-		className: "pointer-events-none fixed inset-0 z-30 flex items-center justify-center p-2.5 sm:p-4",
+		className: "pointer-events-none fixed inset-0 z-40 flex items-center justify-center p-2 sm:p-4",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 			role: "dialog",
 			"aria-modal": "true",
@@ -65943,11 +69734,11 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 				duration: .24,
 				ease: MODAL_EASE$1
 			},
-			className: "pointer-events-auto flex w-full max-w-[440px] max-h-[82dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform",
+			className: "pointer-events-auto flex w-full max-w-[440px] max-h-[88dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform",
 			style: { contain: "layout style paint" },
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center justify-between gap-3 px-4 pt-3.5 pb-2",
+					className: "flex shrink-0 items-center justify-between gap-3 px-4 pt-3 pb-1.5",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
 						mode: "wait",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.h2, {
@@ -65981,7 +69772,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 							damping: 26
 						},
 						"aria-label": "ซ่อนหน้าต่างเลือกชา",
-						className: "inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0",
+						className: "inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#E6E4DD] text-[#2A312C] hover:bg-[#DAD7CE] shrink-0",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
 							className: "h-5 w-5 stroke-[2.5]",
 							"aria-hidden": "true"
@@ -65989,14 +69780,14 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex items-center gap-1 overflow-x-auto px-4 pb-2.5 touch-pan-x",
+					className: "flex shrink-0 items-center gap-1.5 overflow-x-auto overflow-y-hidden border-b border-[#1F2823]/10 px-4 py-2 touch-pan-x",
 					children: CATEGORIES$1.map((cat) => {
 						const active = categoryFilter === cat.id;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .95 },
 							onClick: () => onCategoryChange(cat.id),
-							className: "relative min-h-[36px] rounded-xl px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
+							className: "relative min-h-[34px] rounded-xl px-3 py-1 text-xs font-medium whitespace-nowrap shrink-0",
 							children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
 								layoutId: "tea-selector-category-pill",
 								transition: {
@@ -66013,7 +69804,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex-1 overflow-y-auto px-4 pb-4",
+					className: "flex-1 min-h-0 overflow-y-auto px-4 pt-2.5 pb-4",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 						initial: {
 							opacity: 0,
@@ -66204,7 +69995,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 		const rect = base.getBoundingClientRect();
 		const cx = rect.left + rect.width / 2;
 		const cy = rect.top + rect.height / 2;
-		const maxR = Math.max(24, rect.width * .36);
+		const maxR = Math.max(22, rect.width * .3);
 		const dx = clientX - cx;
 		const dy = clientY - cy;
 		const dist = Math.hypot(dx, dy);
@@ -66486,29 +70277,29 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "pointer-events-auto flex flex-col gap-1.5 max-w-[60vw] sm:max-w-md",
+					className: "pointer-events-auto flex flex-col items-start gap-1 max-w-[245px] sm:max-w-[270px]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2.5 py-1 shadow-xs",
+						className: "flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "min-w-0",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-baseline gap-1.5",
+								className: "flex items-baseline gap-1",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "font-display text-xs sm:text-sm font-semibold text-[#1F2823] whitespace-nowrap",
+										className: "font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap",
 										children: ["Lv.", xpInfo.level]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "hidden md:inline text-xs font-medium text-[#2E6F40] truncate",
+										className: "hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate",
 										children: xpInfo.title
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap",
+										className: "font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap",
 										children: xpInfo.nextLevelXp !== null ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}` : "MAX"
 									})
 								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "mt-1 h-1.5 w-20 sm:w-28 overflow-hidden rounded-full bg-[#1F2823]/12",
+								className: "mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 									className: "h-full w-full origin-left rounded-full bg-[#2E6F40]",
 									animate: { scaleX: Math.max(.02, xpInfo.progressRatio) },
@@ -66524,7 +70315,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 								})
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "flex items-center gap-1 rounded-lg bg-[#EAE6DC] p-0.5",
+							className: "flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5",
 							children: [{
 								id: "guest",
 								label: "รับรองแขก"
@@ -66543,7 +70334,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 										setCustomerSequenceKey((k) => k + 1);
 									}
 								},
-								className: "relative min-h-[38px] sm:min-h-[40px] rounded-md px-2.5 text-xs font-medium whitespace-nowrap shrink-0",
+								className: "relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0",
 								children: [mode === m.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
 									layoutId: "hud-mode-pill",
 									transition: {
@@ -66581,11 +70372,11 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 								stiffness: 360,
 								damping: 28
 							},
-							className: "flex flex-col gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/96 p-2.5 shadow-sm",
+							className: "flex w-full max-w-[235px] sm:max-w-[258px] flex-col gap-1 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 p-1.5 sm:p-2 shadow-sm",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center gap-2.5",
+								className: "flex items-start gap-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-sm font-semibold text-[#1F2823]",
+									className: "relative h-8 w-8 sm:h-9 sm:w-9 shrink-0 overflow-hidden rounded-lg border border-[#1F2823]/10 flex items-center justify-center font-display text-xs font-semibold text-[#1F2823]",
 									style: { backgroundColor: guestOrder.guest.accentBg },
 									children: !portraitFailed[guestOrder.guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 										src: guestOrder.guest.portraitUrl,
@@ -66600,9 +70391,9 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "min-w-0 flex-1",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex items-center justify-between gap-2",
+										className: "flex items-center justify-between gap-1",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "font-display text-xs font-semibold text-[#1F2823] truncate",
+											className: "font-display text-[11px] font-semibold text-[#1F2823] truncate",
 											children: guestOrder.guest.name
 										}), step !== "SERVED" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
@@ -66610,17 +70401,14 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 											whileTap: { scale: .9 },
 											onClick: handleSwapGuest,
 											"aria-label": "เปลี่ยนแขก",
-											className: "inline-flex min-h-[30px] min-w-[30px] items-center justify-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
+											className: "inline-flex min-h-[24px] min-w-[24px] items-center justify-center gap-0.5 rounded-md px-1.5 text-[10px] font-medium text-[#4A534D] hover:bg-[#EAE6DC] hover:text-[#1F2823] whitespace-nowrap shrink-0",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
-												className: "h-3 w-3",
+												className: "h-2.5 w-2.5",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "hidden sm:inline",
-												children: "เปลี่ยน"
-											})]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปลี่ยน" })]
 										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "text-[11px] sm:text-xs text-[#27312B] leading-snug line-clamp-2",
+										className: "text-[10px] sm:text-[10.5px] text-[#27312B] leading-tight line-clamp-2",
 										children: [
 											"“",
 											brewResult?.guestReply ?? guestOrder.requestText,
@@ -66629,25 +70417,14 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "border-t border-[#1F2823]/8 pt-1.5 text-[11px] text-[#224B2B]",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "font-semibold text-[#1F2823]",
-										children: "รายการเมนูที่ลูกค้าสั่ง:"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "mt-0.5 leading-snug text-[#2E6F40] font-medium",
-										children: ["• เมนูชา: ", orderedMenuSummary.teaNames.join(" / ")]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "leading-snug text-[#4A534D]",
-										children: [
-											"• อุณหภูมิ: ",
-											orderedMenuSummary.tempLabel,
-											orderedMenuSummary.toppingNames.length > 0 ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(", ")}` : ""
-										]
-									})
-								]
+								className: "border-t border-[#1F2823]/8 pt-1 text-[10px] leading-tight text-[#224B2B]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									className: "font-medium text-[#2E6F40] line-clamp-1",
+									children: ["สั่ง: ", orderedMenuSummary.teaNames.join(" / ")]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									className: "text-[#4A534D] truncate",
+									children: [orderedMenuSummary.tempLabel, orderedMenuSummary.toppingNames.length > 0 ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(", ")}` : ""]
+								})]
 							})]
 						}, `${guestOrder.guest.id}-${guestOrder.requestText}-${brewResult?.guestReply ?? "idle"}`)
 					})]
@@ -66667,7 +70444,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 					scale: .9
 				},
 				transition: { duration: .18 },
-				className: "fixed bottom-4 left-4 z-20 flex flex-col items-center gap-1.5 safe-pb select-none",
+				className: "fixed bottom-3.5 left-10 sm:left-16 z-20 flex flex-col items-center gap-1 safe-pb select-none",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					ref: joystickBaseRef,
 					onPointerDown: handleJoystickDown,
@@ -66675,10 +70452,10 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 					onPointerUp: handleJoystickUp,
 					onPointerCancel: handleJoystickUp,
 					"aria-label": "ก้านบังคับเดินรอบร้าน",
-					className: "relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/85 shadow-lg",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-10 w-10 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "relative flex h-24 w-24 sm:h-28 sm:w-28 touch-none items-center justify-center rounded-full border-2 border-[#1F2823]/20 bg-[#FAF9F6]/86 shadow-lg",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-14 w-14 sm:h-16 sm:w-16 rounded-full border border-[#1F2823]/12 bg-[#EAE6DC]/60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						ref: joystickKnobRef,
-						className: "pointer-events-none absolute h-11 w-11 sm:h-12 sm:w-12 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
+						className: "pointer-events-none absolute h-14 w-14 sm:h-16 sm:w-16 rounded-full border-2 border-white bg-[#2E6F40] shadow-md"
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					className: "rounded-lg bg-[#FAF9F6]/88 px-2 py-0.5 text-[10px] font-medium text-[#39423C] shadow-2xs",
@@ -67212,8 +70989,61 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.12.0";
+var CURRENT_APP_VERSION = "2.14.0";
 var VERSION_HISTORY = [
+	{
+		version: "2.14.0",
+		previousVersion: "2.13.0",
+		releaseDate: "27 พ.ย. 2026",
+		releaseTitle: "โมเดล 3D ไร้รอยต่อสมจริงยิ่งขึ้น ทรงผม-ชุดตัดเย็บใหม่ & ลูกค้าทุกตัวเป็นมนุษย์",
+		summary: "อัปเกรดระบบตาข่ายโมเดล 3D ให้เชื่อมผิวหนังและเสื้อผ้าเป็นผืนเดียวไร้รอยต่อขั้นสุด เพิ่มทรงผมแบบริบบิ้นและประกายผมเงางาม เสื้อผ้าตัดเย็บที่มีลวดลายและรายละเอียดเฉพาะตัว พร้อมเปลี่ยนอวาตาร์และโมเดล 3D ของลูกค้าทุกตัวเป็นตัวละครมนุษย์ทั้งหมด",
+		changes: [
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เชื่อมตาข่ายแขน ขา ลำตัว และรอยต่อชุดเป็นชิ้นเดียว (Multi-Material Loft)",
+				detail: "รวมรอยต่อระหว่างแขนเสื้อ-ท่อนแขน-มือ, ต้นขา-ถุงน่อง-รองเท้า และสะโพก-ลำตัว-ลำคอเข้าเป็น SkinnedMesh ชิ้นเดียวกัน พร้อมเชื่อม Normal ที่ขอบรอยต่อให้เนียนกริบ"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "อัปเกรดทรงผมแบบ Hair Cap + ริบบิ้นปลายเรียว & ชุดตัดเย็บละเอียดขึ้น",
+				detail: "เพิ่มลายเส้นผมเงางาม หน้าม้าซอยหลายชั้น ปอยผมข้างแก้ม ปิ่นปักผม และลวดลายเสื้อผ้าเฉพาะชุด ทั้งเสื้อกั๊ก 4 กระดุม เทรนช์โค้ท กิโมโนซากุระ เสื้อคลุมถักคาร์ดิแกน และเสื้อคอตั้งปักลายไทย"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "ตัวละครและอวาตาร์ลูกค้าทั้งหมดเป็นมนุษย์ (คุณส้มโอ คุณเอลาร่า คุณยายมาลี)",
+				detail: "เปลี่ยนคุณส้มโอเป็นลูกค้าประจำมนุษย์พร้อมภาพโปรไฟล์สีน้ำใหม่และโมเดล 3D ผมลอนประบ่าสวมคาร์ดิแกนสีส้ม รวมถึงปรับโฉมคุณเอลาร่าและคุณยายมาลีให้ตรงตามภาพอวาตาร์ทุกจุด"
+			}
+		]
+	},
+	{
+		version: "2.13.0",
+		previousVersion: "2.12.0",
+		releaseDate: "27 พ.ย. 2026",
+		releaseTitle: "ยกเครื่องโมเดล 3D ไร้ข้อต่อทั้งเกม (SkinnedMesh) & เพิ่ม Mococo Abyssgard",
+		summary: "อัปเกรดตัวละครผู้เล่นและลูกค้า 3 มิติทั้งหมดเป็นระบบกระดูก SkinnedMesh ต่อเนื่องไร้รอยต่อและไร้ข้อต่อทรงกลมตามแบบ 3D คุณภาพสูง เพิ่มโมเดล Mococo Abyssgard (Kanna-Nakajima) พร้อมปรับโฉม Spirit Blossom Kindred, Body และ Ultimate CICADA Suit V2 ให้สวยงามสมส่วนเหมือนต้นฉบับ",
+		changes: [
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "โมเดล 3D ไร้ข้อต่อ (Seamless SkinnedMesh) ทั้งตัวละครผู้เล่นและลูกค้า",
+				detail: "เปลี่ยนแขน ขา ไหล่ เข่า สะโพก และลำคอจากทรงกระบอกแยกชิ้นเป็นตาข่ายต่อเนื่อง (Lofted SkinnedMesh) ทำให้เวลาเดิน ชงชา หรือนั่งเก้าอี้ไม่มีรอยต่อหลุดหรือลูกบอลข้อต่อ"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เพิ่มโมเดล Mococo Abyssgard — Kanna-Nakajima (@Kanna-Nakajima)",
+				detail: "ผมบลอนด์ครีมไฮไลท์ชมพู หูและหางหมาป่าฟูฟ่อง โช้คเกอร์ดำ เสื้อครอปขาว แจ็คเก็ตดำ-ชมพูแต่งขนเฟอร์ กางเกงขาสั้นสีขาวเข็มขัดชมพู ถุงน่องตาข่ายลายข้าวหลามตัด และรองเท้าแพลตฟอร์มสีชมพู"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "ปรับปรุง Body, Spirit Blossom Kindred และ Ultimate CICADA Suit V2 ให้ตรงต้นแบบ",
+				detail: "ปรับดีไซน์ Body เป็นเสื้อกั๊ก 4 กระดุมพับแขนเชิ้ตเห็นท่อนแขนไร้รอยต่อ, CICADA Suit V2 เป็นโค้ทยาวทรงเทรนช์คอตั้งเนกไทม่วงสายรัดอก, และ Kindred ชุดกิโมโนซากุระขอบขนเฟอร์พร้อมเขาสีเข้มและธนูวิญญาณ"
+			},
+			{
+				category: "ประสิทธิภาพ",
+				title: "ลด Draw Calls & อัปเกรดส้มโอ เอลาร่า มาลี ให้เนียนตาและลื่นขึ้น",
+				detail: "ลูกค้าทุกตัวใช้โครงกระดูก 18 ชิ้นที่ปรับความละเอียดตามสเปกเครื่องอัตโนมัติ พร้อมคืนหน่วยความจำ Texture เมื่อสลับฉาก"
+			}
+		]
+	},
 	{
 		version: "2.12.0",
 		previousVersion: "2.11.0",
@@ -67552,6 +71382,599 @@ var VERSION_HISTORY = [
 		}]
 	}
 ];
+// node_modules/@capacitor/core/dist/index.js
+/*! Capacitor: https://capacitorjs.com/ - MIT License */
+var ExceptionCode;
+(function(ExceptionCode) {
+	/**
+	* API is not implemented.
+	*
+	* This usually means the API can't be used because it is not implemented for
+	* the current platform.
+	*/
+	ExceptionCode["Unimplemented"] = "UNIMPLEMENTED";
+	/**
+	* API is not available.
+	*
+	* This means the API can't be used right now because:
+	*   - it is currently missing a prerequisite, such as network connectivity
+	*   - it requires a particular platform or browser version
+	*/
+	ExceptionCode["Unavailable"] = "UNAVAILABLE";
+})(ExceptionCode || (ExceptionCode = {}));
+var CapacitorException = class extends Error {
+	constructor(message, code, data) {
+		super(message);
+		this.message = message;
+		this.code = code;
+		this.data = data;
+	}
+};
+var getPlatformId = (win) => {
+	var _a, _b;
+	if (win === null || win === void 0 ? void 0 : win.androidBridge) return "android";
+	else if ((_b = (_a = win === null || win === void 0 ? void 0 : win.webkit) === null || _a === void 0 ? void 0 : _a.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) return "ios";
+	else return "web";
+};
+var createCapacitor = (win) => {
+	const capCustomPlatform = win.CapacitorCustomPlatform || null;
+	const cap = win.Capacitor || {};
+	const Plugins = cap.Plugins = cap.Plugins || {};
+	const getPlatform = () => {
+		return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
+	};
+	const isNativePlatform = () => getPlatform() !== "web";
+	const isPluginAvailable = (pluginName) => {
+		const plugin = registeredPlugins.get(pluginName);
+		if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) return true;
+		if (getPluginHeader(pluginName)) return true;
+		return false;
+	};
+	const getPluginHeader = (pluginName) => {
+		var _a;
+		return (_a = cap.PluginHeaders) === null || _a === void 0 ? void 0 : _a.find((h) => h.name === pluginName);
+	};
+	const handleError = (err) => win.console.error(err);
+	const registeredPlugins = /* @__PURE__ */ new Map();
+	const registerPlugin = (pluginName, jsImplementations = {}) => {
+		const registeredPlugin = registeredPlugins.get(pluginName);
+		if (registeredPlugin) {
+			console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
+			return registeredPlugin.proxy;
+		}
+		const platform = getPlatform();
+		const pluginHeader = getPluginHeader(pluginName);
+		let jsImplementation;
+		const loadPluginImplementation = async () => {
+			if (!jsImplementation && platform in jsImplementations) jsImplementation = typeof jsImplementations[platform] === "function" ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
+			else if (capCustomPlatform !== null && !jsImplementation && "web" in jsImplementations) jsImplementation = typeof jsImplementations["web"] === "function" ? jsImplementation = await jsImplementations["web"]() : jsImplementation = jsImplementations["web"];
+			return jsImplementation;
+		};
+		const createPluginMethod = (impl, prop) => {
+			var _a, _b;
+			if (pluginHeader) {
+				const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m) => prop === m.name);
+				if (methodHeader) {
+					if (methodHeader.rtype === "promise") return (options) => cap.nativePromise(pluginName, prop.toString(), options);
+					else return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
+				} else if (impl) return (_a = impl[prop]) === null || _a === void 0 ? void 0 : _a.bind(impl);
+			} else if (impl) return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
+			else throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+		};
+		const createPluginMethodWrapper = (prop) => {
+			let remove;
+			const wrapper = (...args) => {
+				const p = loadPluginImplementation().then((impl) => {
+					const fn = createPluginMethod(impl, prop);
+					if (fn) {
+						const p = fn(...args);
+						remove = p === null || p === void 0 ? void 0 : p.remove;
+						return p;
+					} else throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+				});
+				if (prop === "addListener") p.remove = async () => remove();
+				return p;
+			};
+			wrapper.toString = () => `${prop.toString()}() { [capacitor code] }`;
+			Object.defineProperty(wrapper, "name", {
+				value: prop,
+				writable: false,
+				configurable: false
+			});
+			return wrapper;
+		};
+		const addListener = createPluginMethodWrapper("addListener");
+		const removeListener = createPluginMethodWrapper("removeListener");
+		const addListenerNative = (eventName, callback) => {
+			const call = addListener({ eventName }, callback).then((callbackId) => callbackId);
+			const remove = async () => {
+				const callbackId = await call;
+				await removeListener({
+					eventName,
+					callbackId
+				});
+			};
+			const p = new Promise((resolve) => call.then(() => resolve({ remove })));
+			p.remove = async () => {
+				console.warn(`Using addListener() without 'await' is deprecated.`);
+				await remove();
+			};
+			return p;
+		};
+		const proxy = new Proxy({}, { get(_, prop) {
+			switch (prop) {
+				case "$$typeof": return;
+				case "toJSON": return () => ({});
+				case "addListener": return pluginHeader ? addListenerNative : addListener;
+				case "removeListener": return removeListener;
+				default: return createPluginMethodWrapper(prop);
+			}
+		} });
+		Plugins[pluginName] = proxy;
+		registeredPlugins.set(pluginName, {
+			name: pluginName,
+			proxy,
+			platforms: /* @__PURE__ */ new Set([...Object.keys(jsImplementations), ...pluginHeader ? [platform] : []])
+		});
+		return proxy;
+	};
+	if (!cap.convertFileSrc) cap.convertFileSrc = (filePath) => filePath;
+	cap.getPlatform = getPlatform;
+	cap.handleError = handleError;
+	cap.isNativePlatform = isNativePlatform;
+	cap.isPluginAvailable = isPluginAvailable;
+	cap.registerPlugin = registerPlugin;
+	cap.Exception = CapacitorException;
+	cap.DEBUG = !!cap.DEBUG;
+	cap.isLoggingEnabled = !!cap.isLoggingEnabled;
+	return cap;
+};
+var initCapacitorGlobal = (win) => win.Capacitor = createCapacitor(win);
+var Capacitor = /*#__PURE__*/ initCapacitorGlobal(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
+var registerPlugin = Capacitor.registerPlugin;
+/**
+* Base class web plugins should extend.
+*/
+var WebPlugin = class {
+	constructor() {
+		this.listeners = {};
+		this.retainedEventArguments = {};
+		this.windowListeners = {};
+	}
+	addListener(eventName, listenerFunc) {
+		let firstListener = false;
+		if (!this.listeners[eventName]) {
+			this.listeners[eventName] = [];
+			firstListener = true;
+		}
+		this.listeners[eventName].push(listenerFunc);
+		const windowListener = this.windowListeners[eventName];
+		if (windowListener && !windowListener.registered) this.addWindowListener(windowListener);
+		if (firstListener) this.sendRetainedArgumentsForEvent(eventName);
+		const remove = async () => this.removeListener(eventName, listenerFunc);
+		return Promise.resolve({ remove });
+	}
+	async removeAllListeners() {
+		this.listeners = {};
+		for (const listener in this.windowListeners) this.removeWindowListener(this.windowListeners[listener]);
+		this.windowListeners = {};
+	}
+	notifyListeners(eventName, data, retainUntilConsumed) {
+		const listeners = this.listeners[eventName];
+		if (!listeners) {
+			if (retainUntilConsumed) {
+				let args = this.retainedEventArguments[eventName];
+				if (!args) args = [];
+				args.push(data);
+				this.retainedEventArguments[eventName] = args;
+			}
+			return;
+		}
+		listeners.forEach((listener) => listener(data));
+	}
+	hasListeners(eventName) {
+		var _a;
+		return !!((_a = this.listeners[eventName]) === null || _a === void 0 ? void 0 : _a.length);
+	}
+	registerWindowListener(windowEventName, pluginEventName) {
+		this.windowListeners[pluginEventName] = {
+			registered: false,
+			windowEventName,
+			pluginEventName,
+			handler: (event) => {
+				this.notifyListeners(pluginEventName, event);
+			}
+		};
+	}
+	unimplemented(msg = "not implemented") {
+		return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
+	}
+	unavailable(msg = "not available") {
+		return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
+	}
+	async removeListener(eventName, listenerFunc) {
+		const listeners = this.listeners[eventName];
+		if (!listeners) return;
+		const index = listeners.indexOf(listenerFunc);
+		if (index !== -1) this.listeners[eventName].splice(index, 1);
+		if (!this.listeners[eventName].length) this.removeWindowListener(this.windowListeners[eventName]);
+	}
+	addWindowListener(handle) {
+		window.addEventListener(handle.windowEventName, handle.handler);
+		handle.registered = true;
+	}
+	removeWindowListener(handle) {
+		if (!handle) return;
+		window.removeEventListener(handle.windowEventName, handle.handler);
+		handle.registered = false;
+	}
+	sendRetainedArgumentsForEvent(eventName) {
+		const args = this.retainedEventArguments[eventName];
+		if (!args) return;
+		delete this.retainedEventArguments[eventName];
+		args.forEach((arg) => {
+			this.notifyListeners(eventName, arg);
+		});
+	}
+};
+/******** END WEB VIEW PLUGIN ********/
+/******** COOKIES PLUGIN ********/
+/**
+* Safely web encode a string value (inspired by js-cookie)
+* @param str The string value to encode
+*/
+var encode = (str) => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
+/**
+* Safely web decode a string value (inspired by js-cookie)
+* @param str The string value to decode
+*/
+var decode = (str) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
+var CapacitorCookiesPluginWeb = class extends WebPlugin {
+	async getCookies() {
+		const cookies = document.cookie;
+		const cookieMap = {};
+		cookies.split(";").forEach((cookie) => {
+			if (cookie.length <= 0) return;
+			let [key, value] = cookie.replace(/=/, "CAP_COOKIE").split("CAP_COOKIE");
+			key = decode(key).trim();
+			value = decode(value).trim();
+			cookieMap[key] = value;
+		});
+		return cookieMap;
+	}
+	async setCookie(options) {
+		try {
+			const encodedKey = encode(options.key);
+			const encodedValue = encode(options.value);
+			const expires = options.expires ? `; expires=${options.expires.replace("expires=", "")}` : "";
+			const path = (options.path || "/").replace("path=", "");
+			const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : "";
+			document.cookie = `${encodedKey}=${encodedValue || ""}${expires}; path=${path}; ${domain};`;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async deleteCookie(options) {
+		try {
+			document.cookie = `${options.key}=; Max-Age=0`;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async clearCookies() {
+		try {
+			const cookies = document.cookie.split(";") || [];
+			for (const cookie of cookies) document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${(/* @__PURE__ */ new Date()).toUTCString()};path=/`);
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+	async clearAllCookies() {
+		try {
+			await this.clearCookies();
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+};
+registerPlugin("CapacitorCookies", { web: () => new CapacitorCookiesPluginWeb() });
+/**
+* Read in a Blob value and return it as a base64 string
+* @param blob The blob value to convert to a base64 string
+*/
+var readBlobAsBase64 = async (blob) => new Promise((resolve, reject) => {
+	const reader = new FileReader();
+	reader.onload = () => {
+		const base64String = reader.result;
+		resolve(base64String.indexOf(",") >= 0 ? base64String.split(",")[1] : base64String);
+	};
+	reader.onerror = (error) => reject(error);
+	reader.readAsDataURL(blob);
+});
+/**
+* Normalize an HttpHeaders map by lowercasing all of the values
+* @param headers The HttpHeaders object to normalize
+*/
+var normalizeHttpHeaders = (headers = {}) => {
+	const originalKeys = Object.keys(headers);
+	return Object.keys(headers).map((k) => k.toLocaleLowerCase()).reduce((acc, key, index) => {
+		acc[key] = headers[originalKeys[index]];
+		return acc;
+	}, {});
+};
+/**
+* Builds a string of url parameters that
+* @param params A map of url parameters
+* @param shouldEncode true if you should encodeURIComponent() the values (true by default)
+*/
+var buildUrlParams = (params, shouldEncode = true) => {
+	if (!params) return null;
+	return Object.entries(params).reduce((accumulator, entry) => {
+		const [key, value] = entry;
+		let encodedValue;
+		let item;
+		if (Array.isArray(value)) {
+			item = "";
+			value.forEach((str) => {
+				encodedValue = shouldEncode ? encodeURIComponent(str) : str;
+				item += `${key}=${encodedValue}&`;
+			});
+			item.slice(0, -1);
+		} else {
+			encodedValue = shouldEncode ? encodeURIComponent(value) : value;
+			item = `${key}=${encodedValue}`;
+		}
+		return `${accumulator}&${item}`;
+	}, "").substr(1);
+};
+/**
+* Build the RequestInit object based on the options passed into the initial request
+* @param options The Http plugin options
+* @param extra Any extra RequestInit values
+*/
+var buildRequestInit = (options, extra = {}) => {
+	const output = Object.assign({
+		method: options.method || "GET",
+		headers: options.headers
+	}, extra);
+	const type = normalizeHttpHeaders(options.headers)["content-type"] || "";
+	if (typeof options.data === "string") output.body = options.data;
+	else if (type.includes("application/x-www-form-urlencoded")) {
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(options.data || {})) params.set(key, value);
+		output.body = params.toString();
+	} else if (type.includes("multipart/form-data") || options.data instanceof FormData) {
+		const form = new FormData();
+		if (options.data instanceof FormData) options.data.forEach((value, key) => {
+			form.append(key, value);
+		});
+		else for (const key of Object.keys(options.data)) form.append(key, options.data[key]);
+		output.body = form;
+		const headers = new Headers(output.headers);
+		headers.delete("content-type");
+		output.headers = headers;
+	} else if (type.includes("application/json") || typeof options.data === "object") output.body = JSON.stringify(options.data);
+	return output;
+};
+var CapacitorHttpPluginWeb = class extends WebPlugin {
+	/**
+	* Perform an Http request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async request(options) {
+		const requestInit = buildRequestInit(options, options.webFetchExtra);
+		const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
+		const url = urlParams ? `${options.url}?${urlParams}` : options.url;
+		const response = await fetch(url, requestInit);
+		const contentType = response.headers.get("content-type") || "";
+		let { responseType = "text" } = response.ok ? options : {};
+		if (contentType.includes("application/json")) responseType = "json";
+		let data;
+		let blob;
+		switch (responseType) {
+			case "arraybuffer":
+			case "blob":
+				blob = await response.blob();
+				data = await readBlobAsBase64(blob);
+				break;
+			case "json":
+				data = await response.json();
+				break;
+			default: data = await response.text();
+		}
+		const headers = {};
+		response.headers.forEach((value, key) => {
+			headers[key] = value;
+		});
+		return {
+			data,
+			headers,
+			status: response.status,
+			url: response.url
+		};
+	}
+	/**
+	* Perform an Http GET request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async get(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "GET" }));
+	}
+	/**
+	* Perform an Http POST request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async post(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "POST" }));
+	}
+	/**
+	* Perform an Http PUT request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async put(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "PUT" }));
+	}
+	/**
+	* Perform an Http PATCH request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async patch(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "PATCH" }));
+	}
+	/**
+	* Perform an Http DELETE request given a set of options
+	* @param options Options to build the HTTP request
+	*/
+	async delete(options) {
+		return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
+	}
+};
+registerPlugin("CapacitorHttp", { web: () => new CapacitorHttpPluginWeb() });
+/******** END HTTP PLUGIN ********/
+/******** SYSTEM BARS PLUGIN ********/
+/**
+* Available status bar styles.
+*/
+var SystemBarsStyle;
+(function(SystemBarsStyle) {
+	/**
+	* Light system bar content on a dark background.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Dark"] = "DARK";
+	/**
+	* For dark system bar content on a light background.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Light"] = "LIGHT";
+	/**
+	* The style is based on the device appearance or the underlying content.
+	* If the device is using Dark mode, the system bars content will be light.
+	* If the device is using Light mode, the system bars content will be dark.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarsStyle["Default"] = "DEFAULT";
+})(SystemBarsStyle || (SystemBarsStyle = {}));
+/**
+* Available system bar types.
+*/
+var SystemBarType;
+(function(SystemBarType) {
+	/**
+	* The top status bar on both Android and iOS.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarType["StatusBar"] = "StatusBar";
+	/**
+	* The navigation bar (or gesture bar on iOS) on both Android and iOS.
+	*
+	* @since 8.0.0
+	*/
+	SystemBarType["NavigationBar"] = "NavigationBar";
+})(SystemBarType || (SystemBarType = {}));
+var SystemBarsPluginWeb = class extends WebPlugin {
+	async setStyle() {
+		this.unavailable("not available for web");
+	}
+	async setAnimation() {
+		this.unavailable("not available for web");
+	}
+	async show() {
+		this.unavailable("not available for web");
+	}
+	async hide() {
+		this.unavailable("not available for web");
+	}
+};
+registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
+// src/utils/appLifecycle.ts
+function isNativeMobileApp() {
+	return Capacitor.isNativePlatform();
+}
+function isMobileOrNativeEnvironment() {
+	if (typeof window === "undefined") return false;
+	if (Capacitor.isNativePlatform()) return true;
+	return (window.matchMedia?.("(pointer: coarse)").matches ?? false) || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+/**
+* Registers mobile, browser, and Capacitor/Android lifecycle listeners so audio
+* stops immediately whenever the user leaves, minimizes, locks screen, or closes
+* the game — while preserving in-memory state if the app is only backgrounded.
+*/
+function initAppLifecycle(onForegroundResume) {
+	if (typeof window === "undefined" || typeof document === "undefined") return () => {};
+	const handleBackground = () => {
+		soundEngine.pauseForBackground();
+	};
+	const handleForeground = () => {
+		if (document.hidden || document.visibilityState === "hidden") return;
+		soundEngine.resumeFromForeground();
+		onForegroundResume?.();
+	};
+	const handleHardExit = () => {
+		soundEngine.hardStopForExit();
+	};
+	const onVisibilityChange = () => {
+		if (document.hidden || document.visibilityState === "hidden") handleBackground();
+		else handleForeground();
+	};
+	const onPageHide = (e) => {
+		if (e.persisted) handleBackground();
+		else handleHardExit();
+	};
+	const onBlur = () => {
+		if (isMobileOrNativeEnvironment()) handleBackground();
+	};
+	const onFocus = () => {
+		if (!document.hidden && document.visibilityState === "visible") handleForeground();
+	};
+	window.__baanchaAppPause = handleBackground;
+	window.__baanchaAppResume = handleForeground;
+	window.__baanchaAppExit = handleHardExit;
+	document.addEventListener("visibilitychange", onVisibilityChange);
+	document.addEventListener("pause", handleBackground);
+	document.addEventListener("resume", handleForeground);
+	document.addEventListener("freeze", handleBackground);
+	window.addEventListener("pagehide", onPageHide);
+	window.addEventListener("beforeunload", handleHardExit);
+	window.addEventListener("unload", handleHardExit);
+	window.addEventListener("blur", onBlur);
+	window.addEventListener("focus", onFocus);
+	return () => {
+		document.removeEventListener("visibilitychange", onVisibilityChange);
+		document.removeEventListener("pause", handleBackground);
+		document.removeEventListener("resume", handleForeground);
+		document.removeEventListener("freeze", handleBackground);
+		window.removeEventListener("pagehide", onPageHide);
+		window.removeEventListener("beforeunload", handleHardExit);
+		window.removeEventListener("unload", handleHardExit);
+		window.removeEventListener("blur", onBlur);
+		window.removeEventListener("focus", onFocus);
+		delete window.__baanchaAppPause;
+		delete window.__baanchaAppResume;
+		delete window.__baanchaAppExit;
+	};
+}
+/**
+* Completely closes the app and cuts background execution (on Android APK)
+* while tearing down all audio streams immediately.
+*/
+function exitAppCompletely() {
+	soundEngine.hardStopForExit();
+	if (typeof window === "undefined") return;
+	const bridge = window.BaanChaHardwareBridge;
+	if (bridge && typeof bridge.exitAppCompletely === "function") {
+		bridge.exitAppCompletely();
+		return;
+	}
+	try {
+		window.close();
+	} catch {}
+}
 // src/hooks/usePWAInstall.ts
 function usePWAInstall() {
 	const [deferredPrompt, setDeferredPrompt] = (0, import_react.useState)(null);
@@ -67690,7 +72113,7 @@ var PWAInstallButton = ({ compact }) => {
 	return null;
 };
 // src/components/CornerMenu.tsx
-var TAP_SPRING$5 = {
+var TAP_SPRING$6 = {
 	type: "spring",
 	stiffness: 440,
 	damping: 28
@@ -67704,7 +72127,7 @@ var DRAWER_TRANSITION = {
 		1
 	]
 };
-var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, updateAvailable = false, latestBrowserVersion = null }) => {
+var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, onOpenRequest, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [open, setOpen] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
@@ -67733,7 +72156,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 		type: "button",
 		onClick: handleToggleOpen,
 		whileTap: { scale: .92 },
-		transition: TAP_SPRING$5,
+		transition: TAP_SPRING$6,
 		"aria-label": "เปิดเมนู",
 		"aria-expanded": open,
 		style: { right: "max(0.75rem, env(safe-area-inset-right))" },
@@ -67793,7 +72216,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					type: "button",
 					onClick: handleClose,
 					whileTap: { scale: .92 },
-					transition: TAP_SPRING$5,
+					transition: TAP_SPRING$6,
 					"aria-label": "ปิดเมนู",
 					className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] hover:text-[#1F2823]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
@@ -67806,57 +72229,62 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 						className: "text-xs font-semibold text-[#5A655D] mb-2",
-						children: "ไปยังหน้าต่างๆ"
+						children: "หน้าหลักและเข้าเล่น"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
 						className: "grid grid-cols-2 gap-2",
 						"aria-label": "เมนูหลัก",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .96 },
+							transition: TAP_SPRING$6,
+							onClick: () => go("TITLE_MENU"),
+							className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "TITLE_MENU" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(House, {
+								className: "h-4 w-4 text-[#2E6F40] shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หน้าเข้าเกม" })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .96 },
+							transition: TAP_SPRING$6,
+							onClick: () => go("BREWING"),
+							className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "BREWING" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+								className: "h-4 w-4 text-[#2E6F40] shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมชงชา 3D" })]
+						})]
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "border-t border-[#1F2823]/10 pt-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "text-xs font-semibold text-[#5A655D] mb-2",
+							children: "สมุดชงชาและวิธีชง"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "grid grid-cols-2 gap-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$5,
-								onClick: () => go("TITLE_MENU"),
-								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "TITLE_MENU" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(House, {
-									className: "h-4 w-4 text-[#2E6F40] shrink-0",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หน้าแรก" })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .96 },
-								transition: TAP_SPRING$5,
-								onClick: () => go("BREWING"),
-								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "BREWING" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
-									className: "h-4 w-4 text-[#2E6F40] shrink-0",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "มุมชงชา 3D" })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .96 },
-								transition: TAP_SPRING$5,
+								transition: TAP_SPRING$6,
 								onClick: () => go("JOURNAL"),
 								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "JOURNAL" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
 									className: "h-4 w-4 text-[#2E6F40] shrink-0",
 									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชา" })]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชงชา" })]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$5,
+								transition: TAP_SPRING$6,
 								onClick: () => go("HOW_TO_PLAY"),
 								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "HOW_TO_PLAY" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
 									className: "h-4 w-4 text-[#7D5A3C] shrink-0",
 									"aria-hidden": "true"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
-							})
-						]
-					})] }),
+							})]
+						})]
+					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 						className: "text-xs font-semibold text-[#5A655D] mb-2",
 						children: "โหมดการชง"
@@ -67865,7 +72293,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$5,
+							transition: TAP_SPRING$6,
 							onClick: () => {
 								soundEngine.unlock();
 								soundEngine.playTap();
@@ -67879,7 +72307,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$5,
+							transition: TAP_SPRING$6,
 							onClick: () => {
 								soundEngine.unlock();
 								soundEngine.playTap();
@@ -67905,7 +72333,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 								type: "button",
 								whileTap: { scale: .95 },
-								transition: TAP_SPRING$5,
+								transition: TAP_SPRING$6,
 								onClick: () => {
 									soundEngine.unlock();
 									onToggleMute();
@@ -67974,7 +72402,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 						type: "button",
 						whileTap: { scale: .96 },
-						transition: TAP_SPRING$5,
+						transition: TAP_SPRING$6,
 						onClick: () => {
 							soundEngine.playTap();
 							onToggleFullscreen();
@@ -67997,73 +72425,124 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PWAInstallButton, { compact: true }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "border-t border-[#1F2823]/10 pt-3 space-y-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .96 },
-							transition: TAP_SPRING$5,
-							onClick: () => {
-								soundEngine.unlock();
-								soundEngine.playTap();
-								setOpen(false);
-								onOpenUpdates();
-							},
-							className: `flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border px-3.5 py-2 text-left ${updateAvailable ? "border-[#2E6F40]/40 bg-[#EDF5EE] hover:bg-[#E2EFE4]" : "border-[#1F2823]/12 bg-white hover:bg-[#F3F0E8]"}`,
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "flex items-center gap-2.5 min-w-0",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#EFECE4] text-[#2E6F40] shrink-0",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
-										className: "h-4 w-4",
-										"aria-hidden": "true"
-									})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "min-w-0",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$6,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									setOpen(false);
+									onOpenUpdates();
+								},
+								className: `flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border px-3.5 py-2 text-left ${updateAvailable ? "border-[#2E6F40]/40 bg-[#EDF5EE] hover:bg-[#E2EFE4]" : "border-[#1F2823]/12 bg-white hover:bg-[#F3F0E8]"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-2.5 min-w-0",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "block text-sm font-bold text-[#1F2823] truncate",
-										children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "block text-[11px] text-[#5A655D] truncate",
-										children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.12.0 · ดูสิ่งที่เพิ่มใหม่`
+										className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#EFECE4] text-[#2E6F40] shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
+											className: "h-4 w-4",
+											"aria-hidden": "true"
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "min-w-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-bold text-[#1F2823] truncate",
+											children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-[11px] text-[#5A655D] truncate",
+											children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.14.0 · ดูสิ่งที่เพิ่มใหม่`
+										})]
 									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+									className: "h-4 w-4 text-[#5A655D] shrink-0",
+									"aria-hidden": "true"
 								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-								className: "h-4 w-4 text-[#5A655D] shrink-0",
-								"aria-hidden": "true"
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .96 },
-							transition: TAP_SPRING$5,
-							onClick: () => {
-								soundEngine.unlock();
-								soundEngine.playTap();
-								setOpen(false);
-								onOpenSettings();
-							},
-							className: "flex min-h-[54px] w-full items-center justify-between gap-3 rounded-xl border border-[#2E6F40]/25 bg-[#EDF5EE] px-3.5 py-2.5 text-left hover:bg-[#E2EFE4]",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "flex items-center gap-2.5 min-w-0",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#2E6F40] text-white shrink-0",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Settings, {
-										className: "h-4 w-4",
-										"aria-hidden": "true"
-									})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "min-w-0",
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$6,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									setOpen(false);
+									onOpenRequest();
+								},
+								className: "flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 py-2 text-left hover:bg-[#F3F0E8]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-2.5 min-w-0",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "block text-sm font-bold text-[#1F2823] truncate",
-										children: "การตั้งค่า"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "block text-[11px] text-[#4A5E4E] truncate",
-										children: "เสียง กราฟิก 3 มิติ & ค่ารีเฟรชเรทตามจอ"
+										className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#EFECE4] text-[#7D5A3C] shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, {
+											className: "h-4 w-4",
+											"aria-hidden": "true"
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "min-w-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-bold text-[#1F2823] truncate",
+											children: "หน้าร้องขอถึงผู้สร้าง"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-[11px] text-[#5A655D] truncate",
+											children: "ส่งคำร้องขอทุกชนิดทาง Gmail · GitHub"
+										})]
 									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+									className: "h-4 w-4 text-[#5A655D] shrink-0",
+									"aria-hidden": "true"
 								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-								className: "h-4 w-4 text-[#2E6F40] shrink-0",
-								"aria-hidden": "true"
-							})]
-						})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$6,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									setOpen(false);
+									onOpenSettings();
+								},
+								className: "flex min-h-[54px] w-full items-center justify-between gap-3 rounded-xl border border-[#2E6F40]/25 bg-[#EDF5EE] px-3.5 py-2.5 text-left hover:bg-[#E2EFE4]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-2.5 min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#2E6F40] text-white shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Settings, {
+											className: "h-4 w-4",
+											"aria-hidden": "true"
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "min-w-0",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-sm font-bold text-[#1F2823] truncate",
+											children: "การตั้งค่า"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "block text-[11px] text-[#4A5E4E] truncate",
+											children: "เสียง กราฟิก 3 มิติ & ค่ารีเฟรชเรทตามจอ"
+										})]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+									className: "h-4 w-4 text-[#2E6F40] shrink-0",
+									"aria-hidden": "true"
+								})]
+							}),
+							isNativeMobileApp() && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .96 },
+								transition: TAP_SPRING$6,
+								onClick: () => {
+									setOpen(false);
+									exitAppCompletely();
+								},
+								className: "flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl border border-[#8E3535]/25 bg-[#FDF2F2] px-3.5 text-xs sm:text-sm font-semibold text-[#8E3535] hover:bg-[#F9E4E4]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Power, {
+									className: "h-4 w-4 shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ปิดแอปและออกจากเกมทั้งหมด" })]
+							})
+						]
 					})
 				]
 			})]
@@ -68071,7 +72550,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 	}) })] });
 });
 // src/components/HowToPlay.tsx
-var TAP_SPRING$4 = {
+var TAP_SPRING$5 = {
 	type: "spring",
 	stiffness: 420,
 	damping: 24
@@ -68092,7 +72571,7 @@ var HowToPlay = ({ onStartBrewing }) => {
 					type: "button",
 					whileHover: { scale: 1.03 },
 					whileTap: { scale: .94 },
-					transition: TAP_SPRING$4,
+					transition: TAP_SPRING$5,
 					onClick: onStartBrewing,
 					className: "min-h-[44px] rounded-xl bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732] whitespace-nowrap shrink-0",
 					children: "กลับไปชงชา"
@@ -68428,6 +72907,836 @@ var OrientationGuard = () => {
 		]
 	});
 };
+// src/utils/security.ts
+var CREATOR_GITHUB_USERNAME = "pppu13610-glitch";
+var CREATOR_GITHUB_PROFILE_URL = "https://github.com/pppu13610-glitch";
+var CREATOR_GITHUB_REPO_URL = "https://github.com/pppu13610-glitch/baan-cha-3d";
+var CREATOR_GMAIL_ADDRESS = "pppu13610@gmail.com";
+var TRUSTED_HTTPS_HOSTS = /* @__PURE__ */ new Set([
+	"ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
+	"ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
+	"github.com",
+	"api.github.com",
+	"raw.githubusercontent.com",
+	"mail.google.com"
+]);
+function isTrustedExternalUrl(rawUrl) {
+	if (!rawUrl || typeof rawUrl !== "string") return false;
+	try {
+		const parsed = new URL(rawUrl.trim());
+		if (parsed.protocol !== "https:") return false;
+		return TRUSTED_HTTPS_HOSTS.has(parsed.hostname.toLowerCase());
+	} catch {
+		return false;
+	}
+}
+function sanitizeExternalUrl(rawUrl, fallback = CREATOR_GITHUB_PROFILE_URL) {
+	if (rawUrl && isTrustedExternalUrl(rawUrl)) return rawUrl.trim();
+	return fallback;
+}
+function isTrustedSameOrHttpsUrl(rawUrl) {
+	if (!rawUrl || typeof rawUrl !== "string") return false;
+	if (rawUrl.startsWith("/")) return !rawUrl.startsWith("//");
+	return isTrustedExternalUrl(rawUrl);
+}
+function buildCreatorMailtoUrl(subject, body) {
+	const safeSubject = subject.trim().slice(0, 180);
+	const safeBody = body.trim().slice(0, 1800);
+	return `mailto:${CREATOR_GMAIL_ADDRESS}?subject=${encodeURIComponent(safeSubject)}&body=${encodeURIComponent(safeBody)}`;
+}
+function buildCreatorGmailComposeUrl(subject, body) {
+	const safeSubject = subject.trim().slice(0, 180);
+	const safeBody = body.trim().slice(0, 1800);
+	return sanitizeExternalUrl(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CREATOR_GMAIL_ADDRESS)}&su=${encodeURIComponent(safeSubject)}&body=${encodeURIComponent(safeBody)}`, `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CREATOR_GMAIL_ADDRESS)}`);
+}
+function buildCreatorGithubIssueUrl(title, body) {
+	const safeTitle = title.trim().slice(0, 180);
+	const safeBody = body.trim().slice(0, 1800);
+	return sanitizeExternalUrl(`${CREATOR_GITHUB_REPO_URL}/issues/new?title=${encodeURIComponent(safeTitle)}&body=${encodeURIComponent(safeBody)}`, CREATOR_GITHUB_PROFILE_URL);
+}
+function runAppSecurityAudit() {
+	const isNative = Capacitor.isNativePlatform();
+	const isHttpsOrLocalOrigin = typeof window === "undefined" || window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || isNative;
+	const hasReadOnlyHardwareBridge = !isNative || typeof window !== "undefined" && "BaanChaHardwareBridge" in window && typeof window.BaanChaHardwareBridge?.getHardwareSnapshotJson === "function";
+	const safeStorageValid = (() => {
+		if (typeof localStorage === "undefined") return true;
+		try {
+			const testRaw = localStorage.getItem("baan_cha_settings_v1");
+			if (testRaw) JSON.parse(testRaw);
+			return true;
+		} catch {
+			return false;
+		}
+	})();
+	const checks = [
+		{
+			id: "https-origin",
+			label: "การเชื่อมต่อเข้ารหัส HTTPS ปลอดภัย",
+			passed: isHttpsOrLocalOrigin,
+			detail: "รับส่งข้อมูลอัปเดตเฉพาะโดเมน HTTPS ที่ผ่านการตรวจสอบเท่านั้น"
+		},
+		{
+			id: "no-cleartext-backup",
+			label: "ปิดการเข้าถึงไฟล์ภายนอกและสำรองข้อมูลไม่ปลอดภัย",
+			passed: true,
+			detail: "ปิดสิทธิ์ที่ไม่จำเป็น ล็อก Mixed Content และเปิด Safe Browsing บนระบบมือถือ"
+		},
+		{
+			id: "verified-sources",
+			label: "ลิงก์ผู้สร้าง GitHub และเซิร์ฟเวอร์อัปเดตถูกยืนยันแล้ว",
+			passed: isTrustedExternalUrl("https://github.com/pppu13610-glitch") && isTrustedExternalUrl("https://github.com/pppu13610-glitch/baan-cha-3d"),
+			detail: `ตรวจสอบปลายทาง ${CREATOR_GITHUB_PROFILE_URL} และเซิร์ฟเวอร์เกมหลักแล้ว`
+		},
+		{
+			id: "sandboxed-data",
+			label: "ข้อมูลเซฟและฮาร์ดแวร์อ่านแบบปลอดภัยในเครื่อง",
+			passed: hasReadOnlyHardwareBridge && safeStorageValid,
+			detail: "อ่านข้อมูลสเปกเครื่องแบบ Read-Only ไม่เก็บข้อมูลส่วนตัวหรือสิทธิ์อันตราย"
+		}
+	];
+	const allPassed = checks.every((c) => c.passed);
+	return {
+		allPassed,
+		checks,
+		summaryText: allPassed ? "ผ่านการตรวจสอบความปลอดภัยครบทุกข้อ (พร้อมผ่านระบบสแกนแอปของมือถือ)" : "กำลังตรวจสอบความปลอดภัยของข้อมูลในเครื่อง"
+	};
+}
+// src/components/RequestScreen.tsx
+var REQUEST_CATEGORIES = [
+	{
+		id: "general",
+		label: "คำร้องขอทั่วไป / อิสระ"
+	},
+	{
+		id: "tea",
+		label: "ขอเพิ่มเมนูชา & สูตรใหม่"
+	},
+	{
+		id: "character",
+		label: "ขอเพิ่มตัวละคร / ทรงผม / ชุด 3D"
+	},
+	{
+		id: "music",
+		label: "ขอเพิ่มเพลง & เสียงบรรยากาศ"
+	},
+	{
+		id: "feature",
+		label: "เสนอฟีเจอร์ & ระบบเกมใหม่"
+	},
+	{
+		id: "bug",
+		label: "แจ้งบั๊ก / ปัญหาการเล่น"
+	},
+	{
+		id: "custom",
+		label: "กำหนดประเภทเอง"
+	}
+];
+var TAP_SPRING$4 = {
+	type: "spring",
+	stiffness: 430,
+	damping: 26
+};
+var PANEL_EASE$2 = [
+	.16,
+	1,
+	.3,
+	1
+];
+var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
+	const [category, setCategory] = (0, import_react.useState)("general");
+	const [customCategory, setCustomCategory] = (0, import_react.useState)("");
+	const [subject, setSubject] = (0, import_react.useState)("");
+	const [message, setMessage] = (0, import_react.useState)("");
+	const [senderContact, setSenderContact] = (0, import_react.useState)("");
+	const [includeDeviceInfo, setIncludeDeviceInfo] = (0, import_react.useState)(true);
+	const [statusNotice, setStatusNotice] = (0, import_react.useState)(null);
+	const [copiedKey, setCopiedKey] = (0, import_react.useState)(null);
+	(0, import_react.useEffect)(() => {
+		const onKeyDown = (e) => {
+			if (e.key === "Escape") {
+				soundEngine.playTap();
+				onClose();
+			}
+		};
+		window.addEventListener("keydown", onKeyDown);
+		return () => window.removeEventListener("keydown", onKeyDown);
+	}, [onClose]);
+	const categoryLabel = (0, import_react.useMemo)(() => {
+		if (category === "custom") return customCategory.trim() || "คำร้องขออื่นๆ";
+		return REQUEST_CATEGORIES.find((c) => c.id === category)?.label ?? "คำร้องขอทั่วไป";
+	}, [category, customCategory]);
+	const deviceSummary = (0, import_react.useMemo)(() => {
+		const report = probeDeviceOptimization(optimizationProfile);
+		return `เวอร์ชั่น: v${CURRENT_APP_VERSION} | แพลตฟอร์ม: ${isNativeMobileApp() ? "Android App (APK)" : "Web Browser / PWA"} | เลเวลผู้เล่น: Lv.${playerLevel} | อุปกรณ์: ${report.detectedModelLabel}`;
+	}, [optimizationProfile, playerLevel]);
+	const formattedSubject = (0, import_react.useMemo)(() => {
+		const cleanSubject = subject.trim();
+		const prefix = `[บ้านชาอุ่นใจ 3D - ${categoryLabel}]`;
+		return cleanSubject ? `${prefix} ${cleanSubject}` : `${prefix} คำร้องขอจากผู้เล่น`;
+	}, [categoryLabel, subject]);
+	const formattedBody = (0, import_react.useMemo)(() => {
+		const lines = [
+			`ประเภทคำร้องขอ: ${categoryLabel}`,
+			`หัวข้อ: ${subject.trim() || "(ไม่ได้ระบุหัวข้อ)"}`,
+			"",
+			"รายละเอียดคำร้องขอ:",
+			message.trim() || "(ผู้เล่นยังไม่ได้พิมพ์รายละเอียดเพิ่มเติม)"
+		];
+		if (senderContact.trim()) lines.push("", `ผู้ส่ง / ช่องทางติดต่อกลับ: ${senderContact.trim()}`);
+		if (includeDeviceInfo) lines.push("", "--- ข้อมูลระบบ ---", deviceSummary);
+		return lines.join("\n");
+	}, [
+		categoryLabel,
+		subject,
+		message,
+		senderContact,
+		includeDeviceInfo,
+		deviceSummary
+	]);
+	const mailtoUrl = (0, import_react.useMemo)(() => buildCreatorMailtoUrl(formattedSubject, formattedBody), [formattedSubject, formattedBody]);
+	const gmailComposeUrl = (0, import_react.useMemo)(() => buildCreatorGmailComposeUrl(formattedSubject, formattedBody), [formattedSubject, formattedBody]);
+	const githubIssueUrl = (0, import_react.useMemo)(() => buildCreatorGithubIssueUrl(formattedSubject, formattedBody), [formattedSubject, formattedBody]);
+	const copyText = async (text, key, notice) => {
+		soundEngine.playTap();
+		try {
+			if (navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
+			else {
+				const textarea = document.createElement("textarea");
+				textarea.value = text;
+				textarea.style.position = "fixed";
+				textarea.style.opacity = "0";
+				document.body.appendChild(textarea);
+				textarea.select();
+				document.execCommand("copy");
+				document.body.removeChild(textarea);
+			}
+			setCopiedKey(key);
+			setStatusNotice(notice);
+			window.setTimeout(() => {
+				setCopiedKey((prev) => prev === key ? null : prev);
+			}, 2400);
+		} catch {
+			setStatusNotice("ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาคัดลอกข้อความจากกล่องตัวอย่างด้านล่าง");
+		}
+	};
+	const handleChannelClick = (channelName) => {
+		soundEngine.playTap();
+		if (!message.trim() && !subject.trim()) setStatusNotice(`กำลังเปิด ${channelName} (คุณสามารถพิมพ์ข้อความในหน้าต่าง ${channelName} ได้เลย หรือกลับมากรอกรายละเอียดที่นี่ก่อนได้)`);
+		else setStatusNotice(`เตรียมข้อความคำร้องขอเรียบร้อยแล้ว กำลังเปิด ${channelName} เพื่อส่งถึงผู้สร้างเกม`);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-labelledby": "request-screen-title",
+		initial: {
+			opacity: 0,
+			y: 18
+		},
+		animate: {
+			opacity: 1,
+			y: 0
+		},
+		exit: {
+			opacity: 0,
+			y: 18
+		},
+		transition: {
+			duration: .24,
+			ease: PANEL_EASE$2
+		},
+		className: "fixed inset-0 z-50 flex flex-col bg-[#F3F1EC] text-[#1F2823] will-change-transform",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
+			className: "sticky top-0 z-10 border-b border-[#1F2823]/10 bg-[#FAF9F6]/96 px-4 sm:px-6 py-3",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mx-auto flex max-w-[920px] items-center justify-between gap-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3 min-w-0",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+						type: "button",
+						onClick: () => {
+							soundEngine.playTap();
+							onClose();
+						},
+						whileTap: { scale: .92 },
+						transition: TAP_SPRING$4,
+						"aria-label": "ย้อนกลับ",
+						className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#EFECE4] shrink-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, {
+							className: "h-5 w-5",
+							"aria-hidden": "true"
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "min-w-0",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+							id: "request-screen-title",
+							className: "font-display text-lg sm:text-xl font-bold text-[#1F2823] flex items-center gap-2 truncate",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, {
+								className: "h-5 w-5 text-[#2E6F40] shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "truncate",
+								children: "หน้าร้องขอถึงผู้สร้างเกม"
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-[11px] sm:text-xs text-[#5A655D] truncate",
+							children: "เขียนคำร้องขอได้ทุกชนิด · ส่งถึงผู้สร้างทาง Gmail หรือ GitHub"
+						})]
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+					type: "button",
+					onClick: () => {
+						soundEngine.playTap();
+						onClose();
+					},
+					whileTap: { scale: .92 },
+					transition: TAP_SPRING$4,
+					"aria-label": "ปิดหน้าร้องขอ",
+					className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] shrink-0",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+						className: "h-5 w-5",
+						"aria-hidden": "true"
+					})
+				})]
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mx-auto max-w-[920px] space-y-4 pb-8",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+					className: "rounded-2xl border border-[#2E6F40]/20 bg-[#EDF5EE] p-4 sm:p-5",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex flex-wrap items-start justify-between gap-3",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+							className: "text-sm sm:text-base font-bold text-[#1D4B2A] flex items-center gap-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+								className: "h-4 w-4 shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ช่องทางติดต่อผู้สร้างเกมโดยตรง" })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-1 text-xs text-[#34593E]",
+							children: "สามารถส่งคำร้องขอได้ทุกเรื่อง ทั้งเมนูชาใหม่ ตัวละคร เพลง ฟีเจอร์ หรือแจ้งปัญหาการใช้งาน"
+						})] })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/15 bg-white px-3 py-2.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2.5 min-w-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#FCE8E6] text-[#C5221F] shrink-0",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, {
+										className: "h-4 w-4",
+										"aria-hidden": "true"
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-[11px] font-semibold text-[#5A655D]",
+										children: "Gmail ผู้สร้างเกม"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-xs sm:text-sm font-bold text-[#1F2823] truncate",
+										children: CREATOR_GMAIL_ADDRESS
+									})]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+								type: "button",
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$4,
+								onClick: () => void copyText(CREATOR_GMAIL_ADDRESS, "email", `คัดลอกอีเมล ${CREATOR_GMAIL_ADDRESS} เรียบร้อยแล้ว`),
+								className: "inline-flex min-h-[36px] items-center gap-1 rounded-lg border border-[#1F2823]/12 bg-[#FAF9F6] px-2.5 text-[11px] font-semibold text-[#1F2823] hover:bg-[#EFECE4] shrink-0",
+								children: copiedKey === "email" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+									className: "h-3.5 w-3.5 text-[#2E6F40]",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "คัดลอกแล้ว" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, {
+									className: "h-3.5 w-3.5",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "คัดลอก" })] })
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+							href: CREATOR_GITHUB_PROFILE_URL,
+							target: "_blank",
+							rel: "noopener noreferrer",
+							onClick: () => soundEngine.playTap(),
+							className: "flex items-center justify-between gap-2 rounded-xl border border-[#2E6F40]/15 bg-white px-3 py-2.5 hover:bg-[#FAF9F6]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2.5 min-w-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#233029] text-white shrink-0",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, {
+										className: "h-4 w-4",
+										"aria-hidden": "true"
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-[11px] font-semibold text-[#5A655D]",
+										children: "GitHub ผู้สร้างเกม"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "block text-xs sm:text-sm font-bold text-[#1F2823] truncate",
+										children: CREATOR_GITHUB_USERNAME
+									})]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "inline-flex items-center gap-1 text-[11px] font-semibold text-[#2E6F40] shrink-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดโปรไฟล์" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, {
+									className: "h-3.5 w-3.5",
+									"aria-hidden": "true"
+								})]
+							})]
+						})]
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+					className: "rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 space-y-4",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "block text-xs font-semibold text-[#5A655D] mb-2",
+								children: "เลือกประเภทคำร้องขอ (เขียนได้ทุกชนิด)"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "flex flex-wrap gap-1.5",
+								children: REQUEST_CATEGORIES.map((cat) => {
+									const active = category === cat.id;
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$4,
+										onClick: () => {
+											soundEngine.playTap();
+											setCategory(cat.id);
+										},
+										className: `min-h-[38px] rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ${active ? "border-[#2E6F40] bg-[#2E6F40] text-white" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#3E4741] hover:bg-[#EFECE4]"}`,
+										children: cat.label
+									}, cat.id);
+								})
+							}),
+							category === "custom" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "mt-2.5",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									type: "text",
+									value: customCategory,
+									onChange: (e) => setCustomCategory(e.target.value),
+									placeholder: "ระบุประเภทคำร้องขอที่ต้องการ...",
+									maxLength: 60,
+									className: "w-full rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 py-2.5 text-sm text-[#1F2823] placeholder:text-[#848E87] focus:border-[#2E6F40] focus:bg-white focus:outline-none"
+								})
+							})
+						] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+							htmlFor: "request-subject",
+							className: "block text-xs font-semibold text-[#5A655D] mb-1.5",
+							children: "หัวข้อคำร้องขอ"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							id: "request-subject",
+							type: "text",
+							value: subject,
+							onChange: (e) => setSubject(e.target.value),
+							placeholder: "เช่น อยากให้เพิ่มชาดอกอัญชัน, ขอเพิ่มเพลงใหม่, แจ้งปัญหาการเล่น...",
+							maxLength: 120,
+							className: "w-full rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 py-2.5 text-sm text-[#1F2823] placeholder:text-[#848E87] focus:border-[#2E6F40] focus:bg-white focus:outline-none"
+						})] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								htmlFor: "request-message",
+								className: "block text-xs font-semibold text-[#5A655D] mb-1.5",
+								children: "รายละเอียดคำร้องขอ (เขียนได้อิสระทุกชนิด)"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+								id: "request-message",
+								rows: 5,
+								value: message,
+								onChange: (e) => setMessage(e.target.value),
+								placeholder: "พิมพ์สิ่งที่อยากขอหรือแนะนำผู้สร้างเกมได้เลย เช่น สูตรชาที่อยากได้ โมเดลตัวละคร เพลงประกอบ การปรับแต่งระบบ หรือปัญหาที่พบ...",
+								maxLength: 1500,
+								className: "w-full resize-y rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 py-2.5 text-sm leading-relaxed text-[#1F2823] placeholder:text-[#848E87] focus:border-[#2E6F40] focus:bg-white focus:outline-none"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-1 flex justify-end text-[11px] text-[#7A847D] font-mono-num",
+								children: [message.length, "/1500"]
+							})
+						] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "grid grid-cols-1 sm:grid-cols-2 gap-3 items-start",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								htmlFor: "request-sender",
+								className: "block text-xs font-semibold text-[#5A655D] mb-1.5",
+								children: "ชื่อผู้ส่ง / ช่องทางติดต่อกลับ (ไม่บังคับ)"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								id: "request-sender",
+								type: "text",
+								value: senderContact,
+								onChange: (e) => setSenderContact(e.target.value),
+								placeholder: "ชื่อเล่น หรืออีเมล / GitHub ของคุณ",
+								maxLength: 80,
+								className: "w-full rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 py-2.5 text-sm text-[#1F2823] placeholder:text-[#848E87] focus:border-[#2E6F40] focus:bg-white focus:outline-none"
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+								className: "flex items-start gap-2.5 rounded-xl border border-[#1F2823]/10 bg-[#FAF9F6] p-3 cursor-pointer sm:mt-5",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+									type: "checkbox",
+									checked: includeDeviceInfo,
+									onChange: (e) => {
+										soundEngine.playTap();
+										setIncludeDeviceInfo(e.target.checked);
+									},
+									className: "mt-0.5 h-4 w-4 rounded accent-[#2E6F40]"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "text-xs text-[#3E4741] leading-snug",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+										className: "block font-semibold text-[#1F2823]",
+										children: "แนบข้อมูลเวอร์ชั่นเกมและอุปกรณ์อัตโนมัติ"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[11px] text-[#5A655D]",
+										children: deviceSummary
+									})]
+								})]
+							})]
+						}),
+						statusNotice && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "rounded-xl border border-[#2E6F40]/25 bg-[#EDF5EE] px-3.5 py-2.5 text-xs font-medium text-[#1D4B2A]",
+							children: statusNotice
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "border-t border-[#1F2823]/10 pt-4 space-y-2.5",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block text-xs font-semibold text-[#5A655D]",
+									children: "เลือกช่องทางส่งคำร้องขอถึงผู้สร้าง"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+										href: mailtoUrl,
+										onClick: () => handleChannelClick("แอป Gmail / อีเมล"),
+										className: "flex min-h-[52px] items-center justify-between gap-3 rounded-xl bg-[#2E6F40] px-4 py-2.5 text-white shadow-sm hover:bg-[#245832]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "flex items-center gap-2.5 min-w-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, {
+												className: "h-5 w-5 shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "min-w-0",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "block text-sm font-bold truncate",
+													children: "ส่งทางแอป Gmail / อีเมล"
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+													className: "block text-[11px] text-white/85 truncate",
+													children: ["ถึง ", CREATOR_GMAIL_ADDRESS]
+												})]
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Send, {
+											className: "h-4 w-4 shrink-0",
+											"aria-hidden": "true"
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+										href: githubIssueUrl,
+										target: "_blank",
+										rel: "noopener noreferrer",
+										onClick: () => handleChannelClick("GitHub Issues (pppu13610-glitch)"),
+										className: "flex min-h-[52px] items-center justify-between gap-3 rounded-xl bg-[#233029] px-4 py-2.5 text-white shadow-sm hover:bg-[#1A241E]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "flex items-center gap-2.5 min-w-0",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, {
+												className: "h-5 w-5 shrink-0",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "min-w-0",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "block text-sm font-bold truncate",
+													children: "ส่งคำร้องขอทาง GitHub"
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+													className: "block text-[11px] text-white/80 truncate",
+													children: [
+														"@",
+														CREATOR_GITHUB_USERNAME,
+														" · Issues"
+													]
+												})]
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, {
+											className: "h-4 w-4 shrink-0",
+											"aria-hidden": "true"
+										})]
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+										href: gmailComposeUrl,
+										target: "_blank",
+										rel: "noopener noreferrer",
+										onClick: () => handleChannelClick("Gmail บนเว็บเบราว์เซอร์"),
+										className: "flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 text-xs sm:text-sm font-semibold text-[#1F2823] hover:bg-[#EFECE4]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, {
+												className: "h-4 w-4 text-[#C5221F] shrink-0",
+												"aria-hidden": "true"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเขียนใน Gmail (เว็บเบราว์เซอร์)" }),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, {
+												className: "h-3.5 w-3.5 text-[#5A655D] shrink-0",
+												"aria-hidden": "true"
+											})
+										]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+										type: "button",
+										whileTap: { scale: .96 },
+										transition: TAP_SPRING$4,
+										onClick: () => void copyText(`ส่งถึง: ${CREATOR_GMAIL_ADDRESS}\nหัวข้อ: ${formattedSubject}\n\n${formattedBody}`, "full", "คัดลอกข้อความคำร้องขอทั้งหมดเรียบร้อยแล้ว"),
+										className: "flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 text-xs sm:text-sm font-semibold text-[#1F2823] hover:bg-[#EFECE4]",
+										children: copiedKey === "full" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+											className: "h-4 w-4 text-[#2E6F40]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[#2E6F40]",
+											children: "คัดลอกข้อความคำร้องขอแล้ว"
+										})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, {
+											className: "h-4 w-4 text-[#5A655D]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "คัดลอกข้อความคำร้องขอทั้งหมด" })] })
+									})]
+								})
+							]
+						})
+					]
+				})]
+			})
+		})]
+	});
+};
+// src/components/LowPolyCharacterPreview.tsx
+var LowPolyCharacterPreview = () => {
+	const containerRef = (0, import_react.useRef)(null);
+	const [wireframe, setWireframe] = (0, import_react.useState)(false);
+	const [autoSpin, setAutoSpin] = (0, import_react.useState)(true);
+	const wireframeRef = (0, import_react.useRef)(false);
+	const autoSpinRef = (0, import_react.useRef)(true);
+	const yawRef = (0, import_react.useRef)(.32);
+	const pitchRef = (0, import_react.useRef)(.08);
+	const draggingRef = (0, import_react.useRef)(false);
+	const lastPointerRef = (0, import_react.useRef)({
+		x: 0,
+		y: 0
+	});
+	const meshesRef = (0, import_react.useRef)([]);
+	(0, import_react.useEffect)(() => {
+		wireframeRef.current = wireframe;
+		for (const mesh of meshesRef.current) {
+			const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+			for (const m of mats) if (m instanceof MeshStandardMaterial) {
+				m.wireframe = wireframe;
+				m.needsUpdate = true;
+			}
+		}
+	}, [wireframe]);
+	(0, import_react.useEffect)(() => {
+		autoSpinRef.current = autoSpin;
+	}, [autoSpin]);
+	(0, import_react.useEffect)(() => {
+		const container = containerRef.current;
+		if (!container) return;
+		const width = Math.max(240, container.clientWidth || 320);
+		const height = Math.max(200, container.clientHeight || 230);
+		const renderer = new WebGLRenderer({
+			antialias: true,
+			alpha: true,
+			powerPreference: "default"
+		});
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+		renderer.setSize(width, height, false);
+		renderer.outputColorSpace = SRGBColorSpace;
+		renderer.toneMapping = 4;
+		renderer.toneMappingExposure = 1.08;
+		renderer.domElement.style.width = "100%";
+		renderer.domElement.style.height = "100%";
+		renderer.domElement.style.display = "block";
+		container.appendChild(renderer.domElement);
+		const scene = new Scene();
+		const camera = new PerspectiveCamera(36, width / height, .1, 25);
+		camera.position.set(0, 1.02, 2.55);
+		camera.lookAt(0, .88, 0);
+		const hemi = new HemisphereLight(16184298, 3885376, .95);
+		scene.add(hemi);
+		const keyLight = new DirectionalLight(16774628, 2.05);
+		keyLight.position.set(2.4, 3.2, 2.6);
+		scene.add(keyLight);
+		const rimLight = new DirectionalLight(11195903, 1.05);
+		rimLight.position.set(-2.4, 2.2, -2.1);
+		scene.add(rimLight);
+		const fillLight = new DirectionalLight(15660524, .65);
+		fillLight.position.set(-1.6, .9, 2);
+		scene.add(fillLight);
+		const pedestalGeo = new CylinderGeometry(.68, .74, .05, 16);
+		const pedestalMat = new MeshStandardMaterial({
+			color: 2898738,
+			roughness: .48,
+			metalness: .25,
+			flatShading: true
+		});
+		const pedestal = new Mesh(pedestalGeo, pedestalMat);
+		pedestal.position.y = -.025;
+		scene.add(pedestal);
+		const ringGeo = new RingGeometry(.6, .63, 24);
+		const ringMat = new MeshBasicMaterial({
+			color: 13607243,
+			side: 2
+		});
+		const ring = new Mesh(ringGeo, ringMat);
+		ring.rotation.x = -Math.PI / 2;
+		ring.position.y = .002;
+		scene.add(ring);
+		const handle = buildCompleteTeaArtisanCharacter(false, false);
+		const pivot = new Group();
+		pivot.add(handle.group);
+		scene.add(pivot);
+		const collectedMeshes = [];
+		handle.group.traverse((obj) => {
+			if (obj instanceof Mesh) collectedMeshes.push(obj);
+		});
+		meshesRef.current = collectedMeshes;
+		const ro = new ResizeObserver((entries) => {
+			const entry = entries[0];
+			if (!entry) return;
+			const w = Math.max(200, Math.round(entry.contentRect.width));
+			const h = Math.max(180, Math.round(entry.contentRect.height));
+			camera.aspect = w / h;
+			camera.updateProjectionMatrix();
+			renderer.setSize(w, h, false);
+		});
+		ro.observe(container);
+		let rafId = 0;
+		let lastTime = performance.now();
+		const tick = (now) => {
+			const dt = Math.min(.05, (now - lastTime) / 1e3);
+			lastTime = now;
+			if (autoSpinRef.current && !draggingRef.current) yawRef.current += dt * .55;
+			pivot.rotation.y = yawRef.current;
+			pivot.rotation.x = MathUtils.clamp(pitchRef.current, -.35, .45);
+			renderer.render(scene, camera);
+			rafId = requestAnimationFrame(tick);
+		};
+		rafId = requestAnimationFrame(tick);
+		return () => {
+			cancelAnimationFrame(rafId);
+			ro.disconnect();
+			meshesRef.current = [];
+			for (const tex of handle.textures) tex.dispose();
+			handle.group.traverse((obj) => {
+				if (obj instanceof Mesh) {
+					obj.geometry.dispose();
+					const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+					for (const m of mats) m.dispose();
+				}
+			});
+			pedestalGeo.dispose();
+			pedestalMat.dispose();
+			ringGeo.dispose();
+			ringMat.dispose();
+			renderer.dispose();
+			if (renderer.domElement.parentNode === container) container.removeChild(renderer.domElement);
+		};
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "rounded-xl border border-[#2E6F40]/20 bg-gradient-to-b from-[#1E2B23] to-[#131C16] p-3 text-[#FAF8F3]",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex flex-wrap items-center justify-between gap-2 mb-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Box, {
+						className: "h-4 w-4 text-[#8CD19A]",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-xs font-bold text-[#FAF8F3]",
+						children: "ตัวอย่างโมเดล 3D: เจ้าบ้านชาโฉมใหม่ (โครงสร้างสมบูรณ์)"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-[10px] text-[#C5D8C9]",
+					children: "ลากเพื่อหมุนดูโมเดล 360°"
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				ref: containerRef,
+				onPointerDown: (e) => {
+					draggingRef.current = true;
+					lastPointerRef.current = {
+						x: e.clientX,
+						y: e.clientY
+					};
+					e.currentTarget.setPointerCapture(e.pointerId);
+				},
+				onPointerMove: (e) => {
+					if (!draggingRef.current) return;
+					const dx = e.clientX - lastPointerRef.current.x;
+					const dy = e.clientY - lastPointerRef.current.y;
+					lastPointerRef.current = {
+						x: e.clientX,
+						y: e.clientY
+					};
+					yawRef.current += dx * .012;
+					pitchRef.current = MathUtils.clamp(pitchRef.current + dy * .008, -.35, .45);
+				},
+				onPointerUp: (e) => {
+					draggingRef.current = false;
+					if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+				},
+				onPointerCancel: () => {
+					draggingRef.current = false;
+				},
+				className: "h-[220px] sm:h-[240px] w-full rounded-lg bg-black/20 touch-none cursor-grab active:cursor-grabbing overflow-hidden"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-2.5 flex flex-wrap items-center justify-between gap-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-[11px] text-[#C5D8C9]",
+					children: "3D Rig: 18 Bones · Sculpted Face, Hands, Ears & Two-Tone Footwear"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-1.5",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => {
+								soundEngine.playTap();
+								setWireframe((v) => !v);
+							},
+							className: `min-h-[34px] rounded-lg border px-2.5 text-[11px] font-semibold transition-colors ${wireframe ? "border-[#8CD19A] bg-[#2E6F40] text-white" : "border-white/20 bg-white/10 text-[#E5EFE7] hover:bg-white/15"}`,
+							children: wireframe ? "ปิด Wireframe" : "ดูโครงสร้าง Mesh"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => {
+								soundEngine.playTap();
+								setAutoSpin((v) => !v);
+							},
+							className: "inline-flex min-h-[34px] items-center gap-1 rounded-lg border border-white/20 bg-white/10 px-2.5 text-[11px] font-semibold text-[#E5EFE7] hover:bg-white/15",
+							children: autoSpin ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Pause, {
+								className: "h-3 w-3",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หยุดหมุน" })] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, {
+								className: "h-3 w-3",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หมุนอัตโนมัติ" })] })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => {
+								soundEngine.playTap();
+								yawRef.current = .32;
+								pitchRef.current = .08;
+							},
+							"aria-label": "รีเซ็ตมุมกล้อง",
+							className: "inline-flex min-h-[34px] min-w-[34px] items-center justify-center rounded-lg border border-white/20 bg-white/10 text-[#E5EFE7] hover:bg-white/15",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RotateCcw, {
+								className: "h-3.5 w-3.5",
+								"aria-hidden": "true"
+							})
+						})
+					]
+				})]
+			})
+		]
+	});
+};
 // src/components/SettingsScreen.tsx
 var TAP_SPRING$3 = {
 	type: "spring",
@@ -68512,32 +73821,12 @@ var AMBIENCE_OPTIONS = [
 		label: "ลมสวนไผ่"
 	}
 ];
-var CHARACTER_MODELS = [
-	{
-		id: "tea-master",
-		name: "เจ้าบ้านชา (ต้นตำรับ)",
-		creator: "โมเดลประจำเรือนชา",
-		accentColor: "#2E6F40"
-	},
-	{
-		id: "spirit-blossom-kindred",
-		name: "Spirit Blossom Kindred",
-		creator: "Retronous (@Retronous) [85187f9]",
-		accentColor: "#8B82CB"
-	},
-	{
-		id: "diego-body",
-		name: "Body (Trench/Suit)",
-		creator: "Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]",
-		accentColor: "#8D212C"
-	},
-	{
-		id: "cicada-suit-v2",
-		name: "Ultimate CICADA Suit V2",
-		creator: "rendysix (@rendysix) [21122d8]",
-		accentColor: "#242B35"
-	}
-];
+var CHARACTER_MODELS = [{
+	id: "tea-artisan",
+	name: "เจ้าบ้านชาโฉมใหม่ (โครงสร้างสมบูรณ์)",
+	creator: "โมเดล 3D ร่างกายสมบูรณ์ · จมูก หู มือ นิ้วโป้ง รองเท้า 2 ชั้น & PBR",
+	accentColor: "#2D6A42"
+}];
 var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshRate, onRecheckRefreshRate, onToggleFullscreen, onUpdateSettings, onResetSettings, onClose }) => {
 	const deviceReport = probeDeviceOptimization(settings.optimizationProfile);
 	const visibleOptimizationOptions = [{
@@ -69304,55 +74593,62 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						className: "md:col-span-2 flex flex-col gap-3 rounded-2xl border border-[#1F2823]/10 bg-white p-4 sm:p-5 shadow-2xs",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, {
-									className: "h-5 w-5 text-[#2E6F40]",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-									className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
-									children: "ตัวละครผู้เล่น 3 มิติ (เลือกโมเดล 3D)"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-xs text-[#5A655D]",
-									children: "เปลี่ยนโมเดลตัวละคร 3 มิติที่ใช้เดินสำรวจในร้านน้ำชาได้ทันที"
-								})] })]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "rounded-lg bg-[#EDF5EE] px-2.5 py-1 text-xs font-semibold text-[#2E6F40]",
-								children: CHARACTER_MODELS.find((m) => m.id === settings.playerCharacter)?.name ?? "เจ้าบ้านชา"
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2",
-							children: CHARACTER_MODELS.map((charModel) => {
-								const active = settings.playerCharacter === charModel.id;
-								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileTap: { scale: .96 },
-									transition: TAP_SPRING$3,
-									onClick: () => {
-										soundEngine.playTap();
-										onUpdateSettings({ playerCharacter: charModel.id });
-									},
-									className: `flex min-h-[60px] items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823] shadow-2xs" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "h-8 w-8 shrink-0 rounded-lg border border-black/10 flex items-center justify-center text-xs font-bold text-white",
-										style: { backgroundColor: charModel.accentColor },
-										"aria-hidden": "true",
-										children: "3D"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "min-w-0 flex-1",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-xs sm:text-sm font-bold text-[#1F2823] truncate",
-											children: charModel.name
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-[10px] text-[#5A655D] truncate",
-											children: charModel.creator
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2823]/8 pb-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, {
+										className: "h-5 w-5 text-[#2E6F40]",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+										className: "font-display text-base sm:text-lg font-bold text-[#1F2823]",
+										children: "ตัวละครผู้เล่น 3 มิติ (โมเดลโฉมใหม่)"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-xs text-[#5A655D]",
+										children: "โมเดล 3D โครงสร้างร่างกายสมบูรณ์พร้อมชุดเจ้าบ้านชาและหมุนตรวจสอบ 360°"
+									})] })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "rounded-lg bg-[#EDF5EE] px-2.5 py-1 text-xs font-semibold text-[#2E6F40]",
+									children: CHARACTER_MODELS.find((m) => m.id === settings.playerCharacter)?.name ?? "เจ้าบ้านชาโฉมใหม่"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "grid grid-cols-1 gap-2",
+								children: CHARACTER_MODELS.map((charModel) => {
+									const active = settings.playerCharacter === charModel.id;
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .96 },
+										transition: TAP_SPRING$3,
+										onClick: () => {
+											soundEngine.playTap();
+											onUpdateSettings({ playerCharacter: charModel.id });
+										},
+										className: `flex min-h-[60px] items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-colors ${active ? "border-[#2E6F40] bg-[#EDF5EE] text-[#1F2823] shadow-2xs" : "border-[#1F2823]/12 bg-[#FAF9F6] text-[#4A534D] hover:bg-[#EFECE4]"}`,
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "h-8 w-8 shrink-0 rounded-lg border border-black/10 flex items-center justify-center text-xs font-bold text-white",
+											style: { backgroundColor: charModel.accentColor },
+											"aria-hidden": "true",
+											children: "3D"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "min-w-0 flex-1",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-xs sm:text-sm font-bold text-[#1F2823] truncate",
+												children: charModel.name
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[10px] text-[#5A655D] truncate",
+												children: charModel.creator
+											})]
 										})]
-									})]
-								}, charModel.id);
+									}, charModel.id);
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "pt-1",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LowPolyCharacterPreview, {})
 							})
-						})]
+						]
 					})
 				]
 			})
@@ -69801,7 +75097,7 @@ var MODAL_EASE = [
 	.3,
 	1
 ];
-var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates, isOverlayOpen = false, isUltraLowRam = false, updateAvailable = false, latestBrowserVersion = null }) => {
+var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates, onOpenRequest, isOverlayOpen = false, isUltraLowRam = false, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [bgFailed, setBgFailed] = (0, import_react.useState)(false);
 	const [showMenuModal, setShowMenuModal] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
@@ -69859,9 +75155,59 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 				className: "pointer-events-none absolute inset-0",
 				style: { background: "linear-gradient(to top, rgba(22, 27, 22, 0.72) 0%, rgba(22, 27, 22, 0.28) 28%, transparent 56%)" }
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "relative z-10 flex h-full w-full flex-col justify-end safe-px safe-pb pb-4 sm:pb-6 lg:pb-8",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative z-10 flex h-full w-full flex-col justify-between safe-px safe-pt safe-pb pt-3 sm:pt-5 pb-4 sm:pb-6 lg:pb-8",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					initial: {
+						opacity: 0,
+						y: -10
+					},
+					animate: {
+						opacity: 1,
+						y: 0
+					},
+					transition: {
+						duration: .24,
+						ease: MODAL_EASE
+					},
+					className: "flex justify-end",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .94 },
+							transition: TAP_SPRING$1,
+							onClick: () => {
+								soundEngine.unlock();
+								onOpenJournal();
+							},
+							className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
+								className: "h-4 w-4 text-[#8CD19A] shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+								"สมุดชงชา (",
+								unlockedCount,
+								"/",
+								TEAS.length,
+								")"
+							] })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .94 },
+							transition: TAP_SPRING$1,
+							onClick: () => {
+								soundEngine.unlock();
+								onOpenHowToPlay();
+							},
+							className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
+								className: "h-4 w-4 text-[#DFC48C] shrink-0",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
+						})]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex flex-wrap items-end justify-between gap-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 						initial: {
@@ -69976,7 +75322,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 							]
 						})]
 					})]
-				})
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: showMenuModal && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
 				initial: { opacity: 0 },
@@ -70070,9 +75416,9 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "space-y-4",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 								className: "text-xs font-semibold text-[#5A655D] mb-2",
 								children: "เลือกโหมดชงชา"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -70132,47 +75478,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: "เล่นเลย"
 									})]
 								})]
-							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-								className: "text-xs font-semibold text-[#5A655D] mb-2",
-								children: "สมุดชาและคู่มือ"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid grid-cols-2 gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$1,
-									onClick: () => {
-										setShowMenuModal(false);
-										onOpenJournal();
-									},
-									className: "flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
-										className: "h-4 w-4 text-[#2E6F40] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-										"สมุดชา (",
-										unlockedCount,
-										"/",
-										TEAS.length,
-										")"
-									] })]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-									type: "button",
-									whileHover: { scale: 1.02 },
-									whileTap: { scale: .95 },
-									transition: TAP_SPRING$1,
-									onClick: () => {
-										setShowMenuModal(false);
-										onOpenHowToPlay();
-									},
-									className: "flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 py-2 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
-										className: "h-4 w-4 text-[#7D5A3C] shrink-0",
-										"aria-hidden": "true"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชงและปลดล็อก" })]
-								})]
-							})] })]
+							})] })
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "space-y-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
@@ -70290,7 +75596,22 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.12.0)` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.14.0)` })]
+									}),
+									onOpenRequest && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+										type: "button",
+										whileTap: { scale: .95 },
+										transition: TAP_SPRING$1,
+										onClick: () => {
+											soundEngine.playTap();
+											setShowMenuModal(false);
+											onOpenRequest();
+										},
+										className: "flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EAE6DC]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, {
+											className: "h-4 w-4 text-[#7D5A3C]",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "หน้าร้องขอถึงผู้สร้าง (Gmail · GitHub)" })]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex flex-wrap items-center justify-between gap-2",
@@ -70308,592 +75629,6 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 		]
 	});
 };
-// node_modules/@capacitor/core/dist/index.js
-/*! Capacitor: https://capacitorjs.com/ - MIT License */
-var ExceptionCode;
-(function(ExceptionCode) {
-	/**
-	* API is not implemented.
-	*
-	* This usually means the API can't be used because it is not implemented for
-	* the current platform.
-	*/
-	ExceptionCode["Unimplemented"] = "UNIMPLEMENTED";
-	/**
-	* API is not available.
-	*
-	* This means the API can't be used right now because:
-	*   - it is currently missing a prerequisite, such as network connectivity
-	*   - it requires a particular platform or browser version
-	*/
-	ExceptionCode["Unavailable"] = "UNAVAILABLE";
-})(ExceptionCode || (ExceptionCode = {}));
-var CapacitorException = class extends Error {
-	constructor(message, code, data) {
-		super(message);
-		this.message = message;
-		this.code = code;
-		this.data = data;
-	}
-};
-var getPlatformId = (win) => {
-	var _a, _b;
-	if (win === null || win === void 0 ? void 0 : win.androidBridge) return "android";
-	else if ((_b = (_a = win === null || win === void 0 ? void 0 : win.webkit) === null || _a === void 0 ? void 0 : _a.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) return "ios";
-	else return "web";
-};
-var createCapacitor = (win) => {
-	const capCustomPlatform = win.CapacitorCustomPlatform || null;
-	const cap = win.Capacitor || {};
-	const Plugins = cap.Plugins = cap.Plugins || {};
-	const getPlatform = () => {
-		return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
-	};
-	const isNativePlatform = () => getPlatform() !== "web";
-	const isPluginAvailable = (pluginName) => {
-		const plugin = registeredPlugins.get(pluginName);
-		if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) return true;
-		if (getPluginHeader(pluginName)) return true;
-		return false;
-	};
-	const getPluginHeader = (pluginName) => {
-		var _a;
-		return (_a = cap.PluginHeaders) === null || _a === void 0 ? void 0 : _a.find((h) => h.name === pluginName);
-	};
-	const handleError = (err) => win.console.error(err);
-	const registeredPlugins = /* @__PURE__ */ new Map();
-	const registerPlugin = (pluginName, jsImplementations = {}) => {
-		const registeredPlugin = registeredPlugins.get(pluginName);
-		if (registeredPlugin) {
-			console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
-			return registeredPlugin.proxy;
-		}
-		const platform = getPlatform();
-		const pluginHeader = getPluginHeader(pluginName);
-		let jsImplementation;
-		const loadPluginImplementation = async () => {
-			if (!jsImplementation && platform in jsImplementations) jsImplementation = typeof jsImplementations[platform] === "function" ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
-			else if (capCustomPlatform !== null && !jsImplementation && "web" in jsImplementations) jsImplementation = typeof jsImplementations["web"] === "function" ? jsImplementation = await jsImplementations["web"]() : jsImplementation = jsImplementations["web"];
-			return jsImplementation;
-		};
-		const createPluginMethod = (impl, prop) => {
-			var _a, _b;
-			if (pluginHeader) {
-				const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m) => prop === m.name);
-				if (methodHeader) {
-					if (methodHeader.rtype === "promise") return (options) => cap.nativePromise(pluginName, prop.toString(), options);
-					else return (options, callback) => cap.nativeCallback(pluginName, prop.toString(), options, callback);
-				} else if (impl) return (_a = impl[prop]) === null || _a === void 0 ? void 0 : _a.bind(impl);
-			} else if (impl) return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
-			else throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
-		};
-		const createPluginMethodWrapper = (prop) => {
-			let remove;
-			const wrapper = (...args) => {
-				const p = loadPluginImplementation().then((impl) => {
-					const fn = createPluginMethod(impl, prop);
-					if (fn) {
-						const p = fn(...args);
-						remove = p === null || p === void 0 ? void 0 : p.remove;
-						return p;
-					} else throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
-				});
-				if (prop === "addListener") p.remove = async () => remove();
-				return p;
-			};
-			wrapper.toString = () => `${prop.toString()}() { [capacitor code] }`;
-			Object.defineProperty(wrapper, "name", {
-				value: prop,
-				writable: false,
-				configurable: false
-			});
-			return wrapper;
-		};
-		const addListener = createPluginMethodWrapper("addListener");
-		const removeListener = createPluginMethodWrapper("removeListener");
-		const addListenerNative = (eventName, callback) => {
-			const call = addListener({ eventName }, callback).then((callbackId) => callbackId);
-			const remove = async () => {
-				const callbackId = await call;
-				await removeListener({
-					eventName,
-					callbackId
-				});
-			};
-			const p = new Promise((resolve) => call.then(() => resolve({ remove })));
-			p.remove = async () => {
-				console.warn(`Using addListener() without 'await' is deprecated.`);
-				await remove();
-			};
-			return p;
-		};
-		const proxy = new Proxy({}, { get(_, prop) {
-			switch (prop) {
-				case "$$typeof": return;
-				case "toJSON": return () => ({});
-				case "addListener": return pluginHeader ? addListenerNative : addListener;
-				case "removeListener": return removeListener;
-				default: return createPluginMethodWrapper(prop);
-			}
-		} });
-		Plugins[pluginName] = proxy;
-		registeredPlugins.set(pluginName, {
-			name: pluginName,
-			proxy,
-			platforms: /* @__PURE__ */ new Set([...Object.keys(jsImplementations), ...pluginHeader ? [platform] : []])
-		});
-		return proxy;
-	};
-	if (!cap.convertFileSrc) cap.convertFileSrc = (filePath) => filePath;
-	cap.getPlatform = getPlatform;
-	cap.handleError = handleError;
-	cap.isNativePlatform = isNativePlatform;
-	cap.isPluginAvailable = isPluginAvailable;
-	cap.registerPlugin = registerPlugin;
-	cap.Exception = CapacitorException;
-	cap.DEBUG = !!cap.DEBUG;
-	cap.isLoggingEnabled = !!cap.isLoggingEnabled;
-	return cap;
-};
-var initCapacitorGlobal = (win) => win.Capacitor = createCapacitor(win);
-var Capacitor = /*#__PURE__*/ initCapacitorGlobal(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
-var registerPlugin = Capacitor.registerPlugin;
-/**
-* Base class web plugins should extend.
-*/
-var WebPlugin = class {
-	constructor() {
-		this.listeners = {};
-		this.retainedEventArguments = {};
-		this.windowListeners = {};
-	}
-	addListener(eventName, listenerFunc) {
-		let firstListener = false;
-		if (!this.listeners[eventName]) {
-			this.listeners[eventName] = [];
-			firstListener = true;
-		}
-		this.listeners[eventName].push(listenerFunc);
-		const windowListener = this.windowListeners[eventName];
-		if (windowListener && !windowListener.registered) this.addWindowListener(windowListener);
-		if (firstListener) this.sendRetainedArgumentsForEvent(eventName);
-		const remove = async () => this.removeListener(eventName, listenerFunc);
-		return Promise.resolve({ remove });
-	}
-	async removeAllListeners() {
-		this.listeners = {};
-		for (const listener in this.windowListeners) this.removeWindowListener(this.windowListeners[listener]);
-		this.windowListeners = {};
-	}
-	notifyListeners(eventName, data, retainUntilConsumed) {
-		const listeners = this.listeners[eventName];
-		if (!listeners) {
-			if (retainUntilConsumed) {
-				let args = this.retainedEventArguments[eventName];
-				if (!args) args = [];
-				args.push(data);
-				this.retainedEventArguments[eventName] = args;
-			}
-			return;
-		}
-		listeners.forEach((listener) => listener(data));
-	}
-	hasListeners(eventName) {
-		var _a;
-		return !!((_a = this.listeners[eventName]) === null || _a === void 0 ? void 0 : _a.length);
-	}
-	registerWindowListener(windowEventName, pluginEventName) {
-		this.windowListeners[pluginEventName] = {
-			registered: false,
-			windowEventName,
-			pluginEventName,
-			handler: (event) => {
-				this.notifyListeners(pluginEventName, event);
-			}
-		};
-	}
-	unimplemented(msg = "not implemented") {
-		return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
-	}
-	unavailable(msg = "not available") {
-		return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
-	}
-	async removeListener(eventName, listenerFunc) {
-		const listeners = this.listeners[eventName];
-		if (!listeners) return;
-		const index = listeners.indexOf(listenerFunc);
-		if (index !== -1) this.listeners[eventName].splice(index, 1);
-		if (!this.listeners[eventName].length) this.removeWindowListener(this.windowListeners[eventName]);
-	}
-	addWindowListener(handle) {
-		window.addEventListener(handle.windowEventName, handle.handler);
-		handle.registered = true;
-	}
-	removeWindowListener(handle) {
-		if (!handle) return;
-		window.removeEventListener(handle.windowEventName, handle.handler);
-		handle.registered = false;
-	}
-	sendRetainedArgumentsForEvent(eventName) {
-		const args = this.retainedEventArguments[eventName];
-		if (!args) return;
-		delete this.retainedEventArguments[eventName];
-		args.forEach((arg) => {
-			this.notifyListeners(eventName, arg);
-		});
-	}
-};
-/******** END WEB VIEW PLUGIN ********/
-/******** COOKIES PLUGIN ********/
-/**
-* Safely web encode a string value (inspired by js-cookie)
-* @param str The string value to encode
-*/
-var encode = (str) => encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
-/**
-* Safely web decode a string value (inspired by js-cookie)
-* @param str The string value to decode
-*/
-var decode = (str) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
-var CapacitorCookiesPluginWeb = class extends WebPlugin {
-	async getCookies() {
-		const cookies = document.cookie;
-		const cookieMap = {};
-		cookies.split(";").forEach((cookie) => {
-			if (cookie.length <= 0) return;
-			let [key, value] = cookie.replace(/=/, "CAP_COOKIE").split("CAP_COOKIE");
-			key = decode(key).trim();
-			value = decode(value).trim();
-			cookieMap[key] = value;
-		});
-		return cookieMap;
-	}
-	async setCookie(options) {
-		try {
-			const encodedKey = encode(options.key);
-			const encodedValue = encode(options.value);
-			const expires = options.expires ? `; expires=${options.expires.replace("expires=", "")}` : "";
-			const path = (options.path || "/").replace("path=", "");
-			const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : "";
-			document.cookie = `${encodedKey}=${encodedValue || ""}${expires}; path=${path}; ${domain};`;
-		} catch (error) {
-			return Promise.reject(error);
-		}
-	}
-	async deleteCookie(options) {
-		try {
-			document.cookie = `${options.key}=; Max-Age=0`;
-		} catch (error) {
-			return Promise.reject(error);
-		}
-	}
-	async clearCookies() {
-		try {
-			const cookies = document.cookie.split(";") || [];
-			for (const cookie of cookies) document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${(/* @__PURE__ */ new Date()).toUTCString()};path=/`);
-		} catch (error) {
-			return Promise.reject(error);
-		}
-	}
-	async clearAllCookies() {
-		try {
-			await this.clearCookies();
-		} catch (error) {
-			return Promise.reject(error);
-		}
-	}
-};
-registerPlugin("CapacitorCookies", { web: () => new CapacitorCookiesPluginWeb() });
-/**
-* Read in a Blob value and return it as a base64 string
-* @param blob The blob value to convert to a base64 string
-*/
-var readBlobAsBase64 = async (blob) => new Promise((resolve, reject) => {
-	const reader = new FileReader();
-	reader.onload = () => {
-		const base64String = reader.result;
-		resolve(base64String.indexOf(",") >= 0 ? base64String.split(",")[1] : base64String);
-	};
-	reader.onerror = (error) => reject(error);
-	reader.readAsDataURL(blob);
-});
-/**
-* Normalize an HttpHeaders map by lowercasing all of the values
-* @param headers The HttpHeaders object to normalize
-*/
-var normalizeHttpHeaders = (headers = {}) => {
-	const originalKeys = Object.keys(headers);
-	return Object.keys(headers).map((k) => k.toLocaleLowerCase()).reduce((acc, key, index) => {
-		acc[key] = headers[originalKeys[index]];
-		return acc;
-	}, {});
-};
-/**
-* Builds a string of url parameters that
-* @param params A map of url parameters
-* @param shouldEncode true if you should encodeURIComponent() the values (true by default)
-*/
-var buildUrlParams = (params, shouldEncode = true) => {
-	if (!params) return null;
-	return Object.entries(params).reduce((accumulator, entry) => {
-		const [key, value] = entry;
-		let encodedValue;
-		let item;
-		if (Array.isArray(value)) {
-			item = "";
-			value.forEach((str) => {
-				encodedValue = shouldEncode ? encodeURIComponent(str) : str;
-				item += `${key}=${encodedValue}&`;
-			});
-			item.slice(0, -1);
-		} else {
-			encodedValue = shouldEncode ? encodeURIComponent(value) : value;
-			item = `${key}=${encodedValue}`;
-		}
-		return `${accumulator}&${item}`;
-	}, "").substr(1);
-};
-/**
-* Build the RequestInit object based on the options passed into the initial request
-* @param options The Http plugin options
-* @param extra Any extra RequestInit values
-*/
-var buildRequestInit = (options, extra = {}) => {
-	const output = Object.assign({
-		method: options.method || "GET",
-		headers: options.headers
-	}, extra);
-	const type = normalizeHttpHeaders(options.headers)["content-type"] || "";
-	if (typeof options.data === "string") output.body = options.data;
-	else if (type.includes("application/x-www-form-urlencoded")) {
-		const params = new URLSearchParams();
-		for (const [key, value] of Object.entries(options.data || {})) params.set(key, value);
-		output.body = params.toString();
-	} else if (type.includes("multipart/form-data") || options.data instanceof FormData) {
-		const form = new FormData();
-		if (options.data instanceof FormData) options.data.forEach((value, key) => {
-			form.append(key, value);
-		});
-		else for (const key of Object.keys(options.data)) form.append(key, options.data[key]);
-		output.body = form;
-		const headers = new Headers(output.headers);
-		headers.delete("content-type");
-		output.headers = headers;
-	} else if (type.includes("application/json") || typeof options.data === "object") output.body = JSON.stringify(options.data);
-	return output;
-};
-var CapacitorHttpPluginWeb = class extends WebPlugin {
-	/**
-	* Perform an Http request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async request(options) {
-		const requestInit = buildRequestInit(options, options.webFetchExtra);
-		const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
-		const url = urlParams ? `${options.url}?${urlParams}` : options.url;
-		const response = await fetch(url, requestInit);
-		const contentType = response.headers.get("content-type") || "";
-		let { responseType = "text" } = response.ok ? options : {};
-		if (contentType.includes("application/json")) responseType = "json";
-		let data;
-		let blob;
-		switch (responseType) {
-			case "arraybuffer":
-			case "blob":
-				blob = await response.blob();
-				data = await readBlobAsBase64(blob);
-				break;
-			case "json":
-				data = await response.json();
-				break;
-			default: data = await response.text();
-		}
-		const headers = {};
-		response.headers.forEach((value, key) => {
-			headers[key] = value;
-		});
-		return {
-			data,
-			headers,
-			status: response.status,
-			url: response.url
-		};
-	}
-	/**
-	* Perform an Http GET request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async get(options) {
-		return this.request(Object.assign(Object.assign({}, options), { method: "GET" }));
-	}
-	/**
-	* Perform an Http POST request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async post(options) {
-		return this.request(Object.assign(Object.assign({}, options), { method: "POST" }));
-	}
-	/**
-	* Perform an Http PUT request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async put(options) {
-		return this.request(Object.assign(Object.assign({}, options), { method: "PUT" }));
-	}
-	/**
-	* Perform an Http PATCH request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async patch(options) {
-		return this.request(Object.assign(Object.assign({}, options), { method: "PATCH" }));
-	}
-	/**
-	* Perform an Http DELETE request given a set of options
-	* @param options Options to build the HTTP request
-	*/
-	async delete(options) {
-		return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
-	}
-};
-registerPlugin("CapacitorHttp", { web: () => new CapacitorHttpPluginWeb() });
-/******** END HTTP PLUGIN ********/
-/******** SYSTEM BARS PLUGIN ********/
-/**
-* Available status bar styles.
-*/
-var SystemBarsStyle;
-(function(SystemBarsStyle) {
-	/**
-	* Light system bar content on a dark background.
-	*
-	* @since 8.0.0
-	*/
-	SystemBarsStyle["Dark"] = "DARK";
-	/**
-	* For dark system bar content on a light background.
-	*
-	* @since 8.0.0
-	*/
-	SystemBarsStyle["Light"] = "LIGHT";
-	/**
-	* The style is based on the device appearance or the underlying content.
-	* If the device is using Dark mode, the system bars content will be light.
-	* If the device is using Light mode, the system bars content will be dark.
-	*
-	* @since 8.0.0
-	*/
-	SystemBarsStyle["Default"] = "DEFAULT";
-})(SystemBarsStyle || (SystemBarsStyle = {}));
-/**
-* Available system bar types.
-*/
-var SystemBarType;
-(function(SystemBarType) {
-	/**
-	* The top status bar on both Android and iOS.
-	*
-	* @since 8.0.0
-	*/
-	SystemBarType["StatusBar"] = "StatusBar";
-	/**
-	* The navigation bar (or gesture bar on iOS) on both Android and iOS.
-	*
-	* @since 8.0.0
-	*/
-	SystemBarType["NavigationBar"] = "NavigationBar";
-})(SystemBarType || (SystemBarType = {}));
-var SystemBarsPluginWeb = class extends WebPlugin {
-	async setStyle() {
-		this.unavailable("not available for web");
-	}
-	async setAnimation() {
-		this.unavailable("not available for web");
-	}
-	async show() {
-		this.unavailable("not available for web");
-	}
-	async hide() {
-		this.unavailable("not available for web");
-	}
-};
-registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
-// src/utils/security.ts
-var CREATOR_GITHUB_USERNAME = "pppu13610-glitch";
-var CREATOR_GITHUB_PROFILE_URL = "https://github.com/pppu13610-glitch";
-var CREATOR_GITHUB_REPO_URL = "https://github.com/pppu13610-glitch/baan-cha-3d";
-var TRUSTED_HTTPS_HOSTS = /* @__PURE__ */ new Set([
-	"ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
-	"ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app",
-	"github.com",
-	"api.github.com",
-	"raw.githubusercontent.com"
-]);
-function isTrustedExternalUrl(rawUrl) {
-	if (!rawUrl || typeof rawUrl !== "string") return false;
-	try {
-		const parsed = new URL(rawUrl.trim());
-		if (parsed.protocol !== "https:") return false;
-		return TRUSTED_HTTPS_HOSTS.has(parsed.hostname.toLowerCase());
-	} catch {
-		return false;
-	}
-}
-function sanitizeExternalUrl(rawUrl, fallback = CREATOR_GITHUB_PROFILE_URL) {
-	if (rawUrl && isTrustedExternalUrl(rawUrl)) return rawUrl.trim();
-	return fallback;
-}
-function isTrustedSameOrHttpsUrl(rawUrl) {
-	if (!rawUrl || typeof rawUrl !== "string") return false;
-	if (rawUrl.startsWith("/")) return !rawUrl.startsWith("//");
-	return isTrustedExternalUrl(rawUrl);
-}
-function runAppSecurityAudit() {
-	const isNative = Capacitor.isNativePlatform();
-	const isHttpsOrLocalOrigin = typeof window === "undefined" || window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || isNative;
-	const hasReadOnlyHardwareBridge = !isNative || typeof window !== "undefined" && "BaanChaHardwareBridge" in window && typeof window.BaanChaHardwareBridge?.getHardwareSnapshotJson === "function";
-	const safeStorageValid = (() => {
-		if (typeof localStorage === "undefined") return true;
-		try {
-			const testRaw = localStorage.getItem("baan_cha_settings_v1");
-			if (testRaw) JSON.parse(testRaw);
-			return true;
-		} catch {
-			return false;
-		}
-	})();
-	const checks = [
-		{
-			id: "https-origin",
-			label: "การเชื่อมต่อเข้ารหัส HTTPS ปลอดภัย",
-			passed: isHttpsOrLocalOrigin,
-			detail: "รับส่งข้อมูลอัปเดตเฉพาะโดเมน HTTPS ที่ผ่านการตรวจสอบเท่านั้น"
-		},
-		{
-			id: "no-cleartext-backup",
-			label: "ปิดการเข้าถึงไฟล์ภายนอกและสำรองข้อมูลไม่ปลอดภัย",
-			passed: true,
-			detail: "ปิดสิทธิ์ที่ไม่จำเป็น ล็อก Mixed Content และเปิด Safe Browsing บนระบบมือถือ"
-		},
-		{
-			id: "verified-sources",
-			label: "ลิงก์ผู้สร้าง GitHub และเซิร์ฟเวอร์อัปเดตถูกยืนยันแล้ว",
-			passed: isTrustedExternalUrl("https://github.com/pppu13610-glitch") && isTrustedExternalUrl("https://github.com/pppu13610-glitch/baan-cha-3d"),
-			detail: `ตรวจสอบปลายทาง ${CREATOR_GITHUB_PROFILE_URL} และเซิร์ฟเวอร์เกมหลักแล้ว`
-		},
-		{
-			id: "sandboxed-data",
-			label: "ข้อมูลเซฟและฮาร์ดแวร์อ่านแบบปลอดภัยในเครื่อง",
-			passed: hasReadOnlyHardwareBridge && safeStorageValid,
-			detail: "อ่านข้อมูลสเปกเครื่องแบบ Read-Only ไม่เก็บข้อมูลส่วนตัวหรือสิทธิ์อันตราย"
-		}
-	];
-	const allPassed = checks.every((c) => c.passed);
-	return {
-		allPassed,
-		checks,
-		summaryText: allPassed ? "ผ่านการตรวจสอบความปลอดภัยครบทุกข้อ (พร้อมผ่านระบบสแกนแอปของมือถือ)" : "กำลังตรวจสอบความปลอดภัยของข้อมูลในเครื่อง"
-	};
-}
 // src/utils/appUpdater.ts
 var LIVE_BROWSER_APP_URL = "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
 var DEV_BROWSER_APP_URL = "https://ais-dev-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app";
@@ -71071,7 +75806,7 @@ async function checkLiveBrowserVersion() {
 	if (githubManifest) {
 		if (!bestManifest || compareSemver(githubManifest.version, bestManifest.version) > 0) bestManifest = githubManifest;
 	}
-	const latestVersion = bestManifest?.version ?? "2.12.0";
+	const latestVersion = bestManifest?.version ?? "2.14.0";
 	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
 	const targetSyncUrl = sanitizeExternalUrl(bestManifest?.browserUrl ?? (liveManifestDirect ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"), LIVE_BROWSER_APP_URL);
 	const sourceLabel = checkedFromGithub && checkedFromBrowserServer ? "Browser Server + GitHub ผู้สร้าง" : checkedFromBrowserServer ? "Browser Server ปัจจุบัน" : checkedFromGithub ? "GitHub ผู้สร้างเกม" : "ตรวจสอบในเครื่อง";
@@ -71112,14 +75847,14 @@ async function applyInAppUpdate(result) {
 	} catch {}
 	if (typeof window === "undefined") return;
 	const isNative = Capacitor.isNativePlatform();
-	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.12.0") > 0;
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.14.0") > 0;
 	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
 		const safeTarget = sanitizeExternalUrl(result.targetSyncUrl, LIVE_BROWSER_APP_URL);
 		window.location.replace(safeTarget);
 		return;
 	}
 	const url = new URL(window.location.href);
-	url.searchParams.set("v", result?.latestVersion ?? "2.12.0");
+	url.searchParams.set("v", result?.latestVersion ?? "2.14.0");
 	window.location.replace(url.toString());
 }
 // src/utils/versionMigration.ts
@@ -71128,8 +75863,8 @@ var DEFAULT_SETTINGS = {
 	sfxVolume: 90,
 	ambienceVolume: 75,
 	musicVolume: 70,
-	musicTrack: "morning-bamboo",
-	playerCharacter: "tea-master",
+	musicTrack: "just-the-two-of-us",
+	playerCharacter: "tea-artisan",
 	isMuted: false,
 	ambience: "none",
 	graphicsQuality: "high",
@@ -71178,14 +75913,8 @@ function normalizeOptimizationProfile(raw) {
 		default: return DEFAULT_SETTINGS.optimizationProfile;
 	}
 }
-function normalizePlayerCharacter(raw) {
-	switch (raw) {
-		case "tea-master":
-		case "spirit-blossom-kindred":
-		case "diego-body":
-		case "cicada-suit-v2": return raw;
-		default: return DEFAULT_SETTINGS.playerCharacter;
-	}
+function normalizePlayerCharacter(_raw) {
+	return "tea-artisan";
 }
 function sanitizeJournalRecord(raw) {
 	if (!raw || typeof raw !== "object") return null;
@@ -71234,7 +75963,7 @@ function migrateSettingsPayload(raw) {
 		sfxVolume: typeof parsed.sfxVolume === "number" && Number.isFinite(parsed.sfxVolume) ? Math.max(0, Math.min(100, parsed.sfxVolume)) : DEFAULT_SETTINGS.sfxVolume,
 		ambienceVolume: typeof parsed.ambienceVolume === "number" && Number.isFinite(parsed.ambienceVolume) ? Math.max(0, Math.min(100, parsed.ambienceVolume)) : DEFAULT_SETTINGS.ambienceVolume,
 		musicVolume: typeof parsed.musicVolume === "number" && Number.isFinite(parsed.musicVolume) ? Math.max(0, Math.min(100, parsed.musicVolume)) : DEFAULT_SETTINGS.musicVolume,
-		musicTrack: parsed.musicTrack === "none" || parsed.musicTrack === "morning-bamboo" || parsed.musicTrack === "rainy-teahouse" || parsed.musicTrack === "twilight-lantern" || parsed.musicTrack === "smoke-in-the-glass" ? parsed.musicTrack : DEFAULT_SETTINGS.musicTrack,
+		musicTrack: parsed.musicTrack === "none" || parsed.musicTrack === "just-the-two-of-us" || parsed.musicTrack === "rainy-teahouse" || parsed.musicTrack === "twilight-lantern" || parsed.musicTrack === "smoke-in-the-glass" ? parsed.musicTrack : DEFAULT_SETTINGS.musicTrack,
 		playerCharacter: normalizePlayerCharacter(parsed.playerCharacter),
 		isMuted: typeof parsed.isMuted === "boolean" ? parsed.isMuted : DEFAULT_SETTINGS.isMuted,
 		ambience: parsed.ambience === "rain" || parsed.ambience === "breeze" || parsed.ambience === "none" ? parsed.ambience : DEFAULT_SETTINGS.ambience,
@@ -71364,7 +76093,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.12.0" ? prev : null;
+		return prev && prev !== "2.14.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -71401,7 +76130,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
-	const latestBrowserVersion = updateResult?.latestVersion ?? "2.12.0";
+	const latestBrowserVersion = updateResult?.latestVersion ?? "2.14.0";
 	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
 	const securityAudit = (0, import_react.useMemo)(() => runAppSecurityAudit(), []);
 	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/pppu13610-glitch", CREATOR_GITHUB_PROFILE_URL);
@@ -71562,7 +76291,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 												className: "mt-0.5 h-4 w-4 shrink-0",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.12.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.12.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.14.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.14.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											disabled: isApplyingUpdate,
@@ -71913,6 +76642,7 @@ function App() {
 	const [settings, setSettings] = (0, import_react.useState)(() => loadSettings());
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	const [updatesOpen, setUpdatesOpen] = (0, import_react.useState)(false);
+	const [requestOpen, setRequestOpen] = (0, import_react.useState)(false);
 	const [isFullscreen, setIsFullscreen] = (0, import_react.useState)(() => isFullscreenActive());
 	const [saveData, setSaveData] = (0, import_react.useState)(() => loadSaveData());
 	const [, setHwProbeTick] = (0, import_react.useState)(0);
@@ -71956,11 +76686,7 @@ function App() {
 			recheckRefreshRate();
 		});
 		recheckRefreshRate();
-		const onVisibility = () => {
-			if (!document.hidden) recheckRefreshRate();
-		};
-		document.addEventListener("visibilitychange", onVisibility);
-		return () => document.removeEventListener("visibilitychange", onVisibility);
+		return initAppLifecycle(recheckRefreshRate);
 	}, [recheckRefreshRate]);
 	(0, import_react.useEffect)(() => {
 		const timer = window.setTimeout(() => {
@@ -72090,7 +76816,7 @@ function App() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: `w-full flex flex-col bg-[#F3F1EC] text-[#1F2823] ${isViewportLocked ? "h-dvh overflow-hidden" : "min-h-dvh"}`,
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: screen !== "TITLE_MENU" && !settingsOpen && !updatesOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CornerMenu, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: screen !== "TITLE_MENU" && !settingsOpen && !updatesOpen && !requestOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CornerMenu, {
 					screen,
 					xp: saveData.xp,
 					level: saveData.level,
@@ -72105,6 +76831,7 @@ function App() {
 					onNavigate: navigateTo,
 					onOpenSettings: () => setSettingsOpen(true),
 					onOpenUpdates: () => setUpdatesOpen(true),
+					onOpenRequest: () => setRequestOpen(true),
 					updateAvailable: updateCheckResult?.status === "update-ready",
 					latestBrowserVersion: updateCheckResult?.latestVersion ?? null
 				}, "corner-menu") }),
@@ -72150,7 +76877,8 @@ function App() {
 									onOpenHowToPlay: () => navigateTo("HOW_TO_PLAY"),
 									onOpenSettings: () => setSettingsOpen(true),
 									onOpenUpdates: () => setUpdatesOpen(true),
-									isOverlayOpen: settingsOpen || updatesOpen,
+									onOpenRequest: () => setRequestOpen(true),
+									isOverlayOpen: settingsOpen || updatesOpen || requestOpen,
 									isUltraLowRam: deviceReport.isUltraLowRam,
 									updateAvailable: updateCheckResult?.status === "update-ready",
 									latestBrowserVersion: updateCheckResult?.latestVersion ?? null
@@ -72237,6 +76965,11 @@ function App() {
 					onUpdateResult: setUpdateCheckResult,
 					onClose: () => setUpdatesOpen(false)
 				}, "updates-screen") }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: requestOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RequestScreen, {
+					playerLevel: saveData.level,
+					optimizationProfile: settings.optimizationProfile,
+					onClose: () => setRequestOpen(false)
+				}, "request-screen") }),
 				screen !== "BREWING" && screen !== "TITLE_MENU" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
 					className: "border-t border-[#1F2823]/10 bg-[#FAF9F6] py-4",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

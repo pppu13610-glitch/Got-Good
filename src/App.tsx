@@ -10,6 +10,7 @@ import {CornerMenu} from './components/CornerMenu';
 import {HowToPlay} from './components/HowToPlay';
 import {OfflineIndicator} from './components/OfflineIndicator';
 import {OrientationGuard} from './components/OrientationGuard';
+import {RequestScreen} from './components/RequestScreen';
 import {SettingsScreen} from './components/SettingsScreen';
 import {TeaJournal} from './components/TeaJournal';
 import {TitleScreen} from './components/TitleScreen';
@@ -26,6 +27,7 @@ import {
   checkLiveBrowserVersion,
   UpdateCheckResult,
 } from './utils/appUpdater';
+import {initAppLifecycle} from './utils/appLifecycle';
 import {
   applyDomPerformanceClass,
   probeDeviceOptimization,
@@ -62,6 +64,7 @@ export default function App() {
   const [settings, setSettings] = useState<GameSettings>(() => loadSettings());
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [updatesOpen, setUpdatesOpen] = useState<boolean>(false);
+  const [requestOpen, setRequestOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(() =>
     isFullscreenActive(),
   );
@@ -151,13 +154,8 @@ export default function App() {
       recheckRefreshRate();
     });
     recheckRefreshRate();
-    const onVisibility = () => {
-      if (!document.hidden) {
-        recheckRefreshRate();
-      }
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => document.removeEventListener('visibilitychange', onVisibility);
+    const cleanupLifecycle = initAppLifecycle(recheckRefreshRate);
+    return cleanupLifecycle;
   }, [recheckRefreshRate]);
 
   // Quietly check live browser version in background so update badge is accurate
@@ -367,7 +365,7 @@ export default function App() {
       >
         {/* Top-Right 3-Bar Menu consolidating navigation & controls */}
         <AnimatePresence>
-          {screen !== 'TITLE_MENU' && !settingsOpen && !updatesOpen && (
+          {screen !== 'TITLE_MENU' && !settingsOpen && !updatesOpen && !requestOpen && (
             <CornerMenu
               key="corner-menu"
               screen={screen}
@@ -384,6 +382,7 @@ export default function App() {
               onNavigate={navigateTo}
               onOpenSettings={() => setSettingsOpen(true)}
               onOpenUpdates={() => setUpdatesOpen(true)}
+              onOpenRequest={() => setRequestOpen(true)}
               updateAvailable={updateCheckResult?.status === 'update-ready'}
               latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
             />
@@ -427,7 +426,8 @@ export default function App() {
                   onOpenHowToPlay={() => navigateTo('HOW_TO_PLAY')}
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenUpdates={() => setUpdatesOpen(true)}
-                  isOverlayOpen={settingsOpen || updatesOpen}
+                  onOpenRequest={() => setRequestOpen(true)}
+                  isOverlayOpen={settingsOpen || updatesOpen || requestOpen}
                   isUltraLowRam={deviceReport.isUltraLowRam}
                   updateAvailable={updateCheckResult?.status === 'update-ready'}
                   latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
@@ -513,6 +513,18 @@ export default function App() {
               initialUpdateResult={updateCheckResult}
               onUpdateResult={setUpdateCheckResult}
               onClose={() => setUpdatesOpen(false)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Full-Screen Creator Request Overlay */}
+        <AnimatePresence>
+          {requestOpen && (
+            <RequestScreen
+              key="request-screen"
+              playerLevel={saveData.level}
+              optimizationProfile={settings.optimizationProfile}
+              onClose={() => setRequestOpen(false)}
             />
           )}
         </AnimatePresence>

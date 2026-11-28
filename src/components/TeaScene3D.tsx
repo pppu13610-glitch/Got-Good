@@ -1244,6 +1244,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       });
 
       steamSprites.forEach((s) => s.sprite.material.dispose());
+      shopCharacters.dispose();
       cedarTex.dispose();
       walnutTex.dispose();
       matTex.dispose();

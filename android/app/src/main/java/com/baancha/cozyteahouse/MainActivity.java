@@ -6,11 +6,15 @@ import android.app.GameState;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Process;
 import android.view.Display;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
@@ -19,6 +23,8 @@ import org.json.JSONObject;
 
 public class MainActivity extends BridgeActivity {
     private int detectedDisplayHz = 60;
+    private boolean isTerminating = false;
+    private boolean isWebViewPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +34,141 @@ public class MainActivity extends BridgeActivity {
         engageAndroidGameMode();
         hardenWebViewAndAttachHardwareBridge();
         hideSystemBars();
+
+        getOnBackPressedDispatcher().addCallback(
+            this,
+            new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    terminateAppCompletely();
+                }
+            }
+        );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!isTerminating) {
+            resumeWebViewSafely();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isTerminating) return;
+        resumeWebViewSafely();
+        enableHighRefreshRate();
+        engageAndroidGameMode();
+        hideSystemBars();
+        dispatchLifecycleToJs("window.__baanchaAppResume && window.__baanchaAppResume();");
+    }
+
+    @Override
+    public void onPause() {
+        dispatchLifecycleToJs("window.__baanchaAppPause && window.__baanchaAppPause();");
+        pauseWebViewMediaSafely(false);
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        dispatchLifecycleToJs("window.__baanchaAppPause && window.__baanchaAppPause();");
+        pauseWebViewMediaSafely(true);
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        boolean shouldKillProcess =
+            (isTerminating || isFinishing()) && !isChangingConfigurations();
+        stopAndClearWebViewForExit();
+        super.onDestroy();
+        if (shouldKillProcess) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                Process.killProcess(Process.myPid());
+                System.exit(0);
+            }, 150);
+        }
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
+        if (hasFocus && !isTerminating) {
             enableHighRefreshRate();
             engageAndroidGameMode();
             hideSystemBars();
         }
+    }
+
+    private void dispatchLifecycleToJs(String script) {
+        try {
+            if (getBridge() == null || getBridge().getWebView() == null) return;
+            WebView webView = getBridge().getWebView();
+            webView.evaluateJavascript(script, null);
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void pauseWebViewMediaSafely(boolean pauseTimers) {
+        try {
+            if (getBridge() == null || getBridge().getWebView() == null) return;
+            WebView webView = getBridge().getWebView();
+            if (!isWebViewPaused) {
+                webView.onPause();
+                isWebViewPaused = true;
+            }
+            if (pauseTimers) {
+                webView.pauseTimers();
+            }
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void resumeWebViewSafely() {
+        try {
+            if (getBridge() == null || getBridge().getWebView() == null) return;
+            WebView webView = getBridge().getWebView();
+            webView.resumeTimers();
+            if (isWebViewPaused) {
+                webView.onResume();
+                isWebViewPaused = false;
+            }
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void stopAndClearWebViewForExit() {
+        try {
+            if (getBridge() == null || getBridge().getWebView() == null) return;
+            WebView webView = getBridge().getWebView();
+            webView.onPause();
+            webView.pauseTimers();
+            webView.stopLoading();
+            webView.loadUrl("about:blank");
+            isWebViewPaused = true;
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void terminateAppCompletely() {
+        runOnUiThread(() -> {
+            if (isTerminating) return;
+            isTerminating = true;
+            dispatchLifecycleToJs("window.__baanchaAppExit && window.__baanchaAppExit();");
+            stopAndClearWebViewForExit();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAndRemoveTask();
+            } else {
+                finishAffinity();
+            }
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                Process.killProcess(Process.myPid());
+                System.exit(0);
+            }, 140);
+        });
     }
 
     private void engageAndroidGameMode() {
@@ -153,6 +284,11 @@ public class MainActivity extends BridgeActivity {
             } catch (Throwable ignored) {
                 return "{}";
             }
+        }
+
+        @JavascriptInterface
+        public void exitAppCompletely() {
+            runOnUiThread(MainActivity.this::terminateAppCompletely);
         }
     }
 }

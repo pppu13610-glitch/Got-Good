@@ -38,6 +38,7 @@ import {
   DisplayRefreshRate,
   getAllowedFpsOptions,
 } from '../utils/refreshRate';
+import {LowPolyCharacterPreview} from './LowPolyCharacterPreview';
 import {CHILL_MUSIC_TRACKS, soundEngine} from '../utils/soundEngine';
 
 interface SettingsScreenProps {
@@ -92,28 +93,10 @@ const CHARACTER_MODELS: {
   accentColor: string;
 }[] = [
   {
-    id: 'tea-master',
-    name: 'เจ้าบ้านชา (ต้นตำรับ)',
-    creator: 'โมเดลประจำเรือนชา',
-    accentColor: '#2E6F40',
-  },
-  {
-    id: 'spirit-blossom-kindred',
-    name: 'Spirit Blossom Kindred',
-    creator: 'Retronous (@Retronous) [85187f9]',
-    accentColor: '#8B82CB',
-  },
-  {
-    id: 'diego-body',
-    name: 'Body (Trench/Suit)',
-    creator: 'Diego_P3D_XD (@Diego_P3D_XD) [74b47ca]',
-    accentColor: '#8D212C',
-  },
-  {
-    id: 'cicada-suit-v2',
-    name: 'Ultimate CICADA Suit V2',
-    creator: 'rendysix (@rendysix) [21122d8]',
-    accentColor: '#242B35',
+    id: 'tea-artisan',
+    name: 'เจ้าบ้านชาโฉมใหม่ (โครงสร้างสมบูรณ์)',
+    creator: 'โมเดล 3D ร่างกายสมบูรณ์ · จมูก หู มือ นิ้วโป้ง รองเท้า 2 ชั้น & PBR',
+    accentColor: '#2D6A42',
   },
 ];
 
@@ -962,20 +945,20 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 <User className="h-5 w-5 text-[#2E6F40]" aria-hidden="true" />
                 <div>
                   <h2 className="font-display text-base sm:text-lg font-bold text-[#1F2823]">
-                    ตัวละครผู้เล่น 3 มิติ (เลือกโมเดล 3D)
+                    ตัวละครผู้เล่น 3 มิติ (โมเดลโฉมใหม่)
                   </h2>
                   <p className="text-xs text-[#5A655D]">
-                    เปลี่ยนโมเดลตัวละคร 3 มิติที่ใช้เดินสำรวจในร้านน้ำชาได้ทันที
+                    โมเดล 3D โครงสร้างร่างกายสมบูรณ์พร้อมชุดเจ้าบ้านชาและหมุนตรวจสอบ 360°
                   </p>
                 </div>
               </div>
               <span className="rounded-lg bg-[#EDF5EE] px-2.5 py-1 text-xs font-semibold text-[#2E6F40]">
                 {CHARACTER_MODELS.find((m) => m.id === settings.playerCharacter)?.name ??
-                  'เจ้าบ้านชา'}
+                  'เจ้าบ้านชาโฉมใหม่'}
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               {CHARACTER_MODELS.map((charModel) => {
                 const active = settings.playerCharacter === charModel.id;
                 return (
@@ -1012,6 +995,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   </motion.button>
                 );
               })}
+            </div>
+
+            <div className="pt-1">
+              <LowPolyCharacterPreview />
             </div>
           </section>
         </div>

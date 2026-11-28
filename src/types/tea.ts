@@ -172,15 +172,11 @@ export type TargetFps = 30 | 60 | 90 | 120;
 export type ResolutionScale = 'hd' | 'hd-plus' | 'fhd' | 'fhd-plus';
 export type MusicTrackId =
   | 'none'
-  | 'morning-bamboo'
+  | 'just-the-two-of-us'
   | 'rainy-teahouse'
   | 'twilight-lantern'
   | 'smoke-in-the-glass';
-export type PlayerCharacterId =
-  | 'tea-master'
-  | 'spirit-blossom-kindred'
-  | 'diego-body'
-  | 'cicada-suit-v2';
+export type PlayerCharacterId = 'tea-artisan';
 export type OptimizationProfile =
   | 'auto'
   | 'realme-note-50'
