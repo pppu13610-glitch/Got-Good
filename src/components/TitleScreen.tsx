@@ -10,14 +10,17 @@ import {
   MessageSquarePlus,
   Minimize2,
   Play,
+  ScrollText,
   SlidersHorizontal,
   Sparkles,
+  Users,
   Volume2,
   VolumeX,
   Wind,
   X,
 } from 'lucide-react';
 import {CURRENT_APP_VERSION} from '../data/changelog';
+import {GUESTS} from '../data/guests';
 import {getUnlockedTeas, getXpProgress} from '../data/progression';
 import {TEAS} from '../data/teas';
 import {AmbienceMode, GameMode} from '../types/tea';
@@ -45,6 +48,9 @@ interface TitleScreenProps {
   onOpenSettings?: () => void;
   onOpenUpdates?: () => void;
   onOpenRequest?: () => void;
+  onOpenGuestBook?: () => void;
+  onOpenTeaMenu?: () => void;
+  visitedGuestCount?: number;
   isOverlayOpen?: boolean;
   isUltraLowRam?: boolean;
   updateAvailable?: boolean;
@@ -74,6 +80,9 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   onOpenSettings,
   onOpenUpdates,
   onOpenRequest,
+  onOpenGuestBook,
+  onOpenTeaMenu,
+  visitedGuestCount = 0,
   isOverlayOpen = false,
   isUltraLowRam = false,
   updateAvailable = false,
@@ -175,7 +184,24 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
           transition={{duration: 0.24, ease: MODAL_EASE}}
           className="flex justify-end"
         >
-          <div className="flex items-center gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25">
+          <div className="flex flex-wrap items-center justify-end gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25">
+            {onOpenTeaMenu && (
+              <motion.button
+                type="button"
+                whileTap={{scale: 0.94}}
+                transition={TAP_SPRING}
+                onClick={() => {
+                  soundEngine.unlock();
+                  soundEngine.playTap();
+                  onOpenTeaMenu();
+                }}
+                className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#C89D54]/18 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#C89D54]/28 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap"
+              >
+                <ScrollText className="h-4 w-4 text-[#F0D395] shrink-0" aria-hidden="true" />
+                <span>ป้ายเมนู ({unlockedCount})</span>
+              </motion.button>
+            )}
+
             <motion.button
               type="button"
               whileTap={{scale: 0.94}}
@@ -191,6 +217,25 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
                 สมุดชงชา ({unlockedCount}/{TEAS.length})
               </span>
             </motion.button>
+
+            {onOpenGuestBook && (
+              <motion.button
+                type="button"
+                whileTap={{scale: 0.94}}
+                transition={TAP_SPRING}
+                onClick={() => {
+                  soundEngine.unlock();
+                  soundEngine.playTap();
+                  onOpenGuestBook();
+                }}
+                className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap"
+              >
+                <Users className="h-4 w-4 text-[#A7DFB2] shrink-0" aria-hidden="true" />
+                <span>
+                  ลูกค้า ({visitedGuestCount}/{GUESTS.length})
+                </span>
+              </motion.button>
+            )}
 
             <motion.button
               type="button"

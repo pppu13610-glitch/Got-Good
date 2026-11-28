@@ -164,6 +164,7 @@ export interface TeaHouseSaveData {
   warmthPoints: number;
   totalCups: number;
   teaCounts: Record<string, number>;
+  visitedGuestIds: string[];
   history: JournalRecord[];
 }
 

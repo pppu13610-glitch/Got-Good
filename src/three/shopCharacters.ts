@@ -3,8 +3,10 @@ import {BrewStep, CustomerPhase, GameMode, PlayerCharacterId} from '../types/tea
 import {
   animateSeamlessHumanoid,
   buildCompleteTeaArtisanCharacter,
+  buildLegacyShopkeeperGuest,
   buildSeamlessHumanGuest,
   HumanGuestConfig,
+  LegacyShopkeeperGuestId,
   SeamlessCharacterHandle,
 } from './characterBuilders';
 
@@ -576,8 +578,29 @@ export function createShopCharactersSystem(
     },
   };
 
+  const LEGACY_SHOPKEEPER_GUEST_IDS = new Set<LegacyShopkeeperGuestId>([
+    'tea-master',
+    'spirit-blossom-kindred',
+    'mococo-abyssgard',
+    'diego-body',
+    'cicada-suit-v2',
+  ]);
+
   const guestHandles = new Map<string, SeamlessCharacterHandle>();
   const getOrCreateGuestHandle = (guestId: string): SeamlessCharacterHandle => {
+    if (LEGACY_SHOPKEEPER_GUEST_IDS.has(guestId as LegacyShopkeeperGuestId)) {
+      const existing = guestHandles.get(guestId);
+      if (existing) return existing;
+      const created = buildLegacyShopkeeperGuest(
+        guestId as LegacyShopkeeperGuestId,
+        compactMode,
+        ultraCompact,
+      );
+      guestHandles.set(guestId, created);
+      guestsContainer.add(created.group);
+      return created;
+    }
+
     const resolvedId = GUEST_PRESET_CONFIGS[guestId] ? guestId : 'som-o';
     const existing = guestHandles.get(resolvedId);
     if (existing) return existing;
@@ -723,6 +746,12 @@ export function createShopCharactersSystem(
       const activeGuest = getOrCreateGuestHandle(guestId);
       for (const handle of guestHandles.values()) {
         handle.group.visible = handle === activeGuest;
+      }
+
+      if (activeGuest.spiritOrbGroup && !reducedMotion) {
+        activeGuest.spiritOrbGroup.position.y =
+          1.38 + Math.sin(elapsed * 2.4) * 0.045;
+        activeGuest.spiritOrbGroup.rotation.y = elapsed * 0.85;
       }
 
       if (step === 'SERVED') {

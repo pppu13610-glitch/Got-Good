@@ -7,12 +7,14 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import {AnimatePresence, motion, MotionConfig} from 'motion/react';
 import {BrewingStation} from './components/BrewingStation';
 import {CornerMenu} from './components/CornerMenu';
+import {GuestBookModal} from './components/GuestBookModal';
 import {HowToPlay} from './components/HowToPlay';
 import {OfflineIndicator} from './components/OfflineIndicator';
 import {OrientationGuard} from './components/OrientationGuard';
 import {RequestScreen} from './components/RequestScreen';
 import {SettingsScreen} from './components/SettingsScreen';
 import {TeaJournal} from './components/TeaJournal';
+import {TeaMenuBoardModal} from './components/TeaMenuBoardModal';
 import {TitleScreen} from './components/TitleScreen';
 import {UpdateCheckScreen} from './components/UpdateCheckScreen';
 import {
@@ -22,6 +24,7 @@ import {
   JournalRecord,
   ScreenView,
   TeaHouseSaveData,
+  TeaType,
 } from './types/tea';
 import {
   checkLiveBrowserVersion,
@@ -52,6 +55,7 @@ import {
   DEFAULT_SETTINGS,
   loadSaveData,
   loadSettings,
+  recordGuestVisit,
   saveBrewRecord,
   saveSettings,
 } from './utils/storage';
@@ -65,6 +69,16 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [updatesOpen, setUpdatesOpen] = useState<boolean>(false);
   const [requestOpen, setRequestOpen] = useState<boolean>(false);
+  const [guestBookOpen, setGuestBookOpen] = useState<boolean>(false);
+  const [teaMenuOpen, setTeaMenuOpen] = useState<boolean>(false);
+  const [activeOrderInfo, setActiveOrderInfo] = useState<{
+    teaId: string;
+    guestName: string;
+  } | null>(null);
+  const [quickBrewRequest, setQuickBrewRequest] = useState<{
+    tea: TeaType;
+    requestKey: number;
+  } | null>(null);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(() =>
     isFullscreenActive(),
   );
@@ -335,13 +349,22 @@ export default function App() {
   }, []);
 
   const handleBrewComplete = useCallback(
-    (record: JournalRecord, warmthEarned: number, xpEarned: number) => {
+    (
+      record: JournalRecord,
+      warmthEarned: number,
+      xpEarned: number,
+      guestId?: string,
+    ) => {
       setSaveData((prev) =>
-        saveBrewRecord(prev, record, warmthEarned, xpEarned),
+        saveBrewRecord(prev, record, warmthEarned, xpEarned, guestId),
       );
     },
     [],
   );
+
+  const handleGuestVisited = useCallback((guestId: string) => {
+    setSaveData((prev) => recordGuestVisit(prev, guestId));
+  }, []);
 
   const handleResetJournal = useCallback(() => {
     soundEngine.playTap();
@@ -365,28 +388,36 @@ export default function App() {
       >
         {/* Top-Right 3-Bar Menu consolidating navigation & controls */}
         <AnimatePresence>
-          {screen !== 'TITLE_MENU' && !settingsOpen && !updatesOpen && !requestOpen && (
-            <CornerMenu
-              key="corner-menu"
-              screen={screen}
-              xp={saveData.xp}
-              level={saveData.level}
-              mode={mode}
-              onModeChange={setMode}
-              ambience={settings.ambience}
-              onAmbienceChange={handleAmbienceChange}
-              isMuted={settings.isMuted}
-              onToggleMute={handleToggleMute}
-              isFullscreen={isFullscreen}
-              onToggleFullscreen={handleToggleFullscreen}
-              onNavigate={navigateTo}
-              onOpenSettings={() => setSettingsOpen(true)}
-              onOpenUpdates={() => setUpdatesOpen(true)}
-              onOpenRequest={() => setRequestOpen(true)}
-              updateAvailable={updateCheckResult?.status === 'update-ready'}
-              latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
-            />
-          )}
+          {screen !== 'TITLE_MENU' &&
+            !settingsOpen &&
+            !updatesOpen &&
+            !requestOpen &&
+            !guestBookOpen &&
+            !teaMenuOpen && (
+              <CornerMenu
+                key="corner-menu"
+                screen={screen}
+                xp={saveData.xp}
+                level={saveData.level}
+                mode={mode}
+                onModeChange={setMode}
+                ambience={settings.ambience}
+                onAmbienceChange={handleAmbienceChange}
+                isMuted={settings.isMuted}
+                onToggleMute={handleToggleMute}
+                isFullscreen={isFullscreen}
+                onToggleFullscreen={handleToggleFullscreen}
+                onNavigate={navigateTo}
+                onOpenSettings={() => setSettingsOpen(true)}
+                onOpenUpdates={() => setUpdatesOpen(true)}
+                onOpenRequest={() => setRequestOpen(true)}
+                onOpenGuestBook={() => setGuestBookOpen(true)}
+                onOpenTeaMenu={() => setTeaMenuOpen(true)}
+                visitedGuestCount={saveData.visitedGuestIds.length}
+                updateAvailable={updateCheckResult?.status === 'update-ready'}
+                latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
+              />
+            )}
         </AnimatePresence>
 
         {/* Main Content with Overlapping Smooth Screen Transitions (no wait stall) */}
@@ -427,7 +458,16 @@ export default function App() {
                   onOpenSettings={() => setSettingsOpen(true)}
                   onOpenUpdates={() => setUpdatesOpen(true)}
                   onOpenRequest={() => setRequestOpen(true)}
-                  isOverlayOpen={settingsOpen || updatesOpen || requestOpen}
+                  onOpenGuestBook={() => setGuestBookOpen(true)}
+                  onOpenTeaMenu={() => setTeaMenuOpen(true)}
+                  visitedGuestCount={saveData.visitedGuestIds.length}
+                  isOverlayOpen={
+                    settingsOpen ||
+                    updatesOpen ||
+                    requestOpen ||
+                    guestBookOpen ||
+                    teaMenuOpen
+                  }
                   isUltraLowRam={deviceReport.isUltraLowRam}
                   updateAvailable={updateCheckResult?.status === 'update-ready'}
                   latestBrowserVersion={updateCheckResult?.latestVersion ?? null}
@@ -450,6 +490,10 @@ export default function App() {
                   mode={mode}
                   onModeChange={setMode}
                   settings={settings}
+                  onOpenTeaMenu={() => setTeaMenuOpen(true)}
+                  onActiveOrderChange={setActiveOrderInfo}
+                  quickBrewRequest={quickBrewRequest}
+                  onGuestVisited={handleGuestVisited}
                   onBrewComplete={handleBrewComplete}
                 />
               </motion.div>
@@ -525,6 +569,49 @@ export default function App() {
               playerLevel={saveData.level}
               optimizationProfile={settings.optimizationProfile}
               onClose={() => setRequestOpen(false)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Customer Directory (Visited vs Mystery Guests) Modal */}
+        <AnimatePresence>
+          {guestBookOpen && (
+            <GuestBookModal
+              key="guest-book-modal"
+              visitedGuestIds={saveData.visitedGuestIds}
+              history={saveData.history}
+              onClose={() => setGuestBookOpen(false)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Shop Tea Menu Board Modal (strictly unlocked teas only) */}
+        <AnimatePresence>
+          {teaMenuOpen && (
+            <TeaMenuBoardModal
+              key="tea-menu-board-modal"
+              playerLevel={saveData.level}
+              orderedTeaId={
+                screen === 'BREWING' && mode === 'guest'
+                  ? activeOrderInfo?.teaId ?? null
+                  : null
+              }
+              orderedGuestName={
+                screen === 'BREWING' && mode === 'guest'
+                  ? activeOrderInfo?.guestName
+                  : undefined
+              }
+              onQuickBrewTea={(tea) => {
+                setTeaMenuOpen(false);
+                setQuickBrewRequest((prev) => ({
+                  tea,
+                  requestKey: (prev?.requestKey ?? 0) + 1,
+                }));
+                if (screen !== 'BREWING') {
+                  handleStartBrewing();
+                }
+              }}
+              onClose={() => setTeaMenuOpen(false)}
             />
           )}
         </AnimatePresence>

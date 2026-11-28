@@ -232,3 +232,169 @@ export function createSteamPuffTexture(
   texture.needsUpdate = true;
   return texture;
 }
+
+export interface TeaMenuBoardCanvasHandle {
+  canvas: HTMLCanvasElement;
+  texture: THREE.CanvasTexture;
+  redraw: (
+    unlockedTeas: {
+      id: string;
+      name: string;
+      idealTempLabel: string;
+      richColor: string;
+      categoryLabel: string;
+    }[],
+    playerLevel: number,
+    orderedTeaId?: string | null,
+  ) => void;
+}
+
+function truncateCanvasText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  maxWidth: number,
+): string {
+  if (ctx.measureText(text).width <= maxWidth) return text;
+  let cut = text;
+  while (cut.length > 1 && ctx.measureText(`${cut}…`).width > maxWidth) {
+    cut = cut.slice(0, -1);
+  }
+  return `${cut}…`;
+}
+
+export function createTeaMenuBoardTexture(
+  maxAnisotropy: number,
+  compact = false,
+  ultraCompact = false,
+): TeaMenuBoardCanvasHandle {
+  const w = ultraCompact ? 384 : compact ? 512 : 768;
+  const h = ultraCompact ? 480 : compact ? 640 : 960;
+  const canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = compact || ultraCompact ? 1 : Math.min(4, maxAnisotropy);
+
+  const redraw: TeaMenuBoardCanvasHandle['redraw'] = (
+    unlockedTeas,
+    playerLevel,
+    orderedTeaId,
+  ) => {
+    if (!ctx) return;
+    const s = w / 512;
+
+    // Warm Japanese parchment backing
+    ctx.fillStyle = '#FAF5E8';
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle double border frame
+    ctx.strokeStyle = '#C89D54';
+    ctx.lineWidth = Math.max(2, 3 * s);
+    ctx.strokeRect(10 * s, 10 * s, w - 20 * s, h - 20 * s);
+    ctx.strokeStyle = 'rgba(46, 111, 64, 0.28)';
+    ctx.lineWidth = Math.max(1, 1.5 * s);
+    ctx.strokeRect(16 * s, 16 * s, w - 32 * s, h - 32 * s);
+
+    // Header Ribbon
+    ctx.fillStyle = '#263B2C';
+    ctx.fillRect(16 * s, 16 * s, w - 32 * s, 82 * s);
+
+    ctx.fillStyle = '#FAF5E8';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = `700 ${Math.round(25 * s)}px "Kanit", "Sarabun", sans-serif`;
+    ctx.fillText('ป้ายเมนูชาประจำร้าน', w / 2, 46 * s);
+
+    ctx.fillStyle = '#DFC48C';
+    ctx.font = `500 ${Math.round(14 * s)}px "Sarabun", sans-serif`;
+    ctx.fillText(
+      `พร้อมชงเสิร์ฟ ${unlockedTeas.length} เมนู · ระดับร้าน Lv.${playerLevel}`,
+      w / 2,
+      78 * s,
+    );
+
+    // Menu Rows (strictly ONLY unlocked teas that we can brew)
+    const startY = 114 * s;
+    const availH = h - startY - 38 * s;
+    const useTwoCols = unlockedTeas.length > 10;
+    const cols = useTwoCols ? 2 : 1;
+    const rowsPerCol = Math.ceil(unlockedTeas.length / cols);
+    const colGap = useTwoCols ? 14 * s : 0;
+    const padX = 26 * s;
+    const colW = (w - padX * 2 - colGap * (cols - 1)) / cols;
+    const rowH = Math.min(44 * s, availH / Math.max(1, rowsPerCol));
+
+    unlockedTeas.forEach((tea, idx) => {
+      const col = useTwoCols ? Math.floor(idx / rowsPerCol) : 0;
+      const row = useTwoCols ? idx % rowsPerCol : idx;
+      const rx = padX + col * (colW + colGap);
+      const ry = startY + row * rowH;
+      const isOrdered = Boolean(orderedTeaId && tea.id === orderedTeaId);
+
+      // Highlight ordered tea row cleanly
+      if (isOrdered) {
+        ctx.fillStyle = '#E1F0E3';
+        ctx.fillRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+        ctx.strokeStyle = '#2E6F40';
+        ctx.lineWidth = Math.max(1.5, 2 * s);
+        ctx.strokeRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+      } else if (row % 2 === 1) {
+        ctx.fillStyle = 'rgba(31, 40, 35, 0.035)';
+        ctx.fillRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+      }
+
+      // Tea color swatch circle
+      const dotR = (useTwoCols ? 5.5 : 6.5) * s;
+      const dotX = rx + 12 * s;
+      const dotY = ry + rowH / 2;
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = tea.richColor;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,0.22)';
+      ctx.lineWidth = 1 * s;
+      ctx.stroke();
+
+      // Tea name
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = isOrdered ? '#194A27' : '#1F2823';
+      const fontSize = Math.round((useTwoCols ? 13 : 16.5) * s);
+      ctx.font = `${isOrdered ? '700' : '600'} ${fontSize}px "Kanit", "Sarabun", sans-serif`;
+
+      const rightLabel = isOrdered ? '★ สั่ง' : tea.idealTempLabel;
+      ctx.font = `600 ${Math.round((useTwoCols ? 11 : 13) * s)}px "Sarabun", sans-serif`;
+      const rightW = ctx.measureText(rightLabel).width + 10 * s;
+
+      ctx.font = `${isOrdered ? '700' : '600'} ${fontSize}px "Kanit", "Sarabun", sans-serif`;
+      const nameMaxW = Math.max(40 * s, colW - 26 * s - rightW);
+      const displayName = truncateCanvasText(ctx, tea.name, nameMaxW);
+      ctx.fillText(displayName, rx + 24 * s, dotY);
+
+      // Right meta (temp or ordered indicator)
+      ctx.textAlign = 'right';
+      ctx.fillStyle = isOrdered ? '#2E6F40' : '#5A655D';
+      ctx.font = `${isOrdered ? '700' : '500'} ${Math.round((useTwoCols ? 11 : 13) * s)}px "Sarabun", sans-serif`;
+      ctx.fillText(rightLabel, rx + colW - 8 * s, dotY);
+    });
+
+    // Subtle footer hint
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#5A655D';
+    ctx.font = `500 ${Math.round(12 * s)}px "Sarabun", sans-serif`;
+    ctx.fillText('แตะที่ป้ายเพื่อเปิดดูหน้าเมนูชาฉบับเต็ม', w / 2, h - 22 * s);
+
+    texture.needsUpdate = true;
+  };
+
+  return {canvas, texture, redraw};
+}
+

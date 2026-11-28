@@ -13,14 +13,17 @@ import {
   MessageSquarePlus,
   Minimize2,
   Power,
+  ScrollText,
   Settings,
   Sparkles,
+  Users,
   Volume2,
   VolumeX,
   Wind,
   X,
 } from 'lucide-react';
 import {CURRENT_APP_VERSION} from '../data/changelog';
+import {GUESTS} from '../data/guests';
 import {getUnlockedTeas, getXpProgress} from '../data/progression';
 import {TEAS} from '../data/teas';
 import {AmbienceMode, GameMode, ScreenView} from '../types/tea';
@@ -44,6 +47,9 @@ interface CornerMenuProps {
   onOpenSettings: () => void;
   onOpenUpdates: () => void;
   onOpenRequest: () => void;
+  onOpenGuestBook: () => void;
+  onOpenTeaMenu: () => void;
+  visitedGuestCount: number;
   updateAvailable?: boolean;
   latestBrowserVersion?: string | null;
 }
@@ -70,6 +76,9 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
   onOpenSettings,
   onOpenUpdates,
   onOpenRequest,
+  onOpenGuestBook,
+  onOpenTeaMenu,
+  visitedGuestCount,
   updateAvailable = false,
   latestBrowserVersion = null,
 }) => {
@@ -250,6 +259,48 @@ export const CornerMenu: React.FC<CornerMenuProps> = React.memo(({
                       <span>วิธีชง</span>
                     </motion.button>
                   </div>
+
+                  <motion.button
+                    type="button"
+                    whileTap={{scale: 0.96}}
+                    transition={TAP_SPRING}
+                    onClick={() => {
+                      soundEngine.unlock();
+                      soundEngine.playTap();
+                      setOpen(false);
+                      onOpenTeaMenu();
+                    }}
+                    className="mt-2 flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#C8A66A]/45 bg-[#FAF6EC] px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3EDE0]"
+                  >
+                    <span className="flex items-center gap-2">
+                      <ScrollText className="h-4 w-4 text-[#9B6B2F] shrink-0" aria-hidden="true" />
+                      <span>ป้ายเมนูชาประจำร้าน</span>
+                    </span>
+                    <span className="font-mono-num text-xs font-semibold text-[#2E6F40]">
+                      {unlockedCount} เมนู
+                    </span>
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    whileTap={{scale: 0.96}}
+                    transition={TAP_SPRING}
+                    onClick={() => {
+                      soundEngine.unlock();
+                      soundEngine.playTap();
+                      setOpen(false);
+                      onOpenGuestBook();
+                    }}
+                    className="mt-2 flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-[#2E6F40] shrink-0" aria-hidden="true" />
+                      <span>สมุดลูกค้าประจำร้าน</span>
+                    </span>
+                    <span className="font-mono-num text-xs font-semibold text-[#2E6F40]">
+                      {visitedGuestCount}/{GUESTS.length}
+                    </span>
+                  </motion.button>
                 </div>
 
                 {/* Game Mode */}

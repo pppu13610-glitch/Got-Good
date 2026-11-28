@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import {
   createAnimeFaceTexture,
+  createFishnetStockingTexture,
   createHairStrandTexture,
   createLowPolyPbrTextureSet,
+  createSakuraKimonoTexture,
   createTailoredClothingTexture,
 } from './characterTextures';
 import {
@@ -1599,6 +1601,1193 @@ export function buildSeamlessHumanGuest(
     bagBody.position.set(0.025, -0.10, 0.02);
     bones.rightWrist.add(bagBody);
   }
+
+  return {group, bones, textures};
+}
+
+export type LegacyShopkeeperGuestId =
+  | 'tea-master'
+  | 'spirit-blossom-kindred'
+  | 'mococo-abyssgard'
+  | 'diego-body'
+  | 'cicada-suit-v2';
+
+/**
+ * Returning Former Shopkeeper Models as Shop Guests (excluding T-pose):
+ * 1. tea-master (Traditional Tea Master)
+ * 2. spirit-blossom-kindred (Spirit Blossom Kindred + floating spirit orb)
+ * 3. mococo-abyssgard (Mococo Abyssgard with twin-tails, wolf ears/tail & fishnet tights)
+ * 4. diego-body (Diego / Body with 4-button charcoal waistcoat & rolled shirt sleeves)
+ * 5. cicada-suit-v2 (Ultimate CICADA Suit V2 tactical high-collar trench coat & shades)
+ */
+export function buildLegacyShopkeeperGuest(
+  guestId: LegacyShopkeeperGuestId,
+  compactMode: boolean,
+  ultraCompact: boolean,
+): SeamlessCharacterHandle {
+  const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
+  const castShadow = !compactMode;
+
+  if (guestId === 'tea-master') {
+    const s = 1.01;
+    const bones = createHumanoidSkeleton(s);
+    const group = new THREE.Group();
+    group.add(bones.root);
+
+    const faceTex = createAnimeFaceTexture(
+      {
+        skinHex: '#f0cbb1',
+        blushHex: 'rgba(218, 128, 118, 0.30)',
+        irisTopHex: '#33241c',
+        irisBottomHex: '#6c4d3a',
+        browHex: '#28201c',
+        lipHex: '#ab6a61',
+        eyeScale: 0.92,
+        smileCurve: 1.12,
+        warmAgeLines: true,
+      },
+      compactMode,
+    );
+    const hairTex = createHairStrandTexture(
+      '#2e2623',
+      '#584942',
+      '#1a1412',
+      '#3a302b',
+      compactMode,
+    );
+    const kimonoTex = createTailoredClothingTexture(
+      {
+        style: 'thai-blouse',
+        baseHex: '#5a7856',
+        grainHex: '#2f452d',
+        accentHex: '#274d4b',
+        buttonHex: '#d5c9ab',
+      },
+      compactMode,
+    );
+    const obiTex = createTailoredClothingTexture(
+      {
+        style: 'shirt',
+        baseHex: '#e8dfc7',
+        grainHex: '#c6ba9d',
+      },
+      compactMode,
+    );
+    const textures: THREE.Texture[] = [faceTex, hairTex, kimonoTex, obiTex];
+
+    const {skinMat, headMat} = createCharacterMats({skin: 0xf0cbb1, faceTex});
+    const kimonoMat = new THREE.MeshStandardMaterial({
+      map: kimonoTex,
+      roughness: 0.80,
+      side: THREE.DoubleSide,
+    });
+    const tealTrimMat = new THREE.MeshStandardMaterial({
+      color: 0x264b49,
+      roughness: 0.78,
+    });
+    const obiMat = new THREE.MeshStandardMaterial({
+      map: obiTex,
+      roughness: 0.76,
+    });
+    const hakamaMat = new THREE.MeshStandardMaterial({
+      color: 0x273f3f,
+      roughness: 0.82,
+    });
+    const hairMat = new THREE.MeshStandardMaterial({
+      map: hairTex,
+      roughness: 0.48,
+      metalness: 0.05,
+    });
+    const jadeMat = new THREE.MeshStandardMaterial({
+      color: 0x529b6d,
+      roughness: 0.25,
+      metalness: 0.15,
+    });
+    const shoeMat = new THREE.MeshStandardMaterial({
+      color: 0x6b472b,
+      roughness: 0.54,
+    });
+    const soleMat = new THREE.MeshStandardMaterial({
+      color: 0x2a1b12,
+      roughness: 0.86,
+    });
+
+    const meshes: THREE.SkinnedMesh[] = [
+      ...buildSeamlessTorso(s, seg, bones.skeleton, hakamaMat, kimonoMat, skinMat, {
+        hasHead: true,
+        slender: false,
+        castShadow,
+      }),
+      ...buildSeamlessArm(-1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        bulkySleeve: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        bulkySleeve: true,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, hakamaMat, hakamaMat, shoeMat, soleMat, {
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, hakamaMat, hakamaMat, shoeMat, soleMat, {
+        castShadow,
+      }),
+      buildSculptedHeadSkinnedMesh(1.52 * s, 0.15 * s, seg, headMat, bones.skeleton, {
+        jawTaper: 0.76,
+        faceFlatten: 0.91,
+        castShadow,
+      }),
+      ...buildAnatomicalEarsSkinnedMesh(1.515 * s, 0.15 * s, skinMat, bones.skeleton, castShadow),
+      // Stand collar + Teal Kimono lapel
+      buildLoftedSkinnedMesh(
+        [
+          {center: [0, 1.318 * s, -0.002 * s], rx: 0.058 * s, rz: 0.058 * s, squareness: 0.1, weights: [BONE.CHEST, 0.35, BONE.NECK, 0.65], v: 0},
+          {center: [0, 1.362 * s, -0.002 * s], rx: 0.056 * s, rz: 0.056 * s, squareness: 0.1, weights: [BONE.NECK, 0.85, BONE.CHEST, 0.15], v: 1},
+        ],
+        seg,
+        tealTrimMat,
+        bones.skeleton,
+      ),
+      // Snug Cream Obi Sash
+      buildLoftedSkinnedMesh(
+        [
+          {center: [0, 0.855 * s, 0], rx: 0.158 * s, rz: 0.114 * s, squareness: 0.45, weights: [BONE.HIPS, 0.72, BONE.SPINE, 0.28], v: 0},
+          {center: [0, 0.935 * s, 0], rx: 0.144 * s, rz: 0.104 * s, squareness: 0.45, weights: [BONE.HIPS, 0.45, BONE.SPINE, 0.55], v: 1},
+        ],
+        seg,
+        obiMat,
+        bones.skeleton,
+      ),
+      // Traditional Top-Bun Hairstyle
+      buildHairCapSkinnedMesh(1.52 * s, 0.15 * s, seg, hairMat, bones.skeleton, {
+        backDrop: 0.14,
+        castShadow,
+      }),
+      buildHairRibbonSkinnedMesh(
+        [
+          [-0.088, 1.60 * s, 0.03],
+          [-0.120, 1.505 * s, 0.062],
+          [-0.112, 1.44 * s, 0.052],
+        ],
+        [0.022, 0.016, 0.005],
+        [0.009, 0.007, 0.003],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [0.088, 1.60 * s, 0.03],
+          [0.120, 1.505 * s, 0.062],
+          [0.112, 1.44 * s, 0.052],
+        ],
+        [0.022, 0.016, 0.005],
+        [0.009, 0.007, 0.003],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildTaperedCurveSkinnedMesh(
+        [
+          [0, 1.67 * s, -0.02],
+          [0, 1.75 * s, -0.038],
+        ],
+        [0.066, 0.038],
+        1.05,
+        1.0,
+        10,
+        BONE.HEAD,
+        hairMat,
+        bones.skeleton,
+      ),
+      buildTaperedCurveSkinnedMesh(
+        [
+          [-0.082, 1.71 * s, -0.034],
+          [0.082, 1.735 * s, -0.034],
+        ],
+        [0.006, 0.008],
+        1.0,
+        1.0,
+        6,
+        BONE.HEAD,
+        jadeMat,
+        bones.skeleton,
+      ),
+    ];
+
+    for (const m of meshes) group.add(m);
+
+    // Back Obi Bow Knot
+    const obiKnot = new THREE.Mesh(
+      new THREE.BoxGeometry(0.11 * s, 0.065 * s, 0.045 * s),
+      obiMat,
+    );
+    obiKnot.position.set(0, -0.045 * s, -0.118 * s);
+    bones.spine.add(obiKnot);
+
+    return {group, bones, textures};
+  }
+
+  if (guestId === 'spirit-blossom-kindred') {
+    const s = 0.98;
+    const bones = createHumanoidSkeleton(s);
+    const group = new THREE.Group();
+    group.add(bones.root);
+
+    const faceTex = createAnimeFaceTexture(
+      {
+        skinHex: '#f8e7ea',
+        blushHex: 'rgba(232, 148, 184, 0.36)',
+        irisTopHex: '#5b488c',
+        irisBottomHex: '#b89fe8',
+        browHex: '#8d83a8',
+        lipHex: '#c9788e',
+        eyeScale: 1.04,
+        smileCurve: 1.15,
+      },
+      compactMode,
+    );
+    const hairTex = createHairStrandTexture(
+      '#e4e1f2',
+      '#ffffff',
+      '#b2add0',
+      '#d5c4f0',
+      compactMode,
+    );
+    const kimonoTex = createSakuraKimonoTexture(
+      '#f2c6db',
+      '#9e7cc4',
+      '#fff4f9',
+      compactMode,
+    );
+    const textures: THREE.Texture[] = [faceTex, hairTex, kimonoTex];
+
+    const {skinMat, headMat} = createCharacterMats({skin: 0xf8e7ea, faceTex});
+    const kimonoMat = new THREE.MeshStandardMaterial({
+      map: kimonoTex,
+      roughness: 0.74,
+      side: THREE.DoubleSide,
+    });
+    const obiMat = new THREE.MeshStandardMaterial({
+      color: 0x7c5ca6,
+      roughness: 0.68,
+    });
+    const furMat = new THREE.MeshStandardMaterial({
+      color: 0xfff8fc,
+      roughness: 0.94,
+    });
+    const hornMat = new THREE.MeshStandardMaterial({
+      color: 0x2c224d,
+      roughness: 0.36,
+      metalness: 0.14,
+    });
+    const hairMat = new THREE.MeshStandardMaterial({
+      map: hairTex,
+      roughness: 0.42,
+      metalness: 0.08,
+    });
+    const stockingMat = new THREE.MeshStandardMaterial({
+      color: 0xe3d8f5,
+      roughness: 0.72,
+    });
+    const shoeMat = new THREE.MeshStandardMaterial({
+      color: 0x674978,
+      roughness: 0.48,
+    });
+    const soleMat = new THREE.MeshStandardMaterial({
+      color: 0x352542,
+      roughness: 0.85,
+    });
+
+    const wScale = 0.87;
+    const meshes: THREE.SkinnedMesh[] = [
+      ...buildSeamlessTorso(s, seg, bones.skeleton, kimonoMat, kimonoMat, skinMat, {
+        hasHead: true,
+        slender: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(-1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        bulkySleeve: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        bulkySleeve: true,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, skinMat, stockingMat, shoeMat, soleMat, {
+        thighWidth: 0.94,
+        kneeHighStartY: 0.56,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, skinMat, stockingMat, shoeMat, soleMat, {
+        thighWidth: 0.94,
+        kneeHighStartY: 0.56,
+        castShadow,
+      }),
+      // Kimono Wrap Skirt
+      buildCoatShellSkinnedMesh(
+        [
+          {y: 0.48 * s, rx: (0.174 * wScale + 0.010) * s, rz: (0.122 * wScale + 0.008) * s, squareness: 0.40, arcStart: 0, arcEnd: Math.PI * 2, upperBone: BONE.HIPS, upperWeight: 0.42, v: 0},
+          {y: 0.64 * s, rx: (0.165 * wScale + 0.009) * s, rz: (0.116 * wScale + 0.008) * s, squareness: 0.42, arcStart: 0, arcEnd: Math.PI * 2, upperBone: BONE.HIPS, upperWeight: 0.72, v: 0.48},
+          {y: 0.78 * s, rx: (0.156 * wScale + 0.008) * s, rz: (0.110 * wScale + 0.007) * s, squareness: 0.44, arcStart: 0, arcEnd: Math.PI * 2, upperBone: BONE.HIPS, upperWeight: 0.92, v: 1},
+        ],
+        seg,
+        kimonoMat,
+        bones.skeleton,
+        castShadow,
+      ),
+      // Lavender Obi Sash
+      buildLoftedSkinnedMesh(
+        [
+          {center: [0, 0.855 * s, 0], rx: 0.145 * s, rz: 0.105 * s, squareness: 0.45, weights: [BONE.HIPS, 0.72, BONE.SPINE, 0.28], v: 0},
+          {center: [0, 0.935 * s, 0], rx: 0.128 * s, rz: 0.094 * s, squareness: 0.45, weights: [BONE.HIPS, 0.45, BONE.SPINE, 0.55], v: 1},
+        ],
+        seg,
+        obiMat,
+        bones.skeleton,
+      ),
+      buildSculptedHeadSkinnedMesh(1.52 * s, 0.15 * s, seg, headMat, bones.skeleton, {
+        jawTaper: 0.68,
+        faceFlatten: 0.90,
+        castShadow,
+      }),
+      ...buildAnatomicalEarsSkinnedMesh(1.515 * s, 0.15 * s, skinMat, bones.skeleton, castShadow),
+      buildHairCapSkinnedMesh(1.52 * s, 0.15 * s, seg, hairMat, bones.skeleton, {
+        backDrop: 0.28,
+        castShadow,
+      }),
+      // Long silvery back hair & front sakura bangs
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.62 * s, -0.08],
+          [0, 1.46 * s, -0.165],
+          [0, 1.24 * s, -0.155],
+          [0, 1.08 * s, -0.125],
+        ],
+        [0.148, 0.156, 0.135, 0.068],
+        [0.026, 0.028, 0.022, 0.010],
+        hairMat,
+        bones.skeleton,
+        {followChestLower: true, castShadow},
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.64 * s, 0.055],
+          [-0.045, 1.595 * s, 0.138],
+          [-0.082, 1.525 * s, 0.125],
+        ],
+        [0.046, 0.036, 0.012],
+        [0.014, 0.011, 0.004],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.64 * s, 0.055],
+          [0.045, 1.595 * s, 0.138],
+          [0.082, 1.525 * s, 0.125],
+        ],
+        [0.046, 0.036, 0.012],
+        [0.014, 0.011, 0.004],
+        hairMat,
+        bones.skeleton,
+      ),
+      // Curved Indigo Spirit Horns
+      buildTaperedCurveSkinnedMesh(
+        [
+          [-0.078, 1.635 * s, 0.02],
+          [-0.135, 1.715 * s, -0.025],
+          [-0.145, 1.765 * s, -0.095],
+          [-0.105, 1.735 * s, -0.145],
+        ],
+        [0.024, 0.020, 0.013, 0.005],
+        1.0,
+        1.0,
+        8,
+        BONE.HEAD,
+        hornMat,
+        bones.skeleton,
+      ),
+      buildTaperedCurveSkinnedMesh(
+        [
+          [0.078, 1.635 * s, 0.02],
+          [0.135, 1.715 * s, -0.025],
+          [0.145, 1.765 * s, -0.095],
+          [0.105, 1.735 * s, -0.145],
+        ],
+        [0.024, 0.020, 0.013, 0.005],
+        1.0,
+        1.0,
+        8,
+        BONE.HEAD,
+        hornMat,
+        bones.skeleton,
+      ),
+    ];
+
+    for (const m of meshes) group.add(m);
+
+    // Fluffy Fur Collar Wrap around shoulders
+    const furCollar = new THREE.Mesh(
+      new THREE.TorusGeometry(0.118 * s, 0.028 * s, 8, 16),
+      furMat,
+    );
+    furCollar.rotation.x = Math.PI * 0.46;
+    furCollar.position.set(0, 0.155 * s, 0.005 * s);
+    bones.chest.add(furCollar);
+
+    // Tall Spirit Fox Ears + Porcelain Side Mask on head
+    for (const side of [-1, 1] as const) {
+      const earGroup = new THREE.Group();
+      const outerEar = new THREE.Mesh(
+        new THREE.ConeGeometry(0.036 * s, 0.115 * s, 8),
+        hairMat,
+      );
+      const innerEar = new THREE.Mesh(
+        new THREE.ConeGeometry(0.020 * s, 0.082 * s, 6),
+        new THREE.MeshStandardMaterial({color: 0xf4b6cf, roughness: 0.8}),
+      );
+      innerEar.position.set(0, -0.005 * s, 0.016 * s);
+      earGroup.add(outerEar, innerEar);
+      earGroup.position.set(side * 0.075 * s, 0.295 * s, 0.012 * s);
+      earGroup.rotation.z = -side * 0.28;
+      earGroup.rotation.x = 0.12;
+      bones.head.add(earGroup);
+    }
+
+    const sideMask = new THREE.Mesh(
+      new THREE.SphereGeometry(0.048 * s, 10, 10),
+      furMat,
+    );
+    sideMask.scale.set(0.85, 1.05, 0.45);
+    sideMask.position.set(0.132 * s, 0.195 * s, 0.055 * s);
+    sideMask.rotation.y = Math.PI * 0.36;
+    sideMask.rotation.z = -0.22;
+    bones.head.add(sideMask);
+
+    // Floating Pastel Spirit Orb hovering beside Kindred
+    const spiritOrbGroup = new THREE.Group();
+    spiritOrbGroup.position.set(0.38 * s, 1.38 * s, -0.06 * s);
+    const orbCore = new THREE.Mesh(
+      new THREE.SphereGeometry(0.055 * s, 12, 12),
+      new THREE.MeshStandardMaterial({
+        color: 0xd9c2ff,
+        emissive: 0x8b6be6,
+        emissiveIntensity: 0.65,
+        roughness: 0.25,
+      }),
+    );
+    const orbHalo = new THREE.Mesh(
+      new THREE.SphereGeometry(0.082 * s, 12, 12),
+      new THREE.MeshStandardMaterial({
+        color: 0xf5dcff,
+        transparent: true,
+        opacity: 0.35,
+        roughness: 0.2,
+      }),
+    );
+    spiritOrbGroup.add(orbCore, orbHalo);
+    group.add(spiritOrbGroup);
+
+    return {group, bones, spiritOrbGroup, textures};
+  }
+
+  if (guestId === 'mococo-abyssgard') {
+    const s = 0.95;
+    const wScale = 0.87;
+    const bones = createHumanoidSkeleton(s);
+    const group = new THREE.Group();
+    group.add(bones.root);
+
+    const faceTex = createAnimeFaceTexture(
+      {
+        skinHex: '#fbe0d0',
+        blushHex: 'rgba(244, 138, 152, 0.44)',
+        irisTopHex: '#733856',
+        irisBottomHex: '#ee89ad',
+        browHex: '#b38953',
+        lipHex: '#d66e80',
+        eyeScale: 1.05,
+        smileCurve: 1.28,
+      },
+      compactMode,
+    );
+    const hairTex = createHairStrandTexture(
+      '#f4db96',
+      '#fff4cc',
+      '#c7a55d',
+      '#f296b8',
+      compactMode,
+    );
+    const jacketTex = createTailoredClothingTexture(
+      {
+        style: 'hoodie-jacket',
+        baseHex: '#25222c',
+        grainHex: '#151319',
+        trimHex: '#ef76a4',
+      },
+      compactMode,
+    );
+    const cropTex = createTailoredClothingTexture(
+      {
+        style: 'shirt',
+        baseHex: '#faf7f9',
+        grainHex: '#e1d9e0',
+      },
+      compactMode,
+    );
+    const fishnetTex = createFishnetStockingTexture(
+      '#fbe0d0',
+      '#241e29',
+      '#ef78a6',
+      compactMode,
+    );
+    const textures: THREE.Texture[] = [faceTex, hairTex, jacketTex, cropTex, fishnetTex];
+
+    const {skinMat, headMat} = createCharacterMats({skin: 0xfbe0d0, faceTex});
+    const jacketMat = new THREE.MeshStandardMaterial({
+      map: jacketTex,
+      roughness: 0.72,
+      side: THREE.DoubleSide,
+    });
+    const cropMat = new THREE.MeshStandardMaterial({
+      map: cropTex,
+      roughness: 0.78,
+    });
+    const shortsMat = new THREE.MeshStandardMaterial({
+      color: 0xf5f0f4,
+      roughness: 0.78,
+      side: THREE.DoubleSide,
+    });
+    const fishnetMat = new THREE.MeshStandardMaterial({
+      map: fishnetTex,
+      roughness: 0.68,
+    });
+    const pinkMat = new THREE.MeshStandardMaterial({
+      color: 0xef74a2,
+      roughness: 0.48,
+    });
+    const furMat = new THREE.MeshStandardMaterial({
+      color: 0xfff8fb,
+      roughness: 0.94,
+    });
+    const chokerMat = new THREE.MeshStandardMaterial({
+      color: 0x1d1b22,
+      roughness: 0.45,
+    });
+    const hairMat = new THREE.MeshStandardMaterial({
+      map: hairTex,
+      roughness: 0.44,
+      metalness: 0.08,
+    });
+    const soleMat = new THREE.MeshStandardMaterial({
+      color: 0xf5edf2,
+      roughness: 0.85,
+    });
+
+    const meshes: THREE.SkinnedMesh[] = [
+      ...buildSeamlessTorso(s, seg, bones.skeleton, shortsMat, cropMat, skinMat, {
+        hasHead: true,
+        slender: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(-1, s, seg, bones.skeleton, jacketMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(1, s, seg, bones.skeleton, jacketMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, skinMat, fishnetMat, pinkMat, soleMat, {
+        thighWidth: 0.95,
+        kneeHighStartY: 0.62,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, skinMat, fishnetMat, pinkMat, soleMat, {
+        thighWidth: 0.95,
+        kneeHighStartY: 0.62,
+        castShadow,
+      }),
+      // Snug Short White Pleat Skirt/Shorts Over Hip
+      buildCoatShellSkinnedMesh(
+        [
+          {y: 0.64 * s, rx: (0.168 * wScale + 0.009) * s, rz: (0.118 * wScale + 0.008) * s, squareness: 0.42, arcStart: 0, arcEnd: Math.PI * 2, upperBone: BONE.HIPS, upperWeight: 0.72, v: 0},
+          {y: 0.78 * s, rx: (0.156 * wScale + 0.008) * s, rz: (0.110 * wScale + 0.007) * s, squareness: 0.44, arcStart: 0, arcEnd: Math.PI * 2, upperBone: BONE.HIPS, upperWeight: 0.94, v: 1},
+        ],
+        seg,
+        shortsMat,
+        bones.skeleton,
+        castShadow,
+      ),
+      // Snug Cropped Black-and-Pink Jacket Shell
+      buildCoatShellSkinnedMesh(
+        [
+          {y: 0.90 * s, zOffset: 0, rx: (0.132 * wScale + 0.007) * s, rz: (0.094 * wScale + 0.007) * s, squareness: 0.43, arcStart: -Math.PI * 0.20, arcEnd: Math.PI * 1.20, upperBone: BONE.SPINE, upperWeight: 1, v: 0},
+          {y: 1.06 * s, zOffset: 0.005 * s, rx: (0.150 * wScale + 0.007) * s, rz: (0.108 * wScale + 0.007) * s, squareness: 0.43, arcStart: -Math.PI * 0.22, arcEnd: Math.PI * 1.22, upperBone: BONE.CHEST, upperWeight: 1, v: 0.5},
+          {y: 1.22 * s, zOffset: 0.005 * s, rx: (0.168 * wScale + 0.007) * s, rz: (0.110 * wScale + 0.007) * s, squareness: 0.43, arcStart: -Math.PI * 0.18, arcEnd: Math.PI * 1.18, upperBone: BONE.CHEST, upperWeight: 1, v: 1},
+        ],
+        seg,
+        jacketMat,
+        bones.skeleton,
+        castShadow,
+      ),
+      // Pink Waist Belt
+      buildLoftedSkinnedMesh(
+        [
+          {center: [0, 0.79 * s, 0], rx: 0.162 * wScale * s, rz: 0.116 * wScale * s, squareness: 0.44, weights: [BONE.HIPS, 0.85, BONE.SPINE, 0.15], v: 0},
+          {center: [0, 0.825 * s, 0], rx: 0.158 * wScale * s, rz: 0.113 * wScale * s, squareness: 0.44, weights: [BONE.HIPS, 0.80, BONE.SPINE, 0.20], v: 1},
+        ],
+        seg,
+        pinkMat,
+        bones.skeleton,
+      ),
+      // Black Choker Collar
+      buildLoftedSkinnedMesh(
+        [
+          {center: [0, 1.345 * s, -0.002 * s], rx: 0.053 * s, rz: 0.053 * s, weights: [BONE.NECK, 0.8, BONE.HEAD, 0.2], v: 0},
+          {center: [0, 1.372 * s, -0.002 * s], rx: 0.053 * s, rz: 0.053 * s, weights: [BONE.NECK, 0.7, BONE.HEAD, 0.3], v: 1},
+        ],
+        seg,
+        chokerMat,
+        bones.skeleton,
+      ),
+      buildSculptedHeadSkinnedMesh(1.52 * s, 0.15 * s, seg, headMat, bones.skeleton, {
+        jawTaper: 0.66,
+        faceFlatten: 0.90,
+        castShadow,
+      }),
+      ...buildAnatomicalEarsSkinnedMesh(1.515 * s, 0.15 * s, skinMat, bones.skeleton, castShadow),
+      buildHairCapSkinnedMesh(1.52 * s, 0.15 * s, seg, hairMat, bones.skeleton, {
+        backDrop: 0.18,
+        castShadow,
+      }),
+      // Wispy Front Bangs
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.64 * s, 0.055],
+          [-0.045, 1.595 * s, 0.138],
+          [-0.072, 1.545 * s, 0.136],
+        ],
+        [0.044, 0.034, 0.012],
+        [0.014, 0.011, 0.004],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.64 * s, 0.055],
+          [0.045, 1.595 * s, 0.138],
+          [0.072, 1.545 * s, 0.136],
+        ],
+        [0.044, 0.034, 0.012],
+        [0.014, 0.011, 0.004],
+        hairMat,
+        bones.skeleton,
+      ),
+      // Iconic Blonde-to-Pink Twin-Tails
+      buildTaperedCurveSkinnedMesh(
+        [
+          [-0.122 * s, 1.59 * s, -0.035],
+          [-0.215 * s, 1.54 * s, -0.075],
+          [-0.245 * s, 1.36 * s, -0.085],
+          [-0.210 * s, 1.18 * s, -0.065],
+        ],
+        [0.038, 0.052, 0.044, 0.014],
+        1.1,
+        0.9,
+        10,
+        BONE.HEAD,
+        hairMat,
+        bones.skeleton,
+        castShadow,
+      ),
+      buildTaperedCurveSkinnedMesh(
+        [
+          [0.122 * s, 1.59 * s, -0.035],
+          [0.215 * s, 1.54 * s, -0.075],
+          [0.245 * s, 1.36 * s, -0.085],
+          [0.210 * s, 1.18 * s, -0.065],
+        ],
+        [0.038, 0.052, 0.044, 0.014],
+        1.1,
+        0.9,
+        10,
+        BONE.HEAD,
+        hairMat,
+        bones.skeleton,
+        castShadow,
+      ),
+    ];
+
+    for (const m of meshes) group.add(m);
+
+    // Wolf Ears on Head
+    for (const side of [-1, 1] as const) {
+      const ear = new THREE.Mesh(
+        new THREE.ConeGeometry(0.038 * s, 0.11 * s, 8),
+        hairMat,
+      );
+      const earInner = new THREE.Mesh(
+        new THREE.ConeGeometry(0.022 * s, 0.075 * s, 6),
+        pinkMat,
+      );
+      earInner.position.set(0, -0.008 * s, 0.015 * s);
+      const earGrp = new THREE.Group();
+      earGrp.add(ear, earInner);
+      earGrp.position.set(side * 0.082 * s, 0.285 * s, 0.01 * s);
+      earGrp.rotation.z = -side * 0.34;
+      earGrp.rotation.x = 0.14;
+      bones.head.add(earGrp);
+    }
+
+    // Fluffy Fur Collar & Wolf Tail
+    const collarFur = new THREE.Mesh(
+      new THREE.TorusGeometry(0.098 * s, 0.020 * s, 8, 14),
+      furMat,
+    );
+    collarFur.rotation.x = Math.PI * 0.46;
+    collarFur.position.set(0, 0.15 * s, 0.006 * s);
+    bones.chest.add(collarFur);
+
+    const wolfTail = new THREE.Mesh(
+      new THREE.ConeGeometry(0.058 * s, 0.28 * s, 10),
+      hairMat,
+    );
+    wolfTail.position.set(0, -0.05 * s, -0.175 * s);
+    wolfTail.rotation.x = -Math.PI * 0.36;
+    bones.hips.add(wolfTail);
+
+    return {group, bones, textures};
+  }
+
+  if (guestId === 'diego-body') {
+    const s = 1.03;
+    const bones = createHumanoidSkeleton(s);
+    const group = new THREE.Group();
+    group.add(bones.root);
+
+    const faceTex = createAnimeFaceTexture(
+      {
+        skinHex: '#ecc19e',
+        blushHex: 'rgba(210, 122, 112, 0.22)',
+        irisTopHex: '#2b1e18',
+        irisBottomHex: '#5e4334',
+        browHex: '#1e1714',
+        lipHex: '#a5675e',
+        eyeScale: 0.92,
+        smileCurve: 0.96,
+      },
+      compactMode,
+    );
+    const hairTex = createHairStrandTexture(
+      '#201b18',
+      '#463c36',
+      '#100d0b',
+      '#201b18',
+      compactMode,
+    );
+    const waistcoatTex = createTailoredClothingTexture(
+      {
+        style: 'waistcoat',
+        baseHex: '#2d3038',
+        grainHex: '#1b1d23',
+        accentHex: '#20232a',
+        buttonHex: '#4f5563',
+      },
+      compactMode,
+    );
+    const shirtTex = createTailoredClothingTexture(
+      {
+        style: 'shirt',
+        baseHex: '#737c8a',
+        grainHex: '#59616e',
+        buttonHex: '#9ba3b0',
+      },
+      compactMode,
+    );
+    const trouserTex = createTailoredClothingTexture(
+      {
+        style: 'waistcoat',
+        baseHex: '#24272f',
+        grainHex: '#16181e',
+      },
+      compactMode,
+    );
+    const textures: THREE.Texture[] = [
+      faceTex,
+      hairTex,
+      waistcoatTex,
+      shirtTex,
+      trouserTex,
+    ];
+
+    const {skinMat, headMat} = createCharacterMats({skin: 0xecc19e, faceTex});
+    const vestMat = new THREE.MeshStandardMaterial({
+      map: waistcoatTex,
+      roughness: 0.76,
+      side: THREE.DoubleSide,
+    });
+    const shirtMat = new THREE.MeshStandardMaterial({
+      map: shirtTex,
+      roughness: 0.78,
+    });
+    const trouserMat = new THREE.MeshStandardMaterial({
+      map: trouserTex,
+      roughness: 0.80,
+    });
+    const hairMat = new THREE.MeshStandardMaterial({
+      map: hairTex,
+      roughness: 0.46,
+      metalness: 0.06,
+    });
+    const shoeMat = new THREE.MeshStandardMaterial({
+      color: 0x3b261b,
+      roughness: 0.42,
+      metalness: 0.06,
+    });
+    const soleMat = new THREE.MeshStandardMaterial({
+      color: 0x1d1715,
+      roughness: 0.88,
+    });
+    const buttonMat = new THREE.MeshStandardMaterial({
+      color: 0x181a20,
+      roughness: 0.35,
+      metalness: 0.35,
+    });
+
+    const gap = 0.007 * s;
+    const meshes: THREE.SkinnedMesh[] = [
+      ...buildSeamlessTorso(s, seg, bones.skeleton, trouserMat, shirtMat, skinMat, {
+        hasHead: true,
+        slender: false,
+        castShadow,
+      }),
+      ...buildSeamlessArm(-1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        castShadow,
+      }),
+      ...buildSeamlessArm(1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+        sleeveEndsAtElbow: true,
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, trouserMat, trouserMat, shoeMat, soleMat, {
+        castShadow,
+      }),
+      ...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, trouserMat, trouserMat, shoeMat, soleMat, {
+        castShadow,
+      }),
+      // Tailored Charcoal 4-Button Waistcoat Shell
+      buildCoatShellSkinnedMesh(
+        [
+          {y: 0.77 * s, zOffset: 0, rx: 0.158 * s + gap, rz: 0.111 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.28, arcEnd: Math.PI * 1.28, upperBone: BONE.HIPS, upperWeight: 0.82, v: 0},
+          {y: 0.91 * s, zOffset: 0, rx: 0.132 * s + gap, rz: 0.094 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.28, arcEnd: Math.PI * 1.28, upperBone: BONE.SPINE, upperWeight: 1, v: 0.34},
+          {y: 1.06 * s, zOffset: 0.005 * s, rx: 0.150 * s + gap, rz: 0.108 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.28, arcEnd: Math.PI * 1.28, upperBone: BONE.CHEST, upperWeight: 1, v: 0.68},
+          {y: 1.22 * s, zOffset: 0.005 * s, rx: 0.168 * s + gap, rz: 0.110 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.24, arcEnd: Math.PI * 1.24, upperBone: BONE.CHEST, upperWeight: 1, v: 1},
+        ],
+        seg,
+        vestMat,
+        bones.skeleton,
+        castShadow,
+      ),
+      buildSculptedHeadSkinnedMesh(1.52 * s, 0.15 * s, seg, headMat, bones.skeleton, {
+        jawTaper: 0.78,
+        faceFlatten: 0.92,
+        castShadow,
+      }),
+      ...buildAnatomicalEarsSkinnedMesh(1.515 * s, 0.15 * s, skinMat, bones.skeleton, castShadow),
+      buildHairCapSkinnedMesh(1.52 * s, 0.15 * s, seg, hairMat, bones.skeleton, {
+        backDrop: 0.15,
+        castShadow,
+      }),
+      // Neat Short Quiff Hair
+      buildHairRibbonSkinnedMesh(
+        [
+          [-0.04, 1.642 * s, 0.048],
+          [-0.01, 1.622 * s, 0.128],
+          [0.058, 1.580 * s, 0.132],
+          [0.098, 1.525 * s, 0.108],
+        ],
+        [0.068, 0.060, 0.042, 0.012],
+        [0.024, 0.022, 0.015, 0.005],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [-0.05, 1.635 * s, 0.05],
+          [-0.094, 1.588 * s, 0.114],
+          [-0.118, 1.515 * s, 0.086],
+        ],
+        [0.052, 0.038, 0.014],
+        [0.018, 0.014, 0.005],
+        hairMat,
+        bones.skeleton,
+      ),
+      buildHairRibbonSkinnedMesh(
+        [
+          [0, 1.52 * s, -0.118],
+          [0, 1.44 * s, -0.124],
+          [0, 1.38 * s, -0.090],
+        ],
+        [0.106, 0.086, 0.044],
+        [0.020, 0.016, 0.008],
+        hairMat,
+        bones.skeleton,
+      ),
+    ];
+
+    for (const m of meshes) group.add(m);
+
+    // 4 Sculpted Vest Buttons down front
+    const btnGeo = new THREE.CylinderGeometry(0.008 * s, 0.008 * s, 0.007 * s, 8);
+    btnGeo.rotateX(Math.PI * 0.5);
+    for (const by of [0.015 * s, -0.045 * s, -0.105 * s, -0.165 * s]) {
+      const btn = new THREE.Mesh(btnGeo, buttonMat);
+      btn.position.set(0, by, 0.118 * s);
+      bones.chest.add(btn);
+    }
+
+    return {group, bones, textures};
+  }
+
+  // 'cicada-suit-v2': Ultimate CICADA Suit V2
+  const s = 1.04;
+  const bones = createHumanoidSkeleton(s);
+  const group = new THREE.Group();
+  group.add(bones.root);
+
+  const faceTex = createAnimeFaceTexture(
+    {
+      skinHex: '#e8bc9a',
+      blushHex: 'rgba(202, 118, 110, 0.20)',
+      irisTopHex: '#251e22',
+      irisBottomHex: '#4f3f48',
+      browHex: '#1b1a1f',
+      lipHex: '#9d625a',
+      eyeScale: 0.90,
+      smileCurve: 0.72,
+    },
+    compactMode,
+  );
+  const hairTex = createHairStrandTexture(
+    '#1b1b21',
+    '#414250',
+    '#0e0e12',
+    '#1b1b21',
+    compactMode,
+  );
+  const trenchTex = createTailoredClothingTexture(
+    {
+      style: 'trench',
+      baseHex: '#22242d',
+      grainHex: '#14151b',
+      accentHex: '#15171e',
+      trimHex: '#414554',
+    },
+    compactMode,
+  );
+  const innerShirtTex = createTailoredClothingTexture(
+    {
+      style: 'shirt',
+      baseHex: '#dfe2eb',
+      grainHex: '#b9becb',
+    },
+    compactMode,
+  );
+  const textures: THREE.Texture[] = [faceTex, hairTex, trenchTex, innerShirtTex];
+
+  const {skinMat, headMat} = createCharacterMats({skin: 0xe8bc9a, faceTex});
+  const trenchMat = new THREE.MeshStandardMaterial({
+    map: trenchTex,
+    roughness: 0.68,
+    metalness: 0.08,
+    side: THREE.DoubleSide,
+  });
+  const shirtMat = new THREE.MeshStandardMaterial({
+    map: innerShirtTex,
+    roughness: 0.76,
+  });
+  const gloveMat = new THREE.MeshStandardMaterial({
+    color: 0x1b1c22,
+    roughness: 0.44,
+    metalness: 0.10,
+  });
+  const trouserMat = new THREE.MeshStandardMaterial({
+    color: 0x1b1d24,
+    roughness: 0.78,
+  });
+  const tieMat = new THREE.MeshStandardMaterial({
+    color: 0x5c3088,
+    roughness: 0.56,
+  });
+  const hairMat = new THREE.MeshStandardMaterial({
+    map: hairTex,
+    roughness: 0.44,
+    metalness: 0.06,
+  });
+  const shadeMat = new THREE.MeshStandardMaterial({
+    color: 0x101116,
+    roughness: 0.18,
+    metalness: 0.65,
+  });
+  const metalMat = new THREE.MeshStandardMaterial({
+    color: 0xc2c8d4,
+    roughness: 0.28,
+    metalness: 0.85,
+  });
+  const bootMat = new THREE.MeshStandardMaterial({
+    color: 0x17181d,
+    roughness: 0.48,
+    metalness: 0.08,
+  });
+  const soleMat = new THREE.MeshStandardMaterial({
+    color: 0x0f1014,
+    roughness: 0.88,
+  });
+
+  const gap = 0.008 * s;
+  const meshes: THREE.SkinnedMesh[] = [
+    ...buildSeamlessTorso(s, seg, bones.skeleton, trouserMat, shirtMat, skinMat, {
+      hasHead: true,
+      slender: false,
+      castShadow,
+    }),
+    // Long trench sleeves + dark tactical leather gloves!
+    ...buildSeamlessArm(-1, s, seg, bones.skeleton, trenchMat, trenchMat, gloveMat, {
+      sleeveEndsAtElbow: false,
+      castShadow,
+    }),
+    ...buildSeamlessArm(1, s, seg, bones.skeleton, trenchMat, trenchMat, gloveMat, {
+      sleeveEndsAtElbow: false,
+      castShadow,
+    }),
+    ...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, trouserMat, trouserMat, bootMat, soleMat, {
+      castShadow,
+    }),
+    ...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, trouserMat, trouserMat, bootMat, soleMat, {
+      castShadow,
+    }),
+    // Snug Dark Trench Coat Shell + High Stand Collar
+    buildCoatShellSkinnedMesh(
+      [
+        {y: 0.62 * s, zOffset: 0, rx: 0.168 * s + gap, rz: 0.118 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.25, arcEnd: Math.PI * 1.25, upperBone: BONE.HIPS, upperWeight: 0.68, v: 0},
+        {y: 0.77 * s, zOffset: 0, rx: 0.158 * s + gap, rz: 0.112 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.26, arcEnd: Math.PI * 1.26, upperBone: BONE.HIPS, upperWeight: 0.85, v: 0.25},
+        {y: 0.91 * s, zOffset: 0, rx: 0.132 * s + gap, rz: 0.094 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.28, arcEnd: Math.PI * 1.28, upperBone: BONE.SPINE, upperWeight: 1, v: 0.50},
+        {y: 1.06 * s, zOffset: 0.005 * s, rx: 0.150 * s + gap, rz: 0.108 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.28, arcEnd: Math.PI * 1.28, upperBone: BONE.CHEST, upperWeight: 1, v: 0.75},
+        {y: 1.23 * s, zOffset: 0.004 * s, rx: 0.168 * s + gap, rz: 0.110 * s + gap, squareness: 0.44, arcStart: -Math.PI * 0.24, arcEnd: Math.PI * 1.24, upperBone: BONE.CHEST, upperWeight: 1, v: 1},
+      ],
+      seg,
+      trenchMat,
+      bones.skeleton,
+      castShadow,
+    ),
+    // High Tactical Coat Collar
+    buildCoatShellSkinnedMesh(
+      [
+        {y: 1.29 * s, zOffset: -0.004 * s, rx: 0.068 * s, rz: 0.066 * s, squareness: 0.18, arcStart: -Math.PI * 0.18, arcEnd: Math.PI * 1.18, upperBone: BONE.NECK, upperWeight: 0.65, v: 0},
+        {y: 1.38 * s, zOffset: -0.005 * s, rx: 0.072 * s, rz: 0.070 * s, squareness: 0.18, arcStart: -Math.PI * 0.16, arcEnd: Math.PI * 1.16, upperBone: BONE.NECK, upperWeight: 0.88, v: 1},
+      ],
+      seg,
+      trenchMat,
+      bones.skeleton,
+      castShadow,
+    ),
+    buildSculptedHeadSkinnedMesh(1.52 * s, 0.15 * s, seg, headMat, bones.skeleton, {
+      jawTaper: 0.78,
+      faceFlatten: 0.92,
+      castShadow,
+    }),
+    ...buildAnatomicalEarsSkinnedMesh(1.515 * s, 0.15 * s, skinMat, bones.skeleton, castShadow),
+    buildHairCapSkinnedMesh(1.52 * s, 0.15 * s, seg, hairMat, bones.skeleton, {
+      backDrop: 0.14,
+      castShadow,
+    }),
+    // Slicked-Back Gentleman Side-Part
+    buildHairRibbonSkinnedMesh(
+      [
+        [-0.045, 1.635 * s, 0.052],
+        [0.012, 1.612 * s, 0.128],
+        [0.082, 1.576 * s, 0.115],
+      ],
+      [0.056, 0.048, 0.020],
+      [0.018, 0.016, 0.007],
+      hairMat,
+      bones.skeleton,
+    ),
+    buildHairRibbonSkinnedMesh(
+      [
+        [-0.05, 1.628 * s, 0.05],
+        [-0.106, 1.572 * s, 0.092],
+        [-0.120, 1.505 * s, 0.065],
+      ],
+      [0.042, 0.032, 0.012],
+      [0.014, 0.011, 0.005],
+      hairMat,
+      bones.skeleton,
+    ),
+    buildHairRibbonSkinnedMesh(
+      [
+        [0, 1.52 * s, -0.118],
+        [0, 1.44 * s, -0.122],
+        [0, 1.385 * s, -0.088],
+      ],
+      [0.102, 0.082, 0.042],
+      [0.018, 0.014, 0.007],
+      hairMat,
+      bones.skeleton,
+    ),
+  ];
+
+  for (const m of meshes) group.add(m);
+
+  // Purple Necktie & Tactical Diagonal Chest Strap
+  const tieKnot = new THREE.Mesh(
+    new THREE.BoxGeometry(0.030 * s, 0.028 * s, 0.018 * s),
+    tieMat,
+  );
+  tieKnot.position.set(0, 0.145 * s, 0.100 * s);
+  const tieBlade = new THREE.Mesh(
+    new THREE.BoxGeometry(0.032 * s, 0.195 * s, 0.012 * s),
+    tieMat,
+  );
+  tieBlade.position.set(0, 0.038 * s, 0.115 * s);
+  bones.chest.add(tieKnot, tieBlade);
+
+  const strap = new THREE.Mesh(
+    new THREE.BoxGeometry(0.030 * s, 0.36 * s, 0.014 * s),
+    gloveMat,
+  );
+  strap.position.set(0, 0.01 * s, 0.119 * s);
+  strap.rotation.z = 0.62;
+  const strapBuckle = new THREE.Mesh(
+    new THREE.BoxGeometry(0.038 * s, 0.028 * s, 0.018 * s),
+    metalMat,
+  );
+  strapBuckle.position.set(0.035 * s, 0.04 * s, 0.122 * s);
+  bones.chest.add(strap, strapBuckle);
+
+  // Sleek Black Sunglasses + Tactical Earpiece on Head
+  const lShade = new THREE.Mesh(
+    new THREE.BoxGeometry(0.056 * s, 0.032 * s, 0.010 * s),
+    shadeMat,
+  );
+  lShade.position.set(-0.046 * s, 0.132 * s, 0.144 * s);
+  const rShade = lShade.clone();
+  rShade.position.x = 0.046 * s;
+  const shadeBridge = new THREE.Mesh(
+    new THREE.BoxGeometry(0.040 * s, 0.008 * s, 0.008 * s),
+    shadeMat,
+  );
+  shadeBridge.position.set(0, 0.140 * s, 0.144 * s);
+  const earpiece = new THREE.Mesh(
+    new THREE.BoxGeometry(0.014 * s, 0.026 * s, 0.016 * s),
+    shadeMat,
+  );
+  earpiece.position.set(0.145 * s, 0.115 * s, 0.008 * s);
+  bones.head.add(lShade, rShade, shadeBridge, earpiece);
 
   return {group, bones, textures};
 }

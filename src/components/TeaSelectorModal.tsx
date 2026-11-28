@@ -33,9 +33,10 @@ export function getTeaRewardPreview(tea: TeaType): {warmth: number; xp: number} 
   };
 }
 
-const TeaVesselIcon: React.FC<{tea: TeaType; locked: boolean}> = React.memo(({tea, locked}) => {
-  const liquid = locked ? '#C5C3B8' : tea.lightColor;
-  const liquidEdge = locked ? '#ABA99E' : tea.richColor;
+export const TeaVesselIcon: React.FC<{tea: TeaType; locked?: boolean}> = React.memo(
+  ({tea, locked = false}) => {
+    const liquid = locked ? '#C5C3B8' : tea.lightColor;
+    const liquidEdge = locked ? '#ABA99E' : tea.richColor;
 
   // White cup on saucer with green rosetta latte art
   if (tea.id === 'matcha-rosetta-latte') {

@@ -2,18 +2,22 @@ import React, {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {Coffee} from 'lucide-react';
+import {getUnlockedTeas} from '../data/progression';
 import {getLiquidColor} from '../data/teas';
 import {
   createCeramicSpeckleTexture,
   createContactShadowTexture,
   createSteamPuffTexture,
+  createTeaMenuBoardTexture,
   createWoodGrainTexture,
   createWovenMatTexture,
+  TeaMenuBoardCanvasHandle,
 } from '../three/proceduralTextures';
 import {
   createChasenGroup,
   createEquipmentRig,
   createKettleGroup,
+  createShopMenuBoardSystem,
   createTeaTableEnvironment,
   createTeaVesselSystem,
 } from '../three/teaModels';
@@ -36,6 +40,8 @@ interface TeaScene3DProps {
   tea: TeaType;
   step: BrewStep;
   mode: GameMode;
+  playerLevel: number;
+  orderedTeaId?: string | null;
   guestId: string;
   customerSequenceKey: number;
   waterLevel: number;
@@ -50,12 +56,15 @@ interface TeaScene3DProps {
   onCustomerPhaseChange: (phase: CustomerPhase) => void;
   onKettleClick?: () => void;
   onVesselClick?: () => void;
+  onMenuBoardClick?: () => void;
 }
 
 interface SceneSyncState {
   tea: TeaType;
   step: BrewStep;
   mode: GameMode;
+  playerLevel: number;
+  orderedTeaId?: string | null;
   guestId: string;
   waterLevel: number;
   steepSeconds: number;
@@ -156,6 +165,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   tea,
   step,
   mode,
+  playerLevel,
+  orderedTeaId = null,
   guestId,
   customerSequenceKey,
   waterLevel,
@@ -170,12 +181,14 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   onCustomerPhaseChange,
   onKettleClick,
   onVesselClick,
+  onMenuBoardClick,
 }) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const tableBtnRef = useRef<HTMLButtonElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const keyLightRef = useRef<THREE.DirectionalLight | null>(null);
   const charactersRef = useRef<ShopCharactersHandles | null>(null);
+  const menuBoardRef = useRef<TeaMenuBoardCanvasHandle | null>(null);
   const isSoftwareGlRef = useRef<boolean>(false);
   const shadowDirtyRef = useRef<boolean>(true);
   const dynamicScaleRef = useRef<number>(1);
@@ -192,6 +205,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     tea,
     step,
     mode,
+    playerLevel,
+    orderedTeaId,
     guestId,
     waterLevel,
     steepSeconds,
@@ -203,6 +218,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   const callbacksRef = useRef({
     onKettleClick,
     onVesselClick,
+    onMenuBoardClick,
     onProximityChange,
     onCustomerEnteredDoor,
     onCustomerPhaseChange,
@@ -213,6 +229,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       tea,
       step,
       mode,
+      playerLevel,
+      orderedTeaId,
       guestId,
       waterLevel,
       steepSeconds,
@@ -224,6 +242,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     tea,
     step,
     mode,
+    playerLevel,
+    orderedTeaId,
     guestId,
     waterLevel,
     steepSeconds,
@@ -236,6 +256,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     callbacksRef.current = {
       onKettleClick,
       onVesselClick,
+      onMenuBoardClick,
       onProximityChange,
       onCustomerEnteredDoor,
       onCustomerPhaseChange,
@@ -243,6 +264,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   }, [
     onKettleClick,
     onVesselClick,
+    onMenuBoardClick,
     onProximityChange,
     onCustomerEnteredDoor,
     onCustomerPhaseChange,
@@ -259,6 +281,17 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
   useEffect(() => {
     charactersRef.current?.setPlayerCharacter(settings.playerCharacter);
   }, [settings.playerCharacter]);
+
+  // Redraw 3D shop menu boards whenever unlocked teas or active guest order changes
+  useEffect(() => {
+    if (!menuBoardRef.current) return;
+    menuBoardRef.current.redraw(
+      getUnlockedTeas(playerLevel),
+      playerLevel,
+      mode === 'guest' ? orderedTeaId : null,
+    );
+    shadowDirtyRef.current = true;
+  }, [playerLevel, mode, orderedTeaId]);
 
   useEffect(() => {
     shadowDirtyRef.current = true;
@@ -494,6 +527,17 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     );
     const shadowTex = createContactShadowTexture(ultraCompactAssets);
     const steamTex = createSteamPuffTexture(ultraCompactAssets);
+    const menuBoardCanvas = createTeaMenuBoardTexture(
+      maxAniso,
+      compactAssets,
+      ultraCompactAssets,
+    );
+    menuBoardCanvas.redraw(
+      getUnlockedTeas(syncRef.current.playerLevel),
+      syncRef.current.playerLevel,
+      syncRef.current.mode === 'guest' ? syncRef.current.orderedTeaId : null,
+    );
+    menuBoardRef.current = menuBoardCanvas;
 
     const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
     const envGroup = createTeaTableEnvironment(
@@ -510,6 +554,14 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       obj.matrixAutoUpdate = false;
     });
     scene.add(envGroup);
+
+    const shopMenuBoard = createShopMenuBoardSystem(
+      walnutTex,
+      shadowTex,
+      menuBoardCanvas.texture,
+      compactAssets,
+    );
+    scene.add(shopMenuBoard.root);
 
     const shopCharacters = createShopCharactersSystem(
       walnutTex,
@@ -592,7 +644,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
     let pointerDownPos = {x: 0, y: 0};
 
     const raycaster = new THREE.Raycaster();
-    const clickables = [kettle.clickProxy, vessel.clickProxy];
+    const clickables = [
+      kettle.clickProxy,
+      vessel.clickProxy,
+      ...shopMenuBoard.clickProxies,
+    ];
 
     const onPointerDown = (e: PointerEvent) => {
       if (activePointerId !== null) return;
@@ -611,8 +667,6 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       );
       if (moveDist > 8) return;
 
-      if (syncRef.current.step === 'EXPLORE_SHOP') return;
-
       const rect = renderer.domElement.getBoundingClientRect();
       _pointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       _pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -621,6 +675,11 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       const hits = raycaster.intersectObjects(clickables, false);
       if (hits.length > 0) {
         const id = hits[0].object.userData.interactId;
+        if (id === 'menu-board') {
+          callbacksRef.current.onMenuBoardClick?.();
+          return;
+        }
+        if (syncRef.current.step === 'EXPLORE_SHOP') return;
         if (id === 'kettle') {
           callbacksRef.current.onKettleClick?.();
         } else if (id === 'vessel') {
@@ -663,11 +722,6 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       lastHoverCheck = now;
 
       const curStep = syncRef.current.step;
-      if (curStep === 'EXPLORE_SHOP') {
-        renderer.domElement.style.cursor = 'grab';
-        return;
-      }
-
       const rect = renderer.domElement.getBoundingClientRect();
       _pointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       _pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -677,6 +731,7 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
       let canInteract = false;
       if (hits.length > 0) {
         const id = hits[0].object.userData.interactId;
+        if (id === 'menu-board') canInteract = true;
         if (id === 'kettle' && curStep === 'POUR_WATER') canInteract = true;
         if (id === 'vessel' && curStep === 'STEEP_TEA') canInteract = true;
       }
@@ -1245,6 +1300,8 @@ export const TeaScene3D: React.FC<TeaScene3DProps> = React.memo(({
 
       steamSprites.forEach((s) => s.sprite.material.dispose());
       shopCharacters.dispose();
+      menuBoardCanvas.texture.dispose();
+      menuBoardRef.current = null;
       cedarTex.dispose();
       walnutTex.dispose();
       matTex.dispose();

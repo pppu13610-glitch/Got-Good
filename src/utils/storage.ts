@@ -44,9 +44,15 @@ export function saveBrewRecord(
   record: JournalRecord,
   warmthEarned: number,
   xpEarned: number,
+  guestId?: string,
 ): TeaHouseSaveData {
   const nextXp = current.xp + xpEarned;
   const nextLevel = getLevelFromXp(nextXp);
+  const visitedGuestIds =
+    guestId && !current.visitedGuestIds.includes(guestId)
+      ? [...current.visitedGuestIds, guestId]
+      : current.visitedGuestIds;
+
   const next: TeaHouseSaveData = {
     xp: nextXp,
     level: nextLevel,
@@ -56,7 +62,30 @@ export function saveBrewRecord(
       ...current.teaCounts,
       [record.teaId]: (current.teaCounts[record.teaId] ?? 0) + 1,
     },
+    visitedGuestIds,
     history: [record, ...current.history].slice(0, 30),
+  };
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    localStorage.setItem(SCHEMA_VERSION_KEY, String(CURRENT_DATA_SCHEMA_VERSION));
+  } catch {
+    // Ignore storage errors cleanly
+  }
+
+  return next;
+}
+
+export function recordGuestVisit(
+  current: TeaHouseSaveData,
+  guestId: string,
+): TeaHouseSaveData {
+  if (!guestId || current.visitedGuestIds.includes(guestId)) {
+    return current;
+  }
+  const next: TeaHouseSaveData = {
+    ...current,
+    visitedGuestIds: [...current.visitedGuestIds, guestId],
   };
 
   try {

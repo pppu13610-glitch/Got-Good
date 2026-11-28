@@ -57,6 +57,11 @@ export interface EquipmentRigHandles {
   coldDripDrop: THREE.Mesh;
 }
 
+export interface ShopMenuBoardHandles {
+  root: THREE.Group;
+  clickProxies: THREE.Mesh[];
+}
+
 function makeContactShadow(
   size: number,
   shadowTex: THREE.CanvasTexture,
@@ -1929,3 +1934,142 @@ export function createEquipmentRig(
     coldDripDrop,
   };
 }
+
+export function createShopMenuBoardSystem(
+  walnutTex: THREE.CanvasTexture,
+  shadowTex: THREE.CanvasTexture,
+  menuBoardTex: THREE.CanvasTexture,
+  compactMode = false,
+): ShopMenuBoardHandles {
+  const root = new THREE.Group();
+  const clickProxies: THREE.Mesh[] = [];
+
+  const frameMat = new THREE.MeshStandardMaterial({
+    map: walnutTex,
+    roughness: 0.56,
+    metalness: 0.04,
+  });
+  const brassMat = new THREE.MeshStandardMaterial({
+    color: 0xc89d54,
+    metalness: 0.85,
+    roughness: 0.24,
+  });
+  const sheetMat = new THREE.MeshStandardMaterial({
+    map: menuBoardTex,
+    roughness: 0.72,
+    metalness: 0.0,
+  });
+
+  // 1. Countertop Double-Sided Standing Tea Menu Board (right side of counter)
+  // Both seated customers across the counter (-Z) and the player (+Z) can read it clearly.
+  const counterStand = new THREE.Group();
+  counterStand.position.set(2.54, 0, 0.06);
+  counterStand.rotation.y = -0.32;
+
+  counterStand.add(makeContactShadow(0.82, shadowTex, 0.45));
+
+  const standBase = new THREE.Mesh(
+    new THREE.BoxGeometry(0.76, 0.05, 0.24),
+    frameMat,
+  );
+  standBase.position.y = 0.025;
+  standBase.castShadow = !compactMode;
+  standBase.receiveShadow = true;
+  counterStand.add(standBase);
+
+  const standBoard = new THREE.Mesh(
+    new THREE.BoxGeometry(0.70, 0.88, 0.045),
+    frameMat,
+  );
+  standBoard.position.y = 0.49;
+  standBoard.castShadow = !compactMode;
+  standBoard.receiveShadow = true;
+  counterStand.add(standBoard);
+
+  // Brass corner brackets on tabletop menu stand
+  const cornerPinGeo = new THREE.BoxGeometry(0.055, 0.055, 0.052);
+  for (const [cx, cy] of [
+    [-0.33, 0.90],
+    [0.33, 0.90],
+    [-0.33, 0.08],
+    [0.33, 0.08],
+  ] as [number, number][]) {
+    const pin = new THREE.Mesh(cornerPinGeo, brassMat);
+    pin.position.set(cx, cy, 0);
+    counterStand.add(pin);
+  }
+
+  const counterFaceGeo = new THREE.PlaneGeometry(0.62, 0.78);
+  const counterFaceFront = new THREE.Mesh(counterFaceGeo, sheetMat);
+  counterFaceFront.position.set(0, 0.49, 0.025);
+  const counterFaceBack = new THREE.Mesh(counterFaceGeo, sheetMat);
+  counterFaceBack.position.set(0, 0.49, -0.025);
+  counterFaceBack.rotation.y = Math.PI;
+  counterStand.add(counterFaceFront, counterFaceBack);
+
+  const counterProxy = new THREE.Mesh(
+    new THREE.BoxGeometry(0.84, 1.0, 0.32),
+    new THREE.MeshBasicMaterial({visible: false}),
+  );
+  counterProxy.position.y = 0.49;
+  counterProxy.userData = {interactId: 'menu-board'};
+  counterStand.add(counterProxy);
+  clickProxies.push(counterProxy);
+
+  root.add(counterStand);
+
+  // 2. Large Wall-Mounted Wooden Tea Menu Board (Back-Right Wall near Customer Walkway)
+  const wallBoard = new THREE.Group();
+  wallBoard.position.set(3.38, 1.48, -3.03);
+
+  const wallFrame = new THREE.Mesh(
+    new THREE.BoxGeometry(1.38, 1.72, 0.06),
+    frameMat,
+  );
+  wallFrame.castShadow = !compactMode;
+  wallFrame.receiveShadow = true;
+  wallBoard.add(wallFrame);
+
+  const wallHeaderBar = new THREE.Mesh(
+    new THREE.BoxGeometry(1.44, 0.08, 0.085),
+    frameMat,
+  );
+  wallHeaderBar.position.y = 0.87;
+  wallBoard.add(wallHeaderBar);
+
+  const wallCornerGeo = new THREE.BoxGeometry(0.08, 0.08, 0.07);
+  for (const [cx, cy] of [
+    [-0.66, 0.82],
+    [0.66, 0.82],
+    [-0.66, -0.82],
+    [0.66, -0.82],
+  ] as [number, number][]) {
+    const pin = new THREE.Mesh(wallCornerGeo, brassMat);
+    pin.position.set(cx, cy, 0);
+    wallBoard.add(pin);
+  }
+
+  const wallSheet = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.24, 1.56),
+    sheetMat,
+  );
+  wallSheet.position.z = 0.033;
+  wallBoard.add(wallSheet);
+
+  const wallProxy = new THREE.Mesh(
+    new THREE.BoxGeometry(1.48, 1.82, 0.24),
+    new THREE.MeshBasicMaterial({visible: false}),
+  );
+  wallProxy.userData = {interactId: 'menu-board'};
+  wallBoard.add(wallProxy);
+  clickProxies.push(wallProxy);
+
+  root.add(wallBoard);
+
+  root.traverse((obj) => {
+    obj.frustumCulled = false;
+  });
+
+  return {root, clickProxies};
+}
+

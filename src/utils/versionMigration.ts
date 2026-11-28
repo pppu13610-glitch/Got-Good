@@ -1,3 +1,4 @@
+import {GUESTS} from '../data/guests';
 import {getLevelFromXp} from '../data/progression';
 import {
   GameSettings,
@@ -35,6 +36,7 @@ export const DEFAULT_SAVE: TeaHouseSaveData = {
   warmthPoints: 0,
   totalCups: 0,
   teaCounts: {},
+  visitedGuestIds: [],
   history: [],
 };
 
@@ -156,6 +158,23 @@ export function migrateSaveDataPayload(raw: unknown): TeaHouseSaveData {
         .slice(0, 30)
     : [];
 
+  const validGuestIds = new Set(GUESTS.map((g) => g.id));
+  const visitedSet = new Set<string>();
+  if (Array.isArray(parsed.visitedGuestIds)) {
+    for (const id of parsed.visitedGuestIds) {
+      if (typeof id === 'string' && validGuestIds.has(id)) {
+        visitedSet.add(id);
+      }
+    }
+  }
+  // Backfill any previously served guests recorded in journal history
+  for (const item of history) {
+    if (item.guestName) {
+      const matched = GUESTS.find((g) => g.name === item.guestName);
+      if (matched) visitedSet.add(matched.id);
+    }
+  }
+
   return {
     xp,
     level,
@@ -165,6 +184,7 @@ export function migrateSaveDataPayload(raw: unknown): TeaHouseSaveData {
         : 0,
     totalCups,
     teaCounts: safeTeaCounts,
+    visitedGuestIds: Array.from(visitedSet),
     history,
   };
 }

@@ -21981,6 +21981,30 @@ var RotateCcw = createLucideIcon("rotate-ccw", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var ScrollText = createLucideIcon("scroll-text", [
+	["path", {
+		d: "M15 12h-5",
+		key: "r7krc0"
+	}],
+	["path", {
+		d: "M15 8h-5",
+		key: "1khuty"
+	}],
+	["path", {
+		d: "M19 17V5a2 2 0 0 0-2-2H4",
+		key: "zz82l3"
+	}],
+	["path", {
+		d: "M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3",
+		key: "1ph1d7"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var Send = createLucideIcon("send", [["path", {
 	d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
 	key: "1ffxy3"
@@ -22147,6 +22171,32 @@ var User = createLucideIcon("user", [["path", {
 	r: "4",
 	key: "17ys0d"
 }]]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Users = createLucideIcon("users", [
+	["path", {
+		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
+		key: "1yyitq"
+	}],
+	["path", {
+		d: "M16 3.128a4 4 0 0 1 0 7.744",
+		key: "16gr8j"
+	}],
+	["path", {
+		d: "M22 21v-2a4 4 0 0 0-3-3.87",
+		key: "kshegd"
+	}],
+	["circle", {
+		cx: "9",
+		cy: "7",
+		r: "4",
+		key: "nufk8"
+	}]
+]);
 /**
 * @license lucide-react v0.546.0 - ISC
 *
@@ -23504,13 +23554,55 @@ var GUESTS = [
 		portraitUrl: "/src/assets/images/guest_chandra_music_1795859254499.jpg",
 		fallbackInitial: "จ",
 		accentBg: "#E6D9E1"
+	},
+	{
+		id: "tea-master",
+		name: "อาจารย์ชงชาดั้งเดิม",
+		role: "ปรมาจารย์แห่งศาสตร์ชงชา",
+		portraitUrl: "/src/assets/images/guest_teamaster_classic_1795860705619.jpg",
+		fallbackInitial: "อ",
+		accentBg: "#D4DFD1"
+	},
+	{
+		id: "spirit-blossom-kindred",
+		name: "คุณคินเดร็ด",
+		role: "จิตวิญญาณบุปผาซากุระ",
+		portraitUrl: "/src/assets/images/guest_kindred_spirit_1795860705820.jpg",
+		fallbackInitial: "ค",
+		accentBg: "#EAD9EC"
+	},
+	{
+		id: "mococo-abyssgard",
+		name: "คุณโมโคโค",
+		role: "สาวน้อยสายหวานผู้ร่าเริง",
+		portraitUrl: "/src/assets/images/guest_mococo_girl_1795860705637.jpg",
+		fallbackInitial: "ม",
+		accentBg: "#F2DCE4"
+	},
+	{
+		id: "diego-body",
+		name: "คุณดิเอโก้",
+		role: "สุภาพบุรุษสายเนี๊ยบ",
+		portraitUrl: "/src/assets/images/guest_diego_dapper_1795860706465.jpg",
+		fallbackInitial: "ด",
+		accentBg: "#DADDE2"
+	},
+	{
+		id: "cicada-suit-v2",
+		name: "คุณซิคาด้า",
+		role: "บอดี้การ์ดชุดเทรนช์",
+		portraitUrl: "/src/assets/images/guest_cicada_agent_1795860705872.jpg",
+		fallbackInitial: "ซ",
+		accentBg: "#DCD7E3"
 	}
 ];
+var NATURALLY_ICED_TEA_IDS = /* @__PURE__ */ new Set(["iced-matcha-latte", "uji-shizuku-ice"]);
+var NATURALLY_HOT_TEA_IDS = /* @__PURE__ */ new Set(["matcha-rosetta-latte"]);
 var ORDER_TEMPLATES = [
 	{
 		guestId: "som-o",
 		minLevel: 1,
-		requestText: "สวัสดีค่ะ วันนี้อยากได้ชามัทฉะหรือชาเขียวนุ่มๆ เติมนมอุ่นสักแก้วนะคะ",
+		requestTemplate: "สวัสดีค่ะ วันนี้เห็นบนป้ายเมนูมี「{tea}」เลยขอสั่งแก้วนี้แบบร้อนใส่นมนะคะ",
 		preferredCategories: ["matcha", "green"],
 		preferredTemp: "hot",
 		preferredToppings: ["milk"],
@@ -23520,7 +23612,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "som-o",
 		minLevel: 1,
-		requestText: "บ่ายนี้แดดอุ่นจัง ขอคาโมมายล์ใส่น้ำผึ้งหอมๆ สักถ้วยได้ไหม",
+		requestTemplate: "บ่ายนี้แดดอุ่นจัง เห็นในเมนูมี「{tea}」ขอสั่งแบบใส่น้ำผึ้งหอมๆ สักถ้วยค่ะ",
 		preferredCategories: ["herbal"],
 		preferredToppings: ["honey"],
 		happyReply: "หอมน้ำผึ้งจังเลย ฟังเสียงลมแล้วง่วงนอนแล้วสิ...",
@@ -23529,12 +23621,13 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "som-o",
 		minLevel: 1,
-		requestText: "บ่ายนี้อากาศอุ่นจังเลยค่ะ อยากได้มัทฉะลาเต้เย็น หรือ Matcha คลาสสิกใส่น้ำแข็งสักแก้วจัง",
+		requestTemplate: "บ่ายนี้อากาศอุ่นจังเลยค่ะ ขอสั่ง「{tea}」เติมน้ำแข็งเย็นๆ สักแก้วนะคะ",
 		preferredTeaIds: [
 			"iced-matcha-latte",
 			"classic-matcha",
 			"strawberry-matcha-latte"
 		],
+		preferredTemp: "iced",
 		preferredToppings: ["milk", "ice"],
 		happyReply: "เย็นชื่นใจหอมนมสดเลยค่ะ ขอบคุณนะคะ~",
 		gentleReply: "รสชาตินุ่มนวลดีจัง ดื่มแล้วสดชื่นเลยค่ะ"
@@ -23542,7 +23635,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "elara",
 		minLevel: 1,
-		requestText: "กำลังเขียนบทใหม่พอดี ขอชาอู่หลงหอมๆ หรือชาดำอุ่นๆ ช่วยให้หัวแล่นหน่อยนะคะ",
+		requestTemplate: "กำลังเขียนบทใหม่พอดี ขอสั่ง「{tea}」อุ่นๆ จากเมนูร้านมาจิบให้หัวแล่นสักแก้วนะคะ",
 		preferredCategories: ["oolong", "black"],
 		preferredTemp: "hot",
 		happyReply: "กลิ่นหอมกำลังดีเลยค่ะ นึกไอเดียออกอีกหลายหน้าเลย ขอบคุณนะคะ",
@@ -23551,7 +23644,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "elara",
 		minLevel: 2,
-		requestText: "อยากชิมมัทฉะคั่วหรือชาหอมหมื่นลี้สักถ้วย เติมดอกไม้หรือน้ำผึ้งนิดหน่อยก็เยี่ยมเลยค่ะ",
+		requestTemplate: "เห็นบนป้ายเมนูร้านมี「{tea}」น่าลองมากเลยค่ะ ขอสั่งถ้วยนี้สักแก้วนะคะ",
 		preferredTeaIds: [
 			"uji-roasted-matcha",
 			"osmanthus-oolong",
@@ -23568,7 +23661,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "elara",
 		minLevel: 3,
-		requestText: "อยากลองชาอัญชันสีสวยๆ ใส่น้ำแข็งเย็นชื่นใจ หรือฝานเลมอนสักหน่อยก็ดีเลยค่ะ",
+		requestTemplate: "บ่ายนี้อยากจิบ「{tea}」ใส่น้ำแข็งเย็นชื่นใจสักแก้วค่ะ ดูจากเมนูแล้วน่าดื่มมาก",
 		preferredTeaIds: [
 			"butterfly-pea",
 			"earl-grey",
@@ -23582,7 +23675,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "malee",
 		minLevel: 1,
-		requestText: "บ่ายๆ แบบนี้ ยายคิดถึงชาไทยโบราณใส่นม หรือชาอู่หลงชุ่มคอสักแก้วจ้ะ",
+		requestTemplate: "บ่ายๆ แบบนี้ ยายดูป้ายเมนูแล้วขอสั่ง「{tea}」สักแก้วนะจ๊ะหลาน",
 		preferredTeaIds: [
 			"thai-tea",
 			"dongding-oolong",
@@ -23594,7 +23687,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "malee",
 		minLevel: 2,
-		requestText: "ช่วงบ่ายแก่ๆ แบบนี้ ยายอยากได้มัทฉะตีฟองนุ่มๆ อย่าง Uji Matcha หรือ Matcha สำหรับพิธีกรรมจ้ะ",
+		requestTemplate: "ช่วงบ่ายแก่ๆ แบบนี้ ยายขอสั่ง「{tea}」อุ่นๆ ที่หน้าร้านมีให้ชงสักถ้วยนะจ๊ะ",
 		preferredTeaIds: [
 			"uji-matcha",
 			"ceremonial-matcha",
@@ -23608,7 +23701,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "malee",
 		minLevel: 4,
-		requestText: "ช่วงเย็นๆ แบบนี้ ยายอยากได้โฮจิฉะคั่วหอมหรือดาร์จีลิงอุ่นๆ สักถ้วยนะจ๊ะ",
+		requestTemplate: "ช่วงเย็นๆ แบบนี้ ยายอยากจิบ「{tea}」อุ่นๆ สักถ้วยนะจ๊ะหลาน",
 		preferredTeaIds: [
 			"hojicha-green",
 			"darjeeling-black",
@@ -23621,7 +23714,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "non",
 		minLevel: 1,
-		requestText: "เพิ่งตรวจแบบแปลนเสร็จ ขอ Matcha เข้มข้นไม่หวานมาก หรือเซนฉะใสๆ ดื่มแก้ล้าสักแก้วครับ",
+		requestTemplate: "เพิ่งตรวจแบบแปลนเสร็จ ขอสั่ง「{tea}」ร้อนจากเมนูมาดื่มแก้ล้าสักแก้วครับ",
 		preferredTeaIds: [
 			"kyoto-matcha",
 			"spring-sencha",
@@ -23634,7 +23727,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "non",
 		minLevel: 2,
-		requestText: "อยากได้อู่หลงต้งติ่งหรือเอิร์ลเกรย์ร้อนๆ ไว้นั่งสเก็ตช์งานมุมเงียบๆ สักหน่อยครับ",
+		requestTemplate: "ขอสั่ง「{tea}」ร้อนๆ สักแก้วครับ จะเอามานั่งสเก็ตช์งานมุมเงียบๆ หน่อย",
 		preferredTeaIds: [
 			"dongding-oolong",
 			"earl-grey",
@@ -23647,7 +23740,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "milin",
 		minLevel: 1,
-		requestText: "หนูเพิ่งส่งงานโปรเจกต์เสร็จ อยากได้มัทฉะลาเต้เย็นใส่นมสดหวานชื่นใจสุดๆ เลยค่ะ!",
+		requestTemplate: "หนูเพิ่งส่งงานโปรเจกต์เสร็จ ดูเมนูแล้วขอสั่ง「{tea}」เย็นชื่นใจแก้วนี้เลยค่ะ!",
 		preferredTeaIds: [
 			"iced-matcha-latte",
 			"strawberry-matcha-latte",
@@ -23661,7 +23754,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "milin",
 		minLevel: 2,
-		requestText: "อยากลองสตรอเบอร์รี่มัทฉะลาเต้หรืออัญชันมินต์สีสวยๆ ถ่ายรูปส่งเพื่อนหน่อยค่า",
+		requestTemplate: "อยากลองสั่ง「{tea}」สีสวยๆ ถ่ายรูปส่งเพื่อนหน่อยค่า แก้วนี้เลยนะคะ!",
 		preferredTeaIds: [
 			"strawberry-matcha-latte",
 			"butterfly-pea",
@@ -23679,7 +23772,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "somchai",
 		minLevel: 1,
-		requestText: "เดินเล่นรับลมมาแวะพักเหนื่อย ขอชาอู่หลงต้งติ่งหรือชาไทยร้อนชุ่มคอสักแก้วนะหลานชาย",
+		requestTemplate: "เดินเล่นรับลมมาแวะพักเหนื่อย ขอสั่ง「{tea}」ร้อนชุ่มคอสักแก้วนะหลานชาย",
 		preferredTeaIds: [
 			"dongding-oolong",
 			"thai-tea",
@@ -23692,7 +23785,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "somchai",
 		minLevel: 4,
-		requestText: "ช่วงบ่ายแบบนี้ ปู่อยากจิบโฮจิฉะคั่วหอมหรือมรดกคลาสสิกรสกลมกล่อมสักถ้วยจ้ะ",
+		requestTemplate: "ช่วงบ่ายแบบนี้ ปู่ขอสั่ง「{tea}」รสกลมกล่อมจากเมนูสักถ้วยนะจ๊ะ",
 		preferredTeaIds: [
 			"hojicha-green",
 			"classic-heritage-matcha",
@@ -23705,7 +23798,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "kiryu",
 		minLevel: 1,
-		requestText: "ก่อนขึ้นซ้อมดนตรีคืนนี้ ขอชาดำหรือ Matcha คลาสสิกอุ่นๆ สักแก้วให้เสียงนุ่มหน่อยครับ",
+		requestTemplate: "ก่อนขึ้นซ้อมดนตรีคืนนี้ ขอสั่ง「{tea}」อุ่นๆ ให้เสียงนุ่มสักแก้วครับ",
 		preferredCategories: ["black", "matcha"],
 		preferredTemp: "hot",
 		happyReply: "รสลุ่มลึกเหมือนคอร์ดแจ๊สเลยครับ โดนใจมาก!",
@@ -23714,7 +23807,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "kiryu",
 		minLevel: 2,
-		requestText: "วันนี้อยากได้มัทฉะคั่วอุจิ หรือลาเต้เมฆน้ำตาลทรายแดงหอมคาราเมลเข้มๆ ครับ",
+		requestTemplate: "เห็นในป้ายเมนูมี「{tea}」พอดี วันนี้ขอสั่งแก้วนี้เลยครับ",
 		preferredTeaIds: [
 			"uji-roasted-matcha",
 			"brown-sugar-cloud-latte",
@@ -23731,7 +23824,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "ploysai",
 		minLevel: 1,
-		requestText: "จัดช่อดอกไม้เสร็จแวะมาพักค่ะ ขอชาคาโมมายล์อุ่นๆ ใส่น้ำผึ้ง หรืออู่หลงหอมๆ นะคะ",
+		requestTemplate: "จัดช่อดอกไม้เสร็จแวะมาพักค่ะ ขอสั่ง「{tea}」อุ่นๆ ใส่น้ำผึ้งสักถ้วยนะคะ",
 		preferredTeaIds: [
 			"chamomile-blossom",
 			"osmanthus-oolong",
@@ -23745,7 +23838,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "ploysai",
 		minLevel: 3,
-		requestText: "อยากลองชามัทฉะซากุระ หรือชาหอมหมื่นลี้โรยกลีบดอกไม้หอมๆ สักถ้วยค่ะ",
+		requestTemplate: "อยากลอง「{tea}」ที่อยู่บนป้ายเมนูร้านค่ะ ขอสั่งแก้วนี้สักถ้วยนะคะ",
 		preferredTeaIds: [
 			"sakura-matcha",
 			"osmanthus-oolong",
@@ -23758,7 +23851,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "pheem",
 		minLevel: 1,
-		requestText: "พักเบรกจากคลินิกครับ ขอเซนฉะยอดอ่อนหรือเกียวโตมัทฉะสดชื่นสบายท้องสักถ้วยครับ",
+		requestTemplate: "พักเบรกจากคลินิกครับ ขอสั่ง「{tea}」สดชื่นสบายท้องสักถ้วยครับ",
 		preferredTeaIds: [
 			"spring-sencha",
 			"kyoto-matcha",
@@ -23771,7 +23864,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "pheem",
 		minLevel: 3,
-		requestText: "วันนี้แดดค่อนข้างแรง ขอเกียวคุโระเย็นหรืออูจิ ชิซึคุ ไอซ์ เติมใบมินต์สดชื่นสักแก้วครับ",
+		requestTemplate: "วันนี้แดดค่อนข้างแรง ขอสั่ง「{tea}」เย็นๆ เติมใบมินต์สดชื่นสักแก้วครับ",
 		preferredTeaIds: [
 			"uji-shizuku-ice",
 			"gyokuro-green",
@@ -23785,7 +23878,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "meilin",
 		minLevel: 1,
-		requestText: "อยากชิมมัทฉะตีฟองเนียนๆ หรือมัทฉะลาเต้เนื้อนุ่มๆ เป็นแรงบันดาลใจทำขนมวากาชิค่ะ",
+		requestTemplate: "ดูป้ายเมนูแล้วขอสั่ง「{tea}」สักแก้วค่ะ อยากชิมเป็นแรงบันดาลใจทำขนมวากาชิ",
 		preferredCategories: ["matcha", "latte"],
 		preferredToppings: ["milk", "milk-foam"],
 		happyReply: "เนื้อฟองเนียนละเอียดไร้ที่ติเลยค่ะ หวานกำลังดีมาก!",
@@ -23794,7 +23887,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "meilin",
 		minLevel: 3,
-		requestText: "ขอลาเต้โรเซตต้า หรือมัทฉะฟักทองสไปซ์หอมเครื่องเทศอุ่นๆ คู่ขนมหวานหน่อยนะคะ",
+		requestTemplate: "วันนี้ขอสั่ง「{tea}」อุ่นๆ คู่ขนมหวานสักแก้วนะคะ",
 		preferredTeaIds: [
 			"matcha-rosetta-latte",
 			"pumpkin-spice-matcha",
@@ -23808,7 +23901,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "win",
 		minLevel: 1,
-		requestText: "เพิ่งกลับจากถ่ายภาพนอกสถานที่ ขอชาไทยโบราณใส่น้ำแข็งเย็นจัด หรือมัทฉะลาเต้เย็นสักแก้วครับ!",
+		requestTemplate: "เพิ่งกลับจากถ่ายภาพนอกสถานที่ ขอสั่ง「{tea}」ใส่น้ำแข็งเย็นจัดสักแก้วครับ!",
 		preferredTeaIds: [
 			"thai-tea",
 			"iced-matcha-latte",
@@ -23822,7 +23915,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "win",
 		minLevel: 2,
-		requestText: "ช่วงเย็นแสงสวยแบบนี้ ขอเอิร์ลเกรย์ฝานเลมอน หรืออัญชันมินต์เย็นสักแก้วไว้นั่งคัดรูปครับ",
+		requestTemplate: "ช่วงเย็นแสงสวยแบบนี้ ขอสั่ง「{tea}」เย็นฝานเลมอนไว้นั่งคัดรูปสักแก้วครับ",
 		preferredTeaIds: [
 			"earl-grey",
 			"butterfly-pea",
@@ -23836,7 +23929,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "chandra",
 		minLevel: 1,
-		requestText: "สอนดนตรีเสร็จแวะมาชุ่มคอค่ะ ขอชาอู่หลงหอมๆ หรือคาโมมายล์อุ่นๆ สักถ้วยนะคะ",
+		requestTemplate: "สอนดนตรีเสร็จแวะมาชุ่มคอค่ะ ดูเมนูแล้วขอสั่ง「{tea}」อุ่นๆ สักถ้วยนะคะ",
 		preferredCategories: ["oolong", "herbal"],
 		preferredTemp: "hot",
 		happyReply: "หอมละมุนชุ่มคอไพเราะเหมือนเสียงขิมเลยค่ะ ฝีมือดีจริงเชียว",
@@ -23845,7 +23938,7 @@ var ORDER_TEMPLATES = [
 	{
 		guestId: "chandra",
 		minLevel: 2,
-		requestText: "วันนี้ป้าอยากชิมชาหอมหมื่นลี้ หรือทิกวนอิมร้อนๆ ที่กลิ่นหอมประณีตสักถ้วยนะคะ",
+		requestTemplate: "วันนี้ป้าขอสั่ง「{tea}」ร้อนๆ ที่กลิ่นหอมประณีตสักถ้วยนะคะ",
 		preferredTeaIds: [
 			"osmanthus-oolong",
 			"tieguanyin-oolong",
@@ -23855,14 +23948,157 @@ var ORDER_TEMPLATES = [
 		preferredToppings: ["osmanthus"],
 		happyReply: "กลิ่นหอมสง่างามมากเลยค่ะ จิบแล้วจิตใจสงบงดงามจริงๆ",
 		gentleReply: "รสชาตินุ่มนวลดีมากค่ะ ป้าชอบร้านนี้มากเลย"
+	},
+	{
+		guestId: "tea-master",
+		minLevel: 1,
+		requestTemplate: "แวะมาเยี่ยมเยียนเรือนชา ขอสั่ง「{tea}」รสบริสุทธิ์สักถ้วยครับ",
+		preferredCategories: ["matcha", "green"],
+		preferredTemp: "hot",
+		happyReply: "สมดุลอุณหภูมิและฟองชาได้ประณีตมาก น่าภูมิใจจริงๆ ครับ",
+		gentleReply: "ตั้งใจชงได้ดีทีเดียว ฝึกฝนต่อไปจะยิ่งละมุนขึ้นอีกครับ"
+	},
+	{
+		guestId: "tea-master",
+		minLevel: 2,
+		requestTemplate: "วันนี้อยากลิ้มลอง「{tea}」ที่พร้อมชงบนป้ายเมนูสักถ้วยครับ",
+		preferredTeaIds: [
+			"ceremonial-matcha",
+			"uji-matcha",
+			"kintsugi-matcha",
+			"classic-heritage-matcha"
+		],
+		preferredTemp: "hot",
+		happyReply: "กลิ่นอูมามิและเนื้อชาเนียนละเอียดระดับตำรับแท้เลยครับ ยอดเยี่ยมมาก",
+		gentleReply: "ถ้วยนี้อบอุ่นและเปี่ยมความตั้งใจดีมากครับ ขอบคุณนะ"
+	},
+	{
+		guestId: "spirit-blossom-kindred",
+		minLevel: 1,
+		requestTemplate: "สายลมพัดกลีบดอกไม้มาทางนี้... ขอสั่ง「{tea}」อุ่นใจสักถ้วยนะคะ",
+		preferredCategories: ["herbal", "oolong"],
+		preferredTemp: "hot",
+		preferredToppings: ["honey", "osmanthus"],
+		happyReply: "กลิ่นหอมสงบราวกับสวนวิญญาณยามค่ำคืนเลยค่ะ... ขอบคุณนะคะ",
+		gentleReply: "ชานี้อบอุ่นละมุนใจดีจังเลยค่ะ~"
+	},
+	{
+		guestId: "spirit-blossom-kindred",
+		minLevel: 3,
+		requestTemplate: "ขอเลือก「{tea}」จากป้ายเมนูร้านสักถ้วยนะคะ กลิ่นคงหอมเหมือนกลีบบุปผาเลย",
+		preferredTeaIds: [
+			"sakura-matcha",
+			"osmanthus-oolong",
+			"chamomile-blossom"
+		],
+		preferredToppings: ["osmanthus", "milk"],
+		happyReply: "วิญญาณหมาป่ายังชอบกลิ่นหอมนี้เลยค่ะ นุ่มนวลบริสุทธิ์มากจริงๆ",
+		gentleReply: "รสชาติอ่อนโยนชวนฝันดีมากเลยค่ะ ไว้แวะมาอีกนะคะ"
+	},
+	{
+		guestId: "mococo-abyssgard",
+		minLevel: 1,
+		requestTemplate: "เบาเบา~! วันนี้หนูดูเมนูแล้ว ขอสั่ง「{tea}」เย็นหวานชื่นใจแก้วนี้เลย!",
+		preferredTeaIds: [
+			"strawberry-matcha-latte",
+			"iced-matcha-latte",
+			"brown-sugar-matcha-latte"
+		],
+		preferredTemp: "iced",
+		preferredToppings: [
+			"milk",
+			"ice",
+			"strawberry"
+		],
+		happyReply: "เย้~! หวานหอมฟินสุดๆ เลยล่ะ! ชงเก่งมากเลยนะ~!",
+		gentleReply: "อร่อยสดชื่นมากเลย! มีแรงวิ่งเล่นต่อทั้งวันแล้ว!"
+	},
+	{
+		guestId: "mococo-abyssgard",
+		minLevel: 2,
+		requestTemplate: "ขอสั่ง「{tea}」ฟองนมนุ่มฟูๆ จากเมนูสักแก้วได้ไหมเอ่ย~",
+		preferredTeaIds: [
+			"brown-sugar-cloud-latte",
+			"matcha-rosetta-latte",
+			"iced-matcha-latte"
+		],
+		preferredToppings: [
+			"milk-foam",
+			"brown-sugar",
+			"milk"
+		],
+		happyReply: "ฟองนมนุ่มฟูเหมือนหางหมาป่าเลย~! ชอบที่สุดเลยค่ะ!",
+		gentleReply: "หอมหวานอร่อยจัง ขอบคุณมากเลยนะ~!"
+	},
+	{
+		guestId: "diego-body",
+		minLevel: 1,
+		requestTemplate: "ผมดูป้ายเมนูแล้ว ขอสั่ง「{tea}」ร้อนๆ รสเข้มเรียบหรูสักแก้วครับ",
+		preferredTeaIds: [
+			"earl-grey",
+			"dongding-oolong",
+			"darjeeling-black"
+		],
+		preferredTemp: "hot",
+		happyReply: "จังหวะการชงและการคุมกลิ่นแม่นยำมากครับ สมบูรณ์แบบทีเดียว",
+		gentleReply: "รสชาติสะอาดนุ่มลึกดีครับ ขอบคุณสำหรับบริการที่ยอดเยี่ยม"
+	},
+	{
+		guestId: "diego-body",
+		minLevel: 2,
+		requestTemplate: "บ่ายนี้ขอสั่ง「{tea}」กลิ่นหอมลุ่มลึกสักถ้วยครับ",
+		preferredTeaIds: [
+			"kyoto-matcha",
+			"hojicha-green",
+			"uji-roasted-matcha"
+		],
+		preferredTemp: "hot",
+		happyReply: "รสขมละมุนและกลิ่นคั่วลึกกำลังพอดีเลยครับ ประทับใจมาก",
+		gentleReply: "เป็นแก้วที่ช่วยให้ผ่อนคลายได้ดีมากครับ"
+	},
+	{
+		guestId: "cicada-suit-v2",
+		minLevel: 1,
+		requestTemplate: "ช่วงพักเวรรักษาความปลอดภัย ขอสั่ง「{tea}」จากเมนูช่วยตื่นตัวสักแก้วครับ",
+		preferredTeaIds: [
+			"thai-tea",
+			"earl-grey",
+			"darjeeling-black"
+		],
+		happyReply: "เข้มข้นถึงใจและชัดเจนดีมากครับ พร้อมกลับไปปฏิบัติหน้าที่ต่อแล้ว",
+		gentleReply: "รสชาติดีใช้ได้เลยครับ ขอบคุณมากเจ้าของร้าน"
+	},
+	{
+		guestId: "cicada-suit-v2",
+		minLevel: 3,
+		requestTemplate: "ขอสั่ง「{tea}」ร้อนรสหนักแน่นจากเมนูร้านสักถ้วยครับ",
+		preferredTeaIds: [
+			"tieguanyin-oolong",
+			"uji-roasted-matcha",
+			"gyokuro-green"
+		],
+		preferredTemp: "hot",
+		happyReply: "หนักแน่นและนิ่งสงบดีมากครับ สมกับเป็นร้านชามืออาชีพ",
+		gentleReply: "ดื่มง่ายและสดชื่นขึ้นเยอะเลยครับ ไว้จะแวะมาใหม่"
 	}
 ];
+function getTemplateUnlockedCandidates(template, unlockedTeas) {
+	const unlockedIds = new Set(unlockedTeas.map((t) => t.id));
+	let candidates = template.preferredTeaIds ? unlockedTeas.filter((t) => template.preferredTeaIds.includes(t.id)) : template.preferredCategories ? unlockedTeas.filter((t) => template.preferredCategories.includes(t.category)) : unlockedTeas;
+	if (template.preferredTemp === "hot") {
+		const hotCompatible = candidates.filter((t) => !NATURALLY_ICED_TEA_IDS.has(t.id));
+		if (hotCompatible.length > 0) candidates = hotCompatible;
+	} else if (template.preferredTemp === "iced") {
+		const icedCompatible = candidates.filter((t) => !NATURALLY_HOT_TEA_IDS.has(t.id));
+		if (icedCompatible.length > 0) candidates = icedCompatible;
+	}
+	return candidates.filter((t) => unlockedIds.has(t.id));
+}
 function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
-	const unlockedIds = new Set(getUnlockedTeas(playerLevel).map((t) => t.id));
+	const unlockedTeas = getUnlockedTeas(playerLevel);
 	const eligible = ORDER_TEMPLATES.filter((t) => {
 		if (t.minLevel > playerLevel) return false;
-		if (t.preferredTeaIds) return t.preferredTeaIds.some((id) => unlockedIds.has(id));
-		return true;
+		return getTemplateUnlockedCandidates(t, unlockedTeas).length > 0;
 	});
 	const nonRepeating = previousGuestId ? eligible.filter((t) => t.guestId !== previousGuestId) : eligible;
 	const pool = nonRepeating.length > 0 ? nonRepeating : eligible.length > 0 ? eligible : [ORDER_TEMPLATES[0]];
@@ -23871,13 +24107,16 @@ function createRandomGuestOrder(playerLevel = 1, previousGuestId) {
 	const guestTemplates = pool.filter((t) => t.guestId === pickedGuestId);
 	const picked = guestTemplates[Math.floor(Math.random() * guestTemplates.length)] ?? pool[0];
 	const guest = GUESTS.find((g) => g.id === picked.guestId) ?? GUESTS[0];
+	const candidates = getTemplateUnlockedCandidates(picked, unlockedTeas);
+	const chosenPool = candidates.length > 0 ? candidates : unlockedTeas;
+	const chosenTea = chosenPool[Math.floor(Math.random() * chosenPool.length)] ?? unlockedTeas[0];
+	const resolvedTemp = NATURALLY_ICED_TEA_IDS.has(chosenTea.id) ? "iced" : NATURALLY_HOT_TEA_IDS.has(chosenTea.id) ? "hot" : picked.preferredTemp;
 	return {
-		id: `${picked.guestId}-${Date.now()}`,
+		id: `${picked.guestId}-${chosenTea.id}-${Date.now()}`,
 		guest,
-		requestText: picked.requestText,
-		preferredCategories: picked.preferredCategories,
-		preferredTeaIds: picked.preferredTeaIds,
-		preferredTemp: picked.preferredTemp,
+		requestText: picked.requestTemplate.replace("{tea}", chosenTea.name),
+		preferredTeaIds: [chosenTea.id],
+		preferredTemp: resolvedTemp,
 		preferredToppings: picked.preferredToppings,
 		happyReply: picked.happyReply,
 		gentleReply: picked.gentleReply
@@ -62003,6 +62242,112 @@ function createSteamPuffTexture(ultraCompact = false) {
 	texture.needsUpdate = true;
 	return texture;
 }
+function truncateCanvasText(ctx, text, maxWidth) {
+	if (ctx.measureText(text).width <= maxWidth) return text;
+	let cut = text;
+	while (cut.length > 1 && ctx.measureText(`${cut}…`).width > maxWidth) cut = cut.slice(0, -1);
+	return `${cut}…`;
+}
+function createTeaMenuBoardTexture(maxAnisotropy, compact = false, ultraCompact = false) {
+	const w = ultraCompact ? 384 : compact ? 512 : 768;
+	const h = ultraCompact ? 480 : compact ? 640 : 960;
+	const canvas = document.createElement("canvas");
+	canvas.width = w;
+	canvas.height = h;
+	const ctx = canvas.getContext("2d");
+	const texture = new CanvasTexture(canvas);
+	texture.colorSpace = SRGBColorSpace;
+	texture.wrapS = ClampToEdgeWrapping;
+	texture.wrapT = ClampToEdgeWrapping;
+	texture.generateMipmaps = false;
+	texture.minFilter = LinearFilter;
+	texture.magFilter = LinearFilter;
+	texture.anisotropy = compact || ultraCompact ? 1 : Math.min(4, maxAnisotropy);
+	const redraw = (unlockedTeas, playerLevel, orderedTeaId) => {
+		if (!ctx) return;
+		const s = w / 512;
+		ctx.fillStyle = "#FAF5E8";
+		ctx.fillRect(0, 0, w, h);
+		ctx.strokeStyle = "#C89D54";
+		ctx.lineWidth = Math.max(2, 3 * s);
+		ctx.strokeRect(10 * s, 10 * s, w - 20 * s, h - 20 * s);
+		ctx.strokeStyle = "rgba(46, 111, 64, 0.28)";
+		ctx.lineWidth = Math.max(1, 1.5 * s);
+		ctx.strokeRect(16 * s, 16 * s, w - 32 * s, h - 32 * s);
+		ctx.fillStyle = "#263B2C";
+		ctx.fillRect(16 * s, 16 * s, w - 32 * s, 82 * s);
+		ctx.fillStyle = "#FAF5E8";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.font = `700 ${Math.round(25 * s)}px "Kanit", "Sarabun", sans-serif`;
+		ctx.fillText("ป้ายเมนูชาประจำร้าน", w / 2, 46 * s);
+		ctx.fillStyle = "#DFC48C";
+		ctx.font = `500 ${Math.round(14 * s)}px "Sarabun", sans-serif`;
+		ctx.fillText(`พร้อมชงเสิร์ฟ ${unlockedTeas.length} เมนู · ระดับร้าน Lv.${playerLevel}`, w / 2, 78 * s);
+		const startY = 114 * s;
+		const availH = h - startY - 38 * s;
+		const useTwoCols = unlockedTeas.length > 10;
+		const cols = useTwoCols ? 2 : 1;
+		const rowsPerCol = Math.ceil(unlockedTeas.length / cols);
+		const colGap = useTwoCols ? 14 * s : 0;
+		const padX = 26 * s;
+		const colW = (w - padX * 2 - colGap * (cols - 1)) / cols;
+		const rowH = Math.min(44 * s, availH / Math.max(1, rowsPerCol));
+		unlockedTeas.forEach((tea, idx) => {
+			const col = useTwoCols ? Math.floor(idx / rowsPerCol) : 0;
+			const row = useTwoCols ? idx % rowsPerCol : idx;
+			const rx = padX + col * (colW + colGap);
+			const ry = startY + row * rowH;
+			const isOrdered = Boolean(orderedTeaId && tea.id === orderedTeaId);
+			if (isOrdered) {
+				ctx.fillStyle = "#E1F0E3";
+				ctx.fillRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+				ctx.strokeStyle = "#2E6F40";
+				ctx.lineWidth = Math.max(1.5, 2 * s);
+				ctx.strokeRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+			} else if (row % 2 === 1) {
+				ctx.fillStyle = "rgba(31, 40, 35, 0.035)";
+				ctx.fillRect(rx, ry + 2 * s, colW, rowH - 4 * s);
+			}
+			const dotR = (useTwoCols ? 5.5 : 6.5) * s;
+			const dotX = rx + 12 * s;
+			const dotY = ry + rowH / 2;
+			ctx.beginPath();
+			ctx.arc(dotX, dotY, dotR, 0, Math.PI * 2);
+			ctx.fillStyle = tea.richColor;
+			ctx.fill();
+			ctx.strokeStyle = "rgba(0,0,0,0.22)";
+			ctx.lineWidth = 1 * s;
+			ctx.stroke();
+			ctx.textAlign = "left";
+			ctx.textBaseline = "middle";
+			ctx.fillStyle = isOrdered ? "#194A27" : "#1F2823";
+			const fontSize = Math.round((useTwoCols ? 13 : 16.5) * s);
+			ctx.font = `${isOrdered ? "700" : "600"} ${fontSize}px "Kanit", "Sarabun", sans-serif`;
+			const rightLabel = isOrdered ? "★ สั่ง" : tea.idealTempLabel;
+			ctx.font = `600 ${Math.round((useTwoCols ? 11 : 13) * s)}px "Sarabun", sans-serif`;
+			const rightW = ctx.measureText(rightLabel).width + 10 * s;
+			ctx.font = `${isOrdered ? "700" : "600"} ${fontSize}px "Kanit", "Sarabun", sans-serif`;
+			const nameMaxW = Math.max(40 * s, colW - 26 * s - rightW);
+			const displayName = truncateCanvasText(ctx, tea.name, nameMaxW);
+			ctx.fillText(displayName, rx + 24 * s, dotY);
+			ctx.textAlign = "right";
+			ctx.fillStyle = isOrdered ? "#2E6F40" : "#5A655D";
+			ctx.font = `${isOrdered ? "700" : "500"} ${Math.round((useTwoCols ? 11 : 13) * s)}px "Sarabun", sans-serif`;
+			ctx.fillText(rightLabel, rx + colW - 8 * s, dotY);
+		});
+		ctx.textAlign = "center";
+		ctx.fillStyle = "#5A655D";
+		ctx.font = `500 ${Math.round(12 * s)}px "Sarabun", sans-serif`;
+		ctx.fillText("แตะที่ป้ายเพื่อเปิดดูหน้าเมนูชาฉบับเต็ม", w / 2, h - 22 * s);
+		texture.needsUpdate = true;
+	};
+	return {
+		canvas,
+		texture,
+		redraw
+	};
+}
 // src/three/teaModels.ts
 var TRAY_SURFACE_Y = .08;
 function makeContactShadow(size, shadowTex, opacity = .45) {
@@ -63312,6 +63657,98 @@ function createEquipmentRig(ceramicTex, walnutTex, shadowTex, isSoftwareGl, comp
 		coldDripDrop
 	};
 }
+function createShopMenuBoardSystem(walnutTex, shadowTex, menuBoardTex, compactMode = false) {
+	const root = new Group();
+	const clickProxies = [];
+	const frameMat = new MeshStandardMaterial({
+		map: walnutTex,
+		roughness: .56,
+		metalness: .04
+	});
+	const brassMat = new MeshStandardMaterial({
+		color: 13147476,
+		metalness: .85,
+		roughness: .24
+	});
+	const sheetMat = new MeshStandardMaterial({
+		map: menuBoardTex,
+		roughness: .72,
+		metalness: 0
+	});
+	const counterStand = new Group();
+	counterStand.position.set(2.54, 0, .06);
+	counterStand.rotation.y = -.32;
+	counterStand.add(makeContactShadow(.82, shadowTex, .45));
+	const standBase = new Mesh(new BoxGeometry(.76, .05, .24), frameMat);
+	standBase.position.y = .025;
+	standBase.castShadow = !compactMode;
+	standBase.receiveShadow = true;
+	counterStand.add(standBase);
+	const standBoard = new Mesh(new BoxGeometry(.7, .88, .045), frameMat);
+	standBoard.position.y = .49;
+	standBoard.castShadow = !compactMode;
+	standBoard.receiveShadow = true;
+	counterStand.add(standBoard);
+	const cornerPinGeo = new BoxGeometry(.055, .055, .052);
+	for (const [cx, cy] of [
+		[-.33, .9],
+		[.33, .9],
+		[-.33, .08],
+		[.33, .08]
+	]) {
+		const pin = new Mesh(cornerPinGeo, brassMat);
+		pin.position.set(cx, cy, 0);
+		counterStand.add(pin);
+	}
+	const counterFaceGeo = new PlaneGeometry(.62, .78);
+	const counterFaceFront = new Mesh(counterFaceGeo, sheetMat);
+	counterFaceFront.position.set(0, .49, .025);
+	const counterFaceBack = new Mesh(counterFaceGeo, sheetMat);
+	counterFaceBack.position.set(0, .49, -.025);
+	counterFaceBack.rotation.y = Math.PI;
+	counterStand.add(counterFaceFront, counterFaceBack);
+	const counterProxy = new Mesh(new BoxGeometry(.84, 1, .32), new MeshBasicMaterial({ visible: false }));
+	counterProxy.position.y = .49;
+	counterProxy.userData = { interactId: "menu-board" };
+	counterStand.add(counterProxy);
+	clickProxies.push(counterProxy);
+	root.add(counterStand);
+	const wallBoard = new Group();
+	wallBoard.position.set(3.38, 1.48, -3.03);
+	const wallFrame = new Mesh(new BoxGeometry(1.38, 1.72, .06), frameMat);
+	wallFrame.castShadow = !compactMode;
+	wallFrame.receiveShadow = true;
+	wallBoard.add(wallFrame);
+	const wallHeaderBar = new Mesh(new BoxGeometry(1.44, .08, .085), frameMat);
+	wallHeaderBar.position.y = .87;
+	wallBoard.add(wallHeaderBar);
+	const wallCornerGeo = new BoxGeometry(.08, .08, .07);
+	for (const [cx, cy] of [
+		[-.66, .82],
+		[.66, .82],
+		[-.66, -.82],
+		[.66, -.82]
+	]) {
+		const pin = new Mesh(wallCornerGeo, brassMat);
+		pin.position.set(cx, cy, 0);
+		wallBoard.add(pin);
+	}
+	const wallSheet = new Mesh(new PlaneGeometry(1.24, 1.56), sheetMat);
+	wallSheet.position.z = .033;
+	wallBoard.add(wallSheet);
+	const wallProxy = new Mesh(new BoxGeometry(1.48, 1.82, .24), new MeshBasicMaterial({ visible: false }));
+	wallProxy.userData = { interactId: "menu-board" };
+	wallBoard.add(wallProxy);
+	clickProxies.push(wallProxy);
+	root.add(wallBoard);
+	root.traverse((obj) => {
+		obj.frustumCulled = false;
+	});
+	return {
+		root,
+		clickProxies
+	};
+}
 // src/three/characterTextures.ts
 function makeCanvasTex(size, draw) {
 	const canvas = document.createElement("canvas");
@@ -63637,6 +64074,69 @@ function createTailoredClothingTexture(opts, compactMode = false) {
 			if (opts.trimHex) {
 				ctx.fillStyle = opts.trimHex;
 				ctx.fillRect(0, s * .9, s, s * .07);
+			}
+		}
+	});
+}
+function createFishnetStockingTexture(baseHex, netHex, cuffHex, compactMode = false) {
+	return makeCanvasTex(compactMode ? 128 : 256, (ctx, s) => {
+		ctx.fillStyle = baseHex;
+		ctx.fillRect(0, 0, s, s);
+		const shade = ctx.createLinearGradient(0, 0, s, 0);
+		shade.addColorStop(0, "rgba(0,0,0,0.16)");
+		shade.addColorStop(.5, "rgba(255,255,255,0.08)");
+		shade.addColorStop(1, "rgba(0,0,0,0.16)");
+		ctx.fillStyle = shade;
+		ctx.fillRect(0, 0, s, s);
+		ctx.strokeStyle = netHex;
+		ctx.lineWidth = Math.max(1, s * .0085);
+		ctx.globalAlpha = .58;
+		const spacing = s / 16;
+		for (let i = -s; i < s * 2; i += spacing) {
+			ctx.beginPath();
+			ctx.moveTo(i, 0);
+			ctx.lineTo(i + s, s);
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.moveTo(i, s);
+			ctx.lineTo(i + s, 0);
+			ctx.stroke();
+		}
+		ctx.globalAlpha = 1;
+		ctx.fillStyle = cuffHex;
+		ctx.fillRect(0, 0, s, s * .13);
+		ctx.fillStyle = "rgba(255,255,255,0.45)";
+		ctx.fillRect(0, s * .108, s, s * .024);
+	});
+}
+function createSakuraKimonoTexture(baseHex, accentHex, petalHex, compactMode = false) {
+	return makeCanvasTex(compactMode ? 128 : 256, (ctx, s) => {
+		ctx.fillStyle = baseHex;
+		ctx.fillRect(0, 0, s, s);
+		const grad = ctx.createLinearGradient(0, 0, 0, s);
+		grad.addColorStop(0, "rgba(255,255,255,0.28)");
+		grad.addColorStop(.7, "rgba(255,255,255,0)");
+		grad.addColorStop(1, accentHex);
+		ctx.globalAlpha = .36;
+		ctx.fillStyle = grad;
+		ctx.fillRect(0, 0, s, s);
+		ctx.globalAlpha = 1;
+		ctx.fillStyle = petalHex;
+		for (const [fx, fy] of [
+			[.2, .25],
+			[.72, .34],
+			[.45, .58],
+			[.18, .74],
+			[.82, .78]
+		]) {
+			const x = fx * s;
+			const y = fy * s;
+			const r = s * .032;
+			for (let p = 0; p < 5; p++) {
+				const ang = p / 5 * Math.PI * 2;
+				ctx.beginPath();
+				ctx.ellipse(x + Math.cos(ang) * r, y + Math.sin(ang) * r, r * .55, r * .35, ang, 0, Math.PI * 2);
+				ctx.fill();
 			}
 		}
 	});
@@ -67392,6 +67892,1537 @@ function buildSeamlessHumanGuest(compactMode, ultraCompact, config) {
 	};
 }
 /**
+* Returning Former Shopkeeper Models as Shop Guests (excluding T-pose):
+* 1. tea-master (Traditional Tea Master)
+* 2. spirit-blossom-kindred (Spirit Blossom Kindred + floating spirit orb)
+* 3. mococo-abyssgard (Mococo Abyssgard with twin-tails, wolf ears/tail & fishnet tights)
+* 4. diego-body (Diego / Body with 4-button charcoal waistcoat & rolled shirt sleeves)
+* 5. cicada-suit-v2 (Ultimate CICADA Suit V2 tactical high-collar trench coat & shades)
+*/
+function buildLegacyShopkeeperGuest(guestId, compactMode, ultraCompact) {
+	const seg = ultraCompact ? 10 : compactMode ? 12 : 16;
+	const castShadow = !compactMode;
+	if (guestId === "tea-master") {
+		const s = 1.01;
+		const bones = createHumanoidSkeleton(s);
+		const group = new Group();
+		group.add(bones.root);
+		const faceTex = createAnimeFaceTexture({
+			skinHex: "#f0cbb1",
+			blushHex: "rgba(218, 128, 118, 0.30)",
+			irisTopHex: "#33241c",
+			irisBottomHex: "#6c4d3a",
+			browHex: "#28201c",
+			lipHex: "#ab6a61",
+			eyeScale: .92,
+			smileCurve: 1.12,
+			warmAgeLines: true
+		}, compactMode);
+		const hairTex = createHairStrandTexture("#2e2623", "#584942", "#1a1412", "#3a302b", compactMode);
+		const kimonoTex = createTailoredClothingTexture({
+			style: "thai-blouse",
+			baseHex: "#5a7856",
+			grainHex: "#2f452d",
+			accentHex: "#274d4b",
+			buttonHex: "#d5c9ab"
+		}, compactMode);
+		const obiTex = createTailoredClothingTexture({
+			style: "shirt",
+			baseHex: "#e8dfc7",
+			grainHex: "#c6ba9d"
+		}, compactMode);
+		const textures = [
+			faceTex,
+			hairTex,
+			kimonoTex,
+			obiTex
+		];
+		const { skinMat, headMat } = createCharacterMats({
+			skin: 15780785,
+			faceTex
+		});
+		const kimonoMat = new MeshStandardMaterial({
+			map: kimonoTex,
+			roughness: .8,
+			side: 2
+		});
+		const tealTrimMat = new MeshStandardMaterial({
+			color: 2509641,
+			roughness: .78
+		});
+		const obiMat = new MeshStandardMaterial({
+			map: obiTex,
+			roughness: .76
+		});
+		const hakamaMat = new MeshStandardMaterial({
+			color: 2572095,
+			roughness: .82
+		});
+		const hairMat = new MeshStandardMaterial({
+			map: hairTex,
+			roughness: .48,
+			metalness: .05
+		});
+		const jadeMat = new MeshStandardMaterial({
+			color: 5413741,
+			roughness: .25,
+			metalness: .15
+		});
+		const shoeMat = new MeshStandardMaterial({
+			color: 7030571,
+			roughness: .54
+		});
+		const soleMat = new MeshStandardMaterial({
+			color: 2759442,
+			roughness: .86
+		});
+		const meshes = [
+			...buildSeamlessTorso(s, seg, bones.skeleton, hakamaMat, kimonoMat, skinMat, {
+				hasHead: true,
+				slender: false,
+				castShadow
+			}),
+			...buildSeamlessArm(-1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				bulkySleeve: true,
+				castShadow
+			}),
+			...buildSeamlessArm(1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				bulkySleeve: true,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, hakamaMat, hakamaMat, shoeMat, soleMat, { castShadow }),
+			...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, hakamaMat, hakamaMat, shoeMat, soleMat, { castShadow }),
+			buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+				jawTaper: .76,
+				faceFlatten: .91,
+				castShadow
+			}),
+			...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+			buildLoftedSkinnedMesh([{
+				center: [
+					0,
+					1.318 * s,
+					-.002 * s
+				],
+				rx: .058 * s,
+				rz: .058 * s,
+				squareness: .1,
+				weights: [
+					BONE.CHEST,
+					.35,
+					BONE.NECK,
+					.65
+				],
+				v: 0
+			}, {
+				center: [
+					0,
+					1.362 * s,
+					-.002 * s
+				],
+				rx: .056 * s,
+				rz: .056 * s,
+				squareness: .1,
+				weights: [
+					BONE.NECK,
+					.85,
+					BONE.CHEST,
+					.15
+				],
+				v: 1
+			}], seg, tealTrimMat, bones.skeleton),
+			buildLoftedSkinnedMesh([{
+				center: [
+					0,
+					.855 * s,
+					0
+				],
+				rx: .158 * s,
+				rz: .114 * s,
+				squareness: .45,
+				weights: [
+					BONE.HIPS,
+					.72,
+					BONE.SPINE,
+					.28
+				],
+				v: 0
+			}, {
+				center: [
+					0,
+					.935 * s,
+					0
+				],
+				rx: .144 * s,
+				rz: .104 * s,
+				squareness: .45,
+				weights: [
+					BONE.HIPS,
+					.45,
+					BONE.SPINE,
+					.55
+				],
+				v: 1
+			}], seg, obiMat, bones.skeleton),
+			buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+				backDrop: .14,
+				castShadow
+			}),
+			buildHairRibbonSkinnedMesh([
+				[
+					-.088,
+					1.6 * s,
+					.03
+				],
+				[
+					-.12,
+					1.505 * s,
+					.062
+				],
+				[
+					-.112,
+					1.44 * s,
+					.052
+				]
+			], [
+				.022,
+				.016,
+				.005
+			], [
+				.009,
+				.007,
+				.003
+			], hairMat, bones.skeleton),
+			buildHairRibbonSkinnedMesh([
+				[
+					.088,
+					1.6 * s,
+					.03
+				],
+				[
+					.12,
+					1.505 * s,
+					.062
+				],
+				[
+					.112,
+					1.44 * s,
+					.052
+				]
+			], [
+				.022,
+				.016,
+				.005
+			], [
+				.009,
+				.007,
+				.003
+			], hairMat, bones.skeleton),
+			buildTaperedCurveSkinnedMesh([[
+				0,
+				1.67 * s,
+				-.02
+			], [
+				0,
+				1.75 * s,
+				-.038
+			]], [.066, .038], 1.05, 1, 10, BONE.HEAD, hairMat, bones.skeleton),
+			buildTaperedCurveSkinnedMesh([[
+				-.082,
+				1.71 * s,
+				-.034
+			], [
+				.082,
+				1.735 * s,
+				-.034
+			]], [.006, .008], 1, 1, 6, BONE.HEAD, jadeMat, bones.skeleton)
+		];
+		for (const m of meshes) group.add(m);
+		const obiKnot = new Mesh(new BoxGeometry(.11 * s, .065 * s, .045 * s), obiMat);
+		obiKnot.position.set(0, -.045 * s, -.118 * s);
+		bones.spine.add(obiKnot);
+		return {
+			group,
+			bones,
+			textures
+		};
+	}
+	if (guestId === "spirit-blossom-kindred") {
+		const s = .98;
+		const bones = createHumanoidSkeleton(s);
+		const group = new Group();
+		group.add(bones.root);
+		const faceTex = createAnimeFaceTexture({
+			skinHex: "#f8e7ea",
+			blushHex: "rgba(232, 148, 184, 0.36)",
+			irisTopHex: "#5b488c",
+			irisBottomHex: "#b89fe8",
+			browHex: "#8d83a8",
+			lipHex: "#c9788e",
+			eyeScale: 1.04,
+			smileCurve: 1.15
+		}, compactMode);
+		const hairTex = createHairStrandTexture("#e4e1f2", "#ffffff", "#b2add0", "#d5c4f0", compactMode);
+		const kimonoTex = createSakuraKimonoTexture("#f2c6db", "#9e7cc4", "#fff4f9", compactMode);
+		const textures = [
+			faceTex,
+			hairTex,
+			kimonoTex
+		];
+		const { skinMat, headMat } = createCharacterMats({
+			skin: 16312298,
+			faceTex
+		});
+		const kimonoMat = new MeshStandardMaterial({
+			map: kimonoTex,
+			roughness: .74,
+			side: 2
+		});
+		const obiMat = new MeshStandardMaterial({
+			color: 8150182,
+			roughness: .68
+		});
+		const furMat = new MeshStandardMaterial({
+			color: 16775420,
+			roughness: .94
+		});
+		const hornMat = new MeshStandardMaterial({
+			color: 2892365,
+			roughness: .36,
+			metalness: .14
+		});
+		const hairMat = new MeshStandardMaterial({
+			map: hairTex,
+			roughness: .42,
+			metalness: .08
+		});
+		const stockingMat = new MeshStandardMaterial({
+			color: 14932213,
+			roughness: .72
+		});
+		const shoeMat = new MeshStandardMaterial({
+			color: 6769016,
+			roughness: .48
+		});
+		const soleMat = new MeshStandardMaterial({
+			color: 3482946,
+			roughness: .85
+		});
+		const meshes = [
+			...buildSeamlessTorso(s, seg, bones.skeleton, kimonoMat, kimonoMat, skinMat, {
+				hasHead: true,
+				slender: true,
+				castShadow
+			}),
+			...buildSeamlessArm(-1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				bulkySleeve: true,
+				castShadow
+			}),
+			...buildSeamlessArm(1, s, seg, bones.skeleton, kimonoMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				bulkySleeve: true,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, skinMat, stockingMat, shoeMat, soleMat, {
+				thighWidth: .94,
+				kneeHighStartY: .56,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, skinMat, stockingMat, shoeMat, soleMat, {
+				thighWidth: .94,
+				kneeHighStartY: .56,
+				castShadow
+			}),
+			buildCoatShellSkinnedMesh([
+				{
+					y: .48 * s,
+					rx: .16138 * s,
+					rz: .11413999999999999 * s,
+					squareness: .4,
+					arcStart: 0,
+					arcEnd: Math.PI * 2,
+					upperBone: BONE.HIPS,
+					upperWeight: .42,
+					v: 0
+				},
+				{
+					y: .64 * s,
+					rx: .15255000000000002 * s,
+					rz: .10892000000000002 * s,
+					squareness: .42,
+					arcStart: 0,
+					arcEnd: Math.PI * 2,
+					upperBone: BONE.HIPS,
+					upperWeight: .72,
+					v: .48
+				},
+				{
+					y: .78 * s,
+					rx: .14372000000000001 * s,
+					rz: .1027 * s,
+					squareness: .44,
+					arcStart: 0,
+					arcEnd: Math.PI * 2,
+					upperBone: BONE.HIPS,
+					upperWeight: .92,
+					v: 1
+				}
+			], seg, kimonoMat, bones.skeleton, castShadow),
+			buildLoftedSkinnedMesh([{
+				center: [
+					0,
+					.855 * s,
+					0
+				],
+				rx: .145 * s,
+				rz: .105 * s,
+				squareness: .45,
+				weights: [
+					BONE.HIPS,
+					.72,
+					BONE.SPINE,
+					.28
+				],
+				v: 0
+			}, {
+				center: [
+					0,
+					.935 * s,
+					0
+				],
+				rx: .128 * s,
+				rz: .094 * s,
+				squareness: .45,
+				weights: [
+					BONE.HIPS,
+					.45,
+					BONE.SPINE,
+					.55
+				],
+				v: 1
+			}], seg, obiMat, bones.skeleton),
+			buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+				jawTaper: .68,
+				faceFlatten: .9,
+				castShadow
+			}),
+			...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+			buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+				backDrop: .28,
+				castShadow
+			}),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.62 * s,
+					-.08
+				],
+				[
+					0,
+					1.46 * s,
+					-.165
+				],
+				[
+					0,
+					1.24 * s,
+					-.155
+				],
+				[
+					0,
+					1.08 * s,
+					-.125
+				]
+			], [
+				.148,
+				.156,
+				.135,
+				.068
+			], [
+				.026,
+				.028,
+				.022,
+				.01
+			], hairMat, bones.skeleton, {
+				followChestLower: true,
+				castShadow
+			}),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.64 * s,
+					.055
+				],
+				[
+					-.045,
+					1.595 * s,
+					.138
+				],
+				[
+					-.082,
+					1.525 * s,
+					.125
+				]
+			], [
+				.046,
+				.036,
+				.012
+			], [
+				.014,
+				.011,
+				.004
+			], hairMat, bones.skeleton),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.64 * s,
+					.055
+				],
+				[
+					.045,
+					1.595 * s,
+					.138
+				],
+				[
+					.082,
+					1.525 * s,
+					.125
+				]
+			], [
+				.046,
+				.036,
+				.012
+			], [
+				.014,
+				.011,
+				.004
+			], hairMat, bones.skeleton),
+			buildTaperedCurveSkinnedMesh([
+				[
+					-.078,
+					1.635 * s,
+					.02
+				],
+				[
+					-.135,
+					1.715 * s,
+					-.025
+				],
+				[
+					-.145,
+					1.765 * s,
+					-.095
+				],
+				[
+					-.105,
+					1.735 * s,
+					-.145
+				]
+			], [
+				.024,
+				.02,
+				.013,
+				.005
+			], 1, 1, 8, BONE.HEAD, hornMat, bones.skeleton),
+			buildTaperedCurveSkinnedMesh([
+				[
+					.078,
+					1.635 * s,
+					.02
+				],
+				[
+					.135,
+					1.715 * s,
+					-.025
+				],
+				[
+					.145,
+					1.765 * s,
+					-.095
+				],
+				[
+					.105,
+					1.735 * s,
+					-.145
+				]
+			], [
+				.024,
+				.02,
+				.013,
+				.005
+			], 1, 1, 8, BONE.HEAD, hornMat, bones.skeleton)
+		];
+		for (const m of meshes) group.add(m);
+		const furCollar = new Mesh(new TorusGeometry(.118 * s, .028 * s, 8, 16), furMat);
+		furCollar.rotation.x = Math.PI * .46;
+		furCollar.position.set(0, .155 * s, .005 * s);
+		bones.chest.add(furCollar);
+		for (const side of [-1, 1]) {
+			const earGroup = new Group();
+			const outerEar = new Mesh(new ConeGeometry(.036 * s, .115 * s, 8), hairMat);
+			const innerEar = new Mesh(new ConeGeometry(.02 * s, .082 * s, 6), new MeshStandardMaterial({
+				color: 16037583,
+				roughness: .8
+			}));
+			innerEar.position.set(0, -.005 * s, .016 * s);
+			earGroup.add(outerEar, innerEar);
+			earGroup.position.set(side * .075 * s, .295 * s, .012 * s);
+			earGroup.rotation.z = -side * .28;
+			earGroup.rotation.x = .12;
+			bones.head.add(earGroup);
+		}
+		const sideMask = new Mesh(new SphereGeometry(.048 * s, 10, 10), furMat);
+		sideMask.scale.set(.85, 1.05, .45);
+		sideMask.position.set(.132 * s, .195 * s, .055 * s);
+		sideMask.rotation.y = Math.PI * .36;
+		sideMask.rotation.z = -.22;
+		bones.head.add(sideMask);
+		const spiritOrbGroup = new Group();
+		spiritOrbGroup.position.set(.38 * s, 1.38 * s, -.06 * s);
+		const orbCore = new Mesh(new SphereGeometry(.055 * s, 12, 12), new MeshStandardMaterial({
+			color: 14271231,
+			emissive: 9137126,
+			emissiveIntensity: .65,
+			roughness: .25
+		}));
+		const orbHalo = new Mesh(new SphereGeometry(.082 * s, 12, 12), new MeshStandardMaterial({
+			color: 16112895,
+			transparent: true,
+			opacity: .35,
+			roughness: .2
+		}));
+		spiritOrbGroup.add(orbCore, orbHalo);
+		group.add(spiritOrbGroup);
+		return {
+			group,
+			bones,
+			spiritOrbGroup,
+			textures
+		};
+	}
+	if (guestId === "mococo-abyssgard") {
+		const s = .95;
+		const wScale = .87;
+		const bones = createHumanoidSkeleton(s);
+		const group = new Group();
+		group.add(bones.root);
+		const faceTex = createAnimeFaceTexture({
+			skinHex: "#fbe0d0",
+			blushHex: "rgba(244, 138, 152, 0.44)",
+			irisTopHex: "#733856",
+			irisBottomHex: "#ee89ad",
+			browHex: "#b38953",
+			lipHex: "#d66e80",
+			eyeScale: 1.05,
+			smileCurve: 1.28
+		}, compactMode);
+		const hairTex = createHairStrandTexture("#f4db96", "#fff4cc", "#c7a55d", "#f296b8", compactMode);
+		const jacketTex = createTailoredClothingTexture({
+			style: "hoodie-jacket",
+			baseHex: "#25222c",
+			grainHex: "#151319",
+			trimHex: "#ef76a4"
+		}, compactMode);
+		const cropTex = createTailoredClothingTexture({
+			style: "shirt",
+			baseHex: "#faf7f9",
+			grainHex: "#e1d9e0"
+		}, compactMode);
+		const fishnetTex = createFishnetStockingTexture("#fbe0d0", "#241e29", "#ef78a6", compactMode);
+		const textures = [
+			faceTex,
+			hairTex,
+			jacketTex,
+			cropTex,
+			fishnetTex
+		];
+		const { skinMat, headMat } = createCharacterMats({
+			skin: 16507088,
+			faceTex
+		});
+		const jacketMat = new MeshStandardMaterial({
+			map: jacketTex,
+			roughness: .72,
+			side: 2
+		});
+		const cropMat = new MeshStandardMaterial({
+			map: cropTex,
+			roughness: .78
+		});
+		const shortsMat = new MeshStandardMaterial({
+			color: 16118004,
+			roughness: .78,
+			side: 2
+		});
+		const fishnetMat = new MeshStandardMaterial({
+			map: fishnetTex,
+			roughness: .68
+		});
+		const pinkMat = new MeshStandardMaterial({
+			color: 15692962,
+			roughness: .48
+		});
+		const furMat = new MeshStandardMaterial({
+			color: 16775419,
+			roughness: .94
+		});
+		const chokerMat = new MeshStandardMaterial({
+			color: 1907490,
+			roughness: .45
+		});
+		const hairMat = new MeshStandardMaterial({
+			map: hairTex,
+			roughness: .44,
+			metalness: .08
+		});
+		const soleMat = new MeshStandardMaterial({
+			color: 16117234,
+			roughness: .85
+		});
+		const meshes = [
+			...buildSeamlessTorso(s, seg, bones.skeleton, shortsMat, cropMat, skinMat, {
+				hasHead: true,
+				slender: true,
+				castShadow
+			}),
+			...buildSeamlessArm(-1, s, seg, bones.skeleton, jacketMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				castShadow
+			}),
+			...buildSeamlessArm(1, s, seg, bones.skeleton, jacketMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, skinMat, fishnetMat, pinkMat, soleMat, {
+				thighWidth: .95,
+				kneeHighStartY: .62,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, skinMat, fishnetMat, pinkMat, soleMat, {
+				thighWidth: .95,
+				kneeHighStartY: .62,
+				castShadow
+			}),
+			buildCoatShellSkinnedMesh([{
+				y: .64 * s,
+				rx: .15516000000000002 * s,
+				rz: .11065999999999998 * s,
+				squareness: .42,
+				arcStart: 0,
+				arcEnd: Math.PI * 2,
+				upperBone: BONE.HIPS,
+				upperWeight: .72,
+				v: 0
+			}, {
+				y: .78 * s,
+				rx: .14372000000000001 * s,
+				rz: .1027 * s,
+				squareness: .44,
+				arcStart: 0,
+				arcEnd: Math.PI * 2,
+				upperBone: BONE.HIPS,
+				upperWeight: .94,
+				v: 1
+			}], seg, shortsMat, bones.skeleton, castShadow),
+			buildCoatShellSkinnedMesh([
+				{
+					y: .9 * s,
+					zOffset: 0,
+					rx: .12184000000000002 * s,
+					rz: .08878000000000001 * s,
+					squareness: .43,
+					arcStart: -Math.PI * .2,
+					arcEnd: Math.PI * 1.2,
+					upperBone: BONE.SPINE,
+					upperWeight: 1,
+					v: 0
+				},
+				{
+					y: 1.06 * s,
+					zOffset: .005 * s,
+					rx: .1375 * s,
+					rz: .10096000000000001 * s,
+					squareness: .43,
+					arcStart: -Math.PI * .22,
+					arcEnd: Math.PI * 1.22,
+					upperBone: BONE.CHEST,
+					upperWeight: 1,
+					v: .5
+				},
+				{
+					y: 1.22 * s,
+					zOffset: .005 * s,
+					rx: .15316000000000002 * s,
+					rz: .1027 * s,
+					squareness: .43,
+					arcStart: -Math.PI * .18,
+					arcEnd: Math.PI * 1.18,
+					upperBone: BONE.CHEST,
+					upperWeight: 1,
+					v: 1
+				}
+			], seg, jacketMat, bones.skeleton, castShadow),
+			buildLoftedSkinnedMesh([{
+				center: [
+					0,
+					.79 * s,
+					0
+				],
+				rx: .162 * wScale * s,
+				rz: .116 * wScale * s,
+				squareness: .44,
+				weights: [
+					BONE.HIPS,
+					.85,
+					BONE.SPINE,
+					.15
+				],
+				v: 0
+			}, {
+				center: [
+					0,
+					.825 * s,
+					0
+				],
+				rx: .158 * wScale * s,
+				rz: .113 * wScale * s,
+				squareness: .44,
+				weights: [
+					BONE.HIPS,
+					.8,
+					BONE.SPINE,
+					.2
+				],
+				v: 1
+			}], seg, pinkMat, bones.skeleton),
+			buildLoftedSkinnedMesh([{
+				center: [
+					0,
+					1.345 * s,
+					-.002 * s
+				],
+				rx: .053 * s,
+				rz: .053 * s,
+				weights: [
+					BONE.NECK,
+					.8,
+					BONE.HEAD,
+					.2
+				],
+				v: 0
+			}, {
+				center: [
+					0,
+					1.372 * s,
+					-.002 * s
+				],
+				rx: .053 * s,
+				rz: .053 * s,
+				weights: [
+					BONE.NECK,
+					.7,
+					BONE.HEAD,
+					.3
+				],
+				v: 1
+			}], seg, chokerMat, bones.skeleton),
+			buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+				jawTaper: .66,
+				faceFlatten: .9,
+				castShadow
+			}),
+			...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+			buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+				backDrop: .18,
+				castShadow
+			}),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.64 * s,
+					.055
+				],
+				[
+					-.045,
+					1.595 * s,
+					.138
+				],
+				[
+					-.072,
+					1.545 * s,
+					.136
+				]
+			], [
+				.044,
+				.034,
+				.012
+			], [
+				.014,
+				.011,
+				.004
+			], hairMat, bones.skeleton),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.64 * s,
+					.055
+				],
+				[
+					.045,
+					1.595 * s,
+					.138
+				],
+				[
+					.072,
+					1.545 * s,
+					.136
+				]
+			], [
+				.044,
+				.034,
+				.012
+			], [
+				.014,
+				.011,
+				.004
+			], hairMat, bones.skeleton),
+			buildTaperedCurveSkinnedMesh([
+				[
+					-.122 * s,
+					1.59 * s,
+					-.035
+				],
+				[
+					-.215 * s,
+					1.54 * s,
+					-.075
+				],
+				[
+					-.245 * s,
+					1.36 * s,
+					-.085
+				],
+				[
+					-.21 * s,
+					1.18 * s,
+					-.065
+				]
+			], [
+				.038,
+				.052,
+				.044,
+				.014
+			], 1.1, .9, 10, BONE.HEAD, hairMat, bones.skeleton, castShadow),
+			buildTaperedCurveSkinnedMesh([
+				[
+					.122 * s,
+					1.59 * s,
+					-.035
+				],
+				[
+					.215 * s,
+					1.54 * s,
+					-.075
+				],
+				[
+					.245 * s,
+					1.36 * s,
+					-.085
+				],
+				[
+					.21 * s,
+					1.18 * s,
+					-.065
+				]
+			], [
+				.038,
+				.052,
+				.044,
+				.014
+			], 1.1, .9, 10, BONE.HEAD, hairMat, bones.skeleton, castShadow)
+		];
+		for (const m of meshes) group.add(m);
+		for (const side of [-1, 1]) {
+			const ear = new Mesh(new ConeGeometry(.038 * s, .11 * s, 8), hairMat);
+			const earInner = new Mesh(new ConeGeometry(.022 * s, .075 * s, 6), pinkMat);
+			earInner.position.set(0, -.008 * s, .015 * s);
+			const earGrp = new Group();
+			earGrp.add(ear, earInner);
+			earGrp.position.set(side * .082 * s, .285 * s, .01 * s);
+			earGrp.rotation.z = -side * .34;
+			earGrp.rotation.x = .14;
+			bones.head.add(earGrp);
+		}
+		const collarFur = new Mesh(new TorusGeometry(.098 * s, .02 * s, 8, 14), furMat);
+		collarFur.rotation.x = Math.PI * .46;
+		collarFur.position.set(0, .15 * s, .006 * s);
+		bones.chest.add(collarFur);
+		const wolfTail = new Mesh(new ConeGeometry(.058 * s, .28 * s, 10), hairMat);
+		wolfTail.position.set(0, -.05 * s, -.175 * s);
+		wolfTail.rotation.x = -Math.PI * .36;
+		bones.hips.add(wolfTail);
+		return {
+			group,
+			bones,
+			textures
+		};
+	}
+	if (guestId === "diego-body") {
+		const s = 1.03;
+		const bones = createHumanoidSkeleton(s);
+		const group = new Group();
+		group.add(bones.root);
+		const faceTex = createAnimeFaceTexture({
+			skinHex: "#ecc19e",
+			blushHex: "rgba(210, 122, 112, 0.22)",
+			irisTopHex: "#2b1e18",
+			irisBottomHex: "#5e4334",
+			browHex: "#1e1714",
+			lipHex: "#a5675e",
+			eyeScale: .92,
+			smileCurve: .96
+		}, compactMode);
+		const hairTex = createHairStrandTexture("#201b18", "#463c36", "#100d0b", "#201b18", compactMode);
+		const waistcoatTex = createTailoredClothingTexture({
+			style: "waistcoat",
+			baseHex: "#2d3038",
+			grainHex: "#1b1d23",
+			accentHex: "#20232a",
+			buttonHex: "#4f5563"
+		}, compactMode);
+		const shirtTex = createTailoredClothingTexture({
+			style: "shirt",
+			baseHex: "#737c8a",
+			grainHex: "#59616e",
+			buttonHex: "#9ba3b0"
+		}, compactMode);
+		const trouserTex = createTailoredClothingTexture({
+			style: "waistcoat",
+			baseHex: "#24272f",
+			grainHex: "#16181e"
+		}, compactMode);
+		const textures = [
+			faceTex,
+			hairTex,
+			waistcoatTex,
+			shirtTex,
+			trouserTex
+		];
+		const { skinMat, headMat } = createCharacterMats({
+			skin: 15516062,
+			faceTex
+		});
+		const vestMat = new MeshStandardMaterial({
+			map: waistcoatTex,
+			roughness: .76,
+			side: 2
+		});
+		const shirtMat = new MeshStandardMaterial({
+			map: shirtTex,
+			roughness: .78
+		});
+		const trouserMat = new MeshStandardMaterial({
+			map: trouserTex,
+			roughness: .8
+		});
+		const hairMat = new MeshStandardMaterial({
+			map: hairTex,
+			roughness: .46,
+			metalness: .06
+		});
+		const shoeMat = new MeshStandardMaterial({
+			color: 3876379,
+			roughness: .42,
+			metalness: .06
+		});
+		const soleMat = new MeshStandardMaterial({
+			color: 1906453,
+			roughness: .88
+		});
+		const buttonMat = new MeshStandardMaterial({
+			color: 1579552,
+			roughness: .35,
+			metalness: .35
+		});
+		const meshes = [
+			...buildSeamlessTorso(s, seg, bones.skeleton, trouserMat, shirtMat, skinMat, {
+				hasHead: true,
+				slender: false,
+				castShadow
+			}),
+			...buildSeamlessArm(-1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				castShadow
+			}),
+			...buildSeamlessArm(1, s, seg, bones.skeleton, shirtMat, skinMat, skinMat, {
+				sleeveEndsAtElbow: true,
+				castShadow
+			}),
+			...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, trouserMat, trouserMat, shoeMat, soleMat, { castShadow }),
+			...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, trouserMat, trouserMat, shoeMat, soleMat, { castShadow }),
+			buildCoatShellSkinnedMesh([
+				{
+					y: .77 * s,
+					zOffset: 0,
+					rx: .16995,
+					rz: .12154,
+					squareness: .44,
+					arcStart: -Math.PI * .28,
+					arcEnd: Math.PI * 1.28,
+					upperBone: BONE.HIPS,
+					upperWeight: .82,
+					v: 0
+				},
+				{
+					y: .91 * s,
+					zOffset: 0,
+					rx: .14317,
+					rz: .10403,
+					squareness: .44,
+					arcStart: -Math.PI * .28,
+					arcEnd: Math.PI * 1.28,
+					upperBone: BONE.SPINE,
+					upperWeight: 1,
+					v: .34
+				},
+				{
+					y: 1.06 * s,
+					zOffset: .005 * s,
+					rx: .16171,
+					rz: .11845,
+					squareness: .44,
+					arcStart: -Math.PI * .28,
+					arcEnd: Math.PI * 1.28,
+					upperBone: BONE.CHEST,
+					upperWeight: 1,
+					v: .68
+				},
+				{
+					y: 1.22 * s,
+					zOffset: .005 * s,
+					rx: .18025000000000002,
+					rz: .12050999999999999,
+					squareness: .44,
+					arcStart: -Math.PI * .24,
+					arcEnd: Math.PI * 1.24,
+					upperBone: BONE.CHEST,
+					upperWeight: 1,
+					v: 1
+				}
+			], seg, vestMat, bones.skeleton, castShadow),
+			buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+				jawTaper: .78,
+				faceFlatten: .92,
+				castShadow
+			}),
+			...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+			buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+				backDrop: .15,
+				castShadow
+			}),
+			buildHairRibbonSkinnedMesh([
+				[
+					-.04,
+					1.642 * s,
+					.048
+				],
+				[
+					-.01,
+					1.622 * s,
+					.128
+				],
+				[
+					.058,
+					1.58 * s,
+					.132
+				],
+				[
+					.098,
+					1.525 * s,
+					.108
+				]
+			], [
+				.068,
+				.06,
+				.042,
+				.012
+			], [
+				.024,
+				.022,
+				.015,
+				.005
+			], hairMat, bones.skeleton),
+			buildHairRibbonSkinnedMesh([
+				[
+					-.05,
+					1.635 * s,
+					.05
+				],
+				[
+					-.094,
+					1.588 * s,
+					.114
+				],
+				[
+					-.118,
+					1.515 * s,
+					.086
+				]
+			], [
+				.052,
+				.038,
+				.014
+			], [
+				.018,
+				.014,
+				.005
+			], hairMat, bones.skeleton),
+			buildHairRibbonSkinnedMesh([
+				[
+					0,
+					1.52 * s,
+					-.118
+				],
+				[
+					0,
+					1.44 * s,
+					-.124
+				],
+				[
+					0,
+					1.38 * s,
+					-.09
+				]
+			], [
+				.106,
+				.086,
+				.044
+			], [
+				.02,
+				.016,
+				.008
+			], hairMat, bones.skeleton)
+		];
+		for (const m of meshes) group.add(m);
+		const btnGeo = new CylinderGeometry(.008 * s, .008 * s, .007 * s, 8);
+		btnGeo.rotateX(Math.PI * .5);
+		for (const by of [
+			.015 * s,
+			-.045 * s,
+			-.105 * s,
+			-.165 * s
+		]) {
+			const btn = new Mesh(btnGeo, buttonMat);
+			btn.position.set(0, by, .118 * s);
+			bones.chest.add(btn);
+		}
+		return {
+			group,
+			bones,
+			textures
+		};
+	}
+	const s = 1.04;
+	const bones = createHumanoidSkeleton(s);
+	const group = new Group();
+	group.add(bones.root);
+	const faceTex = createAnimeFaceTexture({
+		skinHex: "#e8bc9a",
+		blushHex: "rgba(202, 118, 110, 0.20)",
+		irisTopHex: "#251e22",
+		irisBottomHex: "#4f3f48",
+		browHex: "#1b1a1f",
+		lipHex: "#9d625a",
+		eyeScale: .9,
+		smileCurve: .72
+	}, compactMode);
+	const hairTex = createHairStrandTexture("#1b1b21", "#414250", "#0e0e12", "#1b1b21", compactMode);
+	const trenchTex = createTailoredClothingTexture({
+		style: "trench",
+		baseHex: "#22242d",
+		grainHex: "#14151b",
+		accentHex: "#15171e",
+		trimHex: "#414554"
+	}, compactMode);
+	const innerShirtTex = createTailoredClothingTexture({
+		style: "shirt",
+		baseHex: "#dfe2eb",
+		grainHex: "#b9becb"
+	}, compactMode);
+	const textures = [
+		faceTex,
+		hairTex,
+		trenchTex,
+		innerShirtTex
+	];
+	const { skinMat, headMat } = createCharacterMats({
+		skin: 15252634,
+		faceTex
+	});
+	const trenchMat = new MeshStandardMaterial({
+		map: trenchTex,
+		roughness: .68,
+		metalness: .08,
+		side: 2
+	});
+	const shirtMat = new MeshStandardMaterial({
+		map: innerShirtTex,
+		roughness: .76
+	});
+	const gloveMat = new MeshStandardMaterial({
+		color: 1776674,
+		roughness: .44,
+		metalness: .1
+	});
+	const trouserMat = new MeshStandardMaterial({
+		color: 1776932,
+		roughness: .78
+	});
+	const tieMat = new MeshStandardMaterial({
+		color: 6041736,
+		roughness: .56
+	});
+	const hairMat = new MeshStandardMaterial({
+		map: hairTex,
+		roughness: .44,
+		metalness: .06
+	});
+	const shadeMat = new MeshStandardMaterial({
+		color: 1052950,
+		roughness: .18,
+		metalness: .65
+	});
+	const metalMat = new MeshStandardMaterial({
+		color: 12765396,
+		roughness: .28,
+		metalness: .85
+	});
+	const bootMat = new MeshStandardMaterial({
+		color: 1513501,
+		roughness: .48,
+		metalness: .08
+	});
+	const soleMat = new MeshStandardMaterial({
+		color: 987156,
+		roughness: .88
+	});
+	const meshes = [
+		...buildSeamlessTorso(s, seg, bones.skeleton, trouserMat, shirtMat, skinMat, {
+			hasHead: true,
+			slender: false,
+			castShadow
+		}),
+		...buildSeamlessArm(-1, s, seg, bones.skeleton, trenchMat, trenchMat, gloveMat, {
+			sleeveEndsAtElbow: false,
+			castShadow
+		}),
+		...buildSeamlessArm(1, s, seg, bones.skeleton, trenchMat, trenchMat, gloveMat, {
+			sleeveEndsAtElbow: false,
+			castShadow
+		}),
+		...buildSeamlessLegAndShoe(-1, s, seg, bones.skeleton, trouserMat, trouserMat, bootMat, soleMat, { castShadow }),
+		...buildSeamlessLegAndShoe(1, s, seg, bones.skeleton, trouserMat, trouserMat, bootMat, soleMat, { castShadow }),
+		buildCoatShellSkinnedMesh([
+			{
+				y: .62 * s,
+				zOffset: 0,
+				rx: .18304,
+				rz: .13104,
+				squareness: .44,
+				arcStart: -Math.PI * .25,
+				arcEnd: Math.PI * 1.25,
+				upperBone: BONE.HIPS,
+				upperWeight: .68,
+				v: 0
+			},
+			{
+				y: .77 * s,
+				zOffset: 0,
+				rx: .17264,
+				rz: .1248,
+				squareness: .44,
+				arcStart: -Math.PI * .26,
+				arcEnd: Math.PI * 1.26,
+				upperBone: BONE.HIPS,
+				upperWeight: .85,
+				v: .25
+			},
+			{
+				y: .91 * s,
+				zOffset: 0,
+				rx: .1456,
+				rz: .10608000000000001,
+				squareness: .44,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.SPINE,
+				upperWeight: 1,
+				v: .5
+			},
+			{
+				y: 1.06 * s,
+				zOffset: .005 * s,
+				rx: .16432,
+				rz: .12064,
+				squareness: .44,
+				arcStart: -Math.PI * .28,
+				arcEnd: Math.PI * 1.28,
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: .75
+			},
+			{
+				y: 1.23 * s,
+				zOffset: .004 * s,
+				rx: .18304,
+				rz: .12272,
+				squareness: .44,
+				arcStart: -Math.PI * .24,
+				arcEnd: Math.PI * 1.24,
+				upperBone: BONE.CHEST,
+				upperWeight: 1,
+				v: 1
+			}
+		], seg, trenchMat, bones.skeleton, castShadow),
+		buildCoatShellSkinnedMesh([{
+			y: 1.29 * s,
+			zOffset: -.004 * s,
+			rx: .068 * s,
+			rz: .066 * s,
+			squareness: .18,
+			arcStart: -Math.PI * .18,
+			arcEnd: Math.PI * 1.18,
+			upperBone: BONE.NECK,
+			upperWeight: .65,
+			v: 0
+		}, {
+			y: 1.38 * s,
+			zOffset: -.005 * s,
+			rx: .072 * s,
+			rz: .07 * s,
+			squareness: .18,
+			arcStart: -Math.PI * .16,
+			arcEnd: Math.PI * 1.16,
+			upperBone: BONE.NECK,
+			upperWeight: .88,
+			v: 1
+		}], seg, trenchMat, bones.skeleton, castShadow),
+		buildSculptedHeadSkinnedMesh(1.52 * s, .15 * s, seg, headMat, bones.skeleton, {
+			jawTaper: .78,
+			faceFlatten: .92,
+			castShadow
+		}),
+		...buildAnatomicalEarsSkinnedMesh(1.515 * s, .15 * s, skinMat, bones.skeleton, castShadow),
+		buildHairCapSkinnedMesh(1.52 * s, .15 * s, seg, hairMat, bones.skeleton, {
+			backDrop: .14,
+			castShadow
+		}),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.045,
+				1.635 * s,
+				.052
+			],
+			[
+				.012,
+				1.612 * s,
+				.128
+			],
+			[
+				.082,
+				1.576 * s,
+				.115
+			]
+		], [
+			.056,
+			.048,
+			.02
+		], [
+			.018,
+			.016,
+			.007
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				-.05,
+				1.628 * s,
+				.05
+			],
+			[
+				-.106,
+				1.572 * s,
+				.092
+			],
+			[
+				-.12,
+				1.505 * s,
+				.065
+			]
+		], [
+			.042,
+			.032,
+			.012
+		], [
+			.014,
+			.011,
+			.005
+		], hairMat, bones.skeleton),
+		buildHairRibbonSkinnedMesh([
+			[
+				0,
+				1.52 * s,
+				-.118
+			],
+			[
+				0,
+				1.44 * s,
+				-.122
+			],
+			[
+				0,
+				1.385 * s,
+				-.088
+			]
+		], [
+			.102,
+			.082,
+			.042
+		], [
+			.018,
+			.014,
+			.007
+		], hairMat, bones.skeleton)
+	];
+	for (const m of meshes) group.add(m);
+	const tieKnot = new Mesh(new BoxGeometry(.03 * s, .028 * s, .018 * s), tieMat);
+	tieKnot.position.set(0, .145 * s, .1 * s);
+	const tieBlade = new Mesh(new BoxGeometry(.032 * s, .195 * s, .012 * s), tieMat);
+	tieBlade.position.set(0, .038 * s, .115 * s);
+	bones.chest.add(tieKnot, tieBlade);
+	const strap = new Mesh(new BoxGeometry(.03 * s, .36 * s, .014 * s), gloveMat);
+	strap.position.set(0, .01 * s, .119 * s);
+	strap.rotation.z = .62;
+	const strapBuckle = new Mesh(new BoxGeometry(.038 * s, .028 * s, .018 * s), metalMat);
+	strapBuckle.position.set(.035 * s, .04 * s, .122 * s);
+	bones.chest.add(strap, strapBuckle);
+	const lShade = new Mesh(new BoxGeometry(.056 * s, .032 * s, .01 * s), shadeMat);
+	lShade.position.set(-.046 * s, .132 * s, .144 * s);
+	const rShade = lShade.clone();
+	rShade.position.x = .046 * s;
+	const shadeBridge = new Mesh(new BoxGeometry(.04 * s, .008 * s, .008 * s), shadeMat);
+	shadeBridge.position.set(0, .14 * s, .144 * s);
+	const earpiece = new Mesh(new BoxGeometry(.014 * s, .026 * s, .016 * s), shadeMat);
+	earpiece.position.set(.145 * s, .115 * s, .008 * s);
+	bones.head.add(lShade, rShade, shadeBridge, earpiece);
+	return {
+		group,
+		bones,
+		textures
+	};
+}
+/**
 * Shared skeletal animator for all seamless humanoids (walking, idle, brewing, seated).
 */
 function animateSeamlessHumanoid(bones, elapsed, delta, options) {
@@ -67925,8 +69956,23 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 			bagColor: 8211501
 		}
 	};
+	const LEGACY_SHOPKEEPER_GUEST_IDS = /* @__PURE__ */ new Set([
+		"tea-master",
+		"spirit-blossom-kindred",
+		"mococo-abyssgard",
+		"diego-body",
+		"cicada-suit-v2"
+	]);
 	const guestHandles = /* @__PURE__ */ new Map();
 	const getOrCreateGuestHandle = (guestId) => {
+		if (LEGACY_SHOPKEEPER_GUEST_IDS.has(guestId)) {
+			const existing = guestHandles.get(guestId);
+			if (existing) return existing;
+			const created = buildLegacyShopkeeperGuest(guestId, compactMode, ultraCompact);
+			guestHandles.set(guestId, created);
+			guestsContainer.add(created.group);
+			return created;
+		}
 		const resolvedId = GUEST_PRESET_CONFIGS[guestId] ? guestId : "som-o";
 		const existing = guestHandles.get(resolvedId);
 		if (existing) return existing;
@@ -68015,6 +70061,10 @@ function createShopCharactersSystem(walnutTex, ceramicTex, compactMode = false, 
 		if (showGuest) {
 			const activeGuest = getOrCreateGuestHandle(guestId);
 			for (const handle of guestHandles.values()) handle.group.visible = handle === activeGuest;
+			if (activeGuest.spiritOrbGroup && !reducedMotion) {
+				activeGuest.spiritOrbGroup.position.y = 1.38 + Math.sin(elapsed * 2.4) * .045;
+				activeGuest.spiritOrbGroup.rotation.y = elapsed * .85;
+			}
 			if (step === "SERVED") customerPhase = "SERVED_ENJOYING";
 			if (customerPhase === "ENTERING") {
 				const wp = CUSTOMER_WAYPOINTS[waypointIdx];
@@ -68475,12 +70525,13 @@ function resolvePixelRatio(settings, isSoftwareGl, liteGpuMode, isUltraLowRam, g
 	const desiredRatio = Math.min(maxCap, Math.max(minFloor, targetShortPx / shortCss));
 	return Math.max(galaxyA10Boost ? .58 : .6, desiredRatio * dynamicScale);
 }
-var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequenceKey, waterLevel, steepSeconds, toppings, isPouring, settings, playerMoveRef, onProximityChange, onBrewAtTableClick, onCustomerEnteredDoor, onCustomerPhaseChange, onKettleClick, onVesselClick }) => {
+var TeaScene3D = import_react.memo(({ tea, step, mode, playerLevel, orderedTeaId = null, guestId, customerSequenceKey, waterLevel, steepSeconds, toppings, isPouring, settings, playerMoveRef, onProximityChange, onBrewAtTableClick, onCustomerEnteredDoor, onCustomerPhaseChange, onKettleClick, onVesselClick, onMenuBoardClick }) => {
 	const mountRef = (0, import_react.useRef)(null);
 	const tableBtnRef = (0, import_react.useRef)(null);
 	const rendererRef = (0, import_react.useRef)(null);
 	const keyLightRef = (0, import_react.useRef)(null);
 	const charactersRef = (0, import_react.useRef)(null);
+	const menuBoardRef = (0, import_react.useRef)(null);
 	const isSoftwareGlRef = (0, import_react.useRef)(false);
 	const shadowDirtyRef = (0, import_react.useRef)(true);
 	const dynamicScaleRef = (0, import_react.useRef)(1);
@@ -68495,6 +70546,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		tea,
 		step,
 		mode,
+		playerLevel,
+		orderedTeaId,
 		guestId,
 		waterLevel,
 		steepSeconds,
@@ -68505,6 +70558,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 	const callbacksRef = (0, import_react.useRef)({
 		onKettleClick,
 		onVesselClick,
+		onMenuBoardClick,
 		onProximityChange,
 		onCustomerEnteredDoor,
 		onCustomerPhaseChange
@@ -68514,6 +70568,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			tea,
 			step,
 			mode,
+			playerLevel,
+			orderedTeaId,
 			guestId,
 			waterLevel,
 			steepSeconds,
@@ -68525,6 +70581,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		tea,
 		step,
 		mode,
+		playerLevel,
+		orderedTeaId,
 		guestId,
 		waterLevel,
 		steepSeconds,
@@ -68536,6 +70594,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		callbacksRef.current = {
 			onKettleClick,
 			onVesselClick,
+			onMenuBoardClick,
 			onProximityChange,
 			onCustomerEnteredDoor,
 			onCustomerPhaseChange
@@ -68543,6 +70602,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 	}, [
 		onKettleClick,
 		onVesselClick,
+		onMenuBoardClick,
 		onProximityChange,
 		onCustomerEnteredDoor,
 		onCustomerPhaseChange
@@ -68557,6 +70617,15 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 	(0, import_react.useEffect)(() => {
 		charactersRef.current?.setPlayerCharacter(settings.playerCharacter);
 	}, [settings.playerCharacter]);
+	(0, import_react.useEffect)(() => {
+		if (!menuBoardRef.current) return;
+		menuBoardRef.current.redraw(getUnlockedTeas(playerLevel), playerLevel, mode === "guest" ? orderedTeaId : null);
+		shadowDirtyRef.current = true;
+	}, [
+		playerLevel,
+		mode,
+		orderedTeaId
+	]);
 	(0, import_react.useEffect)(() => {
 		shadowDirtyRef.current = true;
 	}, [
@@ -68694,6 +70763,9 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		const ceramicTex = createCeramicSpeckleTexture("#EFECE3", "#9D9688", maxAniso, compactAssets, ultraCompactAssets);
 		const shadowTex = createContactShadowTexture(ultraCompactAssets);
 		const steamTex = createSteamPuffTexture(ultraCompactAssets);
+		const menuBoardCanvas = createTeaMenuBoardTexture(maxAniso, compactAssets, ultraCompactAssets);
+		menuBoardCanvas.redraw(getUnlockedTeas(syncRef.current.playerLevel), syncRef.current.playerLevel, syncRef.current.mode === "guest" ? syncRef.current.orderedTeaId : null);
+		menuBoardRef.current = menuBoardCanvas;
 		const disableExtraGlassPass = isSoftwareGl || liteGpuMode || isUltraLowRam;
 		const envGroup = createTeaTableEnvironment(cedarTex, walnutTex, matTex, ceramicTex, shadowTex, compactAssets, ultraCompactAssets);
 		envGroup.traverse((obj) => {
@@ -68701,6 +70773,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			obj.matrixAutoUpdate = false;
 		});
 		scene.add(envGroup);
+		const shopMenuBoard = createShopMenuBoardSystem(walnutTex, shadowTex, menuBoardCanvas.texture, compactAssets);
+		scene.add(shopMenuBoard.root);
 		const shopCharacters = createShopCharactersSystem(walnutTex, ceramicTex, compactAssets, ultraCompactAssets);
 		shopCharacters.setPlayerCharacter(initSettings.playerCharacter);
 		charactersRef.current = shopCharacters;
@@ -68749,7 +70823,11 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			y: 0
 		};
 		const raycaster = new Raycaster();
-		const clickables = [kettle.clickProxy, vessel.clickProxy];
+		const clickables = [
+			kettle.clickProxy,
+			vessel.clickProxy,
+			...shopMenuBoard.clickProxies
+		];
 		const onPointerDown = (e) => {
 			if (activePointerId !== null) return;
 			activePointerId = e.pointerId;
@@ -68765,7 +70843,6 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 		const onPointerUp = (e) => {
 			if (activePointerId === e.pointerId) activePointerId = null;
 			if (Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y) > 8) return;
-			if (syncRef.current.step === "EXPLORE_SHOP") return;
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -68773,6 +70850,11 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			const hits = raycaster.intersectObjects(clickables, false);
 			if (hits.length > 0) {
 				const id = hits[0].object.userData.interactId;
+				if (id === "menu-board") {
+					callbacksRef.current.onMenuBoardClick?.();
+					return;
+				}
+				if (syncRef.current.step === "EXPLORE_SHOP") return;
 				if (id === "kettle") callbacksRef.current.onKettleClick?.();
 				else if (id === "vessel") callbacksRef.current.onVesselClick?.();
 			}
@@ -68799,10 +70881,6 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			if (now - lastHoverCheck < 75) return;
 			lastHoverCheck = now;
 			const curStep = syncRef.current.step;
-			if (curStep === "EXPLORE_SHOP") {
-				renderer.domElement.style.cursor = "grab";
-				return;
-			}
 			const rect = renderer.domElement.getBoundingClientRect();
 			_pointerNdc.x = (e.clientX - rect.left) / rect.width * 2 - 1;
 			_pointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -68811,6 +70889,7 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			let canInteract = false;
 			if (hits.length > 0) {
 				const id = hits[0].object.userData.interactId;
+				if (id === "menu-board") canInteract = true;
 				if (id === "kettle" && curStep === "POUR_WATER") canInteract = true;
 				if (id === "vessel" && curStep === "STEEP_TEA") canInteract = true;
 			}
@@ -69133,6 +71212,8 @@ var TeaScene3D = import_react.memo(({ tea, step, mode, guestId, customerSequence
 			});
 			steamSprites.forEach((s) => s.sprite.material.dispose());
 			shopCharacters.dispose();
+			menuBoardCanvas.texture.dispose();
+			menuBoardRef.current = null;
 			cedarTex.dispose();
 			walnutTex.dispose();
 			matTex.dispose();
@@ -69235,7 +71316,7 @@ function getTeaRewardPreview(tea) {
 		xp: 25 + tierBonus
 	};
 }
-var TeaVesselIcon = import_react.memo(({ tea, locked }) => {
+var TeaVesselIcon = import_react.memo(({ tea, locked = false }) => {
 	const liquid = locked ? "#C5C3B8" : tea.lightColor;
 	const liquidEdge = locked ? "#ABA99E" : tea.richColor;
 	if (tea.id === "matcha-rosetta-latte") {
@@ -69609,7 +71690,7 @@ var TeaVesselIcon = import_react.memo(({ tea, locked }) => {
 		]
 	});
 });
-var MODAL_EASE$1 = [
+var MODAL_EASE$3 = [
 	.16,
 	1,
 	.3,
@@ -69732,7 +71813,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 			},
 			transition: {
 				duration: .24,
-				ease: MODAL_EASE$1
+				ease: MODAL_EASE$3
 			},
 			className: "pointer-events-auto flex w-full max-w-[440px] max-h-[88dvh] flex-col rounded-[24px] border-2 border-[#C5DCBA] bg-[#FDFCF7]/98 shadow-2xl overflow-hidden will-change-transform",
 			style: { contain: "layout style paint" },
@@ -69757,7 +71838,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 							},
 							transition: {
 								duration: .14,
-								ease: MODAL_EASE$1
+								ease: MODAL_EASE$3
 							},
 							className: "font-display text-lg sm:text-xl font-bold text-[#2D6835]",
 							children: activeCat.modalTitle
@@ -69816,7 +71897,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 						},
 						transition: {
 							duration: .18,
-							ease: MODAL_EASE$1
+							ease: MODAL_EASE$3
 						},
 						className: "space-y-2.5 will-change-transform",
 						children: visibleTeas.map((tea) => {
@@ -69839,7 +71920,7 @@ var TeaSelectorModal = import_react.memo(({ playerLevel, selectedTeaId, category
 });
 // src/components/BrewingStation.tsx
 var MAX_STEEP_DISPLAY = 8;
-var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onBrewComplete }) => {
+var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onOpenTeaMenu, onActiveOrderChange, quickBrewRequest, onGuestVisited, onBrewComplete }) => {
 	const [step, setStep] = (0, import_react.useState)("EXPLORE_SHOP");
 	const [selectorOpen, setSelectorOpen] = (0, import_react.useState)(false);
 	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("all");
@@ -69870,21 +71951,91 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 	const steepIntervalRef = (0, import_react.useRef)(null);
 	const arrivalTimerRef = (0, import_react.useRef)(null);
 	const xpInfo = (0, import_react.useMemo)(() => getXpProgress(playerXp), [playerXp]);
+	const unlockedTeas = (0, import_react.useMemo)(() => getUnlockedTeas(playerLevel), [playerLevel]);
+	const lastHandledQuickBrewKeyRef = (0, import_react.useRef)(0);
+	const orderedTeaId = (0, import_react.useMemo)(() => {
+		const primaryId = guestOrder.preferredTeaIds?.[0];
+		const match = primaryId ? TEAS.find((t) => t.id === primaryId) : void 0;
+		if (match && isTeaUnlocked(match, playerLevel)) return match.id;
+		return unlockedTeas[0]?.id ?? TEAS[0].id;
+	}, [
+		guestOrder.preferredTeaIds,
+		playerLevel,
+		unlockedTeas
+	]);
 	const recommendedTeaIds = (0, import_react.useMemo)(() => {
 		if (mode !== "guest") return void 0;
-		if (guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0) return guestOrder.preferredTeaIds;
-		if (guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0) return TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).map((t) => t.id);
-	}, [mode, guestOrder]);
+		return [orderedTeaId];
+	}, [mode, orderedTeaId]);
+	(0, import_react.useEffect)(() => {
+		const orderedTeaObj = guestOrder.preferredTeaIds?.[0] ? TEAS.find((t) => t.id === guestOrder.preferredTeaIds[0]) : void 0;
+		if (!orderedTeaObj || !isTeaUnlocked(orderedTeaObj, playerLevel)) setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
+		if (!isTeaUnlocked(selectedTea, playerLevel)) {
+			setSelectedTea(TEAS[0]);
+			setWaterTemp(TEAS[0].idealTemp);
+		}
+	}, [
+		guestOrder.preferredTeaIds,
+		playerLevel,
+		selectedTea
+	]);
+	(0, import_react.useEffect)(() => {
+		if (!onActiveOrderChange) return;
+		if (mode === "guest") onActiveOrderChange({
+			teaId: orderedTeaId,
+			guestName: guestOrder.guest.name
+		});
+		else onActiveOrderChange(null);
+	}, [
+		mode,
+		orderedTeaId,
+		guestOrder.guest.name,
+		onActiveOrderChange
+	]);
+	(0, import_react.useEffect)(() => {
+		return () => {
+			onActiveOrderChange?.(null);
+		};
+	}, [onActiveOrderChange]);
+	(0, import_react.useEffect)(() => {
+		if (!quickBrewRequest) return;
+		if (quickBrewRequest.requestKey === lastHandledQuickBrewKeyRef.current) return;
+		lastHandledQuickBrewKeyRef.current = quickBrewRequest.requestKey;
+		const tea = quickBrewRequest.tea;
+		if (!isTeaUnlocked(tea, playerLevel)) return;
+		if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
+		if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
+		soundEngine.unlock();
+		soundEngine.playLeafDrop();
+		playerMoveRef.current = {
+			x: 0,
+			y: 0
+		};
+		setIsPouring(false);
+		setWaterLevel(0);
+		setSteepSeconds(0);
+		setToppings([]);
+		setBrewResult(null);
+		setSelectedTea(tea);
+		setWaterTemp(tea.idealTemp);
+		setSelectorOpen(false);
+		setStep("POUR_WATER");
+	}, [quickBrewRequest, playerLevel]);
 	const orderedMenuSummary = (0, import_react.useMemo)(() => {
-		const orderedTeas = guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0 ? TEAS.filter((t) => guestOrder.preferredTeaIds.includes(t.id)) : guestOrder.preferredCategories && guestOrder.preferredCategories.length > 0 ? TEAS.filter((t) => guestOrder.preferredCategories.includes(t.category)).slice(0, 3) : [TEAS[0]];
+		const orderedTea = TEAS.find((t) => t.id === orderedTeaId) ?? unlockedTeas[0] ?? TEAS[0];
 		const orderedToppings = (guestOrder.preferredToppings ?? []).map((id) => TOPPINGS.find((t) => t.id === id)?.name).filter((n) => Boolean(n));
 		const tempLabel = guestOrder.preferredTemp === "iced" ? "เสิร์ฟเย็น (ใส่น้ำแข็ง)" : guestOrder.preferredTemp === "hot" ? "เสิร์ฟร้อน" : "ร้อนหรือเย็นก็ได้";
 		return {
-			teaNames: orderedTeas.map((t) => t.name),
+			teaName: orderedTea.name,
 			toppingNames: orderedToppings,
 			tempLabel
 		};
-	}, [guestOrder]);
+	}, [
+		orderedTeaId,
+		unlockedTeas,
+		guestOrder.preferredToppings,
+		guestOrder.preferredTemp
+	]);
 	const handleOpenBrewingFromTable = (0, import_react.useCallback)(() => {
 		soundEngine.unlock();
 		soundEngine.playTap();
@@ -69902,12 +72053,21 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 	}, []);
 	const handleCustomerEnteredDoor = (0, import_react.useCallback)(() => {
 		soundEngine.playTap();
+		onGuestVisited(guestOrder.guest.id);
 		setArrivalAlertVisible(true);
 		if (arrivalTimerRef.current) window.clearTimeout(arrivalTimerRef.current);
 		arrivalTimerRef.current = window.setTimeout(() => {
 			setArrivalAlertVisible(false);
 		}, 3600);
-	}, []);
+	}, [guestOrder.guest.id, onGuestVisited]);
+	(0, import_react.useEffect)(() => {
+		if (mode === "guest" && customerPhase !== "ENTERING") onGuestVisited(guestOrder.guest.id);
+	}, [
+		mode,
+		customerPhase,
+		guestOrder.guest.id,
+		onGuestVisited
+	]);
 	(0, import_react.useEffect)(() => {
 		const syncKeyboardVector = () => {
 			if (joystickPointerIdRef.current !== null) return;
@@ -70181,7 +72341,7 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 		};
 		setBrewResult(result);
 		setStep("SERVED");
-		onBrewComplete(journalRecord, warmthEarned, xpEarned);
+		onBrewComplete(journalRecord, warmthEarned, xpEarned, mode === "guest" ? guestOrder.guest.id : void 0);
 	};
 	const handleResetCup = (advanceGuest = true, backToShop = true) => {
 		soundEngine.playTap();
@@ -70228,6 +72388,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 					tea: selectedTea,
 					step,
 					mode,
+					playerLevel,
+					orderedTeaId: mode === "guest" ? orderedTeaId : null,
 					guestId: guestOrder.guest.id,
 					customerSequenceKey,
 					waterLevel,
@@ -70241,7 +72403,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 					onCustomerEnteredDoor: handleCustomerEnteredDoor,
 					onCustomerPhaseChange: setCustomerPhase,
 					onKettleClick: handlePourWater,
-					onVesselClick: handleFinishSteep
+					onVesselClick: handleFinishSteep,
+					onMenuBoardClick: onOpenTeaMenu
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: mode === "guest" && arrivalAlertVisible && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
@@ -70277,78 +72440,81 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "pointer-events-auto flex flex-col items-start gap-1 max-w-[245px] sm:max-w-[270px]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "min-w-0",
+					className: "pointer-events-auto flex flex-col items-start gap-1 max-w-[330px] sm:max-w-[360px]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex flex-wrap items-center gap-1.5",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-baseline gap-1",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap",
-										children: ["Lv.", xpInfo.level]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate",
-										children: xpInfo.title
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap",
-										children: xpInfo.nextLevelXp !== null ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}` : "MAX"
+								className: "min-w-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-baseline gap-1",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+											className: "font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap",
+											children: ["Lv.", xpInfo.level]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate",
+											children: xpInfo.title
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap",
+											children: xpInfo.nextLevelXp !== null ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}` : "MAX"
+										})
+									]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+										className: "h-full w-full origin-left rounded-full bg-[#2E6F40]",
+										animate: { scaleX: Math.max(.02, xpInfo.progressRatio) },
+										transition: {
+											duration: .35,
+											ease: [
+												.16,
+												1,
+												.3,
+												1
+											]
+										}
 									})
-								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-									className: "h-full w-full origin-left rounded-full bg-[#2E6F40]",
-									animate: { scaleX: Math.max(.02, xpInfo.progressRatio) },
-									transition: {
-										duration: .35,
-										ease: [
-											.16,
-											1,
-											.3,
-											1
-										]
-									}
-								})
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5",
-							children: [{
-								id: "guest",
-								label: "รับรองแขก"
-							}, {
-								id: "free",
-								label: "ชงตามใจ"
-							}].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-								type: "button",
-								whileTap: { scale: .94 },
-								onClick: () => {
-									soundEngine.unlock();
-									soundEngine.playTap();
-									onModeChange(m.id);
-									if (m.id === "guest") {
-										setCustomerPhase("ENTERING");
-										setCustomerSequenceKey((k) => k + 1);
-									}
-								},
-								className: "relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0",
-								children: [mode === m.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-									layoutId: "hud-mode-pill",
-									transition: {
-										type: "spring",
-										stiffness: 420,
-										damping: 30
-									},
-									className: "absolute inset-0 rounded-md bg-white shadow-xs"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `relative z-10 ${mode === m.id ? "text-[#1F2823]" : "text-[#4A534D]"}`,
-									children: m.label
 								})]
-							}, m.id))
-						})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5",
+								children: [{
+									id: "guest",
+									label: "รับรองแขก"
+								}, {
+									id: "free",
+									label: "ชงตามใจ"
+								}].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .94 },
+									onClick: () => {
+										soundEngine.unlock();
+										soundEngine.playTap();
+										onModeChange(m.id);
+										if (m.id === "guest") {
+											setCustomerPhase("ENTERING");
+											setCustomerSequenceKey((k) => k + 1);
+										}
+									},
+									className: "relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0",
+									children: [mode === m.id && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+										layoutId: "hud-mode-pill",
+										transition: {
+											type: "spring",
+											stiffness: 420,
+											damping: 30
+										},
+										className: "absolute inset-0 rounded-md bg-white shadow-xs"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: `relative z-10 ${mode === m.id ? "text-[#1F2823]" : "text-[#4A534D]"}`,
+										children: m.label
+									})]
+								}, m.id))
+							})]
+						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
 						mode: "wait",
 						children: mode === "guest" && customerPhase !== "ENTERING" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
@@ -70419,8 +72585,8 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "border-t border-[#1F2823]/8 pt-1 text-[10px] leading-tight text-[#224B2B]",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "font-medium text-[#2E6F40] line-clamp-1",
-									children: ["สั่ง: ", orderedMenuSummary.teaNames.join(" / ")]
+									className: "font-semibold text-[#2E6F40] line-clamp-1",
+									children: ["สั่ง: ", orderedMenuSummary.teaName]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 									className: "text-[#4A534D] truncate",
 									children: [orderedMenuSummary.tempLabel, orderedMenuSummary.toppingNames.length > 0 ? ` · เพิ่ม: ${orderedMenuSummary.toppingNames.join(", ")}` : ""]
@@ -70989,8 +73155,38 @@ var BrewingStation = ({ playerXp, playerLevel, mode, onModeChange, settings, onB
 	});
 };
 // src/data/changelog.ts
-var CURRENT_APP_VERSION = "2.14.0";
+var CURRENT_APP_VERSION = "3.0.0";
+var OLDEST_APP_VERSION = "1.0.0";
 var VERSION_HISTORY = [
+	{
+		version: "3.0.0",
+		previousVersion: "2.14.0",
+		releaseDate: "28 พ.ย. 2026",
+		releaseTitle: "ยกเครื่องใหญ่เวอร์ชั่น 3.0.0 — ป้ายเมนูชา 3 มิติ, ลูกค้า 17 ตัวละคร & หน้าเปรียบเทียบเวอร์ชั่นเก่าที่สุด",
+		summary: "ก้าวสู่เวอร์ชั่น 3.0.0 เต็มรูปแบบ เพิ่มป้ายเมนูชา 3 มิติทั้งบนเคาน์เตอร์และผนังร้านพร้อมหน้าต่างป้ายเมนูที่แสดงเฉพาะชาที่ปลดล็อคแล้ว ปรับลูกค้าสั่งชาเพียง 1 เมนูจากรายการที่ชงได้จริง ขยายลูกค้าเป็น 17 ตัวละครพร้อมสมุดลูกค้าแบบเผยรูป-ปริศนา เพิ่มเพลง Just the Two of Us และระบบตัดเสียงอัตโนมัติเมื่อปิดแอปมือถือ พร้อมหน้าเปรียบเทียบกับเวอร์ชั่นเก่าที่สุด v1.0.0",
+		changes: [
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "ป้ายเมนูชาประจำร้าน 3 มิติ & ลูกค้าสั่ง 1 เมนูเฉพาะชาที่ปลดล็อคแล้ว",
+				detail: "เพิ่มป้ายเมนูชาไม้ 3 มิติตั้งโต๊ะเคาน์เตอร์และติดผนังร้านที่อัปเดตเมนูแบบเรียลไทม์ แสดงเฉพาะชาที่ปลดล็อคและชงได้แล้ว พร้อมให้ลูกค้าทุกคนเลือกสั่งเพียง 1 เมนูจากรายการบนป้ายเมนู"
+			},
+			{
+				category: "ภาพและ 3 มิติ",
+				title: "เพิ่มลูกค้า 17 ตัวละครหลากหลายสไตล์ & สมุดลูกค้าเผยรูป/ปริศนา",
+				detail: "ขยายรายชื่อลูกค้าเป็น 17 ตัวละครรวมถึงโมเดลเจ้าของร้านเดิม เพิ่มปุ่มดูสมุดลูกค้าที่เคยมาและยังไม่เคยมาร้าน โดยเปิดเผยภาพผู้เคยมาเยือนและปิดรูปปริศนาสำหรับผู้ที่ยังไม่เคยมา"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "เพลง “Just the Two of Us” (Grover Washington, Jr.) & ระบบร้องขอผู้สร้าง",
+				detail: "ใส่ไฟล์เพลง Just the Two of Us เป็นเพลงอันดับ 1 ของเกม พร้อมระบบตัดเสียงทันทีเมื่อปิด/ออกจากแอปบนมือถือ และเพิ่มหน้าร้องขอถึงผู้สร้างผ่าน Gmail (pppu13610@gmail.com) และ GitHub (pppu13610-glitch)"
+			},
+			{
+				category: "ฟีเจอร์ใหม่",
+				title: "หน้าเปรียบเทียบเวอร์ชั่นปัจจุบัน (v3.0.0) กับเวอร์ชั่นเก่าที่สุด (v1.0.0)",
+				detail: "ดูความแตกต่างทุกด้านตั้งแต่วันแรกที่เปิดตัว v1.0.0 จนถึง v3.0.0 ทั้งฉาก 3 มิติ จำนวนชา ลูกค้า เสียงเพลง และประสิทธิภาพมือถือได้ครบในหน้าเดียว"
+			}
+		]
+	},
 	{
 		version: "2.14.0",
 		previousVersion: "2.13.0",
@@ -71380,6 +73576,50 @@ var VERSION_HISTORY = [
 			title: "รองรับการเล่นแบบออฟไลน์และ PWA",
 			detail: "บันทึกความก้าวหน้าในเครื่องอัตโนมัติ พร้อมเสียงน้ำริน เสียงฝน และเสียงลมสวนไผ่แบบสังเคราะห์ไม่ต้องใช้อินเทอร์เน็ต"
 		}]
+	}
+];
+var VERSION_1_TO_3_COMPARISONS = [
+	{
+		area: "ภาพและ 3 มิติ",
+		aspect: "ฉากร้านและมุมมองการเล่น",
+		oldestText: "หน้าต่างชงชา 2D แบบแบน ภาพนิ่งบนโต๊ะเดียว",
+		latestText: "เรือนชาไม้ 3 มิติเต็มร้าน (Three.js) เดินสำรวจรอบร้านมุมมองบุคคลที่ 3 และชงชาที่โต๊ะในมุมมองบุคคลที่ 1",
+		impactNote: "อัปเกรดจาก 2D เป็นโลก 3D เต็มรูปแบบ"
+	},
+	{
+		area: "ภาพและ 3 มิติ",
+		aspect: "ตัวละครผู้เล่นและลูกค้า 3 มิติ",
+		oldestText: "ยังไม่มีตัวละคร 3 มิติและลูกค้าเดินเข้าร้าน",
+		latestText: "ตัวละครผู้เล่น 3 มิติแบบ SkinnedMesh ไร้ข้อต่อเลือกได้หลายสไตล์ + ลูกค้า 17 ตัวละครเดินเข้าประตูร้านมานั่งสั่งชา",
+		impactNote: "เพิ่มจาก 0 เป็น 17 ตัวละครลูกค้า + ระบบสมุดลูกค้าเผยรูป/ปริศนา"
+	},
+	{
+		area: "เมนูชาและสูตร",
+		aspect: "รายการใบชา ท็อปปิ้ง และอุปกรณ์ชง",
+		oldestText: "ใบชาพื้นฐาน 9 ชนิด อุปกรณ์มาตรฐาน และท็อปปิ้งเริ่มต้นไม่กี่อย่าง",
+		latestText: "ใบชาปลดล็อก 27 เมนูไม่ซ้ำ อุปกรณ์ 3 มิติเฉพาะสูตร 6 ชุด และท็อปปิ้ง 10 ชนิดที่ลอยเปลี่ยนสีในถ้วยจริง",
+		impactNote: "เมนูชาเพิ่มขึ้น +18 เมนู พร้อมป้ายเมนู 3 มิติในร้าน"
+	},
+	{
+		area: "ฟีเจอร์ใหม่",
+		aspect: "ระบบรับออเดอร์และป้ายเมนูชา",
+		oldestText: "กดเลือกชาชงเองตามลำดับ ไม่มีป้ายเมนูร้านให้ลูกค้าดู",
+		latestText: "มีป้ายเมนู 3 มิติตั้งโต๊ะและติดผนังแสดงเฉพาะชาที่ปลดล็อคแล้ว ลูกค้าสั่งตรง 1 เมนูจากป้ายเมนูได้ทันที",
+		impactNote: "ชัดเจน สอดคล้องกับระดับร้านและสูตรที่ชงได้จริง"
+	},
+	{
+		area: "ฟีเจอร์ใหม่",
+		aspect: "เสียงเพลง ดนตรีประกอบ และเสียงบรรยากาศ",
+		oldestText: "เสียงน้ำริน ฝนตก และลมสวนไผ่แบบสังเคราะห์เบื้องต้น",
+		latestText: "เพลงประกอบ 5 แทร็ก (นำโดย Just the Two of Us และ Smoke in the Glass) + ปรับระดับเสียงแยก 4 ช่อง + ตัดเสียงอัตโนมัติเมื่อปิดแอปมือถือ",
+		impactNote: "เพิ่มเพลงจริง 5 เพลงและควบคุมเสียงระดับแอปมือถือ"
+	},
+	{
+		area: "ประสิทธิภาพ",
+		aspect: "แพลตฟอร์ม ความลื่นไหล และการจัดการแอปมือถือ",
+		oldestText: "เว็บแอป PWA พื้นฐาน ไม่มีตัวปรับสเปกเครื่อง",
+		latestText: "รองรับทั้งเว็บ PWA และแอป Android (APK) เต็มจอ 100%, รีเฟรชเรทสูงสุด 120 FPS, โปรไฟล์จูนเฉพาะ realme Note 50 / Galaxy A10 / RAM 2 GB และหน้าร้องขอผู้สร้าง (Gmail/GitHub)",
+		impactNote: "พัฒนาต่อเนื่องรวม 16 เวอร์ชั่นจาก v1.0.0 ถึง v3.0.0"
 	}
 ];
 // node_modules/@capacitor/core/dist/index.js
@@ -72113,7 +74353,7 @@ var PWAInstallButton = ({ compact }) => {
 	return null;
 };
 // src/components/CornerMenu.tsx
-var TAP_SPRING$6 = {
+var TAP_SPRING$8 = {
 	type: "spring",
 	stiffness: 440,
 	damping: 28
@@ -72127,7 +74367,7 @@ var DRAWER_TRANSITION = {
 		1
 	]
 };
-var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, onOpenRequest, updateAvailable = false, latestBrowserVersion = null }) => {
+var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen, onToggleFullscreen, onNavigate, onOpenSettings, onOpenUpdates, onOpenRequest, onOpenGuestBook, onOpenTeaMenu, visitedGuestCount, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [open, setOpen] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
 	const unlockedCount = getUnlockedTeas(level).length;
@@ -72156,7 +74396,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 		type: "button",
 		onClick: handleToggleOpen,
 		whileTap: { scale: .92 },
-		transition: TAP_SPRING$6,
+		transition: TAP_SPRING$8,
 		"aria-label": "เปิดเมนู",
 		"aria-expanded": open,
 		style: { right: "max(0.75rem, env(safe-area-inset-right))" },
@@ -72216,7 +74456,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					type: "button",
 					onClick: handleClose,
 					whileTap: { scale: .92 },
-					transition: TAP_SPRING$6,
+					transition: TAP_SPRING$8,
 					"aria-label": "ปิดเมนู",
 					className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] hover:text-[#1F2823]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
@@ -72236,7 +74476,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$6,
+							transition: TAP_SPRING$8,
 							onClick: () => go("TITLE_MENU"),
 							className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "TITLE_MENU" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(House, {
@@ -72246,7 +74486,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$6,
+							transition: TAP_SPRING$8,
 							onClick: () => go("BREWING"),
 							className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "BREWING" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
@@ -72257,33 +74497,84 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					})] }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "border-t border-[#1F2823]/10 pt-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-xs font-semibold text-[#5A655D] mb-2",
-							children: "สมุดชงชาและวิธีชง"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "grid grid-cols-2 gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "text-xs font-semibold text-[#5A655D] mb-2",
+								children: "สมุดชงชาและวิธีชง"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "grid grid-cols-2 gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .96 },
+									transition: TAP_SPRING$8,
+									onClick: () => go("JOURNAL"),
+									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "JOURNAL" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
+										className: "h-4 w-4 text-[#2E6F40] shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชงชา" })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+									type: "button",
+									whileTap: { scale: .96 },
+									transition: TAP_SPRING$8,
+									onClick: () => go("HOW_TO_PLAY"),
+									className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "HOW_TO_PLAY" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
+										className: "h-4 w-4 text-[#7D5A3C] shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
-								onClick: () => go("JOURNAL"),
-								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "JOURNAL" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
-									className: "h-4 w-4 text-[#2E6F40] shrink-0",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดชงชา" })]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								transition: TAP_SPRING$8,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									setOpen(false);
+									onOpenTeaMenu();
+								},
+								className: "mt-2 flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#C8A66A]/45 bg-[#FAF6EC] px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3EDE0]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollText, {
+										className: "h-4 w-4 text-[#9B6B2F] shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ป้ายเมนูชาประจำร้าน" })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "font-mono-num text-xs font-semibold text-[#2E6F40]",
+									children: [unlockedCount, " เมนู"]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
-								onClick: () => go("HOW_TO_PLAY"),
-								className: `flex min-h-[46px] items-center gap-2 rounded-xl border px-3 text-xs sm:text-sm font-medium ${screen === "HOW_TO_PLAY" ? "border-[#2E6F40] bg-[#E8F1E8] text-[#1F2823]" : "border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#F3F0E8]"}`,
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
-									className: "h-4 w-4 text-[#7D5A3C] shrink-0",
-									"aria-hidden": "true"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
-							})]
-						})]
+								transition: TAP_SPRING$8,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									setOpen(false);
+									onOpenGuestBook();
+								},
+								className: "mt-2 flex min-h-[46px] w-full items-center justify-between gap-2 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#F3F0E8]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
+										className: "h-4 w-4 text-[#2E6F40] shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "สมุดลูกค้าประจำร้าน" })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "font-mono-num text-xs font-semibold text-[#2E6F40]",
+									children: [
+										visitedGuestCount,
+										"/",
+										GUESTS.length
+									]
+								})]
+							})
+						]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 						className: "text-xs font-semibold text-[#5A655D] mb-2",
@@ -72293,7 +74584,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$6,
+							transition: TAP_SPRING$8,
 							onClick: () => {
 								soundEngine.unlock();
 								soundEngine.playTap();
@@ -72307,7 +74598,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 							type: "button",
 							whileTap: { scale: .96 },
-							transition: TAP_SPRING$6,
+							transition: TAP_SPRING$8,
 							onClick: () => {
 								soundEngine.unlock();
 								soundEngine.playTap();
@@ -72333,7 +74624,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 								type: "button",
 								whileTap: { scale: .95 },
-								transition: TAP_SPRING$6,
+								transition: TAP_SPRING$8,
 								onClick: () => {
 									soundEngine.unlock();
 									onToggleMute();
@@ -72402,7 +74693,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 						type: "button",
 						whileTap: { scale: .96 },
-						transition: TAP_SPRING$6,
+						transition: TAP_SPRING$8,
 						onClick: () => {
 							soundEngine.playTap();
 							onToggleFullscreen();
@@ -72429,7 +74720,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
+								transition: TAP_SPRING$8,
 								onClick: () => {
 									soundEngine.unlock();
 									soundEngine.playTap();
@@ -72452,7 +74743,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 											children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่ v${latestBrowserVersion}` : "เช็คอัปเดตเวอร์ชั่น"
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 											className: "block text-[11px] text-[#5A655D] truncate",
-											children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v2.14.0 · ดูสิ่งที่เพิ่มใหม่`
+											children: updateAvailable ? "แตะเพื่ออัปเดตให้ตรงกับ Browser ทันที" : `เวอร์ชั่น v3.0.0 · ดูสิ่งที่เพิ่มใหม่`
 										})]
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
@@ -72463,7 +74754,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
+								transition: TAP_SPRING$8,
 								onClick: () => {
 									soundEngine.unlock();
 									soundEngine.playTap();
@@ -72497,7 +74788,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
+								transition: TAP_SPRING$8,
 								onClick: () => {
 									soundEngine.unlock();
 									soundEngine.playTap();
@@ -72531,7 +74822,7 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 							isNativeMobileApp() && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 								type: "button",
 								whileTap: { scale: .96 },
-								transition: TAP_SPRING$6,
+								transition: TAP_SPRING$8,
 								onClick: () => {
 									setOpen(false);
 									exitAppCompletely();
@@ -72549,8 +74840,405 @@ var CornerMenu = import_react.memo(({ screen, xp, level, mode, onModeChange, amb
 		})
 	}) })] });
 });
+// src/components/GuestBookModal.tsx
+var TAP_SPRING$7 = {
+	type: "spring",
+	stiffness: 420,
+	damping: 26
+};
+var MODAL_EASE$2 = [
+	.16,
+	1,
+	.3,
+	1
+];
+var MysterySilhouetteCardArt = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+	className: "relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-b from-[#DFDDD4] via-[#CFCBC0] to-[#BFBAA9] select-none",
+	"aria-hidden": "true",
+	children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+			viewBox: "0 0 160 160",
+			className: "absolute inset-0 h-full w-full text-[#1F2823]/10",
+			fill: "none",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				d: "M40 0V160M80 0V160M120 0V160M0 40H160M0 80H160M0 120H160",
+				stroke: "currentColor",
+				strokeWidth: "1"
+			})
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			viewBox: "0 0 160 160",
+			className: "relative h-[86%] w-[86%] text-[#3A433D]/55",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "80",
+				cy: "56",
+				r: "24"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M36 144c0-25 19.7-44 44-44s44 19 44 44H36z" })]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "absolute inset-0 flex items-center justify-center",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "font-display text-4xl sm:text-5xl font-bold text-[#FAF8F3] drop-shadow-[0_2px_6px_rgba(31,40,35,0.45)]",
+				children: "?"
+			})
+		})
+	]
+});
+var GuestBookModal = ({ visitedGuestIds, history, onClose }) => {
+	const [filter, setFilter] = (0, import_react.useState)("all");
+	const [selectedGuest, setSelectedGuest] = (0, import_react.useState)(null);
+	const [portraitFailed, setPortraitFailed] = (0, import_react.useState)({});
+	const [lockedHintId, setLockedHintId] = (0, import_react.useState)(null);
+	const visitedSet = (0, import_react.useMemo)(() => new Set(visitedGuestIds), [visitedGuestIds]);
+	const servedCountByName = (0, import_react.useMemo)(() => {
+		const counts = {};
+		for (const item of history) if (item.guestName) counts[item.guestName] = (counts[item.guestName] ?? 0) + 1;
+		return counts;
+	}, [history]);
+	const visitedCount = (0, import_react.useMemo)(() => GUESTS.filter((g) => visitedSet.has(g.id)).length, [visitedSet]);
+	const unvisitedCount = GUESTS.length - visitedCount;
+	const filteredGuests = (0, import_react.useMemo)(() => {
+		if (filter === "visited") return GUESTS.filter((g) => visitedSet.has(g.id));
+		if (filter === "unvisited") return GUESTS.filter((g) => !visitedSet.has(g.id));
+		return [...GUESTS].sort((a, b) => {
+			return (visitedSet.has(a.id) ? 0 : 1) - (visitedSet.has(b.id) ? 0 : 1);
+		});
+	}, [filter, visitedSet]);
+	(0, import_react.useEffect)(() => {
+		const handleKeyDown = (e) => {
+			if (e.key === "Escape") {
+				if (selectedGuest) setSelectedGuest(null);
+				else onClose();
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [onClose, selectedGuest]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		initial: { opacity: 0 },
+		animate: { opacity: 1 },
+		exit: { opacity: 0 },
+		transition: {
+			duration: .16,
+			ease: "easeOut"
+		},
+		className: "fixed inset-0 z-50 flex items-center justify-center bg-black/58 p-3 sm:p-5",
+		onClick: () => {
+			soundEngine.playTap();
+			onClose();
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+			role: "dialog",
+			"aria-modal": "true",
+			"aria-labelledby": "guest-book-heading",
+			initial: {
+				opacity: 0,
+				scale: .96,
+				y: 12
+			},
+			animate: {
+				opacity: 1,
+				scale: 1,
+				y: 0
+			},
+			exit: {
+				opacity: 0,
+				scale: .96,
+				y: 8
+			},
+			transition: {
+				duration: .2,
+				ease: MODAL_EASE$2
+			},
+			onClick: (e) => e.stopPropagation(),
+			style: { contain: "layout style paint" },
+			className: "flex w-full max-w-4xl max-h-[92dvh] flex-col overflow-hidden rounded-2xl border border-[#1F2823]/15 bg-[#FAF8F3] text-[#1F2823] shadow-2xl will-change-transform",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-start justify-between gap-4 border-b border-[#1F2823]/10 px-4 py-3.5 sm:px-6 sm:py-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-3 min-w-0",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F1E8] text-[#2E6F40] shrink-0",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
+								className: "h-5 w-5",
+								"aria-hidden": "true"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "min-w-0",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								id: "guest-book-heading",
+								className: "font-display text-lg sm:text-xl font-semibold text-[#1F2823] truncate",
+								children: "สมุดแขกประจำเรือนชา"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "mt-0.5 text-xs text-[#5A655D]",
+								children: [
+									"เคยมาแล้ว",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "font-mono-num font-semibold text-[#2E6F40]",
+										children: [
+											visitedCount,
+											"/",
+											GUESTS.length
+										]
+									}),
+									" ",
+									"คน · ยังไม่เคยมา",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono-num font-semibold text-[#4A534D]",
+										children: unvisitedCount
+									}),
+									" ",
+									"คน"
+								]
+							})]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+						type: "button",
+						whileHover: { scale: 1.07 },
+						whileTap: { scale: .9 },
+						transition: TAP_SPRING$7,
+						onClick: () => {
+							soundEngine.playTap();
+							onClose();
+						},
+						"aria-label": "ปิดสมุดแขกประจำเรือนชา",
+						className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] hover:text-[#1F2823] shrink-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+							className: "h-5 w-5",
+							"aria-hidden": "true"
+						})
+					})]
+				}),
+				!selectedGuest && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex flex-wrap items-center justify-between gap-2 border-b border-[#1F2823]/8 bg-[#F4F1EA] px-4 py-2.5 sm:px-6",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex items-center gap-1 rounded-lg bg-[#E6E2D8] p-1",
+						role: "tablist",
+						"aria-label": "กรองรายชื่อลูกค้า",
+						children: [
+							{
+								id: "all",
+								label: `ทั้งหมด (${GUESTS.length})`
+							},
+							{
+								id: "visited",
+								label: `เคยมาแล้ว (${visitedCount})`
+							},
+							{
+								id: "unvisited",
+								label: `ยังไม่เคยมา (${unvisitedCount})`
+							}
+						].map((tab) => {
+							const active = filter === tab.id;
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								type: "button",
+								role: "tab",
+								"aria-selected": active,
+								onClick: () => {
+									soundEngine.playTap();
+									setFilter(tab.id);
+								},
+								className: `min-h-[38px] rounded-md px-3 text-xs font-medium whitespace-nowrap shrink-0 transition-colors ${active ? "bg-white text-[#1F2823] shadow-xs" : "text-[#4A534D] hover:text-[#1F2823]"}`,
+								children: tab.label
+							}, tab.id);
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-[11px] text-[#5A655D]",
+						children: "ลูกค้าที่เข้ามาในโหมดรับรองแขกจะเปิดเผยใบหน้าอัตโนมัติ"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex-1 overflow-y-auto p-4 sm:p-6",
+					children: selectedGuest ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "space-y-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							onClick: () => {
+								soundEngine.playTap();
+								setSelectedGuest(null);
+							},
+							className: "inline-flex min-h-[42px] items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-white px-3.5 text-xs sm:text-sm font-medium text-[#1F2823] hover:bg-[#EFECE4]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, {
+								className: "h-4 w-4",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "กลับไปหน้ารายชื่อทั้งหมด" })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "grid grid-cols-1 sm:grid-cols-[240px_1fr] gap-5 items-start rounded-2xl border border-[#1F2823]/12 bg-white p-4 sm:p-5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "aspect-square w-full overflow-hidden rounded-xl border border-[#1F2823]/10 flex items-center justify-center font-display text-4xl font-semibold text-[#1F2823]",
+								style: { backgroundColor: selectedGuest.accentBg },
+								children: !portraitFailed[selectedGuest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: selectedGuest.portraitUrl,
+									alt: selectedGuest.name,
+									referrerPolicy: "no-referrer",
+									onError: () => setPortraitFailed((prev) => ({
+										...prev,
+										[selectedGuest.id]: true
+									})),
+									className: "h-full w-full object-cover"
+								}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: selectedGuest.fallbackInitial })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "space-y-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-1.5 text-xs font-medium text-[#2E6F40]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											className: "h-4 w-4 shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "เปิดเผยข้อมูลแล้ว · เคยแวะมาเยือนเรือนชา" })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "mt-1 font-display text-2xl font-semibold text-[#1F2823]",
+										children: selectedGuest.name
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-sm text-[#5A655D]",
+										children: selectedGuest.role
+									})
+								] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "border-t border-[#1F2823]/10 pt-3 text-xs sm:text-sm text-[#39423C] space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
+										"จำนวนถ้วยที่เคยชงให้:",
+										" ",
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "font-mono-num font-semibold text-[#1F2823]",
+											children: servedCountByName[selectedGuest.name] ?? 0
+										}),
+										" ",
+										"ถ้วย"
+									] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "text-xs text-[#5A655D]",
+										children: [
+											"สามารถต้อนรับและชงชาให้คุณ",
+											selectedGuest.name.replace(/^คุณ/, ""),
+											"ได้อีกครั้งในโหมดรับรองแขก"
+										]
+									})]
+								})]
+							})]
+						})]
+					}) : filteredGuests.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "rounded-xl border border-[#1F2823]/10 bg-white p-8 text-center",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-sm text-[#4A534D]",
+							children: filter === "visited" ? "ยังไม่มีลูกค้าที่เคยมาร้านเลย ลองเปิดร้านในโหมดรับรองแขกเพื่อต้อนรับแขกคนแรกดูสิ" : "ยอดเยี่ยมมาก! คุณได้พบและเปิดเผยใบหน้าลูกค้าครบทุกคนแล้ว"
+						})
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3",
+						children: filteredGuests.map((guest) => {
+							const isVisited = visitedSet.has(guest.id);
+							const servedCount = servedCountByName[guest.name] ?? 0;
+							const showingHint = lockedHintId === guest.id;
+							if (isVisited) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileHover: { y: -2 },
+								whileTap: { scale: .97 },
+								transition: TAP_SPRING$7,
+								onClick: () => {
+									soundEngine.playTap();
+									setSelectedGuest(guest);
+								},
+								className: "group flex flex-col overflow-hidden rounded-xl border border-[#1F2823]/12 bg-white text-left shadow-2xs hover:border-[#2E6F40]/45 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "relative aspect-square w-full overflow-hidden border-b border-[#1F2823]/8 flex items-center justify-center font-display text-2xl font-semibold text-[#1F2823]",
+									style: { backgroundColor: guest.accentBg },
+									children: !portraitFailed[guest.id] ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: guest.portraitUrl,
+										alt: guest.name,
+										referrerPolicy: "no-referrer",
+										loading: "lazy",
+										onError: () => setPortraitFailed((prev) => ({
+											...prev,
+											[guest.id]: true
+										})),
+										className: "h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: guest.fallbackInitial })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex flex-1 flex-col justify-between p-2.5 sm:p-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "font-display text-sm font-semibold text-[#1F2823] truncate",
+										children: guest.name
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-0.5 text-[11px] text-[#5A655D] line-clamp-1",
+										children: guest.role
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "mt-2 flex items-center gap-1 text-[11px] font-medium text-[#2E6F40]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+											className: "h-3.5 w-3.5 shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "truncate font-mono-num",
+											children: servedCount > 0 ? `เคยมา · ชงให้ ${servedCount} แก้ว` : "เคยมาร้านแล้ว"
+										})]
+									})]
+								})]
+							}, guest.id);
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .97 },
+								transition: TAP_SPRING$7,
+								onClick: () => {
+									soundEngine.playTap();
+									setLockedHintId((prev) => prev === guest.id ? null : guest.id);
+								},
+								"aria-label": "ลูกค้าปริศนา ยังไม่เคยมาร้าน",
+								className: "flex flex-col overflow-hidden rounded-xl border border-[#1F2823]/12 bg-[#ECE9E0] text-left opacity-92 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E6F40]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "relative aspect-square w-full overflow-hidden border-b border-[#1F2823]/10",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MysterySilhouetteCardArt, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "absolute top-2 right-2 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#1F2823]/75 text-[#FAF8F3]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, {
+											className: "h-3.5 w-3.5",
+											"aria-hidden": "true"
+										})
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex flex-1 flex-col justify-between p-2.5 sm:p-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "font-display text-sm font-semibold text-[#39423C]",
+										children: "ลูกค้าปริศนา"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-0.5 text-[11px] text-[#636C65] line-clamp-2",
+										children: showingHint ? "เปิดโหมดรับรองแขกเพื่อรอต้อนรับลูกค้าคนนี้" : "ปิดผนึก · ยังไม่เคยมาร้าน"
+									})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+										className: "mt-2 flex items-center gap-1 text-[11px] font-medium text-[#5A655D]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, {
+											className: "h-3 w-3 shrink-0",
+											"aria-hidden": "true"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "รอการพบเจอ" })]
+									})]
+								})]
+							}, guest.id);
+						})
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: lockedHintId && !selectedGuest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					initial: {
+						opacity: 0,
+						y: 6
+					},
+					animate: {
+						opacity: 1,
+						y: 0
+					},
+					exit: {
+						opacity: 0,
+						y: 6
+					},
+					transition: { duration: .16 },
+					className: "border-t border-[#1F2823]/10 bg-[#F4F1EA] px-4 py-2 text-center text-xs text-[#4A534D]",
+					children: "เมื่อลูกค้าใหม่เดินผ่านประตูเข้ามาในโหมดรับรองแขก ระบบจะบันทึกและเปิดเผยรูปภาพอัตโนมัติ"
+				}) })
+			]
+		})
+	});
+};
 // src/components/HowToPlay.tsx
-var TAP_SPRING$5 = {
+var TAP_SPRING$6 = {
 	type: "spring",
 	stiffness: 420,
 	damping: 24
@@ -72571,7 +75259,7 @@ var HowToPlay = ({ onStartBrewing }) => {
 					type: "button",
 					whileHover: { scale: 1.03 },
 					whileTap: { scale: .94 },
-					transition: TAP_SPRING$5,
+					transition: TAP_SPRING$6,
 					onClick: onStartBrewing,
 					className: "min-h-[44px] rounded-xl bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732] whitespace-nowrap shrink-0",
 					children: "กลับไปชงชา"
@@ -73032,7 +75720,7 @@ var REQUEST_CATEGORIES = [
 		label: "กำหนดประเภทเอง"
 	}
 ];
-var TAP_SPRING$4 = {
+var TAP_SPRING$5 = {
 	type: "spring",
 	stiffness: 430,
 	damping: 26
@@ -73159,7 +75847,7 @@ var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
 							onClose();
 						},
 						whileTap: { scale: .92 },
-						transition: TAP_SPRING$4,
+						transition: TAP_SPRING$5,
 						"aria-label": "ย้อนกลับ",
 						className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#1F2823] hover:bg-[#EFECE4] shrink-0",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, {
@@ -73190,7 +75878,7 @@ var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
 						onClose();
 					},
 					whileTap: { scale: .92 },
-					transition: TAP_SPRING$4,
+					transition: TAP_SPRING$5,
 					"aria-label": "ปิดหน้าร้องขอ",
 					className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#1F2823]/12 bg-white text-[#4A534D] hover:bg-[#EFECE4] shrink-0",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
@@ -73242,7 +75930,7 @@ var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 								type: "button",
 								whileTap: { scale: .94 },
-								transition: TAP_SPRING$4,
+								transition: TAP_SPRING$5,
 								onClick: () => void copyText(CREATOR_GMAIL_ADDRESS, "email", `คัดลอกอีเมล ${CREATOR_GMAIL_ADDRESS} เรียบร้อยแล้ว`),
 								className: "inline-flex min-h-[36px] items-center gap-1 rounded-lg border border-[#1F2823]/12 bg-[#FAF9F6] px-2.5 text-[11px] font-semibold text-[#1F2823] hover:bg-[#EFECE4] shrink-0",
 								children: copiedKey === "email" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
@@ -73301,7 +75989,7 @@ var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
 									return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 										type: "button",
 										whileTap: { scale: .95 },
-										transition: TAP_SPRING$4,
+										transition: TAP_SPRING$5,
 										onClick: () => {
 											soundEngine.playTap();
 											setCategory(cat.id);
@@ -73481,7 +76169,7 @@ var RequestScreen = ({ playerLevel, optimizationProfile, onClose }) => {
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 										type: "button",
 										whileTap: { scale: .96 },
-										transition: TAP_SPRING$4,
+										transition: TAP_SPRING$5,
 										onClick: () => void copyText(`ส่งถึง: ${CREATOR_GMAIL_ADDRESS}\nหัวข้อ: ${formattedSubject}\n\n${formattedBody}`, "full", "คัดลอกข้อความคำร้องขอทั้งหมดเรียบร้อยแล้ว"),
 										className: "flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-[#1F2823]/15 bg-[#FAF9F6] px-3.5 text-xs sm:text-sm font-semibold text-[#1F2823] hover:bg-[#EFECE4]",
 										children: copiedKey === "full" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
@@ -73738,7 +76426,7 @@ var LowPolyCharacterPreview = () => {
 	});
 };
 // src/components/SettingsScreen.tsx
-var TAP_SPRING$3 = {
+var TAP_SPRING$4 = {
 	type: "spring",
 	stiffness: 430,
 	damping: 26
@@ -73916,7 +76604,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 					type: "button",
 					whileTap: { scale: .92 },
-					transition: TAP_SPRING$3,
+					transition: TAP_SPRING$4,
 					onClick: () => {
 						soundEngine.playTap();
 						onClose();
@@ -73945,7 +76633,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 				type: "button",
 				whileTap: { scale: .93 },
-				transition: TAP_SPRING$3,
+				transition: TAP_SPRING$4,
 				onClick: () => {
 					soundEngine.playTap();
 					onResetSettings();
@@ -73991,7 +76679,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 									type: "button",
 									whileTap: { scale: .93 },
-									transition: TAP_SPRING$3,
+									transition: TAP_SPRING$4,
 									onClick: () => {
 										soundEngine.unlock();
 										onUpdateSettings({ isMuted: !settings.isMuted });
@@ -74128,7 +76816,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 										return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											whileTap: { scale: .96 },
-											transition: TAP_SPRING$3,
+											transition: TAP_SPRING$4,
 											onClick: () => {
 												soundEngine.unlock();
 												soundEngine.playTap();
@@ -74162,7 +76850,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .94 },
-										transition: TAP_SPRING$3,
+										transition: TAP_SPRING$4,
 										onClick: () => {
 											soundEngine.unlock();
 											soundEngine.playSweetSpotChime();
@@ -74404,7 +77092,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 								].map((toggle) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 									type: "button",
 									whileTap: { scale: .94 },
-									transition: TAP_SPRING$3,
+									transition: TAP_SPRING$4,
 									onClick: () => {
 										soundEngine.playTap();
 										onUpdateSettings({ [toggle.key]: !toggle.value });
@@ -74484,7 +77172,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									deviceReport.showRealmeNote50Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .95 },
-										transition: TAP_SPRING$3,
+										transition: TAP_SPRING$4,
 										onClick: () => {
 											soundEngine.playTap();
 											onUpdateSettings(getRealmeNote50Preset(detectedRefreshRate));
@@ -74504,7 +77192,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									deviceReport.showGalaxyA10Option && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .95 },
-										transition: TAP_SPRING$3,
+										transition: TAP_SPRING$4,
 										onClick: () => {
 											soundEngine.playTap();
 											onUpdateSettings(getGalaxyA10Preset());
@@ -74524,7 +77212,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									deviceReport.showLowRam2GbOption && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .95 },
-										transition: TAP_SPRING$3,
+										transition: TAP_SPRING$4,
 										onClick: () => {
 											soundEngine.playTap();
 											onUpdateSettings(getLowRam2GbPreset(detectedRefreshRate));
@@ -74552,7 +77240,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 									type: "button",
 									whileTap: { scale: .94 },
-									transition: TAP_SPRING$3,
+									transition: TAP_SPRING$4,
 									onClick: () => {
 										soundEngine.playTap();
 										onToggleFullscreen();
@@ -74574,7 +77262,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 									type: "button",
 									whileTap: { scale: .94 },
-									transition: TAP_SPRING$3,
+									transition: TAP_SPRING$4,
 									onClick: () => {
 										soundEngine.playTap();
 										onUpdateSettings({ autoFullscreen: !settings.autoFullscreen });
@@ -74620,7 +77308,7 @@ var SettingsScreen = ({ settings, isFullscreen, detectedRefreshRate, rawRefreshR
 									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .96 },
-										transition: TAP_SPRING$3,
+										transition: TAP_SPRING$4,
 										onClick: () => {
 											soundEngine.playTap();
 											onUpdateSettings({ playerCharacter: charModel.id });
@@ -74686,7 +77374,7 @@ var CATEGORIES = [
 		label: "สมุนไพร"
 	}
 ];
-var TAP_SPRING$2 = {
+var TAP_SPRING$3 = {
 	type: "spring",
 	stiffness: 420,
 	damping: 26
@@ -74742,7 +77430,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
 						whileTap: { scale: .95 },
-						transition: TAP_SPRING$2,
+						transition: TAP_SPRING$3,
 						onClick: onStartBrewing,
 						className: "min-h-[44px] rounded-xl bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732] whitespace-nowrap shrink-0",
 						children: "ไปชงชา 3 มิติ"
@@ -74949,7 +77637,7 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
 						type: "button",
 						whileTap: { scale: .95 },
-						transition: TAP_SPRING$2,
+						transition: TAP_SPRING$3,
 						onClick: onStartBrewing,
 						className: "mt-4 min-h-[44px] rounded-lg bg-[#2E6F40] px-4 py-2 text-sm font-medium text-white hover:bg-[#245732]",
 						children: "เริ่มชงถ้วยแรก"
@@ -74996,6 +77684,318 @@ var TeaJournal = ({ saveData, onStartBrewing, onResetJournal }) => {
 		]
 	});
 };
+// src/components/TeaMenuBoardModal.tsx
+var CATEGORY_LABELS = [
+	{
+		id: "all",
+		label: "ทั้งหมด"
+	},
+	{
+		id: "matcha",
+		label: "มัทฉะ"
+	},
+	{
+		id: "latte",
+		label: "ลาเต้"
+	},
+	{
+		id: "green",
+		label: "ชาเขียว"
+	},
+	{
+		id: "oolong",
+		label: "อู่หลง"
+	},
+	{
+		id: "black",
+		label: "ชาดำ"
+	},
+	{
+		id: "herbal",
+		label: "สมุนไพร"
+	}
+];
+var TAP_SPRING$2 = {
+	type: "spring",
+	stiffness: 420,
+	damping: 26
+};
+var MODAL_EASE$1 = [
+	.16,
+	1,
+	.3,
+	1
+];
+var TeaMenuBoardModal = import_react.memo(({ playerLevel, orderedTeaId, orderedGuestName, onQuickBrewTea, onClose }) => {
+	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("all");
+	const unlockedTeas = (0, import_react.useMemo)(() => getUnlockedTeas(playerLevel), [playerLevel]);
+	const levelInfo = (0, import_react.useMemo)(() => getLevelInfo(playerLevel), [playerLevel]);
+	const availableCategories = (0, import_react.useMemo)(() => {
+		const present = new Set(unlockedTeas.map((t) => t.category));
+		return CATEGORY_LABELS.filter((cat) => cat.id === "all" || present.has(cat.id));
+	}, [unlockedTeas]);
+	(0, import_react.useEffect)(() => {
+		if (categoryFilter !== "all" && !availableCategories.some((c) => c.id === categoryFilter)) setCategoryFilter("all");
+	}, [availableCategories, categoryFilter]);
+	const visibleTeas = (0, import_react.useMemo)(() => {
+		const list = categoryFilter === "all" ? unlockedTeas : unlockedTeas.filter((t) => t.category === categoryFilter);
+		if (!orderedTeaId) return list;
+		return [...list].sort((a, b) => {
+			if (a.id === orderedTeaId && b.id !== orderedTeaId) return -1;
+			if (b.id === orderedTeaId && a.id !== orderedTeaId) return 1;
+			return 0;
+		});
+	}, [
+		categoryFilter,
+		unlockedTeas,
+		orderedTeaId
+	]);
+	(0, import_react.useEffect)(() => {
+		const onKeyDown = (e) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKeyDown);
+		return () => window.removeEventListener("keydown", onKeyDown);
+	}, [onClose]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		initial: { opacity: 0 },
+		animate: { opacity: 1 },
+		exit: { opacity: 0 },
+		transition: {
+			duration: .16,
+			ease: "easeOut"
+		},
+		className: "fixed inset-0 z-50 flex items-center justify-center bg-black/52 p-3 sm:p-5",
+		onClick: onClose,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+			role: "dialog",
+			"aria-modal": "true",
+			"aria-labelledby": "tea-menu-board-title",
+			initial: {
+				opacity: 0,
+				scale: .96,
+				y: 12
+			},
+			animate: {
+				opacity: 1,
+				scale: 1,
+				y: 0
+			},
+			exit: {
+				opacity: 0,
+				scale: .96,
+				y: 8
+			},
+			transition: {
+				duration: .22,
+				ease: MODAL_EASE$1
+			},
+			onClick: (e) => e.stopPropagation(),
+			style: { contain: "layout style paint" },
+			className: "flex w-full max-w-3xl max-h-[88dvh] flex-col overflow-hidden rounded-2xl border-2 border-[#C8A66A] bg-[#FAF6EC] text-[#1F2823] shadow-2xl will-change-transform",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex shrink-0 items-center justify-between gap-3 border-b border-[#C8A66A]/45 bg-[#24392A] px-4 py-3 sm:px-6 text-[#FAF6EC]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-3 min-w-0",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#C89D54]/20 text-[#E6C78B] shrink-0",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollText, {
+								className: "h-5 w-5",
+								"aria-hidden": "true"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "min-w-0",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								id: "tea-menu-board-title",
+								className: "font-display text-lg sm:text-xl font-bold tracking-tight truncate",
+								children: "ป้ายเมนูชาประจำร้าน"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								className: "text-xs text-[#D6DFCE] truncate",
+								children: [
+									"พร้อมชงเสิร์ฟให้ลูกค้าเลือก",
+									" ",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono-num font-semibold text-[#F4D99E]",
+										children: unlockedTeas.length
+									}),
+									" ",
+									"เมนู · ระดับร้าน Lv.",
+									playerLevel,
+									" (",
+									levelInfo.title,
+									")"
+								]
+							})]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.button, {
+						type: "button",
+						whileTap: { scale: .92 },
+						transition: TAP_SPRING$2,
+						onClick: () => {
+							soundEngine.playTap();
+							onClose();
+						},
+						"aria-label": "ปิดป้ายเมนูชา",
+						className: "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/15 bg-white/10 text-[#FAF6EC] hover:bg-white/20 shrink-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+							className: "h-5 w-5",
+							"aria-hidden": "true"
+						})
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-[#1F2823]/10 bg-[#F3EDE0] px-4 py-2 sm:px-6 touch-pan-x",
+					children: availableCategories.map((cat) => {
+						const active = categoryFilter === cat.id;
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+							type: "button",
+							whileTap: { scale: .95 },
+							onClick: () => {
+								soundEngine.playTap();
+								setCategoryFilter(cat.id);
+							},
+							className: "relative min-h-[38px] rounded-xl px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap shrink-0",
+							children: [active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+								layoutId: "menu-board-category-pill",
+								transition: {
+									type: "spring",
+									stiffness: 440,
+									damping: 32
+								},
+								className: "absolute inset-0 rounded-xl bg-[#2E6F40]"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: `relative z-10 ${active ? "text-white" : "text-[#444E47]"}`,
+								children: cat.label
+							})]
+						}, cat.id);
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex-1 min-h-0 overflow-y-auto p-4 sm:p-5",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
+						mode: "wait",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+							initial: {
+								opacity: 0,
+								y: 6
+							},
+							animate: {
+								opacity: 1,
+								y: 0
+							},
+							exit: {
+								opacity: 0,
+								y: -4
+							},
+							transition: {
+								duration: .18,
+								ease: MODAL_EASE$1
+							},
+							className: "grid grid-cols-1 md:grid-cols-2 gap-3",
+							children: visibleTeas.map((tea) => {
+								const isOrdered = Boolean(orderedTeaId && tea.id === orderedTeaId);
+								const reward = getTeaRewardPreview(tea);
+								const equipment = getEquipmentInfo(tea.equipmentId);
+								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: `flex flex-col justify-between gap-2.5 rounded-2xl border p-3.5 transition-colors ${isOrdered ? "border-[#2E6F40] bg-[#ECF5ED] shadow-sm" : "border-[#1F2823]/12 bg-white"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-start gap-3",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "rounded-xl border border-[#1F2823]/8 bg-[#FAF7EE] p-1 shrink-0",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaVesselIcon, {
+												tea,
+												locked: false
+											})
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "min-w-0 flex-1",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													className: "flex items-start justify-between gap-2",
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+														className: "font-display text-base font-bold text-[#1F2823] leading-snug",
+														children: tea.name
+													}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+														className: "font-mono-num text-xs font-bold text-[#2E6F40] whitespace-nowrap shrink-0",
+														children: [
+															"+",
+															reward.warmth,
+															" แต้ม"
+														]
+													})]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+													className: "mt-0.5 text-xs font-medium text-[#5A655D]",
+													children: [
+														tea.categoryLabel,
+														" · ",
+														tea.idealTempLabel,
+														" · แช่",
+														" ",
+														tea.idealSteepMin,
+														"–",
+														tea.idealSteepMax,
+														" วิ"
+													]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+													className: "mt-1 text-xs text-[#3C463F] line-clamp-2 leading-relaxed",
+													children: tea.description
+												})
+											]
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex flex-wrap items-center justify-between gap-2 border-t border-[#1F2823]/8 pt-2 text-[11px]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "min-w-0 flex-1 text-[#4A534D]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+												className: "truncate",
+												children: [
+													"อุปกรณ์: ",
+													equipment.name,
+													" · วัตถุดิบ:",
+													" ",
+													tea.baseIngredients.join(" · ")
+												]
+											}), isOrdered && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+												className: "mt-0.5 flex items-center gap-1 font-bold text-[#215A31]",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, {
+													className: "h-3.5 w-3.5 shrink-0",
+													"aria-hidden": "true"
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: orderedGuestName ? `${orderedGuestName} กำลังสั่งเมนูนี้` : "ลูกค้ากำลังสั่งเมนูนี้" })]
+											})]
+										}), onQuickBrewTea && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .94 },
+											transition: TAP_SPRING$2,
+											onClick: () => {
+												soundEngine.unlock();
+												soundEngine.playTap();
+												onQuickBrewTea(tea);
+											},
+											className: `inline-flex min-h-[38px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold whitespace-nowrap shrink-0 ${isOrdered ? "bg-[#2E6F40] text-white hover:bg-[#235632]" : "border border-[#2E6F40]/35 bg-[#F2F7F2] text-[#255F30] hover:bg-[#E4EFE4]"}`,
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Coffee, {
+												className: "h-3.5 w-3.5",
+												"aria-hidden": "true"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ชงเมนูนี้เลย" })]
+										})]
+									})]
+								}, tea.id);
+							})
+						}, categoryFilter)
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex shrink-0 items-center justify-between gap-2 border-t border-[#1F2823]/10 bg-[#F3EDE0] px-4 py-2.5 sm:px-6 text-xs text-[#5A655D]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "บนป้ายเมนูร้านจะแสดงเฉพาะชาที่ปลดล็อกและชงได้แล้วในระดับปัจจุบันเท่านั้น" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-mono-num font-semibold text-[#2E6F40] whitespace-nowrap",
+						children: [unlockedTeas.length, " เมนูพร้อมเสิร์ฟ"]
+					})]
+				})
+			]
+		})
+	});
+});
 // src/components/SunlitParticles.tsx
 function createMoteSprite(warm) {
 	const sprite = document.createElement("canvas");
@@ -75097,7 +78097,7 @@ var MODAL_EASE = [
 	.3,
 	1
 ];
-var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates, onOpenRequest, isOverlayOpen = false, isUltraLowRam = false, updateAvailable = false, latestBrowserVersion = null }) => {
+var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, ambience, onAmbienceChange, isMuted, onToggleMute, isFullscreen = false, onToggleFullscreen, particlesEnabled = true, onStart, onOpenJournal, onOpenHowToPlay, onOpenSettings, onOpenUpdates, onOpenRequest, onOpenGuestBook, onOpenTeaMenu, visitedGuestCount = 0, isOverlayOpen = false, isUltraLowRam = false, updateAvailable = false, latestBrowserVersion = null }) => {
 	const [bgFailed, setBgFailed] = (0, import_react.useState)(false);
 	const [showMenuModal, setShowMenuModal] = (0, import_react.useState)(false);
 	const xpInfo = getXpProgress(xp);
@@ -75172,40 +78172,83 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 					},
 					className: "flex justify-end",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .94 },
-							transition: TAP_SPRING$1,
-							onClick: () => {
-								soundEngine.unlock();
-								onOpenJournal();
-							},
-							className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
-								className: "h-4 w-4 text-[#8CD19A] shrink-0",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-								"สมุดชงชา (",
-								unlockedCount,
-								"/",
-								TEAS.length,
-								")"
-							] })]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
-							type: "button",
-							whileTap: { scale: .94 },
-							transition: TAP_SPRING$1,
-							onClick: () => {
-								soundEngine.unlock();
-								onOpenHowToPlay();
-							},
-							className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
-								className: "h-4 w-4 text-[#DFC48C] shrink-0",
-								"aria-hidden": "true"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
-						})]
+						className: "flex flex-wrap items-center justify-end gap-2 rounded-2xl border border-[#FAF7F0]/22 bg-[#1E251F]/84 p-1.5 shadow-lg shadow-black/25",
+						children: [
+							onOpenTeaMenu && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$1,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									onOpenTeaMenu();
+								},
+								className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#C89D54]/18 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#C89D54]/28 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollText, {
+									className: "h-4 w-4 text-[#F0D395] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+									"ป้ายเมนู (",
+									unlockedCount,
+									")"
+								] })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$1,
+								onClick: () => {
+									soundEngine.unlock();
+									onOpenJournal();
+								},
+								className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BookOpen, {
+									className: "h-4 w-4 text-[#8CD19A] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+									"สมุดชงชา (",
+									unlockedCount,
+									"/",
+									TEAS.length,
+									")"
+								] })]
+							}),
+							onOpenGuestBook && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$1,
+								onClick: () => {
+									soundEngine.unlock();
+									soundEngine.playTap();
+									onOpenGuestBook();
+								},
+								className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
+									className: "h-4 w-4 text-[#A7DFB2] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+									"ลูกค้า (",
+									visitedGuestCount,
+									"/",
+									GUESTS.length,
+									")"
+								] })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+								type: "button",
+								whileTap: { scale: .94 },
+								transition: TAP_SPRING$1,
+								onClick: () => {
+									soundEngine.unlock();
+									onOpenHowToPlay();
+								},
+								className: "inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#FAF8F3]/10 px-3.5 py-2 text-xs sm:text-sm font-medium text-[#FAF7F0] hover:bg-[#FAF8F3]/18 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5E7C6] whitespace-nowrap",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Compass, {
+									className: "h-4 w-4 text-[#DFC48C] shrink-0",
+									"aria-hidden": "true"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "วิธีชง" })]
+							})
+						]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex flex-wrap items-end justify-between gap-4",
@@ -75596,7 +78639,7 @@ var TitleScreen = ({ xp, level, totalCups, warmthPoints, mode, onModeChange, amb
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
 											className: "h-4 w-4 text-[#2E6F40]",
 											"aria-hidden": "true"
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v2.14.0)` })]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: updateAvailable && latestBrowserVersion ? `อัปเดตใหม่พร้อมใช้งาน (v${latestBrowserVersion})` : `เช็คอัปเดตเวอร์ชั่น (v3.0.0)` })]
 									}),
 									onOpenRequest && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
@@ -75806,7 +78849,7 @@ async function checkLiveBrowserVersion() {
 	if (githubManifest) {
 		if (!bestManifest || compareSemver(githubManifest.version, bestManifest.version) > 0) bestManifest = githubManifest;
 	}
-	const latestVersion = bestManifest?.version ?? "2.14.0";
+	const latestVersion = bestManifest?.version ?? "3.0.0";
 	const hasNewerVersion = compareSemver(latestVersion, CURRENT_APP_VERSION) > 0;
 	const targetSyncUrl = sanitizeExternalUrl(bestManifest?.browserUrl ?? (liveManifestDirect ? "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app" : "https://ais-pre-mtcwhk4ypdwqid2skp5jiy-4788132701.asia-northeast1.run.app"), LIVE_BROWSER_APP_URL);
 	const sourceLabel = checkedFromGithub && checkedFromBrowserServer ? "Browser Server + GitHub ผู้สร้าง" : checkedFromBrowserServer ? "Browser Server ปัจจุบัน" : checkedFromGithub ? "GitHub ผู้สร้างเกม" : "ตรวจสอบในเครื่อง";
@@ -75847,14 +78890,14 @@ async function applyInAppUpdate(result) {
 	} catch {}
 	if (typeof window === "undefined") return;
 	const isNative = Capacitor.isNativePlatform();
-	const hasNewerRemote = result && compareSemver(result.latestVersion, "2.14.0") > 0;
+	const hasNewerRemote = result && compareSemver(result.latestVersion, "3.0.0") > 0;
 	if (isNative && hasNewerRemote && result?.targetSyncUrl) {
 		const safeTarget = sanitizeExternalUrl(result.targetSyncUrl, LIVE_BROWSER_APP_URL);
 		window.location.replace(safeTarget);
 		return;
 	}
 	const url = new URL(window.location.href);
-	url.searchParams.set("v", result?.latestVersion ?? "2.14.0");
+	url.searchParams.set("v", result?.latestVersion ?? "3.0.0");
 	window.location.replace(url.toString());
 }
 // src/utils/versionMigration.ts
@@ -75882,6 +78925,7 @@ var DEFAULT_SAVE = {
 	warmthPoints: 0,
 	totalCups: 0,
 	teaCounts: {},
+	visitedGuestIds: [],
 	history: []
 };
 function normalizeResolutionScale(raw) {
@@ -75946,12 +78990,22 @@ function migrateSaveDataPayload(raw) {
 		for (const [key, val] of Object.entries(parsed.teaCounts)) if (typeof key === "string" && typeof val === "number" && Number.isFinite(val)) safeTeaCounts[key] = Math.max(0, Math.round(val));
 	}
 	const history = Array.isArray(parsed.history) ? parsed.history.map(sanitizeJournalRecord).filter((item) => item !== null).slice(0, 30) : [];
+	const validGuestIds = new Set(GUESTS.map((g) => g.id));
+	const visitedSet = /* @__PURE__ */ new Set();
+	if (Array.isArray(parsed.visitedGuestIds)) {
+		for (const id of parsed.visitedGuestIds) if (typeof id === "string" && validGuestIds.has(id)) visitedSet.add(id);
+	}
+	for (const item of history) if (item.guestName) {
+		const matched = GUESTS.find((g) => g.name === item.guestName);
+		if (matched) visitedSet.add(matched.id);
+	}
 	return {
 		xp,
 		level,
 		warmthPoints: typeof parsed.warmthPoints === "number" && Number.isFinite(parsed.warmthPoints) ? Math.max(0, Math.round(parsed.warmthPoints)) : 0,
 		totalCups,
 		teaCounts: safeTeaCounts,
+		visitedGuestIds: Array.from(visitedSet),
 		history
 	};
 }
@@ -75995,18 +79049,33 @@ function loadSaveData() {
 		return DEFAULT_SAVE;
 	}
 }
-function saveBrewRecord(current, record, warmthEarned, xpEarned) {
+function saveBrewRecord(current, record, warmthEarned, xpEarned, guestId) {
 	const nextXp = current.xp + xpEarned;
+	const nextLevel = getLevelFromXp(nextXp);
+	const visitedGuestIds = guestId && !current.visitedGuestIds.includes(guestId) ? [...current.visitedGuestIds, guestId] : current.visitedGuestIds;
 	const next = {
 		xp: nextXp,
-		level: getLevelFromXp(nextXp),
+		level: nextLevel,
 		warmthPoints: current.warmthPoints + warmthEarned,
 		totalCups: current.totalCups + 1,
 		teaCounts: {
 			...current.teaCounts,
 			[record.teaId]: (current.teaCounts[record.teaId] ?? 0) + 1
 		},
+		visitedGuestIds,
 		history: [record, ...current.history].slice(0, 30)
+	};
+	try {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+		localStorage.setItem(SCHEMA_VERSION_KEY, String(3));
+	} catch {}
+	return next;
+}
+function recordGuestVisit(current, guestId) {
+	if (!guestId || current.visitedGuestIds.includes(guestId)) return current;
+	const next = {
+		...current,
+		visitedGuestIds: [...current.visitedGuestIds, guestId]
 	};
 	try {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
@@ -76083,6 +79152,7 @@ var CATEGORY_FILTERS = [
 ];
 var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }) => {
 	const [selectedVersion, setSelectedVersion] = (0, import_react.useState)(CURRENT_APP_VERSION);
+	const [compareWithOldest, setCompareWithOldest] = (0, import_react.useState)(false);
 	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("ทั้งหมด");
 	const [status, setStatus] = (0, import_react.useState)(initialUpdateResult?.status ?? "checking");
 	const [updateResult, setUpdateResult] = (0, import_react.useState)(initialUpdateResult);
@@ -76093,7 +79163,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 	}));
 	const [upgradedFrom] = (0, import_react.useState)(() => {
 		const prev = loadLastSeenVersion();
-		return prev && prev !== "2.14.0" ? prev : null;
+		return prev && prev !== "3.0.0" ? prev : null;
 	});
 	(0, import_react.useEffect)(() => {
 		saveLastSeenVersion(CURRENT_APP_VERSION);
@@ -76126,15 +79196,27 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 		await applyInAppUpdate(updateResult);
 	};
 	const activeEntry = (0, import_react.useMemo)(() => VERSION_HISTORY.find((v) => v.version === selectedVersion) ?? VERSION_HISTORY[0], [selectedVersion]);
+	const oldestEntry = (0, import_react.useMemo)(() => VERSION_HISTORY.find((v) => v.version === "1.0.0") ?? VERSION_HISTORY[VERSION_HISTORY.length - 1], []);
 	const filteredChanges = (0, import_react.useMemo)(() => {
 		if (categoryFilter === "ทั้งหมด") return activeEntry.changes;
 		return activeEntry.changes.filter((c) => c.category === categoryFilter);
 	}, [activeEntry, categoryFilter]);
-	const latestBrowserVersion = updateResult?.latestVersion ?? "2.14.0";
+	const filteredOldestComparisons = (0, import_react.useMemo)(() => {
+		if (categoryFilter === "ทั้งหมด") return VERSION_1_TO_3_COMPARISONS;
+		return VERSION_1_TO_3_COMPARISONS.filter((c) => c.area === categoryFilter);
+	}, [categoryFilter]);
+	const cumulativeMilestones = (0, import_react.useMemo)(() => {
+		return VERSION_HISTORY.filter((entry) => compareSemver(entry.version, "1.0.0") > 0 && compareSemver(entry.version, activeEntry.version) <= 0).map((entry) => ({
+			...entry,
+			matchedChanges: categoryFilter === "ทั้งหมด" ? entry.changes : entry.changes.filter((c) => c.category === categoryFilter)
+		})).filter((entry) => entry.matchedChanges.length > 0);
+	}, [activeEntry.version, categoryFilter]);
+	const latestBrowserVersion = updateResult?.latestVersion ?? "3.0.0";
 	const hasNewerBrowserVersion = compareSemver(latestBrowserVersion, CURRENT_APP_VERSION) > 0;
 	const securityAudit = (0, import_react.useMemo)(() => runAppSecurityAudit(), []);
 	const safeGithubProfileUrl = sanitizeExternalUrl(updateResult?.analysis.githubProfileUrl ?? "https://github.com/pppu13610-glitch", CREATOR_GITHUB_PROFILE_URL);
 	const safeGithubRepoUrl = sanitizeExternalUrl(updateResult?.analysis.githubRepoUrl ?? "https://github.com/pppu13610-glitch/baan-cha-3d", CREATOR_GITHUB_REPO_URL);
+	const isViewingLatestVsOldest = activeEntry.version === CURRENT_APP_VERSION;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 		role: "dialog",
 		"aria-modal": "true",
@@ -76187,7 +79269,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 							"เวอร์ชั่นในตัวเกม",
 							" ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "font-mono-num font-semibold text-[#2E6F40]",
+								className: "font-mono-num font-semibold text-[#2E6F40] tabular-nums",
 								children: ["v", CURRENT_APP_VERSION]
 							}),
 							" ",
@@ -76225,12 +79307,13 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 										alt: "ไอคอนเกมบ้านชาอุ่นใจ",
 										width: 44,
 										height: 44,
+										referrerPolicy: "no-referrer",
 										className: "h-11 w-11 rounded-xl object-cover shadow-xs ring-1 ring-[#1F2823]/10 shrink-0"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "text-xs text-[#5A655D]",
 										children: "เวอร์ชั่นในตัวเกม"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-										className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823]",
+										className: "mt-0.5 font-mono-num text-2xl font-bold text-[#1F2823] tabular-nums",
 										children: ["v", CURRENT_APP_VERSION]
 									})] })]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -76241,11 +79324,11 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											children: "เวอร์ชั่น Browser ล่าสุด"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-											className: "font-mono-num text-base font-bold text-[#2E6F40]",
+											className: "font-mono-num text-base font-bold text-[#2E6F40] tabular-nums",
 											children: ["v", latestBrowserVersion]
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-											className: "font-mono-num text-[11px] text-[#5A655D]",
+											className: "font-mono-num text-[11px] text-[#5A655D] tabular-nums",
 											children: [
 												"ตรวจเมื่อ ",
 												lastCheckedAt,
@@ -76291,7 +79374,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 												className: "mt-0.5 h-4 w-4 shrink-0",
 												"aria-hidden": "true"
-											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v2.14.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v2.14.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: upgradedFrom ? `อัปเดตจาก v${upgradedFrom} เป็น v3.0.0 ตรงกับ Browser เรียบร้อยแล้ว` : `ตัวเกมของคุณ (v3.0.0) ตรงกับเวอร์ชั่นบน Browser ปัจจุบันแล้ว` })]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 											type: "button",
 											disabled: isApplyingUpdate,
@@ -76413,6 +79496,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 								children: VERSION_HISTORY.map((item) => {
 									const isActive = item.version === activeEntry.version;
 									const isCurrent = item.version === CURRENT_APP_VERSION;
+									const isOldest = item.version === OLDEST_APP_VERSION;
 									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
 										type: "button",
 										whileTap: { scale: .96 },
@@ -76420,6 +79504,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 										onClick: () => {
 											soundEngine.playTap();
 											setSelectedVersion(item.version);
+											if (item.version === "1.0.0") setCompareWithOldest(false);
 											setCategoryFilter("ทั้งหมด");
 										},
 										className: `flex min-h-[52px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors ${isActive ? "border-[#2E6F40] bg-[#EDF5EE]" : "border-[#1F2823]/10 bg-[#FAF9F6] hover:bg-[#EFECE4]"}`,
@@ -76427,19 +79512,26 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 											className: "min-w-0",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 												className: "flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1F2823]",
-												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-													className: "font-mono-num",
-													children: ["v", item.version]
-												}), isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													className: "text-[11px] font-semibold text-[#2E6F40]",
-													children: "· ล่าสุด"
-												})]
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+														className: "font-mono-num tabular-nums",
+														children: ["v", item.version]
+													}),
+													isCurrent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: "text-[11px] font-semibold text-[#2E6F40]",
+														children: "· ล่าสุด"
+													}),
+													isOldest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: "text-[11px] font-semibold text-[#7D5A3C]",
+														children: "· เก่าที่สุด"
+													})
+												]
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 												className: "text-[11px] text-[#5A655D] truncate",
 												children: item.releaseTitle
 											})]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-											className: "font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap shrink-0",
+											className: "font-mono-num text-[11px] text-[#5A655D] whitespace-nowrap shrink-0 tabular-nums",
 											children: [item.changes.length, " รายการ"]
 										})]
 									}, item.version);
@@ -76473,43 +79565,55 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 								className: "border-b border-[#1F2823]/10 pb-4",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: "flex flex-wrap items-center gap-2 text-xs text-[#5A655D]",
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GitCompareArrows, {
-												className: "h-4 w-4 text-[#2E6F40] shrink-0",
+										className: "flex flex-wrap items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex flex-wrap items-center gap-2 text-xs text-[#5A655D]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GitCompareArrows, {
+													className: "h-4 w-4 text-[#2E6F40] shrink-0",
+													"aria-hidden": "true"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "font-mono-num font-semibold text-[#2E6F40] tabular-nums",
+													children: compareWithOldest && activeEntry.version !== "1.0.0" ? `เปรียบเทียบ v${activeEntry.version} เทียบกับเวอร์ชั่นเก่าที่สุด v${OLDEST_APP_VERSION}` : activeEntry.previousVersion ? `เปรียบเทียบ v${activeEntry.version} เทียบกับ v${activeEntry.previousVersion}` : `เวอร์ชั่นเริ่มต้น v${activeEntry.version}`
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"aria-hidden": "true",
+													children: "·"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: compareWithOldest && activeEntry.version !== "1.0.0" ? `${oldestEntry.releaseDate} → ${activeEntry.releaseDate}` : activeEntry.releaseDate }),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"aria-hidden": "true",
+													children: "·"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "font-mono-num tabular-nums",
+													children: compareWithOldest && activeEntry.version !== "1.0.0" ? `พัฒนาต่อเนื่อง ${cumulativeMilestones.length} รุ่น` : `เพิ่มและปรับปรุง ${activeEntry.changes.length} รายการ`
+												})
+											]
+										}), activeEntry.version !== "1.0.0" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.button, {
+											type: "button",
+											whileTap: { scale: .95 },
+											transition: TAP_SPRING,
+											onClick: () => {
+												soundEngine.playTap();
+												setCompareWithOldest((prev) => !prev);
+											},
+											className: `inline-flex min-h-[38px] items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${compareWithOldest ? "border-[#2E6F40] bg-[#2E6F40] text-white" : "border-[#1F2823]/15 bg-[#FAF9F6] text-[#2E6F40] hover:bg-[#EDF5EE]"}`,
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GitCompareArrows, {
+												className: "h-3.5 w-3.5 shrink-0",
 												"aria-hidden": "true"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "font-mono-num font-semibold text-[#2E6F40]",
-												children: activeEntry.previousVersion ? `เปรียบเทียบ v${activeEntry.version} เทียบกับ v${activeEntry.previousVersion}` : `เวอร์ชั่นเริ่มต้น v${activeEntry.version}`
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												"aria-hidden": "true",
-												children: "·"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: activeEntry.releaseDate }),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												"aria-hidden": "true",
-												children: "·"
-											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-												className: "font-mono-num",
-												children: [
-													"เพิ่มและปรับปรุง ",
-													activeEntry.changes.length,
-													" รายการ"
-												]
-											})
-										]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: compareWithOldest ? `กลับไปดูเฉพาะ v${activeEntry.version}` : `เทียบกับเวอร์ชั่นเก่าที่สุด (v1.0.0)` })]
+										})]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 										className: "mt-1.5 font-display text-lg sm:text-2xl font-bold text-[#1F2823]",
 										style: { textWrap: "balance" },
-										children: activeEntry.releaseTitle
+										children: compareWithOldest && activeEntry.version !== "1.0.0" ? `สรุปความแตกต่างระหว่าง v${OLDEST_APP_VERSION} (เก่าที่สุด) กับ v${activeEntry.version}` : activeEntry.releaseTitle
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "mt-1 text-xs sm:text-sm text-[#4A534D] leading-relaxed",
-										children: activeEntry.summary
+										children: compareWithOldest && activeEntry.version !== "1.0.0" ? `เทียบพัฒนาการตั้งแต่เวอร์ชั่นเปิดตัวแรกสุด v${OLDEST_APP_VERSION} (${oldestEntry.releaseDate}) มาจนถึง v${activeEntry.version} (${activeEntry.releaseDate})` : activeEntry.summary
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "mt-4 flex gap-1 overflow-x-auto rounded-xl bg-[#EFECE4] p-1 touch-pan-x",
@@ -76539,7 +79643,161 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 										})
 									})
 								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							}), compareWithOldest && activeEntry.version !== "1.0.0" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-3 space-y-5",
+								children: [isViewingLatestVsOldest && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-[#1F2823]/10 pb-3.5",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[11px] text-[#5A655D]",
+											children: "เมนูชาทั้งหมด"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "mt-0.5 font-mono-num text-base font-bold text-[#1F2823] tabular-nums",
+											children: [
+												"9 → ",
+												TEAS.length,
+												" เมนู"
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[11px] text-[#5A655D]",
+											children: "ตัวละครลูกค้า"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "mt-0.5 font-mono-num text-base font-bold text-[#1F2823] tabular-nums",
+											children: [
+												"0 → ",
+												GUESTS.length,
+												" ตัวละคร"
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[11px] text-[#5A655D]",
+											children: "เพลงประกอบ"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "mt-0.5 font-mono-num text-base font-bold text-[#1F2823] tabular-nums",
+											children: [
+												"0 → ",
+												CHILL_MUSIC_TRACKS.length,
+												" เพลง"
+											]
+										})] }),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-[11px] text-[#5A655D]",
+											children: "อุปกรณ์ 3 มิติ"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+											className: "mt-0.5 font-mono-num text-base font-bold text-[#1F2823] tabular-nums",
+											children: [
+												"1 → ",
+												Object.keys(EQUIPMENTS).length,
+												" ชุด"
+											]
+										})] })
+									]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "divide-y divide-[#1F2823]/10",
+									children: filteredOldestComparisons.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "py-3.5",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex flex-wrap items-baseline justify-between gap-2",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
+													className: "font-display text-sm sm:text-base font-bold text-[#1F2823]",
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+														className: "font-mono-num text-[#2E6F40] mr-1.5 tabular-nums",
+														children: [String(idx + 1).padStart(2, "0"), "."]
+													}), item.aspect]
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] font-medium text-[#5A655D]",
+													children: item.area
+												})]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													className: "rounded-xl bg-[#F7F5EE] p-3",
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+														className: "font-mono-num text-[11px] font-semibold text-[#7D5A3C] tabular-nums",
+														children: [
+															"เวอร์ชั่นเก่าที่สุด (v",
+															"1.0.0",
+															")"
+														]
+													}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+														className: "mt-1 text-xs sm:text-sm text-[#4A534D] leading-relaxed",
+														children: item.oldestText
+													})]
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													className: "rounded-xl bg-[#EDF5EE] p-3",
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+														className: "font-mono-num text-[11px] font-semibold text-[#255F30] tabular-nums",
+														children: [
+															"เวอร์ชั่นใหม่ (v",
+															"3.0.0",
+															")"
+														]
+													}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+														className: "mt-1 text-xs sm:text-sm font-medium text-[#1F2823] leading-relaxed",
+														children: item.latestText
+													})]
+												})]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+												className: "mt-1.5 text-xs font-medium text-[#2E6F40]",
+												children: ["สิ่งที่เปลี่ยนไป: ", item.impactNote]
+											})
+										]
+									}, item.aspect))
+								})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "border-t border-[#1F2823]/10 pt-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
+										className: "font-display text-sm sm:text-base font-bold text-[#1F2823] mb-2",
+										children: [
+											"รายการที่เพิ่มและเปลี่ยนแปลงทั้งหมดตั้งแต่หลัง v",
+											OLDEST_APP_VERSION,
+											" ถึง v",
+											activeEntry.version
+										]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "divide-y divide-[#1F2823]/8",
+										children: cumulativeMilestones.map((entry) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "py-3",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex flex-wrap items-baseline justify-between gap-2",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+													className: "font-mono-num text-xs sm:text-sm font-bold text-[#2E6F40] tabular-nums",
+													children: [
+														"v",
+														entry.version,
+														" — ",
+														entry.releaseTitle
+													]
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[11px] text-[#5A655D]",
+													children: entry.releaseDate
+												})]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+												className: "mt-1.5 space-y-1 text-xs text-[#3D4640]",
+												children: entry.matchedChanges.map((ch) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [
+													"• ",
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: "font-semibold text-[#1F2823]",
+														children: ch.title
+													}),
+													" ",
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+														className: "text-[#5A655D]",
+														children: [
+															"(",
+															ch.category,
+															")"
+														]
+													})
+												] }, `${entry.version}-${ch.title}`))
+											})]
+										}, entry.version))
+									})]
+								})]
+							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "mt-2 divide-y divide-[#1F2823]/8",
 								children: filteredChanges.length > 0 ? filteredChanges.map((change, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "py-3.5 sm:py-4",
@@ -76547,7 +79805,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 											className: "flex flex-wrap items-baseline gap-2 text-xs text-[#2E6F40] font-semibold",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-												className: "font-mono-num",
+												className: "font-mono-num tabular-nums",
 												children: [String(idx + 1).padStart(2, "0"), "."]
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: change.category })]
 										}),
@@ -76565,7 +79823,7 @@ var UpdateCheckScreen = ({ initialUpdateResult = null, onUpdateResult, onClose }
 									children: ["ไม่มีรายการในหมวดหมู่นี้สำหรับเวอร์ชั่น v", activeEntry.version]
 								})
 							})]
-						}, activeEntry.version)
+						}, `${activeEntry.version}-${compareWithOldest ? "oldest" : "prev"}`)
 					})
 				})]
 			})
@@ -76643,6 +79901,10 @@ function App() {
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	const [updatesOpen, setUpdatesOpen] = (0, import_react.useState)(false);
 	const [requestOpen, setRequestOpen] = (0, import_react.useState)(false);
+	const [guestBookOpen, setGuestBookOpen] = (0, import_react.useState)(false);
+	const [teaMenuOpen, setTeaMenuOpen] = (0, import_react.useState)(false);
+	const [activeOrderInfo, setActiveOrderInfo] = (0, import_react.useState)(null);
+	const [quickBrewRequest, setQuickBrewRequest] = (0, import_react.useState)(null);
 	const [isFullscreen, setIsFullscreen] = (0, import_react.useState)(() => isFullscreenActive());
 	const [saveData, setSaveData] = (0, import_react.useState)(() => loadSaveData());
 	const [, setHwProbeTick] = (0, import_react.useState)(0);
@@ -76798,8 +80060,11 @@ function App() {
 			return next;
 		});
 	}, []);
-	const handleBrewComplete = (0, import_react.useCallback)((record, warmthEarned, xpEarned) => {
-		setSaveData((prev) => saveBrewRecord(prev, record, warmthEarned, xpEarned));
+	const handleBrewComplete = (0, import_react.useCallback)((record, warmthEarned, xpEarned, guestId) => {
+		setSaveData((prev) => saveBrewRecord(prev, record, warmthEarned, xpEarned, guestId));
+	}, []);
+	const handleGuestVisited = (0, import_react.useCallback)((guestId) => {
+		setSaveData((prev) => recordGuestVisit(prev, guestId));
 	}, []);
 	const handleResetJournal = (0, import_react.useCallback)(() => {
 		soundEngine.playTap();
@@ -76816,7 +80081,7 @@ function App() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: `w-full flex flex-col bg-[#F3F1EC] text-[#1F2823] ${isViewportLocked ? "h-dvh overflow-hidden" : "min-h-dvh"}`,
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: screen !== "TITLE_MENU" && !settingsOpen && !updatesOpen && !requestOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CornerMenu, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: screen !== "TITLE_MENU" && !settingsOpen && !updatesOpen && !requestOpen && !guestBookOpen && !teaMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CornerMenu, {
 					screen,
 					xp: saveData.xp,
 					level: saveData.level,
@@ -76832,6 +80097,9 @@ function App() {
 					onOpenSettings: () => setSettingsOpen(true),
 					onOpenUpdates: () => setUpdatesOpen(true),
 					onOpenRequest: () => setRequestOpen(true),
+					onOpenGuestBook: () => setGuestBookOpen(true),
+					onOpenTeaMenu: () => setTeaMenuOpen(true),
+					visitedGuestCount: saveData.visitedGuestIds.length,
 					updateAvailable: updateCheckResult?.status === "update-ready",
 					latestBrowserVersion: updateCheckResult?.latestVersion ?? null
 				}, "corner-menu") }),
@@ -76878,7 +80146,10 @@ function App() {
 									onOpenSettings: () => setSettingsOpen(true),
 									onOpenUpdates: () => setUpdatesOpen(true),
 									onOpenRequest: () => setRequestOpen(true),
-									isOverlayOpen: settingsOpen || updatesOpen || requestOpen,
+									onOpenGuestBook: () => setGuestBookOpen(true),
+									onOpenTeaMenu: () => setTeaMenuOpen(true),
+									visitedGuestCount: saveData.visitedGuestIds.length,
+									isOverlayOpen: settingsOpen || updatesOpen || requestOpen || guestBookOpen || teaMenuOpen,
 									isUltraLowRam: deviceReport.isUltraLowRam,
 									updateAvailable: updateCheckResult?.status === "update-ready",
 									latestBrowserVersion: updateCheckResult?.latestVersion ?? null
@@ -76905,6 +80176,10 @@ function App() {
 									mode,
 									onModeChange: setMode,
 									settings,
+									onOpenTeaMenu: () => setTeaMenuOpen(true),
+									onActiveOrderChange: setActiveOrderInfo,
+									quickBrewRequest,
+									onGuestVisited: handleGuestVisited,
 									onBrewComplete: handleBrewComplete
 								})
 							}, "screen-brewing"),
@@ -76970,6 +80245,25 @@ function App() {
 					optimizationProfile: settings.optimizationProfile,
 					onClose: () => setRequestOpen(false)
 				}, "request-screen") }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: guestBookOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GuestBookModal, {
+					visitedGuestIds: saveData.visitedGuestIds,
+					history: saveData.history,
+					onClose: () => setGuestBookOpen(false)
+				}, "guest-book-modal") }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: teaMenuOpen && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TeaMenuBoardModal, {
+					playerLevel: saveData.level,
+					orderedTeaId: screen === "BREWING" && mode === "guest" ? activeOrderInfo?.teaId ?? null : null,
+					orderedGuestName: screen === "BREWING" && mode === "guest" ? activeOrderInfo?.guestName : void 0,
+					onQuickBrewTea: (tea) => {
+						setTeaMenuOpen(false);
+						setQuickBrewRequest((prev) => ({
+							tea,
+							requestKey: (prev?.requestKey ?? 0) + 1
+						}));
+						if (screen !== "BREWING") handleStartBrewing();
+					},
+					onClose: () => setTeaMenuOpen(false)
+				}, "tea-menu-board-modal") }),
 				screen !== "BREWING" && screen !== "TITLE_MENU" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
 					className: "border-t border-[#1F2823]/10 bg-[#FAF9F6] py-4",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

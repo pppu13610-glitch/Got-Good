@@ -16,6 +16,7 @@ import {createRandomGuestOrder} from '../data/guests';
 import {
   getLevelFromXp,
   getNewlyUnlockedTeas,
+  getUnlockedTeas,
   getXpProgress,
   isTeaUnlocked,
 } from '../data/progression';
@@ -50,10 +51,15 @@ interface BrewingStationProps {
   mode: GameMode;
   onModeChange: (mode: GameMode) => void;
   settings: GameSettings;
+  onOpenTeaMenu?: () => void;
+  onActiveOrderChange?: (info: {teaId: string; guestName: string} | null) => void;
+  quickBrewRequest?: {tea: TeaType; requestKey: number} | null;
+  onGuestVisited: (guestId: string) => void;
   onBrewComplete: (
     record: JournalRecord,
     warmthEarned: number,
     xpEarned: number,
+    guestId?: string,
   ) => void;
 }
 
@@ -65,6 +71,10 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
   mode,
   onModeChange,
   settings,
+  onOpenTeaMenu,
+  onActiveOrderChange,
+  quickBrewRequest,
+  onGuestVisited,
   onBrewComplete,
 }) => {
   const [step, setStep] = useState<BrewStep>('EXPLORE_SHOP');
@@ -104,34 +114,89 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
   const arrivalTimerRef = useRef<number | null>(null);
 
   const xpInfo = useMemo(() => getXpProgress(playerXp), [playerXp]);
+  const unlockedTeas = useMemo(
+    () => getUnlockedTeas(playerLevel),
+    [playerLevel],
+  );
+  const lastHandledQuickBrewKeyRef = useRef<number>(0);
+
+  const orderedTeaId = useMemo(() => {
+    const primaryId = guestOrder.preferredTeaIds?.[0];
+    const match = primaryId ? TEAS.find((t) => t.id === primaryId) : undefined;
+    if (match && isTeaUnlocked(match, playerLevel)) {
+      return match.id;
+    }
+    return unlockedTeas[0]?.id ?? TEAS[0].id;
+  }, [guestOrder.preferredTeaIds, playerLevel, unlockedTeas]);
 
   const recommendedTeaIds = useMemo(() => {
     if (mode !== 'guest') return undefined;
-    if (guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0) {
-      return guestOrder.preferredTeaIds;
-    }
-    if (
-      guestOrder.preferredCategories &&
-      guestOrder.preferredCategories.length > 0
-    ) {
-      return TEAS.filter((t) =>
-        guestOrder.preferredCategories!.includes(t.category),
-      ).map((t) => t.id);
-    }
-    return undefined;
-  }, [mode, guestOrder]);
+    return [orderedTeaId];
+  }, [mode, orderedTeaId]);
 
-  // Explicit ordered menu items to show cleanly when customer orders
+  // Safeguard if save progress resets below the currently displayed tea/order level
+  useEffect(() => {
+    const orderedTeaObj = guestOrder.preferredTeaIds?.[0]
+      ? TEAS.find((t) => t.id === guestOrder.preferredTeaIds![0])
+      : undefined;
+    if (!orderedTeaObj || !isTeaUnlocked(orderedTeaObj, playerLevel)) {
+      setGuestOrder((prev) => createRandomGuestOrder(playerLevel, prev.guest.id));
+    }
+    if (!isTeaUnlocked(selectedTea, playerLevel)) {
+      setSelectedTea(TEAS[0]);
+      setWaterTemp(TEAS[0].idealTemp);
+    }
+  }, [guestOrder.preferredTeaIds, playerLevel, selectedTea]);
+
+  // Keep parent App synchronized with current single ordered tea for Menu Board highlighting
+  useEffect(() => {
+    if (!onActiveOrderChange) return;
+    if (mode === 'guest') {
+      onActiveOrderChange({
+        teaId: orderedTeaId,
+        guestName: guestOrder.guest.name,
+      });
+    } else {
+      onActiveOrderChange(null);
+    }
+  }, [mode, orderedTeaId, guestOrder.guest.name, onActiveOrderChange]);
+
+  useEffect(() => {
+    return () => {
+      onActiveOrderChange?.(null);
+    };
+  }, [onActiveOrderChange]);
+
+  // Allow quick-starting a brew directly from the Tea Menu Board modal
+  useEffect(() => {
+    if (!quickBrewRequest) return;
+    if (quickBrewRequest.requestKey === lastHandledQuickBrewKeyRef.current) {
+      return;
+    }
+    lastHandledQuickBrewKeyRef.current = quickBrewRequest.requestKey;
+    const tea = quickBrewRequest.tea;
+    if (!isTeaUnlocked(tea, playerLevel)) return;
+
+    if (pourIntervalRef.current) window.clearInterval(pourIntervalRef.current);
+    if (steepIntervalRef.current) window.clearInterval(steepIntervalRef.current);
+    soundEngine.unlock();
+    soundEngine.playLeafDrop();
+    playerMoveRef.current = {x: 0, y: 0};
+    setIsPouring(false);
+    setWaterLevel(0);
+    setSteepSeconds(0);
+    setToppings([]);
+    setBrewResult(null);
+    setSelectedTea(tea);
+    setWaterTemp(tea.idealTemp);
+    setSelectorOpen(false);
+    setStep('POUR_WATER');
+  }, [quickBrewRequest, playerLevel]);
+
+  // Explicit single unlocked ordered menu item shown cleanly in Customer Order card
   const orderedMenuSummary = useMemo(() => {
-    const orderedTeas =
-      guestOrder.preferredTeaIds && guestOrder.preferredTeaIds.length > 0
-        ? TEAS.filter((t) => guestOrder.preferredTeaIds!.includes(t.id))
-        : guestOrder.preferredCategories &&
-            guestOrder.preferredCategories.length > 0
-          ? TEAS.filter((t) =>
-              guestOrder.preferredCategories!.includes(t.category),
-            ).slice(0, 3)
-          : [TEAS[0]];
+    const orderedTea =
+      TEAS.find((t) => t.id === orderedTeaId) ?? unlockedTeas[0] ?? TEAS[0];
 
     const orderedToppings = (guestOrder.preferredToppings ?? [])
       .map((id) => TOPPINGS.find((t) => t.id === id)?.name)
@@ -145,11 +210,11 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
           : 'ร้อนหรือเย็นก็ได้';
 
     return {
-      teaNames: orderedTeas.map((t) => t.name),
+      teaName: orderedTea.name,
       toppingNames: orderedToppings,
       tempLabel,
     };
-  }, [guestOrder]);
+  }, [orderedTeaId, unlockedTeas, guestOrder.preferredToppings, guestOrder.preferredTemp]);
 
   const handleOpenBrewingFromTable = useCallback(() => {
     soundEngine.unlock();
@@ -167,6 +232,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
 
   const handleCustomerEnteredDoor = useCallback(() => {
     soundEngine.playTap();
+    onGuestVisited(guestOrder.guest.id);
     setArrivalAlertVisible(true);
     if (arrivalTimerRef.current) {
       window.clearTimeout(arrivalTimerRef.current);
@@ -174,7 +240,14 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
     arrivalTimerRef.current = window.setTimeout(() => {
       setArrivalAlertVisible(false);
     }, 3600);
-  }, []);
+  }, [guestOrder.guest.id, onGuestVisited]);
+
+  // Also ensure seated guests in guest mode are always recorded as visited
+  useEffect(() => {
+    if (mode === 'guest' && customerPhase !== 'ENTERING') {
+      onGuestVisited(guestOrder.guest.id);
+    }
+  }, [mode, customerPhase, guestOrder.guest.id, onGuestVisited]);
 
   // Desktop keyboard movement (WASD / Arrow keys) + E/Enter at table
   useEffect(() => {
@@ -503,7 +576,12 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
 
     setBrewResult(result);
     setStep('SERVED');
-    onBrewComplete(journalRecord, warmthEarned, xpEarned);
+    onBrewComplete(
+      journalRecord,
+      warmthEarned,
+      xpEarned,
+      mode === 'guest' ? guestOrder.guest.id : undefined,
+    );
   };
 
   const handleResetCup = (advanceGuest = true, backToShop = true) => {
@@ -568,6 +646,8 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
           tea={selectedTea}
           step={step}
           mode={mode}
+          playerLevel={playerLevel}
+          orderedTeaId={mode === 'guest' ? orderedTeaId : null}
           guestId={guestOrder.guest.id}
           customerSequenceKey={customerSequenceKey}
           waterLevel={waterLevel}
@@ -582,6 +662,7 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
           onCustomerPhaseChange={setCustomerPhase}
           onKettleClick={handlePourWater}
           onVesselClick={handleFinishSteep}
+          onMenuBoardClick={onOpenTeaMenu}
         />
       </div>
 
@@ -606,70 +687,72 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
 
       {/* Top Landscape HUD Bar */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-2 sm:p-3.5 pr-16 safe-px">
-        {/* Top-Left: Compact Level + Mode + Customer Ordered Menu Card */}
-        <div className="pointer-events-auto flex flex-col items-start gap-1 max-w-[245px] sm:max-w-[270px]">
-          <div className="flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs">
-            <div className="min-w-0">
-              <div className="flex items-baseline gap-1">
-                <span className="font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap">
-                  Lv.{xpInfo.level}
-                </span>
-                <span className="hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate">
-                  {xpInfo.title}
-                </span>
-                <span className="font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap">
-                  {xpInfo.nextLevelXp !== null
-                    ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}`
-                    : 'MAX'}
-                </span>
-              </div>
-              <div className="mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12">
-                <motion.div
-                  className="h-full w-full origin-left rounded-full bg-[#2E6F40]"
-                  animate={{scaleX: Math.max(0.02, xpInfo.progressRatio)}}
-                  transition={{duration: 0.35, ease: [0.16, 1, 0.3, 1]}}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5">
-              {(
-                [
-                  {id: 'guest', label: 'รับรองแขก'},
-                  {id: 'free', label: 'ชงตามใจ'},
-                ] as const
-              ).map((m) => (
-                <motion.button
-                  key={m.id}
-                  type="button"
-                  whileTap={{scale: 0.94}}
-                  onClick={() => {
-                    soundEngine.unlock();
-                    soundEngine.playTap();
-                    onModeChange(m.id);
-                    if (m.id === 'guest') {
-                      setCustomerPhase('ENTERING');
-                      setCustomerSequenceKey((k) => k + 1);
-                    }
-                  }}
-                  className="relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0"
-                >
-                  {mode === m.id && (
-                    <motion.span
-                      layoutId="hud-mode-pill"
-                      transition={{type: 'spring', stiffness: 420, damping: 30}}
-                      className="absolute inset-0 rounded-md bg-white shadow-xs"
-                    />
-                  )}
-                  <span
-                    className={`relative z-10 ${
-                      mode === m.id ? 'text-[#1F2823]' : 'text-[#4A534D]'
-                    }`}
-                  >
-                    {m.label}
+        {/* Top-Left: Compact Level + Mode + Guest Directory Button + Customer Ordered Menu Card */}
+        <div className="pointer-events-auto flex flex-col items-start gap-1 max-w-[330px] sm:max-w-[360px]">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <div className="flex w-fit items-center gap-1.5 rounded-xl border border-[#1F2823]/12 bg-[#FAF9F6]/94 px-2 py-1 shadow-xs">
+              <div className="min-w-0">
+                <div className="flex items-baseline gap-1">
+                  <span className="font-display text-[11px] sm:text-xs font-semibold text-[#1F2823] whitespace-nowrap">
+                    Lv.{xpInfo.level}
                   </span>
-                </motion.button>
-              ))}
+                  <span className="hidden xl:inline text-[11px] font-medium text-[#2E6F40] truncate">
+                    {xpInfo.title}
+                  </span>
+                  <span className="font-mono-num text-[10px] text-[#5A655D] whitespace-nowrap">
+                    {xpInfo.nextLevelXp !== null
+                      ? `${xpInfo.currentLevelXp}/${xpInfo.nextLevelXp}`
+                      : 'MAX'}
+                  </span>
+                </div>
+                <div className="mt-0.5 h-1 w-14 sm:w-20 overflow-hidden rounded-full bg-[#1F2823]/12">
+                  <motion.div
+                    className="h-full w-full origin-left rounded-full bg-[#2E6F40]"
+                    animate={{scaleX: Math.max(0.02, xpInfo.progressRatio)}}
+                    transition={{duration: 0.35, ease: [0.16, 1, 0.3, 1]}}
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-0.5 rounded-lg bg-[#EAE6DC] p-0.5">
+                {(
+                  [
+                    {id: 'guest', label: 'รับรองแขก'},
+                    {id: 'free', label: 'ชงตามใจ'},
+                  ] as const
+                ).map((m) => (
+                  <motion.button
+                    key={m.id}
+                    type="button"
+                    whileTap={{scale: 0.94}}
+                    onClick={() => {
+                      soundEngine.unlock();
+                      soundEngine.playTap();
+                      onModeChange(m.id);
+                      if (m.id === 'guest') {
+                        setCustomerPhase('ENTERING');
+                        setCustomerSequenceKey((k) => k + 1);
+                      }
+                    }}
+                    className="relative min-h-[32px] sm:min-h-[34px] rounded-md px-2 text-[11px] font-medium whitespace-nowrap shrink-0"
+                  >
+                    {mode === m.id && (
+                      <motion.span
+                        layoutId="hud-mode-pill"
+                        transition={{type: 'spring', stiffness: 420, damping: 30}}
+                        className="absolute inset-0 rounded-md bg-white shadow-xs"
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        mode === m.id ? 'text-[#1F2823]' : 'text-[#4A534D]'
+                      }`}
+                    >
+                      {m.label}
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -732,10 +815,10 @@ export const BrewingStation: React.FC<BrewingStationProps> = ({
                   </div>
                 </div>
 
-                {/* Compact Ordered Menu Summary */}
+                {/* Compact Single-Tea Ordered Menu Summary */}
                 <div className="border-t border-[#1F2823]/8 pt-1 text-[10px] leading-tight text-[#224B2B]">
-                  <p className="font-medium text-[#2E6F40] line-clamp-1">
-                    สั่ง: {orderedMenuSummary.teaNames.join(' / ')}
+                  <p className="font-semibold text-[#2E6F40] line-clamp-1">
+                    สั่ง: {orderedMenuSummary.teaName}
                   </p>
                   <p className="text-[#4A534D] truncate">
                     {orderedMenuSummary.tempLabel}
